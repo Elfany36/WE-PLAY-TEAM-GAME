@@ -1,23 +1,15 @@
-# Delivery status — 31 October 2026
+# Delivery status — arcade update, 31 October 2026
 
-The hosted site is deployed and publicly accessible according to Sites' returned deployment/access state:
+Public hosted site: https://markup-learn-play-together.brightbunch.chatgpt.site
 
-https://markup-learn-play-together.brightbunch.chatgpt.site
+Sites reports version 2 successfully published. Its source commit is `cdd755ac0b6bb14e7a04eb01f452324abeeae75a`. The previously owner-approved public audience is preserved.
 
-The owner explicitly approved public access in this conversation. Site version 1 uses source commit `ce6c7f8daf8710f05c9d1d3dc55c450e4aa03184`.
+Matching application source is GitHub commit `185513b44031935b9df0d51bb68c04bba9bf8143`. Every tracked hosted-source file was byte-compared against this checkout. The source ZIP contains this matching source and the built GitHub Pages distribution.
 
-The matching application source was pushed to GitHub in commit `433bf7819eb8fbe3380440d91463f903cff214f2`; its Git tree exactly matches the hosted source tree. GitHub's build job independently passed TypeScript, 188 individual tests, 324 CSS syntax checks and the Pages build. The prebuilt downloadable ZIP was fetched from its public GitHub URL and its SHA-256 matches the locally checked archive.
+Local verification: 198 individual automated tests, TypeScript, 325 CSS syntax checks, hosted build and Pages build passed. Chromium exercised all three kart tracks, animated dice and tile-by-tile travel, responsive strategy/memory boards, a styled two-player Doodle relay/PNG export and eight-participant Snake with simulated request delay. Detailed results and limitations are under `docs/verification/` and `AUDIT_REPORT.md`.
 
-GitHub Pages deployment is **not live yet**. The deploy job failed at `actions/configure-pages` because the repository has not enabled Pages. Set **Settings → Pages → Build and deployment → Source → GitHub Actions** at:
+Native Sites publication succeeded. This execution environment blocks direct access to the published Site origin, so local browser results do not establish a completed end-to-end production multiplayer test. Real-world network/device delay remains variable.
 
-https://github.com/Elfany36/WE-PLAY-TEAM-GAME/settings/pages
+GitHub independently passed TypeScript, the test suite, CSS syntax checks and the Pages build for the new source. GitHub Pages is still not live: its deploy failed at `actions/configure-pages` with a Pages-not-found response because Pages has not been enabled in repository settings. The verified workflow result is https://github.com/Elfany36/WE-PLAY-TEAM-GAME/actions/runs/41164841968 .
 
-Then re-run the failed job here:
-
-https://github.com/Elfany36/WE-PLAY-TEAM-GAME/actions/runs/41160803673
-
-The expected Pages URL is https://elfany36.github.io/WE-PLAY-TEAM-GAME/ . This URL is not presented as a verified publication until deployment succeeds.
-
-Local Chromium QA verified the eight-browser coding flow, gifts, emoji, chat cleanup, fullscreen, resizing and mobile layout. All eleven casual models passed online startup/read checks at their tested capacities. Direct browser/HTTP inspection of the published Site was unavailable because this execution environment's outbound policy blocks that origin; native Sites deployment and public-access state succeeded. Therefore an end-to-end production multiplayer test remains distinct from the passed local tests.
-
-The ZIP contains the source, ready-built static Pages files and the complete audit report. Its general hosting instructions describe the default private state; this delivery note records the later owner-approved public access.
+To finish GitHub Pages publication, select Settings → Pages → Build and deployment → Source → GitHub Actions at https://github.com/Elfany36/WE-PLAY-TEAM-GAME/settings/pages and re-run the failed deploy job. The connector does not expose the Pages administration operation. The expected, not yet verified Pages URL is https://elfany36.github.io/WE-PLAY-TEAM-GAME/ .
