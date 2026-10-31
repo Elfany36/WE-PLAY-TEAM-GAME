@@ -52,7 +52,7 @@ export async function casualBody(req:Request){
  if(typeof b.scene==='string'&&b.scene.length<=128)out.scene=b.scene;
  return out;
 }
-export function createCasualAPI(DB:D1Database|undefined,keepAlive?:((task:Promise<unknown>)=>void)){
+export function createCasualAPI(DB:D1Database|undefined,keepAlive?:((task:Promise<unknown>)=>void),newCode?:string){
  async function read(code:string){if(!DB)throw new CasualError('Room storage is unavailable.',503);const row=await DB.prepare('SELECT state,revision,created_at FROM casual_rooms WHERE code=?').bind(code).first<{state:string;revision:number;created_at:number}>();if(!row)throw new CasualError('Room not found. Check the code.',404);if(Date.now()-row.created_at>ROOM_TTL)throw new CasualError('This room expired after 24 hours.',410);return{state:JSON.parse(row.state) as CasualState,revision:row.revision}}
  async function credential(req:Request){const bearer=(req.headers.get('Authorization')||'').match(/^Bearer ([a-f0-9]{64})$/);return bearer?hash(bearer[1]):null}
  function authenticate(tokenHash:string|null,s:CasualState){if(!tokenHash)throw new CasualError('Join a room to play.',401);const p=s.players.find(p=>p.tokenHash===tokenHash&&!p.retired);if(!p)throw new CasualError('Your session ended. Join the room again.',401);return p.id}
@@ -70,7 +70,7 @@ export function createCasualAPI(DB:D1Database|undefined,keepAlive?:((task:Promis
  }catch(e){return error(req,e)}}
  async function POST(req:Request){beginRoomRequest(req);try{originCheck(req);const b=await casualBody(req);if(!DB)throw new CasualError('Room storage is unavailable.',503);
   if(b.action==='create'){
-   const token=secret(),id=crypto.randomUUID(),tokenHash=await hash(token),now=Date.now();let code='';for(let i=0;i<8;i++)code+='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[crypto.getRandomValues(new Uint8Array(1))[0]%32];
+   const token=secret(),id=crypto.randomUUID(),tokenHash=await hash(token),now=Date.now();let code=newCode&&/^[A-HJ-NP-Z2-9]{8}$/.test(newCode)?newCode:'';if(!code)for(let i=0;i<8;i++)code+='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[crypto.getRandomValues(new Uint8Array(1))[0]%32];
    let s=createCasual(code,id,b.name,tokenHash,b.mode as CasualMode,crypto.getRandomValues(new Uint32Array(1))[0],now);s=applyCasualAction(s,{...b,action:'configure'},id,now);
    await DB.prepare('DELETE FROM casual_rooms WHERE created_at < ?').bind(now-ROOM_TTL).run();
    await DB.prepare('INSERT INTO casual_rooms(code,state,revision,created_at) VALUES(?,?,0,?)').bind(code,JSON.stringify(s),now).run();return reply(req,{token,room:{...publicCasual(s,id,now),revision:0}},201)
