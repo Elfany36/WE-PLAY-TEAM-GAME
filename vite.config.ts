@@ -6,14 +6,11 @@ import { configureToolEnvironment } from "./scripts/tool-environment.mjs";
 import { sites } from "./scripts/vite/sites-vite-plugin";
 import { connectorPreview } from "./scripts/vite/connector-preview-plugin.mjs";
 
-const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
-  "00000000-0000-4000-8000-000000000000";
-
-// Cloudflare Workers Builds: set D1_DATABASE_ID (and optionally D1_DATABASE_NAME)
-// as build variables so `wrangler deploy` binds the real D1 database.
-// Without it the placeholder is kept, which is fine for local dev and previews.
-const D1_DATABASE_ID =
-  process.env.D1_DATABASE_ID || SITE_CREATOR_PLACEHOLDER_DATABASE_ID;
+// Real D1 database (site-creator-d1) used by `wrangler deploy` on Cloudflare.
+// Override with the D1_DATABASE_ID / D1_DATABASE_NAME build variables if the
+// database is ever recreated or deployed to a different account.
+const DEFAULT_D1_DATABASE_ID = "89871452-465b-4ebf-bfac-2c4b4c3aaf72";
+const D1_DATABASE_ID = process.env.D1_DATABASE_ID || DEFAULT_D1_DATABASE_ID;
 const D1_DATABASE_NAME = process.env.D1_DATABASE_NAME || "site-creator-d1";
 
 const { d1, r2 } = hostingConfig;
