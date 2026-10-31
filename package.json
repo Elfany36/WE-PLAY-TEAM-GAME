@@ -16,7 +16,8 @@
     "test": "node --experimental-strip-types --test --test-isolation=none tests/*.test.ts",
     "check": "tsc --noEmit",
     "prebuild": "node --experimental-strip-types scripts/generate-question-facts.mjs",
-    "prebuild:pages": "node --experimental-strip-types scripts/generate-question-facts.mjs"
+    "prebuild:pages": "node --experimental-strip-types scripts/generate-question-facts.mjs",
+    "test:non-relay": "node scripts/test-non-relay.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

@@ -1,6 +1,6 @@
 # Phase 1: implementation report
 
-All changes are local. No push, source publication, GitHub upload or Site deployment was performed for this phase. The latest supplied video exceeded the transfer tool's 32 MiB limit; the written report and earlier three recordings were available.
+Phase 1 was completed in local commits before the six-game expansion. Subsequent release work is recorded in PHASE2_REPORT.md. The latest supplied video exceeded the transfer tool's 32 MiB limit; the written report and earlier three recordings were available.
 
 | Area/game | Cause addressed and implementation | Verification |
 |---|---|---|
@@ -34,4 +34,4 @@ Non-Doodle checks are enumerated in the test files and verification notes. The i
 - `7a74b7e` shared deltas, acknowledgements, resumable seats and diagnostics.
 - `4dc899f` server-timed dice and capped board paths.
 - `392c9f5` kart scenery collision and Snake buffer reuse.
-- The following viewport/touch/report commit completes Phase 1 before integrating the six-game working changes.
+- `1d6ee25` viewport/touch/report completion, before integrating the six-game working changes.

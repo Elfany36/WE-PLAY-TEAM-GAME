@@ -1,6 +1,6 @@
 # Current implementation status
 
-The report below is historical version-four evidence. Current Phase 1 changes and their verification limits are recorded in `docs/PHASE1_REPORT.md` and the priority v5 verification files. Doodle Relay changes are source-traced and TypeScript-checked only; Doodle was deliberately not launched or tested. Current work remains in local commits and has not been pushed or published under the latest instruction.
+The report below is historical version-four evidence. Current Phase 1 and Phase 2 changes and their verification limits are recorded in `docs/PHASE1_REPORT.md`, `docs/PHASE2_REPORT.md` and the v5 verification files. Doodle Relay changes are source-traced and TypeScript-checked only; Doodle was deliberately not launched or tested. The phase reports describe the current implementation; the remainder of this file records the earlier release.
 
 # Markup improvement and verification report
 
