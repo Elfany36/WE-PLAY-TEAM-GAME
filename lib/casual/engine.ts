@@ -1,3 +1,5 @@
+import {compareSnake} from './snake-rank.ts';
+import {resumeTimeline} from './pause.ts';
 import type {RoomTraffic} from '../room-budget.ts';
 import {newParty,advanceParty,partyAction,isParty,type PartyGame} from './party.ts';
 import {newBlocks,advanceBlocks,blocksAction,publicBlocks,type BlocksGame} from './blocks.ts';
@@ -104,7 +106,7 @@ function advanceOwned(s:CasualState,now:number):{state:CasualState;changed:boole
   if(now<g.startAt)return{state:s,changed};
   if(now-g.lastTickAt>8000){s.phase='paused';g.pausedAt=now;s.pauseReason='No room updates for 8 seconds. The host can resume when everyone reconnects.';event(s,'The arena paused after a connection gap.',now);return{state:s,changed:true}}
   while(g.lastTickAt+s.settings.speed<=Math.min(now,g.deadline)&&s.phase==='playing'){g.lastTickAt+=s.settings.speed;stepSnake(s,g.lastTickAt);changed=true}
-  if(s.phase==='playing'&&now>=g.deadline){const survivors=g.worms.filter(w=>s.settings.battle?!s.players.find(p=>p.id===w.id)?.retired:w.alive),points=(w:Worm)=>s.settings.battle?(w.kills||0)*100+(w.best||0):w.score,best=Math.max(0,...survivors.map(points));finish(s,survivors.filter(w=>points(w)===best).map(w=>w.id),s.settings.battle?'Battle complete. Most eliminations wins, then best growth.':'Time is up. Surviving snakes with the most food share the win.',now);changed=true}
+  if(s.phase==='playing'&&now>=g.deadline){const survivors=g.worms.filter(w=>s.settings.battle?!s.players.find(p=>p.id===w.id)?.retired:w.alive).sort((a,b)=>compareSnake(a,b,!!s.settings.battle)),best=survivors[0];finish(s,best?survivors.filter(w=>compareSnake(w,best,!!s.settings.battle)===0).map(w=>w.id):[],s.settings.battle?'Battle complete. Most eliminations wins, then best growth.':'Time is up. Surviving snakes with the most food share the win.',now);changed=true}
  }else if(g.kind==='ladders'||g.kind==='memory'){
   if(g.kind==='memory'&&g.resolveAt!==null&&now>=g.resolveAt){g.revealed=[];g.resolveAt=null;moveTurn(s,g,now);changed=true}
   if(now>=g.deadline){const name=s.players.find(p=>p.id===g.currentId)?.name||'Player';if(g.kind==='memory'){g.revealed=[];g.resolveAt=null}moveTurn(s,g,now);event(s,name+'’s turn timed out. Play moved to the next player.',now);changed=true}
@@ -189,7 +191,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
  if(a.action==='pause'||a.action==='resume'){
   if(!s.game||!['snake','circuit','terra','sumo','tanks','pong','marble','blocks','pool'].includes(s.game.kind))throw new CasualError('Only simultaneous action games can be paused.');const g=s.game as SnakeGame|CircuitGame|TerraGame|PartyGame|BlocksGame|PoolGame;
   if(a.action==='pause'){if(s.phase!=='playing')throw new CasualError('This arena is not running.',409);s.phase='paused';g.pausedAt=now;s.pauseReason='Paused by the host.';event(s,'The host paused the arena.',now)}
-  else{if(s.phase!=='paused')throw new CasualError('This arena is not paused.',409);const oldTick=g.lastTickAt,oldPause=g.pausedAt??now;const remaining=Math.max(0,g.deadline-Math.max(g.pausedAt??now,g.startAt));g.startAt=now+3000;g.deadline=g.startAt+remaining;g.lastTickAt=g.startAt;const shift=g.startAt-oldTick;if(isParty(g.kind)){const pg=g as PartyGame;pg.ball.serveAt+=shift;for(const shot of pg.shots)shot.until+=shift;for(const a of pg.actors){a.cooldown+=shift;a.shieldUntil+=shift;if(a.respawnAt)a.respawnAt+=shift}}else if(g.kind==='blocks'){for(const b of g.boards){b.fallAt+=shift;if(b.lockAt)b.lockAt+=shift}}else if(g.kind==='pool'){g.turnDeadline+=g.startAt-oldPause;if(g.shot)g.shot.at+=shift}g.pausedAt=null;s.phase='playing';s.pauseReason='';event(s,'The arena resumes after a 3-second countdown.',now)}return s;
+  else{if(s.phase!=='paused')throw new CasualError('This arena is not paused.',409);resumeTimeline(g,now);s.phase='playing';s.pauseReason='';event(s,'The arena resumes after a 3-second countdown.',now)}return s;
  }
  if(a.action==='end'){
   if(p.id!==s.hostId)throw new CasualError('Only the host can end a round.',403);if(s.phase!=='playing'&&s.phase!=='paused')throw new CasualError('There is no running round.',409);finish(s,[],'The host ended this round. No winner was declared.',now);return s;
@@ -197,6 +199,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
  if(s.phase!=='playing'||!s.game)throw new CasualError('Wait for the host to start a round.',409);
  if(a.round!==s.round)throw new CasualError('This action belongs to an older round.',409);
  const g=s.game;
+ if(a.inputEpoch!==undefined&&'startAt'in g&&a.inputEpoch!==g.startAt)throw new CasualError('This control belongs to an older round timeline.',409);
  if('actors'in g){partyAction(s,a,p.id,now);return s}
  if(g.kind==='blocks'){blocksAction(s,a,p.id,now);return s}
  if(g.kind==='pool'){poolAction(s,a,p.id,now);return s}

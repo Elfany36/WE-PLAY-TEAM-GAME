@@ -1,3 +1,4 @@
+import {cleanRoomText} from './room-text.ts';
 import {ArenaError} from './arena-engine.ts';
 const actions=new Set(['chat','create','join','heartbeat','disconnect','leave','ready','configure','start','answer','claim-host','remove-inactive']);
 export function roomCode(value:unknown){if(typeof value!=='string'||!/^[A-HJ-NP-Z2-9]{8}$/.test(value.trim().toUpperCase()))throw new ArenaError('Use the 8-character room code.');return value.trim().toUpperCase();}
@@ -7,7 +8,7 @@ export function validateArenaRequest(value:unknown){
  if(typeof b.action!=='string'||!actions.has(b.action))throw new ArenaError('Choose a valid room action.');
  const out={...b};if(b.requestId!==undefined&&(typeof b.requestId!=='string'||b.requestId.length<8||b.requestId.length>80))throw new ArenaError('Use a valid request identifier.');if(b.action==='chat'&&(typeof b.text!=='string'||!b.text.trim()||b.text.length>280||typeof b.messageId!=='string'||b.messageId.length<8||b.messageId.length>80))throw new ArenaError('Send a chat message of 1–280 characters with an identifier.');
  if(b.action==='create'||b.action==='join'){
-  if(typeof b.name!=='string'||b.name.trim().length<2||b.name.trim().length>20)throw new ArenaError('Choose a display name of 2–20 characters.');out.name=b.name.trim();
+  if(typeof b.name!=='string'||b.name.trim().length<2||b.name.trim().length>20)throw new ArenaError('Choose a display name of 2–20 characters.');out.name=cleanRoomText(b.name);if(out.name.length<2)throw new ArenaError('Use at least two visible characters in your display name.');
  }
  if(b.action!=='create')out.code=roomCode(b.code);
  if(b.action==='configure'||b.action==='create'){

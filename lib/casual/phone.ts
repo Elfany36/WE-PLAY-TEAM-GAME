@@ -1,3 +1,4 @@
+import {cleanRoomText} from '../room-text.ts';
 import type {CasualState} from './engine.ts';
 import {CasualError} from './error.ts';
 import {livePlayers,record,finish} from './shared.ts';
@@ -16,7 +17,7 @@ function nextStage(s:CasualState,g:PhoneGame,now:number){
 }
 export function advancePhone(s:CasualState,now:number){const g=s.game as PhoneGame;if(g.revealing||now<g.deadline)return false;for(const id of g.players){if(g.submitted[id])continue;storeEntry(g,id,g.stage,missingEntry(g,id,now));g.submitted[id]=true}nextStage(s,g,now);return true}
 function readEntry(task:{kind:string},a:Record<string,any>,id:string,now:number,draft=false):PhoneEntry{
- if(task.kind==='text'){if(typeof a.text!=='string'||a.text.length>220||!draft&&!a.text.trim())throw new CasualError('Write a sentence of 1–220 characters.');return{by:id,kind:'text',text:a.text.trim(),savedAt:now}}
+ if(task.kind==='text'){if(typeof a.text!=='string'||a.text.length>220||!draft&&!a.text.trim())throw new CasualError('Write a sentence of 1–220 characters.');const text=cleanRoomText(a.text);if(!draft&&!text)throw new CasualError('Write a visible sentence before sending.');return{by:id,kind:'text',text,savedAt:now}}
  if(!Array.isArray(a.strokes)||a.strokes.length>140)throw new CasualError('Use up to 140 drawing strokes.');let total=0;
  const strokes:InkStroke[]=a.strokes.map((line:any)=>{if(!line||!Array.isArray(line.points)||!line.points.length||line.points.length>180)throw new CasualError('Invalid drawing stroke.');total+=line.points.length;if(total>2000)throw new CasualError('This drawing has too many points. Undo a few strokes.');let style;try{style=inkStyle(line)}catch(error){throw new CasualError((error as Error).message)}return{...style,points:line.points.map((p:any)=>{if(!Array.isArray(p)||p.length!==2||!p.every((v:any)=>Number.isFinite(v)&&v>=0&&v<=1))throw new CasualError('Drawing coordinates must stay on the canvas.');return[Math.round(p[0]*1000)/1000,Math.round(p[1]*1000)/1000]})}});
  return{by:id,kind:'drawing',strokes,savedAt:now}
