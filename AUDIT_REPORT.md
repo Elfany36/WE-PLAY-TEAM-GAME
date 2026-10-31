@@ -26,9 +26,9 @@ The historical source pins support the inventory date. Live WHATWG/MDN links can
 
 ## Automated verification
 
-- 188 individual Node tests passed, with zero failures. The test command explicitly uses `--test-isolation=none`; the environment's default isolated runner had reported file wrappers instead of individual test results.
+- 198 individual Node tests passed, with zero failures. The test command explicitly uses `--test-isolation=none`; the environment's default isolated runner had reported file wrappers instead of individual test results.
 - TypeScript checking passed.
-- 324 CSS documents/snippets parsed, including the new guides and refinements stylesheet. This is syntax parsing, not semantic or browser-behavior certification.
+- 325 CSS documents/snippets parsed, including the new guides and arcade stylesheet. This is syntax parsing, not semantic or browser-behavior certification.
 - Hosted Worker and GitHub Pages builds completed successfully.
 - Tests cover game rules, answer correctness/normalization, seeded formats, all 100 code tasks, private data projection, authentication, seat caps, concurrent revision writes, replay protection, time limits, motion recovery, terrain reuse, chat cleanup/expiry/gifts, CORS, exercise grading and core theme contrast.
 
@@ -47,11 +47,27 @@ Local QA used Chromium with the actual Worker/D1 preview. Evidence is in `docs/v
 
 These checks are not a complete playthrough of every casual-game state. Browser QA used Chromium emulation; Safari, Firefox, physical phones and adverse real-world network conditions remain unverified. Internet/device latency cannot be eliminated or guaranteed to be zero. The remaining large reference chunk is loaded when reference browsing needs it.
 
+## Arcade controls, motion and graphics update
+
+- Fixed a keyboard-control error where untouched kart keys could produce `NaN` and serialize as invalid `null` controls. Input is now finite for idle, individual, opposing and released keys. Stationary steering no longer rotates the kart; the eight-position starting grid has proper clearance.
+- Enlarged all three new-race circuits by 6.6, added 96 ordered progress checkpoints and continuous road-distance detection. Fixed-step baseline bots measured first laps of 58.15 s (Meadow), 60.75 s (Coast) and 62.15 s (Night). These are baseline timings, not a guaranteed duration for every driver. Existing older active races keep their original world scale.
+- Added original top-down kart artwork, steered wheels, helmets, drift/boost effects, smoother camera motion, themed scenery, coastline water and a readable minimap. Cached road/scenery paths reduce repeated geometry work.
+- Snake schedules turns at a future visible grid boundary so a new input does not rewrite an already-predicted segment. Local growth prediction, bounded extrapolation, a smaller adaptive remote buffer, cached obstacle lookups/backgrounds and direct numeric canvas paths reduce unnecessary work. A second fresh control request can pass a stalled request; stale failures cannot retry over a newer sequence. One-shot controls retain ordering barriers.
+- Dice tumble before movement; property and ladder tokens visibly hop tile by tile. A fresh delayed roll still animates its complete path for an existing observer. Property card movement retains the combined route. Action panels sit below the board and wait for the local movement presentation to finish.
+- Added six Doodle tools, 24 swatches/custom colors, gradients, opacity, width, blending and undo/redo. Validated styles survive server storage and relay transfer. Editor, incoming drawings, albums and export share one renderer.
+- Refreshed all six Snake map themes, enlarged strategy boards and memory cards, improved pieces and card backs, and made content-based Auto layout the default. Explicit fit, resize and fullscreen options are retained. Game controls no longer stick across the middle of tall boards.
+
+Additional Chromium evidence is in `docs/verification/arcade-v2-results.json`, `doodle-v2-results.json`, `snake-v2-single-view-results.json` and `snake-v2-eight-view-results.json`. All three kart tracks accepted real held/released keyboard input without invalid HTTP requests. Dice animation and distinct token positions during travel were observed for both dice games. Strategy and memory layouts passed at desktop, 768 px and 390 px without document-level horizontal overflow. All ten local casual modes and all eleven online mode starts/read flows were repeated.
+
+Two Doodle clients completed a relay with six tools, gradient, opacity and blending; the next player's drawing contained the styled strokes. The revealed album canvas and downloaded PNG matched byte-for-byte when encoded as PNG.
+
+An eight-participant Snake check with one rendered Chromium client and an added 40 ms per request recorded 82 active-frame samples, a 22.4 ms 95th-percentile frame interval and a largest sampled move of 1.59 cells. Eight simultaneously rendered browsers on the same executor also completed the turn/synchronization checks, but their 131 ms 95th-percentile frame interval shows local rendering contention. These short synthetic samples are not production latency benchmarks or a guarantee of smooth rendering on every device. No uncaught JavaScript exceptions occurred in the Doodle or Snake test flows.
+
 ## Hosting and access
 
 The source includes a Sites Worker deployment with D1 migrations and a ready-built GitHub Pages distribution. Current returned publication state, source commit and deployment URL are recorded in the delivery message; a build or expected URL alone is not proof that a site is live.
 
-Sites creates new sites private. Public visitors and a public GitHub Pages frontend need an accessible room service; the audience must be changed by the owner if public access is desired. No site audience is silently widened.
+The owner explicitly approved public multiplayer access in this conversation. This update preserves that existing public audience. Public GitHub Pages visitors use the separately hosted room service.
 
 GitHub Pages requires the selected repository's Pages source to be enabled. The connected GitHub connector supports source publication but does not expose that administration operation; the normal workflow token cannot enable it automatically. Setup is documented in `GITHUB_PAGES_SETUP.md`. A successful build artifact is not proof of a completed Pages deployment.
 

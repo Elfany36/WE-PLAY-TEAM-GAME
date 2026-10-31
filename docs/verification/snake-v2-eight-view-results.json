@@ -1,0 +1,9 @@
+[
+  {
+    "test": "eight Snake browsers with 40ms request delay, predicted turn and continuous frames",
+    "pass": true,
+    "samples": 100,
+    "p95FrameMs": 131.0,
+    "largestSampleMove": 18.44
+  }
+]

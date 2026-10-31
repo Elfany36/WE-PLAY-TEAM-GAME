@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-31",
+  "environment": "Local Chromium against actual Worker/D1 preview",
+  "checks": [
+    {
+      "game": "kart-meadow",
+      "pass": true,
+      "check": "held/released driving, finite position, HTTP controls"
+    },
+    {
+      "game": "kart-coast",
+      "pass": true,
+      "check": "held/released driving, finite position, HTTP controls"
+    },
+    {
+      "game": "kart-night",
+      "pass": true,
+      "check": "held/released driving, finite position, HTTP controls"
+    },
+    {
+      "game": "ladders",
+      "pass": true,
+      "check": "dice animation, distinct in-motion token positions, controls below board"
+    },
+    {
+      "game": "property",
+      "pass": true,
+      "check": "dice animation, distinct in-motion token positions, controls below board"
+    },
+    {
+      "game": "chess",
+      "pass": true,
+      "check": "desktop board size and 390/768 px overflow"
+    },
+    {
+      "game": "dama",
+      "pass": true,
+      "check": "desktop board size and 390/768 px overflow"
+    },
+    {
+      "game": "scidama",
+      "pass": true,
+      "check": "desktop board size and 390/768 px overflow"
+    },
+    {
+      "game": "memory",
+      "pass": true,
+      "check": "desktop board size and 390/768 px overflow"
+    }
+  ],
+  "baselineLapSeconds": {
+    "meadow": 58.15,
+    "coast": 60.75,
+    "night": 62.15
+  },
+  "lapMethod": "fixed 50ms simulation steps; one baseline bot; deterministic .99 item random value; first lap including grid start",
+  "limits": [
+    "Not exhaustive game-state coverage or cross-browser certification",
+    "Network-delay tests use a local service and synthetic 40ms request delay",
+    "Eight rendered windows contend for the same executor; frame numbers are not production guarantees"
+  ]
+}
