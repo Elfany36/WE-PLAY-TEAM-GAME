@@ -21,3 +21,17 @@
 @media(prefers-reduced-motion:reduce){.memory-tile.face-up .memory-tile-inner,.memory-turning>span{animation:none!important}}
 
 .memory-fieldset{border:0;padding:0;margin:0;min-width:0;width:100%}
+.memory-symbols{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+.memory-front .garden-art{display:block;width:100%;height:100%;max-width:100%;max-height:100%;overflow:visible}
+.party-live-layout>*{min-width:0;max-width:100%}
+.party-live-layout.snake .surface-content{display:block}
+.action-world>canvas{display:block;height:auto;max-width:100%}
+.action-keys button,.snake-dpad button{touch-action:none;user-select:none;-webkit-user-select:none}
+.surface-toolbar,.surface-toolbar>div,.party-session-bar,.party-session-bar>div{flex-wrap:wrap}
+.flexible-surface:fullscreen{display:flex;flex-direction:column;width:100%;height:100dvh;max-width:none;padding:12px;background:var(--surface);overflow:hidden;box-sizing:border-box}
+.flexible-surface:fullscreen>.surface-toolbar,.flexible-surface:fullscreen>.surface-bottom,.flexible-surface:fullscreen>.surface-resize-controls{flex-shrink:0}
+.flexible-surface:fullscreen>.adjustable-surface{flex:1;min-height:0!important;height:auto!important;max-height:none;overflow:auto!important;max-width:100%;scrollbar-gutter:stable}
+.game-recovery{padding:28px;max-width:620px;margin:20px auto;border:1px solid var(--border);border-radius:16px;background:var(--surface);color:var(--text)}
+.game-recovery h2{font-size:24px;line-height:1.3}
+.game-recovery p{margin:14px 0;line-height:1.8}
+.game-recovery small{display:block;margin-top:12px;line-height:1.6;color:var(--muted)}
