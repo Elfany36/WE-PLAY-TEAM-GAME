@@ -2,7 +2,7 @@ import type {CasualPublic} from '../../lib/casual/engine';
 import {trackPoints,circuitWorld,TRACKS,type CircuitGame} from '../../lib/casual/circuit';
 import {PLAYER_COLORS} from '../../lib/casual/rules';
 import {shortestAngle} from '../../lib/game-motion';
-export type RaceCamera={x:number;y:number;angle?:number;initialized?:boolean};
+export type RaceCamera={x:number;y:number;angle?:number;initialized?:boolean;northUp?:boolean};
 type Prop={x:number;y:number;angle:number;kind:number};
 const scenes=new Map<string,{road:Path2D;props:Prop[]}>();
 function scene(g:CircuitGame){
@@ -36,7 +36,7 @@ function kart(c:CanvasRenderingContext2D,d:CircuitGame['drivers'][number],color:
 }
 export function drawRace(c:CanvasRenderingContext2D,g:CircuitGame,r:CasualPublic,time:number,camera:RaceCamera,dt:number){
  const own=g.drivers.find(d=>d.id===r.youId)||g.drivers[0];if(!own)return;const track=TRACKS.find(t=>t.id===g.track)||TRACKS[0],world=circuitWorld(g),art=scene(g),follow=1-Math.exp(-Math.min(50,dt)/90);
- if(!camera.initialized||Math.hypot(camera.x-own.x,camera.y-own.y)>650){camera.x=own.x;camera.y=own.y;camera.angle=own.angle;camera.initialized=true}else{camera.x+=(own.x-camera.x)*follow;camera.y+=(own.y-camera.y)*follow;camera.angle=(camera.angle||0)+shortestAngle(own.angle-(camera.angle||0))*follow}
+ if(!camera.initialized||Math.hypot(camera.x-own.x,camera.y-own.y)>650){camera.x=own.x;camera.y=own.y;camera.angle=camera.northUp!==false?-Math.PI/2:own.angle;camera.initialized=true}else{camera.x+=(own.x-camera.x)*follow;camera.y+=(own.y-camera.y)*follow;camera.angle=camera.northUp!==false?-Math.PI/2:(camera.angle||0)+shortestAngle(own.angle-(camera.angle||0))*follow}
  c.fillStyle=track.ground;c.fillRect(0,0,960,600);c.save();c.translate(480,390);c.rotate(-(camera.angle||0)-Math.PI/2);c.scale(.84,.84);c.translate(-camera.x,-camera.y);
  c.fillStyle=g.track==='night'?'#173444':g.track==='coast'?'#73b3bd':'#88ad76';c.fillRect(0,0,world.width,world.height);
  c.strokeStyle=g.track==='night'?'#8de4e00b':'#e9e9be12';c.lineWidth=1;const minX=Math.floor((camera.x-1000)/80)*80,minY=Math.floor((camera.y-1000)/80)*80;for(let x=minX;x<camera.x+1000;x+=80){c.beginPath();c.moveTo(x,camera.y-1000);c.lineTo(x,camera.y+1000);c.stroke()}for(let y=minY;y<camera.y+1000;y+=80){c.beginPath();c.moveTo(camera.x-1000,y);c.lineTo(camera.x+1000,y);c.stroke()}
