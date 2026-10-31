@@ -1,0 +1,4 @@
+import {createCasual,applyCasualAction,advanceCasual} from '../lib/casual/engine.ts';
+const results=[];
+for(const size of [32,48,64]){let s=createCasual('ABCDEFGH','p0','Host','h','snake',19,10000);for(let i=1;i<8;i++)s=applyCasualAction(s,{action:'join',id:'p'+i,name:'P'+i,hash:'h'+i},null,10000);s.settings={...s.settings,snakeSize:size,map:'crossroads',battle:true,speed:175};s=applyCasualAction(s,{action:'start'},'p0',10000);const times=[];for(let i=0;i<1000;i++){const before=performance.now();s=advanceCasual(s,13000+(i+1)*175).state;times.push(performance.now()-before)}times.sort((a,b)=>a-b);results.push({size,players:8,updates:1000,p50_ms:+times[500].toFixed(3),p95_ms:+times[950].toFixed(3)})}
+console.log(JSON.stringify({kind:'In-process CPU simulation only, excluding HTTP, D1, network, and rendering. Short snakes respawn throughout this scenario.',results}));

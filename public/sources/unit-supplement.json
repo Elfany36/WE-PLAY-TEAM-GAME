@@ -1,0 +1,230 @@
+{
+  "reviewed": "2026-10-31",
+  "scope": "32 units missing from the original 3117-entry index, all defined in linked W3C publications predating 2026-10-29. No browser version claims are added.",
+  "units": [
+    {
+      "name": "rex",
+      "meaning": "A root-font-relative length based on the x-height of the root element’s first available font. Font metrics and writing mode affect the result according to the unit’s definition.",
+      "where": "Use it where a length is accepted when sizing should follow root font metrics rather than a nested component’s font.",
+      "example": "3rex",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#font-relative-lengths"
+    },
+    {
+      "name": "rcap",
+      "meaning": "A root-font-relative length based on the cap-height of the root element’s first available font. Font metrics and writing mode affect the result according to the unit’s definition.",
+      "where": "Use it where a length is accepted when sizing should follow root font metrics rather than a nested component’s font.",
+      "example": "3rcap",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#font-relative-lengths"
+    },
+    {
+      "name": "rch",
+      "meaning": "A root-font-relative length based on the advance measure of the “0” glyph of the root element’s first available font. Font metrics and writing mode affect the result according to the unit’s definition.",
+      "where": "Use it where a length is accepted when sizing should follow root font metrics rather than a nested component’s font.",
+      "example": "24rch",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#font-relative-lengths"
+    },
+    {
+      "name": "ric",
+      "meaning": "A root-font-relative length based on the advance measure of the ideographic water glyph (水) of the root element’s first available font. Font metrics and writing mode affect the result according to the unit’s definition.",
+      "where": "Use it where a length is accepted when sizing should follow root font metrics rather than a nested component’s font.",
+      "example": "3ric",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#font-relative-lengths"
+    },
+    {
+      "name": "lh",
+      "meaning": "A length based on the computed line height of the element, with normal resolved using font metrics. Using it does not itself limit a box to a particular number of actual lines.",
+      "where": "Use it for spacing that should follow the text’s line-height rhythm. Special parent/initial-metric rules avoid circular definitions in font and line-height declarations.",
+      "example": "1lh",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#font-relative-lengths"
+    },
+    {
+      "name": "rlh",
+      "meaning": "A length based on the computed line height of the root element, with normal resolved using font metrics. Using it does not itself limit a box to a particular number of actual lines.",
+      "where": "Use it for spacing that should follow the text’s line-height rhythm. Special parent/initial-metric rules avoid circular definitions in font and line-height declarations.",
+      "example": "1rlh",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#font-relative-lengths"
+    },
+    {
+      "name": "vi",
+      "meaning": "One vi is one percent of the inline size of the large viewport. The large viewport assumes retractable browser interfaces are retracted, so visible browser controls can cover content.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "40vi",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "vb",
+      "meaning": "One vb is one percent of the block size of the large viewport. The large viewport assumes retractable browser interfaces are retracted, so visible browser controls can cover content.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "8vb",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "svw",
+      "meaning": "One svw is one percent of the width of the small viewport. The small viewport assumes retractable browser interfaces are expanded.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "40svw",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "svh",
+      "meaning": "One svh is one percent of the height of the small viewport. The small viewport assumes retractable browser interfaces are expanded.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "8svh",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "svi",
+      "meaning": "One svi is one percent of the inline size of the small viewport. The small viewport assumes retractable browser interfaces are expanded.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "40svi",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "svb",
+      "meaning": "One svb is one percent of the block size of the small viewport. The small viewport assumes retractable browser interfaces are expanded.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "8svb",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "svmin",
+      "meaning": "One svmin is one percent of the smaller of width and height of the small viewport. The small viewport assumes retractable browser interfaces are expanded.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "8svmin",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "svmax",
+      "meaning": "One svmax is one percent of the larger of width and height of the small viewport. The small viewport assumes retractable browser interfaces are expanded.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "8svmax",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "lvw",
+      "meaning": "One lvw is one percent of the width of the large viewport. The large viewport assumes retractable browser interfaces are retracted, so visible browser controls can cover content.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "40lvw",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "lvh",
+      "meaning": "One lvh is one percent of the height of the large viewport. The large viewport assumes retractable browser interfaces are retracted, so visible browser controls can cover content.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "8lvh",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "lvi",
+      "meaning": "One lvi is one percent of the inline size of the large viewport. The large viewport assumes retractable browser interfaces are retracted, so visible browser controls can cover content.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "40lvi",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "lvb",
+      "meaning": "One lvb is one percent of the block size of the large viewport. The large viewport assumes retractable browser interfaces are retracted, so visible browser controls can cover content.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "8lvb",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "lvmin",
+      "meaning": "One lvmin is one percent of the smaller of width and height of the large viewport. The large viewport assumes retractable browser interfaces are retracted, so visible browser controls can cover content.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "8lvmin",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "lvmax",
+      "meaning": "One lvmax is one percent of the larger of width and height of the large viewport. The large viewport assumes retractable browser interfaces are retracted, so visible browser controls can cover content.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "8lvmax",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "dvw",
+      "meaning": "One dvw is one percent of the width of the dynamic viewport. Dynamic viewport dimensions can change as browser interfaces expand or retract.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "40dvw",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "dvh",
+      "meaning": "One dvh is one percent of the height of the dynamic viewport. Dynamic viewport dimensions can change as browser interfaces expand or retract.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "8dvh",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "dvi",
+      "meaning": "One dvi is one percent of the inline size of the dynamic viewport. Dynamic viewport dimensions can change as browser interfaces expand or retract.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "40dvi",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "dvb",
+      "meaning": "One dvb is one percent of the block size of the dynamic viewport. Dynamic viewport dimensions can change as browser interfaces expand or retract.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "8dvb",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "dvmin",
+      "meaning": "One dvmin is one percent of the smaller of width and height of the dynamic viewport. Dynamic viewport dimensions can change as browser interfaces expand or retract.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "8dvmin",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "dvmax",
+      "meaning": "One dvmax is one percent of the larger of width and height of the dynamic viewport. Dynamic viewport dimensions can change as browser interfaces expand or retract.",
+      "where": "Use it where a length is accepted. Choose small, large or dynamic viewport behavior deliberately, and test browser controls and writing modes.",
+      "example": "8dvmax",
+      "source": "https://www.w3.org/TR/2024/WD-css-values-4-20240312/#viewport-relative-lengths"
+    },
+    {
+      "name": "cqw",
+      "meaning": "One cqw is one percent of the relevant query container’s width. When no eligible query container exists for an axis, the small viewport size supplies the fallback for that axis.",
+      "where": "Use it on descendants of a size-query container to make a component respond to its container rather than directly to the viewport. Eligibility is determined separately for each axis.",
+      "example": "8cqw",
+      "source": "https://www.w3.org/TR/2022/WD-css-contain-3-20220818/#container-lengths"
+    },
+    {
+      "name": "cqh",
+      "meaning": "One cqh is one percent of the relevant query container’s height. When no eligible query container exists for an axis, the small viewport size supplies the fallback for that axis.",
+      "where": "Use it on descendants of a size-query container to make a component respond to its container rather than directly to the viewport. Eligibility is determined separately for each axis.",
+      "example": "8cqh",
+      "source": "https://www.w3.org/TR/2022/WD-css-contain-3-20220818/#container-lengths"
+    },
+    {
+      "name": "cqi",
+      "meaning": "One cqi is one percent of the relevant query container’s inline size. When no eligible query container exists for an axis, the small viewport size supplies the fallback for that axis.",
+      "where": "Use it on descendants of a size-query container to make a component respond to its container rather than directly to the viewport. Eligibility is determined separately for each axis.",
+      "example": "8cqi",
+      "source": "https://www.w3.org/TR/2022/WD-css-contain-3-20220818/#container-lengths"
+    },
+    {
+      "name": "cqb",
+      "meaning": "One cqb is one percent of the relevant query container’s block size. When no eligible query container exists for an axis, the small viewport size supplies the fallback for that axis.",
+      "where": "Use it on descendants of a size-query container to make a component respond to its container rather than directly to the viewport. Eligibility is determined separately for each axis.",
+      "example": "8cqb",
+      "source": "https://www.w3.org/TR/2022/WD-css-contain-3-20220818/#container-lengths"
+    },
+    {
+      "name": "cqmin",
+      "meaning": "One cqmin is one percent of the relevant query container’s smaller of inline and block sizes. When no eligible query container exists for an axis, the small viewport size supplies the fallback for that axis.",
+      "where": "Use it on descendants of a size-query container to make a component respond to its container rather than directly to the viewport. Eligibility is determined separately for each axis.",
+      "example": "8cqmin",
+      "source": "https://www.w3.org/TR/2022/WD-css-contain-3-20220818/#container-lengths"
+    },
+    {
+      "name": "cqmax",
+      "meaning": "One cqmax is one percent of the relevant query container’s larger of inline and block sizes. When no eligible query container exists for an axis, the small viewport size supplies the fallback for that axis.",
+      "where": "Use it on descendants of a size-query container to make a component respond to its container rather than directly to the viewport. Eligibility is determined separately for each axis.",
+      "example": "8cqmax",
+      "source": "https://www.w3.org/TR/2022/WD-css-contain-3-20220818/#container-lengths"
+    }
+  ]
+}

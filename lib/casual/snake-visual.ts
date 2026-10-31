@@ -1,0 +1,3 @@
+import type {Point} from './engine.ts';
+export function interpolateBody(body:Point[],previous:Point[]|undefined,alpha:number){const t=Math.max(0,Math.min(1,alpha));return body.map((p,i)=>{const a=previous?.[i]||previous?.at(-1)||p;return{x:(a.x+(p.x-a.x)*t)*20+10,y:(a.y+(p.y-a.y)*t)*20+10}})}
+export function smoothSnakePath(p:Point[]){if(!p.length)return '';let d=`M${p[0].x},${p[0].y}`;for(let i=1;i<p.length-1;i++){const a=p[i-1],b=p[i],c=p[i+1],ab=Math.hypot(b.x-a.x,b.y-a.y),bc=Math.hypot(c.x-b.x,c.y-b.y);if(!ab||!bc)continue;const r=Math.min(8,ab/2,bc/2);d+=`L${b.x+(a.x-b.x)*r/ab},${b.y+(a.y-b.y)*r/ab}Q${b.x},${b.y} ${b.x+(c.x-b.x)*r/bc},${b.y+(c.y-b.y)*r/bc}`}if(p.length>1)d+=`L${p.at(-1)!.x},${p.at(-1)!.y}`;return d}

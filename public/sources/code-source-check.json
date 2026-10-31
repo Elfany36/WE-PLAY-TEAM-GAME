@@ -1,0 +1,236 @@
+{
+  "sources": {
+    "https://html.spec.whatwg.org/multipage/embedded-content.html": {
+      "final": "https://html.spec.whatwg.org/multipage/embedded-content.html",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/embedded-content.html",
+      "sha256": "896d965a5c5a939cb41b56dcb3bce35c775d0ca8efe10dce1a67ddd430151495",
+      "error": null
+    },
+    "https://html.spec.whatwg.org/multipage/form-control-infrastructure.html": {
+      "final": "https://html.spec.whatwg.org/multipage/form-control-infrastructure.html",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/form-control-infrastructure.html",
+      "sha256": "0f0c2fc61952ff9da882f1d68f964b48a9db12c94c00340d3396985631145b5e",
+      "error": null
+    },
+    "https://html.spec.whatwg.org/multipage/form-elements.html": {
+      "final": "https://html.spec.whatwg.org/multipage/form-elements.html",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/form-elements.html",
+      "sha256": "8e2e9998a3072ff6dd6c9f278db03e59cedc5bd5a2829e631bed0b9fbfdd0f71",
+      "error": null
+    },
+    "https://html.spec.whatwg.org/multipage/forms.html": {
+      "final": "https://html.spec.whatwg.org/multipage/forms.html",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/forms.html",
+      "sha256": "398664c841897966798ab0f84840234a3ec31817358d9a65ffa9f36f9d3f356b",
+      "error": null
+    },
+    "https://html.spec.whatwg.org/multipage/grouping-content.html": {
+      "final": "https://html.spec.whatwg.org/multipage/grouping-content.html",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/grouping-content.html",
+      "sha256": "14e78e2b20580a8c7f0c43d4941c39694ed9f3d237c1e51059fb30e086407b46",
+      "error": null
+    },
+    "https://html.spec.whatwg.org/multipage/input.html": {
+      "final": "https://html.spec.whatwg.org/multipage/input.html",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/input.html",
+      "sha256": "b0a9c654265004b9d3bbfb18399281bcfe24eba6aa375d2893b10599db36ae2b",
+      "error": null
+    },
+    "https://html.spec.whatwg.org/multipage/interactive-elements.html": {
+      "final": "https://html.spec.whatwg.org/multipage/interactive-elements.html",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/interactive-elements.html",
+      "sha256": "c9a36d41565ea97bae5cb6e3eac57d35034945e12a442f1707e4e6ffb691156d",
+      "error": null
+    },
+    "https://html.spec.whatwg.org/multipage/links.html": {
+      "final": "https://html.spec.whatwg.org/multipage/links.html",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/links.html",
+      "sha256": "5cc5270db3ad2184aecfb6af751cb14bd7d728d3cb108adb0b377a28c0ccca57",
+      "error": null
+    },
+    "https://html.spec.whatwg.org/multipage/sections.html": {
+      "final": "https://html.spec.whatwg.org/multipage/sections.html",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/sections.html",
+      "sha256": "2a73ccd10e555e110c047524bb38275ccbab94af5bc7824cd91496cf62841bea",
+      "error": null
+    },
+    "https://html.spec.whatwg.org/multipage/semantics.html": {
+      "final": "https://html.spec.whatwg.org/multipage/semantics.html",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/semantics.html",
+      "sha256": "83a454310395e0d95fcd6bcc3ab7bff708052919ef693d0f70509aa16e1914d5",
+      "error": null
+    },
+    "https://html.spec.whatwg.org/multipage/syntax.html": {
+      "final": "https://html.spec.whatwg.org/multipage/syntax.html",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/syntax.html",
+      "sha256": "b926fbd3a2e67de34eabb0258c4d054403203a1ee4f3fac59ef8d16d5492bfef",
+      "error": null
+    },
+    "https://html.spec.whatwg.org/multipage/tables.html": {
+      "final": "https://html.spec.whatwg.org/multipage/tables.html",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/tables.html",
+      "sha256": "73e29bc49f1f8e3094521ae8abdd8e1f77334ede79077e4e487ad552a6ed1d82",
+      "error": null
+    },
+    "https://html.spec.whatwg.org/multipage/text-level-semantics.html": {
+      "final": "https://html.spec.whatwg.org/multipage/text-level-semantics.html",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/text-level-semantics.html",
+      "sha256": "cd780ede93618a6e604f5fff457742253c7909de2d66bc8451f79b7f94b852e8",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-align-3/": {
+      "final": "https://www.w3.org/TR/css-align-3/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-align-3.html",
+      "sha256": "1bec648f3606e2dda5ae1cc95073cad8e942f13c97bb0bbe23c14d26640c7afa",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-animations-1/": {
+      "final": "https://www.w3.org/TR/css-animations-1/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-animations-1.html",
+      "sha256": "f725ad790abbf87f7f53b00f383b8c206a95decb27cd5c257a9725646abb4d98",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-backgrounds-3/": {
+      "final": "https://www.w3.org/TR/css-backgrounds-3/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-backgrounds-3.html",
+      "sha256": "8a291792b2fd351eee443df466626d02b889d890f5d80e315bf80181b408712a",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-box-3/": {
+      "final": "https://www.w3.org/TR/css-box-3/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-box-3.html",
+      "sha256": "5330ef95e4b8ae6ee3f87ea24f52b2b23092fb0dd0f9011736e1878db96c702e",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-cascade-5/": {
+      "final": "https://www.w3.org/TR/css-cascade-5/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-cascade-5.html",
+      "sha256": "1fe27cdb69e4990a801bdad630d4bea755b4d472ff9aa23bf07f743056a3a2a1",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-color-4/": {
+      "final": "https://www.w3.org/TR/css-color-4/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-color-4.html",
+      "sha256": "9751423df92ce6e97dc3e0c6a647955c85c484f69872606e277e1392ed5fcf46",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-conditional-3/": {
+      "final": "https://www.w3.org/TR/css-conditional-3/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-conditional-3.html",
+      "sha256": "672eb79c78c53b9c92a460ffcfd8718af3c1e38ecf317566d955ffa1df470b35",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-flexbox-1/": {
+      "final": "https://www.w3.org/TR/css-flexbox-1/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-flexbox-1.html",
+      "sha256": "b0e3b097bc6db0688d4712968c290cda280f8f750eb998bc358c28df490ff3f5",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-fonts-4/": {
+      "final": "https://www.w3.org/TR/css-fonts-4/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-fonts-4.html",
+      "sha256": "b8e2b86d61febe7a32a1bb72c308c0de428cc2c275de26445ff3305fa9205360",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-grid-1/": {
+      "final": "https://www.w3.org/TR/css-grid-1/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-grid-1.html",
+      "sha256": "53a47980a217f0b976e1ab8fa0b56944421f7e6311deef96a6aa591ddc693317",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-inline-3/": {
+      "final": "https://www.w3.org/TR/css-inline-3/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-inline-3.html",
+      "sha256": "a73a73a45bf591c5964c5d49212de94066a2e4aeda245c7eb1f984c5fd3bb152",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-overflow-3/": {
+      "final": "https://www.w3.org/TR/css-overflow-3/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-overflow-3.html",
+      "sha256": "1b59ae503fd88cdaeb07ae2a1c6b5ff344baead236ce4e1b55425f880eed85fb",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-position-3/": {
+      "final": "https://www.w3.org/TR/css-position-3/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-position-3.html",
+      "sha256": "3c8a8120af2c32d9259eb2feb80506cadffb29c716dbf571b9c1154ab06079a6",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-pseudo-4/": {
+      "final": "https://www.w3.org/TR/css-pseudo-4/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-pseudo-4.html",
+      "sha256": "f983c087cb9e408fe0696976eeba6d5bc36120b62019e77114ee6b274b74db2e",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-sizing-3/": {
+      "final": "https://www.w3.org/TR/css-sizing-3/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-sizing-3.html",
+      "sha256": "ca0f1db3d5ad0c9799bf9dc04b9c30b4d9adf8d4d6f222787e4759ed81a6bbad",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-text-3/": {
+      "final": "https://www.w3.org/TR/css-text-3/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-text-3.html",
+      "sha256": "17c26f1b41455947f106dac81736944b12da328ee4892c7c5b601f5b65ced55a",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-transforms-1/": {
+      "final": "https://www.w3.org/TR/css-transforms-1/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-transforms-1.html",
+      "sha256": "4672e86844bfbe7af670c6702e873a36aee5a925d7fa30f374b79e88a1e18351",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-transitions-1/": {
+      "final": "https://www.w3.org/TR/css-transitions-1/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-transitions-1.html",
+      "sha256": "969d35d13ee4e4248421ebf991156a1af6b577d17a1be2565ffeaa94a012ec80",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-ui-4/": {
+      "final": "https://www.w3.org/TR/css-ui-4/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-ui-4.html",
+      "sha256": "42d9c51404fbef8121215b0a098ce436f89f0b57798fb499e342b4dfc7740f8f",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-values-4/": {
+      "final": "https://www.w3.org/TR/css-values-4/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-values-4.html",
+      "sha256": "7b6b68c34d00d7f6945e66e4e2efa913266299f597d5825393cae85dac1cc78c",
+      "error": null
+    },
+    "https://www.w3.org/TR/css-variables-1/": {
+      "final": "https://www.w3.org/TR/css-variables-1/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/css-variables-1.html",
+      "sha256": "5ce7b2c106af576328f222dd622598f847881f2ba9a64d53d6681d27d07ea0db",
+      "error": null
+    },
+    "https://www.w3.org/TR/selectors-4/": {
+      "final": "https://www.w3.org/TR/selectors-4/",
+      "file": "/workspace/scratch/b8a08128b72e/research/code-source-pages/selectors-4.html",
+      "sha256": "5d3b3f7e1fcc562dcec1a01ad2c5651e9f0bac294b255a75352e9df202604e6d",
+      "error": null
+    }
+  },
+  "bad": [],
+  "parser": "stdlib HTMLParser; handles unquoted WHATWG IDs",
+  "all_100_anchors_exist": true,
+  "counts": {
+    "HTML": 45,
+    "CSS": 55
+  },
+  "data_sha256": "c32523a889426c5d5a7cef8833279df0b4bc271624ebfdae353b3335bf3ba7e5",
+  "checks": [
+    "100 unique ids",
+    "100 unique prompts",
+    "exactly one ____ hole per snippet",
+    "all answers nonempty strings",
+    "all 100 primary-source fragment identifiers found in retrieved pages",
+    "all 55 completed CSS snippets parsed without error recovery by Lightning CSS 1.31.1"
+  ],
+  "limitations": [
+    "This is an authored 100-task practice set, not an exhaustive language test suite.",
+    "Source-anchor checks establish citation targets, not independent formal proof of every pedagogical claim.",
+    "Snippets are examples, not full applications; forms do not implement a backend.",
+    "Browser rendering and multiplayer mechanics must be tested by the application owner."
+  ]
+}

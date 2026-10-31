@@ -1,0 +1,26 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {DatabaseSync} from 'node:sqlite';
+import {createArenaAPI} from '../lib/arena-api.ts';
+import {roundQuestion,type ArenaState} from '../lib/arena-engine.ts';
+const origin='https://elfany36.github.io';
+function setup(){
+ const sqlite=new DatabaseSync(':memory:');
+ sqlite.exec('CREATE TABLE arena_rooms(code TEXT PRIMARY KEY,state TEXT NOT NULL,revision INTEGER NOT NULL,created_at INTEGER NOT NULL)');
+ const db={
+  prepare(sql:string){
+   return {
+    bind(...args:any[]){
+     return {
+      async first(){return sqlite.prepare(sql).get(...args)||null},
+      async run(){return {meta:{changes:Number(sqlite.prepare(sql).run(...args).changes)}}}
+     };
+    }
+   };
+  }
+ };
+ return {api:createArenaAPI(db as any),sqlite};
+}
+async function post(api:ReturnType<typeof createArenaAPI>,body:unknown,token?:string,from=origin){const r=await api.POST(new Request('https://example.com/api/arena',{method:'POST',headers:{Origin:from,'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:JSON.stringify(body)}));return {status:r.status,headers:r.headers,data:await r.json() as any}}
+test('real handlers with SQLite support eight simultaneous players, synchronized scores and replay protection',async()=>{const {api,sqlite}=setup();try{const host=await post(api,{action:'create',name:'Test Host'});assert.equal(host.status,201);const code=host.data.room.code;const guests=await Promise.all(Array.from({length:7},(_,i)=>post(api,{action:'join',code,name:'Tester '+i})));for(const g of guests)assert.equal(g.status,200,JSON.stringify(g.data));const sessions=[host,...guests].map(x=>x.data.token);assert.equal((await post(api,{action:'join',code,name:'Ninth Tester'})).status,409);assert.equal((await post(api,{action:'start',code},sessions[1])).status,403);const started=await post(api,{action:'start',code},sessions[0]);assert.equal(started.status,200);assert(!('seed' in started.data.room));const r=sqlite.prepare('SELECT state FROM arena_rooms WHERE code=?').get(code) as any;const state=JSON.parse(r.state) as ArenaState;const q=roundQuestion(state,0);const answers=await Promise.all(sessions.map(token=>post(api,{action:'answer',code,questionId:q.id,answer:q.answer},token)));for(const a of answers){assert.equal(a.status,200,JSON.stringify(a.data));assert(a.data.feedback.correct)}const saved=JSON.parse((sqlite.prepare('SELECT state FROM arena_rooms WHERE code=?').get(code) as any).state);assert.equal(saved.players.length,8);assert(saved.players.every((p:any)=>p.score===100&&p.index===1));const q2=roundQuestion(saved,1);const replay=await Promise.all([1,2].map(()=>post(api,{action:'answer',code,questionId:q2.id,answer:q2.answer},sessions[0])));assert.deepEqual(replay.map(r=>r.status).sort(),[200,409]);const get=await api.GET(new Request('https://example.com/api/arena?code='+code,{headers:{Origin:origin,Authorization:'Bearer '+sessions[3]}}));assert.equal(get.status,200);assert.equal(get.headers.get('Access-Control-Allow-Origin'),origin);const payload=await get.json() as any;assert.equal(payload.room.players.find((p:any)=>p.id===started.data.room.youId).score,200);assert.equal(payload.room.players.filter((p:any)=>p.score===100).length,7);assert(!JSON.stringify(payload).includes('tokenHash'));assert.equal((await post(api,{action:'leave',code},sessions[0])).status,200);const afterLeave=await api.GET(new Request('https://example.com/api/arena?code='+code,{headers:{Authorization:'Bearer '+sessions[1]}}));const transferred=(await afterLeave.json() as any).room;assert.equal(transferred.players.filter((p:any)=>p.isHost).length,1);assert.notEqual(transferred.hostId,started.data.room.youId);assert.equal(transferred.players.length,7);assert.equal((await api.GET(new Request('https://example.com/api/arena?code='+code,{headers:{Authorization:'Bearer '+sessions[0]}}))).status,401);}finally{sqlite.close()}});
+test('API handles invalid JSON/shapes, unknown rooms, storage outages and forbidden origins',async()=>{const {api,sqlite}=setup();try{for(const value of [null,[],{action:'create',name:55},{action:'unrecognized'}])assert.equal((await post(api,value)).status,400);const malformed=await api.POST(new Request('https://example.com',{method:'POST',body:'{'}));assert.equal(malformed.status,400);assert.equal((await api.POST(new Request('https://example.com',{method:'POST',body:'a'.repeat(12001)}))).status,413);assert.equal((await post(api,{action:'create',name:'Good'},undefined,'https://untrusted.example')).status,403);const unknown=await api.GET(new Request('https://example.com/api/arena?code=ABCDEFGH'));assert.equal(unknown.status,404);assert.equal((await api.GET(new Request('https://example.com/api/arena?code=bad'))).status,400);const unavailable=createArenaAPI(undefined);assert.equal((await post(unavailable,{action:'create',name:'Good'})).status,503);const preflight=await api.OPTIONS(new Request('https://example.com/api/arena',{method:'OPTIONS',headers:{Origin:origin}}));assert.equal(preflight.status,204);assert.equal(preflight.headers.get('Access-Control-Allow-Origin'),origin);assert.equal((await api.OPTIONS(new Request('https://example.com',{headers:{Origin:'https://untrusted.example'}}))).headers.get('Access-Control-Allow-Origin'),null);}finally{sqlite.close()}});

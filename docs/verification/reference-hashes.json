@@ -1,0 +1,68 @@
+[
+  {
+    "file": "browsers.html-data.json",
+    "sha256Matches": true,
+    "bytes": 457614,
+    "url": "https://raw.githubusercontent.com/microsoft/vscode-custom-data/01df47ad7cc0b140624fc941ff57618c36ed46a1/web-data/data/browsers.html-data.json"
+  },
+  {
+    "file": "browsers.css-data.json",
+    "sha256Matches": true,
+    "bytes": 1224353,
+    "url": "https://raw.githubusercontent.com/microsoft/vscode-custom-data/01df47ad7cc0b140624fc941ff57618c36ed46a1/web-data/data/browsers.css-data.json"
+  },
+  {
+    "file": "css-webref.json",
+    "sha256Matches": true,
+    "bytes": 816005,
+    "url": "https://raw.githubusercontent.com/w3c/webref/6ac6259c96b11e0aea5c34a16822eb06add278c9/ed/css.json"
+  },
+  {
+    "file": "html-elements-webref.json",
+    "sha256Matches": true,
+    "bytes": 23758,
+    "url": "https://raw.githubusercontent.com/w3c/webref/6ac6259c96b11e0aea5c34a16822eb06add278c9/ed/elements/html.json"
+  },
+  {
+    "file": "mdn-properties.json",
+    "sha256Matches": true,
+    "bytes": 362897,
+    "url": "https://raw.githubusercontent.com/mdn/data/fc60c55f5018ea399516a84ea2c64adf7731da82/css/properties.json"
+  },
+  {
+    "file": "mdn-syntaxes.json",
+    "sha256Matches": true,
+    "bytes": 40338,
+    "url": "https://raw.githubusercontent.com/mdn/data/fc60c55f5018ea399516a84ea2c64adf7731da82/css/syntaxes.json"
+  },
+  {
+    "file": "mdn-units.json",
+    "sha256Matches": true,
+    "bytes": 2836,
+    "url": "https://raw.githubusercontent.com/mdn/data/fc60c55f5018ea399516a84ea2c64adf7731da82/css/units.json"
+  },
+  {
+    "file": "mdn-at-rules.json",
+    "sha256Matches": true,
+    "bytes": 20505,
+    "url": "https://raw.githubusercontent.com/mdn/data/fc60c55f5018ea399516a84ea2c64adf7731da82/css/at-rules.json"
+  },
+  {
+    "file": "mdn-selectors.json",
+    "sha256Matches": true,
+    "bytes": 30058,
+    "url": "https://raw.githubusercontent.com/mdn/data/fc60c55f5018ea399516a84ea2c64adf7731da82/css/selectors.json"
+  },
+  {
+    "file": "mdn-functions.json",
+    "sha256Matches": true,
+    "bytes": 27452,
+    "url": "https://raw.githubusercontent.com/mdn/data/fc60c55f5018ea399516a84ea2c64adf7731da82/css/functions.json"
+  },
+  {
+    "file": "mdn-types.json",
+    "sha256Matches": true,
+    "bytes": 7278,
+    "url": "https://raw.githubusercontent.com/mdn/data/fc60c55f5018ea399516a84ea2c64adf7731da82/css/types.json"
+  }
+]

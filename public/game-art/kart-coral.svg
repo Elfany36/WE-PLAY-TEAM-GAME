@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Coral isometric toy kart"><title>Coral isometric toy kart</title><defs><linearGradient id="paint" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#ff8e84"/><stop offset="1" stop-color="#ed4d62"/></linearGradient><linearGradient id="side" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#ed4d62"/><stop offset="1" stop-color="#aa304b"/></linearGradient><linearGradient id="helmet" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#fff3b8"/><stop offset="1" stop-color="#cfdfdb"/></linearGradient><linearGradient id="glass" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#79d7e3"/><stop offset="1" stop-color="#264c6b"/></linearGradient></defs><ellipse cx="64" cy="111" rx="47" ry="10" fill="#102334" opacity=".16"/>
+<g stroke="#203246" stroke-width="2.6" stroke-linejoin="round">
+<path d="M25 57 36 51 47 58 47 72 36 79 25 72Z" fill="#243849"/><path d="M25 57 36 64 47 58M36 64V79" fill="none" stroke="#43586c"/><ellipse cx="30" cy="67" rx="5" ry="8" fill="#142333"/><path d="m30 61 0 10" stroke="#627b86" stroke-width="2"/>
+<path d="M62 39 73 34 84 41 84 55 73 63 62 55Z" fill="#243849"/><path d="m73 47 11-6M73 47v15" stroke="#43586c" fill="none"/>
+<path d="m27 68 25-20 45 29 6 13-28 20-43-27Z" fill="url(#side)"/>
+<path d="m27 68 25-20 45 29-24 20Z" fill="url(#paint)"/>
+<path d="m32 78 42 26 22-16" fill="none" stroke="#ff8e84" stroke-width="3"/>
+<path d="m39 57 14-9 26 17-16 10-23-13Z" fill="#304356"/>
+<path d="M45 48Q42 37 52 32L65 37 65 57 53 64 43 58Z" fill="#263d50"/>
+<path d="m47 54 13-8 13 12-12 10Z" fill="#ed4d62"/>
+<path d="M43 37Q44 22 57 24 71 25 72 41L62 50 49 45Z" fill="url(#helmet)"/>
+<path d="M45 36 57 40 70 34 72 41 61 48 48 43Z" fill="url(#glass)"/>
+<path d="m52 28 7 2M47 33l5 2" stroke="white" stroke-linecap="round" stroke-width="3" opacity=".85"/>
+<path d="m53 57 7 4 10-4 6 6" fill="none" stroke="#fff3b8" stroke-width="6" stroke-linecap="round"/>
+<ellipse cx="74" cy="62" rx="9" ry="5.5" transform="rotate(-28 74 62)" fill="none" stroke="#263b4c" stroke-width="3.5"/>
+<path d="m61 73 18-10 19 17-22 15-17-12Z" fill="url(#paint)"/>
+<path d="m73 70 7-4 16 15-7 4Z" fill="#fff3b8" stroke="none"/>
+<path d="m57 85 15 8 3 12-18-10Z" fill="#aa304b"/><path d="m78 95 22-15 2 10-23 17Z" fill="url(#side)"/>
+<path d="m75 99 22-15" stroke="#fff3b8" stroke-width="3.6"/>
+<path d="m46 91 11-7 12 8 0 15-11 8-12-8Z" fill="#25394b"/><path d="m46 91 12 8 11-7M58 99v16" stroke="#4b6277" fill="none"/><ellipse cx="51" cy="101" rx="4.6" ry="7.5" fill="#111f2d"/><path d="m51 97 0 6" stroke="#7993a0" stroke-width="2"/>
+<path d="m91 72 10-6 11 8 0 15-10 7-11-8Z" fill="#25394b"/><path d="m91 72 11 8 10-6M102 80v15" stroke="#4b6277" fill="none"/><ellipse cx="107" cy="84" rx="4.5" ry="7" fill="#111f2d"/><path d="m107 80 0 6" stroke="#7993a0" stroke-width="2"/>
+<path d="m27 62 12-8 7 4-13 9Z" fill="#ff8e84"/><path d="m85 100 12-7 6 3-12 8Z" fill="#fff3b8"/>
+</g><path d="m79 75 6 4" stroke="white" stroke-width="2" stroke-linecap="round" opacity=".8"/></svg>

@@ -1,0 +1,3 @@
+import type {CasualPublic} from './engine.ts';
+/** Lobbies intentionally have no game yet; roster order must still be renderable. */
+export function casualLeaderboard(room:CasualPublic|null){if(!room)return[];const game=room.game,players=[...room.players];if(!game)return players;return players.sort((a,b)=>game.kind==='ladders'?(game.positions[b.id]||0)-(game.positions[a.id]||0):game.kind==='memory'||game.kind==='uno'?(game.scores[b.id]||0)-(game.scores[a.id]||0):game.kind==='snake'?value(b.id)-value(a.id):0);function value(id:string){const worm=game.worms.find((w:any)=>w.id===id);return room!.settings.battle?(worm?.kills||0)*100+(worm?.best||0):(worm?.alive?100000:0)+(worm?.score||0)}}

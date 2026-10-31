@@ -1,0 +1,97 @@
+[
+  {
+    "game": "uno",
+    "localRender": true
+  },
+  {
+    "game": "ladders",
+    "localRender": true
+  },
+  {
+    "game": "memory",
+    "localRender": true
+  },
+  {
+    "game": "snake",
+    "localRender": true
+  },
+  {
+    "game": "property",
+    "localRender": true
+  },
+  {
+    "game": "circuit",
+    "localRender": true
+  },
+  {
+    "game": "terra",
+    "localRender": true
+  },
+  {
+    "game": "chess",
+    "localRender": true
+  },
+  {
+    "game": "dama",
+    "localRender": true
+  },
+  {
+    "game": "scidama",
+    "localRender": true
+  },
+  {
+    "game": "uno",
+    "onlineStartAndAuthenticatedReads": true,
+    "players": 8
+  },
+  {
+    "game": "ladders",
+    "onlineStartAndAuthenticatedReads": true,
+    "players": 8
+  },
+  {
+    "game": "memory",
+    "onlineStartAndAuthenticatedReads": true,
+    "players": 8
+  },
+  {
+    "game": "snake",
+    "onlineStartAndAuthenticatedReads": true,
+    "players": 8
+  },
+  {
+    "game": "property",
+    "onlineStartAndAuthenticatedReads": true,
+    "players": 8
+  },
+  {
+    "game": "circuit",
+    "onlineStartAndAuthenticatedReads": true,
+    "players": 8
+  },
+  {
+    "game": "terra",
+    "onlineStartAndAuthenticatedReads": true,
+    "players": 8
+  },
+  {
+    "game": "chess",
+    "onlineStartAndAuthenticatedReads": true,
+    "players": 2
+  },
+  {
+    "game": "dama",
+    "onlineStartAndAuthenticatedReads": true,
+    "players": 2
+  },
+  {
+    "game": "scidama",
+    "onlineStartAndAuthenticatedReads": true,
+    "players": 2
+  },
+  {
+    "game": "phone",
+    "onlineStartAndAuthenticatedReads": true,
+    "players": 8
+  }
+]

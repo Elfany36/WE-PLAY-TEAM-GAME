@@ -1,0 +1,14 @@
+export type Pose={x:number;y:number;angle?:number};
+export const shortestAngle=(n:number)=>Math.atan2(Math.sin(n),Math.cos(n));
+/** Smooth only the correction introduced by a new authority snapshot; keep input prediction immediate. */
+export class PoseReconciler{private poses=new Map<string,Pose>();private offsets=new Map<string,Pose>();private targets=new Map<string,Pose>();private velocities=new Map<string,Pose>();reset(){this.poses.clear();this.offsets.clear();this.targets.clear();this.velocities.clear()}
+ resolve(id:string,target:Pose,dt:number,newSnapshot:boolean,warpDistance:number){dt=Math.max(0,Math.min(dt,100));const previous=this.poses.get(id),priorTarget=this.targets.get(id),velocity=this.velocities.get(id)||{x:0,y:0,angle:0};let offset=this.offsets.get(id)||{x:0,y:0,angle:0};if(newSnapshot&&previous){const distance=Math.hypot(previous.x-target.x,previous.y-target.y);offset=distance>warpDistance?{x:0,y:0,angle:0}:{x:previous.x+velocity.x*dt-target.x,y:previous.y+velocity.y*dt-target.y,angle:shortestAngle((previous.angle||0)+(velocity.angle||0)*dt-(target.angle||0))}}else if(priorTarget&&dt>0){this.velocities.set(id,{x:(target.x-priorTarget.x)/dt,y:(target.y-priorTarget.y)/dt,angle:shortestAngle((target.angle||0)-(priorTarget.angle||0))/dt})}const fade=Math.exp(-dt/85);offset={x:offset.x*fade,y:offset.y*fade,angle:(offset.angle||0)*fade};const result={x:target.x+offset.x,y:target.y+offset.y,angle:target.angle===undefined?undefined:target.angle+(offset.angle||0)};this.offsets.set(id,offset);this.poses.set(id,result);this.targets.set(id,target);return result}
+}
+/** A monotonic display clock avoids reversing a moving entity when HTTP receipts jitter. */
+export class GameClock{private estimate=0;private received=0;private previous=0;private initialized=false;
+ sample(serverNow:number,receivedAt:number,rtt=0){const target=serverNow+Math.min(120,Math.max(0,rtt/2));if(!this.initialized){this.estimate=target;this.received=receivedAt;this.previous=target;this.initialized=true;return}const current=this.estimate+receivedAt-this.received;this.estimate=current+(target-current)*.25;this.received=receivedAt}
+ read(time:number){this.previous=Math.max(this.previous,this.estimate+Math.max(0,time-this.received));return this.previous}
+ reset(){this.initialized=false;this.previous=0}
+}
+export type TimedPose={at:number;pose:Pose;epoch?:number};
+export function interpolatePose(frames:TimedPose[],time:number,fallback:Pose,warpDistance=100){if(!frames.length)return fallback;let a=frames[0];for(let i=1;i<frames.length;i++){const b=frames[i];if(time<=b.at){if(a.epoch!==b.epoch||Math.hypot(a.pose.x-b.pose.x,a.pose.y-b.pose.y)>warpDistance)return b.pose;const t=Math.max(0,Math.min(1,(time-a.at)/Math.max(1,b.at-a.at)));return{x:a.pose.x+(b.pose.x-a.pose.x)*t,y:a.pose.y+(b.pose.y-a.pose.y)*t,angle:a.pose.angle===undefined?undefined:a.pose.angle+shortestAngle((b.pose.angle||0)-a.pose.angle)*t}}a=b}return fallback}

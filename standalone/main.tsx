@@ -1,0 +1,13 @@
+import AppBoundary from '../components/markup/AppBoundary';
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import MarkupApp from '../components/markup/MarkupApp';
+import '../app/globals.css';
+import '../app/themes.css';
+import '../app/arcade.css';
+import '../app/practice.css';
+import '../app/studio.css';
+import '../app/expansion.css';
+import '../app/room.css';
+import '../app/refinements.css';
+createRoot(document.getElementById('root')!).render(<React.StrictMode><AppBoundary><MarkupApp/></AppBoundary></React.StrictMode>);

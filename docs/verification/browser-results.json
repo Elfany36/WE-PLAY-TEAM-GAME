@@ -1,0 +1,37 @@
+[
+  {
+    "test": "eight distinct browser contexts join and score a coding round; ninth rejected",
+    "pass": true,
+    "players": 8
+  },
+  {
+    "test": "emoji message and catalog gift synchronize between browser clients",
+    "pass": true
+  },
+  {
+    "test": "player departure deletes shared chat and gifts",
+    "pass": true
+  },
+  {
+    "test": "dark theme, fullscreen and custom resize with scrollable code panel",
+    "pass": true
+  },
+  {
+    "test": "survival HTTP eight-seat score synchronization",
+    "pass": true,
+    "format": "blank"
+  },
+  {
+    "test": "quiz HTTP eight-seat score synchronization",
+    "pass": true,
+    "format": "matching"
+  },
+  {
+    "test": "seven main views fit a 390px mobile viewport without horizontal overflow",
+    "pass": true
+  },
+  {
+    "test": "no uncaught browser exceptions across tested flows",
+    "pass": true
+  }
+]

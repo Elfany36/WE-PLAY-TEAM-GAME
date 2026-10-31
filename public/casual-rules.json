@@ -1,0 +1,290 @@
+{
+  "reviewed": "2026-10-30",
+  "games": [
+    {
+      "id": "uno",
+      "name": "UNO · Classic & Flip",
+      "eyebrow": "A CLASSIC NIGHT AT THE TABLE.",
+      "description": "A fanned hand, a lively table, and two ways to play. Switch to the dark side with a double-sided Flip deck.",
+      "tag": "2–12 players · private hands",
+      "rules": [
+        "Classic 108-card deck, seven cards each. Match color, number, or symbol; use a Wild to choose a color. The first to empty their hand scores the other active hands. Reach 500 points to win the match.",
+        "Draw one, not until playable. You may play only that newly drawn card, or pass. No stacking, jump-in, or seven-zero house rules.",
+        "Skip skips one player. Reverse changes direction; with two players it acts as Skip. Draw Two makes the next player draw two and lose the turn.",
+        "Wild Draw Four is legal only if no OTHER card matches the active color. The affected player may accept four or challenge. A successful challenge makes the offender draw four; an unsuccessful one makes the challenger draw six and lose the turn. Only the challenger sees the captured hand evidence.",
+        "Use Call UNO with your two-card play, or call immediately after reaching one. Other players can catch an undeclared one-card hand before the next player begins drawing or playing. A catch adds two cards.",
+        "An opening Skip, Reverse, Draw Two, or Wild has its classic opening effect. An opening Wild Draw Four is returned and replaced. Preserve the top discard when reshuffling. Apply final draw penalties before scoring.",
+        "Online hands are private. Local play hides the next hand behind a pass-device screen. Color names and action labels supplement the card colors.",
+        "Optional Flip edition: 112 double-sided cards. Start on the Light side. Flip turns every hand over and reverses the entire draw and discard piles; the newly exposed discard sets the color but its action is ignored. If it is Wild, the flipper chooses a color.",
+        "Light: Draw One, Skip, Reverse, Flip and Wild Draw Two. Dark: Draw Five, Reverse, Skip Everyone, Flip and Wild Draw Color (draw until the chosen printed color, then skip). No penalty stacking.",
+        "For Flip challenges, following the updated Mattel 2024 instructions, any OTHER active-color card OR Wild makes Wild Draw Two / Wild Draw Color illegal. Successful challenge: offender takes the penalty. Failed: challenger takes the penalty plus two. The private captured hand is shown to the challenger.",
+        "Flip scores the active face: numbers at face value; Draw One 10; Reverse/Skip/Flip/Draw Five 20; Skip Everyone 30; Wild 40; Wild Draw Two 50; Wild Draw Color 60. First to 500 wins."
+      ],
+      "sources": [
+        {
+          "label": "Mattel: classic UNO Basic instructions (108-card edition)",
+          "url": "https://service.mattel.com/instruction_sheets/UNO%20Basic%20IS.pdf"
+        },
+        {
+          "label": "Mattel: precise UNO call and catch timing",
+          "url": "https://service.mattel.com/instruction_sheets/43001%20Deluxe%20UNO.PDF"
+        },
+        {
+          "label": "Mattel: classic two-player rules",
+          "url": "https://service.mattel.com/instruction_sheets/41001-0925-2L.pdf"
+        },
+        {
+          "label": "Mattel: updated 2024 UNO Flip instructions",
+          "url": "https://service.mattel.com/instruction_sheets/GDR44_UNO%20Flip_4LB_Colorblind%20Symbols.pdf"
+        }
+      ],
+      "variant": "Unofficial digital implementation with original SVG card artwork in the classic layout, not a licensed or pixel-identical reproduction. Mattel’s classic rules specify 2–10 players; seats 11–12 are a digital extension. The dealer starts randomly and rotates between hands. A 45-second timeout draws one and passes (or accepts pending four). Forced draws resolve immediately. A departing hand returns to stock; disputes involving a departing player are canceled. If no stock can be drawn for a full table cycle, the hand is a draw. Optional modern customizable cards are not included. Flip uses the official face counts with a fixed original digital front/back pairing; that pairing is not claimed to match the physical deck. If a requested printed color cannot be drawn after cycling the deck, the penalty stops when no further card can be drawn."
+    },
+    {
+      "id": "ladders",
+      "name": "Snakes & Ladders",
+      "eyebrow": "A LITTLE LUCK. A BIG ADVENTURE.",
+      "description": "Climb through a hand-drawn garden. Roll, rise, and watch out for the winding way down.",
+      "tag": "1–8 players · turn based",
+      "rules": [
+        "Start off the board at 0. Roll a six-sided die and move that many spaces; no six is needed to enter.",
+        "Land at a ladder’s foot to climb. Land on a snake’s head to slide. Passing over either does nothing.",
+        "Reach 100 exactly to win. An overshoot leaves your piece where it was.",
+        "The host goes first, followed by join order. A six does not grant an extra turn. Pieces can share a square.",
+        "Only the player whose turn it is can roll. A 45-second turn limit keeps a disconnected player from blocking the room."
+      ],
+      "sources": [
+        {
+          "label": "Hasbro published ladder-game instructions",
+          "url": "https://www.hasbro.com/common/documents/dad2614c1c4311ddbd0b0800200c9a66/4C5FB0165056900B10CBFE14B7B4D5F6.pdf"
+        }
+      ],
+      "variant": "An original board and eight-player digital variant of the traditional game. It uses a die, snakes, join-order turns, and a turn timer; it does not reproduce a publisher’s board or artwork."
+    },
+    {
+      "id": "memory",
+      "name": "Memory Garden",
+      "eyebrow": "TURN A CARD. MAKE A CONNECTION.",
+      "description": "A pocket garden of illustrated pairs. Choose your deck, remember the details, and collect the most matches.",
+      "tag": "1–8 players · 12–200 cards",
+      "rules": [
+        "Choose an even-sized deck from 12 to 200 cards. Each round independently samples illustrations from a 100-design collection and shuffles the pairs. Every selected illustration has exactly one matching partner.",
+        "On your turn, reveal one card and then a different face-down card. No third card can be revealed.",
+        "A match earns one pair and another turn. Matched cards stay visible in their original positions.",
+        "A mismatch stays visible for 1.8 seconds on Cozy, 1 second on Standard, or 0.55 seconds on Expert. It then turns over and the next player takes a turn.",
+        "Most pairs wins when every pair is found. Tied leaders share the win. Turn limits are 45 seconds on Cozy, 30 on Standard, and 15 on Expert."
+      ],
+      "sources": [
+        {
+          "label": "Ravensburger published matching-game instructions",
+          "url": "https://www.ravensburger.org/spielanleitungen/ecm/Spielanleitungen/26632%20anl%201429398.pdf"
+        }
+      ],
+      "variant": "Original illustrations and a configurable digital pair-matching variant. This version uses configurable decks, timed reveals, a turn timer, and shared wins instead of a tie-break round."
+    },
+    {
+      "id": "snake",
+      "name": "Snake Xenzia",
+      "eyebrow": "FIND YOUR FLOW. LEAVE YOUR TRAIL.",
+      "description": "Glide through six sculpted arenas. Every snake shares the field. Grow, outmaneuver, crash, and come back.",
+      "tag": "1–8 players · simultaneous",
+      "rules": [
+        "Use the arrow keys, WASD, the on-screen arrows, or a swipe on the arena. Each online player controls only their own snake.",
+        "Eating an apple adds one body segment and one point. Movement continues automatically; you cannot reverse direction instantly.",
+        "Choose one of six maps before the round. Classic Orchard is open; the other five contain solid obstacles. Hit an obstacle, a wall, your body, or another snake’s body and you crash. Two heads meeting or swapping cells on the same step both crash.",
+        "A tail cell that moves away on that step is safe unless its snake is growing. In Battle, a crash resets your growth and respawns you after 2 seconds with 1.2 seconds of protection; protected snakes pass through opponents.",
+        "Battle lasts 5 minutes. Most body-collision eliminations wins, with best growth as the tie-break. Head-on crashes award no elimination. Classic elimination is an optional 3-minute mode: last snake moving wins.",
+        "A solo Battle run also respawns. A solo Classic run ends on collision or at the time limit. The host can pause; a room-wide update gap over 8 seconds also pauses the arena.",
+        "Choose Compact 32 × 32, Large 48 × 48 (default), or Grand 64 × 64 before starting. Continuous walls share one visible surface. Your steering is predicted locally, remote snakes are interpolated, and collision results remain server-authoritative. Network latency is connection-dependent."
+      ],
+      "sources": [
+        {
+          "label": "Nokia-published Snake instructions (archived user guide)",
+          "url": "https://www.instructionsmanuals.com/sites/default/files/2019-05/Nokia-3395-en.pdf"
+        },
+        {
+          "label": "MDN: game loops and time steps",
+          "url": "https://developer.mozilla.org/en-US/docs/Games/Anatomy"
+        },
+        {
+          "label": "MDN: 2D collision techniques",
+          "url": "https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection"
+        }
+      ],
+      "variant": "An original grid-based multiplayer variant. Simultaneous collisions, shared wins, the meadow artwork, network pause, respawning Battle and elimination Classic are rules of this version."
+    },
+    {
+      "id": "property",
+      "name": "Property Parks",
+      "eyebrow": "BUILD A LITTLE EMPIRE.",
+      "description": "Forty garden addresses. Sculpted pieces, bustling auctions, clever trades, and the joy of your first hotel.",
+      "tag": "2–8 players · property trading",
+      "rules": [
+        "Everyone begins with $1,500. Roll two dice, move clockwise, and collect $200 for passing or landing on GO. Unowned land may be bought at its price or auctioned to everyone, including the player who declined it.",
+        "Rent is automatic. Unbuilt full color sets double the base rent; mortgaged spaces collect no rent. Four railways pay $25/$50/$100/$200. Utilities use a fresh dice roll ×4 for one, ×10 for both.",
+        "Own the complete color group to build. Build and sell evenly. Four houses may become a hotel. The bank has 32 houses and 12 hotels. Sell buildings for half price. If the bank cannot replace a hotel with four houses, liquidate the complete group’s buildings.",
+        "Mortgage undeveloped property for half its price; first sell every building in its color group. Redemption costs 110% of the mortgage value. No immediate mortgage transfer fee is charged, following the current rule edition.",
+        "Doubles grant another roll; three consecutive doubles send you to jail. In jail: pay $50, use a release card, or try doubles for up to 3 turns. Release doubles do not grant another roll. On the third failed attempt, pay $50 and move by that roll.",
+        "Trade money, undeveloped deeds, and jail-release cards by mutual consent. Receiving mortgaged property keeps its mortgage. Offers are validated again on acceptance.",
+        "If you owe more than you have, sell or mortgage to raise funds. Bankruptcy to a player transfers remaining deeds and release cards after buildings are sold. Bankruptcy to the bank auctions the returned deeds. Last solvent player wins. No Free Parking jackpot."
+      ],
+      "sources": [
+        {
+          "label": "Hasbro: current Monopoly Classic rules",
+          "url": "https://assets-us-01.kc-usercontent.com/500e0a65-283d-00ef-33b2-7f1f20488fe2/12890f7d-e57c-47f5-9d25-288b2fa5c397/G0009GA01_INST_MONOPOLY_CLASSIC_REFRESH_FAR.pdf"
+        },
+        {
+          "label": "Hasbro: classic property-trading instructions",
+          "url": "https://www.hasbro.com/common/instruct/monins.pdf"
+        }
+      ],
+      "variant": "Original names, board, models and card wording inspired by classic property trading. Eight seats are a digital extension of the current 2–6 player edition. Automatic rent, $10 minimum auctions with a 20-second bid timer, 90-second turn timer and 180-second debt timer keep rooms moving. This is not a licensed Monopoly product."
+    },
+    {
+      "id": "phone",
+      "name": "Doodle Relay",
+      "eyebrow": "LOST IN A LOVELY TRANSLATION.",
+      "description": "Write a strange sentence. Draw the one you receive. Watch the story unravel together, one album at a time.",
+      "tag": "2–8 players · simultaneous",
+      "rules": [
+        "Each player writes a starting sentence privately. The server sends it to the next player, who draws it. The next player describes only that drawing. Continue alternating drawing and text.",
+        "Everyone works simultaneously on their own task. Submit to lock it in. The next stage begins when all remaining players submit, or when the timer expires. Missing submissions become clearly labeled blanks.",
+        "Choose 3–9 stages and 20–180 seconds per stage. Only your immediate previous entry is visible until the shared reveal. Sentences are limited to 220 characters; drawings use up to 140 strokes and 2,000 points.",
+        "At the end, the host reveals each album one entry at a time on everyone’s screen. There is no correctness score. Save individual drawings as PNG files."
+      ],
+      "sources": [
+        {
+          "label": "Gartic Phone: official game description",
+          "url": "https://garticphone.com/en"
+        }
+      ],
+      "variant": "An original drawing-and-description relay inspired by the telephone-game format, with its own interface, brushes, privacy projection and timing. It needs separate devices; passing one device would expose private tasks. It does not reproduce Gartic branding or artwork."
+    },
+    {
+      "id": "circuit",
+      "name": "Pocket Kart",
+      "eyebrow": "SMALL KARTS. BIG COMEBACKS.",
+      "description": "Three scenic circuits. Drift into a boost, grab an item, and chase your friends through the final lap.",
+      "tag": "1–8 racers · live racing",
+      "rules": [
+        "Drive with WASD or arrow keys. Up accelerates, Down brakes and reverses, Left/Right steer. Hold Space while cornering to charge a drift boost; release to use it.",
+        "Complete every checkpoint in order for three laps. Cutting straight to the finish cannot count a lap. Grass slows you down. Karts bump each other. R recovers to your last checkpoint.",
+        "Item boxes recharge. E uses your item: Boost accelerates, Oil leaves a slowing hazard, Spark fires a projectile, and Shield blocks a hit. Touch controls provide the same actions.",
+        "Up to eight racers share the course. Optional bots occupy available seats and are labeled. First finish starts a 45-second finish window. A race also ends at six minutes; unfinished racers rank by lap, checkpoint and progress."
+      ],
+      "sources": [
+        {
+          "label": "Nintendo: official driving, drifting and item guide",
+          "url": "https://www.nintendo.com/jp/ichikara/aabpa/index_en.html"
+        },
+        {
+          "label": "MDN: game-loop architecture",
+          "url": "https://developer.mozilla.org/en-US/docs/Games/Anatomy"
+        }
+      ],
+      "variant": "An original top-down browser kart racer with three tracks, three laps, drift boosts, four items and optional bots. It is inspired by kart-racing conventions; it is not Mario Kart, and does not claim the commercial game’s characters, 3D world, modes or content."
+    },
+    {
+      "id": "terra",
+      "name": "Terra Workshop",
+      "eyebrow": "A WORLD YOU CAN MAKE YOUR OWN.",
+      "description": "A shared pixel wilderness. Dig through glowing caves, build a camp, forge better tools, and light the crystal beacon.",
+      "tag": "1–8 players · shared sandbox",
+      "rules": [
+        "Move with A/D or arrows and jump with Space. Aim on the world and hold to use the selected tool. Number keys 1–0 select the hotbar. E opens inventory and crafting.",
+        "Mine within five tiles. Pickaxes mine earth, stone and ore; axes cut wood and leaves. Crystal needs the iron pickaxe. Select a block and hold to place it beside an existing block, within reach and outside every player.",
+        "Craft planks and torches, then a workbench, furnace, metal bars and upgraded tools. Recipes show materials and required nearby stations. A bed can set your respawn point.",
+        "Swing the sword to defeat slimes and bats. Hits have a short damage cooldown. At zero health you respawn after 2.4 seconds and keep your pack. Health slowly regenerates after a quiet period.",
+        "Explore a generated 160 × 60 tile world with up to eight players. Craft a crystal beacon and activate it near a workbench to complete the shared expedition. Export a JSON snapshot to keep a record. Expeditions last at most 30 minutes."
+      ],
+      "sources": [
+        {
+          "label": "Re-Logic: Terraria developer game listing",
+          "url": "https://store.steampowered.com/app/105600/Terraria/"
+        },
+        {
+          "label": "MDN: 2D collision techniques",
+          "url": "https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection"
+        }
+      ],
+      "variant": "An original finite browser mining and building expedition with its own sprites, world generator, recipes, enemies and goal. It is not Terraria and does not reproduce its full item catalog, bosses, biomes or progression. Exported snapshots are records, not reloadable saves. Online rooms expire after 24 hours."
+    },
+    {
+      "id": "chess",
+      "name": "Chess Atelier",
+      "eyebrow": "EVERY MOVE TELLS A STORY.",
+      "description": "An ivory-and-jade board, sculpted pieces, clear legal moves. A quiet duel with room for a brilliant idea.",
+      "tag": "2 players · local or online",
+      "rules": [
+        "White moves first. Select a piece, then one of its highlighted legal destinations. Each online seat controls its own color; local play passes the device between turns. Colors alternate each round.",
+        "Kings may never move into check. Checkmate wins; stalemate draws. Castling, immediate en passant and promotion to queen, rook, bishop or knight are validated by chess.js 1.4.0.",
+        "Threefold repetition and fifty moves by each side without a pawn move or capture are claimable draws. Use Claim current draw, or Claim with next move before selecting your intended legal move. An invalid claim reports an error and keeps the board.",
+        "Fivefold repetition and seventy-five moves by each side without a pawn move or capture draw automatically. Checkmate takes precedence. Detected insufficient mating material draws immediately.",
+        "You may offer, accept or decline a draw, resign, and export a PGN move record. A player leaving forfeits the round. Games are untimed; online rooms expire after 24 hours."
+      ],
+      "sources": [
+        {
+          "label": "FIDE: Laws of Chess, effective January 2023",
+          "url": "https://handbook.fide.com/chapter/E012023"
+        },
+        {
+          "label": "chess.js: official legal-move library documentation",
+          "url": "https://jhlywa.github.io/chess.js/"
+        }
+      ],
+      "variant": "Original digital chess board and artwork. No clocks, rated matchmaking or AI opponent are included. The library detects its documented insufficient-material cases; this edition does not claim exhaustive adjudication of every possible FIDE dead position. Draw offers and claims are digital controls, and departure is an explicit forfeit convention."
+    },
+    {
+      "id": "dama",
+      "name": "Filipino Dama",
+      "eyebrow": "A SMALL BOARD. A CLEVER PLAN.",
+      "description": "Flying kings and unbroken capture routes. Play a carefully described Luzon edition on a warm sculpted board.",
+      "tag": "2 players · maximum captures",
+      "rules": [
+        "Luzon edition: twelve pieces per side on the light squares of an 8 × 8 board. Ivory / White starts. A man steps one diagonal square forward into an empty square.",
+        "Men capture diagonally forward or backward by jumping one adjacent enemy into the empty square beyond. Captures are compulsory. Of all available complete routes, you must choose one capturing the greatest number of pieces. Equal-length routes are freely selectable.",
+        "Dama / kings move any distance along clear diagonals. To capture, pass one enemy and land on any empty square beyond it, stopping before another piece. Continue jumping until the selected maximum route is complete.",
+        "Captured pieces remain blockers until the entire capture finishes. You cannot capture the same piece twice. A man is crowned only when its complete turn ends on the far row; reaching that row mid-route does not crown it immediately.",
+        "Take every enemy piece or leave the opponent with no legal move to win. Select a piece and each highlighted landing in order; the server applies the full route as one turn.",
+        "Digital draw convention: threefold position repetition or eighty turns without capture or promotion ends in a draw. Players may also agree to draw or resign. Leaving forfeits. Colors alternate each round."
+      ],
+      "sources": [
+        {
+          "label": "Filipino player’s firsthand Luzon / Vismin rules account",
+          "url": "https://luffykudo.wordpress.com/2024/03/11/how-to-play-filipino-checkers/"
+        }
+      ],
+      "variant": "Explicit Luzon rules edition based on a firsthand Philippine account, not a federation certification. Regional variants exist. Optional mayordama priority is off: equal maximum-length routes may be chosen regardless of king involvement. The automatic draw and departure rules are disclosed digital conventions."
+    },
+    {
+      "id": "scidama",
+      "name": "Sci-Dama · Water Patrol",
+      "eyebrow": "THINK AHEAD. SAVE EVERY DROP.",
+      "description": "Dama with a scientific twist. Printed water-consumption chips, a capture ledger, and the challenge of finishing lower.",
+      "tag": "2 players · 20-minute session",
+      "rules": [
+        "This Water Patrol edition uses the numbered starting formation in DepEd Tabuk DM 449 (2023). From your back row upward, left-to-right: 110, 85, 50, 25; 5, 30, 105, 70; 90, 65, 10, 45 cubic metres. The opposing formation is rotated 180 degrees.",
+        "Move and capture with the same forward-step, backward-capture, flying-dama and maximum-capture rules described for Filipino Dama. A man is crowned only if the complete turn ends on the far row. Equal maximum routes are freely selectable in this digital edition.",
+        "For each captured chip, apply the landing square’s + or − operator to the taker’s printed value and the victim’s printed value. Multiply by two if either chip is dama, or four if both are dama. Add each leg to the taker’s capture ledger. Its printed value never changes. Quiet moves score nothing.",
+        "Final consumption = capture ledger + values of your surviving chips. Every surviving dama counts twice. LOWER final consumption wins; equal totals tie. Losing all chips or having no legal moves ends the session and triggers scoring; it does not automatically award a survival win.",
+        "The shared session ends after twenty minutes, threefold repetition, or eighty quiet turns. Complete capture routes are submitted atomically. Remaining values and running totals are always visible. Resignation or leaving is a forfeit, not a score comparison.",
+        "Declared arcade arithmetic conventions: + and − alternate across playable squares; subtraction keeps signed results, including negative scores. These operator placement, negative-result, repetition and equal-route rules resolve details the inspected Sci-Dama memos do not completely specify."
+      ],
+      "sources": [
+        {
+          "label": "DepEd Tabuk 2023: Sci-Dama rules and starting diagrams, pp. 3–5",
+          "url": "https://depedtabukcity.com/wp-content/uploads/2023/11/DM-NO-449-S-2023-DIVISION-SCIENCE-AND-TECHNOLOGY-FAIR-1.pdf"
+        },
+        {
+          "label": "DepEd CAR 2015: Sci-Dama scoring and endings, p. 6",
+          "url": "https://depedpines.com/wp-content/uploads/2015/10/2015-Regional-Science-and-Math-Festival.pdf"
+        },
+        {
+          "label": "DepEd Digos 2024: Damath arithmetic base, pp. 15–16",
+          "url": "https://depeddigoscity.org/storage/wp-content/uploads/2024/01/DM_CID_2024_030.pdf"
+        }
+      ],
+      "variant": "Water Patrol inspired by the cited official education memos, with the explicit arcade conventions above. This is not a claim of exact tournament equivalence. Damath arithmetic is a separately identified base source; Sci-Dama’s lower-score outcome and residual-piece formula come from Sci-Dama memos. Other Sci-Dama science variants are not included."
+    }
+  ]
+}
