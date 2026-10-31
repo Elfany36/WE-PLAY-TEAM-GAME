@@ -46,3 +46,10 @@
 .connection-stats dt{color:var(--muted);font-size:11px}
 .connection-stats dd{margin:4px 0 0;font:650 14px ui-monospace,monospace}
 .connection-stats p{color:var(--muted);font-size:11px;max-width:80ch}
+
+/* Keep the playable canvas in view after entering a round, with controls below it. */
+.flexible-surface.view-content .action-world>canvas{max-width:min(100%,max(320px,calc((100svh - 300px)*1.6)));margin-inline:auto}
+.flexible-surface.view-content .snake-stadium{max-width:min(100%,max(280px,calc(100svh - 280px)));margin-inline:auto}
+.flexible-surface.view-content .strategy-board-frame{max-width:min(100%,max(280px,calc(100svh - 250px)));margin-inline:auto}
+.snake-dpad button[aria-pressed=true]{background:var(--accent);color:var(--button-text);border-color:var(--accent)}
+@media(max-width:600px){.surface-toolbar{gap:8px}.surface-toolbar>strong{max-width:100%;overflow-wrap:anywhere}.view-buttons{width:100%;gap:6px}.view-buttons button{flex:1;justify-content:center;min-height:42px}}

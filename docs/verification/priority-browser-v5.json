@@ -1,0 +1,43 @@
+[
+  {
+    "p95FrameMs": 16.800000000000182,
+    "maxFrameMs": 16.800000000000182,
+    "longTasks": 0,
+    "canvasPixels": [
+      958,
+      599
+    ],
+    "overflowPx": 0,
+    "gamePaintFps": "60",
+    "canvasVisible": true,
+    "mode": "circuit",
+    "participants": 8,
+    "uncaughtErrors": []
+  },
+  {
+    "p95FrameMs": 16.700000000000728,
+    "maxFrameMs": 16.800000000000182,
+    "longTasks": 0,
+    "canvasPixels": [
+      594,
+      594
+    ],
+    "overflowPx": 0,
+    "gamePaintFps": "60",
+    "canvasVisible": true,
+    "mode": "snake",
+    "participants": 8,
+    "uncaughtErrors": []
+  },
+  {
+    "mode": "memory",
+    "participants": 8,
+    "cards": 200,
+    "symbols": 68,
+    "faces": 1,
+    "externalFaceImages": 0,
+    "overflowPx": 0,
+    "mobileOverflowPx": 0,
+    "uncaughtErrors": []
+  }
+]
