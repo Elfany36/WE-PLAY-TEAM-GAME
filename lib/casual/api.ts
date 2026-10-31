@@ -1,3 +1,5 @@
+import {takeRoomBudget} from '../room-budget.ts';
+import {roomSnapshot} from '../room-snapshots.ts';
 import {beginRoomRequest,stampRoomReply} from '../request-clock.ts';
 import {roomBatch} from '../room-batch.ts';
 import {roomScene} from './client-room.ts';
@@ -6,13 +8,13 @@ import {roomHeaders,roomOriginAllowed} from '../room-origin.ts';
 import {SNAKE_MAP_IDS,SNAKE_SIZES} from './maps.ts';
 import {createCasual,applyCasualAction,advanceCasual,publicCasual,CasualError,ROOM_TTL,type CasualState,type CasualMode,CASUAL_MODES} from './engine.ts';
 function headers(req:Request){return roomHeaders(req)}
-function reply(req:Request,data:unknown,status=200){return Response.json(stampRoomReply(req,data),{status,headers:headers(req)})}
+function reply(req:Request,data:unknown,status=200){return Response.json(stampRoomReply(req,roomSnapshot(req,data)),{status,headers:headers(req)})}
 function originCheck(req:Request){const o=req.headers.get('Origin');if(o&&!roomOriginAllowed(req))throw new CasualError('This frontend is not allowed to use these rooms.',403)}
 function error(req:Request,e:unknown){return reply(req,{error:e instanceof CasualError?e.message:'The room service could not complete this request. Please reconnect.'},e instanceof CasualError?e.status:503)}
 async function hash(token:string){return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(token))),n=>n.toString(16).padStart(2,'0')).join('')}
 function secret(){return Array.from(crypto.getRandomValues(new Uint8Array(32)),n=>n.toString(16).padStart(2,'0')).join('')}
 function roomCode(value:unknown){if(typeof value!=='string'||!/^[A-HJ-NP-Z2-9]{8}$/.test(value.trim().toUpperCase()))throw new CasualError('Use the 8-character room code.');return value.trim().toUpperCase()}
-const actions=new Set(['move-board','resign-board','offer-draw','decline-draw','claim-draw','chat','create','join','configure','start','lobby','ready','heartbeat','leave','remove-inactive','claim-host','roll','flip','direction','pause','resume','end','play-uno','draw-uno','pass-uno','call-uno','catch-uno','choose-uno-color','accept-four','challenge-four','roll-property','buy-property','auction-property','end-property','pay-jail','use-jail-card','bid-property','pass-auction','build-property','sell-property','sell-set','mortgage-property','redeem-property','offer-trade','accept-trade','reject-trade','settle-property','bankrupt-property','submit-phone','draft-phone','reveal-phone','drive','explore','craft-terra','spawn-terra','beacon-terra']);
+const actions=new Set(['move-board','resign-board','offer-draw','decline-draw','claim-draw','chat','create','join','configure','start','lobby','ready','heartbeat','disconnect','leave','remove-inactive','claim-host','roll','flip','direction','pause','resume','end','play-uno','draw-uno','pass-uno','call-uno','catch-uno','choose-uno-color','accept-four','challenge-four','roll-property','buy-property','auction-property','end-property','pay-jail','use-jail-card','bid-property','pass-auction','build-property','sell-property','sell-set','mortgage-property','redeem-property','offer-trade','accept-trade','reject-trade','settle-property','bankrupt-property','submit-phone','draft-phone','reveal-phone','drive','explore','craft-terra','spawn-terra','beacon-terra']);
 export async function casualBody(req:Request){
  if(Number(req.headers.get('Content-Length'))>160000)throw new CasualError('The request is too large.',413);if(!req.body)throw new CasualError('Send a JSON request.');
  const reader=req.body.getReader();let size=0;const chunks:Uint8Array[]=[];
@@ -69,7 +71,7 @@ export function createCasualAPI(DB:D1Database|undefined,keepAlive?:((task:Promis
   }
   const token=b.action==='join'?secret():null,joinId=token?crypto.randomUUID():null,tokenHash=token?await hash(token):await credential(req);
   return await batch(b.code).run((state,now)=>{
-   const id=joinId||authenticate(tokenHash,state),next=applyCasualAction(state,b.action==='join'?{...b,id,hash:tokenHash}:b,id,now);
+   const id=joinId||authenticate(tokenHash,state);if(!joinId&&b.requestId&&state.players.find(p=>p.id===id)?.requests.includes(b.requestId)){const advanced=advanceCasual(state,now);return{state:advanced.state,changed:advanced.changed,result:(final:CasualState,revision:number,time:number)=>reply(req,{ack:b.requestId,room:project(final,id,time,revision,b.worldRound,b.worldVersion,b.scene)})}}const budget={traffic:state.players.find(p=>p.id===id)?.traffic};if(!takeRoomBudget(budget,now,b.action==='draft-phone'?10:1))throw new CasualError('Too many actions. Give the room a moment to catch up.',429);const next=applyCasualAction(state,b.action==='join'?{...b,id,hash:tokenHash}:b,id,now),player=next.players.find(p=>p.id===id);if(player)player.traffic=budget.traffic;
    return{state:next,changed:true,result:(final,revision,time)=>b.action==='leave'?reply(req,{ok:true}):reply(req,{...(token?{token}:{}),room:project(final,id,time,revision,b.worldRound,b.worldVersion,b.scene)})};
   });
  }catch(e){return error(req,e)}}

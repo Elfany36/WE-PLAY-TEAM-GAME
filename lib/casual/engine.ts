@@ -1,3 +1,4 @@
+import type {RoomTraffic} from '../room-budget.ts';
 import {newStrategy,strategyAction,advanceStrategy,leaveStrategy,publicStrategy,isStrategy,type StrategyGame} from './strategy.ts';
 import {DICE_ROLL_MS,LADDER_STEP_MS,LADDER_JUMP_MS} from './motion.ts';
 import {appendChat,activeChat,ChatError,type ChatMessage} from '../room-chat.ts';
@@ -16,7 +17,7 @@ export const casualMinimum=(mode:string)=>isStrategy(mode)||['uno','property','p
 export type CasualSettings={cards:number;speed:number;map?:SnakeMapId;snakeSize?:32|48|64;battle?:boolean;difficulty?:'cozy'|'standard'|'expert';unoFlip?:boolean;track?:string;bots?:number;relayRounds?:number;relaySeconds?:number};
 export type Direction='up'|'right'|'down'|'left';
 export type Point={x:number;y:number};
-export type CasualPlayer={id:string;name:string;tokenHash:string;joinedAt:number;lastSeen:number;color:number;ready:boolean;retired:boolean;requests:string[];bot?:boolean};
+export type CasualPlayer={id:string;name:string;tokenHash:string;joinedAt:number;lastSeen:number;color:number;ready:boolean;retired:boolean;requests:string[];traffic?:RoomTraffic;bot?:boolean};
 export type LadderGame={kind:'ladders';positions:Record<string,number>;currentId:string;turn:number;deadline:number;lockUntil:number;lastRoll:null|{playerId:string;die:number;from:number;landing:number;to:number;jump:'ladder'|'snake'|null;overshoot:boolean;at:number}};
 export type MemoryGame={kind:'memory';deck:{key:number;matchedBy:string|null}[];revealed:number[];currentId:string;turn:number;deadline:number;resolveAt:number|null;scores:Record<string,number>;moves:number};
 export type Worm={id:string;body:Point[];previous?:Point[];direction:Direction;queue:Direction[];queueTicks?:number[];alive:boolean;score:number;lastSeq:number;deathAt:number|null;deathPoint:Point|null;reason:string;respawnAt?:number;kills?:number;deaths?:number;best?:number;protectedUntil?:number};
@@ -114,6 +115,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
  }
  const p=s.players.find(p=>p.id===id&&!p.retired);if(!p)throw new CasualError('Your session ended. Join the room again.',401);p.lastSeen=now;
  if(a.requestId){if(p.requests.includes(a.requestId))throw new CasualError('That action was already applied. The room has been refreshed.',409);p.requests=[...p.requests.slice(-23),a.requestId]}
+ if(a.action==='disconnect'){p.lastSeen=now-HOST_TIMEOUT-1;s.chat=[];s.chatEpoch=(s.chatEpoch||0)+1;return s}
  if(a.action==='heartbeat')return s;
  if(a.action==='chat'){try{s.chat=appendChat(s.chat,p.id,p.name,a.text,a.messageId,now,a.giftId)}catch(e){if(e instanceof ChatError)throw new CasualError(e.message,e.status);throw e}return s}
  if(a.action==='leave'||a.action==='remove-inactive'){
@@ -220,6 +222,6 @@ export function publicCasual(s:CasualState,id:string,now:number){
  else if(s.game?.kind==='property')game={...s.game,chance:undefined,chest:undefined};
  else if(s.game?.kind==='memory'){const g=s.game;game={...g,deck:g.deck.map((c,index)=>({index,matchedBy:c.matchedBy,...(c.matchedBy||g.revealed.includes(index)?{key:c.key}:{})}))}}
  else if(s.game?.kind==='snake')game={...s.game,worms:s.game.worms.map(({queue,queueTicks,lastSeq,...w})=>({...w,...(w.id===id?{pendingTurns:queue,pendingTicks:queueTicks,inputAck:lastSeq}:{})}))};
- return{code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&now-lastSeen<20000,canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
+ return{code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,traffic,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&now-lastSeen<20000,canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
 }
 export type CasualPublic=ReturnType<typeof publicCasual>&{revision?:number;network?:{rtt:number;totalRtt?:number;serverMs?:number}};

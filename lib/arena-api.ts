@@ -1,3 +1,5 @@
+import {takeRoomBudget} from './room-budget.ts';
+import {roomSnapshot} from './room-snapshots.ts';
 import {beginRoomRequest,stampRoomReply} from './request-clock.ts';
 import {roomBatch} from './room-batch.ts';
 import {activeChat} from './room-chat.ts';
@@ -6,7 +8,7 @@ import {createArena,applyAction,publicArena,ArenaError,type ArenaState} from './
 import {readArenaBody,roomCode} from './arena-request.ts';
 const ttl=86400000;
 function cors(req:Request){return roomHeaders(req)}
-function reply(req:Request,data:unknown,status=200){return Response.json(stampRoomReply(req,data),{status,headers:cors(req)})}
+function reply(req:Request,data:unknown,status=200){return Response.json(stampRoomReply(req,roomSnapshot(req,data)),{status,headers:cors(req)})}
 async function hash(token:string){return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(token))),x=>x.toString(16).padStart(2,'0')).join('')}
 function randomCode(){return Array.from(crypto.getRandomValues(new Uint8Array(8)),n=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[n%32]).join('')}
 function secret(){return Array.from(crypto.getRandomValues(new Uint8Array(32)),x=>x.toString(16).padStart(2,'0')).join('')}
@@ -37,7 +39,7 @@ await DB.prepare('INSERT INTO arena_rooms(code,state,revision,created_at) VALUES
 const code=b.code;if(!/^[A-HJ-NP-Z2-9]{8}$/.test(code))throw new ArenaError('Use the 8-character room code.');const token=b.action==='join'?secret():null,id=b.action==='join'?crypto.randomUUID():null,tokenHash=token?await hash(token):await credential(req);
 const action={...b,...(b.action==='join'?{id,hash:tokenHash}:{}),...(b.action==='start'?{seed:crypto.getRandomValues(new Uint32Array(1))[0]}:{})};
 return await batch(code).run((state,now)=>{
- const playerId=id||authenticate(tokenHash,state),result=applyAction(state,action,playerId,now);
+ const playerId=id||authenticate(tokenHash,state),prior=b.requestId?state.players.find(p=>p.id===playerId)?.receipts?.find(r=>r.id===b.requestId):null;if(prior)return{state,changed:false,result:(final:ArenaState,revision:number,time:number)=>reply(req,{ack:b.requestId,room:{...publicArena(final,playerId!,time),revision},...(prior.feedback?{feedback:prior.feedback}:{})})};const budget={traffic:state.players.find(p=>p.id===playerId)?.traffic};if(!takeRoomBudget(budget,now))throw new ArenaError('Too many actions. Give the room a moment to catch up.',429);const result=applyAction(state,action,playerId,now),player=result.state.players.find(p=>p.id===playerId);if(player)player.traffic=budget.traffic;if(player&&b.requestId)player.receipts=[...(player.receipts||[]).slice(-7),{id:b.requestId,...(result.result?{feedback:result.result}:{})}];
  return{state:result.state,changed:true,result:(final,revision,time)=>b.action==='leave'?reply(req,{ok:true}):reply(req,{...(token?{token}:{}),room:{...publicArena(final,playerId!,time),revision},...(result.result?{feedback:result.result}:{})})};
 });
 }catch(e){return error(req,e)}}
