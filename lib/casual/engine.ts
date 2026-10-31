@@ -1,6 +1,6 @@
 import type {RoomTraffic} from '../room-budget.ts';
 import {newStrategy,strategyAction,advanceStrategy,leaveStrategy,publicStrategy,isStrategy,type StrategyGame} from './strategy.ts';
-import {DICE_ROLL_MS,LADDER_STEP_MS,LADDER_JUMP_MS} from './motion.ts';
+import {DICE_ROLL_MS,LADDER_STEP_MS,LADDER_JUMP_MS,ladderMoveDuration} from './motion.ts';
 import {appendChat,activeChat,ChatError,type ChatMessage} from '../room-chat.ts';
 import {newProperty,propertyAction,advanceProperty,bankruptEstate,type PropertyGame} from './property.ts';
 import {newPhone,phoneAction,advancePhone,leavePhone,publicPhone,type PhoneGame} from './phone.ts';
@@ -201,9 +201,9 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
  if(a.action==='roll'){
   if(g.kind!=='ladders')throw new CasualError('Roll controls belong to Snakes & Ladders.');if(now<g.lockUntil)throw new CasualError('Wait for the pieces to finish moving.',409);
   const die=Math.floor(random(s)*6)+1,from=g.positions[p.id]||0,overshoot=from+die>100,landing=overshoot?from:from+die,to=overshoot?from:LADDERS[landing]??SLIDES[landing]??landing,jump=overshoot?null:LADDERS[landing]?'ladder':SLIDES[landing]?'snake':null;
-  g.positions[p.id]=to;g.lastRoll={playerId:p.id,die,from,landing,to,jump,overshoot,at:now};g.lockUntil=now+DICE_ROLL_MS+die*LADDER_STEP_MS+(jump?LADDER_JUMP_MS:0);
+  g.positions[p.id]=to;g.lastRoll={playerId:p.id,die,from,landing,to,jump,overshoot,at:now};g.lockUntil=now+DICE_ROLL_MS+(overshoot?0:ladderMoveDuration(die,!!jump));
   event(s,p.name+' rolled '+die+(overshoot?' and stayed on '+from+'.':jump?' · '+(jump==='ladder'?'climbed ':'slid ')+landing+' → '+to+'.':' · moved to '+to+'.'),now);
-  if(to===100)finish(s,[p.id],p.name+' reached 100!',now);else moveTurn(s,g,now);return s;
+  if(to===100)finish(s,[p.id],p.name+' reached 100!',now);else{moveTurn(s,g,now);g.deadline=g.lockUntil+TURN_MS}return s;
  }
  if(a.action==='flip'){
   if(g.kind!=='memory')throw new CasualError('Card controls belong to Memory Garden.');if(g.resolveAt!==null)throw new CasualError('Let everyone see these two cards first.',409);
