@@ -1,3 +1,5 @@
+import {roomBatch} from '../room-batch.ts';
+import {roomScene} from './client-room.ts';
 import {activeChat} from '../room-chat.ts';
 import {roomHeaders,roomOriginAllowed} from '../room-origin.ts';
 import {SNAKE_MAP_IDS,SNAKE_SIZES} from './maps.ts';
@@ -37,19 +39,25 @@ export async function casualBody(req:Request){
  if(b.action==='craft-terra')out.recipe=b.recipe;
  if(b.action==='spawn-terra'){out.x=b.x;out.y=b.y}
  if(b.worldVersion!==undefined&&Number.isSafeInteger(b.worldVersion)&&Number.isSafeInteger(b.worldRound)){out.worldVersion=b.worldVersion;out.worldRound=b.worldRound}
+ if(typeof b.scene==='string'&&b.scene.length<=128)out.scene=b.scene;
  return out;
 }
-export function createCasualAPI(DB:D1Database|undefined){
+export function createCasualAPI(DB:D1Database|undefined,keepAlive?:((task:Promise<unknown>)=>void)){
  async function read(code:string){if(!DB)throw new CasualError('Room storage is unavailable.',503);const row=await DB.prepare('SELECT state,revision,created_at FROM casual_rooms WHERE code=?').bind(code).first<{state:string;revision:number;created_at:number}>();if(!row)throw new CasualError('Room not found. Check the code.',404);if(Date.now()-row.created_at>ROOM_TTL)throw new CasualError('This room expired after 24 hours.',410);return{state:JSON.parse(row.state) as CasualState,revision:row.revision}}
- async function authenticate(req:Request,s:CasualState){const bearer=(req.headers.get('Authorization')||'').match(/^Bearer ([a-f0-9]{64})$/);if(!bearer)throw new CasualError('Join a room to play.',401);const tokenHash=await hash(bearer[1]),p=s.players.find(p=>p.tokenHash===tokenHash&&!p.retired);if(!p)throw new CasualError('Your session ended. Join the room again.',401);return p.id}
+ async function credential(req:Request){const bearer=(req.headers.get('Authorization')||'').match(/^Bearer ([a-f0-9]{64})$/);return bearer?hash(bearer[1]):null}
+ function authenticate(tokenHash:string|null,s:CasualState){if(!tokenHash)throw new CasualError('Join a room to play.',401);const p=s.players.find(p=>p.tokenHash===tokenHash&&!p.retired);if(!p)throw new CasualError('Your session ended. Join the room again.',401);return p.id}
  async function save(code:string,state:CasualState,revision:number){const r=await DB!.prepare('UPDATE casual_rooms SET state=?, revision=revision+1 WHERE code=? AND revision=?').bind(JSON.stringify(state),code,revision).run();return!!r.meta.changes}
- function project(s:CasualState,id:string,now:number,revision:number,round?:number,worldVersion?:number){const room={...publicCasual(s,id,now),revision};if(room.mode==='terra'&&room.round===round&&room.game?.version===worldVersion)room.game={...room.game,tiles:undefined};return room}
- async function GET(req:Request){try{originCheck(req);const code=roomCode(new URL(req.url).searchParams.get('code'));for(let i=0;i<16;i++){
-  const row=await read(code),id=await authenticate(req,row.state),now=Date.now(),advanced=advanceCasual(row.state,now),p=advanced.state.players.find(p=>p.id===id)!;let changed=advanced.changed;const messages=activeChat(advanced.state.chat,now);if(messages.length!==(advanced.state.chat||[]).length){advanced.state.chat=messages;changed=true}
-  if(now-p.lastSeen>5000){p.lastSeen=now;changed=true}
-  if(changed&&!await save(code,advanced.state,row.revision))continue;
-  return reply(req,{room:project(advanced.state,id,now,row.revision+(changed?1:0),Number(new URL(req.url).searchParams.get('worldRound')),Number(new URL(req.url).searchParams.get('worldVersion')))})
- }throw new CasualError('The room is busy. Reconnecting…',409)}catch(e){return error(req,e)}}
+ function project(s:CasualState,id:string,now:number,revision:number,round?:number,worldVersion?:number,scene?:string|null){const room={...publicCasual(s,id,now),revision};if(room.mode==='terra'&&room.round===round&&room.game?.version===worldVersion)room.game={...room.game,tiles:undefined};if(scene&&scene===roomScene(room))room.game={...room.game,obstacles:undefined};return room}
+ function batch(code:string){if(!DB)throw new CasualError('Room storage is unavailable.',503);return roomBatch(DB,'casual:'+code,()=>read(code),(state:CasualState,revision:number)=>save(code,state,revision),()=>new CasualError('The room is busy. Reconnecting…',409),keepAlive)}
+ async function GET(req:Request){try{
+  originCheck(req);const url=new URL(req.url),code=roomCode(url.searchParams.get('code')),tokenHash=await credential(req);
+  return await batch(code).run((state,now)=>{
+   const id=authenticate(tokenHash,state),advanced=advanceCasual(state,now),p=advanced.state.players.find(p=>p.id===id)!;let changed=advanced.changed;
+   const messages=activeChat(advanced.state.chat,now);if(messages.length!==(advanced.state.chat||[]).length){advanced.state.chat=messages;changed=true}
+   if(now-p.lastSeen>5000){p.lastSeen=now;changed=true}
+   return{state:advanced.state,changed,result:(final,revision,time)=>url.searchParams.get('revision')===String(revision)?reply(req,{unchanged:true,revision,serverNow:time}):reply(req,{room:project(final,id,time,revision,Number(url.searchParams.get('worldRound')),Number(url.searchParams.get('worldVersion')),url.searchParams.get('scene'))})};
+  });
+ }catch(e){return error(req,e)}}
  async function POST(req:Request){try{originCheck(req);const b=await casualBody(req);if(!DB)throw new CasualError('Room storage is unavailable.',503);
   if(b.action==='create'){
    const token=secret(),id=crypto.randomUUID(),tokenHash=await hash(token),now=Date.now();let code='';for(let i=0;i<8;i++)code+='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[crypto.getRandomValues(new Uint8Array(1))[0]%32];
@@ -57,13 +65,11 @@ export function createCasualAPI(DB:D1Database|undefined){
    await DB.prepare('DELETE FROM casual_rooms WHERE created_at < ?').bind(now-ROOM_TTL).run();
    await DB.prepare('INSERT INTO casual_rooms(code,state,revision,created_at) VALUES(?,?,0,?)').bind(code,JSON.stringify(s),now).run();return reply(req,{token,room:{...publicCasual(s,id,now),revision:0}},201)
   }
-  const token=b.action==='join'?secret():null,joinId=token?crypto.randomUUID():null,tokenHash=token?await hash(token):null;
-  for(let i=0;i<16;i++){
-   const row=await read(b.code),now=Date.now(),id=joinId||await authenticate(req,row.state);
-   const s=applyCasualAction(row.state,b.action==='join'?{...b,id,hash:tokenHash}:b,id,now);
-   if(!await save(b.code,s,row.revision))continue;
-   if(b.action==='leave')return reply(req,{ok:true});return reply(req,{...(token?{token}:{}),room:project(s,id,now,row.revision+1,b.worldRound,b.worldVersion)})
-  }throw new CasualError('The room is busy. Please try again.',409)
+  const token=b.action==='join'?secret():null,joinId=token?crypto.randomUUID():null,tokenHash=token?await hash(token):await credential(req);
+  return await batch(b.code).run((state,now)=>{
+   const id=joinId||authenticate(tokenHash,state),next=applyCasualAction(state,b.action==='join'?{...b,id,hash:tokenHash}:b,id,now);
+   return{state:next,changed:true,result:(final,revision,time)=>b.action==='leave'?reply(req,{ok:true}):reply(req,{...(token?{token}:{}),room:project(final,id,time,revision,b.worldRound,b.worldVersion,b.scene)})};
+  });
  }catch(e){return error(req,e)}}
  async function OPTIONS(req:Request){return new Response(null,{status:204,headers:headers(req)})}
  return{GET,POST,OPTIONS};

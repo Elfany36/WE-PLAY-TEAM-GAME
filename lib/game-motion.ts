@@ -6,9 +6,15 @@ export class PoseReconciler{private poses=new Map<string,Pose>();private offsets
 }
 /** A monotonic display clock avoids reversing a moving entity when HTTP receipts jitter. */
 export class GameClock{private estimate=0;private received=0;private previous=0;private initialized=false;
- sample(serverNow:number,receivedAt:number,rtt=0){const target=serverNow+Math.min(120,Math.max(0,rtt/2));if(!this.initialized){this.estimate=target;this.received=receivedAt;this.previous=target;this.initialized=true;return}const current=this.estimate+receivedAt-this.received;this.estimate=current+(target-current)*.25;this.received=receivedAt}
+ sample(serverNow:number,receivedAt:number,rtt=0){const target=serverNow+Math.min(450,Math.max(0,rtt/2));if(!this.initialized){this.estimate=target;this.received=receivedAt;this.previous=target;this.initialized=true;return}const current=this.estimate+receivedAt-this.received;this.estimate=current+(target-current)*.25;this.received=receivedAt}
  read(time:number){this.previous=Math.max(this.previous,this.estimate+Math.max(0,time-this.received));return this.previous}
  reset(){this.initialized=false;this.previous=0}
 }
 export type TimedPose={at:number;pose:Pose;epoch?:number};
-export function interpolatePose(frames:TimedPose[],time:number,fallback:Pose,warpDistance=100){if(!frames.length)return fallback;let a=frames[0];for(let i=1;i<frames.length;i++){const b=frames[i];if(time<=b.at){if(a.epoch!==b.epoch||Math.hypot(a.pose.x-b.pose.x,a.pose.y-b.pose.y)>warpDistance)return b.pose;const t=Math.max(0,Math.min(1,(time-a.at)/Math.max(1,b.at-a.at)));return{x:a.pose.x+(b.pose.x-a.pose.x)*t,y:a.pose.y+(b.pose.y-a.pose.y)*t,angle:a.pose.angle===undefined?undefined:a.pose.angle+shortestAngle((b.pose.angle||0)-a.pose.angle)*t}}a=b}return fallback}
+export function interpolatePose(frames:TimedPose[],time:number,fallback:Pose,warpDistance=100){if(!frames.length)return fallback;let a=frames[0];for(let i=1;i<frames.length;i++){const b=frames[i];if(time<=b.at){if(a.epoch!==b.epoch||Math.hypot(a.pose.x-b.pose.x,a.pose.y-b.pose.y)>warpDistance)return b.pose;const t=Math.max(0,Math.min(1,(time-a.at)/Math.max(1,b.at-a.at)));return{x:a.pose.x+(b.pose.x-a.pose.x)*t,y:a.pose.y+(b.pose.y-a.pose.y)*t,angle:a.pose.angle===undefined?undefined:a.pose.angle+shortestAngle((b.pose.angle||0)-a.pose.angle)*t}}a=b}
+ // Continue on the requested display timeline. Jumping to a prediction at "now"
+ // here used to skip the interpolation buffer whenever one response was late.
+ const prior=frames.at(-2);if(!prior||prior.epoch!==a.epoch||Math.hypot(a.pose.x-prior.pose.x,a.pose.y-prior.pose.y)>warpDistance)return a.pose;
+ const gap=Math.max(0,time-a.at),extra=gap<=200?gap:200+150*(1-Math.exp(-(gap-200)/150)),t=extra/Math.max(1,a.at-prior.at);
+ return{x:a.pose.x+(a.pose.x-prior.pose.x)*t,y:a.pose.y+(a.pose.y-prior.pose.y)*t,angle:a.pose.angle===undefined?undefined:a.pose.angle+shortestAngle(a.pose.angle-(prior.pose.angle||0))*t};
+}
