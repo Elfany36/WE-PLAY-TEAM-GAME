@@ -22,6 +22,10 @@ const managedLinux = readExecutionProfile() === "managed-linux";
 const localBindingConfig = {
   main: "./worker/index.ts",
   compatibility_flags: ["nodejs_compat"],
+  // Every room request does a D1 read then a D1 write. Smart Placement runs the
+  // Worker near the database instead of near the player, which removes most of
+  // the per-request database round-trip time (the "server work" lag).
+  placement: { mode: "smart" as const },
   d1_databases: d1
     ? [
         {
