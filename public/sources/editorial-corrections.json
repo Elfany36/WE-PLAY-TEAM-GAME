@@ -1,0 +1,31 @@
+{
+  "reviewedAt": "2026-10-31",
+  "inventoryCutoff": "2026-10-29",
+  "notes": "The pinned upstream files are preserved. This authored correction is applied to the reading UI and question-bank projection. Function aliases are collapsed by kind, context and name for scoring only; all 3,117 inventory entries remain available.",
+  "corrections": [
+    {
+      "id": "css-pseudo-class-not",
+      "reason": "The pinned editor prose described the Selectors Level 3 single-simple-selector restriction. Level 4 supports a list of complex selectors.",
+      "source": "https://www.w3.org/TR/2026/WD-selectors-4-20260122/#negation",
+      "implementation": "lib/reference-corrections.ts"
+    },
+    {
+      "id": "css-at-rule-charset",
+      "reason": "Clarify stylesheet byte decoding, document encoding distinction, and strict initial encoding declaration.",
+      "source": "https://www.w3.org/TR/2026/CRD-css-syntax-3-20261001/#input-byte-stream",
+      "implementation": "lib/reference-corrections.ts"
+    },
+    {
+      "id": "css-at-rule-media",
+      "reason": "Cover media-query conditions and features beyond media type.",
+      "source": "https://www.w3.org/TR/2024/CRD-css-conditional-3-20240815/#at-ruledef-media",
+      "implementation": "lib/reference-corrections.ts"
+    },
+    {
+      "id": "css-at-rule-property",
+      "reason": "Explain custom-property registration and distinguish draft grammar from basic implementation support.",
+      "source": "https://www.w3.org/TR/2024/WD-css-properties-values-api-1-20240326/#at-property-rule",
+      "implementation": "lib/reference-corrections.ts"
+    }
+  ]
+}

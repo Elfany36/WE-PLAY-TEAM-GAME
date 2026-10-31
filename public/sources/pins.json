@@ -1,0 +1,26 @@
+{
+  "microsoft/vscode-custom-data": {
+    "sha": "01df47ad7cc0b140624fc941ff57618c36ed46a1",
+    "date": "2026-06-22T18:22:20Z",
+    "url": "https://github.com/microsoft/vscode-custom-data/commit/01df47ad7cc0b140624fc941ff57618c36ed46a1",
+    "branch": "main"
+  },
+  "mdn/data": {
+    "sha": "fc60c55f5018ea399516a84ea2c64adf7731da82",
+    "date": "2026-10-15T10:06:49Z",
+    "url": "https://github.com/mdn/data/commit/fc60c55f5018ea399516a84ea2c64adf7731da82",
+    "branch": "main"
+  },
+  "mdn/browser-compat-data": {
+    "sha": "aed1f62c2a5cf37c42ae934c1a44f172397a0d8d",
+    "date": "2026-10-29T11:03:51Z",
+    "url": "https://github.com/mdn/browser-compat-data/commit/aed1f62c2a5cf37c42ae934c1a44f172397a0d8d",
+    "branch": "main"
+  },
+  "w3c/webref": {
+    "sha": "6ac6259c96b11e0aea5c34a16822eb06add278c9",
+    "date": "2026-10-26T19:01:33Z",
+    "url": "https://github.com/w3c/webref/commit/6ac6259c96b11e0aea5c34a16822eb06add278c9",
+    "branch": "curated"
+  }
+}

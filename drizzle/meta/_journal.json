@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1793289170541,
+      "tag": "0000_cheerful_sauron",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1793291550065,
+      "tag": "0001_serious_texas_twister",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1793325424272,
+      "tag": "0002_clever_dreaming_celestial",
+      "breakpoints": true
+    }
+  ]
+}

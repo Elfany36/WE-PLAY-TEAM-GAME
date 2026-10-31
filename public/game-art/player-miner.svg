@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="64" viewBox="0 0 48 64" role="img" aria-label="Miner adventurer sprite"><title>Miner adventurer sprite</title><defs></defs><ellipse cx="24" cy="60" rx="17" ry="2.5" fill="#142b3b" opacity=".18"/>
+<path d="M11 42h12v15h-3v4H9v-7h2Zm14 0h12v16h3v3H26v-4h-1Z" fill="#273b4e"/><path d="M12 44h8v10h-8ZM28 44h7v10h-7Z" fill="#526277"/><path d="M10 56h11v5H9v-3Zm17 0h11l2 5H27Z" fill="#203246"/>
+<path d="M9 25h29v22H9Z" fill="#a77643"/><path d="M14 25h20v19H14Z" fill="#e4b85e"/><path d="M10 29H6v15h7V31Zm27 0h5v15h-7V31Z" fill="#a77643"/><path d="M5 40h8v7H5Zm31 0h8v7h-8Z" fill="#f2c49b"/>
+<path d="M10 39h28v6H10Z" fill="#5c4b3f"/><path d="M22 39h7v6h-7Z" fill="#ebc977"/><path d="M24 40h3v3h-3Z" fill="#a5834f"/>
+<path d="M14 10h21v19H14Z" fill="#3a3841"/><path d="M16 11h18v17H16Z" fill="#f2c49b"/><path d="M16 23h18v5H16Z" fill="#c48a72"/><path d="M20 17h3v4h-3ZM30 17h3v4h-3Z" fill="#24394b"/><path d="M24 23h5v2h-5Z" fill="#8e5c55"/>
+<path d="M12 26h25v6H12Z" fill="#79c9c3"/><path d="M31 29h7v13l-7-3Z" fill="#79c9c3"/>
+<path d="M15 32h3v5h-3Z" fill="white" opacity=".25"/><path d="M10 11h4V5h19v6h5v6H10Z" fill="#c18f45"/><path d="M14 5h19v7H14Z" fill="#f1cf79"/><path d="M9 12h30v5H9Z" fill="#e8b65b"/><path d="M21 8h10v9H21Z" fill="#536578"/><path d="M23 9h6v6h-6Z" fill="#fff2b0"/><path d="M8 27h5v11H8Z" fill="#94704c"/></svg>
