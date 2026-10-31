@@ -1,0 +1,49 @@
+{
+  "pickerGames": 17,
+  "liveActionCards": 7,
+  "darkMode": true,
+  "pickerMobileOverflow": 0,
+  "localGames": [
+    {
+      "mode": "sumo",
+      "players": 2,
+      "overflow": 0
+    },
+    {
+      "mode": "tanks",
+      "players": 2,
+      "overflow": 0
+    },
+    {
+      "mode": "pong",
+      "players": 2,
+      "overflow": 0
+    },
+    {
+      "mode": "marble",
+      "players": 1,
+      "overflow": 0
+    },
+    {
+      "mode": "blocks",
+      "players": 1,
+      "overflow": 0
+    },
+    {
+      "mode": "pool",
+      "players": 2,
+      "overflow": 0
+    }
+  ],
+  "chatDelivery": true,
+  "giftDelivery": true,
+  "chatClearsOnGameChange": true,
+  "duplicateTabLease": true,
+  "sameSeatReload": true,
+  "casualRoomAfterReloadPlayers": 2,
+  "chatClearsOnLeave": true,
+  "codingLobbyChatDocked": true,
+  "codingAnswerAcknowledged": true,
+  "codingActiveChatDocked": true,
+  "uncaughtErrors": []
+}

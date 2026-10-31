@@ -1,0 +1,116 @@
+[
+  {
+    "p95FrameMs": 16.799999999999272,
+    "maxFrameMs": 16.800000000000182,
+    "longTasks": 0,
+    "canvasPixels": [
+      667,
+      417
+    ],
+    "overflowPx": 0,
+    "gamePaintFps": "60",
+    "canvasVisible": true,
+    "mode": "sumo",
+    "participants": 8,
+    "diagnostics": "Connection & rendering\nPing\n117 ms\nJitter\n3 ms\nGame paint\n60 fps\nServer step\n20 Hz\nLast receipt\n71 ms ago\nPayload traffic\n2.6 KB/s\nServer work\n5 ms\n\nDisplay FPS measures browser frames. Games may paint less often while idle. Ping excludes server processing; payload traffic excludes HTTP headers. Rooms use HTTPS polling with authoritative server state.",
+    "chatVisible": true,
+    "fullscreenIncludesSidebar": true,
+    "mobileOverflowPx": 0,
+    "uncaughtErrors": []
+  },
+  {
+    "p95FrameMs": 16.700000000000728,
+    "maxFrameMs": 16.800000000000182,
+    "longTasks": 0,
+    "canvasPixels": [
+      667,
+      417
+    ],
+    "overflowPx": 0,
+    "gamePaintFps": "60",
+    "canvasVisible": true,
+    "mode": "tanks",
+    "participants": 8,
+    "diagnostics": "Connection & rendering\nPing\n119 ms\nJitter\n2 ms\nGame paint\n60 fps\nServer step\n20 Hz\nLast receipt\n120 ms ago\nPayload traffic\n2.0 KB/s\nServer work\n5 ms\n\nDisplay FPS measures browser frames. Games may paint less often while idle. Ping excludes server processing; payload traffic excludes HTTP headers. Rooms use HTTPS polling with authoritative server state.",
+    "chatVisible": true,
+    "fullscreenIncludesSidebar": true,
+    "mobileOverflowPx": 0,
+    "uncaughtErrors": []
+  },
+  {
+    "p95FrameMs": 16.700000000000728,
+    "maxFrameMs": 16.80000000000109,
+    "longTasks": 0,
+    "canvasPixels": [
+      667,
+      417
+    ],
+    "overflowPx": 0,
+    "gamePaintFps": "60",
+    "canvasVisible": true,
+    "mode": "pong",
+    "participants": 2,
+    "diagnostics": "Connection & rendering\nPing\n121 ms\nJitter\n4 ms\nGame paint\n60 fps\nServer step\n20 Hz\nLast receipt\n50 ms ago\nPayload traffic\n2.3 KB/s\nServer work\n5 ms\n\nDisplay FPS measures browser frames. Games may paint less often while idle. Ping excludes server processing; payload traffic excludes HTTP headers. Rooms use HTTPS polling with authoritative server state.",
+    "chatVisible": true,
+    "fullscreenIncludesSidebar": true,
+    "mobileOverflowPx": 0,
+    "uncaughtErrors": []
+  },
+  {
+    "p95FrameMs": 16.700000000000728,
+    "maxFrameMs": 16.800000000000182,
+    "longTasks": 0,
+    "canvasPixels": [
+      667,
+      417
+    ],
+    "overflowPx": 0,
+    "gamePaintFps": "60",
+    "canvasVisible": true,
+    "mode": "marble",
+    "participants": 8,
+    "diagnostics": "Connection & rendering\nPing\n118 ms\nJitter\n1 ms\nGame paint\n60 fps\nServer step\n20 Hz\nLast receipt\n199 ms ago\nPayload traffic\n2.4 KB/s\nServer work\n5 ms\n\nDisplay FPS measures browser frames. Games may paint less often while idle. Ping excludes server processing; payload traffic excludes HTTP headers. Rooms use HTTPS polling with authoritative server state.",
+    "chatVisible": true,
+    "fullscreenIncludesSidebar": true,
+    "mobileOverflowPx": 0,
+    "uncaughtErrors": []
+  },
+  {
+    "p95FrameMs": 16.700000000000728,
+    "maxFrameMs": 16.800000000000182,
+    "longTasks": 0,
+    "canvasPixels": [
+      667,
+      445
+    ],
+    "overflowPx": 0,
+    "gamePaintFps": "60",
+    "canvasVisible": true,
+    "mode": "blocks",
+    "participants": 8,
+    "diagnostics": "Connection & rendering\nPing\n116 ms\nJitter\n4 ms\nGame paint\n60 fps\nServer step\n20 Hz\nLast receipt\n150 ms ago\nPayload traffic\n2.6 KB/s\nServer work\n6 ms\n\nDisplay FPS measures browser frames. Games may paint less often while idle. Ping excludes server processing; payload traffic excludes HTTP headers. Rooms use HTTPS polling with authoritative server state.",
+    "chatVisible": true,
+    "fullscreenIncludesSidebar": true,
+    "mobileOverflowPx": 0,
+    "uncaughtErrors": []
+  },
+  {
+    "p95FrameMs": 16.700000000000728,
+    "maxFrameMs": 16.800000000000182,
+    "longTasks": 0,
+    "canvasPixels": [
+      667,
+      374
+    ],
+    "overflowPx": 0,
+    "gamePaintFps": "60",
+    "canvasVisible": true,
+    "mode": "pool",
+    "participants": 2,
+    "diagnostics": "Connection & rendering\nPing\n119 ms\nJitter\n2 ms\nGame paint\n38 fps\nServer step\n20 Hz\nLast receipt\n129 ms ago\nPayload traffic\n1.7 KB/s\nServer work\n5 ms\n\nDisplay FPS measures browser frames. Games may paint less often while idle. Ping excludes server processing; payload traffic excludes HTTP headers. Rooms use HTTPS polling with authoritative server state.",
+    "chatVisible": true,
+    "fullscreenIncludesSidebar": true,
+    "mobileOverflowPx": 0,
+    "uncaughtErrors": []
+  }
+]
