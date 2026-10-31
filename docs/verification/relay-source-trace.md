@@ -1,0 +1,13 @@
+# Doodle Relay: implementation and source trace only
+
+No Doodle Relay test was written or run. The game was not launched. The following is a source/data-flow review, not runtime validation.
+
+- A draft is stored in this tab's session storage and sent through the existing authenticated room API with a stable request identifier and increasing draft sequence. The API permits the drawing body limit for both draft and final submission (160,000 bytes). The server validates colors, brush styles, fill tolerance, normalized points, 140 operations and 2,000 total points. Validation errors are returned explicitly.
+- Only the current participant's private draft is projected back for restoration. The server retains drafts in room state. At the authoritative deadline, `advancePhone` promotes a meaningful draft to the current chain entry, instead of replacing submitted local work with an empty timeout drawing. The client also submits at that deadline with bounded acknowledgement retries. A five-second late window permits replacing only a timeout/automatic entry, never another player's entry or a confirmed final submission.
+- Entries carry their exact stage. Assignment reads `entries[stage - 1]`; storing reads/writes the owner's chain at `entries[stage]`. This avoids appending to an unrelated step and avoids showing a player's newly submitted entry as its own previous prompt. Missing/departed steps retain explicit placeholders.
+- Editing, received drawings, album art and PNG export all use the same renderer and a fixed 1280 × 960 backing canvas. CSS resizing changes no backing dimensions. Layout changes do not reinitialize the drawing. The renderer paints a white background before replay and export.
+- The bucket is an ordered fill operation alongside strokes, using the selected color/gradient, opacity/blend and anti-alias color tolerance. It is validated, stored, replayed, undone and redone through the same operation list. It is not a separate unsynced bitmap.
+- Received/revealed canvases repaint when their entry identity/version changes; repeated room polls do not repeatedly run fills over identical art. Missing art is labelled, rather than shown as an unexplained white canvas.
+- Session restoration uses the newer local/server draft sequence. The room lifecycle work in Phase 1C preserves membership on page navigation/reload; an explicit Leave still retires the player.
+
+Remaining uncertainty: actual browser, pen/touch behavior, flood-fill edge appearance, export result and multiplayer timings are deliberately untested. The supplied large video could not be transferred through the 32 MiB file-tool limit.
