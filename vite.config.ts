@@ -9,6 +9,13 @@ import { connectorPreview } from "./scripts/vite/connector-preview-plugin.mjs";
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   "00000000-0000-4000-8000-000000000000";
 
+// Cloudflare Workers Builds: set D1_DATABASE_ID (and optionally D1_DATABASE_NAME)
+// as build variables so `wrangler deploy` binds the real D1 database.
+// Without it the placeholder is kept, which is fine for local dev and previews.
+const D1_DATABASE_ID =
+  process.env.D1_DATABASE_ID || SITE_CREATOR_PLACEHOLDER_DATABASE_ID;
+const D1_DATABASE_NAME = process.env.D1_DATABASE_NAME || "site-creator-d1";
+
 const { d1, r2 } = hostingConfig;
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
@@ -22,8 +29,8 @@ const localBindingConfig = {
     ? [
         {
           binding: d1,
-          database_name: "site-creator-d1",
-          database_id: SITE_CREATOR_PLACEHOLDER_DATABASE_ID,
+          database_name: D1_DATABASE_NAME,
+          database_id: D1_DATABASE_ID,
         },
       ]
     : [],
