@@ -26,7 +26,7 @@ The historical source pins support the inventory date. Live WHATWG/MDN links can
 
 ## Automated verification
 
-- 198 individual Node tests passed, with zero failures. The test command explicitly uses `--test-isolation=none`; the environment's default isolated runner had reported file wrappers instead of individual test results.
+- 208 individual Node tests passed, with zero failures. The test command explicitly uses `--test-isolation=none`; the environment's default isolated runner had reported file wrappers instead of individual test results.
 - TypeScript checking passed.
 - 325 CSS documents/snippets parsed, including the new guides and arcade stylesheet. This is syntax parsing, not semantic or browser-behavior certification.
 - Hosted Worker and GitHub Pages builds completed successfully.
@@ -64,6 +64,8 @@ Two Doodle clients completed a relay with six tools, gradient, opacity and blend
 An eight-participant Snake check with one rendered Chromium client and an added 40 ms per request recorded 82 active-frame samples, a 22.4 ms 95th-percentile frame interval and a largest sampled move of 1.59 cells. Eight simultaneously rendered browsers on the same executor also completed the turn/synchronization checks, but their 131 ms 95th-percentile frame interval shows local rendering contention. These short synthetic samples are not production latency benchmarks or a guarantee of smooth rendering on every device. No uncaught JavaScript exceptions occurred in the Doodle or Snake test flows.
 
 ## Hosting and access
+
+The subsequent performance release is detailed in `docs/verification/performance-v3.md`, including the unchanged-room protocol, Worker request lifetimes, cross-isolate revision protection, delayed-response browser checks, 640-request control burst and drawing-cache pixel comparisons. Earlier arcade-v2 measurements above describe the preceding graphics release; they are retained as historical evidence.
 
 The source includes a Sites Worker deployment with D1 migrations and a ready-built GitHub Pages distribution. Current returned publication state, source commit and deployment URL are recorded in the delivery message; a build or expected URL alone is not proof that a site is live.
 

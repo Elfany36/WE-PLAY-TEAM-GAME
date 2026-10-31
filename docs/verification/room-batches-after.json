@@ -1,0 +1,42 @@
+[
+  {
+    "mode": "snake",
+    "requests": 40,
+    "reads": 5,
+    "writes": 0,
+    "p50Ms": 9.8,
+    "p95Ms": 10.3,
+    "meanBytes": 6930,
+    "errors": 0
+  },
+  {
+    "mode": "circuit",
+    "requests": 40,
+    "reads": 5,
+    "writes": 5,
+    "p50Ms": 18.5,
+    "p95Ms": 19.6,
+    "meanBytes": 7148,
+    "errors": 0
+  },
+  {
+    "mode": "terra",
+    "requests": 40,
+    "reads": 5,
+    "writes": 5,
+    "p50Ms": 25.8,
+    "p95Ms": 27.8,
+    "meanBytes": 26683,
+    "errors": 0
+  },
+  {
+    "mode": "memory",
+    "requests": 40,
+    "reads": 5,
+    "writes": 0,
+    "p50Ms": 9,
+    "p95Ms": 9.6,
+    "meanBytes": 3549,
+    "errors": 0
+  }
+]

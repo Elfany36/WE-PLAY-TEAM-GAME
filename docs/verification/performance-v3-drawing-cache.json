@@ -1,0 +1,5 @@
+{
+  "test": "cached live drawing equals the full renderer for six brushes, opacity, gradients, blend modes, undo/redo, resize and clear",
+  "pixelExactComparisons": 28,
+  "pass": true
+}

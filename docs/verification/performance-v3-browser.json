@@ -1,0 +1,42 @@
+{
+  "flows": [
+    {
+      "mode": "circuit",
+      "participants": 8,
+      "addedResponseDelayMs": 300,
+      "frames": 196,
+      "p95FrameIntervalMs": 20.9,
+      "longTasksOver50Ms": 0,
+      "largestLongTaskMs": 0,
+      "distinctMotionSamples": 15,
+      "renderMs": "2.9",
+      "mobileResizeFullscreenAndContextEventRecovery": true
+    },
+    {
+      "mode": "terra",
+      "participants": 8,
+      "addedResponseDelayMs": 300,
+      "frames": 235,
+      "p95FrameIntervalMs": 22.8,
+      "longTasksOver50Ms": 0,
+      "largestLongTaskMs": 0,
+      "distinctMotionSamples": 15,
+      "renderMs": "2.7",
+      "mobileResizeFullscreenAndContextEventRecovery": true
+    },
+    {
+      "mode": "snake",
+      "participants": 8,
+      "addedResponseDelayMs": 300,
+      "frames": 187,
+      "p95FrameIntervalMs": 18.2,
+      "longTasksOver50Ms": 0,
+      "largestLongTaskMs": 0,
+      "distinctMotionSamples": 15,
+      "renderMs": null,
+      "mobileResizeFullscreenAndContextEventRecovery": true
+    }
+  ],
+  "uncaughtExceptions": [],
+  "limits": "Local Chromium, synthetic 300ms response delay; one rendered client with eight participants. Context events are synthetic lifecycle checks, not forced GPU process failure."
+}

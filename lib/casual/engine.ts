@@ -72,7 +72,19 @@ export function stepSnake(s:CasualState,now:number){
 }
 /** Advance only from server time. No client can supply positions, food, die values or scores. */
 export function advanceCasual(input:CasualState,now:number):{state:CasualState;changed:boolean}{
- const s=structuredClone(input);if(now-s.createdAt>ROOM_TTL)throw new CasualError('This room expired after 24 hours. Create a fresh room.',410);let changed=false;const g=s.game;
+ if(now-input.createdAt>ROOM_TTL)throw new CasualError('This room expired after 24 hours. Create a fresh room.',410);
+ const g=input.game;
+ if(input.phase!=='playing'||!g)return{state:input,changed:false};
+ let due=now>=g.deadline;
+ if(g.kind==='snake'||g.kind==='circuit'||g.kind==='terra')due=now>=g.startAt&&(due||now-g.lastTickAt>8000||g.lastTickAt+(g.kind==='snake'?input.settings.speed:50)<=now);
+ else if(g.kind==='chess'||g.kind==='dama')due=false;
+ else if(g.kind==='phone'&&g.revealing)due=false;
+ else if(g.kind==='memory'&&g.resolveAt!==null&&now>=g.resolveAt)due=true;
+ if(!due)return{state:input,changed:false};
+ return advanceOwned(structuredClone(input),now);
+}
+function advanceOwned(s:CasualState,now:number):{state:CasualState;changed:boolean}{
+ if(now-s.createdAt>ROOM_TTL)throw new CasualError('This room expired after 24 hours. Create a fresh room.',410);let changed=false;const g=s.game;
  if(s.phase!=='playing'||!g)return{state:s,changed};
  if(g.kind==='uno')return{state:s,changed:advanceUno(s,now)};
  if(g.kind==='property')return{state:s,changed:advanceProperty(s,now)};
@@ -92,7 +104,7 @@ export function advanceCasual(input:CasualState,now:number):{state:CasualState;c
  return{state:s,changed};
 }
 export function applyCasualAction(input:CasualState,a:Record<string,any>,id:string|null,now:number):CasualState{
- const s=advanceCasual(input,now).state;s.chat=activeChat(s.chat,now);
+ const s=advanceOwned(structuredClone(input),now).state;s.chat=activeChat(s.chat,now);
  if(a.action==='join'){
   if(s.phase==='playing'||s.phase==='paused')throw new CasualError('This round is running. Join after the host opens the next lobby.',409);
   if(activePlayers(s).length>=casualCapacity(s.mode))throw new CasualError('This room is full. Up to '+casualCapacity(s.mode)+' players can join.',409);

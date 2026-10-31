@@ -1,0 +1,10 @@
+{
+  "test": "640 real Worker/D1 control requests, eight participants, two concurrent inputs each, reordered sequences and final key release",
+  "requests": 640,
+  "errors": 0,
+  "allLatestSequencesAccepted": true,
+  "allControlsReleased": true,
+  "revisionIncrease": 82,
+  "p95RequestMs": 184.0,
+  "limits": "One local Worker instance, not a production-region or multi-device latency benchmark."
+}

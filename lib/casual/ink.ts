@@ -27,3 +27,17 @@ export function paintStroke(c:CanvasRenderingContext2D,s:InkStroke){
  c.restore();
 }
 export function paintDrawing(canvas:HTMLCanvasElement,strokes:InkStroke[]){const c=canvas.getContext('2d');if(!c)return;c.setTransform(canvas.width/640,0,0,canvas.height/480,0,0);c.clearRect(0,0,640,480);c.fillStyle='#ffffff';c.fillRect(0,0,640,480);for(const s of strokes)paintStroke(c,s)}
+export type DrawingLayer={canvas:HTMLCanvasElement;completed:InkStroke[]};
+/** Repaint the active stroke only; completed soft/blended strokes stay cached. */
+export function paintLiveDrawing(canvas:HTMLCanvasElement,strokes:InkStroke[],active:boolean,layer:DrawingLayer){
+ const base=layer.canvas,count=Math.max(0,strokes.length-(active?1:0));
+ if(base.width!==canvas.width||base.height!==canvas.height||layer.completed.length>count||layer.completed.some((s,i)=>s!==strokes[i])){
+  base.width=canvas.width;base.height=canvas.height;layer.completed=[];paintDrawing(base,[]);
+ }
+ const b=base.getContext('2d')!,c=canvas.getContext('2d')!;
+ if(!layer.completed.length)paintDrawing(base,[]);
+ b.setTransform(base.width/640,0,0,base.height/480,0,0);
+ for(let i=layer.completed.length;i<count;i++){paintStroke(b,strokes[i]);layer.completed.push(strokes[i])}
+ c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,canvas.width,canvas.height);c.drawImage(base,0,0);
+ if(active&&strokes.length){c.setTransform(canvas.width/640,0,0,canvas.height/480,0,0);paintStroke(c,strokes.at(-1)!)}
+}

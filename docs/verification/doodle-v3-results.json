@@ -1,0 +1,12 @@
+[
+  {
+    "test": "Doodle six brushes, custom gradient/opacity/blend survive relay and paint for next player",
+    "pass": true,
+    "coloredPixels": 277058
+  },
+  {
+    "test": "album reveal and PNG download match the shared renderer pixel-for-pixel",
+    "pass": true,
+    "pngBytes": 380878
+  }
+]

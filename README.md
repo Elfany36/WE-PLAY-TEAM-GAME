@@ -22,6 +22,8 @@ Property Parks and Snakes & Ladders roll animated dice and hop through each trav
 
 Doodle Relay includes round, marker, pencil, soft, calligraphy and eraser tools; 1–64 px sizes; 5–100% opacity; custom colors; two-color gradients; normal, multiply and screen blending; and undo/redo. The relay, album and PNG export use the same drawing renderer.
 
+The performance update batches overlapping room work within each Worker isolate, preserves revision checks across isolates, returns small acknowledgments for unchanged casual rooms and reuses acknowledged Snake scenery. Stable game views avoid repeated board reconstruction; drawing caches completed strokes. Action-game prediction tolerates longer response gaps, remote movement stays on one display timeline, and hidden/offscreen arenas stop painting. Canvas recovery rebuilds disposable graphics. The transport remains authenticated HTTP polling with D1 storage; connection/device delay still matters. See `docs/verification/performance-v3.md` for measured results and limits.
+
 The inventory is not an exhaustive tutorial for every possible HTML/CSS expression. It includes 1,333 records without upstream explanatory prose. These are explicitly labeled. CSS value spaces include unlimited numbers, URLs and author-defined names; formal grammar describes those spaces. An upstream status or compatibility record is not certification of every browser behavior.
 
 ## Run locally
