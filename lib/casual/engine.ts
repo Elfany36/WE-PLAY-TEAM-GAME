@@ -140,7 +140,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
    else if(g.kind==='phone')leavePhone(s,target.id,now);
    else if((g.kind==='chess'||g.kind==='dama'||g.kind==='scidama'))leaveStrategy(s,target.id,now);
    else if(g.kind==='pool'){finish(s,activePlayers(s).map(p=>p.id),'A player left the table. The remaining player wins.',now)}
-   else if(isParty(g.kind)){const pg=g as PartyGame,actor=pg.actors.find(a=>a.id===target.id);if(actor){actor.alive=false;actor.respawnAt=0;actor.finishedAt=now}pg.actors=pg.actors.filter(a=>a.id!==target.id);if(pg.actors.length<2&&pg.kind!=='marble')finish(s,pg.actors.map(a=>a.id),'The remaining player wins after a departure.',now)}
+   else if(isParty(g.kind)){const pg=g as PartyGame;delete pg.inputs[target.id];pg.shots=pg.shots.filter(shot=>shot.owner!==target.id);const actor=pg.actors.find(a=>a.id===target.id);if(actor){actor.alive=false;actor.respawnAt=0;actor.finishedAt=now}pg.actors=pg.actors.filter(a=>a.id!==target.id);if(pg.actors.length<2&&pg.kind!=='marble')finish(s,pg.actors.map(a=>a.id),'The remaining player wins after a departure.',now)}
    else if(g.kind==='blocks'){const board=g.boards.find(b=>b.id===target.id);if(board)board.alive=false}
    else if(g.kind==='circuit'||g.kind==='terra'){}
    else if(g.kind==='snake'){const worm=g.worms.find(w=>w.id===target.id);if(worm){worm.alive=false;worm.body=[];worm.reason='Left the round';worm.deathAt=now}const alive=g.worms.filter(w=>w.alive);if(!s.settings.battle&&alive.length<=1)finish(s,alive.map(w=>w.id),'A player left. The remaining snake wins.',now)}

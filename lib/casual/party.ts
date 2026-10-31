@@ -7,12 +7,14 @@ export type PartyKind=typeof PARTY_MODES[number];
 export const isParty=(mode:string):mode is PartyKind=>PARTY_MODES.includes(mode as PartyKind);
 export type ClubMap='garden'|'canyon'|'neon';
 export const CLUB_MAPS=[{id:'garden',name:'Clover Gardens',ground:'#bad4ad',road:'#dbe7cf',ink:'#426a57'},{id:'canyon',name:'Copper Canyon',ground:'#deb791',road:'#f2dabb',ink:'#93634d'},{id:'neon',name:'Midnight Arcade',ground:'#182c42',road:'#415a72',ink:'#91d8cb'}] as const;
-export type ClubInput={seq:number;at:number;dx:number;dy:number;aim:number;fire:boolean;dash:boolean;brake:boolean;fireSeq?:number;dashSeq?:number;targetY?:number};
+export type ClubInput={seq:number;at:number;dx:number;dy:number;aim:number;fire:boolean;dash:boolean;brake:boolean;fireSeq?:number;dashSeq?:number;targetY?:number;tx?:number;ty?:number};
 export type ClubActor={id:string;x:number;y:number;vx:number;vy:number;angle:number;alive:boolean;hp:number;score:number;deaths:number;cooldown:number;respawnAt:number;shieldUntil:number;checkpoint:number;lap:number;z:number;vz:number;finishedAt:number|null;lastFireSeq?:number;lastDashSeq?:number;spawnedAt?:number;eliminatedAt?:number};
 export type PartyGame={kind:PartyKind;map:ClubMap;actors:ClubActor[];inputs:Record<string,ClubInput>;startAt:number;lastTickAt:number;deadline:number;pausedAt:number|null;tick:number;shots:{x:number;y:number;vx:number;vy:number;owner:string;bounces:number;until:number}[];ball:{x:number;y:number;vx:number;vy:number;serveAt:number};winnerIds:string[];ended:boolean;scores:Record<string,number>};
+export const TANK_RADIUS=34;
+const tankWallCache=new Map<ClubMap,{x:number;y:number;w:number;h:number}[]>();
 const clamp=(n:number,a:number,b:number)=>Math.max(a,Math.min(b,n));
 export function clubTrack(map:ClubMap,count=192){return trackPoints(map==='canyon'?'coast':map==='neon'?'night':'meadow',count,3)}
-export function tankWalls(map:ClubMap){const walls=[{x:250,y:135,w:44,h:125},{x:666,y:360,w:44,h:125},{x:420,y:255,w:120,h:42},{x:200,y:430,w:150,h:32},{x:610,y:135,w:150,h:32}];if(map==='canyon')walls.push({x:440,y:80,w:40,h:90},{x:450,y:440,w:40,h:90});if(map==='neon')walls.push({x:90,y:280,w:90,h:30},{x:780,y:280,w:90,h:30});return walls}
+export function tankWalls(map:ClubMap){const known=tankWallCache.get(map);if(known)return known;const walls=[{x:250,y:135,w:44,h:125},{x:666,y:360,w:44,h:125},{x:420,y:255,w:120,h:42},{x:200,y:430,w:150,h:32},{x:610,y:135,w:150,h:32}];if(map==='canyon')walls.push({x:440,y:80,w:40,h:90},{x:450,y:440,w:40,h:90});if(map==='neon')walls.push({x:90,y:280,w:90,h:30},{x:780,y:280,w:90,h:30});tankWallCache.set(map,walls);return walls}
 const starts=[[100,100],[860,500],[860,100],[100,500],[520,100],[520,500],[100,300],[860,300]];
 export function newParty(s:CasualState,now:number):PartyGame{
  const kind=s.mode as PartyKind,map=s.settings.arena||'garden',ps=livePlayers(s),pts=clubTrack(map,32),a=pts[0],b=pts[1],angle=Math.atan2(b.y-a.y,b.x-a.x);
@@ -36,12 +38,12 @@ export function stepParty(g:PartyGame,dt:number,now:number){
    a.vx+=dx/norm*(g.kind==='marble'?360:850)*h;a.vy+=dy/norm*(g.kind==='marble'?360:850)*h;
    const damp=Math.exp(-h*(g.kind==='marble'?(input?.brake?10:1.3):4));a.vx*=damp;a.vy*=damp;
    const v=Math.hypot(a.vx,a.vy),cap=g.kind==='sumo'&&a.cooldown-at>1650?580:speed;if(v>cap){a.vx*=cap/v;a.vy*=cap/v}
-   if(input)a.angle=input.aim;
+   if(input)a.angle=g.kind==='tanks'&&input.tx!==undefined&&input.ty!==undefined?Math.atan2(input.ty-a.y,input.tx-a.x):input.aim;
    if(g.kind==='sumo'){
     if((input?.dash||(input?.dashSeq||0)>(a.lastDashSeq||0))&&at>=a.cooldown){a.lastDashSeq=input?.dashSeq||input?.seq||0;a.vx+=Math.cos(a.angle)*440;a.vy+=Math.sin(a.angle)*440;a.cooldown=at+2100}
     a.x+=a.vx*h;a.y+=a.vy*h;if(Math.hypot(a.x-480,a.y-310)>sumoRadius(g,at)+9){a.alive=false;a.eliminatedAt=at;a.deaths++;a.vx=a.vy=0}
    }else if(g.kind==='tanks'){
-    moveCircle(a,h,walls);
+    moveCircle(a,h,walls,TANK_RADIUS);
     if((input?.fire||(input?.fireSeq||0)>(a.lastFireSeq||0))&&at>=a.cooldown){a.lastFireSeq=input?.fireSeq||input?.seq||0;g.shots.push({x:a.x+Math.cos(a.angle)*29,y:a.y+Math.sin(a.angle)*29,vx:Math.cos(a.angle)*450,vy:Math.sin(a.angle)*450,owner:a.id,bounces:0,until:at+2500});a.cooldown=at+650}
    }else{
     if((input?.dash||(input?.dashSeq||0)>(a.lastDashSeq||0))&&a.z===0&&at>=a.cooldown){a.lastDashSeq=input?.dashSeq||input?.seq||0;a.vz=205;a.cooldown=at+1100}a.vz-=520*h;a.z=Math.max(0,a.z+a.vz*h);if(!a.z)a.vz=0;
@@ -51,13 +53,14 @@ export function stepParty(g:PartyGame,dt:number,now:number){
    }
   }
   if(g.kind==='sumo'||g.kind==='marble')collideActors(g,g.kind==='sumo'?23:18,g.kind==='sumo'?30:0);
+  if(g.kind==='tanks')for(let pass=0;pass<2;pass++){collideActors(g,TANK_RADIUS,0);for(const actor of g.actors)if(actor.alive)moveCircle(actor,0,walls,TANK_RADIUS)}
   if(g.kind==='sumo')for(const a of g.actors)if(a.alive&&Math.hypot(a.x-480,a.y-310)>sumoRadius(g,at)+9){a.alive=false;a.eliminatedAt=at;a.deaths++;a.vx=a.vy=0}
   if(g.kind==='tanks'){
    const retained:PartyGame['shots']=[];
    for(const shot of g.shots){if(shot.until<at)continue;const px=shot.x,py=shot.y;shot.x+=shot.vx*h;shot.y+=shot.vy*h;let hit=false;
     const wall=walls.find(r=>shot.x>=r.x-3&&shot.x<=r.x+r.w+3&&shot.y>=r.y-3&&shot.y<=r.y+r.h+3),edgeX=shot.x<48||shot.x>912,edgeY=shot.y<58||shot.y>562;
     if(wall||edgeX||edgeY){if(shot.bounces++)continue;if(edgeX||wall&&(px<wall.x||px>wall.x+wall.w))shot.vx*=-1;else shot.vy*=-1;shot.x=px;shot.y=py}
-    for(const a of g.actors)if(a.alive&&a.id!==shot.owner&&at>a.shieldUntil&&Math.hypot(a.x-shot.x,a.y-shot.y)<24){a.hp--;hit=true;if(a.hp<=0){a.alive=false;a.deaths++;a.respawnAt=at+1800;const owner=g.actors.find(p=>p.id===shot.owner);if(owner)owner.score++}break}
+    for(const a of g.actors)if(a.alive&&a.id!==shot.owner&&at>a.shieldUntil&&Math.hypot(a.x-shot.x,a.y-shot.y)<TANK_RADIUS+5){a.hp--;hit=true;if(a.hp<=0){a.alive=false;a.deaths++;a.respawnAt=at+1800;const owner=g.actors.find(p=>p.id===shot.owner);if(owner)owner.score++}break}
     if(!hit)retained.push(shot)
    }g.shots=retained.slice(-40);
   }
@@ -72,4 +75,4 @@ export function stepParty(g:PartyGame,dt:number,now:number){
  if(g.kind==='marble'&&g.actors.some(a=>a.finishedAt!==null)){g.winnerIds=g.actors.filter(a=>a.finishedAt===Math.min(...g.actors.map(a=>a.finishedAt??Infinity))).map(a=>a.id);g.ended=true}
 }
 export function advanceParty(s:CasualState,now:number){const g=s.game as PartyGame;if(now<g.startAt)return false;if(now-g.lastTickAt>8000){s.phase='paused';g.pausedAt=now;s.pauseReason='The room paused after a connection gap. Resume when your crew returns.';return true}let changed=false;while(g.lastTickAt+50<=Math.min(now,g.deadline)&&!g.ended){g.lastTickAt+=50;stepParty(g,.05,g.lastTickAt);changed=true}if(now>=g.deadline||g.ended){if(!g.ended){const score=(a:ClubActor)=>g.kind==='sumo'?(a.alive?100000:0)-Math.hypot(a.x-480,a.y-310):a.score,max=Math.max(...g.actors.map(score));g.winnerIds=g.actors.filter(a=>score(a)===max).map(a=>a.id)}finish(s,g.winnerIds,g.kind==='sumo'?'Ring complete. Last standing, or closest to the center at time, wins.':g.kind==='marble'?'Race complete. First through two validated laps wins.':'Match complete. Highest score wins.',now);changed=true}return changed}
-export function partyAction(s:CasualState,a:Record<string,any>,id:string,now:number){const g=s.game as PartyGame,actor=g.actors.find(p=>p.id===id);if(a.action!=='party-control')throw new CasualError('Use the arena controls.');if(!actor)throw new CasualError('Your arena seat is unavailable.',403);if(!actor.alive||actor.finishedAt!==null)throw new CasualError('This actor is not accepting inputs.',409);if(!Number.isSafeInteger(a.seq)||a.seq<1||![a.dx,a.dy,a.aim].every(Number.isFinite)||Math.abs(a.dx)>1||Math.abs(a.dy)>1||Math.abs(a.aim)>Math.PI*4||(a.targetY!==undefined&&(!Number.isFinite(a.targetY)||a.targetY<0||a.targetY>600)))throw new CasualError('Invalid arena controls.');for(const key of ['fireSeq','dashSeq'])if(a[key]!==undefined&&(!Number.isSafeInteger(a[key])||a[key]<0||a[key]>a.seq))throw new CasualError('Invalid action sequence.');if(actor&&now<actor.cooldown){if(a.fireSeq)actor.lastFireSeq=Math.max(actor.lastFireSeq||0,a.fireSeq);if(a.dashSeq)actor.lastDashSeq=Math.max(actor.lastDashSeq||0,a.dashSeq)}if((g.inputs[id]?.seq||0)>=a.seq)return;g.inputs[id]={seq:a.seq,at:now,dx:a.dx,dy:a.dy,aim:a.aim,fire:a.fire===true,dash:a.dash===true,brake:a.brake===true,fireSeq:a.fireSeq||0,dashSeq:a.dashSeq||0,...(a.targetY!==undefined?{targetY:a.targetY}:{})}}
+export function partyAction(s:CasualState,a:Record<string,any>,id:string,now:number){const g=s.game as PartyGame,actor=g.actors.find(p=>p.id===id);if(a.action!=='party-control')throw new CasualError('Use the arena controls.');if(!actor)throw new CasualError('Your arena seat is unavailable.',403);if(!actor.alive||actor.finishedAt!==null)throw new CasualError('This actor is not accepting inputs.',409);if(!Number.isSafeInteger(a.seq)||a.seq<1||![a.dx,a.dy,a.aim].every(Number.isFinite)||Math.abs(a.dx)>1||Math.abs(a.dy)>1||Math.abs(a.aim)>Math.PI*4||(a.targetY!==undefined&&(!Number.isFinite(a.targetY)||a.targetY<0||a.targetY>600)))throw new CasualError('Invalid arena controls.');for(const key of ['fireSeq','dashSeq'])if(a[key]!==undefined&&(!Number.isSafeInteger(a[key])||a[key]<0||a[key]>a.seq))throw new CasualError('Invalid action sequence.');if(actor&&now<actor.cooldown){if(a.fireSeq)actor.lastFireSeq=Math.max(actor.lastFireSeq||0,a.fireSeq);if(a.dashSeq)actor.lastDashSeq=Math.max(actor.lastDashSeq||0,a.dashSeq)}if((a.tx!==undefined||a.ty!==undefined)&&(!Number.isFinite(a.tx)||!Number.isFinite(a.ty)||a.tx<0||a.tx>960||a.ty<0||a.ty>600))throw new CasualError('Aim inside the arena.');if((g.inputs[id]?.seq||0)>=a.seq)return;g.inputs[id]={seq:a.seq,at:now,dx:a.dx,dy:a.dy,aim:a.aim,fire:a.fire===true,dash:a.dash===true,brake:a.brake===true,fireSeq:a.fireSeq||0,dashSeq:a.dashSeq||0,...(a.tx!==undefined?{tx:a.tx,ty:a.ty}:{}),...(a.targetY!==undefined?{targetY:a.targetY}:{})}}

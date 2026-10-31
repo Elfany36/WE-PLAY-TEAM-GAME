@@ -40,7 +40,7 @@ export async function casualBody(req:Request){
  if(b.action==='submit-phone'||b.action==='draft-phone'){if(!Number.isInteger(b.stage)||b.stage<0||b.stage>8)throw new CasualError('Choose the current relay task.');out.stage=b.stage;out.text=b.text;out.strokes=b.strokes;if(b.action==='draft-phone'){if(!Number.isSafeInteger(b.draftSeq)||b.draftSeq<1)throw new CasualError('Invalid draft sequence.');out.draftSeq=b.draftSeq}}
  if(b.action==='drive'||b.action==='explore'){out.seq=b.seq;for(const k of b.action==='drive'?['throttle','steer','drift','use','recover','useSeq','recoverSeq']:['left','right','jump','use','tx','ty','slot'])out[k]=b[k]}
  for(const k of ['useSeq','recoverSeq'])if(out[k]!==undefined&&(!Number.isSafeInteger(out[k])||out[k]<1||out[k]>out.seq))throw new CasualError('Invalid command identifier.');
- if(b.action==='party-control'){for(const k of ['seq','dx','dy','aim','fire','dash','brake','fireSeq','dashSeq','targetY'])out[k]=b[k]}
+ if(b.action==='party-control'){for(const k of ['seq','dx','dy','aim','fire','dash','brake','fireSeq','dashSeq','targetY','tx','ty'])out[k]=b[k]}
  if(b.action==='block-input'){out.seq=b.seq;out.moves=b.moves}
  if(b.action==='pool-shot'){out.angle=b.angle;out.power=b.power;out.pocket=b.pocket}
  if(b.action==='pool-place'){out.x=b.x;out.y=b.y}
