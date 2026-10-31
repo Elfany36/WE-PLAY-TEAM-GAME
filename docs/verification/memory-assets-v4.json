@@ -1,0 +1,3346 @@
+{
+  "root": "/workspace/sites/markup-fixes",
+  "referencedCount": 68,
+  "uniqueNameCount": 68,
+  "fileCount": 68,
+  "passed": 68,
+  "failed": 0,
+  "warnings": 0,
+  "duplicateContentGroups": [],
+  "items": [
+    {
+      "name": "acorn",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/acorn.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1739,
+      "sha256": "b5187b041b6f64ec08fea0db301b875d4ba3a5e051688e33f7458c16ffb82a32",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 7,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 5
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11051,
+        "nonWhitePixels": 11051,
+        "visibleFraction": 0.67449951171875,
+        "nonWhiteFraction": 0.67449951171875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "hot-air-balloon",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/hot-air-balloon.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1802,
+      "sha256": "e340c8dc8f217f86ecfbd2ba9b5377805b88715bd76fab273582556b8f1ca8d4",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11051,
+        "nonWhitePixels": 11002,
+        "visibleFraction": 0.67449951171875,
+        "nonWhiteFraction": 0.6715087890625,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "beehive",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/beehive.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1832,
+      "sha256": "fba98cd30c3c9d7db41277c8ea2b2f076184343be9846188acc4d92a858a6f3a",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 1,
+        "ellipse": 3,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11051,
+        "nonWhitePixels": 11051,
+        "visibleFraction": 0.67449951171875,
+        "nonWhiteFraction": 0.67449951171875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "turtle",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/turtle.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2254,
+      "sha256": "798ba7853787a5a53588c7b80ec7d8395cbfab4a41d9cfe2c040ec239ad6313c",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 13,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 9,
+        "stop": 18,
+        "circle": 2,
+        "ellipse": 3,
+        "g": 1,
+        "path": 8
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11134,
+        "nonWhitePixels": 11134,
+        "visibleFraction": 0.6795654296875,
+        "nonWhiteFraction": 0.6795654296875,
+        "paintedBounds": [
+          5,
+          5,
+          126,
+          122
+        ]
+      }
+    },
+    {
+      "name": "cactus",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/cactus.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1825,
+      "sha256": "4bb61e3ecd87f4fb60e5b6d15d9e8c258c8bc0060f459b7e3c180f7f17e7beb3",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 2,
+        "ellipse": 1,
+        "g": 1,
+        "path": 5
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11051,
+        "nonWhitePixels": 11051,
+        "visibleFraction": 0.67449951171875,
+        "nonWhiteFraction": 0.67449951171875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "penguin",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/penguin.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2217,
+      "sha256": "05f68181a2f557e9fe36812c25fdb67a5e647d612acdea7b39567426ff335a4d",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 12,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 9,
+        "stop": 18,
+        "circle": 3,
+        "ellipse": 1,
+        "g": 1,
+        "path": 8
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11245,
+        "nonWhitePixels": 11237,
+        "visibleFraction": 0.68634033203125,
+        "nonWhiteFraction": 0.68585205078125,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "castle",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/castle.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1761,
+      "sha256": "9f80f64295723036f1cb227556e96a06867934373cf7ec7321810b709b6da2c4",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 9,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 7
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11152,
+        "nonWhitePixels": 11152,
+        "visibleFraction": 0.6806640625,
+        "nonWhiteFraction": 0.6806640625,
+        "paintedBounds": [
+          5,
+          3,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "hedgehog",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/hedgehog.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2186,
+      "sha256": "877e7ef491edcd3eefb442aab9ddd17cc295f4eea4abafae35b230ce57a5d335",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 11,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 9,
+        "stop": 18,
+        "circle": 2,
+        "ellipse": 5,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11051,
+        "nonWhitePixels": 11048,
+        "visibleFraction": 0.67449951171875,
+        "nonWhiteFraction": 0.67431640625,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "kite",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/kite.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2094,
+      "sha256": "589f030e9e73d9498fb1deb451f8871bfb8052898b6e966ae0807373b0f22f6a",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 10,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 9,
+        "stop": 18,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 8
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11092,
+        "nonWhitePixels": 11092,
+        "visibleFraction": 0.677001953125,
+        "nonWhiteFraction": 0.677001953125,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          126
+        ]
+      }
+    },
+    {
+      "name": "cupcake",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/cupcake.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1847,
+      "sha256": "2a4e5793b74f5c3e5456e55a1de4ead2ddeabb51ba175f389fb62123ce054aa1",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 2,
+        "ellipse": 1,
+        "g": 1,
+        "path": 5
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11059,
+        "nonWhitePixels": 11010,
+        "visibleFraction": 0.67498779296875,
+        "nonWhiteFraction": 0.6719970703125,
+        "paintedBounds": [
+          5,
+          3,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "firefly",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/firefly.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2080,
+      "sha256": "c9edeb6ce10067b4cb09e676fb5988cbe9e8c3c86f5cc0b261841781859f0457",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 12,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 4,
+        "ellipse": 5,
+        "g": 1,
+        "path": 3
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11051,
+        "nonWhitePixels": 11051,
+        "visibleFraction": 0.67449951171875,
+        "nonWhiteFraction": 0.67449951171875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "frog",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/frog.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2066,
+      "sha256": "03c237ee6196d012d80b95ad682c9c9444db10b05b8969451df9eeef27a84ce8",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 13,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 7,
+        "ellipse": 3,
+        "g": 1,
+        "path": 3
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11266,
+        "nonWhitePixels": 11254,
+        "visibleFraction": 0.6876220703125,
+        "nonWhiteFraction": 0.6868896484375,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "guitar",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/guitar.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1827,
+      "sha256": "13e191c0339d347637522eb22800c7488ab8192640c75382c93db2f83c8796db",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 9,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 2,
+        "ellipse": 1,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11051,
+        "nonWhitePixels": 11051,
+        "visibleFraction": 0.67449951171875,
+        "nonWhiteFraction": 0.67449951171875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "ice-cream",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/ice-cream.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1852,
+      "sha256": "52c2a8d311382d4d1e5ce938ee8a9ee0df9adf04d1a8e5237b77ad8942c9c80f",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 2,
+        "ellipse": 1,
+        "g": 1,
+        "path": 5
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11072,
+        "nonWhitePixels": 11062,
+        "visibleFraction": 0.67578125,
+        "nonWhiteFraction": 0.6751708984375,
+        "paintedBounds": [
+          5,
+          2,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "jellyfish",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/jellyfish.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1938,
+      "sha256": "b24215bfb34f50dab435cffb6c2ebb17acb75b4c9f780a96d8f2085a722783fd",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 3,
+        "ellipse": 1,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11051,
+        "nonWhitePixels": 11051,
+        "visibleFraction": 0.67449951171875,
+        "nonWhiteFraction": 0.67449951171875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "lantern",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/lantern.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1866,
+      "sha256": "6b2fc504992385ce397aeb1f279da492c919faf9c333f236b10379638637abf1",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 10,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 8
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11106,
+        "nonWhitePixels": 11103,
+        "visibleFraction": 0.6778564453125,
+        "nonWhiteFraction": 0.67767333984375,
+        "paintedBounds": [
+          5,
+          3,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "lighthouse",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/lighthouse.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1919,
+      "sha256": "b2d79b675b248700f642e529d4f0a4cde16e6c11b22544663a229c6f3ee9cb40",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 10,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 8
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11234,
+        "nonWhitePixels": 11234,
+        "visibleFraction": 0.6856689453125,
+        "nonWhiteFraction": 0.6856689453125,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "mushroom",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/mushroom.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1926,
+      "sha256": "da80cf10fd926a2ffe41f15fdac3aaffd05c0218682dd1a8b9df2946287b1ec8",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 10,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 4,
+        "ellipse": 2,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11123,
+        "nonWhitePixels": 11077,
+        "visibleFraction": 0.67889404296875,
+        "nonWhiteFraction": 0.67608642578125,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "octopus",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/octopus.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1878,
+      "sha256": "f4badc6d20569f2912243159118f62d9427529f7e3244cacaf2c9b687cc7b002",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 3,
+        "ellipse": 1,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11118,
+        "nonWhitePixels": 11118,
+        "visibleFraction": 0.6785888671875,
+        "nonWhiteFraction": 0.6785888671875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "owl",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/owl.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1851,
+      "sha256": "4b809b70e55118cecc2afcfd1cf6547569cfce4b7a258489a3f98c4fce527a85",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 10,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 5,
+        "ellipse": 1,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11058,
+        "nonWhitePixels": 11045,
+        "visibleFraction": 0.6749267578125,
+        "nonWhiteFraction": 0.67413330078125,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "pineapple",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/pineapple.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1733,
+      "sha256": "56c9281bb3af46edfadeda01067f88c67b6f24d883639815ea5cd5cef511b861",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 6,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11060,
+        "nonWhitePixels": 11060,
+        "visibleFraction": 0.675048828125,
+        "nonWhiteFraction": 0.675048828125,
+        "paintedBounds": [
+          5,
+          3,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "watering-can",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/watering-can.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2162,
+      "sha256": "bcb9354d59e40d115feb79f04b484f9f8de200412e9f35a55a7f780c87a3b7d3",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 12,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 9,
+        "stop": 18,
+        "circle": 1,
+        "ellipse": 3,
+        "g": 1,
+        "path": 8
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11201,
+        "nonWhitePixels": 11201,
+        "visibleFraction": 0.68365478515625,
+        "nonWhiteFraction": 0.68365478515625,
+        "paintedBounds": [
+          3,
+          5,
+          125,
+          122
+        ]
+      }
+    },
+    {
+      "name": "sailboat",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/sailboat.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1807,
+      "sha256": "1baa0a3bedbe8e46527d1de5663be3dc7d7f1e7335d3307dba9dd4823e47d69d",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 9,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 7
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11272,
+        "nonWhitePixels": 11272,
+        "visibleFraction": 0.68798828125,
+        "nonWhiteFraction": 0.68798828125,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "dragonfly",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/dragonfly.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2495,
+      "sha256": "405bcb4587e6960429cd96a1f6ee9e653593091f55b4f811d2f431a2a9ca9b4e",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 16,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 9,
+        "stop": 18,
+        "circle": 6,
+        "ellipse": 6,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11065,
+        "nonWhitePixels": 11022,
+        "visibleFraction": 0.67535400390625,
+        "nonWhiteFraction": 0.6727294921875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "snail",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/snail.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1933,
+      "sha256": "976da864dd9602aaa028dca23f1bddab5ed21f76aa8cc7d7dd755a9c7a53e8cc",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 9,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 4,
+        "ellipse": 1,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11096,
+        "nonWhitePixels": 11096,
+        "visibleFraction": 0.67724609375,
+        "nonWhiteFraction": 0.67724609375,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "snowglobe",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/snowglobe.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1974,
+      "sha256": "e87e649ec9f764e157d498e304c2ff2f3af85582f648c63564c261b216d2f584",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 12,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 5,
+        "ellipse": 1,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11057,
+        "nonWhitePixels": 11008,
+        "visibleFraction": 0.67486572265625,
+        "nonWhiteFraction": 0.671875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "strawberry",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/strawberry.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1753,
+      "sha256": "a7136f0107acdec4f7c882bf987b431a514837cf125a14a5ab1f65e616570364",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 6,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11060,
+        "nonWhitePixels": 11060,
+        "visibleFraction": 0.675048828125,
+        "nonWhiteFraction": 0.675048828125,
+        "paintedBounds": [
+          5,
+          3,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "teapot",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/teapot.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1898,
+      "sha256": "85540bda97043822a6ee5a99eef0f5d88dec2ab2ba915312399357486edc5c69",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 10,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 1,
+        "ellipse": 2,
+        "g": 1,
+        "path": 7
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11051,
+        "nonWhitePixels": 11036,
+        "visibleFraction": 0.67449951171875,
+        "nonWhiteFraction": 0.673583984375,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "telescope",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/telescope.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1865,
+      "sha256": "b5550e8585d57cc0bb1e623d21d41a3029db646eb0379e2fdab1a6f2f6620a20",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 9,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 2,
+        "ellipse": 1,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11116,
+        "nonWhitePixels": 11116,
+        "visibleFraction": 0.678466796875,
+        "nonWhiteFraction": 0.678466796875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "treasure-chest",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/treasure-chest.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1911,
+      "sha256": "b9fee4ff7c486aa6b800dcb36647af1604adebd032045be67a93e2f7c7026c02",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 9,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 6,
+        "rect": 1
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11262,
+        "nonWhitePixels": 11253,
+        "visibleFraction": 0.6873779296875,
+        "nonWhiteFraction": 0.68682861328125,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "volcano",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/volcano.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2102,
+      "sha256": "ea6091c63452ecc819d39e6cd86183112812d63111e469ff2090b53d2f6b5a8c",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 10,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 9,
+        "stop": 18,
+        "circle": 1,
+        "ellipse": 2,
+        "g": 1,
+        "path": 7
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11125,
+        "nonWhitePixels": 11125,
+        "visibleFraction": 0.67901611328125,
+        "nonWhiteFraction": 0.67901611328125,
+        "paintedBounds": [
+          5,
+          4,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "whale",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/whale.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1868,
+      "sha256": "1fe38977c0cd559a8152db1baa3a0351a9814f3fce3d8fc20d7935c9d5b7ffb8",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 8,
+        "stop": 16,
+        "circle": 2,
+        "ellipse": 1,
+        "g": 1,
+        "path": 5
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11058,
+        "nonWhitePixels": 11055,
+        "visibleFraction": 0.6749267578125,
+        "nonWhiteFraction": 0.67474365234375,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "avocado",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/avocado.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2070,
+      "sha256": "2208ea7353dced5c081e116ec038e110ffceaa49be3f739a45c0d89ec23e3bc1",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 7,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 2,
+        "ellipse": 1,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11051,
+        "nonWhitePixels": 11051,
+        "visibleFraction": 0.67449951171875,
+        "nonWhiteFraction": 0.67449951171875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "beetle",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/beetle.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2303,
+      "sha256": "cdcf56922fd86d80f5cc8e0d6657c8df486916d9ae2c2c0594ddaa71ee222132",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 11,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 3,
+        "ellipse": 2,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11167,
+        "nonWhitePixels": 11124,
+        "visibleFraction": 0.68157958984375,
+        "nonWhiteFraction": 0.678955078125,
+        "paintedBounds": [
+          5,
+          4,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "bell",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/bell.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2094,
+      "sha256": "88b68f2c5f9f750619c0e0adba35fc224066869a74f610b9ae0cc544a0003827",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 9,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 2,
+        "ellipse": 2,
+        "g": 1,
+        "path": 5
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11133,
+        "nonWhitePixels": 11133,
+        "visibleFraction": 0.67950439453125,
+        "nonWhiteFraction": 0.67950439453125,
+        "paintedBounds": [
+          4,
+          2,
+          123,
+          122
+        ]
+      }
+    },
+    {
+      "name": "binoculars",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/binoculars.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2195,
+      "sha256": "b59e12dc85ae383b26c317d21ff37b1e0c33ccb58834527b5f6d6a502f204e75",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 12,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 7,
+        "ellipse": 1,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11057,
+        "nonWhitePixels": 11049,
+        "visibleFraction": 0.67486572265625,
+        "nonWhiteFraction": 0.67437744140625,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "broccoli",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/broccoli.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2229,
+      "sha256": "4014c03020726882d3caf4fff7fa29e8f5336fe96956f6a3557d5ce6a32d6d4e",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 2,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11065,
+        "nonWhitePixels": 11065,
+        "visibleFraction": 0.67535400390625,
+        "nonWhiteFraction": 0.67535400390625,
+        "paintedBounds": [
+          5,
+          5,
+          123,
+          122
+        ]
+      }
+    },
+    {
+      "name": "campfire",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/campfire.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2212,
+      "sha256": "8272acb12fb6964bcdf3a5055ac5cb9317547f524ccac4318ef5ce400656adf9",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 10,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 2,
+        "g": 1,
+        "path": 7
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11258,
+        "nonWhitePixels": 11258,
+        "visibleFraction": 0.6871337890625,
+        "nonWhiteFraction": 0.6871337890625,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "candle",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/candle.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2179,
+      "sha256": "7976445eb12d881ea9fd84f4ba135d88e9fce87dcc33b8a66f372919b88bb2f6",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 10,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 3,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11125,
+        "nonWhitePixels": 11110,
+        "visibleFraction": 0.67901611328125,
+        "nonWhiteFraction": 0.6781005859375,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "carrot",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/carrot.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1960,
+      "sha256": "64ce8088643f881d6ab03a8a99f65b5dbd73fa21b922c6ec38b90962a004eb79",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 6,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11067,
+        "nonWhitePixels": 11067,
+        "visibleFraction": 0.67547607421875,
+        "nonWhiteFraction": 0.67547607421875,
+        "paintedBounds": [
+          5,
+          4,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "chocolate",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/chocolate.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2082,
+      "sha256": "ce95ca0e38311274b9e48217c0ebfd4d5b93e4749bbbf2b533c376db41effd32",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11097,
+        "nonWhitePixels": 11082,
+        "visibleFraction": 0.67730712890625,
+        "nonWhiteFraction": 0.6763916015625,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "clover",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/clover.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2128,
+      "sha256": "61209e130f2c74d51e66241281e894df162593d8aa8ac7a3986470d94e095155",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11051,
+        "nonWhitePixels": 11051,
+        "visibleFraction": 0.67449951171875,
+        "nonWhiteFraction": 0.67449951171875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "cookie",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/cookie.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2146,
+      "sha256": "94ab5cfdbbe35b189a85e4fa449e981b48c4e3afae1e2830915524b987fabdbb",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 4,
+        "ellipse": 1,
+        "g": 1,
+        "path": 3
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11051,
+        "nonWhitePixels": 11051,
+        "visibleFraction": 0.67449951171875,
+        "nonWhiteFraction": 0.67449951171875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "crocodile",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/crocodile.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2204,
+      "sha256": "28a8c3bfa3e32501655993111c8ba43b9d4be19c5bb5920c1fbbb2d4c08ed275",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 11,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 3,
+        "ellipse": 1,
+        "g": 1,
+        "path": 7
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11059,
+        "nonWhitePixels": 11059,
+        "visibleFraction": 0.67498779296875,
+        "nonWhiteFraction": 0.67498779296875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "drum",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/drum.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2230,
+      "sha256": "4af641054444962042a3665f40af6ec8bf2e38fbe999c49351179c0acff72d8d",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 10,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 4,
+        "g": 1,
+        "path": 5
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11338,
+        "nonWhitePixels": 11337,
+        "visibleFraction": 0.6920166015625,
+        "nonWhiteFraction": 0.69195556640625,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "duck",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/duck.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2123,
+      "sha256": "22bfbe80487ce30682148b9e8fcacf7faec9c0432d574f29c4b79f3c8689fd99",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 9,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 2,
+        "ellipse": 1,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11120,
+        "nonWhitePixels": 11120,
+        "visibleFraction": 0.6787109375,
+        "nonWhiteFraction": 0.6787109375,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "elephant",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/elephant.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2220,
+      "sha256": "059f1a8527de14a1f027e57fa14bda90755acac787fc5063c108534591cd2461",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 11,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 2,
+        "ellipse": 3,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11091,
+        "nonWhitePixels": 11047,
+        "visibleFraction": 0.67694091796875,
+        "nonWhiteFraction": 0.67425537109375,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "flamingo",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/flamingo.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2242,
+      "sha256": "8ed0b56179c4f8bf26ed9d7a49e8e352522038283647c84ed1c21a6e23d00a70",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 11,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 2,
+        "ellipse": 2,
+        "g": 1,
+        "path": 7
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11051,
+        "nonWhitePixels": 11048,
+        "visibleFraction": 0.67449951171875,
+        "nonWhiteFraction": 0.67431640625,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "fox",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/fox.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2289,
+      "sha256": "b8eefb39e60d424a766fdb6e069c2055c33e6fdfec07c6287f36b2051de0bd92",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 12,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 3,
+        "ellipse": 1,
+        "g": 1,
+        "path": 8
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11198,
+        "nonWhitePixels": 11198,
+        "visibleFraction": 0.6834716796875,
+        "nonWhiteFraction": 0.6834716796875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "giraffe",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/giraffe.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2317,
+      "sha256": "de13af9cc7344f8fa045c2b0767194eb504686246e97e7eb6a053a792af28f48",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 11,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 4,
+        "ellipse": 1,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11306,
+        "nonWhitePixels": 11263,
+        "visibleFraction": 0.6900634765625,
+        "nonWhiteFraction": 0.68743896484375,
+        "paintedBounds": [
+          5,
+          3,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "grapes",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/grapes.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2342,
+      "sha256": "001da2cc3667103f325ef6ef035d21271701698cd62ba6951994ed1f5854febb",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 14,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 9,
+        "ellipse": 1,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11236,
+        "nonWhitePixels": 11236,
+        "visibleFraction": 0.685791015625,
+        "nonWhiteFraction": 0.685791015625,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "ladybird",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/ladybird.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2312,
+      "sha256": "00a77193c3018e899a71428aa044c80c8bc8e897beb15b46e0685f6136524b2f",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 12,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 6,
+        "ellipse": 2,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11071,
+        "nonWhitePixels": 11061,
+        "visibleFraction": 0.67572021484375,
+        "nonWhiteFraction": 0.67510986328125,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "lemon",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/lemon.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2044,
+      "sha256": "e6af273c9222e6c97621d5ce37a7f7736da6ae675ecbfc84c5ca790c1386c849",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 7,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 5
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11256,
+        "nonWhitePixels": 11256,
+        "visibleFraction": 0.68701171875,
+        "nonWhiteFraction": 0.68701171875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "lobster",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/lobster.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2350,
+      "sha256": "df30b3d8622a9edeebf70ff85852fe6951bb6a5cee2f89becd6557ac7143d134",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 11,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 3,
+        "ellipse": 2,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11627,
+        "nonWhitePixels": 11627,
+        "visibleFraction": 0.70965576171875,
+        "nonWhiteFraction": 0.70965576171875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "magnet",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/magnet.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 1992,
+      "sha256": "03a072cb162915e31cfffa2aca3d33b6eefda3fdd9c011bd72082405b2840c51",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 7,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 5
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11208,
+        "nonWhitePixels": 11193,
+        "visibleFraction": 0.68408203125,
+        "nonWhiteFraction": 0.68316650390625,
+        "paintedBounds": [
+          5,
+          3,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "map",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/map.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2165,
+      "sha256": "aff1b87cf43efb53f3477da2db2be665d88ebe89b029069a50ae41610b617674",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 9,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 7
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11220,
+        "nonWhitePixels": 11220,
+        "visibleFraction": 0.684814453125,
+        "nonWhiteFraction": 0.684814453125,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "panda",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/panda.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2451,
+      "sha256": "3e48f592bfda5c9a75e3ec43fa9fff432fa6cb725342fec29516505230dbbfb4",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 15,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 5,
+        "ellipse": 6,
+        "g": 1,
+        "path": 4
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11061,
+        "nonWhitePixels": 11046,
+        "visibleFraction": 0.67510986328125,
+        "nonWhiteFraction": 0.6741943359375,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "peach",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/peach.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2057,
+      "sha256": "b38289641932485cf74ba9434baa4d56d226033e54c5e8a58563af6b4a9a8242",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11195,
+        "nonWhitePixels": 11195,
+        "visibleFraction": 0.68328857421875,
+        "nonWhiteFraction": 0.68328857421875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "pear",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/pear.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2087,
+      "sha256": "a658e9a2f010cc4f5c28d26da77db65e8b2a934f170a5198715800e463401118",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11284,
+        "nonWhitePixels": 11284,
+        "visibleFraction": 0.688720703125,
+        "nonWhiteFraction": 0.688720703125,
+        "paintedBounds": [
+          5,
+          2,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "raccoon",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/raccoon.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2278,
+      "sha256": "5586c9e74c81c9517f20f9d3fba24527becb7c8e51cceb38d567a637de3d6955",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 12,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 10
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11200,
+        "nonWhitePixels": 11200,
+        "visibleFraction": 0.68359375,
+        "nonWhiteFraction": 0.68359375,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "robot",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/robot.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2330,
+      "sha256": "726597d7add68f4ba82337f9b0fb6bbabb50620be706bb05bace2e6120b30d52",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 14,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 5,
+        "ellipse": 1,
+        "g": 1,
+        "path": 6,
+        "rect": 2
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11179,
+        "nonWhitePixels": 11177,
+        "visibleFraction": 0.68231201171875,
+        "nonWhiteFraction": 0.68218994140625,
+        "paintedBounds": [
+          5,
+          2,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "scarf",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/scarf.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2099,
+      "sha256": "3d1601ee3051e74343e81d844adeb6745bb08da23001d363fcd975507267b0d5",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 8,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11124,
+        "nonWhitePixels": 11124,
+        "visibleFraction": 0.678955078125,
+        "nonWhiteFraction": 0.678955078125,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "seahorse",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/seahorse.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2153,
+      "sha256": "f8a94595db9e2b47bec3006456530f4c4558c03cb56454cf661381aff7042c28",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 9,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 2,
+        "ellipse": 1,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11110,
+        "nonWhitePixels": 11063,
+        "visibleFraction": 0.6781005859375,
+        "nonWhiteFraction": 0.67523193359375,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          125
+        ]
+      }
+    },
+    {
+      "name": "seal",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/seal.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2272,
+      "sha256": "85d1706a857ebf553fc1c8035583453dc77f43e36a5e543d6ea8449343341ba6",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 11,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 3,
+        "ellipse": 2,
+        "g": 1,
+        "path": 6
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11216,
+        "nonWhitePixels": 11214,
+        "visibleFraction": 0.6845703125,
+        "nonWhiteFraction": 0.6844482421875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "skateboard",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/skateboard.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2122,
+      "sha256": "d45a172fd5b8c2b7c4462ef997e6038874a5d14b22e74b48d2d5c7f5fc91c703",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 9,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 3,
+        "ellipse": 1,
+        "g": 1,
+        "path": 5
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11075,
+        "nonWhitePixels": 11075,
+        "visibleFraction": 0.67596435546875,
+        "nonWhiteFraction": 0.67596435546875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "sunflower",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/sunflower.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2531,
+      "sha256": "d85fd04269e76d5ec30efc48026592fdb104e7e2e8146e6858e6460b3f391724",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 14,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 2,
+        "ellipse": 9,
+        "g": 2,
+        "path": 3
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11077,
+        "nonWhitePixels": 11030,
+        "visibleFraction": 0.67608642578125,
+        "nonWhiteFraction": 0.6732177734375,
+        "paintedBounds": [
+          5,
+          2,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "train",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/train.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2310,
+      "sha256": "3f34d457e5d465a95a6bfc2aeccb2c7dba207d4e4b9f16330cc7cae15f97fbe2",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 16,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 5,
+        "ellipse": 1,
+        "g": 1,
+        "path": 10
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11246,
+        "nonWhitePixels": 11246,
+        "visibleFraction": 0.6864013671875,
+        "nonWhiteFraction": 0.6864013671875,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    },
+    {
+      "name": "watermelon",
+      "file": "/workspace/sites/markup-fixes/public/game-art/memory/watermelon.svg",
+      "exists": true,
+      "errors": [],
+      "warnings": [],
+      "bytes": 2015,
+      "sha256": "65c5298076bed80a7291b2933ea74869f040f6286c3bf7a9995f98a268853883",
+      "xmlValid": true,
+      "rootTag": "{http://www.w3.org/2000/svg}svg",
+      "viewBox": "0 0 96 96",
+      "width": "96",
+      "height": "96",
+      "viewBoxNumbers": [
+        0.0,
+        0.0,
+        96.0,
+        96.0
+      ],
+      "drawableElementCount": 7,
+      "tagCounts": {
+        "svg": 1,
+        "title": 1,
+        "defs": 1,
+        "linearGradient": 10,
+        "stop": 20,
+        "circle": 1,
+        "ellipse": 1,
+        "g": 1,
+        "path": 5
+      },
+      "externalDependencies": [],
+      "unresolvedLocalReferences": [],
+      "rasterCheck": {
+        "decoded": true,
+        "naturalWidth": 96,
+        "naturalHeight": 96,
+        "visiblePixels": 11051,
+        "nonWhitePixels": 11041,
+        "visibleFraction": 0.67449951171875,
+        "nonWhiteFraction": 0.67388916015625,
+        "paintedBounds": [
+          5,
+          5,
+          122,
+          122
+        ]
+      }
+    }
+  ]
+}

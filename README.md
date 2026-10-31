@@ -66,3 +66,5 @@ Learning progress, bookmarks and theme are device-local. Chat is transient. Game
 ## Evidence
 
 See [AUDIT_REPORT.md](AUDIT_REPORT.md) and `docs/verification/` for the actual automated checks, Chromium flows, source integrity checks, and remaining deployment/browser limits. Dataset attributions and licenses are retained under `public/sources/`. The latest authored corrections preserve the pinned upstream files and apply to both documentation and the playable bank.
+
+The recording fixes replace memory's 3D backface flips with lightweight 2D transitions, preload/decode the small artwork set, and show a readable fallback or immediate pending face. Mismatches remain readable for 2.2 seconds on Cozy, 1.6 on Standard and 1.2 on Expert. Memory polls more frequently, and ordinary polls no longer throttle themselves after a response. Snake uses solid player colors without names over the bodies, with a bounded latency-adaptive prediction window. Kart's default camera keeps north up; Change camera restores the heading-following view. See `docs/verification/recorded-fixes-v4.md`.

@@ -1,0 +1,15 @@
+{
+  "checks": [
+    {
+      "test": "local 200-card expert reveal uses visible 2D faces and readable dwell",
+      "pass": true
+    },
+    {
+      "test": "eight-player room gives immediate pending feedback during 600ms response delay and delayed art",
+      "pass": true,
+      "playwrightActionAndFeedbackMs": 125.2,
+      "pointerToPendingFrameMs": 45.1
+    }
+  ],
+  "uncaughtExceptions": []
+}

@@ -26,9 +26,9 @@ The historical source pins support the inventory date. Live WHATWG/MDN links can
 
 ## Automated verification
 
-- 208 individual Node tests passed, with zero failures. The test command explicitly uses `--test-isolation=none`; the environment's default isolated runner had reported file wrappers instead of individual test results.
+- 211 individual Node tests passed, with zero failures. The test command explicitly uses `--test-isolation=none`; the environment's default isolated runner had reported file wrappers instead of individual test results.
 - TypeScript checking passed.
-- 325 CSS documents/snippets parsed, including the new guides and arcade stylesheet. This is syntax parsing, not semantic or browser-behavior certification.
+- 326 CSS documents/snippets parsed, including the new guides and arcade stylesheet. This is syntax parsing, not semantic or browser-behavior certification.
 - Hosted Worker and GitHub Pages builds completed successfully.
 - Tests cover game rules, answer correctness/normalization, seeded formats, all 100 code tasks, private data projection, authentication, seat caps, concurrent revision writes, replay protection, time limits, motion recovery, terrain reuse, chat cleanup/expiry/gifts, CORS, exercise grading and core theme contrast.
 
@@ -84,3 +84,7 @@ GitHub Pages requires the selected repository's Pages source to be enabled. The 
 - Scoping: https://www.w3.org/TR/2024/WD-css-cascade-6-20240906/#scoped-styles
 - GitHub Pages: https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages
 - Pages enablement permissions: https://github.com/actions/configure-pages/blob/v5/action.yml
+
+## Recording fixes
+
+The subsequent priority fixes are documented in `docs/verification/recorded-fixes-v4.md`. Previous version measurements remain historical evidence.

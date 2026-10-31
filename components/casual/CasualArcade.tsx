@@ -1,4 +1,5 @@
 'use client';
+import {warmMemoryArt} from '../../lib/memory-art';
 import {leaveRoomOnExit} from '../../lib/room-lifecycle';
 import {multiplayerEndpoint} from '../../lib/multiplayer-config';
 import {lazy,Suspense,useEffect,useRef,useState,useCallback,useMemo} from 'react';
@@ -37,11 +38,12 @@ export default function CasualArcade({name}:{name:string}){
  localRef.current=local;
  function clearControls(){generation.current++;controlChannel.current?.reset();pendingTurns.current=[];setIntent(null)}
  function setSavedSession(s:Session|null){if(sessionRef.current?.token!==s?.token)clearControls();sessionRef.current=s;setSession(s);if(s)writeStored('markup-casual-session',s,true);else removeStored('markup-casual-session',true)}
- function adopt(r:CasualPublic){lastReceipt.current=performance.now();const previous=roomRef.current;if(!fresh(previous,r))return;const restored=restoreRoomTerrain(previous,r);if(!restored)return;r=restored;roomRef.current=r;setRemote(r);setOffset(r.serverNow+(r.network?.rtt||0)/2-Date.now());setConnected(true);setConnectionError('')}
+ function adopt(r:CasualPublic,fromPoll=false){if(!fromPoll)lastReceipt.current=performance.now();const previous=roomRef.current;if(!fresh(previous,r))return;const restored=restoreRoomTerrain(previous,r);if(!restored)return;r=restored;roomRef.current=r;setRemote(r);setOffset(r.serverNow+(r.network?.rtt||0)/2-Date.now());setConnected(true);setConnectionError('')}
  function worldVersion(){const r=roomRef.current;return r?.mode==='terra'&&r.game?.tiles?{worldRound:r.round,worldVersion:r.game.version}:roomScene(r)?{scene:roomScene(r)}:{}}
  async function request(body:Record<string,any>,s:Session|null=sessionRef.current){const controller=new AbortController(),started=performance.now(),timeout=setTimeout(()=>controller.abort(),['direction','drive','explore'].includes(body.action)?2000:8000);try{const result=await json(await fetch(endpoint(),{method:'POST',credentials:'omit',mode:'cors',signal:controller.signal,headers:{'Content-Type':'application/json',...(s?{Authorization:'Bearer '+s.token}:{})},body:JSON.stringify({...body,...(s?{code:s.code}:{}),...worldVersion(),requestId:body.requestId||nonce()})}));if(result.room)result.room={...result.room,network:{rtt:Math.round(performance.now()-started)}};return result}finally{clearTimeout(timeout)}}
  useEffect(()=>leaveRoomOnExit(endpoint,()=>sessionRef.current,'markup-casual-session'),[]);
  useEffect(()=>{const invite=new URLSearchParams(location.search).get('arcade')?.toUpperCase(),s=readStored('markup-casual-session',null,true);if(s&&typeof s.token==='string'&&/^[a-f0-9]{64}$/.test(s.token)&&typeof s.code==='string'&&/^[A-HJ-NP-Z2-9]{8}$/.test(s.code)&&(!invite||invite===s.code))setSavedSession(s);else if(invite){setCode(invite.slice(0,8));removeStored('markup-casual-session',true)}setMuted(readStored('markup-party-muted',true)!==false)},[]);
+ useEffect(()=>{if(selected==='memory'||remote?.mode==='memory')warmMemoryArt()},[selected,remote?.mode]);
  useEffect(()=>{const t=setInterval(()=>setClock(Date.now()),250);return()=>clearInterval(t)},[]);
  useEffect(()=>{if(!local)return;const t=setInterval(()=>setLocal(previous=>{if(!previous)return previous;try{const next=advanceCasual(previous,Date.now());return next.changed?next.state:previous}catch(e){setError((e as Error).message);return previous}}),fastModes.includes(local.mode)?50:100);return()=>clearInterval(t)},[!!local,local?.mode]);
  useEffect(()=>{
@@ -50,7 +52,7 @@ export default function CasualArcade({name}:{name:string}){
   async function poll(){
    if(stopped||pending)return;
    if(document.hidden){schedule(1500);return}
-   const fast=roomRef.current&&fastModes.includes(roomRef.current.mode)&&roomRef.current.phase==='playing';
+   const fast=roomRef.current&&(fastModes.includes(roomRef.current.mode)||roomRef.current.mode==='memory')&&roomRef.current.phase==='playing';
    if(fast&&performance.now()-lastReceipt.current<120){schedule(80);return}
    pending=true;controller=new AbortController();const started=performance.now(),timeout=setTimeout(()=>controller?.abort(),fast?2500:6000);
    try{
@@ -58,8 +60,8 @@ export default function CasualArcade({name}:{name:string}){
     const d=await json(await fetch(endpoint()+'?code='+s.code+'&'+version.toString(),{credentials:'omit',mode:'cors',signal:controller.signal,headers:{Authorization:'Bearer '+s.token}}));
     if(!stopped&&sessionRef.current?.token===s.token){
      const network={rtt:Math.round(performance.now()-started)};
-     if(d.room)adopt({...d.room,network});
-     else if(d.unchanged&&roomRef.current?.code===s.code&&roomRef.current.revision===d.revision)adopt({...roomRef.current,serverNow:d.serverNow,network});
+     if(d.room)adopt({...d.room,network},true);
+     else if(d.unchanged&&roomRef.current?.code===s.code&&roomRef.current.revision===d.revision)adopt({...roomRef.current,serverNow:d.serverNow,network},true);
      failures=0;
     }
    }catch(e){if(!stopped){failures++;setConnected(false);setConnectionError((e as any).name==='AbortError'?'The connection is slow. Reconnecting…':(e as Error).message);if([401,404,410].includes((e as any).status)){setSavedSession(null);setRemote(null);roomRef.current=null}}}

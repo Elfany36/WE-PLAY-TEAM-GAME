@@ -1,0 +1,23 @@
+/* Two-dimensional flips avoid disappearing backfaces on GPU/compositor changes. */
+.memory-tile{filter:none!important;perspective:none!important}
+.memory-tile-inner{transform:none!important;transform-style:flat!important;transition:none!important}
+.memory-front,.memory-back{transform:none!important;backface-visibility:visible!important;transition:opacity .12s ease!important}
+.memory-front{opacity:0;visibility:hidden}
+.memory-back{opacity:1;visibility:visible}
+.memory-tile.face-up .memory-front{opacity:1;visibility:visible}
+.memory-tile.face-up .memory-back{opacity:0;visibility:hidden}
+.memory-tile.face-up .memory-tile-inner{animation:readable-card-flip .22s ease-out}
+.decoded-card-art{position:relative;display:grid;place-items:center;max-width:100%;max-height:100%}
+.decoded-card-art .decoded-image{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:contain;opacity:0}
+.decoded-card-art .decoded-image.is-ready{opacity:1}
+.card-art-fallback{display:grid;place-items:center;width:100%;height:100%;color:#244e46}
+.card-art-fallback svg{width:85%;height:75%}
+.card-art-fallback small{font-size:clamp(8px,1vw,11px);line-height:1.1;text-align:center;max-width:100%;overflow-wrap:anywhere}
+.card-art-fallback[aria-hidden=true]{visibility:hidden}
+.memory-turning{display:grid;place-items:center;gap:7px;font-size:12px;font-weight:700;color:#3b6556}
+.memory-turning>span{width:22px;height:22px;border:3px solid #afc9b6;border-top-color:#3b6556;border-radius:50%;animation:memory-wait .65s linear infinite}
+@keyframes readable-card-flip{0%{transform:scaleX(.78)}45%{transform:scaleX(.96)}100%{transform:scaleX(1)}}
+@keyframes memory-wait{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.memory-tile.face-up .memory-tile-inner,.memory-turning>span{animation:none!important}}
+
+.memory-fieldset{border:0;padding:0;margin:0;min-width:0;width:100%}

@@ -11,4 +11,5 @@ import '../app/expansion.css';
 import '../app/room.css';
 import '../app/refinements.css';
 import '../app/arcade-v2.css';
+import '../app/recorded-fixes.css';
 createRoot(document.getElementById('root')!).render(<React.StrictMode><AppBoundary><MarkupApp/></AppBoundary></React.StrictMode>);

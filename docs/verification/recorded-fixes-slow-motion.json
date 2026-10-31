@@ -1,0 +1,30 @@
+{
+  "flows": [
+    {
+      "mode": "circuit",
+      "participants": 8,
+      "addedResponseDelayMs": 600,
+      "frames": 198,
+      "p95FrameIntervalMs": 19.8,
+      "longTasksOver50Ms": 0,
+      "largestLongTaskMs": 0,
+      "distinctMotionSamples": 15,
+      "renderMs": "0.7",
+      "mobileResizeFullscreenAndContextEventRecovery": true
+    },
+    {
+      "mode": "snake",
+      "participants": 8,
+      "addedResponseDelayMs": 600,
+      "frames": 187,
+      "p95FrameIntervalMs": 17.5,
+      "longTasksOver50Ms": 0,
+      "largestLongTaskMs": 0,
+      "distinctMotionSamples": 15,
+      "renderMs": null,
+      "mobileResizeFullscreenAndContextEventRecovery": true
+    }
+  ],
+  "uncaughtExceptions": [],
+  "limits": "Local Chromium, synthetic 600ms response delay; one rendered client with eight participants. Context events are synthetic lifecycle checks, not forced GPU process failure."
+}
