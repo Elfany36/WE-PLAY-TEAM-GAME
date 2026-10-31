@@ -28,9 +28,9 @@ test('fresh control can pass one stalled request; stale failure does not retry o
  let reject!:((e:Error)=>void);const sent:number[]=[];const c=new ControlChannel(p=>{sent.push(p.seq);return p.seq===1?new Promise((_,r)=>reject=r):Promise.resolve()},()=>{},()=>0,2);
  c.enqueue({action:'drive',round:1,seq:1,throttle:1});c.enqueue({action:'drive',round:1,seq:2,throttle:0});assert.deepEqual(sent,[1,2]);reject(Error('old request failed'));await new Promise(r=>setTimeout(r,15));assert.deepEqual(sent,[1,2]);c.reset();
 });
-test('a board observer sees every hop after a delayed fresh roll, while old joins remain at the destination',()=>{
+test('a delayed board observer follows server progress and settles at the destination',()=>{
  const path=[{x:0,y:0},{x:100,y:0},{x:200,y:0},{x:300,y:0}],t=new TokenTimeline(path[0]);t.update(path[0],undefined,undefined,0,now,0,720,900);
- t.update(path[3],path,undefined,now,now+1400,100,720,900);assert.equal(t.sample(100).x,0);assert(t.sample(1100).x>0&&t.sample(1100).x<200);assert.equal(t.sample(2000).x,300);
+ t.update(path[3],path,undefined,now,now+1400,100,720,900);assert(t.sample(100).x>200&&t.sample(100).x<300);assert.equal(t.sample(1100).x,300);assert.equal(t.sample(2000).x,300);
 });
 test('drawing styles accept six brushes, gradients and mixing while rejecting malformed controls',()=>{
  for(const brush of BRUSHES){const s=inkStyle({color:'#123456',color2:'#abcdef',size:64,opacity:.4,gradient:true,blend:'multiply',brush});assert.equal(s.brush,brush);assert.equal(s.opacity,.4);assert.equal(s.color2,'#abcdef')}

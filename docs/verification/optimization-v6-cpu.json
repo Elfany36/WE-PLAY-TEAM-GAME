@@ -1,0 +1,77 @@
+{
+  "scope": "Local deterministic advanceCasual CPU; not Internet latency or Cloudflare billing CPU",
+  "rows": [
+    {
+      "mode": "snake",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0.001,
+      "p95Ms": 0.189,
+      "maxMs": 0.762,
+      "aiRejected": 0
+    },
+    {
+      "mode": "tanks",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0.113,
+      "p95Ms": 0.321,
+      "maxMs": 1.995,
+      "aiRejected": 0
+    },
+    {
+      "mode": "sumo",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0.084,
+      "p95Ms": 0.184,
+      "maxMs": 0.485,
+      "aiRejected": 0
+    },
+    {
+      "mode": "blocks",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0.258,
+      "p95Ms": 1.319,
+      "maxMs": 9.928,
+      "aiRejected": 0
+    },
+    {
+      "mode": "marble",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0.108,
+      "p95Ms": 0.269,
+      "maxMs": 0.974,
+      "aiRejected": 0
+    },
+    {
+      "mode": "circuit",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0.102,
+      "p95Ms": 0.391,
+      "maxMs": 2.233,
+      "aiRejected": 0
+    },
+    {
+      "mode": "terra",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0.986,
+      "p95Ms": 1.465,
+      "maxMs": 4.229,
+      "aiRejected": 0
+    },
+    {
+      "mode": "chess",
+      "players": 2,
+      "samples": 1200,
+      "p50Ms": 0,
+      "p95Ms": 0.001,
+      "maxMs": 0.031,
+      "aiRejected": 0
+    }
+  ]
+}

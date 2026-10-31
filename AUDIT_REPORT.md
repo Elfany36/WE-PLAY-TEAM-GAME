@@ -92,3 +92,8 @@ GitHub Pages requires the selected repository's Pages source to be enabled. The 
 ## Recording fixes
 
 The subsequent priority fixes are documented in `docs/verification/recorded-fixes-v4.md`. Previous version measurements remain historical evidence.
+
+
+## Arcade optimization v6
+
+The current verification is tracked in `docs/verification/optimization-v6.md` and its JSON evidence. Older phase reports describe historical scope and architectures; the v6 ledger supersedes them for this release. The full test suite, including drawing relay suites, now runs in GitHub Pages CI. Production Internet latency and a complete arbitrary-device visual audit remain outside the local measurements.

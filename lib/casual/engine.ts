@@ -1,3 +1,4 @@
+import {advanceBots,botsDue,type BotBrain} from './bots.ts';
 import {compareSnake} from './snake-rank.ts';
 import {resumeTimeline} from './pause.ts';
 import type {RoomTraffic} from '../room-budget.ts';
@@ -27,7 +28,7 @@ export type LadderGame={kind:'ladders';positions:Record<string,number>;currentId
 export type MemoryGame={kind:'memory';deck:{key:number;matchedBy:string|null}[];revealed:number[];currentId:string;turn:number;deadline:number;resolveAt:number|null;scores:Record<string,number>;moves:number};
 export type Worm={id:string;body:Point[];previous?:Point[];direction:Direction;queue:Direction[];queueTicks?:number[];alive:boolean;score:number;lastSeq:number;deathAt:number|null;deathPoint:Point|null;reason:string;respawnAt?:number;kills?:number;deaths?:number;best?:number;protectedUntil?:number};
 export type SnakeGame={kind:'snake';size?:number;mapId?:SnakeMapId;obstacles?:Point[];worms:Worm[];food:Point[];tick:number;lastTickAt:number;startAt:number;deadline:number;pausedAt:number|null;participants:number};
-export type CasualState={schema:1;chat?:ChatMessage[];chatEpoch?:number;code:string;hostId:string;mode:CasualMode;phase:'lobby'|'playing'|'paused'|'finished';createdAt:number;round:number;random:number;settings:CasualSettings;players:CasualPlayer[];game:LadderGame|MemoryGame|SnakeGame|UnoGame|PropertyGame|PhoneGame|CircuitGame|TerraGame|StrategyGame|PartyGame|BlocksGame|PoolGame|null;result:null|{winnerIds:string[];reason:string};events:{id:number;text:string;at:number}[];eventId:number;pauseReason:string};
+export type CasualState={schema:1;ai?:BotBrain;chat?:ChatMessage[];chatEpoch?:number;code:string;hostId:string;mode:CasualMode;phase:'lobby'|'playing'|'paused'|'finished';createdAt:number;round:number;random:number;settings:CasualSettings;players:CasualPlayer[];game:LadderGame|MemoryGame|SnakeGame|UnoGame|PropertyGame|PhoneGame|CircuitGame|TerraGame|StrategyGame|PartyGame|BlocksGame|PoolGame|null;result:null|{winnerIds:string[];reason:string};events:{id:number;text:string;at:number}[];eventId:number;pauseReason:string};
 export const GRID_SIZE=32,TURN_MS=45000,HOST_TIMEOUT=45000,ROOM_TTL=86400000;
 export const LADDERS:Record<number,number>={2:23,8:34,20:39,32:51,41:79,54:72,64:87,76:94,89:99};
 export const SLIDES:Record<number,number>={17:6,30:9,47:26,59:38,66:45,75:53,83:62,91:71,98:80};
@@ -87,10 +88,14 @@ export function advanceCasual(input:CasualState,now:number):{state:CasualState;c
  else if(g.kind==='chess'||g.kind==='dama')due=false;
  else if(g.kind==='phone'&&g.revealing)due=false;
  else if(g.kind==='memory'&&g.resolveAt!==null&&now>=g.resolveAt)due=true;
+ if(botsDue(input,now))due=true;
  if(!due)return{state:input,changed:false};
  return advanceOwned(structuredClone(input),now);
 }
 function advanceOwned(s:CasualState,now:number):{state:CasualState;changed:boolean}{
+ const advanced=advanceGame(s,now);const aiChanged=advanceBots(s,now,(id,a)=>{applyCasualAction(s,a,id,now,true)});return{state:s,changed:advanced.changed||aiChanged};
+}
+function advanceGame(s:CasualState,now:number):{state:CasualState;changed:boolean}{
  if(now-s.createdAt>ROOM_TTL)throw new CasualError('This room expired after 24 hours. Create a fresh room.',410);let changed=false;const g=s.game;
  if(s.phase!=='playing'||!g)return{state:s,changed};
  if(isParty(g.kind))return{state:s,changed:advanceParty(s,now)};
@@ -113,9 +118,10 @@ function advanceOwned(s:CasualState,now:number):{state:CasualState;changed:boole
  }
  return{state:s,changed};
 }
-export function applyCasualAction(input:CasualState,a:Record<string,any>,id:string|null,now:number):CasualState{
- const s=advanceOwned(structuredClone(input),now).state;s.chat=activeChat(s.chat,now);
+export function applyCasualAction(input:CasualState,a:Record<string,any>,id:string|null,now:number,internal=false):CasualState{
+ const s=internal?input:advanceOwned(structuredClone(input),now).state;s.chat=activeChat(s.chat,now);
  if(a.action==='join'){
+  if(s.phase==='lobby'||s.phase==='finished')s.players=s.players.filter(p=>!p.bot);
   if(s.phase==='playing'||s.phase==='paused')throw new CasualError('This round is running. Join after the host opens the next lobby.',409);
   if(activePlayers(s).length>=casualCapacity(s.mode))throw new CasualError('This room is full. Up to '+casualCapacity(s.mode)+' players can join.',409);
   if(s.players.some(p=>p.id===a.id))throw new CasualError('You already joined this room.',409);
@@ -135,7 +141,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
    if(!target||target.id===p.id||now-target.lastSeen<HOST_TIMEOUT)throw new CasualError('Only a player inactive for 45 seconds can be removed.',409);
   }
   if(!target)throw new CasualError('That player is no longer here.',409);s.chat=[];s.chatEpoch=(s.chatEpoch||0)+1;target.retired=true;
-  if(s.hostId===target.id)s.hostId=activePlayers(s).sort((a,b)=>a.joinedAt-b.joinedAt)[0]?.id||'';
+  if(s.hostId===target.id)s.hostId=activePlayers(s).filter(p=>!p.bot).sort((a,b)=>a.joinedAt-b.joinedAt)[0]?.id||'';
   const g=s.game;if(g&&(s.phase==='playing'||s.phase==='paused')){
    if(g.kind==='uno')leaveUno(s,target.id,now);
    else if(g.kind==='property')bankruptEstate(s,g,target.id,now);
@@ -148,7 +154,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
    else if(g.kind==='snake'){const worm=g.worms.find(w=>w.id===target.id);if(worm){worm.alive=false;worm.body=[];worm.reason='Left the round';worm.deathAt=now}const alive=g.worms.filter(w=>w.alive);if(!s.settings.battle&&alive.length<=1)finish(s,alive.map(w=>w.id),'A player left. The remaining snake wins.',now)}
    else if((g.kind==='ladders'||g.kind==='memory')&&g.currentId===target.id){if(g.kind==='memory'){g.revealed=[];g.resolveAt=null}moveTurn(s,g,now)}
   }
-  if(!activePlayers(s).length){s.phase='lobby';s.game=null;s.result=null}
+  if(!activePlayers(s).some(p=>!p.bot)){s.players=s.players.filter(p=>!p.bot);s.phase='lobby';s.game=null;s.result=null;s.ai=undefined}
   event(s,target.name+' left the room.',now);return s;
  }
  if(a.action==='claim-host'){
@@ -158,6 +164,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
  if(a.action==='ready'){if(s.phase!=='lobby')throw new CasualError('Ready controls are available in the lobby.',409);p.ready=!p.ready;return s}
  if(['configure','start','lobby','pause','resume'].includes(a.action)&&p.id!==s.hostId)throw new CasualError('Only the room host can do that.',403);
  if(a.action==='configure'){
+  if(s.phase==='lobby'||s.phase==='finished')s.players=s.players.filter(p=>!p.bot);
   if(s.phase==='playing'||s.phase==='paused')throw new CasualError('Finish the round before changing the game.',409);
   if(!CASUAL_MODES.includes(a.mode))throw new CasualError('Choose a valid game.');
   if(activePlayers(s).length>casualCapacity(a.mode))throw new CasualError('This game has '+casualCapacity(a.mode)+' seats. Ask extra players to leave before switching.',409);
@@ -170,10 +177,11 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
  }
  if(a.action==='start'){
   if(s.phase==='playing'||s.phase==='paused')throw new CasualError('A round is already running.',409);if(!activePlayers(s).length)throw new CasualError('Add a player first.');
-  const priorUno=s.game?.kind==='uno'?s.game:null;if(s.mode==='uno'&&activePlayers(s).length<2)throw new CasualError('UNO needs 2–12 players.',409);
-  if(casualMinimum(s.mode)===2&&activePlayers(s).length<2)throw new CasualError('This game needs at least two players.',409);
+  const priorUno=s.game?.kind==='uno'?s.game:null;
   s.players=s.players.filter(p=>!p.bot&&!p.retired);
-  if(s.mode==='circuit')for(let i=0;i<(s.settings.bots||0)&&activePlayers(s).length<8;i++){const botId='bot-'+(s.round+1)+'-'+i;let botColor=0;while(s.players.some(p=>p.color===botColor))botColor++;s.players.push({...newPlayer(botId,['Pip','Coco','Sunny','Moss','Luna','Ash','Nova'][i], '',now,botColor),bot:true})}
+  for(let i=0;i<(s.settings.bots||0)&&activePlayers(s).length<casualCapacity(s.mode);i++){const botId='bot-'+(s.round+1)+'-'+i;let botColor=0;while(s.players.some(p=>p.color===botColor))botColor++;s.players.push({...newPlayer(botId,['Pip','Coco','Sunny','Moss','Luna','Ash','Nova'][i], '',now,botColor),bot:true})}
+  if(activePlayers(s).length<casualMinimum(s.mode))throw new CasualError('Add another player or a computer opponent.',409);
+  s.ai=s.players.some(p=>p.bot)?{nextAt:now+1000,cursor:0}:undefined;
   s.round++;s.phase='playing';s.result=null;s.pauseReason='';s.players=s.players.filter(p=>!p.retired);s.players.forEach(p=>{p.ready=false;p.requests=[]});const first=s.players[0].id;
   if(isParty(s.mode))s.game=newParty(s,now);
   else if(s.mode==='blocks')s.game=newBlocks(s,now);
@@ -242,6 +250,6 @@ export function publicCasual(s:CasualState,id:string,now:number){
  else if(s.game?.kind==='property')game={...s.game,chance:undefined,chest:undefined};
  else if(s.game?.kind==='memory'){const g=s.game;game={...g,deck:g.deck.map((c,index)=>({index,matchedBy:c.matchedBy,...(c.matchedBy||g.revealed.includes(index)?{key:c.key}:{})}))}}
  else if(s.game?.kind==='snake')game={...s.game,worms:s.game.worms.map(({queue,queueTicks,lastSeq,...w})=>({...w,...(w.id===id?{pendingTurns:queue,pendingTicks:queueTicks,inputAck:lastSeq}:{})}))};
- return{code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,traffic,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&now-lastSeen<20000,canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
+ return{code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,traffic,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&(p.bot||now-lastSeen<20000),canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
 }
 export type CasualPublic=ReturnType<typeof publicCasual>&{revision?:number;network?:{rtt:number;totalRtt?:number;serverMs?:number}};

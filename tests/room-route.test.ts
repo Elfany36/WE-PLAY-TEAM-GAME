@@ -16,7 +16,7 @@ test('requests are routed to the Durable Object named after the normalized room 
  const {rooms,calls}=fakeRooms();
  const get=await routeCasual(new Request('https://example.test/api/casual?code=abcdefgh'),{CASUAL_ROOMS:rooms});
  assert.equal(get.status,201);assert.equal(calls[0].name,'casual:ABCDEFGH');
- await routeCasual(post({action:'chat',code:'abcd2345',text:'hi'}),{CASUAL_ROOMS:rooms});
+ await routeCasual(post({action:'chat',code:'abcd2345',text:'hi',messageId:'message-123',requestId:'request-123'}),{CASUAL_ROOMS:rooms});
  assert.equal(calls[1].name,'casual:ABCD2345');assert.equal(JSON.parse(calls[1].body).text,'hi');assert.equal(calls[1].code,null);
 });
 
@@ -31,7 +31,7 @@ test('create picks a fresh code for the Worker and ignores any client-supplied X
 test('unreadable codes never reach a Durable Object and keep the original validation errors',async()=>{
  const {rooms,calls}=fakeRooms();
  const bad=await routeCasual(new Request('https://example.test/api/casual?code=nope'),{CASUAL_ROOMS:rooms});
- assert.equal(bad.status,400);assert.match((await bad.json()).error,/8-character/);
+ assert.equal(bad.status,400);assert.match(((await bad.json()) as {error:string}).error,/8-character/);
  const junk=await routeCasual(new Request('https://example.test/api/casual',{method:'POST',body:'not json'}),{CASUAL_ROOMS:rooms});
  assert.equal(junk.status,400);assert.equal(calls.length,0);
  const options=await routeCasual(new Request('https://example.test/api/casual',{method:'OPTIONS'}),{CASUAL_ROOMS:rooms});

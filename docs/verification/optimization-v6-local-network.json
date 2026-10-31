@@ -1,0 +1,11 @@
+{
+  "scope": "Local workerd HTTP round trips with eight authenticated clients; not Internet latency",
+  "origin": "http://127.0.0.1:8787",
+  "clients": 8,
+  "requests": 400,
+  "p50Ms": 22.15,
+  "p95Ms": 32.86,
+  "maxMs": 41.55,
+  "meanBytes": 5150,
+  "failures": 0
+}

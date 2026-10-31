@@ -1,0 +1,135 @@
+[
+  {
+    "game": "pool",
+    "status": "passed",
+    "errors": [],
+    "canvases": [
+      {
+        "width": 742,
+        "height": 416,
+        "cssWidth": 742,
+        "cssHeight": 416,
+        "fps": "60"
+      }
+    ],
+    "text": "Skip to content\nmarkup\n.\nYOUR WORKSPACE\nOverview\nLearning paths\nDocumentation\nPractice studio\nPlayground\nCoding games\nCasual arcade\nNEW\nAchievements\nB\nBuilder\nLevel 1 \u00b7 Curious beginner\nYour workspace\nCasual arcade\nHide dashboard\n/\nDark\nBack to the arcade\nON THIS DEVICE\nROUND 1 \u00b7 LOCAL PLAY\nEight Ball Lounge\n14:56\nYOUR TURN \u00b7 PLAYER 1\n\nAim, choose power, call a pocket and shoot.\n\nYour controls\nEight Ball Lounge view\nFit screen\nAuto layout\nResize\nFullscreen\nPass the cue to Player 1\nTable open \u00b7 groups assigned after the break\n\nBreak from the left. Aim, choose power, then shoot.\n\nAim \u00b7 0\u00b0\nPower \u00b7 55%\nCalled pocket\n1 \u00b7 Upper left\n2 \u00b7 Upper middle\n3 \u00b7 Upper right\n4 \u00b7 Lower left\n5 \u00b7 Lower middle\n6 \u00b7 Lower right\nShoot\nPause\nPlayer 1\nOpen\nPip\nOpen\n\nTap or drag to aim. Left/right arrows fine-tune; Shift makes finer adjustments. Space shoots. Select power and Shoot. Call the eight ball\u2019s pocket before your final shot. A foul gives the opponent ball in hand. Spin, jump shots and re-rack choices are outside this arcade edition.\n\nFull content \u00b7 scroll the page\nRecent room activity\nEnd round\nHow to play & rule sources\nPlayers & scores\n2 / 2\n1\nPlayer 1\nOpen table\n2\nPip\nOpen table\nTable chat\nShow chat\nConnection & rendering"
+  },
+  {
+    "game": "tanks",
+    "status": "passed",
+    "errors": [],
+    "canvases": [
+      {
+        "width": 742,
+        "height": 464,
+        "cssWidth": 742,
+        "cssHeight": 464,
+        "fps": "60"
+      }
+    ],
+    "text": "Skip to content\nmarkup\n.\nYOUR WORKSPACE\nOverview\nLearning paths\nDocumentation\nPractice studio\nPlayground\nCoding games\nCasual arcade\nNEW\nAchievements\nB\nBuilder\nLevel 1 \u00b7 Curious beginner\nYour workspace\nCasual arcade\nHide dashboard\n/\nDark\nBack to the arcade\nON THIS DEVICE\nROUND 1 \u00b7 LOCAL PLAY\nTank Courtyard\n119s\nEVERYONE PLAYS TOGETHER\n\nMove, aim and fire. Each tank takes three hits.\n\nYour controls\nTank Courtyard view\nFit screen\nAuto layout\nResize\nFullscreen\nMove \u00b7 aim \u00b7 fire\nClover Gardens\n60 fps\nPlayer 1\n3 HP \u00b7 5/5 shells \u00b7 0 KOs\nPip \u00b7 AI\n3 HP \u00b7 5/5 shells \u00b7 0 KOs\nTouch controls for\nPlayer 1\nFire\nPause\n\nPlayer 1: WASD + Space. Player 2: arrows + Enter. Aim with the pointer or move toward your target. Lead moving targets. Shells bounce once; five shots trigger a short reload.\n\nFull content \u00b7 scroll the page\nRecent room activity\nEnd round\nHow to play & rule sources\nPlayers & scores\n2 / 8\n1\nPlayer 1\n0 KOs\n2\nPip\n0 KOs\nTable chat\nShow chat\nConnection & rendering"
+  },
+  {
+    "game": "sumo",
+    "status": "passed",
+    "errors": [],
+    "canvases": [
+      {
+        "width": 742,
+        "height": 464,
+        "cssWidth": 742,
+        "cssHeight": 464,
+        "fps": "60"
+      }
+    ],
+    "text": "Skip to content\nmarkup\n.\nYOUR WORKSPACE\nOverview\nLearning paths\nDocumentation\nPractice studio\nPlayground\nCoding games\nCasual arcade\nNEW\nAchievements\nB\nBuilder\nLevel 1 \u00b7 Curious beginner\nYour workspace\nCasual arcade\nHide dashboard\n/\nDark\nBack to the arcade\nON THIS DEVICE\nROUND 1 \u00b7 LOCAL PLAY\nSumo Circle\n119s\nEVERYONE PLAYS TOGETHER\n\nMove and dash to push opponents out.\n\nYour controls\nSumo Circle view\nFit screen\nAuto layout\nResize\nFullscreen\nStay inside the ring\nClover Gardens\n60 fps\nPlayer 1\nIn the ring\nPip \u00b7 AI\nIn the ring\nTouch controls for\nPlayer 1\nDash\nPause\n\nPlayer 1: WASD + Space. Player 2: arrows + Enter. Touch controls work below the arena.\n\nFull content \u00b7 scroll the page\nRecent room activity\nEnd round\nHow to play & rule sources\nPlayers & scores\n2 / 8\n2\nPip\nIn the ring\n1\nPlayer 1\nIn the ring\nTable chat\nShow chat\nConnection & rendering"
+  },
+  {
+    "game": "blocks",
+    "status": "passed",
+    "errors": [],
+    "canvases": [
+      {
+        "width": 320,
+        "height": 527,
+        "cssWidth": 320,
+        "cssHeight": 528,
+        "fps": "58"
+      }
+    ],
+    "text": "Skip to content\nmarkup\n.\nYOUR WORKSPACE\nOverview\nLearning paths\nDocumentation\nPractice studio\nPlayground\nCoding games\nCasual arcade\nNEW\nAchievements\nB\nBuilder\nLevel 1 \u00b7 Curious beginner\nCasual arcade\nBack to the arcade\nON THIS DEVICE\nROUND 1 \u00b7 LOCAL PLAY\nBlock Drop\n2:59\nEVERYONE PLAYS TOGETHER\n\nFill full rows, keep your well clear, and watch incoming garbage.\n\nBlock Drop view\nFit screen\nAuto layout\nResize\nFullscreen\nBlock Drop \u00b7 clear full rows\nSeven-piece bags \u00b7 hold \u00b7 ghost \u00b7 garbage battles\nMove block left\nMove block right\nRotate clockwise\nRotate counterclockwise\nSoft drop\nHard drop\nHold piece\nPause\n\nArrows / A D move \u00b7 Up / X rotates \u00b7 Z rotates back \u00b7 Down soft-drops \u00b7 Space hard-drops \u00b7 C holds. Clear two or more rows to send garbage to the next opponent. Maximum 3 minutes.\n\nFull content \u00b7 scroll the page\nRecent room activity\nEnd round\nHow to play & rule sources\nPlayers & scores\n2 / 8\n2\nPip\n36 pts \u00b7 0 rows\n1\nPlayer 1\n0 pts \u00b7 0 rows\nTable chat\nShow chat\nConnection & rendering"
+  },
+  {
+    "game": "memory",
+    "status": "passed",
+    "errors": [],
+    "canvases": [],
+    "text": "Skip to content\nmarkup\n.\nYOUR WORKSPACE\nOverview\nLearning paths\nDocumentation\nPractice studio\nPlayground\nCoding games\nCasual arcade\nNEW\nAchievements\nB\nBuilder\nLevel 1 \u00b7 Curious beginner\nYour workspace\nCasual arcade\nHide dashboard\n/\nDark\nBack to the arcade\nON THIS DEVICE\nROUND 1 \u00b7 LOCAL PLAY\nMemory Garden\n0 / 16 pairs\nYOUR TURN \u00b7 PLAYER 1\n\nSelect any face-down card, then find its partner.\n\nYour controls\nMemory Garden view\nFit screen\nAuto layout\nResize\nFullscreen\n1\nPass to Player 1\nReveal two different face-down cards.\n26s\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\nFull content \u00b7 scroll the page\nRecent room activity\nEnd round\nHow to play & rule sources\nPlayers & scores\n2 / 8\n1\nPlayer 1\n0 points\n2\nPip\n0 points\nTable chat\nShow chat\nConnection & rendering"
+  },
+  {
+    "game": "chess",
+    "status": "passed",
+    "errors": [],
+    "canvases": [],
+    "text": "Skip to content\nmarkup\n.\nYOUR WORKSPACE\nOverview\nLearning paths\nDocumentation\nPractice studio\nPlayground\nCoding games\nCasual arcade\nNEW\nAchievements\nB\nBuilder\nLevel 1 \u00b7 Curious beginner\nYour workspace\nCasual arcade\nHide dashboard\n/\nDark\nBack to the arcade\nON THIS DEVICE\nROUND 1 \u00b7 LOCAL PLAY\nChess Atelier\nYOUR TURN \u00b7 PLAYER 1\n\nSelect your piece, then a highlighted legal destination.\n\nYour controls\nChess Atelier view\nFit screen\nAuto layout\nResize\nFullscreen\nPlayer 1\nIvory / White \u00b7 TO MOVE\nPip\nJade / Black\nSelect a piece, then a legal square.\nStandard chess \u00b7 untimed\n8\n7\n6\n5\n4\n3\n2\n1\na\nb\nc\nd\ne\nf\ng\nh\nYour controls are ready\n\nClick a piece to see legal moves. Castling, en passant, check and promotion are validated by the room.\n\nMove history\nThe first move is yours to make.\nExport PGN\nOffer draw\nClaim current draw\nClaim with next move\nResign\nFull content \u00b7 scroll the page\nRecent room activity\nEnd round\nHow to play & rule sources\nPlayers & scores\n2 / 2\n1\nPlayer 1\n0 points\n2\nPip\n0 points\nTable chat\nShow chat\nConnection & rendering"
+  },
+  {
+    "game": "uno",
+    "status": "passed",
+    "errors": [],
+    "canvases": [],
+    "text": "Skip to content\nmarkup\n.\nYOUR WORKSPACE\nOverview\nLearning paths\nDocumentation\nPractice studio\nPlayground\nCoding games\nCasual arcade\nNEW\nAchievements\nB\nBuilder\nLevel 1 \u00b7 Curious beginner\nYour workspace\nCasual arcade\nHide dashboard\n/\nDark\nBack to the arcade\nON THIS DEVICE\nROUND 1 \u00b7 LOCAL PLAY\nUNO \u00b7 Classic & Flip\n41s\nYOUR TURN \u00b7 PLAYER 1\n\nReveal your hand if needed. Select a highlighted card, or Draw one.\n\nYour controls\nUNO \u00b7 Classic & Flip view\nFit screen\nAuto layout\nResize\nFullscreen\n1\nPlayer 1 \u00b7 you\n7 cards \u00b7 0 points\nUNO\nUNO\n2\nPip\n7 cards \u00b7 0 points\nUNO\nUNO\nHAND 1 \u00b7 CLASSIC \u00b7 FIRST TO 500\nClockwise \u21bb\nUNO\n93 in stock\n7\n7\n7\nDiscard\nGreen\nActive color\nYour table. Your move.\nPass the device to Player 1\n\nThe next hand stays hidden until its player is ready.\n\nReveal my hand\n\n108-card Classic \u00b7 match color, number or symbol. Original digital artwork \u00b7 2\u201312 seats (11\u201312 extension) \u00b7 no stacking \u00b7 first to 500.\n\nFull content \u00b7 scroll the page\nRecent room activity\nEnd round\nHow to play & rule sources\nPlayers & scores\n2 / 12\n1\nPlayer 1\n0 points\n2\nPip\n0 points\nTable chat\nShow chat\nConnection & rendering"
+  },
+  {
+    "game": "snake",
+    "status": "passed",
+    "errors": [],
+    "canvases": [],
+    "text": "Skip to content\nmarkup\n.\nYOUR WORKSPACE\nOverview\nLearning paths\nDocumentation\nPractice studio\nPlayground\nCoding games\nCasual arcade\nNEW\nAchievements\nB\nBuilder\nLevel 1 \u00b7 Curious beginner\nYour workspace\nCasual arcade\nHide dashboard\n/\nDark\nBack to the arcade\nON THIS DEVICE\nROUND 1 \u00b7 LOCAL PLAY\nSnakes & Ladders\nFirst to 100\nYOUR TURN \u00b7 PLAYER 1\n\nSelect Roll the die below the board.\n\nYour controls\nSnakes & Ladders view\nFit screen\nAuto layout\nResize\nFullscreen\n1\nPass to Player 1\nRoll, hop, and follow the garden path.\n41s\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29\n30\n31\n32\n33\n34\n35\n36\n37\n38\n39\n40\n41\n42\n43\n44\n45\n46\n47\n48\n49\n50\n51\n52\n53\n54\n55\n56\n57\n58\n59\n60\n61\n62\n63\n64\n65\n66\n67\n68\n69\n70\n71\n72\n73\n74\n75\n76\n77\n78\n79\n80\n81\n82\n83\n84\n85\n86\n87\n88\n89\n90\n91\n92\n93\n94\n95\n96\n97\n98\n99\n100\n1\n2\nSTART\nFINISH \u00b7 100\nA little roll. A big possibility.\n\nLand on a ladder to climb. Watch for snake heads.\n\nRoll the die\nHide paths\nFull content \u00b7 scroll the page\nRecent room activity\nEnd round\nHow to play & rule sources\nPlayers & scores\n2 / 8\n1\nPlayer 1\nSquare 0\n2\nPip\nSquare 0\nTable chat\nShow chat\nConnection & rendering"
+  },
+  {
+    "game": "circuit",
+    "status": "passed",
+    "errors": [],
+    "canvases": [
+      {
+        "width": 742,
+        "height": 464,
+        "cssWidth": 742,
+        "cssHeight": 463,
+        "fps": "60"
+      }
+    ],
+    "text": "Skip to content\nmarkup\n.\nYOUR WORKSPACE\nOverview\nLearning paths\nDocumentation\nPractice studio\nPlayground\nCoding games\nCasual arcade\nNEW\nAchievements\nB\nBuilder\nLevel 1 \u00b7 Curious beginner\nYour workspace\nCasual arcade\nHide dashboard\n/\nDark\nBack to the arcade\nON THIS DEVICE\nROUND 1 \u00b7 LOCAL PLAY\nPocket Kart\n5:59\nEVERYONE PLAYS TOGETHER\n\nDrive with arrows or WASD. Space drifts; E uses your item.\n\nYour controls\nPocket Kart view\nFit screen\nAuto layout\nResize\nFullscreen\n1 / 3 laps\nPosition 2 / 2\nItem: find a box\nTarget \u00b7 ~1 min per lap\n60 fps \u00b7 on device\nUse item \u00b7 E\nRecover \u00b7 R\nChange camera\nPause\n\nWASD / arrows drive \u00b7 Space drift \u00b7 E item \u00b7 R recover. Three laps through every checkpoint. Each track targets about one minute per lap; driving and items affect your time.\n\n1\nPip \u00b7 BOT\nLap 1\n2\nPlayer 1\nLap 1\nFull content \u00b7 scroll the page\nRecent room activity\nEnd round\nHow to play & rule sources\nPlayers & scores\n2 / 8\n2\nPip\nLap 1\n1\nPlayer 1\nLap 1\nTable chat\nShow chat\nConnection & rendering"
+  },
+  {
+    "game": "marble",
+    "status": "passed",
+    "errors": [],
+    "canvases": [
+      {
+        "width": 742,
+        "height": 464,
+        "cssWidth": 742,
+        "cssHeight": 464,
+        "fps": "60"
+      }
+    ],
+    "text": "Skip to content\nmarkup\n.\nYOUR WORKSPACE\nOverview\nLearning paths\nDocumentation\nPractice studio\nPlayground\nCoding games\nCasual arcade\nNEW\nAchievements\nB\nBuilder\nLevel 1 \u00b7 Curious beginner\nYour workspace\nCasual arcade\nHide dashboard\n/\nDark\nBack to the arcade\nON THIS DEVICE\nROUND 1 \u00b7 LOCAL PLAY\nMarble Trail\n3:59\nEVERYONE PLAYS TOGETHER\n\nRoll, brake and jump. Follow every checkpoint for two laps.\n\nYour controls\nMarble Trail view\nFit screen\nAuto layout\nResize\nFullscreen\nTwo laps \u00b7 jump the gaps\nClover Gardens\n60 fps\nPlayer 1\nLap 1/2 \u00b7 0 falls\nPip \u00b7 AI\nLap 1/2 \u00b7 0 falls\nJump\nBrake \u00b7 Shift\nPause\n\nWASD or arrows move. Space uses your action. Keep momentum, jump over dark gaps, and brake before tight corners.\n\nFull content \u00b7 scroll the page\nRecent room activity\nEnd round\nHow to play & rule sources\nPlayers & scores\n2 / 8\n2\nPip\nLap 1\n1\nPlayer 1\nLap 1\nTable chat\nShow chat\nConnection & rendering"
+  },
+  {
+    "game": "pong",
+    "status": "passed",
+    "errors": [],
+    "canvases": [
+      {
+        "width": 742,
+        "height": 464,
+        "cssWidth": 742,
+        "cssHeight": 464,
+        "fps": "60"
+      }
+    ],
+    "text": "Skip to content\nmarkup\n.\nYOUR WORKSPACE\nOverview\nLearning paths\nDocumentation\nPractice studio\nPlayground\nCoding games\nCasual arcade\nNEW\nAchievements\nB\nBuilder\nLevel 1 \u00b7 Curious beginner\nYour workspace\nCasual arcade\nHide dashboard\n/\nDark\nBack to the arcade\nON THIS DEVICE\nROUND 1 \u00b7 LOCAL PLAY\nPaddle Rally\n2:59\nEVERYONE PLAYS TOGETHER\n\nMove your paddle. First to eleven, win by two.\n\nYour controls\nPaddle Rally view\nFit screen\nAuto layout\nResize\nFullscreen\nFirst to 11 \u00b7 win by two\nClover Gardens\n60 fps\nPlayer 1\n0 points\nPip \u00b7 AI\n0 points\nPause\n\nWASD or arrows move. Space uses your action. Touch controls work below the arena.\n\nFull content \u00b7 scroll the page\nRecent room activity\nEnd round\nHow to play & rule sources\nPlayers & scores\n2 / 2\n1\nPlayer 1\n0 points\n2\nPip\n0 points\nTable chat\nShow chat\nConnection & rendering"
+  }
+]

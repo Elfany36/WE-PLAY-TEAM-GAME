@@ -22,6 +22,20 @@
       "when": 1793325424272,
       "tag": "0002_clever_dreaming_celestial",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1793466415176,
+      "tag": "0003_room_expiry_indexes",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1793466768098,
+      "tag": "0004_player_room_lookup",
+      "breakpoints": true
     }
   ]
 }

@@ -1,4 +1,6 @@
-import {createCasualAPI} from './api.ts';
+import {createCasualAPI,casualBody,casualFailure} from './api.ts';
+import {roomOriginAllowed} from '../room-origin.ts';
+import {CasualError} from './error.ts';
 
 type RoomEnv={CASUAL_ROOMS?:DurableObjectNamespace;DB?:D1Database};
 const CODE=/^[A-HJ-NP-Z2-9]{8}$/;
@@ -13,19 +15,21 @@ function newRoomCode(){let code='';for(let i=0;i<8;i++)code+=ALPHABET[crypto.get
  * (local tooling) the original D1 path is used.
  */
 export async function routeCasual(req:Request,env:RoomEnv,keepAlive?:(task:Promise<unknown>)=>void):Promise<Response>{
- const direct=(db?:D1Database)=>{const api=createCasualAPI(db,keepAlive);return req.method==='GET'?api.GET(req):req.method==='POST'?api.POST(req):api.OPTIONS(req)};
+ let request=req;
+ const direct=(db?:D1Database)=>{const api=createCasualAPI(db,keepAlive);return request.method==='GET'?api.GET(request):request.method==='POST'?api.POST(request):api.OPTIONS(request)};
  const rooms=env.CASUAL_ROOMS;
  if(!rooms)return direct(env.DB);
  if(req.method==='OPTIONS')return direct();
+ if(req.headers.has('Origin')&&!roomOriginAllowed(req))return casualFailure(req,new CasualError('This frontend is not allowed to use these rooms.',403));
  let code:string|undefined,create=false,text:string|undefined;
  if(req.method==='GET')code=normalize(new URL(req.url).searchParams.get('code'));
  else if(req.method==='POST'){
-  if(Number(req.headers.get('Content-Length'))>160000)return direct();
-  let body:any;try{text=await req.clone().text();if(text.length>160000)return direct();body=JSON.parse(text)}catch{return direct()}
+  let body:Record<string,unknown>;try{body=await casualBody(req);text=JSON.stringify(body)}catch(error){return casualFailure(req,error)}
+  request=new Request(req.url,{method:req.method,headers:req.headers,body:text});
   if(body&&typeof body==='object'&&body.action==='create'){create=true;code=newRoomCode()}else code=normalize(body?.code);
  }
  if(!code)return direct();
- const headers=new Headers(req.headers);headers.delete('X-Room-Code');if(create)headers.set('X-Room-Code',code);
+ const headers=new Headers(req.headers);headers.delete('X-Room-Code');headers.set('X-Room-Key',code);if(create)headers.set('X-Room-Code',code);
  // Rebuilt from parts: the framework's request object is not a native Request.
  const res=await rooms.get(rooms.idFromName('casual:'+code)).fetch(new Request(req.url,{method:req.method,headers,body:req.method==='POST'?text:undefined}));
  // Stub responses have immutable headers, which the framework still edits.

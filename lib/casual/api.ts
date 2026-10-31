@@ -1,3 +1,4 @@
+import type {CasualDatabase} from './room-store.ts';
 import {cleanRoomText} from '../room-text.ts';
 import {takeRoomBudget} from '../room-budget.ts';
 import {roomSnapshot} from '../room-snapshots.ts';
@@ -11,17 +12,21 @@ import {createCasual,applyCasualAction,advanceCasual,publicCasual,CasualError,RO
 function headers(req:Request){return roomHeaders(req)}
 function reply(req:Request,data:unknown,status=200){return Response.json(stampRoomReply(req,roomSnapshot(req,data)),{status,headers:headers(req)})}
 function originCheck(req:Request){const o=req.headers.get('Origin');if(o&&!roomOriginAllowed(req))throw new CasualError('This frontend is not allowed to use these rooms.',403)}
-function error(req:Request,e:unknown){return reply(req,{error:e instanceof CasualError?e.message:'The room service could not complete this request. Please reconnect.'},e instanceof CasualError?e.status:503)}
+export function casualFailure(req:Request,e:unknown){return reply(req,{error:e instanceof CasualError?e.message:'The room service could not complete this request. Please reconnect.'},e instanceof CasualError?e.status:503)}
 async function hash(token:string){return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(token))),n=>n.toString(16).padStart(2,'0')).join('')}
 function secret(){return Array.from(crypto.getRandomValues(new Uint8Array(32)),n=>n.toString(16).padStart(2,'0')).join('')}
 function roomCode(value:unknown){if(typeof value!=='string'||!/^[A-HJ-NP-Z2-9]{8}$/.test(value.trim().toUpperCase()))throw new CasualError('Use the 8-character room code.');return value.trim().toUpperCase()}
 const actions=new Set(['party-control','block-input','pool-shot','pool-place','move-board','resign-board','offer-draw','decline-draw','claim-draw','chat','create','join','configure','start','lobby','ready','heartbeat','disconnect','leave','remove-inactive','claim-host','roll','flip','direction','pause','resume','end','play-uno','draw-uno','pass-uno','call-uno','catch-uno','choose-uno-color','accept-four','challenge-four','roll-property','buy-property','auction-property','end-property','pay-jail','use-jail-card','bid-property','pass-auction','build-property','sell-property','sell-set','mortgage-property','redeem-property','offer-trade','accept-trade','reject-trade','settle-property','bankrupt-property','submit-phone','draft-phone','reveal-phone','drive','explore','craft-terra','spawn-terra','beacon-terra']);
-export async function casualBody(req:Request){
+export async function readCasualText(req:Request){
  if(Number(req.headers.get('Content-Length'))>160000)throw new CasualError('The request is too large.',413);if(!req.body)throw new CasualError('Send a JSON request.');
  const reader=req.body.getReader();let size=0;const chunks:Uint8Array[]=[];
  while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>160000){await reader.cancel();throw new CasualError('The request is too large.',413)}chunks.push(value)}
  const bytes=new Uint8Array(size);let offset=0;for(const part of chunks){bytes.set(part,offset);offset+=part.byteLength}
- let b:Record<string,any>;try{b=JSON.parse(new TextDecoder().decode(bytes))}catch{throw new CasualError(size>4000?'The request is too large.':'Send valid JSON.',size>4000?413:400)}
+ return new TextDecoder().decode(bytes);
+}
+export async function casualBody(req:Request){
+ const text=await readCasualText(req),size=new TextEncoder().encode(text).byteLength;
+ let b:Record<string,any>;try{b=JSON.parse(text)}catch{throw new CasualError(size>4000?'The request is too large.':'Send valid JSON.',size>4000?413:400)}
  if(size>4000&&!['submit-phone','draft-phone'].includes(b?.action))throw new CasualError('The request is too large.',413);
  if(!b||typeof b!=='object'||Array.isArray(b)||!actions.has(b.action))throw new CasualError('Choose a valid game action.');
  const out:Record<string,any>={action:b.action};if(b.action==='chat'){if(typeof b.text!=='string'||!b.text.trim()||b.text.length>280||typeof b.messageId!=='string'||b.messageId.length<8||b.messageId.length>80)throw new CasualError('Send a chat message of 1–280 characters with an identifier.');out.text=b.text;out.messageId=b.messageId;out.giftId=b.giftId}
@@ -52,7 +57,7 @@ export async function casualBody(req:Request){
  if(typeof b.scene==='string'&&b.scene.length<=128)out.scene=b.scene;
  return out;
 }
-export function createCasualAPI(DB:D1Database|undefined,keepAlive?:((task:Promise<unknown>)=>void),newCode?:string){
+export function createCasualAPI(DB:CasualDatabase|undefined,keepAlive?:((task:Promise<unknown>)=>void),newCode?:string){
  async function read(code:string){if(!DB)throw new CasualError('Room storage is unavailable.',503);const row=await DB.prepare('SELECT state,revision,created_at FROM casual_rooms WHERE code=?').bind(code).first<{state:string;revision:number;created_at:number}>();if(!row)throw new CasualError('Room not found. Check the code.',404);if(Date.now()-row.created_at>ROOM_TTL)throw new CasualError('This room expired after 24 hours.',410);return{state:JSON.parse(row.state) as CasualState,revision:row.revision}}
  async function credential(req:Request){const bearer=(req.headers.get('Authorization')||'').match(/^Bearer ([a-f0-9]{64})$/);return bearer?hash(bearer[1]):null}
  function authenticate(tokenHash:string|null,s:CasualState){if(!tokenHash)throw new CasualError('Join a room to play.',401);const p=s.players.find(p=>p.tokenHash===tokenHash&&!p.retired);if(!p)throw new CasualError('Your session ended. Join the room again.',401);return p.id}
@@ -67,7 +72,7 @@ export function createCasualAPI(DB:D1Database|undefined,keepAlive?:((task:Promis
    if(now-p.lastSeen>5000){p.lastSeen=now;changed=true}
    return{state:advanced.state,changed,result:(final,revision,time)=>url.searchParams.get('revision')===String(revision)?reply(req,{unchanged:true,revision,serverNow:time}):reply(req,{room:project(final,id,time,revision,Number(url.searchParams.get('worldRound')),Number(url.searchParams.get('worldVersion')),url.searchParams.get('scene'))})};
   });
- }catch(e){return error(req,e)}}
+ }catch(e){return casualFailure(req,e)}}
  async function POST(req:Request){beginRoomRequest(req);try{originCheck(req);const b=await casualBody(req);if(!DB)throw new CasualError('Room storage is unavailable.',503);
   if(b.action==='create'){
    const token=secret(),id=crypto.randomUUID(),tokenHash=await hash(token),now=Date.now();let code=newCode&&/^[A-HJ-NP-Z2-9]{8}$/.test(newCode)?newCode:'';if(!code)for(let i=0;i<8;i++)code+='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[crypto.getRandomValues(new Uint8Array(1))[0]%32];
@@ -80,7 +85,7 @@ export function createCasualAPI(DB:D1Database|undefined,keepAlive?:((task:Promis
    const id=joinId||authenticate(tokenHash,state);if(!joinId&&b.requestId&&state.players.find(p=>p.id===id)?.requests.includes(b.requestId)){const advanced=advanceCasual(state,now);return{state:advanced.state,changed:advanced.changed,result:(final:CasualState,revision:number,time:number)=>reply(req,{ack:b.requestId,room:project(final,id,time,revision,b.worldRound,b.worldVersion,b.scene)})}}const budget={traffic:state.players.find(p=>p.id===id)?.traffic};if(!takeRoomBudget(budget,now,b.action==='draft-phone'?10:1))throw new CasualError('Too many actions. Give the room a moment to catch up.',429);const next=applyCasualAction(state,b.action==='join'?{...b,id,hash:tokenHash}:b,id,now),player=next.players.find(p=>p.id===id);if(player)player.traffic=budget.traffic;
    return{state:next,changed:true,result:(final,revision,time)=>b.action==='leave'?reply(req,{ok:true}):reply(req,{...(token?{token}:{}),room:project(final,id,time,revision,b.worldRound,b.worldVersion,b.scene)})};
   });
- }catch(e){return error(req,e)}}
+ }catch(e){return casualFailure(req,e)}}
  async function OPTIONS(req:Request){return new Response(null,{status:204,headers:headers(req)})}
  return{GET,POST,OPTIONS};
 }

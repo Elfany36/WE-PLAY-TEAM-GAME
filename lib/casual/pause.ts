@@ -27,7 +27,7 @@ export function resumeTimeline(g:TimedGame,now:number){
  }else if('actors'in g){
   g.ball.serveAt=stamp(g.ball.serveAt);
   for(const s of g.shots)s.until=stamp(s.until);
-  for(const a of g.actors){a.cooldown=stamp(a.cooldown);a.shieldUntil=stamp(a.shieldUntil);a.respawnAt=stamp(a.respawnAt);if(a.finishedAt!==null)a.finishedAt+=shift;if(a.spawnedAt!==undefined)a.spawnedAt=stamp(a.spawnedAt);if(a.eliminatedAt!==undefined)a.eliminatedAt=stamp(a.eliminatedAt);}
+  for(const a of g.actors){a.cooldown=stamp(a.cooldown);a.reloadUntil=stamp(a.reloadUntil||0);a.lastShotAt=stamp(a.lastShotAt||0);a.shieldUntil=stamp(a.shieldUntil);a.respawnAt=stamp(a.respawnAt);if(a.finishedAt!==null)a.finishedAt+=shift;if(a.spawnedAt!==undefined)a.spawnedAt=stamp(a.spawnedAt);if(a.eliminatedAt!==undefined)a.eliminatedAt=stamp(a.eliminatedAt);}
  }else if(g.kind==='blocks'){
   for(const b of g.boards){b.fallAt+=shift;b.lockAt=stamp(b.lockAt);b.flashAt=stamp(b.flashAt);}
  }else if(g.kind==='pool'){
