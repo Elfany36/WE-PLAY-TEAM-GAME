@@ -21,7 +21,7 @@ export function predictSnake(g:SnakeGame,w:Worm,clock:number,speed:number,turns:
 }
 export function sampledSnake(history:SnakeSnapshot[],id:string,clock:number,speed:number,horizon=650){
  if(!history.length)return[];let a=history[0];
- for(let i=1;i<history.length;i++){const b=history[i];if(clock<=b.at){const wa=a.game.worms.find(w=>w.id===id),wb=b.game.worms.find(w=>w.id===id);if(!wb)return[];if(!wa||!wa.alive||!wb.alive||wa.deathAt!==wb.deathAt||Math.hypot((wa.body[0]?.x||0)-(wb.body[0]?.x||0),(wa.body[0]?.y||0)-(wb.body[0]?.y||0))>6)return wb.body;return blendBodies(wa.body,wb.body,Math.max(0,Math.min(1,(clock-a.at)/Math.max(1,b.at-a.at))))}a=b}
+ for(let i=1;i<history.length;i++){const b=history[i];if(clock<=b.at){const wa=a.game.worms.find(w=>w.id===id),wb=b.game.worms.find(w=>w.id===id);if(!wb)return[];if(!wa||!wa.alive||!wb.alive||wa.deathAt!==wb.deathAt||wa.protectedUntil!==wb.protectedUntil||Math.hypot((wa.body[0]?.x||0)-(wb.body[0]?.x||0),(wa.body[0]?.y||0)-(wb.body[0]?.y||0))>6)return wb.body;return blendBodies(wa.body,wb.body,Math.max(0,Math.min(1,(clock-a.at)/Math.max(1,b.at-a.at))))}a=b}
  const w=a.game.worms.find(w=>w.id===id);return w?predictSnake(a.game,w,Math.min(clock,a.at+horizon),speed):[];
 }
 export function snakeBuffer(rtt:number){return Math.min(170,Math.max(85,45+Math.max(0,rtt)*.35))}

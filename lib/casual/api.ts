@@ -1,3 +1,4 @@
+import {beginRoomRequest,stampRoomReply} from '../request-clock.ts';
 import {roomBatch} from '../room-batch.ts';
 import {roomScene} from './client-room.ts';
 import {activeChat} from '../room-chat.ts';
@@ -5,7 +6,7 @@ import {roomHeaders,roomOriginAllowed} from '../room-origin.ts';
 import {SNAKE_MAP_IDS,SNAKE_SIZES} from './maps.ts';
 import {createCasual,applyCasualAction,advanceCasual,publicCasual,CasualError,ROOM_TTL,type CasualState,type CasualMode,CASUAL_MODES} from './engine.ts';
 function headers(req:Request){return roomHeaders(req)}
-function reply(req:Request,data:unknown,status=200){return Response.json(data,{status,headers:headers(req)})}
+function reply(req:Request,data:unknown,status=200){return Response.json(stampRoomReply(req,data),{status,headers:headers(req)})}
 function originCheck(req:Request){const o=req.headers.get('Origin');if(o&&!roomOriginAllowed(req))throw new CasualError('This frontend is not allowed to use these rooms.',403)}
 function error(req:Request,e:unknown){return reply(req,{error:e instanceof CasualError?e.message:'The room service could not complete this request. Please reconnect.'},e instanceof CasualError?e.status:503)}
 async function hash(token:string){return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(token))),n=>n.toString(16).padStart(2,'0')).join('')}
@@ -35,7 +36,8 @@ export async function casualBody(req:Request){
  if(b.action==='remove-inactive'||b.action==='catch-uno'){if(typeof b.playerId!=='string'||b.playerId.length>80)throw new CasualError('Choose an inactive player.');out.playerId=b.playerId}
  if(b.action.endsWith('-property')||['pass-auction','pay-jail','use-jail-card','sell-set','offer-trade','accept-trade','reject-trade'].includes(b.action)){for(const k of ['space','amount','turn','give','take','giveCash','takeCash','giveJail','takeJail','to'])if(b[k]!==undefined)out[k]=b[k]}
  if(b.action==='submit-phone'){if(!Number.isInteger(b.stage)||b.stage<0||b.stage>8)throw new CasualError('Choose the current relay task.');out.stage=b.stage;out.text=b.text;out.strokes=b.strokes}
- if(b.action==='drive'||b.action==='explore'){out.seq=b.seq;for(const k of b.action==='drive'?['throttle','steer','drift','use','recover']:['left','right','jump','use','tx','ty','slot'])out[k]=b[k]}
+ if(b.action==='drive'||b.action==='explore'){out.seq=b.seq;for(const k of b.action==='drive'?['throttle','steer','drift','use','recover','useSeq','recoverSeq']:['left','right','jump','use','tx','ty','slot'])out[k]=b[k]}
+ for(const k of ['useSeq','recoverSeq'])if(out[k]!==undefined&&(!Number.isSafeInteger(out[k])||out[k]<1||out[k]>out.seq))throw new CasualError('Invalid command identifier.');
  if(b.action==='craft-terra')out.recipe=b.recipe;
  if(b.action==='spawn-terra'){out.x=b.x;out.y=b.y}
  if(b.worldVersion!==undefined&&Number.isSafeInteger(b.worldVersion)&&Number.isSafeInteger(b.worldRound)){out.worldVersion=b.worldVersion;out.worldRound=b.worldRound}
@@ -49,7 +51,7 @@ export function createCasualAPI(DB:D1Database|undefined,keepAlive?:((task:Promis
  async function save(code:string,state:CasualState,revision:number){const r=await DB!.prepare('UPDATE casual_rooms SET state=?, revision=revision+1 WHERE code=? AND revision=?').bind(JSON.stringify(state),code,revision).run();return!!r.meta.changes}
  function project(s:CasualState,id:string,now:number,revision:number,round?:number,worldVersion?:number,scene?:string|null){const room={...publicCasual(s,id,now),revision};if(room.mode==='terra'&&room.round===round&&room.game?.version===worldVersion)room.game={...room.game,tiles:undefined};if(scene&&scene===roomScene(room))room.game={...room.game,obstacles:undefined};return room}
  function batch(code:string){if(!DB)throw new CasualError('Room storage is unavailable.',503);return roomBatch(DB,'casual:'+code,()=>read(code),(state:CasualState,revision:number)=>save(code,state,revision),()=>new CasualError('The room is busy. Reconnecting…',409),keepAlive)}
- async function GET(req:Request){try{
+ async function GET(req:Request){beginRoomRequest(req);try{
   originCheck(req);const url=new URL(req.url),code=roomCode(url.searchParams.get('code')),tokenHash=await credential(req);
   return await batch(code).run((state,now)=>{
    const id=authenticate(tokenHash,state),advanced=advanceCasual(state,now),p=advanced.state.players.find(p=>p.id===id)!;let changed=advanced.changed;
@@ -58,7 +60,7 @@ export function createCasualAPI(DB:D1Database|undefined,keepAlive?:((task:Promis
    return{state:advanced.state,changed,result:(final,revision,time)=>url.searchParams.get('revision')===String(revision)?reply(req,{unchanged:true,revision,serverNow:time}):reply(req,{room:project(final,id,time,revision,Number(url.searchParams.get('worldRound')),Number(url.searchParams.get('worldVersion')),url.searchParams.get('scene'))})};
   });
  }catch(e){return error(req,e)}}
- async function POST(req:Request){try{originCheck(req);const b=await casualBody(req);if(!DB)throw new CasualError('Room storage is unavailable.',503);
+ async function POST(req:Request){beginRoomRequest(req);try{originCheck(req);const b=await casualBody(req);if(!DB)throw new CasualError('Room storage is unavailable.',503);
   if(b.action==='create'){
    const token=secret(),id=crypto.randomUUID(),tokenHash=await hash(token),now=Date.now();let code='';for(let i=0;i<8;i++)code+='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[crypto.getRandomValues(new Uint8Array(1))[0]%32];
    let s=createCasual(code,id,b.name,tokenHash,b.mode as CasualMode,crypto.getRandomValues(new Uint32Array(1))[0],now);s=applyCasualAction(s,{...b,action:'configure'},id,now);

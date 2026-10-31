@@ -222,4 +222,4 @@ export function publicCasual(s:CasualState,id:string,now:number){
  else if(s.game?.kind==='snake')game={...s.game,worms:s.game.worms.map(({queue,queueTicks,lastSeq,...w})=>({...w,...(w.id===id?{pendingTurns:queue,pendingTicks:queueTicks,inputAck:lastSeq}:{})}))};
  return{code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&now-lastSeen<20000,canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
 }
-export type CasualPublic=ReturnType<typeof publicCasual>&{revision?:number;network?:{rtt:number}};
+export type CasualPublic=ReturnType<typeof publicCasual>&{revision?:number;network?:{rtt:number;totalRtt?:number;serverMs?:number}};

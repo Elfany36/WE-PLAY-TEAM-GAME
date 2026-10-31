@@ -1,3 +1,4 @@
+import {beginRoomRequest,stampRoomReply} from './request-clock.ts';
 import {roomBatch} from './room-batch.ts';
 import {activeChat} from './room-chat.ts';
 import {roomHeaders,roomOriginAllowed} from './room-origin.ts';
@@ -5,7 +6,7 @@ import {createArena,applyAction,publicArena,ArenaError,type ArenaState} from './
 import {readArenaBody,roomCode} from './arena-request.ts';
 const ttl=86400000;
 function cors(req:Request){return roomHeaders(req)}
-function reply(req:Request,data:unknown,status=200){return Response.json(data,{status,headers:cors(req)})}
+function reply(req:Request,data:unknown,status=200){return Response.json(stampRoomReply(req,data),{status,headers:cors(req)})}
 async function hash(token:string){return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(token))),x=>x.toString(16).padStart(2,'0')).join('')}
 function randomCode(){return Array.from(crypto.getRandomValues(new Uint8Array(8)),n=>'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[n%32]).join('')}
 function secret(){return Array.from(crypto.getRandomValues(new Uint8Array(32)),x=>x.toString(16).padStart(2,'0')).join('')}
@@ -17,7 +18,7 @@ function authenticate(tokenHash:string|null,state:ArenaState){if(!tokenHash)thro
 async function save(code:string,state:ArenaState,revision:number){const result=await DB!.prepare('UPDATE arena_rooms SET state=?, revision=revision+1 WHERE code=? AND revision=?').bind(JSON.stringify(state),code,revision).run();return!!result.meta.changes}
 function batch(code:string){if(!DB)throw new ArenaError('Room storage is unavailable.',503);return roomBatch(DB,'arena:'+code,()=>read(code),(state:ArenaState,revision:number)=>save(code,state,revision),()=>new ArenaError('The room is busy. Reconnecting…',409),keepAlive)}
 async function OPTIONS(req:Request){return new Response(null,{status:204,headers:cors(req)})}
-async function GET(req:Request){try{
+async function GET(req:Request){beginRoomRequest(req);try{
  checkOrigin(req);const url=new URL(req.url),code=roomCode(url.searchParams.get('code')),tokenHash=await credential(req);
  return await batch(code).run((state,now)=>{
   const id=authenticate(tokenHash,state),player=state.players.find(p=>p.id===id)!;
@@ -27,7 +28,7 @@ async function GET(req:Request){try{
  });
 }catch(e){return error(req,e)}}
 function error(req:Request,e:unknown){return reply(req,{error:e instanceof ArenaError?e.message:'Could not complete the request. Please reconnect and try again.'},e instanceof ArenaError?e.status:503)}
-async function POST(req:Request){try{checkOrigin(req);let b=await readArenaBody(req);if(!DB)throw new ArenaError('Room storage is unavailable.',503);
+async function POST(req:Request){beginRoomRequest(req);try{checkOrigin(req);let b=await readArenaBody(req);if(!DB)throw new ArenaError('Room storage is unavailable.',503);
 if(b.action==='create'){
 const name=b.name;if(name.length<2||name.length>20)throw new ArenaError('Choose a display name of 2–20 characters.');const token=secret(),id=crypto.randomUUID(),tokenHash=await hash(token);const now=Date.now();let code=randomCode(),s=createArena(code,id,tokenHash,name,now);if(b.mode||b.topic)s=applyAction(s,{action:'configure',mode:b.mode||'blanks',topic:b.topic||'All'},id,now).state;
 await DB.prepare('DELETE FROM arena_rooms WHERE created_at < ?').bind(now-ttl).run();
