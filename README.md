@@ -12,6 +12,16 @@ A responsive HTML/CSS learning studio with light/dark themes, a sandboxed playgr
 - Eleven retained casual games, including simultaneous Snake, memory, ladders, cards, drawing relay, kart racing, a shared mining world and strategy boards. Capacity follows each game's rules: most support 8; UNO supports up to 12; the three strategy boards use 2 seats.
 - Emoji chat and six free virtual gifts. Shared history clears when someone leaves or the host changes games, caps at 50 messages, and expires after 15 minutes.
 
+## Arcade update
+
+Pocket Kart now uses longer Meadow, Coast and Night tracks, new top-down kart artwork, a smooth chase camera, a non-overlapping starting grid and corrected keyboard controls. Deterministic baseline laps measured 58–62 seconds; driving, items and collisions change an actual lap time. Arrow keys or WASD drive, Space drifts, E uses an item and R recovers. The enlarged tracks apply to new races; an already-running older room retains its existing track geometry.
+
+Snake Xenzia has boundary-scheduled predicted turns, a bounded adaptive snapshot buffer, fewer redundant requests and cached arena backgrounds. All six map themes have refreshed graphics. Network and device performance still affect responsiveness.
+
+Property Parks and Snakes & Ladders roll animated dice and hop through each traversed tile. The larger chess, dama and sci-dama boards, memory cards and default Auto layout improve readability; Fit screen, Resize and fullscreen remain available.
+
+Doodle Relay includes round, marker, pencil, soft, calligraphy and eraser tools; 1–64 px sizes; 5–100% opacity; custom colors; two-color gradients; normal, multiply and screen blending; and undo/redo. The relay, album and PNG export use the same drawing renderer.
+
 The inventory is not an exhaustive tutorial for every possible HTML/CSS expression. It includes 1,333 records without upstream explanatory prose. These are explicitly labeled. CSS value spaces include unlimited numbers, URLs and author-defined names; formal grammar describes those spaces. An upstream status or compatibility record is not certification of every browser behavior.
 
 ## Run locally

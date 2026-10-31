@@ -1,0 +1,9 @@
+[
+  {
+    "test": "one rendered Snake client, eight participants and 40ms request delay",
+    "pass": true,
+    "samples": 82,
+    "p95FrameMs": 22.4,
+    "largestSampleMove": 1.59
+  }
+]
