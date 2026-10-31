@@ -1,5 +1,11 @@
+import {compareSnake} from './snake-rank.ts';
+import {resumeTimeline} from './pause.ts';
+import type {RoomTraffic} from '../room-budget.ts';
+import {newParty,advanceParty,partyAction,isParty,type PartyGame} from './party.ts';
+import {newBlocks,advanceBlocks,blocksAction,publicBlocks,type BlocksGame} from './blocks.ts';
+import {newPool,advancePool,poolAction,type PoolGame} from './pool.ts';
 import {newStrategy,strategyAction,advanceStrategy,leaveStrategy,publicStrategy,isStrategy,type StrategyGame} from './strategy.ts';
-import {DICE_ROLL_MS,LADDER_STEP_MS,LADDER_JUMP_MS} from './motion.ts';
+import {DICE_ROLL_MS,LADDER_STEP_MS,LADDER_JUMP_MS,ladderMoveDuration} from './motion.ts';
 import {appendChat,activeChat,ChatError,type ChatMessage} from '../room-chat.ts';
 import {newProperty,propertyAction,advanceProperty,bankruptEstate,type PropertyGame} from './property.ts';
 import {newPhone,phoneAction,advancePhone,leavePhone,publicPhone,type PhoneGame} from './phone.ts';
@@ -9,19 +15,19 @@ import {newUno,unoAction,advanceUno,leaveUno,publicUno,type UnoGame} from './uno
 import {snakeMap,SNAKE_MAP_IDS,snakeStarts,SNAKE_SIZES,type SnakeMapId} from './maps.ts';
 import {CasualError} from './error.ts';
 export {CasualError} from './error.ts';
-export type CasualMode='ladders'|'memory'|'snake'|'uno'|'property'|'phone'|'circuit'|'terra'|'chess'|'dama'|'scidama';
-export const CASUAL_MODES=['ladders','memory','snake','uno','property','phone','circuit','terra','chess','dama','scidama'] as const;
-export const casualCapacity=(mode:string)=>isStrategy(mode)?2:mode==='uno'?12:8;
-export const casualMinimum=(mode:string)=>isStrategy(mode)||['uno','property','phone'].includes(mode)?2:1;
-export type CasualSettings={cards:number;speed:number;map?:SnakeMapId;snakeSize?:32|48|64;battle?:boolean;difficulty?:'cozy'|'standard'|'expert';unoFlip?:boolean;track?:string;bots?:number;relayRounds?:number;relaySeconds?:number};
+export type CasualMode='ladders'|'memory'|'snake'|'uno'|'property'|'phone'|'circuit'|'terra'|'chess'|'dama'|'scidama'|'sumo'|'tanks'|'pong'|'marble'|'blocks'|'pool';
+export const CASUAL_MODES=['ladders','memory','snake','uno','property','phone','circuit','terra','chess','dama','scidama','sumo','tanks','pong','marble','blocks','pool'] as const;
+export const casualCapacity=(mode:string)=>isStrategy(mode)||['pong','pool'].includes(mode)?2:mode==='uno'?12:8;
+export const casualMinimum=(mode:string)=>isStrategy(mode)||['uno','property','phone','sumo','tanks','pong','pool'].includes(mode)?2:1;
+export type CasualSettings={cards:number;speed:number;map?:SnakeMapId;snakeSize?:32|48|64;battle?:boolean;difficulty?:'cozy'|'standard'|'expert';unoFlip?:boolean;track?:string;bots?:number;relayRounds?:number;relaySeconds?:number;arena?:'garden'|'canyon'|'neon'};
 export type Direction='up'|'right'|'down'|'left';
 export type Point={x:number;y:number};
-export type CasualPlayer={id:string;name:string;tokenHash:string;joinedAt:number;lastSeen:number;color:number;ready:boolean;retired:boolean;requests:string[];bot?:boolean};
+export type CasualPlayer={id:string;name:string;tokenHash:string;joinedAt:number;lastSeen:number;color:number;ready:boolean;retired:boolean;requests:string[];traffic?:RoomTraffic;bot?:boolean};
 export type LadderGame={kind:'ladders';positions:Record<string,number>;currentId:string;turn:number;deadline:number;lockUntil:number;lastRoll:null|{playerId:string;die:number;from:number;landing:number;to:number;jump:'ladder'|'snake'|null;overshoot:boolean;at:number}};
 export type MemoryGame={kind:'memory';deck:{key:number;matchedBy:string|null}[];revealed:number[];currentId:string;turn:number;deadline:number;resolveAt:number|null;scores:Record<string,number>;moves:number};
 export type Worm={id:string;body:Point[];previous?:Point[];direction:Direction;queue:Direction[];queueTicks?:number[];alive:boolean;score:number;lastSeq:number;deathAt:number|null;deathPoint:Point|null;reason:string;respawnAt?:number;kills?:number;deaths?:number;best?:number;protectedUntil?:number};
 export type SnakeGame={kind:'snake';size?:number;mapId?:SnakeMapId;obstacles?:Point[];worms:Worm[];food:Point[];tick:number;lastTickAt:number;startAt:number;deadline:number;pausedAt:number|null;participants:number};
-export type CasualState={schema:1;chat?:ChatMessage[];chatEpoch?:number;code:string;hostId:string;mode:CasualMode;phase:'lobby'|'playing'|'paused'|'finished';createdAt:number;round:number;random:number;settings:CasualSettings;players:CasualPlayer[];game:LadderGame|MemoryGame|SnakeGame|UnoGame|PropertyGame|PhoneGame|CircuitGame|TerraGame|StrategyGame|null;result:null|{winnerIds:string[];reason:string};events:{id:number;text:string;at:number}[];eventId:number;pauseReason:string};
+export type CasualState={schema:1;chat?:ChatMessage[];chatEpoch?:number;code:string;hostId:string;mode:CasualMode;phase:'lobby'|'playing'|'paused'|'finished';createdAt:number;round:number;random:number;settings:CasualSettings;players:CasualPlayer[];game:LadderGame|MemoryGame|SnakeGame|UnoGame|PropertyGame|PhoneGame|CircuitGame|TerraGame|StrategyGame|PartyGame|BlocksGame|PoolGame|null;result:null|{winnerIds:string[];reason:string};events:{id:number;text:string;at:number}[];eventId:number;pauseReason:string};
 export const GRID_SIZE=32,TURN_MS=45000,HOST_TIMEOUT=45000,ROOM_TTL=86400000;
 export const LADDERS:Record<number,number>={2:23,8:34,20:39,32:51,41:79,54:72,64:87,76:94,89:99};
 export const SLIDES:Record<number,number>={17:6,30:9,47:26,59:38,66:45,75:53,83:62,91:71,98:80};
@@ -76,7 +82,8 @@ export function advanceCasual(input:CasualState,now:number):{state:CasualState;c
  const g=input.game;
  if(input.phase!=='playing'||!g)return{state:input,changed:false};
  let due=now>=g.deadline;
- if(g.kind==='snake'||g.kind==='circuit'||g.kind==='terra')due=now>=g.startAt&&(due||now-g.lastTickAt>8000||g.lastTickAt+(g.kind==='snake'?input.settings.speed:50)<=now);
+ if(g.kind==='pool')due=due||(g.moving?g.lastTickAt+50<=now||now-g.lastTickAt>8000:now>=g.turnDeadline);
+ if('lastTickAt'in g&&'startAt'in g&&g.kind!=='pool')due=now>=g.startAt&&(due||now-g.lastTickAt>8000||g.lastTickAt+(g.kind==='snake'?input.settings.speed:50)<=now);
  else if(g.kind==='chess'||g.kind==='dama')due=false;
  else if(g.kind==='phone'&&g.revealing)due=false;
  else if(g.kind==='memory'&&g.resolveAt!==null&&now>=g.resolveAt)due=true;
@@ -86,6 +93,9 @@ export function advanceCasual(input:CasualState,now:number):{state:CasualState;c
 function advanceOwned(s:CasualState,now:number):{state:CasualState;changed:boolean}{
  if(now-s.createdAt>ROOM_TTL)throw new CasualError('This room expired after 24 hours. Create a fresh room.',410);let changed=false;const g=s.game;
  if(s.phase!=='playing'||!g)return{state:s,changed};
+ if(isParty(g.kind))return{state:s,changed:advanceParty(s,now)};
+ if(g.kind==='blocks')return{state:s,changed:advanceBlocks(s,now)};
+ if(g.kind==='pool')return{state:s,changed:advancePool(s,now)};
  if(g.kind==='uno')return{state:s,changed:advanceUno(s,now)};
  if(g.kind==='property')return{state:s,changed:advanceProperty(s,now)};
  if(g.kind==='phone')return{state:s,changed:advancePhone(s,now)};
@@ -96,7 +106,7 @@ function advanceOwned(s:CasualState,now:number):{state:CasualState;changed:boole
   if(now<g.startAt)return{state:s,changed};
   if(now-g.lastTickAt>8000){s.phase='paused';g.pausedAt=now;s.pauseReason='No room updates for 8 seconds. The host can resume when everyone reconnects.';event(s,'The arena paused after a connection gap.',now);return{state:s,changed:true}}
   while(g.lastTickAt+s.settings.speed<=Math.min(now,g.deadline)&&s.phase==='playing'){g.lastTickAt+=s.settings.speed;stepSnake(s,g.lastTickAt);changed=true}
-  if(s.phase==='playing'&&now>=g.deadline){const survivors=g.worms.filter(w=>s.settings.battle?!s.players.find(p=>p.id===w.id)?.retired:w.alive),points=(w:Worm)=>s.settings.battle?(w.kills||0)*100+(w.best||0):w.score,best=Math.max(0,...survivors.map(points));finish(s,survivors.filter(w=>points(w)===best).map(w=>w.id),s.settings.battle?'Battle complete. Most eliminations wins, then best growth.':'Time is up. Surviving snakes with the most food share the win.',now);changed=true}
+  if(s.phase==='playing'&&now>=g.deadline){const survivors=g.worms.filter(w=>s.settings.battle?!s.players.find(p=>p.id===w.id)?.retired:w.alive).sort((a,b)=>compareSnake(a,b,!!s.settings.battle)),best=survivors[0];finish(s,best?survivors.filter(w=>compareSnake(w,best,!!s.settings.battle)===0).map(w=>w.id):[],s.settings.battle?'Battle complete. Most eliminations wins, then best growth.':'Time is up. Surviving snakes with the most food share the win.',now);changed=true}
  }else if(g.kind==='ladders'||g.kind==='memory'){
   if(g.kind==='memory'&&g.resolveAt!==null&&now>=g.resolveAt){g.revealed=[];g.resolveAt=null;moveTurn(s,g,now);changed=true}
   if(now>=g.deadline){const name=s.players.find(p=>p.id===g.currentId)?.name||'Player';if(g.kind==='memory'){g.revealed=[];g.resolveAt=null}moveTurn(s,g,now);event(s,name+'’s turn timed out. Play moved to the next player.',now);changed=true}
@@ -114,6 +124,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
  }
  const p=s.players.find(p=>p.id===id&&!p.retired);if(!p)throw new CasualError('Your session ended. Join the room again.',401);p.lastSeen=now;
  if(a.requestId){if(p.requests.includes(a.requestId))throw new CasualError('That action was already applied. The room has been refreshed.',409);p.requests=[...p.requests.slice(-23),a.requestId]}
+ if(a.action==='disconnect'){p.lastSeen=now-HOST_TIMEOUT-1;s.chat=[];s.chatEpoch=(s.chatEpoch||0)+1;return s}
  if(a.action==='heartbeat')return s;
  if(a.action==='chat'){try{s.chat=appendChat(s.chat,p.id,p.name,a.text,a.messageId,now,a.giftId)}catch(e){if(e instanceof ChatError)throw new CasualError(e.message,e.status);throw e}return s}
  if(a.action==='leave'||a.action==='remove-inactive'){
@@ -130,6 +141,9 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
    else if(g.kind==='property')bankruptEstate(s,g,target.id,now);
    else if(g.kind==='phone')leavePhone(s,target.id,now);
    else if((g.kind==='chess'||g.kind==='dama'||g.kind==='scidama'))leaveStrategy(s,target.id,now);
+   else if(g.kind==='pool'){finish(s,activePlayers(s).map(p=>p.id),'A player left the table. The remaining player wins.',now)}
+   else if(isParty(g.kind)){const pg=g as PartyGame;delete pg.inputs[target.id];pg.shots=pg.shots.filter(shot=>shot.owner!==target.id);const actor=pg.actors.find(a=>a.id===target.id);if(actor){actor.alive=false;actor.respawnAt=0;actor.finishedAt=now}pg.actors=pg.actors.filter(a=>a.id!==target.id);if(pg.actors.length<2&&pg.kind!=='marble')finish(s,pg.actors.map(a=>a.id),'The remaining player wins after a departure.',now)}
+   else if(g.kind==='blocks'){const board=g.boards.find(b=>b.id===target.id);if(board)board.alive=false}
    else if(g.kind==='circuit'||g.kind==='terra'){}
    else if(g.kind==='snake'){const worm=g.worms.find(w=>w.id===target.id);if(worm){worm.alive=false;worm.body=[];worm.reason='Left the round';worm.deathAt=now}const alive=g.worms.filter(w=>w.alive);if(!s.settings.battle&&alive.length<=1)finish(s,alive.map(w=>w.id),'A player left. The remaining snake wins.',now)}
    else if((g.kind==='ladders'||g.kind==='memory')&&g.currentId===target.id){if(g.kind==='memory'){g.revealed=[];g.resolveAt=null}moveTurn(s,g,now)}
@@ -148,7 +162,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
   if(!CASUAL_MODES.includes(a.mode))throw new CasualError('Choose a valid game.');
   if(activePlayers(s).length>casualCapacity(a.mode))throw new CasualError('This game has '+casualCapacity(a.mode)+' seats. Ask extra players to leave before switching.',409);
   if(!Number.isInteger(a.cards)||a.cards<12||a.cards>200||a.cards%2)throw new CasualError('Choose an even deck size from 12 to 200 cards.');
-  if(![125,175,250,350,500].includes(a.speed))throw new CasualError('Choose a valid snake speed.');for(const k of ['battle','unoFlip'])if(a[k]!==undefined&&typeof a[k]!=='boolean')throw new CasualError('Invalid game option.');if(a.difficulty&&!['cozy','standard','expert'].includes(a.difficulty))throw new CasualError('Choose a valid difficulty.');if(a.track&&!['meadow','coast','night'].includes(a.track))throw new CasualError('Choose a track.');for(const [k,min,max]of [['bots',0,7],['relayRounds',3,9],['relaySeconds',20,180]] as const)if(a[k]!==undefined&&(!Number.isInteger(a[k])||a[k]<min||a[k]>max))throw new CasualError('Invalid '+k+' setting.');if(s.mode!==a.mode){s.chat=[];s.chatEpoch=(s.chatEpoch||0)+1;}s.mode=a.mode;if(a.snakeSize!==undefined&&!SNAKE_SIZES.includes(a.snakeSize))throw new CasualError('Choose a 32, 48 or 64 square arena.');if(a.map!==undefined&&!SNAKE_MAP_IDS.includes(a.map))throw new CasualError('Choose a valid map.');s.settings={...s.settings,cards:a.cards,speed:a.speed,snakeSize:a.snakeSize||s.settings.snakeSize||48,map:a.map||s.settings.map||'classic',...(a.battle!==undefined?{battle:a.battle===true}:{}),...(a.difficulty?{difficulty:a.difficulty}:{}),...(a.unoFlip!==undefined?{unoFlip:a.unoFlip===true}:{}),...(a.track?{track:a.track}:{}),...(a.bots!==undefined?{bots:a.bots}:{}),...(a.relayRounds?{relayRounds:a.relayRounds}:{}),...(a.relaySeconds?{relaySeconds:a.relaySeconds}:{})};s.phase='lobby';s.game=null;s.result=null;activePlayers(s).forEach(p=>p.ready=false);return s;
+  if(![125,175,250,350,500].includes(a.speed))throw new CasualError('Choose a valid snake speed.');for(const k of ['battle','unoFlip'])if(a[k]!==undefined&&typeof a[k]!=='boolean')throw new CasualError('Invalid game option.');if(a.arena!==undefined&&!['garden','canyon','neon'].includes(a.arena))throw new CasualError('Choose a valid arena.');if(a.difficulty&&!['cozy','standard','expert'].includes(a.difficulty))throw new CasualError('Choose a valid difficulty.');if(a.track&&!['meadow','coast','night'].includes(a.track))throw new CasualError('Choose a track.');for(const [k,min,max]of [['bots',0,7],['relayRounds',3,9],['relaySeconds',20,180]] as const)if(a[k]!==undefined&&(!Number.isInteger(a[k])||a[k]<min||a[k]>max))throw new CasualError('Invalid '+k+' setting.');if(s.mode!==a.mode){s.chat=[];s.chatEpoch=(s.chatEpoch||0)+1;}s.mode=a.mode;if(a.snakeSize!==undefined&&!SNAKE_SIZES.includes(a.snakeSize))throw new CasualError('Choose a 32, 48 or 64 square arena.');if(a.map!==undefined&&!SNAKE_MAP_IDS.includes(a.map))throw new CasualError('Choose a valid map.');s.settings={...s.settings,...(a.arena?{arena:a.arena}:{}),cards:a.cards,speed:a.speed,snakeSize:a.snakeSize||s.settings.snakeSize||48,map:a.map||s.settings.map||'classic',...(a.battle!==undefined?{battle:a.battle===true}:{}),...(a.difficulty?{difficulty:a.difficulty}:{}),...(a.unoFlip!==undefined?{unoFlip:a.unoFlip===true}:{}),...(a.track?{track:a.track}:{}),...(a.bots!==undefined?{bots:a.bots}:{}),...(a.relayRounds?{relayRounds:a.relayRounds}:{}),...(a.relaySeconds?{relaySeconds:a.relaySeconds}:{})};s.phase='lobby';s.game=null;s.result=null;activePlayers(s).forEach(p=>p.ready=false);return s;
  }
  if(a.action==='lobby'){
   if(s.phase==='playing'||s.phase==='paused')throw new CasualError('Finish or end the current round first.',409);
@@ -161,7 +175,10 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
   s.players=s.players.filter(p=>!p.bot&&!p.retired);
   if(s.mode==='circuit')for(let i=0;i<(s.settings.bots||0)&&activePlayers(s).length<8;i++){const botId='bot-'+(s.round+1)+'-'+i;let botColor=0;while(s.players.some(p=>p.color===botColor))botColor++;s.players.push({...newPlayer(botId,['Pip','Coco','Sunny','Moss','Luna','Ash','Nova'][i], '',now,botColor),bot:true})}
   s.round++;s.phase='playing';s.result=null;s.pauseReason='';s.players=s.players.filter(p=>!p.retired);s.players.forEach(p=>{p.ready=false;p.requests=[]});const first=s.players[0].id;
-  if(isStrategy(s.mode))s.game=newStrategy(s,now);
+  if(isParty(s.mode))s.game=newParty(s,now);
+  else if(s.mode==='blocks')s.game=newBlocks(s,now);
+  else if(s.mode==='pool')s.game=newPool(s,now);
+  else if(isStrategy(s.mode))s.game=newStrategy(s,now);
   else if(s.mode==='uno')s.game=newUno(s,now,priorUno);
   else if(s.mode==='property')s.game=newProperty(s,now);
   else if(s.mode==='phone')s.game=newPhone(s,now);
@@ -172,9 +189,9 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
   else s.game=newSnake(s,now);event(s,'Round '+s.round+' started.',now);return s;
  }
  if(a.action==='pause'||a.action==='resume'){
-  if(!s.game||!['snake','circuit','terra'].includes(s.game.kind))throw new CasualError('Only simultaneous action games can be paused.');const g=s.game as SnakeGame|CircuitGame|TerraGame;
+  if(!s.game||!['snake','circuit','terra','sumo','tanks','pong','marble','blocks','pool'].includes(s.game.kind))throw new CasualError('Only simultaneous action games can be paused.');const g=s.game as SnakeGame|CircuitGame|TerraGame|PartyGame|BlocksGame|PoolGame;
   if(a.action==='pause'){if(s.phase!=='playing')throw new CasualError('This arena is not running.',409);s.phase='paused';g.pausedAt=now;s.pauseReason='Paused by the host.';event(s,'The host paused the arena.',now)}
-  else{if(s.phase!=='paused')throw new CasualError('This arena is not paused.',409);const remaining=Math.max(0,g.deadline-Math.max(g.pausedAt??now,g.startAt));g.startAt=now+3000;g.deadline=g.startAt+remaining;g.lastTickAt=g.startAt;g.pausedAt=null;s.phase='playing';s.pauseReason='';event(s,'The arena resumes after a 3-second countdown.',now)}return s;
+  else{if(s.phase!=='paused')throw new CasualError('This arena is not paused.',409);resumeTimeline(g,now);s.phase='playing';s.pauseReason='';event(s,'The arena resumes after a 3-second countdown.',now)}return s;
  }
  if(a.action==='end'){
   if(p.id!==s.hostId)throw new CasualError('Only the host can end a round.',403);if(s.phase!=='playing'&&s.phase!=='paused')throw new CasualError('There is no running round.',409);finish(s,[],'The host ended this round. No winner was declared.',now);return s;
@@ -182,6 +199,10 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
  if(s.phase!=='playing'||!s.game)throw new CasualError('Wait for the host to start a round.',409);
  if(a.round!==s.round)throw new CasualError('This action belongs to an older round.',409);
  const g=s.game;
+ if(a.inputEpoch!==undefined&&'startAt'in g&&a.inputEpoch!==g.startAt)throw new CasualError('This control belongs to an older round timeline.',409);
+ if('actors'in g){partyAction(s,a,p.id,now);return s}
+ if(g.kind==='blocks'){blocksAction(s,a,p.id,now);return s}
+ if(g.kind==='pool'){poolAction(s,a,p.id,now);return s}
  if((g.kind==='chess'||g.kind==='dama'||g.kind==='scidama')){strategyAction(s,a,p.id,now);return s}
  if(g.kind==='uno'){unoAction(s,a,p.id,now);return s}
  if(g.kind==='property'){propertyAction(s,a,p.id,now);return s}
@@ -199,9 +220,9 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
  if(a.action==='roll'){
   if(g.kind!=='ladders')throw new CasualError('Roll controls belong to Snakes & Ladders.');if(now<g.lockUntil)throw new CasualError('Wait for the pieces to finish moving.',409);
   const die=Math.floor(random(s)*6)+1,from=g.positions[p.id]||0,overshoot=from+die>100,landing=overshoot?from:from+die,to=overshoot?from:LADDERS[landing]??SLIDES[landing]??landing,jump=overshoot?null:LADDERS[landing]?'ladder':SLIDES[landing]?'snake':null;
-  g.positions[p.id]=to;g.lastRoll={playerId:p.id,die,from,landing,to,jump,overshoot,at:now};g.lockUntil=now+DICE_ROLL_MS+die*LADDER_STEP_MS+(jump?LADDER_JUMP_MS:0);
+  g.positions[p.id]=to;g.lastRoll={playerId:p.id,die,from,landing,to,jump,overshoot,at:now};g.lockUntil=now+DICE_ROLL_MS+(overshoot?0:ladderMoveDuration(die,!!jump));
   event(s,p.name+' rolled '+die+(overshoot?' and stayed on '+from+'.':jump?' · '+(jump==='ladder'?'climbed ':'slid ')+landing+' → '+to+'.':' · moved to '+to+'.'),now);
-  if(to===100)finish(s,[p.id],p.name+' reached 100!',now);else moveTurn(s,g,now);return s;
+  if(to===100)finish(s,[p.id],p.name+' reached 100!',now);else{moveTurn(s,g,now);g.deadline=g.lockUntil+TURN_MS}return s;
  }
  if(a.action==='flip'){
   if(g.kind!=='memory')throw new CasualError('Card controls belong to Memory Garden.');if(g.resolveAt!==null)throw new CasualError('Let everyone see these two cards first.',409);
@@ -215,11 +236,12 @@ export function publicCasual(s:CasualState,id:string,now:number){
  const me=s.players.find(p=>p.id===id&&!p.retired);if(!me)throw new CasualError('Your session ended. Join again.',401);
  const host=s.players.find(p=>p.id===s.hostId&&!p.retired);let game:any=s.game;
  if(s.game&&isStrategy(s.game.kind))game=publicStrategy(s.game as StrategyGame);
+ else if(s.game?.kind==='blocks')game=publicBlocks(s.game);
  else if(s.game?.kind==='uno')game=publicUno(s.game,id);
  else if(s.game?.kind==='phone')game=publicPhone(s.game,id);
  else if(s.game?.kind==='property')game={...s.game,chance:undefined,chest:undefined};
  else if(s.game?.kind==='memory'){const g=s.game;game={...g,deck:g.deck.map((c,index)=>({index,matchedBy:c.matchedBy,...(c.matchedBy||g.revealed.includes(index)?{key:c.key}:{})}))}}
  else if(s.game?.kind==='snake')game={...s.game,worms:s.game.worms.map(({queue,queueTicks,lastSeq,...w})=>({...w,...(w.id===id?{pendingTurns:queue,pendingTicks:queueTicks,inputAck:lastSeq}:{})}))};
- return{code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&now-lastSeen<20000,canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
+ return{code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,traffic,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&now-lastSeen<20000,canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
 }
-export type CasualPublic=ReturnType<typeof publicCasual>&{revision?:number;network?:{rtt:number}};
+export type CasualPublic=ReturnType<typeof publicCasual>&{revision?:number;network?:{rtt:number;totalRtt?:number;serverMs?:number}};

@@ -1,6 +1,6 @@
 {
-  "reviewed": "2026-10-30",
-  "scope": "Original browser editions with primary-source mechanics and documented digital adaptations. Every multiplayer mode has authenticated room chat. Memory supports 200 cards / 100 unique pairs. Artwork provenance: game-art/ASSETS.md.",
+  "reviewed": "2026-10-31",
+  "scope": "Original browser editions with linked primary mechanics and documented digital adaptations. Seventeen casual modes share authenticated room chat. Most support eight players; UNO supports twelve; strategy boards, Paddle Rally and Pocket Billiards use two. Doodle Relay changes are source-reviewed only and have not been runtime-tested in this update. Artwork provenance: game-art/ASSETS.md.",
   "games": [
     {
       "id": "uno",
@@ -72,7 +72,7 @@
         "Choose an even-sized deck from 12 to 200 cards. Each round independently samples illustrations from a 100-design collection and shuffles the pairs. Every selected illustration has exactly one matching partner.",
         "On your turn, reveal one card and then a different face-down card. No third card can be revealed.",
         "A match earns one pair and another turn. Matched cards stay visible in their original positions.",
-        "A mismatch stays visible for 1.8 seconds on Cozy, 1 second on Standard, or 0.55 seconds on Expert. It then turns over and the next player takes a turn.",
+        "A mismatch stays visible for 2.2 seconds on Cozy, 1.6 seconds on Standard, or 1.2 seconds on Expert. It then turns over and the next player takes a turn.",
         "Most pairs wins when every pair is found. Tied leaders share the win. Turn limits are 45 seconds on Cozy, 30 on Standard, and 15 on Expert."
       ],
       "sources": [
@@ -95,7 +95,8 @@
         "Choose one of six maps before the round. Classic Orchard is open; the other five contain solid obstacles. Hit an obstacle, a wall, your body, or another snake’s body and you crash. Two heads meeting or swapping cells on the same step both crash.",
         "A tail cell that moves away on that step is safe unless its snake is growing. In Battle, a crash resets your growth and respawns you after 2 seconds with 1.2 seconds of protection; protected snakes pass through opponents.",
         "Battle lasts 5 minutes. Most body-collision eliminations wins, with best growth as the tie-break. Head-on crashes award no elimination. Classic elimination is an optional 3-minute mode: last snake moving wins.",
-        "A solo Battle run also respawns. A solo Classic run ends on collision or at the time limit. The host can pause; a room-wide update gap over 8 seconds also pauses the arena."
+        "A solo Battle run also respawns. A solo Classic run ends on collision or at the time limit. The host can pause; a room-wide update gap over 8 seconds also pauses the arena.",
+        "Choose Compact 32 × 32, Large 48 × 48 (default), or Grand 64 × 64 before starting. Continuous walls share one visible surface. Your steering is predicted locally, remote snakes are interpolated, and collision results remain server-authoritative. Network latency is connection-dependent."
       ],
       "sources": [
         {
@@ -208,6 +209,204 @@
         }
       ],
       "variant": "An original finite browser mining and building expedition with its own sprites, world generator, recipes, enemies and goal. It is not Terraria and does not reproduce its full item catalog, bosses, biomes or progression. Exported snapshots are records, not reloadable saves. Online rooms expire after 24 hours."
+    },
+    {
+      "id": "chess",
+      "name": "Chess Atelier",
+      "eyebrow": "EVERY MOVE TELLS A STORY.",
+      "description": "An ivory-and-jade board, sculpted pieces, clear legal moves. A quiet duel with room for a brilliant idea.",
+      "tag": "2 players · local or online",
+      "rules": [
+        "White moves first. Select a piece, then one of its highlighted legal destinations. Each online seat controls its own color; local play passes the device between turns. Colors alternate each round.",
+        "Kings may never move into check. Checkmate wins; stalemate draws. Castling, immediate en passant and promotion to queen, rook, bishop or knight are validated by chess.js 1.4.0.",
+        "Threefold repetition and fifty moves by each side without a pawn move or capture are claimable draws. Use Claim current draw, or Claim with next move before selecting your intended legal move. An invalid claim reports an error and keeps the board.",
+        "Fivefold repetition and seventy-five moves by each side without a pawn move or capture draw automatically. Checkmate takes precedence. Detected insufficient mating material draws immediately.",
+        "You may offer, accept or decline a draw, resign, and export a PGN move record. A player leaving forfeits the round. Games are untimed; online rooms expire after 24 hours."
+      ],
+      "sources": [
+        {
+          "label": "FIDE: Laws of Chess, effective January 2023",
+          "url": "https://handbook.fide.com/chapter/E012023"
+        },
+        {
+          "label": "chess.js: official legal-move library documentation",
+          "url": "https://jhlywa.github.io/chess.js/"
+        }
+      ],
+      "variant": "Original digital chess board and artwork. No clocks, rated matchmaking or AI opponent are included. The library detects its documented insufficient-material cases; this edition does not claim exhaustive adjudication of every possible FIDE dead position. Draw offers and claims are digital controls, and departure is an explicit forfeit convention."
+    },
+    {
+      "id": "dama",
+      "name": "Filipino Dama",
+      "eyebrow": "A SMALL BOARD. A CLEVER PLAN.",
+      "description": "Flying kings and unbroken capture routes. Play a carefully described Luzon edition on a warm sculpted board.",
+      "tag": "2 players · maximum captures",
+      "rules": [
+        "Luzon edition: twelve pieces per side on the light squares of an 8 × 8 board. Ivory / White starts. A man steps one diagonal square forward into an empty square.",
+        "Men capture diagonally forward or backward by jumping one adjacent enemy into the empty square beyond. Captures are compulsory. Of all available complete routes, you must choose one capturing the greatest number of pieces. Equal-length routes are freely selectable.",
+        "Dama / kings move any distance along clear diagonals. To capture, pass one enemy and land on any empty square beyond it, stopping before another piece. Continue jumping until the selected maximum route is complete.",
+        "Captured pieces remain blockers until the entire capture finishes. You cannot capture the same piece twice. A man is crowned only when its complete turn ends on the far row; reaching that row mid-route does not crown it immediately.",
+        "Take every enemy piece or leave the opponent with no legal move to win. Select a piece and each highlighted landing in order; the server applies the full route as one turn.",
+        "Digital draw convention: threefold position repetition or eighty turns without capture or promotion ends in a draw. Players may also agree to draw or resign. Leaving forfeits. Colors alternate each round."
+      ],
+      "sources": [
+        {
+          "label": "Filipino player’s firsthand Luzon / Vismin rules account",
+          "url": "https://luffykudo.wordpress.com/2024/03/11/how-to-play-filipino-checkers/"
+        }
+      ],
+      "variant": "Explicit Luzon rules edition based on a firsthand Philippine account, not a federation certification. Regional variants exist. Optional mayordama priority is off: equal maximum-length routes may be chosen regardless of king involvement. The automatic draw and departure rules are disclosed digital conventions."
+    },
+    {
+      "id": "scidama",
+      "name": "Sci-Dama · Water Patrol",
+      "eyebrow": "THINK AHEAD. SAVE EVERY DROP.",
+      "description": "Dama with a scientific twist. Printed water-consumption chips, a capture ledger, and the challenge of finishing lower.",
+      "tag": "2 players · 20-minute session",
+      "rules": [
+        "This Water Patrol edition uses the numbered starting formation in DepEd Tabuk DM 449 (2023). From your back row upward, left-to-right: 110, 85, 50, 25; 5, 30, 105, 70; 90, 65, 10, 45 cubic metres. The opposing formation is rotated 180 degrees.",
+        "Move and capture with the same forward-step, backward-capture, flying-dama and maximum-capture rules described for Filipino Dama. A man is crowned only if the complete turn ends on the far row. Equal maximum routes are freely selectable in this digital edition.",
+        "For each captured chip, apply the landing square’s + or − operator to the taker’s printed value and the victim’s printed value. Multiply by two if either chip is dama, or four if both are dama. Add each leg to the taker’s capture ledger. Its printed value never changes. Quiet moves score nothing.",
+        "Final consumption = capture ledger + values of your surviving chips. Every surviving dama counts twice. LOWER final consumption wins; equal totals tie. Losing all chips or having no legal moves ends the session and triggers scoring; it does not automatically award a survival win.",
+        "The shared session ends after twenty minutes, threefold repetition, or eighty quiet turns. Complete capture routes are submitted atomically. Remaining values and running totals are always visible. Resignation or leaving is a forfeit, not a score comparison.",
+        "Declared arcade arithmetic conventions: + and − alternate across playable squares; subtraction keeps signed results, including negative scores. These operator placement, negative-result, repetition and equal-route rules resolve details the inspected Sci-Dama memos do not completely specify."
+      ],
+      "sources": [
+        {
+          "label": "DepEd Tabuk 2023: Sci-Dama rules and starting diagrams, pp. 3–5",
+          "url": "https://depedtabukcity.com/wp-content/uploads/2023/11/DM-NO-449-S-2023-DIVISION-SCIENCE-AND-TECHNOLOGY-FAIR-1.pdf"
+        },
+        {
+          "label": "DepEd CAR 2015: Sci-Dama scoring and endings, p. 6",
+          "url": "https://depedpines.com/wp-content/uploads/2015/10/2015-Regional-Science-and-Math-Festival.pdf"
+        },
+        {
+          "label": "DepEd Digos 2024: Damath arithmetic base, pp. 15–16",
+          "url": "https://depeddigoscity.org/storage/wp-content/uploads/2024/01/DM_CID_2024_030.pdf"
+        }
+      ],
+      "variant": "Water Patrol inspired by the cited official education memos, with the explicit arcade conventions above. This is not a claim of exact tournament equivalence. Damath arithmetic is a separately identified base source; Sci-Dama’s lower-score outcome and residual-piece formula come from Sci-Dama memos. Other Sci-Dama science variants are not included."
+    },
+    {
+      "id": "sumo",
+      "name": "Sumo Circle",
+      "eyebrow": "HOLD YOUR GROUND.",
+      "description": "A tiny arena with big momentum. Dodge, dash and push your crew beyond the ring.",
+      "tag": "2–8 online · 2 on one keyboard",
+      "rules": [
+        "Move with WASD or arrows; Space dashes in your movement direction. Dashes recharge after 2.1 seconds. Your numbered color matches the roster.",
+        "Push opponents beyond the circular boundary. Knocked-out wrestlers stay out for the round. Last standing wins; simultaneous final knockouts draw.",
+        "The ring gradually shrinks after 45 seconds. At the two-minute limit, a surviving wrestler closest to the center wins.",
+        "On one keyboard, Player 1 uses WASD + Space; Player 2 uses arrows + Enter. Touch controls can switch between the two local seats."
+      ],
+      "sources": [
+        {
+          "label": "Japan Sumo Association: introduction and ring-out concept",
+          "url": "https://www.sumo.or.jp/pdf/en/sumo_introduction.pdf"
+        }
+      ],
+      "variant": "Original arcade ring-out game. Circular bodies, dashes, up to eight wrestlers, shrinking rings and timed center ranking are house rules. This is not a full simulation of wrestling or official sumo techniques."
+    },
+    {
+      "id": "tanks",
+      "name": "Tank Courtyard",
+      "eyebrow": "LINE UP YOUR NEXT SHOT.",
+      "description": "Colorful tanks, ricocheting shells and three compact arenas. Find cover, aim well and keep moving.",
+      "tag": "2–8 online · 2 on one keyboard",
+      "rules": [
+        "WASD or arrows move. Aim with the pointer, or steer toward your target. Space fires; holding it repeats at the reload pace.",
+        "Each tank takes three hits. A knockout awards one point to the shooter. Respawn takes 1.8 seconds, followed by a 1.3-second shield.",
+        "Shells bounce once against a wall and expire after 2.5 seconds. Walls block tanks and shots. Highest knockout count at two minutes wins; tied leaders share the win.",
+        "Choose Clover Gardens, Copper Canyon or Midnight Arcade. Local two-player controls are WASD + Space and arrows + Enter."
+      ],
+      "sources": [
+        {
+          "label": "MDN: 2D collision detection",
+          "url": "https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection"
+        }
+      ],
+      "variant": "Original tank skirmish with its own maps, models, hit rules and timing. The room server validates movement inputs and computes collisions; clients never submit hits or scores."
+    },
+    {
+      "id": "pong",
+      "name": "Paddle Rally",
+      "eyebrow": "ONE MORE RETURN.",
+      "description": "A clean two-player table-tennis arcade. Keep the rally alive and find an opening past the other paddle.",
+      "tag": "2 players · local or online",
+      "rules": [
+        "Move your paddle up/down with W/S or arrows. Drag on the court or use the touch arrows. On one keyboard Player 1 uses W/S and Player 2 uses Up/Down.",
+        "Return the ball before it passes your paddle. The contact point sets the bounce angle; rallies gradually increase ball speed.",
+        "First to eleven points with a two-point lead wins. A three-minute limit uses the highest score; a tied score draws. Serves restart automatically after each point."
+      ],
+      "sources": [
+        {
+          "label": "MDN: game-loop architecture",
+          "url": "https://developer.mozilla.org/en-US/docs/Games/Anatomy"
+        }
+      ],
+      "variant": "Original two-paddle arcade with deterministic ball/paddle physics. It is inspired by classic paddle games; it does not claim official table-tennis service, spin or scoring procedures."
+    },
+    {
+      "id": "marble",
+      "name": "Marble Trail",
+      "eyebrow": "FIND YOUR BALANCE.",
+      "description": "Roll along winding sky paths, jump the gaps and race through every glowing checkpoint.",
+      "tag": "1–8 players · parkour racing",
+      "rules": [
+        "WASD or arrows accelerate your marble. Space jumps; Shift brakes. Momentum carries through corners, so slow down before a tight bend.",
+        "Stay on the raised path and jump the three dark gaps. Falling respawns you near a safe checkpoint after 0.9 seconds.",
+        "Complete every checkpoint in order for two laps. First to finish wins. A four-minute limit ranks validated lap/checkpoint progress. Baseline lap duration depends on driving and the chosen trail.",
+        "Choose three differently shaped trails. Local play is solo practice; online rooms allow eight simultaneous racers."
+      ],
+      "sources": [
+        {
+          "label": "MDN: 2D collision detection",
+          "url": "https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection"
+        }
+      ],
+      "variant": "Original marble parkour racer with inertial controls, jumping, safe respawns and validated checkpoints. There are no purchasable advantages or commercial game assets."
+    },
+    {
+      "id": "blocks",
+      "name": "Block Drop",
+      "eyebrow": "MAKE ROOM FOR WHAT’S NEXT.",
+      "description": "Seven-piece bags, a ghost guide and a useful hold. Stack carefully in solo practice or an eight-well battle.",
+      "tag": "1–8 players · falling blocks",
+      "rules": [
+        "Left/Right or A/D move; Up/X rotates clockwise; Z rotates back. Down soft-drops, Space hard-drops and C holds. Touch buttons provide the same controls.",
+        "Complete full horizontal rows. Clears score 100/300/500/800 points for one/two/three/four rows, multiplied by level. Soft/hard drops add placement points. Levels advance every ten rows.",
+        "Every player receives the same fresh seven-piece bag sequence. Hold is usable once per locked piece; rotation tries a disclosed set of nearby offsets. Lock delay is 0.5 seconds.",
+        "Doubles, triples and four-row clears attack with 1/2/4 garbage rows. Attack strength first cancels incoming rows; the remainder targets the next living opponent. Incoming garbage is announced and applied after a lock.",
+        "Last surviving well wins. At three minutes, surviving wells rank by score; if all have topped out, score ranks the finished runs. Locking above the visible well loses immediately. Solo top-out ends the run."
+      ],
+      "sources": [
+        {
+          "label": "Official Tetris: falling blocks and horizontal-line objective",
+          "url": "https://play.tetris.com/games/"
+        }
+      ],
+      "variant": "Original falling-block implementation and artwork. Hold, ghost, bags, a small kick table and these battle/scoring rules are explicitly implemented; advanced spin scoring, back-to-back bonuses and exact commercial rotation guidelines are not claimed."
+    },
+    {
+      "id": "pool",
+      "name": "Eight Ball Lounge",
+      "eyebrow": "TAKE YOUR TIME. FIND YOUR LINE.",
+      "description": "A warm felt table, a clear aiming guide and a called final pocket. Pass the cue locally or play a friend online.",
+      "tag": "2 players · local or online",
+      "rules": [
+        "Aim by tapping/dragging on the felt or using the angle slider. Choose power, select the called pocket, then Shoot. Wait for all balls to stop.",
+        "The break leaves the table open. A later legal pocket assigns solids or stripes. Hit your group first, then pocket your balls before the eight. A legal own-group pocket keeps the turn.",
+        "A miss needs a cushion after object contact. Scratches, no contact, wrong contact and illegal breaks give the opponent cue ball in hand. Place it on clear felt before shooting.",
+        "Call the eight ball’s pocket. Early eight, wrong pocket, or an eight with a foul loses. An eight on the break is respotted. Breaks need an object pocket or four object balls on cushions.",
+        "Turns allow 90 seconds; timeout gives the next player ball in hand. The table session draws at 15 minutes. Leaving forfeits."
+      ],
+      "sources": [
+        {
+          "label": "WPA: 2026 rules of play, eight-ball reference",
+          "url": "https://www.wpapool.com/wp-content/uploads/2026/01/2026.01.02-WPA-Rules.pdf"
+        }
+      ],
+      "variant": "Original arcade edition informed by WPA concepts. This version automatically spots break eights, has no re-rack choice, permits full-table ball in hand, calls only the final eight pocket, and omits spin/jump shots and tournament adjudication. It is not tournament-rule certification."
     }
   ]
 }

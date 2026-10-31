@@ -21,3 +21,35 @@
 @media(prefers-reduced-motion:reduce){.memory-tile.face-up .memory-tile-inner,.memory-turning>span{animation:none!important}}
 
 .memory-fieldset{border:0;padding:0;margin:0;min-width:0;width:100%}
+.memory-symbols{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+.memory-front .garden-art{display:block;width:100%;height:100%;max-width:100%;max-height:100%;overflow:visible}
+.party-live-layout>*{min-width:0;max-width:100%}
+.party-live-layout.snake .surface-content{display:block}
+.action-world>canvas{display:block;height:auto;max-width:100%}
+.action-keys button,.snake-dpad button{touch-action:none;user-select:none;-webkit-user-select:none}
+.surface-toolbar,.surface-toolbar>div,.party-session-bar,.party-session-bar>div{flex-wrap:wrap}
+.flexible-surface:fullscreen{display:flex;flex-direction:column;width:100%;height:100dvh;max-width:none;padding:12px;background:var(--surface);overflow:hidden;box-sizing:border-box}
+.flexible-surface:fullscreen>.surface-toolbar,.flexible-surface:fullscreen>.surface-bottom,.flexible-surface:fullscreen>.surface-resize-controls{flex-shrink:0}
+.flexible-surface:fullscreen>.adjustable-surface{flex:1;min-height:0!important;height:auto!important;max-height:none;overflow:auto!important;max-width:100%;scrollbar-gutter:stable}
+.game-recovery{padding:28px;max-width:620px;margin:20px auto;border:1px solid var(--border);border-radius:16px;background:var(--surface);color:var(--text)}
+.game-recovery h2{font-size:24px;line-height:1.3}
+.game-recovery p{margin:14px 0;line-height:1.8}
+.game-recovery small{display:block;margin-top:12px;line-height:1.6;color:var(--muted)}
+
+.drawing-canvas,.phone-drawing{display:block;width:100%;height:auto;aspect-ratio:4/3;touch-action:none;background:#fff;max-width:100%}
+.phone-drawing-empty{display:grid;place-items:center;min-height:150px;padding:24px;border:1px dashed var(--border);border-radius:12px;background:var(--surface-soft);color:var(--muted);line-height:1.7;text-align:center}
+.relay-save-status{font-size:12px;line-height:1.7;color:var(--muted);margin-top:12px}
+
+.connection-stats{margin:18px 0;padding:14px 18px;border:1px solid var(--border);border-radius:12px;background:var(--surface);color:var(--text);font-size:12px;line-height:1.7}
+.connection-stats summary{cursor:pointer;font-weight:650}
+.connection-stats dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:14px;margin:16px 0}
+.connection-stats dt{color:var(--muted);font-size:11px}
+.connection-stats dd{margin:4px 0 0;font:650 14px ui-monospace,monospace}
+.connection-stats p{color:var(--muted);font-size:11px;max-width:80ch}
+
+/* Keep the playable canvas in view after entering a round, with controls below it. */
+.flexible-surface.view-content .action-world>canvas{max-width:min(100%,max(320px,calc((100svh - 300px)*1.6)));margin-inline:auto}
+.flexible-surface.view-content .snake-stadium{max-width:min(100%,max(280px,calc(100svh - 280px)));margin-inline:auto}
+.flexible-surface.view-content .strategy-board-frame{max-width:min(100%,max(280px,calc(100svh - 250px)));margin-inline:auto}
+.snake-dpad button[aria-pressed=true]{background:var(--accent);color:var(--button-text);border-color:var(--accent)}
+@media(max-width:600px){.surface-toolbar{gap:8px}.surface-toolbar>strong{max-width:100%;overflow-wrap:anywhere}.view-buttons{width:100%;gap:6px}.view-buttons button{flex:1;justify-content:center;min-height:42px}}

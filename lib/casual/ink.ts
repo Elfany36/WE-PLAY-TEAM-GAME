@@ -1,6 +1,6 @@
-export const BRUSHES=['round','marker','pencil','soft','calligraphy','eraser'] as const;
+export const BRUSHES=['round','marker','pencil','soft','calligraphy','eraser','fill'] as const;
 export type Brush=typeof BRUSHES[number];
-export type InkStroke={color:string;size:number;points:[number,number][];brush?:Brush;opacity?:number;color2?:string;gradient?:boolean;blend?:'normal'|'multiply'|'screen'};
+export type InkStroke={color:string;size:number;points:[number,number][];brush?:Brush;opacity?:number;color2?:string;gradient?:boolean;blend?:'normal'|'multiply'|'screen';tolerance?:number};
 /** Normalize the permitted drawing controls at the server boundary. */
 export function inkStyle(line:Record<string,any>){
  if(!/^#[a-fA-F0-9]{6}$/.test(line.color)||!Number.isFinite(line.size)||line.size<1||line.size>64)throw Error('Choose a hex color and a brush width from 1 to 64.');
@@ -9,11 +9,19 @@ export function inkStyle(line:Record<string,any>){
  if(line.color2!==undefined&&!/^#[a-fA-F0-9]{6}$/.test(line.color2))throw Error('Choose a valid second color.');
  if(line.gradient!==undefined&&typeof line.gradient!=='boolean')throw Error('Choose a valid color mode.');
  if(line.blend!==undefined&&!['normal','multiply','screen'].includes(line.blend))throw Error('Choose a supported blending mode.');
- return {color:line.color,size:line.size,...(line.brush?{brush:line.brush as Brush}:{}),...(line.opacity!==undefined?{opacity:Math.round(line.opacity*1000)/1000}:{}),...(line.color2?{color2:line.color2}:{}),...(line.gradient!==undefined?{gradient:line.gradient}:{}),...(line.blend?{blend:line.blend as InkStroke['blend']}:{})};
+ if(line.tolerance!==undefined&&(!Number.isInteger(line.tolerance)||line.tolerance<0||line.tolerance>120))throw Error('Fill tolerance must be 0–120.');
+ return {color:line.color,size:line.size,...(line.brush?{brush:line.brush as Brush}:{}),...(line.opacity!==undefined?{opacity:Math.round(line.opacity*1000)/1000}:{}),...(line.color2?{color2:line.color2}:{}),...(line.gradient!==undefined?{gradient:line.gradient}:{}),...(line.blend?{blend:line.blend as InkStroke['blend']}:{}),...(line.tolerance!==undefined?{tolerance:line.tolerance}:{})};
+}
+/** A fill is a replayable operation in the same ordered vector history as strokes. */
+function paintFill(c:CanvasRenderingContext2D,s:InkStroke){
+ const w=c.canvas.width,h=c.canvas.height;if(!w||!h)return;const image=c.getImageData(0,0,w,h),data=image.data,seed=Math.min(w-1,Math.floor(s.points[0][0]*w))+Math.min(h-1,Math.floor(s.points[0][1]*h))*w,at=seed*4,target=[data[at],data[at+1],data[at+2],data[at+3]],tolerance=s.tolerance??38,visited=new Uint8Array(w*h),queue=new Uint32Array(w*h),parse=(hex:string)=>[parseInt(hex.slice(1,3),16),parseInt(hex.slice(3,5),16),parseInt(hex.slice(5,7),16)],a=parse(s.color),b=parse(s.gradient&&s.color2?s.color2:s.color),alpha=s.opacity??1;let head=0,tail=1;queue[0]=seed;visited[seed]=1;
+ const enqueue=(pixel:number)=>{if(visited[pixel])return;visited[pixel]=1;const i=pixel*4;if(Math.max(Math.abs(data[i]-target[0]),Math.abs(data[i+1]-target[1]),Math.abs(data[i+2]-target[2]),Math.abs(data[i+3]-target[3]))<=tolerance)queue[tail++]=pixel};
+ while(head<tail){const pixel=queue[head++],i=pixel*4,x=pixel%w,t=s.gradient?x/Math.max(1,w-1):0;for(let channel=0;channel<3;channel++){const color=a[channel]+(b[channel]-a[channel])*t,old=data[i+channel],mixed=s.blend==='multiply'?old*color/255:s.blend==='screen'?255-(255-old)*(255-color)/255:color;data[i+channel]=Math.round(old+(mixed-old)*alpha)}data[i+3]=255;if(x>0)enqueue(pixel-1);if(x<w-1)enqueue(pixel+1);if(pixel>=w)enqueue(pixel-w);if(pixel<w*(h-1))enqueue(pixel+w)}
+ c.putImageData(image,0,0);
 }
 /** The editor, received drawings, albums and PNG export use this exact renderer. */
 export function paintStroke(c:CanvasRenderingContext2D,s:InkStroke){
- if(!s.points.length)return;c.save();const brush=s.brush||'round',erase=brush==='eraser';
+ if(!s.points.length)return;if(s.brush==='fill'){paintFill(c,s);return}c.save();const brush=s.brush||'round',erase=brush==='eraser';
  c.globalAlpha=(s.opacity??1)*(brush==='pencil'?.75:1);c.globalCompositeOperation=erase?'source-over':s.blend==='multiply'?'multiply':s.blend==='screen'?'screen':'source-over';
  c.lineCap=brush==='marker'||brush==='calligraphy'?'square':'round';c.lineJoin='round';c.lineWidth=brush==='pencil'?Math.max(1,s.size*.5):s.size;c.strokeStyle=erase?'#ffffff':s.color;
  if(!erase&&s.gradient&&s.color2){const a=s.points[0],b=s.points.at(-1)!,end=Math.hypot(a[0]-b[0],a[1]-b[1])>.001?b:[Math.min(1,a[0]+.12),Math.min(1,a[1]+.12)];const gradient=c.createLinearGradient(a[0]*640,a[1]*480,end[0]*640,end[1]*480);gradient.addColorStop(0,s.color);gradient.addColorStop(1,s.color2);c.strokeStyle=gradient}

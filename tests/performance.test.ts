@@ -41,7 +41,7 @@ test('idle simulation preserves game identity while actions and due deadlines re
 });
 test('remote display extrapolation stays continuous across a missing receipt and remains bounded',()=>{
  const frames=[{at:0,pose:{x:0,y:0,angle:3.1},epoch:0},{at:100,pose:{x:10,y:0,angle:-3.1},epoch:0}],fallback={x:999,y:999};
- assert.equal(interpolatePose(frames,100,fallback).x,10);assert.equal(interpolatePose(frames,101,fallback).x,10.1);assert.equal(interpolatePose(frames,200,fallback).x,20);const old=interpolatePose(frames,10000,fallback);assert(old.x<=45&&old.x>30);assert.equal(old.y,0);
+ assert.equal(interpolatePose(frames,100,fallback).x,10);assert.equal(interpolatePose(frames,101,fallback).x,10.1);assert.equal(interpolatePose(frames,200,fallback).x,20);const old=interpolatePose(frames,10000,fallback);assert.equal(interpolatePose(frames,300,fallback).x,30);assert.equal(interpolatePose(frames,301,fallback).x,30);assert.equal(old.x,30);assert.equal(old.y,0);
  assert.equal(interpolatePose([{...frames[0],epoch:1},frames[1]],200,fallback).x,10);
 });
 test('Snake scene acknowledgments restore only a matching room, map and round',()=>{

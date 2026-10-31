@@ -21,8 +21,25 @@ export function predictSnake(g:SnakeGame,w:Worm,clock:number,speed:number,turns:
 }
 export function sampledSnake(history:SnakeSnapshot[],id:string,clock:number,speed:number,horizon=650){
  if(!history.length)return[];let a=history[0];
- for(let i=1;i<history.length;i++){const b=history[i];if(clock<=b.at){const wa=a.game.worms.find(w=>w.id===id),wb=b.game.worms.find(w=>w.id===id);if(!wb)return[];if(!wa||!wa.alive||!wb.alive||wa.deathAt!==wb.deathAt||Math.hypot((wa.body[0]?.x||0)-(wb.body[0]?.x||0),(wa.body[0]?.y||0)-(wb.body[0]?.y||0))>6)return wb.body;return blendBodies(wa.body,wb.body,Math.max(0,Math.min(1,(clock-a.at)/Math.max(1,b.at-a.at))))}a=b}
+ for(let i=1;i<history.length;i++){const b=history[i];if(clock<=b.at){const wa=a.game.worms.find(w=>w.id===id),wb=b.game.worms.find(w=>w.id===id);if(!wb)return[];if(!wa||!wa.alive||!wb.alive||wa.deathAt!==wb.deathAt||wa.protectedUntil!==wb.protectedUntil||Math.hypot((wa.body[0]?.x||0)-(wb.body[0]?.x||0),(wa.body[0]?.y||0)-(wb.body[0]?.y||0))>6)return wb.body;return blendBodies(wa.body,wb.body,Math.max(0,Math.min(1,(clock-a.at)/Math.max(1,b.at-a.at))))}a=b}
  const w=a.game.worms.find(w=>w.id===id);return w?predictSnake(a.game,w,Math.min(clock,a.at+horizon),speed):[];
 }
 export function snakeBuffer(rtt:number){return Math.min(170,Math.max(85,45+Math.max(0,rtt)*.35))}
 export function snakeHorizon(rtt:number,speed:number){return Math.min(1500,Math.max(650,speed*3,Math.max(0,rtt)*1.7+200))}
+
+type Prediction={body:Point[];tick:number;startAt:number;turns:PredictedTurn[];direction:Direction;turnIndex:number;frames:Point[][];occupied:Set<string>;food:Set<string>;walls:Point[]|undefined;stopped:boolean};
+/** Build grid steps once per snapshot/input, then interpolate into reusable point buffers. */
+export class SnakeMotionBuffer{
+ private predictions=new Map<string,Prediction>();private outputs=new Map<string,Point[]>();
+ reset(){this.predictions.clear();this.outputs.clear()}
+ private blend(id:string,a:Point[],b:Point[],t:number){let out=this.outputs.get(id);if(!out){out=[];this.outputs.set(id,out)}out.length=b.length;for(let i=0;i<b.length;i++){const from=a[Math.min(i,a.length-1)]||b[i],point=out[i]||(out[i]={x:0,y:0});point.x=from.x+(b[i].x-from.x)*t;point.y=from.y+(b[i].y-from.y)*t}return out}
+ predict(g:SnakeGame,w:Worm,clock:number,speed:number,turns:PredictedTurn[]){
+  if(!w.alive||clock<g.startAt||!w.body.length)return w.body;
+  let state=this.predictions.get(w.id);if(!state||state.body!==w.body||state.tick!==g.tick||state.startAt!==g.startAt||state.turns!==turns||state.walls!==g.obstacles){state={body:w.body,tick:g.tick,startAt:g.startAt,turns,direction:w.direction,turnIndex:0,frames:[w.body],occupied:new Set(w.body.map(p=>p.x+','+p.y)),food:new Set(g.food.map(p=>p.x+','+p.y)),walls:g.obstacles,stopped:false};this.predictions.set(w.id,state)}
+  const steps=Math.min(12,Math.max(0,(clock-g.lastTickAt)/speed)),walls=blocked(g),size=g.size||32;
+  while(state.frames.length<=Math.ceil(steps)&&!state.stopped){const i=state.frames.length-1,body=state.frames[i],turn=turns[state.turnIndex];if(turn&&(typeof turn==='string'||turn.tick===undefined||turn.tick<=g.tick+i+1)){const proposed=typeof turn==='string'?turn:turn.direction;state.turnIndex++;if(delta[proposed].x!==-delta[state.direction].x||delta[proposed].y!==-delta[state.direction].y)state.direction=proposed}const d=delta[state.direction],head={x:body[0].x+d.x,y:body[0].y+d.y},key=head.x+','+head.y,eats=state.food.has(key);if(!eats){const tail=body.at(-1)!;state.occupied.delete(tail.x+','+tail.y)}if(head.x<0||head.y<0||head.x>=size||head.y>=size||walls.has(key)||state.occupied.has(key)){state.stopped=true;break}state.occupied.add(key);if(eats)state.food.delete(key);state.frames.push([head,...(eats?body:body.slice(0,-1))])}
+  const at=Math.min(Math.floor(steps),state.frames.length-1),a=state.frames[at],b=state.frames[Math.min(at+1,state.frames.length-1)];return this.blend(w.id,a,b,steps-Math.floor(steps));
+ }
+ sample(history:SnakeSnapshot[],id:string,clock:number,speed:number,horizon=200){if(!history.length)return[];let a=history[0];for(let i=1;i<history.length;i++){const b=history[i];if(clock<=b.at){const wa=a.game.worms.find(w=>w.id===id),wb=b.game.worms.find(w=>w.id===id);if(!wb)return[];if(!wa||!wa.alive||!wb.alive||wa.deathAt!==wb.deathAt||wa.protectedUntil!==wb.protectedUntil)return wb.body;return this.blend(id,wa.body,wb.body,Math.max(0,Math.min(1,(clock-a.at)/Math.max(1,b.at-a.at))))}a=b}const w=a.game.worms.find(w=>w.id===id);return w?this.predict(a.game,w,Math.min(clock,a.at+horizon),speed,NO_TURNS):[]}
+}
+const NO_TURNS:PredictedTurn[]=[];

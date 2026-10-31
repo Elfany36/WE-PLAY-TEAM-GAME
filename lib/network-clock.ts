@@ -1,0 +1,2 @@
+/** Separate time spent in the room service from transport delay. */
+export function roomReceipt(data:any,elapsed:number){const received=data.clock?.receivedAt,sent=data.clock?.sentAt,valid=Number.isFinite(received)&&Number.isFinite(sent)&&sent>=received,serverMs=valid?Math.min(elapsed,Math.max(0,sent-received)):0;return{serverNow:valid?sent:data.room?.serverNow??data.serverNow,network:{rtt:Math.max(0,Math.round(elapsed-serverMs)),totalRtt:Math.round(elapsed),serverMs:Math.round(serverMs)}}}

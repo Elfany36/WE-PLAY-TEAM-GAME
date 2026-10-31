@@ -1,4 +1,6 @@
-# Priority recording fixes — 31 October 2026
+# Historical version-four verification — 31 October 2026
+
+These results apply to the version-four commit only. Later implementation changes are documented separately and do not inherit these verification claims.
 
 Three supplied recordings were reviewed privately. They showed blank memory-card faces, a rotating kart camera and intervals of near-static Snake imagery. The files and players' names are not included in this public source delivery. The recordings do not contain input-event timestamps, so they cannot establish precise key-to-screen latency.
 

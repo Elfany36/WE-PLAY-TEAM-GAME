@@ -2,6 +2,8 @@
 
 The selected repository is `Elfany36/WE-PLAY-TEAM-GAME`.
 
+**Use matching frontend and backend releases.** The six new game modes require the Worker source shipped with this release. The following GitHub Pages steps still require the repository’s Pages source to be enabled; a successful Sites deployment does not enable GitHub Pages.
+
 ## Enable the repository's Pages source
 
 1. Open https://github.com/Elfany36/WE-PLAY-TEAM-GAME/settings/pages .
