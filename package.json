@@ -18,7 +18,9 @@
     "check": "tsc --noEmit",
     "prebuild": "node --experimental-strip-types scripts/generate-question-facts.mjs",
     "prebuild:pages": "node --experimental-strip-types scripts/generate-question-facts.mjs",
-    "test:non-relay": "node scripts/test-non-relay.mjs"
+    "test:non-relay": "node scripts/test-non-relay.mjs",
+    "postbuild": "node scripts/retain-client-assets.mjs dist/client",
+    "postbuild:pages": "node scripts/retain-client-assets.mjs dist-pages"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

@@ -24,7 +24,7 @@ New frontend setups enable enhanced mechanics. Original physics/editions remain 
 
 ## Validation
 
-- **353 tests pass**, including 21 new domain tests covering bracket isolation/advancement/byes/forfeits/ties, stamina and knockback, gravity progression and pause continuity, turret limits/front armor, stable-color Flip conservation through complete seeded hands, drift rewards, item replay/shields, marble jump clearance, pool energy/sleeping, capped rents and memory privacy.
+- **354 tests pass**, including 21 new domain tests covering bracket isolation/advancement/byes/forfeits/ties, stamina and knockback, gravity progression and pause continuity, turret limits/front armor, stable-color Flip conservation through complete seeded hands, drift rewards, item replay/shields, marble jump clearance, pool energy/sleeping, capped rents and memory privacy.
 - TypeScript, Sites build, Pages build and standalone arcade Worker dry run pass. The existing large separately loaded documentation chunk warning remains in the Pages build.
 - All 17 real local workerd API create/start/poll/end/leave flows pass with enhanced settings: [API results](design-mechanics-v11-api.json).
 - Twenty desktop/mobile checks cover the ten redesigned games at 1440/390 px, including dark/light themes, mobile slider release and the 200-card memory deck. A separate two-client pool check verifies that cancellation fires no shot, release fires once, and both moving-ball views sample 60 FPS: [pool controls](design-mechanics-v11-pool.json). Seven additional shared HUD/important-action checks cover the other modes: [browser results](design-mechanics-v11-browser.json).
@@ -45,3 +45,11 @@ Screenshots: [Block Drop](design-v11-blocks.png), [tanks](design-v11-tanks.png),
 Actual Philippines ISP latency, production percentile improvement, long-session balance and universal stutter elimination are **not established** by local tests. Production hosts remain outside this environment's allowed network destinations. Native publication receipts can verify the deployed source/bindings, but cannot substitute for production gameplay timing. Heuristic AI remains intentionally imperfect; the previously disclosed Phone template and Terra follow/mine limitations remain.
 
 Publication follows the authorized order: GitHub exact source → GPT Site saved version/deployment → dedicated `markup-arcade` Worker. Preserve the public audience, D1 binding and both Durable Object namespaces. Native version/deployment receipts are reported only after success.
+
+## Publication loading follow-up
+
+Native production logs immediately after Site v11 publication showed `/_next/static/chunks/ActionWorld-DeXf8GqX.js` requests returning 404 from older open tabs. The new page referenced the new hash; the existing tab still referenced v10. Existing game boundaries offered reload/reconnect, but missing previous immutable files prevented a not-yet-loaded game from opening.
+
+The compatibility patch retains immutable client assets from the two preceding distinct client releases, v10 and v11. It stores a bounded, compressed pack with a readable source/hash manifest and integrity-checked postbuild restoration for Sites and Pages. New pages use current build files. No server modules, room snapshots or credentials are included.
+
+A local production Worker served all 87 retained files with HTTP 200, and real Chromium imported both the v10 and v11 ActionWorld modules with their full dependency graphs: [asset results](design-mechanics-v11-assets.json). The additional regression verifies complete relative-import closure and idempotent restoration. The full suite is 354 passing tests. This follow-up is published as the next Site version; the arcade mechanics remain the v11 set described above. Production Internet latency remains unmeasured.

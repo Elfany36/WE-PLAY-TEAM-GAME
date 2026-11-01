@@ -1,0 +1,9 @@
+{
+  "scope": "Production build served by local workerd, real retained ESM imports; not a production Internet fetch",
+  "assets": 87,
+  "allStatuses": 200,
+  "imports": {
+    "v10": "function",
+    "v11": "function"
+  }
+}
