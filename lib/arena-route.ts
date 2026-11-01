@@ -1,3 +1,4 @@
+import {roomStub} from './room-placement.ts';
 import {createArenaAPI} from './arena-api.ts';
 import {readArenaBody} from './arena-request.ts';
 import {roomHeaders} from './room-origin.ts';
@@ -34,7 +35,7 @@ export async function routeArena(req:Request,env:RoomEnv,keepAlive?:(task:Promis
  if(!code)return direct();
  const headers=new Headers(req.headers);headers.delete('X-Room-Code');headers.set('X-Room-Key',code);headers.set('X-Room-Legacy',options.legacyImport===false?'deny':'allow');if(create)headers.set('X-Room-Code',code);
  // Rebuilt from parts: the framework's request object is not a native Request.
- const res=await rooms.get(rooms.idFromName('arena:'+code)).fetch(new Request(req.url,{method:req.method,headers,body:req.method==='POST'?text:undefined}));
+ const res=await roomStub(rooms,'arena:'+code).fetch(new Request(req.url,{method:req.method,headers,body:req.method==='POST'?text:undefined}));
  if(res.status===101&&res.webSocket)return new Response(null,{status:101,headers:new Headers(res.headers),webSocket:res.webSocket});
  // Stub responses have immutable headers, which the framework still edits.
  return new Response(res.body,{status:res.status,statusText:res.statusText,headers:new Headers(res.headers)});

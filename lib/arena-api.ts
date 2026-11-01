@@ -1,3 +1,4 @@
+import {roomHint} from './room-params.ts';
 import type {CasualDatabase} from './casual/room-store.ts';
 import {takeRoomBudget} from './room-budget.ts';
 import {roomSnapshot} from './room-snapshots.ts';
@@ -27,7 +28,7 @@ async function GET(req:Request){beginRoomRequest(req);try{
   const id=authenticate(tokenHash,state),player=state.players.find(p=>p.id===id)!;
   const messages=activeChat(state.chat,now),changed=now-player.lastSeen>=5000||messages.length!==(state.chat||[]).length;
   if(changed){player.lastSeen=now;state.chat=messages}
-  return{state,changed,result:(final,revision,time)=>final.startedAt===null&&url.searchParams.get('revision')===String(revision)?reply(req,{unchanged:true,revision,serverNow:time}):reply(req,{room:{...publicArena(final,id,time),revision}})};
+  return{state,changed,result:(final,revision,time)=>final.startedAt===null&&roomHint(req,'revision')===String(revision)?reply(req,{unchanged:true,revision,serverNow:time}):reply(req,{room:{...publicArena(final,id,time),revision}})};
  });
 }catch(e){return error(req,e)}}
 function error(req:Request,e:unknown){return reply(req,{error:e instanceof ArenaError?e.message:'Could not complete the request. Please reconnect and try again.'},e instanceof ArenaError?e.status:503)}

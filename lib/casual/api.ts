@@ -1,3 +1,4 @@
+import {roomHint} from '../room-params.ts';
 import type {CasualDatabase} from './room-store.ts';
 import {cleanRoomText} from '../room-text.ts';
 import {takeRoomBudget} from '../room-budget.ts';
@@ -70,7 +71,7 @@ export function createCasualAPI(DB:CasualDatabase|undefined,keepAlive?:((task:Pr
    const id=authenticate(tokenHash,state),advanced=advanceCasual(state,now),p=advanced.state.players.find(p=>p.id===id)!;let changed=advanced.changed;
    const messages=activeChat(advanced.state.chat,now);if(messages.length!==(advanced.state.chat||[]).length){advanced.state.chat=messages;changed=true}
    if(now-p.lastSeen>5000){p.lastSeen=now;changed=true}
-   return{state:advanced.state,changed,result:(final,revision,time)=>url.searchParams.get('revision')===String(revision)?reply(req,{unchanged:true,revision,serverNow:time}):reply(req,{room:project(final,id,time,revision,Number(url.searchParams.get('worldRound')),Number(url.searchParams.get('worldVersion')),url.searchParams.get('scene'))})};
+   return{state:advanced.state,changed,result:(final,revision,time)=>roomHint(req,'revision')===String(revision)?reply(req,{unchanged:true,revision,serverNow:time}):reply(req,{room:project(final,id,time,revision,Number(roomHint(req,'worldRound')),Number(roomHint(req,'worldVersion')),roomHint(req,'scene'))})};
   });
  }catch(e){return casualFailure(req,e)}}
  async function POST(req:Request){beginRoomRequest(req);try{originCheck(req);const b=await casualBody(req);if(!DB)throw new CasualError('Room storage is unavailable.',503);

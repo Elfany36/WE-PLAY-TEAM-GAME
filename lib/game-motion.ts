@@ -1,4 +1,10 @@
 export type Pose={x:number;y:number;angle?:number};
+/** A small dead zone suppresses camera shake from subpixel receipt corrections. */
+export function followCamera(current:Pose,target:Pose,dt:number,warp=12){
+ if(Math.hypot(target.x-current.x,target.y-current.y)>warp)return {...target};
+ const gain=1-Math.exp(-Math.max(0,Math.min(100,dt))/100);
+ return{x:current.x+(Math.abs(target.x-current.x)>.025?(target.x-current.x)*gain:0),y:current.y+(Math.abs(target.y-current.y)>.025?(target.y-current.y)*gain:0)};
+}
 export const shortestAngle=(n:number)=>Math.atan2(Math.sin(n),Math.cos(n));
 /** Smooth only the correction introduced by a new authority snapshot; keep input prediction immediate. */
 export class PoseReconciler{private poses=new Map<string,Pose>();private offsets=new Map<string,Pose>();private targets=new Map<string,Pose>();private velocities=new Map<string,Pose>();reset(){this.poses.clear();this.offsets.clear();this.targets.clear();this.velocities.clear()}forget(id:string){this.poses.delete(id);this.offsets.delete(id);this.targets.delete(id);this.velocities.delete(id)}

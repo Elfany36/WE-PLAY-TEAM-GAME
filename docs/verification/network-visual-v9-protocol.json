@@ -1,0 +1,33 @@
+[
+  {
+    "protocol": "changing-query",
+    "scope": "Local Chromium + real workerd, CDP synthetic 110 ms latency; not measured Philippines Internet ping",
+    "requests": 8,
+    "p50Ms": 121.9,
+    "p95Ms": 135.4,
+    "preflights": 8,
+    "urls": [
+      "http://127.0.0.1:8787/api/casual?code=4V5A9GMA&wire=1&base=&revision=0",
+      "http://127.0.0.1:8787/api/casual?code=4V5A9GMA&wire=1&base=&revision=1",
+      "http://127.0.0.1:8787/api/casual?code=4V5A9GMA&wire=1&base=f0d343a2-8994-4590-979c-c51d12291da7&revision=2",
+      "http://127.0.0.1:8787/api/casual?code=4V5A9GMA&wire=1&base=3c4ad6f6-0ba2-4e8d-97a8-322a7b2ebfcf&revision=3",
+      "http://127.0.0.1:8787/api/casual?code=4V5A9GMA&wire=1&base=3b98c60d-96b7-4fb3-aa07-b3430ad0d508&revision=4",
+      "http://127.0.0.1:8787/api/casual?code=4V5A9GMA&wire=1&base=5953b3fe-4e20-47c4-bd24-8e547d1b9d78&revision=5",
+      "http://127.0.0.1:8787/api/casual?code=4V5A9GMA&wire=1&base=be4acd40-ba65-4d74-bb6d-156ca7ea6b53&revision=6",
+      "http://127.0.0.1:8787/api/casual?code=4V5A9GMA&wire=1&base=2e47e05b-0be9-4e53-b249-377e25892c92&revision=7"
+    ],
+    "errors": []
+  },
+  {
+    "protocol": "stable-headers",
+    "scope": "Local Chromium + real workerd, CDP synthetic 110 ms latency; not measured Philippines Internet ping",
+    "requests": 8,
+    "p50Ms": 116.8,
+    "p95Ms": 121.8,
+    "preflights": 1,
+    "urls": [
+      "http://127.0.0.1:8787/api/casual?code=4V5A9GMA&wire=1"
+    ],
+    "errors": []
+  }
+]

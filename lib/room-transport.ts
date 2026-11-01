@@ -1,3 +1,4 @@
+import {stableRoomRequest} from './room-params.ts';
 import {roomReceipt} from './network-clock.ts';
 import {applyRoomDelta} from './room-delta.ts';
 export type TransportStats={live:boolean;rtt:number;totalRtt:number;serverMs:number;jitter:number;bytesPerSecond:number;lastReceipt:number;receivedBytes:number;sentBytes:number;failures:number};
@@ -11,10 +12,12 @@ export class RoomTransport{
  async send(endpoint:string,init:RequestInit={},options:Options={}):Promise<any>{
   const max=options.retries||0;
   for(let attempt=0;;attempt++){
-   const url=new URL(endpoint,typeof location==='undefined'?'http://localhost':location.href);url.searchParams.set('wire','1');if(this.latest)url.searchParams.set('base',this.latest.id);
+   const url=new URL(endpoint,typeof location==='undefined'?'http://localhost':location.href);url.searchParams.set('wire','1');const stable=stableRoomRequest(url,init,this.latest?.id);
    const controller=new AbortController(),abort=()=>controller.abort(),started=performance.now(),timeout=setTimeout(abort,options.timeout||8000);init.signal?.addEventListener('abort',abort,{once:true});
    try{
-    if(init.signal?.aborted)controller.abort();const response=await fetch(url,{...init,credentials:'omit',mode:'cors',cache:'no-store',signal:controller.signal}),raw=await response.text(),elapsed=performance.now()-started;
+    // Responses carry Cache-Control: no-store. Request-side no-store also bypasses
+    // Chromium's preflight cache, adding OPTIONS even when the URL is stable.
+    if(init.signal?.aborted)controller.abort();const response=await fetch(url,{...stable,credentials:'omit',mode:'cors',cache:'default',signal:controller.signal}),raw=await response.text(),elapsed=performance.now()-started;
     if(!response.headers.get('content-type')?.includes('application/json'))throw Error('The room service returned an unexpected page. Reload the view to reconnect.');
     const data=JSON.parse(raw);if(!response.ok)throw Object.assign(Error(data.error||'The room request could not be completed.'),{status:response.status});
     if(data.patch){const base=this.bases.get(data.baseSnapshot);if(!base){this.latest=null;throw Object.assign(Error('Refreshing the complete room snapshot.'),{status:409,resync:true})}data.room=applyRoomDelta(base,data.patch);delete data.patch}

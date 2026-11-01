@@ -1,0 +1,100 @@
+[
+  {
+    "game": "snake",
+    "status": "passed",
+    "errors": [],
+    "canvases": [
+      {
+        "width": 694,
+        "height": 694,
+        "cssWidth": 694,
+        "cssHeight": 694,
+        "fps": "60"
+      }
+    ]
+  },
+  {
+    "game": "circuit",
+    "status": "passed",
+    "errors": [],
+    "canvases": [
+      {
+        "width": 742,
+        "height": 464,
+        "cssWidth": 742,
+        "cssHeight": 463,
+        "fps": "60"
+      }
+    ]
+  },
+  {
+    "game": "terra",
+    "status": "passed",
+    "errors": [],
+    "canvases": [
+      {
+        "width": 320,
+        "height": 200,
+        "cssWidth": 320,
+        "cssHeight": 199,
+        "fps": "60"
+      }
+    ]
+  },
+  {
+    "game": "tanks",
+    "status": "passed",
+    "errors": [],
+    "canvases": [
+      {
+        "width": 742,
+        "height": 464,
+        "cssWidth": 742,
+        "cssHeight": 464,
+        "fps": "60"
+      }
+    ]
+  },
+  {
+    "game": "sumo",
+    "status": "passed",
+    "errors": [],
+    "canvases": [
+      {
+        "width": 742,
+        "height": 464,
+        "cssWidth": 742,
+        "cssHeight": 464,
+        "fps": "60"
+      }
+    ]
+  },
+  {
+    "game": "marble",
+    "status": "passed",
+    "errors": [],
+    "canvases": [
+      {
+        "width": 742,
+        "height": 464,
+        "cssWidth": 742,
+        "cssHeight": 464,
+        "fps": "60"
+      }
+    ]
+  },
+  {
+    "game": "pong",
+    "status": "passed",
+    "errors": [],
+    "canvases": [
+      {
+        "width": 742,
+        "height": 464,
+        "cssWidth": 742,
+        "cssHeight": 464,
+        "fps": "60"
+      }
+    ]
+  }
+]

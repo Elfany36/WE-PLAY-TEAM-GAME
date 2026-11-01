@@ -100,3 +100,9 @@ UNO/Flip bot scores now carry between hands, penalty Wild choices obey challenge
 Sumo has cached shaded wrestlers, animated limbs, dash trails and readiness meters. Strategy pieces have shaded models and movement that starts at the received server timeline, including the castling rook. Ladder boards, property buildings and ownership markers have more depth. Long property labels fit their spaces; large UNO hands scroll inside the hand panel and large tables use compact player bands. Memory reuses unchanged boards and owner lookups.
 
 See [the current verification and publication tracker](docs/verification/game-continuation-v8.md). Historical ledgers describe their own release, and all timing results are labeled by measurement environment.
+
+## Philippines network and movement update (v9)
+
+New rooms request Southeast Asia placement using `apac-se`; this is best effort and does not relocate existing rooms. Stable polling URLs and header-based snapshot hints allow browser preflight reuse, while game responses remain uncacheable. Snake follows received grid trails with short prediction; other action games cap speculation at 300 ms, use finite correction thresholds, and reset on resume. Terra also checks corrections against terrain and filters camera jitter. The dedicated service root opens the arcade.
+
+See [the v9 verification tracker](docs/verification/network-visual-v9.md) for tests, browser preflight counts and explicit production/geographic measurement limits.

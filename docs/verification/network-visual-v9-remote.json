@@ -1,0 +1,14 @@
+[
+  {
+    "blockedSocket": false,
+    "idleGetsIn2600ms": 0,
+    "remoteFlipMs": 133,
+    "errors": []
+  },
+  {
+    "blockedSocket": true,
+    "idleGetsIn2600ms": 3,
+    "remoteFlipMs": 111,
+    "errors": []
+  }
+]
