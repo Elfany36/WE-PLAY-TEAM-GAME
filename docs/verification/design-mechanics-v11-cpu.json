@@ -1,0 +1,140 @@
+{
+  "scope": "Local Node deterministic advanceCasual CPU with enhanced mechanics and bots; not Internet latency or Cloudflare billing CPU",
+  "rows": [
+    {
+      "mode": "snake",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0,
+      "p95Ms": 0.186,
+      "maxMs": 2.704,
+      "aiRejected": 0
+    },
+    {
+      "mode": "tanks",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0.129,
+      "p95Ms": 0.301,
+      "maxMs": 4.651,
+      "aiRejected": 0
+    },
+    {
+      "mode": "sumo",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0.07,
+      "p95Ms": 0.138,
+      "maxMs": 2.128,
+      "aiRejected": 0
+    },
+    {
+      "mode": "blocks",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0.24,
+      "p95Ms": 0.817,
+      "maxMs": 27.45,
+      "aiRejected": 0
+    },
+    {
+      "mode": "marble",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0.139,
+      "p95Ms": 1.028,
+      "maxMs": 36.542,
+      "aiRejected": 0
+    },
+    {
+      "mode": "circuit",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0.116,
+      "p95Ms": 0.426,
+      "maxMs": 28.225,
+      "aiRejected": 0
+    },
+    {
+      "mode": "terra",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0.932,
+      "p95Ms": 4.286,
+      "maxMs": 41.573,
+      "aiRejected": 0
+    },
+    {
+      "mode": "pool",
+      "players": 2,
+      "samples": 1200,
+      "p50Ms": 0.049,
+      "p95Ms": 0.193,
+      "maxMs": 34.012,
+      "aiRejected": 0
+    },
+    {
+      "mode": "uno",
+      "players": 8,
+      "samples": 868,
+      "p50Ms": 0,
+      "p95Ms": 0.001,
+      "maxMs": 4.496,
+      "aiRejected": 0
+    },
+    {
+      "mode": "property",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0,
+      "p95Ms": 0.001,
+      "maxMs": 34.557,
+      "aiRejected": 0
+    },
+    {
+      "mode": "memory",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0,
+      "p95Ms": 0.211,
+      "maxMs": 5.182,
+      "aiRejected": 0
+    },
+    {
+      "mode": "chess",
+      "players": 2,
+      "samples": 1200,
+      "p50Ms": 0,
+      "p95Ms": 0.002,
+      "maxMs": 51.126,
+      "aiRejected": 0
+    },
+    {
+      "mode": "dama",
+      "players": 2,
+      "samples": 749,
+      "p50Ms": 0,
+      "p95Ms": 0.001,
+      "maxMs": 8.265,
+      "aiRejected": 0
+    },
+    {
+      "mode": "scidama",
+      "players": 2,
+      "samples": 1200,
+      "p50Ms": 0,
+      "p95Ms": 0.001,
+      "maxMs": 37.114,
+      "aiRejected": 0
+    },
+    {
+      "mode": "ladders",
+      "players": 8,
+      "samples": 1200,
+      "p50Ms": 0,
+      "p95Ms": 0,
+      "maxMs": 0.626,
+      "aiRejected": 0
+    }
+  ]
+}

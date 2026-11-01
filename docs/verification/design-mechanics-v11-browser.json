@@ -1,0 +1,497 @@
+{
+  "scope": "Local Chromium desktop/mobile UI and control checks. Canvas FPS counters in setup snapshots include intentional idle painting; see separate moving-pool follow-up.",
+  "cases": [
+    {
+      "game": "blocks",
+      "width": 1440,
+      "theme": "dark",
+      "errors": [],
+      "canvas": [
+        {
+          "w": 742,
+          "h": 495,
+          "cssWidth": 742,
+          "fps": "60"
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "tanks",
+      "width": 1440,
+      "theme": "dark",
+      "errors": [],
+      "canvas": [
+        {
+          "w": 742,
+          "h": 464,
+          "cssWidth": 742,
+          "fps": "60",
+          "ms": "0.30"
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "sumo",
+      "width": 1440,
+      "theme": "dark",
+      "errors": [],
+      "canvas": [
+        {
+          "w": 742,
+          "h": 464,
+          "cssWidth": 742,
+          "fps": "60",
+          "ms": "0.40"
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "pong",
+      "width": 1440,
+      "theme": "dark",
+      "errors": [],
+      "canvas": [
+        {
+          "w": 742,
+          "h": 464,
+          "cssWidth": 742,
+          "fps": "60",
+          "ms": "0.20"
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "pool",
+      "width": 1440,
+      "theme": "dark",
+      "errors": [],
+      "shotOnRelease": "Balls in motion\nTable open \u00b7 groups assigned after the break",
+      "canvas": [
+        {
+          "w": 612,
+          "h": 343,
+          "cssWidth": 612,
+          "fps": "18"
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "property",
+      "width": 1440,
+      "theme": "dark",
+      "errors": [],
+      "canvas": [],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "circuit",
+      "width": 1440,
+      "theme": "dark",
+      "errors": [],
+      "canvas": [
+        {
+          "w": 742,
+          "h": 464,
+          "cssWidth": 742,
+          "fps": "60",
+          "ms": "0.3"
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "marble",
+      "width": 1440,
+      "theme": "dark",
+      "errors": [],
+      "canvas": [
+        {
+          "w": 742,
+          "h": 464,
+          "cssWidth": 742,
+          "fps": "60",
+          "ms": "0.30"
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "memory",
+      "width": 1440,
+      "theme": "dark",
+      "errors": [],
+      "privateCards": 1,
+      "canvas": [],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "uno",
+      "width": 1440,
+      "theme": "dark",
+      "errors": [],
+      "canvas": [],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "blocks",
+      "width": 390,
+      "theme": "light",
+      "errors": [],
+      "canvas": [
+        {
+          "w": 320,
+          "h": 527,
+          "cssWidth": 318,
+          "fps": "60"
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "tanks",
+      "width": 390,
+      "theme": "light",
+      "errors": [],
+      "canvas": [
+        {
+          "w": 320,
+          "h": 200,
+          "cssWidth": 318,
+          "fps": "60",
+          "ms": "0.20"
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "sumo",
+      "width": 390,
+      "theme": "light",
+      "errors": [],
+      "canvas": [
+        {
+          "w": 320,
+          "h": 200,
+          "cssWidth": 318,
+          "fps": "60",
+          "ms": "0.60"
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "pong",
+      "width": 390,
+      "theme": "light",
+      "errors": [],
+      "canvas": [
+        {
+          "w": 320,
+          "h": 200,
+          "cssWidth": 318,
+          "fps": "60",
+          "ms": "0.10"
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "pool",
+      "width": 390,
+      "theme": "light",
+      "errors": [],
+      "shotOnRelease": "Balls in motion\nTable open \u00b7 groups assigned after the break",
+      "canvas": [
+        {
+          "w": 320,
+          "h": 179,
+          "cssWidth": 318,
+          "fps": "19"
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "property",
+      "width": 390,
+      "theme": "light",
+      "errors": [],
+      "canvas": [],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "circuit",
+      "width": 390,
+      "theme": "light",
+      "errors": [],
+      "canvas": [
+        {
+          "w": 320,
+          "h": 200,
+          "cssWidth": 318,
+          "fps": "60",
+          "ms": "0.2"
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "marble",
+      "width": 390,
+      "theme": "light",
+      "errors": [],
+      "canvas": [
+        {
+          "w": 320,
+          "h": 200,
+          "cssWidth": 318,
+          "fps": "60",
+          "ms": "0.20"
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "memory",
+      "width": 390,
+      "theme": "light",
+      "errors": [],
+      "privateCards": 1,
+      "canvas": [],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "uno",
+      "width": 390,
+      "theme": "light",
+      "errors": [],
+      "canvas": [],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "ladders",
+      "width": 1440,
+      "theme": "dark",
+      "errors": [],
+      "turnAlert": "Player 1, your turn\nYour controls are ready",
+      "endButtons": [
+        {
+          "text": "End round",
+          "height": 45,
+          "border": "rgb(255, 170, 166)",
+          "background": "rgb(255, 217, 213)",
+          "color": "rgb(75, 37, 44)",
+          "left": 851.90625,
+          "right": 957.96875
+        },
+        {
+          "text": "Keep playing",
+          "height": 44,
+          "border": "rgb(81, 104, 83)",
+          "background": "rgb(27, 41, 34)",
+          "color": "rgb(196, 233, 151)",
+          "left": 969.96875,
+          "right": 1073
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "chess",
+      "width": 1440,
+      "theme": "light",
+      "errors": [],
+      "turnAlert": "Player 1, your turn\nYour controls are ready",
+      "endButtons": [
+        {
+          "text": "End round",
+          "height": 45,
+          "border": "rgb(187, 65, 73)",
+          "background": "rgb(141, 37, 43)",
+          "color": "rgb(255, 240, 238)",
+          "left": 851.90625,
+          "right": 957.96875
+        },
+        {
+          "text": "Keep playing",
+          "height": 44,
+          "border": "rgb(186, 200, 182)",
+          "background": "rgb(255, 254, 250)",
+          "color": "rgb(48, 91, 53)",
+          "left": 969.96875,
+          "right": 1073
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "dama",
+      "width": 390,
+      "theme": "dark",
+      "errors": [],
+      "turnAlert": "Player 1, your turn\nYour controls are ready",
+      "endButtons": [
+        {
+          "text": "End round",
+          "height": 45,
+          "border": "rgb(255, 170, 166)",
+          "background": "rgb(255, 217, 213)",
+          "color": "rgb(75, 37, 44)",
+          "left": 34,
+          "right": 356
+        },
+        {
+          "text": "Keep playing",
+          "height": 44,
+          "border": "rgb(81, 104, 83)",
+          "background": "rgb(27, 41, 34)",
+          "color": "rgb(196, 233, 151)",
+          "left": 34,
+          "right": 137.03125
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "scidama",
+      "width": 1440,
+      "theme": "dark",
+      "errors": [],
+      "turnAlert": "Player 1, your turn\nYour controls are ready",
+      "endButtons": [
+        {
+          "text": "End round",
+          "height": 45,
+          "border": "rgb(255, 170, 166)",
+          "background": "rgb(255, 217, 213)",
+          "color": "rgb(75, 37, 44)",
+          "left": 851.90625,
+          "right": 957.96875
+        },
+        {
+          "text": "Keep playing",
+          "height": 44,
+          "border": "rgb(81, 104, 83)",
+          "background": "rgb(27, 41, 34)",
+          "color": "rgb(196, 233, 151)",
+          "left": 969.96875,
+          "right": 1073
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "snake",
+      "width": 1440,
+      "theme": "dark",
+      "errors": [],
+      "endButtons": [
+        {
+          "text": "End round",
+          "height": 45,
+          "border": "rgb(255, 170, 166)",
+          "background": "rgb(255, 217, 213)",
+          "color": "rgb(75, 37, 44)",
+          "left": 851.90625,
+          "right": 957.96875
+        },
+        {
+          "text": "Keep playing",
+          "height": 44,
+          "border": "rgb(81, 104, 83)",
+          "background": "rgb(27, 41, 34)",
+          "color": "rgb(196, 233, 151)",
+          "left": 969.96875,
+          "right": 1073
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "terra",
+      "width": 390,
+      "theme": "dark",
+      "errors": [],
+      "endButtons": [
+        {
+          "text": "End round",
+          "height": 45,
+          "border": "rgb(255, 170, 166)",
+          "background": "rgb(255, 217, 213)",
+          "color": "rgb(75, 37, 44)",
+          "left": 34,
+          "right": 356
+        },
+        {
+          "text": "Keep playing",
+          "height": 44,
+          "border": "rgb(81, 104, 83)",
+          "background": "rgb(27, 41, 34)",
+          "color": "rgb(196, 233, 151)",
+          "left": 34,
+          "right": 137.03125
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    },
+    {
+      "game": "phone",
+      "width": 1440,
+      "theme": "dark",
+      "errors": [],
+      "endButtons": [
+        {
+          "text": "End round",
+          "height": 45,
+          "border": "rgb(255, 170, 166)",
+          "background": "rgb(255, 217, 213)",
+          "color": "rgb(75, 37, 44)",
+          "left": 851.90625,
+          "right": 957.96875
+        },
+        {
+          "text": "Keep playing",
+          "height": 44,
+          "border": "rgb(81, 104, 83)",
+          "background": "rgb(27, 41, 34)",
+          "color": "rgb(196, 233, 151)",
+          "left": 969.96875,
+          "right": 1073
+        }
+      ],
+      "overflow": false,
+      "status": "passed"
+    }
+  ]
+}

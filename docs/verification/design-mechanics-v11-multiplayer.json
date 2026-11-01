@@ -1,0 +1,199 @@
+[
+  {
+    "mode": "tanks",
+    "scope": "Two local browser clients + real workerd; synthetic 110 ms CDP latency",
+    "errors": [],
+    "inputAcknowledged": true,
+    "phase": "playing",
+    "ticks": 47,
+    "canvases": [
+      [
+        {
+          "fps": "60",
+          "ms": "0.30"
+        }
+      ],
+      [
+        {
+          "fps": "60",
+          "ms": "0.30"
+        }
+      ]
+    ],
+    "status": "passed"
+  },
+  {
+    "mode": "sumo",
+    "scope": "Two local browser clients + real workerd; synthetic 110 ms CDP latency",
+    "errors": [],
+    "inputAcknowledged": true,
+    "phase": "playing",
+    "ticks": 57,
+    "bracket": {
+      "round": 1,
+      "arenas": 4
+    },
+    "canvases": [
+      [
+        {
+          "fps": "60",
+          "ms": "0.50"
+        }
+      ],
+      [
+        {
+          "fps": "60",
+          "ms": "0.40"
+        }
+      ]
+    ],
+    "status": "passed"
+  },
+  {
+    "mode": "pong",
+    "scope": "Two local browser clients + real workerd; synthetic 110 ms CDP latency",
+    "errors": [],
+    "inputAcknowledged": true,
+    "phase": "playing",
+    "ticks": 47,
+    "canvases": [
+      [
+        {
+          "fps": "60",
+          "ms": "0.40"
+        }
+      ],
+      [
+        {
+          "fps": "60",
+          "ms": "0.20"
+        }
+      ]
+    ],
+    "status": "passed"
+  },
+  {
+    "mode": "marble",
+    "scope": "Two local browser clients + real workerd; synthetic 110 ms CDP latency",
+    "errors": [],
+    "inputAcknowledged": true,
+    "phase": "playing",
+    "ticks": 47,
+    "canvases": [
+      [
+        {
+          "fps": "60",
+          "ms": "1.30"
+        }
+      ],
+      [
+        {
+          "fps": "60",
+          "ms": "0.30"
+        }
+      ]
+    ],
+    "status": "passed"
+  },
+  {
+    "mode": "circuit",
+    "scope": "Two local browser clients + real workerd; synthetic 110 ms CDP latency",
+    "errors": [],
+    "inputAcknowledged": true,
+    "phase": "playing",
+    "ticks": 47,
+    "canvases": [
+      [
+        {
+          "fps": "60",
+          "ms": "0.8"
+        }
+      ],
+      [
+        {
+          "fps": "60",
+          "ms": "0.2"
+        }
+      ]
+    ],
+    "status": "passed"
+  },
+  {
+    "mode": "blocks",
+    "scope": "Two local browser clients + real workerd; synthetic 110 ms CDP latency",
+    "errors": [],
+    "inputAcknowledged": true,
+    "phase": "playing",
+    "ticks": 47,
+    "canvases": [
+      [
+        {
+          "fps": "60"
+        }
+      ],
+      [
+        {
+          "fps": "60"
+        }
+      ]
+    ],
+    "status": "passed"
+  },
+  {
+    "mode": "pool",
+    "scope": "Two local browser clients + real workerd; synthetic 110 ms CDP latency",
+    "errors": [],
+    "singleReleaseShot": true,
+    "shotPower": 1,
+    "moving": true,
+    "canvases": [
+      [
+        {
+          "fps": "49"
+        }
+      ],
+      [
+        {
+          "fps": "41"
+        }
+      ]
+    ],
+    "status": "passed"
+  },
+  {
+    "mode": "memory",
+    "scope": "Two local browser clients + real workerd; synthetic 110 ms CDP latency",
+    "errors": [],
+    "sharedReveals": 1,
+    "hiddenCards": 199,
+    "canvases": [
+      [],
+      []
+    ],
+    "status": "passed"
+  },
+  {
+    "mode": "uno",
+    "scope": "Two local browser clients + real workerd; synthetic 110 ms CDP latency",
+    "errors": [],
+    "turnAdvanced": true,
+    "sameColors": true,
+    "canvases": [
+      [],
+      []
+    ],
+    "status": "passed"
+  },
+  {
+    "mode": "property",
+    "scope": "Two local browser clients + real workerd; synthetic 110 ms CDP latency",
+    "errors": [],
+    "animatedRoll": true,
+    "market": true,
+    "canvases": [
+      [],
+      []
+    ],
+    "status": "passed"
+  }
+]

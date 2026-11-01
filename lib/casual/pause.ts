@@ -17,7 +17,7 @@ export function resumeTimeline(g:TimedGame,now:number){
  }else if(g.kind==='circuit'){
   g.raceStartedAt=(g.raceStartedAt??oldStart)+shift;
   if(g.firstFinish!==null)g.firstFinish+=shift;
-  for(const d of g.drivers){d.boostUntil=stamp(d.boostUntil);d.shieldUntil=stamp(d.shieldUntil);d.stunnedUntil=stamp(d.stunnedUntil);d.lastRecover=stamp(d.lastRecover);if(d.lapStartedAt!==undefined)d.lapStartedAt+=shift;if(d.finishedAt!==null)d.finishedAt+=shift;}
+  for(const d of g.drivers){d.boostUntil=stamp(d.boostUntil);d.magnetUntil=stamp(d.magnetUntil||0);d.pulseAt=stamp(d.pulseAt||0);d.shieldUntil=stamp(d.shieldUntil);d.stunnedUntil=stamp(d.stunnedUntil);d.lastRecover=stamp(d.lastRecover);if(d.lapStartedAt!==undefined)d.lapStartedAt+=shift;if(d.finishedAt!==null)d.finishedAt+=shift;}
   for(const b of g.boxes)b.readyAt=stamp(b.readyAt);
   for(const h of g.hazards)h.until=stamp(h.until);
   for(const s of g.shots)s.until=stamp(s.until);
@@ -25,14 +25,14 @@ export function resumeTimeline(g:TimedGame,now:number){
   for(const p of g.explorers){p.deadUntil=stamp(p.deadUntil);p.hurtUntil=stamp(p.hurtUntil);p.lastDamage=stamp(p.lastDamage);p.lastUse=stamp(p.lastUse);p.mining=null;}
   for(const e of g.enemies)e.hurtUntil=stamp(e.hurtUntil);
  }else if('actors'in g){
-  g.ball.serveAt=stamp(g.ball.serveAt);
+  g.ball.serveAt=stamp(g.ball.serveAt);g.ball.hitAt=stamp(g.ball.hitAt||0);
   for(const s of g.shots)s.until=stamp(s.until);
-  for(const a of g.actors){a.cooldown=stamp(a.cooldown);a.reloadUntil=stamp(a.reloadUntil||0);a.lastShotAt=stamp(a.lastShotAt||0);a.shieldUntil=stamp(a.shieldUntil);a.respawnAt=stamp(a.respawnAt);if(a.finishedAt!==null)a.finishedAt+=shift;if(a.spawnedAt!==undefined)a.spawnedAt=stamp(a.spawnedAt);if(a.eliminatedAt!==undefined)a.eliminatedAt=stamp(a.eliminatedAt);}
+  for(const a of g.actors){a.cooldown=stamp(a.cooldown);a.hitAt=stamp(a.hitAt||0);a.knockbackUntil=stamp(a.knockbackUntil||0);a.reloadUntil=stamp(a.reloadUntil||0);a.lastShotAt=stamp(a.lastShotAt||0);a.shieldUntil=stamp(a.shieldUntil);a.respawnAt=stamp(a.respawnAt);if(a.finishedAt!==null)a.finishedAt+=shift;if(a.spawnedAt!==undefined)a.spawnedAt=stamp(a.spawnedAt);if(a.eliminatedAt!==undefined)a.eliminatedAt=stamp(a.eliminatedAt);}
  }else if(g.kind==='blocks'){
   for(const b of g.boards){b.fallAt+=shift;b.lockAt=stamp(b.lockAt);b.flashAt=stamp(b.flashAt);}
  }else if(g.kind==='pool'){
   g.turnDeadline+=g.startAt-Math.max(oldPause,oldStart);
-  if(g.shot)g.shot.at+=shift;
+  if(g.shot){g.shot.at+=shift;for(const p of g.shot.potted)if(p.at)p.at+=shift}g.impacts=[];
  }
  g.pausedAt=null;
 }

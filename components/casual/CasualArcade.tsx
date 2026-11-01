@@ -47,7 +47,7 @@ const localDuel=(mode:string)=>['sumo','tanks','pong'].includes(mode);
 const categoryOf=(mode:string)=>['sumo','tanks','pong','marble','circuit','snake','terra'].includes(mode)?'Live action':['chess','dama','scidama','pool','property'].includes(mode)?'Strategy':'Party & puzzles';
 const gameKeywords:Partial<Record<CasualMode,string>>={pool:'8 ball eight ball pool billiards',pong:'ping pong table tennis',blocks:'tetris falling blocks',marble:'ball parkour racing',sumo:'sumo wrestling',tanks:'tank battle'};
 const admin=['start','configure','lobby','pause','resume','end'];
-const defaults:CasualSettings={cards:32,speed:175,map:'classic',snakeSize:48,battle:true,difficulty:'standard',unoFlip:false,track:'meadow',bots:1,relayRounds:5,relaySeconds:75};
+const defaults:CasualSettings={arcadeV2:true,unoSameColor:true,sumoFormat:'bracket',blockPace:'expert',cards:32,speed:175,map:'classic',snakeSize:48,battle:true,difficulty:'standard',unoFlip:false,track:'meadow',bots:1,relayRounds:5,relaySeconds:75};
 function localHumans(mode:CasualMode,bots:number|undefined,count:number){const maximum=localDuel(mode)?2:fastModes.includes(mode)&&mode!=='pool'?1:casualCapacity(mode);return Math.max(bots?1:casualMinimum(mode),Math.min(maximum,count))}
 function nonce(){return Array.from(crypto.getRandomValues(new Uint8Array(16)),n=>n.toString(16).padStart(2,'0')).join('')}
 function fresh(previous:CasualPublic|null,next:CasualPublic){return !previous||previous.code!==next.code||(next.revision??0)>(previous.revision??0)||next.revision===previous.revision&&next.serverNow>=previous.serverNow}
