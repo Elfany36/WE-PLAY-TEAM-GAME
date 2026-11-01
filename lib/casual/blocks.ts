@@ -1,7 +1,7 @@
 import type {CasualState} from './engine.ts';
 import {CasualError} from './error.ts';
 import {finish,livePlayers,random as roomRandom} from './shared.ts';
-export const BLOCK_COLORS=['','#54c4d2','#f0c856','#ad87d0','#6c98d3','#eea463','#8fc788','#df8299','#647988'];
+export const BLOCK_COLORS=['','#22d3ee','#ffd43b','#b76bfa','#4a8dff','#ff963d','#69d65f','#ff638d','#7188a6'];
 export const BLOCK_SHAPES=[[[0,1],[1,1],[2,1],[3,1]],[[1,0],[2,0],[1,1],[2,1]],[[1,0],[0,1],[1,1],[2,1]],[[0,0],[0,1],[1,1],[2,1]],[[2,0],[0,1],[1,1],[2,1]],[[1,0],[2,0],[0,1],[1,1]],[[0,0],[1,0],[1,1],[2,1]]];
 export type BlockMove='left'|'right'|'rotate'|'counter'|'soft'|'drop'|'hold';
 export type BlockPiece={type:number;rotation:number;x:number;y:number};

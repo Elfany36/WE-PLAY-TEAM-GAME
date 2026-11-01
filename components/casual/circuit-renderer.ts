@@ -2,6 +2,8 @@ import type {CasualPublic} from '../../lib/casual/engine';
 import {circuitObstacles,trackPoints,circuitWorld,circuitProps,CIRCUIT_SHOULDER,KART_RADIUS,TRACKS,type CircuitGame,type CircuitProp} from '../../lib/casual/circuit';
 import {PLAYER_COLORS} from '../../lib/casual/rules';
 import {shortestAngle} from '../../lib/game-motion';
+import {paintImpact,paintSpeedTrail} from './arena-effects';
+let motionPreference:MediaQueryList|null=null;
 export type RaceCamera={x:number;y:number;angle?:number;initialized?:boolean;northUp?:boolean};
 type Prop=CircuitProp;
 const scenes=new Map<string,{road:Path2D;props:Prop[]}>();
@@ -40,7 +42,7 @@ function kart(c:CanvasRenderingContext2D,d:CircuitGame['drivers'][number],color:
  c.restore();
 }
 export function drawRace(c:CanvasRenderingContext2D,g:CircuitGame,r:CasualPublic,time:number,camera:RaceCamera,dt:number){
- const own=g.drivers.find(d=>d.id===r.youId)||g.drivers[0];if(!own)return;const track=TRACKS.find(t=>t.id===g.track)||TRACKS[0],world=circuitWorld(g),art=scene(g),follow=1-Math.exp(-Math.min(50,dt)/90);
+ const own=g.drivers.find(d=>d.id===r.youId)||g.drivers[0];if(!own)return;motionPreference??=matchMedia('(prefers-reduced-motion: reduce)');const effects=!motionPreference.matches;const track=TRACKS.find(t=>t.id===g.track)||TRACKS[0],world=circuitWorld(g),art=scene(g),follow=1-Math.exp(-Math.min(50,dt)/90);
  if(!camera.initialized||Math.hypot(camera.x-own.x,camera.y-own.y)>650){camera.x=own.x;camera.y=own.y;camera.angle=camera.northUp!==false?-Math.PI/2:own.angle;camera.initialized=true}else{camera.x+=(own.x-camera.x)*follow;camera.y+=(own.y-camera.y)*follow;camera.angle=camera.northUp!==false?-Math.PI/2:(camera.angle||0)+shortestAngle(own.angle-(camera.angle||0))*follow}
  c.fillStyle=track.ground;c.fillRect(0,0,960,600);c.save();c.translate(480,390);c.rotate(-(camera.angle||0)-Math.PI/2);c.scale(.84,.84);c.translate(-camera.x,-camera.y);
  c.fillStyle=g.track==='night'?'#173444':g.track==='coast'?'#73b3bd':'#88ad76';c.fillRect(0,0,world.width,world.height);
@@ -50,8 +52,8 @@ export function drawRace(c:CanvasRenderingContext2D,g:CircuitGame,r:CasualPublic
  const points=trackPoints(g.track,192,g.worldScale||1),first=points[0],angle=Math.atan2(points[1].y-first.y,points[1].x-first.x);c.save();c.translate(first.x,first.y);c.rotate(angle);for(let y=-90;y<90;y+=18)for(let x=-18;x<18;x+=18){c.fillStyle=((x/18+y/18)%2+2)%2?'#fff6db':'#273749';c.fillRect(x,y,18,18)}c.restore();
  for(const b of g.boxes){if(b.readyAt>time||Math.hypot(b.x-camera.x,b.y-camera.y)>1000)continue;c.save();c.translate(b.x,b.y);c.rotate(Math.sin(time*.002)*.18);rounded(c,-21,-21,42,42,8,'#d4f0ed');c.strokeStyle='#75a7aa';c.lineWidth=3;c.strokeRect(-17,-17,34,34);c.fillStyle='#385c79';c.font='900 28px system-ui';c.textAlign='center';c.fillText('?',0,10);c.restore()}
  for(const h of g.hazards){c.fillStyle='#15263f';c.beginPath();c.ellipse(h.x,h.y,25,17,.2,0,7);c.fill();c.strokeStyle='#ae91d5';c.lineWidth=2;c.stroke()}
- for(const s of g.shots){c.fillStyle='#fff3a5';c.beginPath();c.arc(s.x,s.y,10,0,7);c.fill()}
- for(const d of g.drivers)if(!r.players.find(p=>p.id===d.id)?.retired&&Math.abs(d.x-camera.x)<1200&&Math.abs(d.y-camera.y)<1200)depthOrder.push(d);depthOrder.sort((a,b)=>a.y-b.y);for(const item of depthOrder){if('speed'in item){const player=r.players.find(p=>p.id===item.id);if(player){const color=PLAYER_COLORS[player.color%12];kart(c,item,color.fill,color.ink,time)}}else prop(c,item,g.track)}
+ for(const s of g.shots){c.save();c.translate(s.x,s.y);c.rotate(Math.atan2(s.vy,s.vx));const tail=c.createLinearGradient(-60,0,8,0);tail.addColorStop(0,'#f3a44400');tail.addColorStop(1,'#fff9b7dd');c.fillStyle=tail;c.beginPath();c.moveTo(-60,0);c.lineTo(0,-8);c.lineTo(14,0);c.lineTo(0,8);c.closePath();c.fill();c.fillStyle='#fff9d4';c.beginPath();c.arc(0,0,10,0,7);c.fill();c.restore()}
+ for(const d of g.drivers)if(!r.players.find(p=>p.id===d.id)?.retired&&Math.abs(d.x-camera.x)<1200&&Math.abs(d.y-camera.y)<1200)depthOrder.push(d);depthOrder.sort((a,b)=>a.y-b.y);for(const item of depthOrder){if('speed'in item){const player=r.players.find(p=>p.id===item.id);if(player){const color=PLAYER_COLORS[player.color%12];if(effects){if(item.hitAt)paintImpact(c,item.x,item.y,time-item.hitAt,42);if(item.boostUntil>time||item.drifting>.15)paintSpeedTrail(c,item.x,item.y,item.vx??Math.cos(item.angle)*item.speed,item.vy??Math.sin(item.angle)*item.speed,'#ffe3a4')}kart(c,item,color.fill,color.ink,time)}}else prop(c,item,g.track)}
  for(const d of g.drivers){const p=r.players.find(p=>p.id===d.id);if(!p||p.retired||Math.hypot(d.x-camera.x,d.y-camera.y)>1200)continue;c.save();c.translate(d.x,d.y-52);c.rotate((camera.angle||0)+Math.PI/2);c.font='700 13px system-ui';c.textAlign='center';const label=p.isYou?'YOU':p.name+(d.bot?' · BOT':''),w=c.measureText(label).width;rounded(c,-w/2-8,-15,w+16,23,7,'#153340e8');c.fillStyle='#fff5df';c.fillText(label,0,1);c.restore()}
  c.restore();
  rounded(c,18,18,210,58,12,'#122c3de8');c.fillStyle='#d3e8dd';c.font='700 11px system-ui';c.textAlign='left';c.fillText('POCKET KART · '+track.name.toUpperCase(),30,39);c.fillStyle='#fff7dc';c.font='700 16px system-ui';c.fillText('LAP '+Math.min(g.laps,own.lap+1)+' / '+g.laps+'   ·   ~1 MIN / LAP',30,62);
