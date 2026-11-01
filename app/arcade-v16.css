@@ -1,0 +1,88 @@
+/* Clear scene boundaries and readable, independent controls. Terra keeps its existing UI. */
+.casual-arcade:not([data-game=terra]) :is(.game-guide,.game-help,.party-rules,.club-help,.action-control-note,.snake-control-help,.strategy-move-help){display:none!important}
+.casual-arcade:not([data-game=terra]) .game-round-footer{border:0!important;padding:0!important;margin:18px 0 0!important;min-height:0;justify-content:flex-end;gap:14px}
+.casual-arcade:not([data-game=terra]) .game-round-footer:empty{display:none}
+.casual-arcade:not([data-game=terra]) .game-round-footer .party-end-confirm{display:flex;align-items:center;justify-content:flex-end;gap:14px;flex-wrap:wrap;padding:14px;border:1px solid var(--border);border-radius:13px;background:var(--surface)}
+.casual-arcade:not([data-game=terra]) .party-result>div:last-child{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.casual-arcade:not([data-game=terra]) .choose-game-button{display:inline-flex;justify-content:center;gap:10px;min-height:48px;padding:12px 18px;border:1px solid var(--accent);border-radius:12px;background:var(--surface);color:var(--accent-text);font-size:14px;font-weight:800;box-shadow:0 3px 0 #152e2520}
+.casual-arcade:not([data-game=terra]) .choose-game-button:hover{background:var(--accent-soft)}
+.casual-arcade:not([data-game=terra]) .party-board-panel{padding:clamp(12px,1.4vw,20px)!important;border-radius:20px!important;box-shadow:0 8px 24px #102a2510!important}
+.casual-arcade:not([data-game=terra]) .surface-toolbar{padding:14px!important;gap:14px!important;margin-bottom:18px;border:1px solid var(--border);border-radius:14px!important;background:var(--surface-soft)}
+.surface-label{display:flex;align-items:center;flex-wrap:wrap;gap:12px;flex:1;min-width:170px}
+.surface-label>strong{font-size:15px;line-height:1.5;overflow-wrap:anywhere}
+.surface-label .surface-details-toggle{margin:0;min-height:40px;padding:9px 12px;font-size:12px;white-space:nowrap}
+.casual-arcade:not([data-game=terra]) .surface-toolbar .view-buttons{gap:9px;align-items:stretch}
+.casual-arcade:not([data-game=terra]) .surface-toolbar button{min-height:44px!important;padding:10px 13px!important;font-size:12px;line-height:1.4}
+.casual-arcade:not([data-game=terra]) .surface-toolbar button[aria-pressed=true]{background:var(--button-bg);border-color:var(--button-bg);color:var(--button-text);box-shadow:0 2px 0 #102b2525}
+.casual-arcade:not([data-game=terra]) .surface-restore{padding:0 0 14px;min-height:0}
+.casual-arcade:not([data-game=terra]) .surface-restore button{min-height:42px;padding:10px 14px;font-size:12px;border-radius:11px}
+.casual-arcade:not([data-game=terra]) .surface-resize-controls{margin:0 0 18px;padding:18px;gap:18px;border-radius:14px}
+.casual-arcade:not([data-game=terra]) .surface-resize-controls>span{grid-column:1;align-self:center;font-size:12px}
+.casual-arcade:not([data-game=terra]) .surface-resize-controls .surface-drag-handle{justify-self:end;min-height:44px;min-width:44px}
+.casual-arcade:not([data-game=terra]) .view-content :is(.club-arena>canvas,.kart-world>canvas,.blocks-arena>canvas,.pool-stage>canvas){width:100%!important;max-width:1280px!important;max-height:none!important;height:auto!important;margin-inline:auto}
+.casual-arcade:not([data-game=terra]) .view-content .snake-stadium{width:100%;max-width:980px!important;margin-inline:auto}
+.casual-arcade:not([data-game=terra]) :is(.club-arena>canvas,.kart-world>canvas,.blocks-arena>canvas,.pool-stage>canvas){margin-top:16px;margin-bottom:20px;border:1px solid #7fadb5!important;border-radius:17px!important;box-shadow:0 4px 0 #102a3022,0 12px 24px #102a3015!important}
+.casual-arcade:not([data-game=terra]) :is(.club-controls,.action-controls,.pool-shot-controls){padding:15px!important;gap:13px!important;margin-top:18px;border-radius:14px;background:var(--surface-soft);border:1px solid var(--border)}
+.casual-arcade:not([data-game=terra]) :is(.club-controls,.action-controls,.pool-shot-controls) .button{min-height:48px;padding:12px 17px!important;border-radius:11px!important;font-size:13px!important;line-height:1.5}
+.casual-arcade:not([data-game=terra]) :is(.club-dpad,.action-keys,.snake-dpad){gap:7px}
+.casual-arcade:not([data-game=terra]) :is(.club-dpad,.action-keys,.snake-dpad) button{min-width:46px;min-height:46px;border-radius:11px;box-shadow:0 3px 0 #102a3020}
+.casual-arcade:not([data-game=terra]) :is(.club-dpad,.action-keys,.snake-dpad) button:active{background:var(--accent-soft);box-shadow:none;transform:translateY(1px)}
+.arena-hud{display:flex!important;align-items:center;justify-content:space-between;gap:18px!important;padding:16px!important;flex-wrap:wrap;border:1px solid var(--border)!important;background:linear-gradient(110deg,var(--surface-soft),var(--surface))!important;letter-spacing:0;min-width:0}
+.hud-player{display:flex;gap:12px;align-items:center;min-width:130px;flex:1}
+.hud-avatar{display:grid;place-items:center;width:43px;height:43px;flex-shrink:0;border:2px solid #fff8;border-radius:13px;font-size:17px;font-weight:900;box-shadow:0 3px 0 #092b3030}
+.hud-player>div{display:grid;gap:4px;min-width:0}.hud-player strong{font-size:15px!important;line-height:1.4;overflow-wrap:anywhere}.hud-player strong>small{font-size:9px;color:var(--accent-text)!important;letter-spacing:.08em;padding:3px 5px;background:var(--accent-soft);border-radius:5px;white-space:nowrap;margin-left:5px}
+.hud-player>div>span{font-size:11px;line-height:1.6;color:var(--muted)}
+.hud-vitals{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:12px;min-width:0;flex:2}
+.hud-chip,.hud-clock{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:700;line-height:1.5;min-height:38px;padding:8px 10px;border-radius:9px;background:var(--surface);border:1px solid var(--border);color:var(--text);white-space:nowrap}
+.hud-clock{font-variant-numeric:tabular-nums;flex-shrink:0}.hud-score{font-size:26px;font-weight:900;font-variant-numeric:tabular-nums}.hud-score small{font-size:20px;color:var(--muted)}
+.game-meter{min-width:110px;max-width:175px;flex:1;--meter-fill:#39d8e5;--meter-end:#a1f55c;--meter-edge:#167390}
+.game-meter.meter-health{--meter-fill:#ff5b76;--meter-end:#ffa358;--meter-edge:#a6335f}.game-meter.meter-gold{--meter-fill:#ffab29;--meter-end:#ffeb53;--meter-edge:#a36b1b}
+.meter-caption{display:flex;justify-content:space-between;gap:10px;font-size:10px;line-height:1.5;margin-bottom:5px;font-weight:750;text-transform:uppercase;letter-spacing:.04em}.meter-caption strong{font-size:11px!important;font-variant-numeric:tabular-nums;color:var(--text)!important;white-space:nowrap}.meter-caption small{font-size:9px;color:var(--muted)}
+.meter-track{height:15px;padding:2px;border:1px solid var(--meter-edge);border-radius:7px;background:#102b42;box-shadow:inset 0 2px 3px #0004;overflow:hidden}
+.meter-track>i{display:block;height:100%;max-width:100%;background:linear-gradient(90deg,var(--meter-fill),var(--meter-end));border-top:2px solid #ffffff77;border-radius:3px;transition:width .14s linear;box-shadow:0 0 7px color-mix(in srgb,var(--meter-fill) 50%,transparent)}
+.casual-arcade:not([data-game=terra]) .room-roster-card{padding:18px!important;border-radius:16px!important;border-color:var(--border);background:var(--surface);box-shadow:0 6px 18px #102a3008}
+.casual-arcade:not([data-game=terra]) .room-roster-card>summary{min-height:44px;font-size:14px;gap:12px;padding-bottom:12px}
+.casual-arcade:not([data-game=terra]) .room-roster-list{display:grid;gap:10px;margin-top:10px}
+.casual-arcade:not([data-game=terra]) .room-roster-player{position:relative;display:flex;align-items:center;gap:10px;padding:13px!important;border:1px solid var(--border);border-radius:12px;background:var(--surface-soft);min-width:0}
+.casual-arcade:not([data-game=terra]) .room-roster-player.is-you{background:var(--accent-soft);border-color:var(--accent)}
+.casual-arcade:not([data-game=terra]) .room-roster-player>div{min-width:0;flex:1}
+.casual-arcade:not([data-game=terra]) .room-roster-player strong{display:block;font-size:14px;line-height:1.5;overflow-wrap:anywhere}.casual-arcade:not([data-game=terra]) .room-roster-player small{display:block;font-size:11px;line-height:1.7;margin-top:4px}
+.roster-rank{font:800 10px/1.2 ui-monospace,monospace;color:var(--muted);min-width:14px}.roster-rank.is-first{color:var(--accent-text)}
+.room-roster-player .game-meter.compact{margin-top:9px;min-width:0;max-width:100%}.game-meter.compact .meter-track{height:10px}.game-meter.compact .meter-caption{margin-bottom:3px;font-size:9px}
+.casual-arcade:not([data-game=terra]) .game-library .party-game-art:not(.terra) .party-poster{filter:saturate(1.22) contrast(1.03)}
+.casual-arcade:not([data-game=terra]) .party-game-card{background:var(--surface);border-color:var(--border)}
+.casual-arcade:not([data-game=terra]) .party-game-card h2{font-weight:800!important;line-height:1.25!important}
+.casual-arcade:not([data-game=terra]) .party-game-card footer{font-size:12px!important;gap:12px!important;padding-top:16px!important}
+.casual-arcade:not([data-game=terra]) .party-game-card footer b{padding:7px 10px;border-radius:8px;background:var(--accent-soft);font-weight:800;color:var(--accent-text)}
+.casual-arcade:not([data-game=terra]) .uno-hand-card{border-radius:13px!important}.uno-hand-card.playable{background:var(--accent-soft)!important}.casual-arcade .uno-card-art{filter:saturate(1.15) drop-shadow(0 3px 2px #081c2530)}
+.casual-arcade:not([data-game=terra]) .memory-back{background:linear-gradient(135deg,#496ad4,#693aac 65%,#ae5ac4)!important;color:#ffe66b!important;border-color:#c6adff!important}.casual-arcade:not([data-game=terra]) .memory-back svg{color:#ffe987!important}
+.casual-arcade:not([data-game=terra]) .party-result{border-radius:18px;padding:24px;gap:22px}.casual-arcade:not([data-game=terra]) .party-result h2{font-size:clamp(24px,2.5vw,34px);line-height:1.25}.casual-arcade:not([data-game=terra]) .party-result p{font-size:14px;line-height:1.8}
+.main-shell:not(:has([data-game=terra].has-party-room)) :is(.button,.interface-toggle,.disclosure-toggle){font-size:13px;letter-spacing:0}
+.main-shell:not(:has([data-game=terra].has-party-room)) .section-title{gap:18px}.main-shell:not(:has([data-game=terra].has-party-room)) :is(.path-card h3,.lesson-card h3){font-weight:800}
+@media(max-width:760px){
+ .casual-arcade:not([data-game=terra]) .party-board-panel{padding:12px!important;border-radius:16px!important}.casual-arcade:not([data-game=terra]) .surface-toolbar{padding:12px!important;gap:12px!important;margin-bottom:16px}.surface-label{justify-content:space-between;width:100%;min-width:0}.surface-label>strong{font-size:14px}.surface-label .surface-details-toggle{min-height:38px!important;font-size:11px}
+ .casual-arcade:not([data-game=terra]) .surface-toolbar .view-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;width:100%}.casual-arcade:not([data-game=terra]) .surface-toolbar .view-buttons button{min-width:0;padding:10px 5px!important;min-height:46px!important;font-size:11px!important;flex-wrap:wrap}.casual-arcade:not([data-game=terra]) .surface-toolbar .view-buttons .hide-view-tools{grid-column:span 2}
+ .arena-hud{padding:13px!important;gap:12px!important}.hud-player{flex:1;min-width:130px}.hud-vitals{flex-basis:100%;justify-content:flex-start;gap:10px;order:3}.hud-clock{margin-left:auto}.hud-player strong{font-size:14px!important}.hud-avatar{width:38px;height:38px}.game-meter{min-width:90px;max-width:none}.hud-chip{font-size:11px;min-height:36px}
+ .casual-arcade:not([data-game=terra]) :is(.club-controls,.action-controls,.pool-shot-controls){padding:12px!important;gap:10px!important;margin-top:16px}.casual-arcade:not([data-game=terra]) :is(.club-controls,.action-controls,.pool-shot-controls) .button{padding:11px 13px!important;font-size:12px!important;min-height:46px}.casual-arcade:not([data-game=terra]) .party-result{padding:20px;gap:17px}.casual-arcade:not([data-game=terra]) .party-result>div:last-child{width:100%;gap:12px}.casual-arcade:not([data-game=terra]) .choose-game-button{width:100%;font-size:13px}.casual-arcade:not([data-game=terra]) .room-shell:fullscreen .party-board-panel{padding:10px!important}
+}
+@media(max-width:360px){.casual-arcade:not([data-game=terra]) .surface-toolbar .view-buttons{grid-template-columns:repeat(2,minmax(0,1fr))!important}.casual-arcade:not([data-game=terra]) .surface-toolbar .view-buttons .hide-view-tools{grid-column:1/-1}.hud-vitals>.hud-chip{flex-basis:100%}}
+@media(prefers-reduced-motion:reduce){.meter-track>i{transition:none}.casual-arcade:not([data-game=terra]) .choose-game-button{transition:none}}
+.casual-arcade[data-scene=cobalt]{--game-felt:#102f69;--game-glow:#ffe05b;--game-light:#f8e9bd;--game-dark:#668dc3}
+.casual-arcade[data-scene=cherry]{--game-felt:#5a1d49;--game-glow:#ffd867;--game-light:#ffe6d7;--game-dark:#ce84a3}
+@media(min-width:761px){.table-scene-picker>div{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* Fullscreen card actions stay outside the scrolling private hand. */
+.casual-arcade:not([data-game=terra]) .room-shell:fullscreen .party-live-layout.uno .surface-content{height:100%!important;min-height:0;overflow:hidden!important}
+.casual-arcade:not([data-game=terra]) .room-shell:fullscreen .uno-experience{height:100%;min-height:0;display:flex;flex-direction:column;gap:8px}
+.casual-arcade:not([data-game=terra]) .room-shell:fullscreen .uno-hand-section{display:flex;flex:1;flex-direction:column;min-height:0!important;overflow:hidden!important;margin:0;gap:6px}
+.casual-arcade:not([data-game=terra]) .room-shell:fullscreen .uno-hand-heading{flex-shrink:0;margin:0;gap:7px}
+.casual-arcade:not([data-game=terra]) .room-shell:fullscreen .uno-hand{flex:1;min-height:65px;max-height:none!important;overflow:auto!important;align-content:start;padding:8px 5px!important}
+.casual-arcade:not([data-game=terra]) .room-shell:fullscreen .uno-action-row{flex-shrink:0;min-height:44px;margin:0;padding:6px 0 0;gap:8px}
+.casual-arcade:not([data-game=terra]) .room-shell:fullscreen .uno-hand-section.choosing-action{overflow:auto!important}
+.casual-arcade:not([data-game=terra]) .room-shell:fullscreen .uno-color-picker{flex-shrink:0}
+.casual-arcade:not([data-game=terra]) .uno-action-row{padding:12px!important;gap:12px!important;border:1px solid var(--border);border-radius:12px;background:var(--surface-soft);margin-top:14px}
+.casual-arcade:not([data-game=terra]) .uno-action-row .button{box-shadow:none!important;padding:11px 13px!important;min-height:46px;flex:1;border-radius:10px!important}
+.casual-arcade:not([data-game=terra]) .room-shell:fullscreen .uno-action-row{padding:10px!important;margin-top:0;gap:10px!important}
+
+.casual-arcade:not([data-game=terra]) .details-hidden :is(.race-live-order,.strategy-status,.board-player-bands,.board-move-history,.water-score-panel,.estate-market-hud,.estate-players,.pool-message){display:none!important}
+
+.online-content-note{padding:12px 14px;border:1px solid var(--border);border-radius:10px;font-size:13px;line-height:1.7;background:var(--surface-soft);color:var(--text)}

@@ -1,12 +1,12 @@
 'use client';
 import {memo,useId} from 'react';
-import {trackPoints} from '../../lib/casual/circuit';
-import {clubTrack,tankWalls,type ClubMap} from '../../lib/casual/party';
+import {trackPoints,TRACKS} from '../../lib/casual/circuit';
+import {clubTrack,tankWalls,CLUB_MAPS,type ClubMap} from '../../lib/casual/party';
 
 /** Map cards use the same route and cover geometry as the playable arena. */
 export default memo(function MapPreview({theme,kind}:{theme:string;kind:string}){
  const id=useId().replaceAll(':',''),dark=theme==='neon'||theme==='night'||theme==='harbor'||theme==='foundry',sand=theme==='canyon'||theme==='coast';
- const ground=dark?'#122638':sand?'#b77e57':'#316454',road=dark?'#52617e':sand?'#ebc795':'#98b998',ink=dark?'#8fe0ed':sand?'#563e39':'#d9e6c0';
+ const club=CLUB_MAPS.find(m=>m.id===theme),race=TRACKS.find(m=>m.id===theme),ground=club?.ground||race?.ground||(dark?'#122638':sand?'#b77e57':'#316454'),road=club?.road||race?.road||(dark?'#52617e':sand?'#ebc795':'#98b998'),ink=club?.ink||(dark?'#8fe0ed':sand?'#563e39':'#d9e6c0');
  const track=kind==='circuit'?trackPoints(theme,192,1):kind==='marble'?clubTrack(theme as ClubMap):[];
  const bounds=track.length?{minX:Math.min(...track.map(p=>p.x)),maxX:Math.max(...track.map(p=>p.x)),minY:Math.min(...track.map(p=>p.y)),maxY:Math.max(...track.map(p=>p.y))}:null;
  const scale=bounds?Math.min(198/(bounds.maxX-bounds.minX),79/(bounds.maxY-bounds.minY)):1;

@@ -3,7 +3,7 @@ import {roomReceipt} from './network-clock.ts';
 import {applyRoomDelta} from './room-delta.ts';
 import type {RoomRevisionFeed} from './room-revisions.ts';
 export type TransportStats={live:boolean;streaming:boolean;rtt:number;totalRtt:number;serverMs:number;jitter:number;bytesPerSecond:number;lastReceipt:number;lastStateReceipt:number;stateInterval:number;receivedBytes:number;sentBytes:number;failures:number};
-type Options={timeout?:number;retries?:number};
+type Options={timeout?:number;retries?:number;forceHttp?:boolean};
 const aborted=()=>new DOMException('Room session changed or request aborted.','AbortError');
 /** One private snapshot/receipt path for WebSocket and HTTP fallback. */
 export class RoomTransport{
@@ -33,7 +33,7 @@ export class RoomTransport{
    const url=new URL(endpoint,typeof location==='undefined'?'http://localhost':location.href);url.searchParams.set('wire','1');const baseId=this.latest?.id,stable=stableRoomRequest(url,init,baseId);if(baseId)this.pins.set(baseId,(this.pins.get(baseId)||0)+1);
    const controller=new AbortController(),abort=()=>controller.abort(),started=performance.now(),timeout=setTimeout(abort,options.timeout||8000);this.controllers.add(controller);init.signal?.addEventListener('abort',abort,{once:true});
    try{
-    const liveRequest=this.roomMode==='phone'?null:this.live?.request(url,{...stable,signal:controller.signal});
+    const liveRequest=this.roomMode==='phone'||options.forceHttp&&(init.method||'GET').toUpperCase()==='GET'?null:this.live?.request(url,{...stable,signal:controller.signal});
     // Response no-store preserves CORS preflight reuse without caching private state.
     const response=await(liveRequest||fetch(url,{...stable,credentials:'omit',mode:'cors',cache:'default',signal:controller.signal})),raw=await response.text(),elapsed=performance.now()-started;
     if(generation!==this.generation||controller.signal.aborted)throw aborted();
