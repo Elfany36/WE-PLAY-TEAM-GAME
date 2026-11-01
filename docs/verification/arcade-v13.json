@@ -1,0 +1,706 @@
+{
+  "version": 13,
+  "baseline": "d6405398c269022689a73ee9e00837ec85d3a237",
+  "tests": {
+    "pass": 375,
+    "fail": 0
+  },
+  "typecheck": "pass",
+  "builds": {
+    "framework": "pass",
+    "githubPages": "pass"
+  },
+  "curriculumCssDocumentsParsed": 327,
+  "website": [
+    {
+      "route": "overview",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "learning-paths",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "documentation",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "practice-studio",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "playground",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "games",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "casual-arcade",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "achievements",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "kart-map-cards",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "overview",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "learning-paths",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "documentation",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "practice-studio",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "playground",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "games",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "casual-arcade",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "achievements",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "kart-map-cards",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "overview",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "learning-paths",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "documentation",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "practice-studio",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "playground",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "games",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "casual-arcade",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "achievements",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "kart-map-cards",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    }
+  ],
+  "gameLayouts": [
+    {
+      "mode": "snake",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 26,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "sumo",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 25,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "tanks",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 23,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "pong",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 17,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "marble",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 22,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "blocks",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 61,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "circuit",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 57,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "terra",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 45,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "pool",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 1,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "uno",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 2,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "ladders",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 1,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "memory",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 2,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "property",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 2,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "chess",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 1,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "dama",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 1,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "scidama",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 1,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "phone",
+      "width": 1440,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 0,
+      "liveRevisions": 3,
+      "errors": []
+    },
+    {
+      "mode": "snake",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 23,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "sumo",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 16,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "tanks",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 20,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "pong",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 17,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "marble",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 17,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "blocks",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 43,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "circuit",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 38,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "terra",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 42,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "pool",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 2,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "uno",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 2,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "ladders",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 2,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "memory",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 2,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "property",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 2,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "chess",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 2,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "dama",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 1,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "scidama",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 2,
+      "liveRevisions": 0,
+      "errors": []
+    },
+    {
+      "mode": "phone",
+      "width": 390,
+      "overflow": 0,
+      "cueOverlapsCanvas": false,
+      "liveStates": 0,
+      "liveRevisions": 3,
+      "errors": []
+    }
+  ],
+  "finalAffectedLayouts": [
+    {
+      "mode": "snake",
+      "width": 1440,
+      "overflow": 0,
+      "hiddenFullscreenControls": [],
+      "errors": []
+    },
+    {
+      "mode": "circuit",
+      "width": 1440,
+      "overflow": 0,
+      "hiddenFullscreenControls": [],
+      "errors": []
+    },
+    {
+      "mode": "uno",
+      "width": 1440,
+      "overflow": 0,
+      "hiddenFullscreenControls": [],
+      "errors": []
+    },
+    {
+      "mode": "blocks",
+      "width": 1440,
+      "overflow": 0,
+      "hiddenFullscreenControls": [],
+      "errors": []
+    },
+    {
+      "mode": "tanks",
+      "width": 1440,
+      "overflow": 0,
+      "hiddenFullscreenControls": null,
+      "errors": []
+    },
+    {
+      "mode": "snake",
+      "width": 390,
+      "overflow": 0,
+      "hiddenFullscreenControls": [],
+      "errors": []
+    },
+    {
+      "mode": "circuit",
+      "width": 390,
+      "overflow": 0,
+      "hiddenFullscreenControls": [],
+      "errors": []
+    },
+    {
+      "mode": "uno",
+      "width": 390,
+      "overflow": 0,
+      "hiddenFullscreenControls": [],
+      "errors": []
+    },
+    {
+      "mode": "blocks",
+      "width": 390,
+      "overflow": 0,
+      "hiddenFullscreenControls": [],
+      "errors": []
+    },
+    {
+      "mode": "tanks",
+      "width": 390,
+      "overflow": 0,
+      "hiddenFullscreenControls": null,
+      "errors": []
+    }
+  ],
+  "keyboard": [
+    {
+      "mode": "snake",
+      "keyboardAcknowledgementMs": 219,
+      "movement": {
+        "dx": 1,
+        "dy": 2
+      },
+      "neutralRelease": null,
+      "otherHumanControlsUntouched": true,
+      "errors": []
+    },
+    {
+      "mode": "sumo",
+      "keyboardAcknowledgementMs": 259,
+      "movement": {
+        "dx": -34.45,
+        "dy": 0
+      },
+      "neutralRelease": true,
+      "otherHumanControlsUntouched": true,
+      "errors": []
+    },
+    {
+      "mode": "tanks",
+      "keyboardAcknowledgementMs": 87,
+      "movement": {
+        "dx": 26.82,
+        "dy": 0
+      },
+      "neutralRelease": true,
+      "otherHumanControlsUntouched": true,
+      "errors": []
+    },
+    {
+      "mode": "pong",
+      "keyboardAcknowledgementMs": 46,
+      "movement": {
+        "dx": 0,
+        "dy": 86
+      },
+      "neutralRelease": true,
+      "otherHumanControlsUntouched": true,
+      "reconnected": true,
+      "errors": []
+    },
+    {
+      "mode": "marble",
+      "keyboardAcknowledgementMs": 44,
+      "movement": {
+        "dx": 10.44,
+        "dy": 0
+      },
+      "neutralRelease": true,
+      "otherHumanControlsUntouched": true,
+      "errors": []
+    },
+    {
+      "mode": "blocks",
+      "keyboardAcknowledgementMs": 43,
+      "movement": {
+        "dx": -2,
+        "dy": 0
+      },
+      "neutralRelease": null,
+      "otherHumanControlsUntouched": true,
+      "errors": []
+    },
+    {
+      "mode": "circuit",
+      "keyboardAcknowledgementMs": 46,
+      "movement": {
+        "dx": 8.3,
+        "dy": 1.18
+      },
+      "neutralRelease": true,
+      "otherHumanControlsUntouched": true,
+      "errors": []
+    },
+    {
+      "mode": "terra",
+      "keyboardAcknowledgementMs": 61,
+      "movement": {
+        "dx": 1.08,
+        "dy": 0
+      },
+      "neutralRelease": true,
+      "otherHumanControlsUntouched": true,
+      "errors": []
+    }
+  ],
+  "chrome": [
+    {
+      "width": 1440,
+      "fullscreen": false,
+      "restoreVisible": true,
+      "canvas": {
+        "width": 413,
+        "height": 259
+      },
+      "horizontalOverflow": 0
+    },
+    {
+      "width": 1440,
+      "fullscreen": true,
+      "restoreVisible": true,
+      "canvas": {
+        "width": 913,
+        "height": 571
+      },
+      "horizontalOverflow": 0
+    },
+    {
+      "width": 390,
+      "fullscreen": false,
+      "restoreVisible": true,
+      "canvas": {
+        "width": 301,
+        "height": 189
+      },
+      "horizontalOverflow": 0
+    },
+    {
+      "width": 390,
+      "fullscreen": true,
+      "restoreVisible": true,
+      "canvas": {
+        "width": 315,
+        "height": 198
+      },
+      "horizontalOverflow": 0
+    }
+  ],
+  "twoBrowsers": {
+    "remoteReceiptMs": 115,
+    "hostStates": 76,
+    "friendStates": 58,
+    "friendSawShells": true,
+    "friendSawRelease": true,
+    "independentSeats": true,
+    "errors": []
+  },
+  "terraProtectedFiles": {
+    "lib/casual/terra.ts": "054b3e029fb2f2c225d52af986ea7f39ca510639a4c3277471371ce53cdd15ba",
+    "components/casual/terra-terrain.ts": "1d8942126ae96546d5bb7764e25fdabb1817610f7a16ec39f41b54ca136d41db",
+    "components/casual/ActionWorld.tsx": "d2862dd5e861742e1ecd430742c14600bf1f83077a658a54f57a7e171597fb6f"
+  },
+  "scope": "Local real Chromium and local Durable Object runtime. Production and geographic network latency were not verified; no manual Cloudflare deployment."
+}
