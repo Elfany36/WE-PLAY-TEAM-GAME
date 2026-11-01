@@ -1,0 +1,22 @@
+{
+  "scope": "Real local workerd; no Internet latency simulation",
+  "results": [
+    {
+      "kind": "casual",
+      "mode": "memory",
+      "notificationMs": 76.87,
+      "privateStateOnSocket": false,
+      "rosterSynced": true,
+      "removedSessionClosed": true
+    },
+    {
+      "kind": "arena",
+      "mode": "quiz",
+      "notificationMs": 55.22,
+      "privateStateOnSocket": false,
+      "rosterSynced": true,
+      "removedSessionClosed": true
+    }
+  ],
+  "invalidAuthCode": 4001
+}

@@ -88,3 +88,7 @@ This release fixes capped request reading before routing, durable cache state af
 Pool has a longer tapered cue, power-dependent preparation and strike animation, aiming preview and keyboard fine adjustment. New tank maps have 2.25× the playable area, independent hull/turret models, moving treads, projectile trails, recoil and five-shell reloads. New sumo rings have 1.69× the area. Existing rooms retain their original scale. Block Drop has a portrait mobile well, bounded lock-delay adjustments and row flashes. Arcade scoreboards, touch controls, phone layouts, UNO actions and board surfaces received readability changes.
 
 See [the v6 verification ledger](docs/verification/optimization-v6.md). Its local CPU, HTTP and browser measurements are not claims about every visitor’s device or Internet connection. Publication receipts are recorded in the release report supplied with the update.
+
+## Urgent room receipt update (v7)
+
+New production rooms use the dedicated Durable Object service directly for both arcade and coding games. Live revision notifications reduce idle polling and the wait for another player's turn, while authenticated HTTP still carries actions and private game state. Existing rooms retain their original authority; create a new room after the current round to select the current dedicated service. The connection panel now separates round trip, server work and game-state age. See [the receipt fix evidence](docs/verification/network-receipts-v7.md) for measured results and production verification limits.

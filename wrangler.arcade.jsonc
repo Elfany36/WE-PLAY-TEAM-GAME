@@ -7,7 +7,7 @@
  "account_id":"ad5e0678ef8fa101846cfe82265d3db1",
  "workers_dev":true,
  "observability":{"enabled":true,"head_sampling_rate":0.1},
- "durable_objects":{"bindings":[{"name":"CASUAL_ROOMS","class_name":"CasualRoom"}]},
- "migrations":[{"tag":"casual-rooms-v1","new_sqlite_classes":["CasualRoom"]}],
+ "durable_objects":{"bindings":[{"name":"CASUAL_ROOMS","class_name":"CasualRoom"},{"name":"ARENA_ROOMS","class_name":"ArenaRoom"}]},
+ "migrations":[{"tag":"casual-rooms-v1","new_sqlite_classes":["CasualRoom"]},{"tag":"room-authorities-v2","new_sqlite_classes":["ArenaRoom"]}],
  "d1_databases":[{"binding":"DB","database_name":"site-creator-d1","database_id":"89871452-465b-4ebf-bfac-2c4b4c3aaf72","migrations_dir":"drizzle"}]
 }

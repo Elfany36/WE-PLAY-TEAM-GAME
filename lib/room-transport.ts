@@ -1,13 +1,13 @@
 import {roomReceipt} from './network-clock.ts';
 import {applyRoomDelta} from './room-delta.ts';
-export type TransportStats={rtt:number;totalRtt:number;serverMs:number;jitter:number;bytesPerSecond:number;lastReceipt:number;receivedBytes:number;sentBytes:number;failures:number};
+export type TransportStats={live:boolean;rtt:number;totalRtt:number;serverMs:number;jitter:number;bytesPerSecond:number;lastReceipt:number;receivedBytes:number;sentBytes:number;failures:number};
 type Options={timeout?:number;retries?:number};
 /** One authenticated HTTP/receipt/delta path for every room game. */
 export class RoomTransport{
  private bases=new Map<string,any>();private latest:{id:string;room:any}|null=null;
  private samples:{at:number;bytes:number}[]=[];
- readonly stats:TransportStats={rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,receivedBytes:0,sentBytes:0,failures:0};
- reset(){this.bases.clear();this.latest=null;this.samples=[];Object.assign(this.stats,{rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,receivedBytes:0,sentBytes:0,failures:0})}
+ readonly stats:TransportStats={live:false,rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,receivedBytes:0,sentBytes:0,failures:0};
+ reset(){this.bases.clear();this.latest=null;this.samples=[];Object.assign(this.stats,{live:false,rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,receivedBytes:0,sentBytes:0,failures:0})}
  async send(endpoint:string,init:RequestInit={},options:Options={}):Promise<any>{
   const max=options.retries||0;
   for(let attempt=0;;attempt++){

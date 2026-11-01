@@ -25,9 +25,9 @@ const localBindingConfig = {
   // One Durable Object per casual room keeps game state in memory, so a poll
   // no longer needs a D1 read and write (the "server work" lag).
   durable_objects: {
-    bindings: [{ name: "CASUAL_ROOMS", class_name: "CasualRoom" }],
+    bindings: [{ name: "CASUAL_ROOMS", class_name: "CasualRoom" },{name:"ARENA_ROOMS",class_name:"ArenaRoom"}],
   },
-  migrations: [{ tag: "casual-rooms-v1", new_sqlite_classes: ["CasualRoom"] }],
+  migrations: [{ tag: "casual-rooms-v1", new_sqlite_classes: ["CasualRoom"] },{tag:"room-authorities-v2",new_sqlite_classes:["ArenaRoom"]}],
   d1_databases: d1
     ? [
         {

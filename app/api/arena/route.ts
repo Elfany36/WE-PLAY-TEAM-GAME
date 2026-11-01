@@ -1,6 +1,6 @@
 import {env,waitUntil} from 'cloudflare:workers';
-import {createArenaAPI} from '../../../lib/arena-api';
+import {routeArena} from '../../../lib/arena-route';
 export const dynamic='force-dynamic';
-export function GET(req:Request){return createArenaAPI(env.DB,waitUntil).GET(req)}
-export function POST(req:Request){return createArenaAPI(env.DB,waitUntil).POST(req)}
-export function OPTIONS(req:Request){return createArenaAPI(env.DB,waitUntil).OPTIONS(req)}
+export function GET(req:Request){return routeArena(req,env,waitUntil)}
+export function POST(req:Request){return routeArena(req,env,waitUntil)}
+export function OPTIONS(req:Request){return routeArena(req,env,waitUntil)}

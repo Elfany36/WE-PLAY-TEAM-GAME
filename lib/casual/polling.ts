@@ -1,0 +1,10 @@
+import type {CasualPublic} from './engine.ts';
+const simultaneous=new Set(['snake','circuit','terra','sumo','tanks','pong','marble','blocks']);
+export function casualPollPeriod(room:CasualPublic|null,live:boolean,elapsed=0){
+ const game=room?.game,playing=room?.phase==='playing',fast=playing&&(simultaneous.has(room.mode)||room.mode==='pool'&&game?.moving||room.mode==='memory'&&(!live||game?.revealed?.length||game?.resolveAt));
+ if(fast)return 200;
+ if(!live)return 750;
+ if(playing&&(room.mode==='phone'&&room.players.some(p=>p.bot&&!p.retired)||room.players.some(p=>p.bot&&p.id===game?.currentId)))return 350;
+ const deadline=game?.deadline??game?.turnDeadline;
+ return playing&&Number.isFinite(deadline)?Math.min(5000,Math.max(100,deadline-room.serverNow-elapsed)):5000;
+}
