@@ -48,7 +48,7 @@ test('property rolls always have a dice event, and card movement retains the com
  const result=applyCasualAction(original,{action:'roll-property',round:1,turn:1},'p0',now+1).game as any;assert.equal(result.diceAt,now+1);assert.equal(result.lastMove.from,start);assert.equal(result.lastMove.path[0],(start+1)%40);assert.equal(result.lastMove.to,0);assert(result.lastMove.path.includes(7));
 });
 test('Snake has a bounded adaptive remote buffer, predicts growth and keeps its authority state immutable',()=>{
- let s=createCasual('ABCDEFGH','p0','Host','h','snake',3,now);s=applyCasualAction(s,{action:'start'},'p0',now);const g=s.game as SnakeGame,w=g.worms[0],before=JSON.stringify(g);g.food=[{x:w.body[0].x+1,y:w.body[0].y}];const snapshot=JSON.stringify(g),body=predictSnake(g,w,g.lastTickAt+175,175);assert.equal(body.length,w.body.length+1);assert.equal(JSON.stringify(g),snapshot);assert(snakeBuffer(30)<220);assert(snakeBuffer(2000)<=170);assert(before);
+ let s=createCasual('ABCDEFGH','p0','Host','h','snake',3,now);s=applyCasualAction(s,{action:'start'},'p0',now);const g=s.game as SnakeGame,w=g.worms[0],before=JSON.stringify(g);g.food=[{x:w.body[0].x+1,y:w.body[0].y}];const snapshot=JSON.stringify(g),body=predictSnake(g,w,g.lastTickAt+175,175);assert.equal(body.length,w.body.length+1);assert.equal(JSON.stringify(g),snapshot);assert(snakeBuffer(30)<220);assert(snakeBuffer(2000)<=700);assert(before);
 });
 test('Snake schedules fresh turns at a visible grid boundary instead of rewriting an already predicted segment',()=>{
  let s=createCasual('ABCDEFGH','p0','Host','h','snake',3,now);s=applyCasualAction(s,{action:'start'},'p0',now);const g=s.game as SnakeGame,w=g.worms[0],head={...w.body[0]},tick=g.tick+2;
