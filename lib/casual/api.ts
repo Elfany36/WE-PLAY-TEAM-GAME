@@ -58,9 +58,9 @@ export async function casualBody(req:Request){
  if(typeof b.scene==='string'&&b.scene.length<=128)out.scene=b.scene;
  return out;
 }
-export function createCasualAPI(DB:CasualDatabase|undefined,keepAlive?:((task:Promise<unknown>)=>void),newCode?:string){
+export function createCasualAPI(DB:CasualDatabase|undefined,keepAlive?:((task:Promise<unknown>)=>void),newCode?:string,authenticatedHash?:string){
  async function read(code:string){if(!DB)throw new CasualError('Room storage is unavailable.',503);const row=await DB.prepare('SELECT state,revision,created_at FROM casual_rooms WHERE code=?').bind(code).first<{state:string;revision:number;created_at:number}>();if(!row)throw new CasualError('Room not found. Check the code.',404);if(Date.now()-row.created_at>ROOM_TTL)throw new CasualError('This room expired after 24 hours.',410);return{state:JSON.parse(row.state) as CasualState,revision:row.revision}}
- async function credential(req:Request){const bearer=(req.headers.get('Authorization')||'').match(/^Bearer ([a-f0-9]{64})$/);return bearer?hash(bearer[1]):null}
+ async function credential(req:Request){if(authenticatedHash)return authenticatedHash;const bearer=(req.headers.get('Authorization')||'').match(/^Bearer ([a-f0-9]{64})$/);return bearer?hash(bearer[1]):null}
  function authenticate(tokenHash:string|null,s:CasualState){if(!tokenHash)throw new CasualError('Join a room to play.',401);const p=s.players.find(p=>p.tokenHash===tokenHash&&!p.retired);if(!p)throw new CasualError('Your session ended. Join the room again.',401);return p.id}
  async function save(code:string,state:CasualState,revision:number){const r=await DB!.prepare('UPDATE casual_rooms SET state=?, revision=revision+1 WHERE code=? AND revision=?').bind(JSON.stringify(state),code,revision).run();return!!r.meta.changes}
  function project(s:CasualState,id:string,now:number,revision:number,round?:number,worldVersion?:number,scene?:string|null){const room={...publicCasual(s,id,now),revision};if(room.mode==='terra'&&room.round===round&&room.game?.version===worldVersion)room.game={...room.game,tiles:undefined};if(scene&&scene===roomScene(room))room.game={...room.game,obstacles:undefined};return room}

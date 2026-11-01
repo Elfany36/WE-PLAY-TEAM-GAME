@@ -28,7 +28,7 @@ Doodle Relay includes round, marker, pencil, soft, calligraphy, eraser and toler
 
 The shared transport uses private exact-base deltas, full-state recovery, stale-revision rejection, retry acknowledgements, per-player budgets and resumable seats. Real-time clients buffer remote poses and replay local inputs at their issue times with bounded correction. Fixed physics steps are 50 ms, while Snake follows its configured grid cadence. Games pause after an eight-second room update gap; resuming preserves remaining effects and releases stale held controls. Canvas backgrounds, symbols, grid layers and model buffers are reused; canvas DPR and extrapolation are bounded. Hidden arenas stop painting. Memory's 100 faces are bundled SVG artwork, avoiding face-image network/decode stalls.
 
-The transport remains authenticated HTTPS polling with D1 storage. This hosting configuration has no durable WebSocket broadcast binding; a 20 Hz simulation step is not a 20 Hz network broadcast. Measurements in the phase reports are bounded local samples, not universal frame-rate or Internet-latency guarantees.
+The original service supports authenticated HTTPS polling. The dedicated room service now also supports authenticated WebSocket state and control receipts; see the v12 update below. Measurements in the phase reports are bounded local samples, not universal frame-rate or Internet-latency guarantees.
 
 The inventory is not an exhaustive tutorial for every possible HTML/CSS expression. It includes 1,333 records without upstream explanatory prose. These are explicitly labeled. CSS value spaces include unlimited numbers, URLs and author-defined names; formal grammar describes those spaces. An upstream status or compatibility record is not certification of every browser behavior.
 
@@ -112,3 +112,15 @@ See [the v9 verification tracker](docs/verification/network-visual-v9.md) for te
 Turn-based games now show clear turn-arrival notices and persistent contrasting status, including fullscreen. Leave, End round and Resume controls have distinct colors and larger touch targets in both themes. Bots have varied reactions and legal choices; memory bots learn separately, forget faces and can miss pairs without inspecting hidden cards.
 
 Active action rooms have a foreground-only server simulation heartbeat. Rendering compensates for transit time before applying its bounded prediction allowance, high-refresh devices avoid excessive whole-world paints, and selected game scenes warm during setup. See [the v10 verification tracker](docs/verification/hud-fairness-v10.md) for the 332 tests, all-game HUD checks, multiplayer evidence and remaining production measurement limits.
+
+## Live play and stable game views (v12)
+
+The dedicated room service negotiates private WebSocket snapshots, exact-base deltas and authoritative action receipts. Foreground action rooms advance at 50 ms steps. Each client may have four unacknowledged state frames; slower links receive the newest committed state when space becomes available. Handshake timeouts, heartbeat checks, bounded reconnection and full-state recovery keep HTTP fallback available. Old clients and revision-only servers remain compatible. Drawing Relay keeps its large artwork transfers on HTTPS and receives live revision notifications.
+
+Game status and turn notices now occupy their own layout space. They do not follow the viewport over the board. Fullscreen reserves room for controls, and exiting restores the selected layout. Private UNO hands scroll separately from Draw, penalty and Wild-color controls. Guides and rule sources live behind **Guides & controls** beside the game; detailed scene tips and edition notes have their own toggles. Setup controls and documentation tabs also fit narrow phones.
+
+Movement presentation uses finite recovery thresholds, stable marble rolling, eased block movement and a camera initialized to the controlled actor. Focusing a form or opening inventory releases held controls. Terra reuses terrain chunks and light stamps instead of repainting every tile; map cards use the playable track and cover geometry. The static Pages entry now imports the same current arcade styles as the hosted entry.
+
+Browsers and this Worker deployment do not expose raw UDP game sockets. This implementation uses encrypted WebSockets and HTTPS. A UDP-based WebRTC or WebTransport service would require additional supported infrastructure.
+
+See [v12 verification and deployment notes](docs/verification/live-play-v12.md) for the actual local checks, screenshots, measured limits and the deployment status.
