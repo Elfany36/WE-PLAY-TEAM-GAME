@@ -1,0 +1,1450 @@
+{
+  "baseline": "df678b666f6edf5763013496c3aec5adc2d311ca",
+  "tests": {
+    "pass": 425,
+    "fail": 0
+  },
+  "typecheck": "passed",
+  "frameworkBuild": "passed",
+  "pagesBuild": "passed",
+  "cssExamplesParsed": 327,
+  "botPacing": [
+    {
+      "mode": "chess",
+      "advertisedWaitRemainingMs": 2208,
+      "observedDecisionAfterThinkingNoticeMs": 2324,
+      "decisionAfterAdvertisedDeadlineMs": 116,
+      "independentSecondMemoryDelay": false,
+      "liveStates": 4,
+      "errors": []
+    },
+    {
+      "mode": "dama",
+      "advertisedWaitRemainingMs": 2454,
+      "observedDecisionAfterThinkingNoticeMs": 2558,
+      "decisionAfterAdvertisedDeadlineMs": 104,
+      "independentSecondMemoryDelay": false,
+      "liveStates": 4,
+      "errors": []
+    },
+    {
+      "mode": "scidama",
+      "advertisedWaitRemainingMs": 1236,
+      "observedDecisionAfterThinkingNoticeMs": 1338,
+      "decisionAfterAdvertisedDeadlineMs": 102,
+      "independentSecondMemoryDelay": false,
+      "liveStates": 4,
+      "errors": []
+    },
+    {
+      "mode": "memory",
+      "advertisedWaitRemainingMs": 2085,
+      "observedDecisionAfterThinkingNoticeMs": 2187,
+      "decisionAfterAdvertisedDeadlineMs": 102,
+      "independentSecondMemoryDelay": true,
+      "liveStates": 6,
+      "errors": []
+    },
+    {
+      "mode": "uno",
+      "advertisedWaitRemainingMs": 1334,
+      "observedDecisionAfterThinkingNoticeMs": 1437,
+      "decisionAfterAdvertisedDeadlineMs": 103,
+      "independentSecondMemoryDelay": false,
+      "liveStates": 5,
+      "errors": []
+    },
+    {
+      "mode": "pool",
+      "advertisedWaitRemainingMs": 2155,
+      "observedDecisionAfterThinkingNoticeMs": 2257,
+      "decisionAfterAdvertisedDeadlineMs": 102,
+      "independentSecondMemoryDelay": false,
+      "liveStates": 26,
+      "errors": []
+    }
+  ],
+  "chat": [
+    {
+      "width": 1440,
+      "styledTextSynced": true,
+      "markupEscaped": true,
+      "emojiSynced": true,
+      "giftSynced": true,
+      "gifSynced": true,
+      "oneGifPlayback": true,
+      "reducedMotionStopsGif": true,
+      "resizeWorks": true,
+      "gameInputIsolated": true,
+      "idleChatDomMutations": 0,
+      "overflow": 0,
+      "chatWidth": 412,
+      "chatHeight": 480,
+      "errors": []
+    },
+    {
+      "width": 390,
+      "styledTextSynced": true,
+      "markupEscaped": true,
+      "emojiSynced": true,
+      "giftSynced": true,
+      "gifSynced": true,
+      "oneGifPlayback": true,
+      "reducedMotionStopsGif": true,
+      "resizeWorks": true,
+      "gameInputIsolated": true,
+      "idleChatDomMutations": 0,
+      "overflow": 0,
+      "chatWidth": 350,
+      "chatHeight": 480,
+      "errors": []
+    }
+  ],
+  "rendering": [
+    {
+      "mode": "tanks",
+      "width": 1440,
+      "actors": 4,
+      "sampleMs": 1800,
+      "renderFps": 60,
+      "gradientCalls": {
+        "linear": 0,
+        "radial": 0
+      },
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "marble",
+      "width": 1440,
+      "actors": 4,
+      "sampleMs": 1800,
+      "renderFps": 60,
+      "gradientCalls": {
+        "linear": 0,
+        "radial": 432
+      },
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "circuit",
+      "width": 1440,
+      "actors": 4,
+      "sampleMs": 1800,
+      "renderFps": 55,
+      "gradientCalls": {
+        "linear": 0,
+        "radial": 0
+      },
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "tanks",
+      "width": 390,
+      "actors": 4,
+      "sampleMs": 1800,
+      "renderFps": 60,
+      "gradientCalls": {
+        "linear": 0,
+        "radial": 0
+      },
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "marble",
+      "width": 390,
+      "actors": 4,
+      "sampleMs": 1800,
+      "renderFps": 60,
+      "gradientCalls": {
+        "linear": 0,
+        "radial": 432
+      },
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "circuit",
+      "width": 390,
+      "actors": 4,
+      "sampleMs": 1800,
+      "renderFps": 60,
+      "gradientCalls": {
+        "linear": 0,
+        "radial": 0
+      },
+      "overflow": 0,
+      "errors": []
+    }
+  ],
+  "snakeLatency": [
+    {
+      "rtt": 400,
+      "ready": 1,
+      "states": 60,
+      "alive": true,
+      "longestPause": 0,
+      "worldGaps": {
+        "max": 552,
+        "afterWarmup": 405
+      },
+      "frames": 450,
+      "fps": 60,
+      "maxDisplayedCellStep": 0.3425142857142873,
+      "p95Speed": 10.285714285714365,
+      "stillFrames": 0,
+      "errors": []
+    },
+    {
+      "rtt": 3000,
+      "ready": 1,
+      "states": 53,
+      "alive": true,
+      "longestPause": 133.29999999999927,
+      "worldGaps": {
+        "max": 1611,
+        "afterWarmup": 297
+      },
+      "frames": 407,
+      "fps": 60,
+      "maxDisplayedCellStep": 0.34251428571427844,
+      "p95Speed": 10.285714285714365,
+      "stillFrames": 8,
+      "errors": []
+    },
+    {
+      "rtt": 5000,
+      "ready": 1,
+      "states": 43,
+      "alive": true,
+      "longestPause": 0,
+      "worldGaps": {
+        "max": 2603,
+        "afterWarmup": 291
+      },
+      "frames": 341,
+      "fps": 60,
+      "maxDisplayedCellStep": 0.21311941964285808,
+      "p95Speed": 10.285714285714365,
+      "stillFrames": 0,
+      "errors": []
+    }
+  ],
+  "staleWorldRecovery": {
+    "healthyHttpGets": 1,
+    "missingStateFallbackGets": 3,
+    "firstFallbackMs": 925,
+    "worldTickContinued": true,
+    "streamResumed": true,
+    "errors": []
+  },
+  "keyboard": [
+    {
+      "mode": "snake",
+      "keyboardAcknowledgementMs": 471,
+      "movement": {
+        "dx": 2,
+        "dy": 1
+      },
+      "neutralRelease": null,
+      "otherHumanControlsUntouched": true,
+      "errors": []
+    },
+    {
+      "mode": "sumo",
+      "keyboardAcknowledgementMs": 84,
+      "movement": {
+        "dx": -19.81,
+        "dy": 0
+      },
+      "neutralRelease": true,
+      "otherHumanControlsUntouched": true,
+      "errors": []
+    },
+    {
+      "mode": "tanks",
+      "keyboardAcknowledgementMs": 43,
+      "movement": {
+        "dx": 19.81,
+        "dy": 0
+      },
+      "neutralRelease": true,
+      "otherHumanControlsUntouched": true,
+      "errors": []
+    },
+    {
+      "mode": "pong",
+      "keyboardAcknowledgementMs": 85,
+      "movement": {
+        "dx": 0,
+        "dy": 107.5
+      },
+      "neutralRelease": true,
+      "otherHumanControlsUntouched": true,
+      "reconnected": true,
+      "errors": []
+    },
+    {
+      "mode": "marble",
+      "keyboardAcknowledgementMs": 42,
+      "movement": {
+        "dx": 14.11,
+        "dy": 0
+      },
+      "neutralRelease": true,
+      "otherHumanControlsUntouched": true,
+      "errors": []
+    },
+    {
+      "mode": "blocks",
+      "keyboardAcknowledgementMs": 43,
+      "movement": {
+        "dx": -1,
+        "dy": 0
+      },
+      "neutralRelease": null,
+      "otherHumanControlsUntouched": true,
+      "errors": []
+    },
+    {
+      "mode": "circuit",
+      "keyboardAcknowledgementMs": 55,
+      "movement": {
+        "dx": 8.3,
+        "dy": 1.18
+      },
+      "neutralRelease": true,
+      "otherHumanControlsUntouched": true,
+      "errors": []
+    },
+    {
+      "mode": "terra",
+      "keyboardAcknowledgementMs": 47,
+      "movement": {
+        "dx": 1.35,
+        "dy": -0.18
+      },
+      "neutralRelease": true,
+      "otherHumanControlsUntouched": true,
+      "errors": []
+    }
+  ],
+  "contentCapabilities": [
+    {
+      "healthDelayMs": 0,
+      "capabilityGets": 1,
+      "advertisedContent": false,
+      "newOnlineChoiceAllowed": false,
+      "localNewTrackAvailable": true,
+      "olderLobbyNewChoiceDisabled": true,
+      "errors": []
+    },
+    {
+      "healthDelayMs": 0,
+      "capabilityGets": 1,
+      "advertisedContent": true,
+      "newOnlineChoiceAllowed": true,
+      "localNewTrackAvailable": true,
+      "olderLobbyNewChoiceDisabled": false,
+      "errors": []
+    },
+    {
+      "healthDelayMs": 5000,
+      "capabilityGets": 1,
+      "advertisedContent": true,
+      "newOnlineChoiceAllowed": true,
+      "localNewTrackAvailable": true,
+      "olderLobbyNewChoiceDisabled": false,
+      "errors": []
+    }
+  ],
+  "unoFinalDecisions": [
+    {
+      "scenario": "large-flip-hand",
+      "hidden": [],
+      "count": 40,
+      "overlaps": []
+    },
+    {
+      "scenario": "choose-color",
+      "hidden": [],
+      "count": 7,
+      "overlaps": []
+    },
+    {
+      "scenario": "accept-penalty",
+      "hidden": [],
+      "count": 7,
+      "overlaps": []
+    }
+  ],
+  "codingViews": [
+    {
+      "mode": "blanks",
+      "width": 1440,
+      "overflow": 0,
+      "stats": 3,
+      "questionVisible": true,
+      "errors": []
+    },
+    {
+      "mode": "survival",
+      "width": 1440,
+      "overflow": 0,
+      "stats": 3,
+      "questionVisible": true,
+      "errors": []
+    },
+    {
+      "mode": "quiz",
+      "width": 1440,
+      "overflow": 0,
+      "stats": 3,
+      "questionVisible": true,
+      "errors": []
+    },
+    {
+      "mode": "blanks",
+      "width": 390,
+      "overflow": 0,
+      "stats": 3,
+      "questionVisible": true,
+      "errors": []
+    },
+    {
+      "mode": "survival",
+      "width": 390,
+      "overflow": 0,
+      "stats": 3,
+      "questionVisible": true,
+      "errors": []
+    },
+    {
+      "mode": "quiz",
+      "width": 390,
+      "overflow": 0,
+      "stats": 3,
+      "questionVisible": true,
+      "errors": []
+    }
+  ],
+  "newContentViews": [
+    {
+      "mode": "snake",
+      "width": 1440,
+      "settings": {
+        "map": "lotus"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "snake",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "snake",
+      "width": 1440,
+      "settings": {
+        "map": "frost"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "snake",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "ladders",
+      "width": 1440,
+      "settings": {
+        "scene": "lagoon"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "ladders",
+      "scene": "lagoon",
+      "errors": []
+    },
+    {
+      "mode": "chess",
+      "width": 1440,
+      "settings": {
+        "scene": "royal"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "chess",
+      "scene": "royal",
+      "errors": []
+    },
+    {
+      "mode": "snake",
+      "width": 1440,
+      "settings": {
+        "map": "sunspire"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "snake",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "snake",
+      "width": 1440,
+      "settings": {
+        "map": "tidepool"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "snake",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "circuit",
+      "width": 1440,
+      "settings": {
+        "track": "cinder"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "circuit",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "tanks",
+      "width": 1440,
+      "settings": {
+        "arena": "glacier"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "tanks",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "sumo",
+      "width": 1440,
+      "settings": {
+        "arena": "glacier"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "sumo",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "pong",
+      "width": 1440,
+      "settings": {
+        "arena": "glacier"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "pong",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "marble",
+      "width": 1440,
+      "settings": {
+        "arena": "glacier"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "marble",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "uno",
+      "width": 1440,
+      "settings": {
+        "scene": "cobalt"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "uno",
+      "scene": "cobalt",
+      "errors": []
+    },
+    {
+      "mode": "memory",
+      "width": 1440,
+      "settings": {
+        "scene": "cherry"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "memory",
+      "scene": "cherry",
+      "errors": []
+    },
+    {
+      "mode": "ladders",
+      "width": 1440,
+      "settings": {
+        "scene": "cobalt"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "ladders",
+      "scene": "cobalt",
+      "errors": []
+    },
+    {
+      "mode": "property",
+      "width": 1440,
+      "settings": {
+        "scene": "cherry"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "property",
+      "scene": "cherry",
+      "errors": []
+    },
+    {
+      "mode": "chess",
+      "width": 1440,
+      "settings": {
+        "scene": "cobalt"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "chess",
+      "scene": "cobalt",
+      "errors": []
+    },
+    {
+      "mode": "dama",
+      "width": 1440,
+      "settings": {
+        "scene": "cherry"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "dama",
+      "scene": "cherry",
+      "errors": []
+    },
+    {
+      "mode": "scidama",
+      "width": 1440,
+      "settings": {
+        "scene": "cobalt"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "scidama",
+      "scene": "cobalt",
+      "errors": []
+    },
+    {
+      "mode": "pool",
+      "width": 1440,
+      "settings": {
+        "scene": "cherry"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "pool",
+      "scene": "cherry",
+      "errors": []
+    },
+    {
+      "mode": "blocks",
+      "width": 1440,
+      "settings": {
+        "scene": "cobalt"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "blocks",
+      "scene": "cobalt",
+      "errors": []
+    },
+    {
+      "mode": "phone",
+      "width": 1440,
+      "settings": {
+        "scene": "cherry"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "phone",
+      "scene": "cherry",
+      "errors": []
+    },
+    {
+      "mode": "snake",
+      "width": 390,
+      "settings": {
+        "map": "lotus"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "snake",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "snake",
+      "width": 390,
+      "settings": {
+        "map": "frost"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "snake",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "ladders",
+      "width": 390,
+      "settings": {
+        "scene": "lagoon"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "ladders",
+      "scene": "lagoon",
+      "errors": []
+    },
+    {
+      "mode": "chess",
+      "width": 390,
+      "settings": {
+        "scene": "royal"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "chess",
+      "scene": "royal",
+      "errors": []
+    },
+    {
+      "mode": "snake",
+      "width": 390,
+      "settings": {
+        "map": "sunspire"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "snake",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "snake",
+      "width": 390,
+      "settings": {
+        "map": "tidepool"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "snake",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "circuit",
+      "width": 390,
+      "settings": {
+        "track": "cinder"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "circuit",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "tanks",
+      "width": 390,
+      "settings": {
+        "arena": "glacier"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "tanks",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "sumo",
+      "width": 390,
+      "settings": {
+        "arena": "glacier"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "sumo",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "pong",
+      "width": 390,
+      "settings": {
+        "arena": "glacier"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "pong",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "marble",
+      "width": 390,
+      "settings": {
+        "arena": "glacier"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "marble",
+      "scene": "garden",
+      "errors": []
+    },
+    {
+      "mode": "uno",
+      "width": 390,
+      "settings": {
+        "scene": "cobalt"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "uno",
+      "scene": "cobalt",
+      "errors": []
+    },
+    {
+      "mode": "memory",
+      "width": 390,
+      "settings": {
+        "scene": "cherry"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "memory",
+      "scene": "cherry",
+      "errors": []
+    },
+    {
+      "mode": "ladders",
+      "width": 390,
+      "settings": {
+        "scene": "cobalt"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "ladders",
+      "scene": "cobalt",
+      "errors": []
+    },
+    {
+      "mode": "property",
+      "width": 390,
+      "settings": {
+        "scene": "cherry"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "property",
+      "scene": "cherry",
+      "errors": []
+    },
+    {
+      "mode": "chess",
+      "width": 390,
+      "settings": {
+        "scene": "cobalt"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "chess",
+      "scene": "cobalt",
+      "errors": []
+    },
+    {
+      "mode": "dama",
+      "width": 390,
+      "settings": {
+        "scene": "cherry"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "dama",
+      "scene": "cherry",
+      "errors": []
+    },
+    {
+      "mode": "scidama",
+      "width": 390,
+      "settings": {
+        "scene": "cobalt"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "scidama",
+      "scene": "cobalt",
+      "errors": []
+    },
+    {
+      "mode": "pool",
+      "width": 390,
+      "settings": {
+        "scene": "cherry"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "pool",
+      "scene": "cherry",
+      "errors": []
+    },
+    {
+      "mode": "blocks",
+      "width": 390,
+      "settings": {
+        "scene": "cobalt"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "blocks",
+      "scene": "cobalt",
+      "errors": []
+    },
+    {
+      "mode": "phone",
+      "width": 390,
+      "settings": {
+        "scene": "cherry"
+      },
+      "overflow": 0,
+      "overlaps": [],
+      "footerText": false,
+      "tips": 0,
+      "activity": false,
+      "game": "phone",
+      "scene": "cherry",
+      "errors": []
+    }
+  ],
+  "gameViews": [
+    {
+      "mode": "snake",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "sumo",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "tanks",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "pong",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "marble",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "blocks",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "circuit",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "terra",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "pool",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "uno",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "ladders",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "memory",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "property",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "chess",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "dama",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "scidama",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "phone",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "snake",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "sumo",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "tanks",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "pong",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "marble",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "blocks",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "circuit",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "terra",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "pool",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "uno",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "ladders",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "memory",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "property",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "chess",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "dama",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "scidama",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "mode": "phone",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    }
+  ],
+  "website": [
+    {
+      "route": "overview",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "learning-paths",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "documentation",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "practice-studio",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "playground",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "games",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "casual-arcade",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "achievements",
+      "width": 1440,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "kart-map-cards",
+      "width": 1440,
+      "columns": "351.328px 351.328px 351.344px",
+      "distinctRoutePreviews": 5
+    },
+    {
+      "route": "overview",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "learning-paths",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "documentation",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "practice-studio",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "playground",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "games",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "casual-arcade",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "achievements",
+      "width": 390,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "kart-map-cards",
+      "width": 390,
+      "columns": "159.5px 159.5px",
+      "distinctRoutePreviews": 5
+    },
+    {
+      "route": "overview",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "learning-paths",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "documentation",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "practice-studio",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "playground",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "games",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "casual-arcade",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "achievements",
+      "width": 320,
+      "overflow": 0,
+      "errors": []
+    },
+    {
+      "route": "kart-map-cards",
+      "width": 320,
+      "columns": "124.5px 124.5px",
+      "distinctRoutePreviews": 5
+    }
+  ],
+  "newContent": {
+    "snakeMaps": 12,
+    "clubArenas": 6,
+    "kartTracks": 5,
+    "tableThemes": 8,
+    "gifs": 3
+  },
+  "manualDeployments": [],
+  "limits": [
+    "Local Chromium and local Durable Object runtime",
+    "Physical devices and Safari/Firefox not measured",
+    "Latency proxy is not a geographically separated production measurement",
+    "Server-side changes await the separately skipped Worker deployment"
+  ]
+}
