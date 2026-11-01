@@ -1,0 +1,44 @@
+[
+  {
+    "width": 1440,
+    "errors": [],
+    "interfaceHidden": true,
+    "auto": {
+      "width": 1005,
+      "height": 847,
+      "overflow": false
+    },
+    "fit": {
+      "overflow": "visible",
+      "clipped": false
+    },
+    "fullscreen": {
+      "width": 702,
+      "height": 591,
+      "rootOverflow": "auto",
+      "controls": true
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "errors": [],
+    "interfaceHidden": true,
+    "auto": {
+      "width": 344,
+      "height": 565,
+      "overflow": false
+    },
+    "fit": {
+      "overflow": "visible",
+      "clipped": false
+    },
+    "fullscreen": {
+      "width": 322,
+      "height": 529,
+      "rootOverflow": "auto",
+      "controls": true
+    },
+    "status": "passed"
+  }
+]

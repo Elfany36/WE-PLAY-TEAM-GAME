@@ -31,7 +31,7 @@ export function paintStroke(c:CanvasRenderingContext2D,s:InkStroke){
   if(s.points.length===1){const p=s.points[0];c.moveTo(p[0]*640-dx,p[1]*480-dy);c.lineTo(p[0]*640+dx,p[1]*480-dy);c.lineTo(p[0]*640+dx,p[1]*480+dy);c.lineTo(p[0]*640-dx,p[1]*480+dy)}
   else{for(let i=0;i<s.points.length;i++){const p=s.points[i];i?c.lineTo(p[0]*640-dx,p[1]*480-dy):c.moveTo(p[0]*640-dx,p[1]*480-dy)}for(let i=s.points.length-1;i>=0;i--){const p=s.points[i];c.lineTo(p[0]*640+dx,p[1]*480+dy)}}c.closePath();c.fill();
  }
- else{c.beginPath();s.points.forEach((p,i)=>i?c.lineTo(p[0]*640,p[1]*480):c.moveTo(p[0]*640,p[1]*480));if(s.points.length===1)c.lineTo(s.points[0][0]*640+.01,s.points[0][1]*480);c.stroke()}
+ else{c.beginPath();const first=s.points[0];c.moveTo(first[0]*640,first[1]*480);if(s.points.length>2&&['round','pencil','soft'].includes(brush)){for(let i=1;i<s.points.length-1;i++){const p=s.points[i],next=s.points[i+1];c.quadraticCurveTo(p[0]*640,p[1]*480,(p[0]+next[0])*320,(p[1]+next[1])*240)}const end=s.points.at(-1)!;c.lineTo(end[0]*640,end[1]*480)}else for(let i=1;i<s.points.length;i++)c.lineTo(s.points[i][0]*640,s.points[i][1]*480);if(s.points.length===1)c.lineTo(first[0]*640+.01,first[1]*480);c.stroke()}
  c.restore();
 }
 export function paintDrawing(canvas:HTMLCanvasElement,strokes:InkStroke[]){const c=canvas.getContext('2d');if(!c)return;c.setTransform(canvas.width/640,0,0,canvas.height/480,0,0);c.clearRect(0,0,640,480);c.fillStyle='#ffffff';c.fillRect(0,0,640,480);for(const s of strokes)paintStroke(c,s)}

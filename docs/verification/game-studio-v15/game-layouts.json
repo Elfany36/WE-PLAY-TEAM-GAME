@@ -1,0 +1,1040 @@
+[
+  {
+    "game": "circuit",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 400.09375,
+        "bottom": 466.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": {
+        "top": 553.59375,
+        "bottom": 1203.59375,
+        "left": 319,
+        "right": 1359
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "blocks",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 400.09375,
+        "bottom": 466.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": {
+        "top": 535.59375,
+        "bottom": 1382.59375,
+        "left": 336.5,
+        "right": 1341.5
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "sumo",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 278.5,
+        "bottom": 356.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 387.09375,
+        "bottom": 453.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": {
+        "top": 590.59375,
+        "bottom": 1219.59375,
+        "left": 336.5,
+        "right": 1341.5
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "snake",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 400.09375,
+        "bottom": 466.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": {
+        "top": 586.09375,
+        "bottom": 1230.09375,
+        "left": 413,
+        "right": 1057
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "uno",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 401.09375,
+        "bottom": 467.09375,
+        "left": 290,
+        "right": 1388
+      },
+      "board": {
+        "top": 564.1875,
+        "bottom": 880.375,
+        "left": 290,
+        "right": 1388
+      },
+      "overflow": false
+    },
+    "cards": [
+      {
+        "width": 98.1875,
+        "height": 191.28125,
+        "left": 294,
+        "right": 392.1875,
+        "transform": "none"
+      },
+      {
+        "width": 98.203125,
+        "height": 193.296875,
+        "left": 404.1875,
+        "right": 502.390625,
+        "transform": "none"
+      },
+      {
+        "width": 98.203125,
+        "height": 206.296875,
+        "left": 514.390625,
+        "right": 612.59375,
+        "transform": "none"
+      },
+      {
+        "width": 98.203125,
+        "height": 193.296875,
+        "left": 624.59375,
+        "right": 722.796875,
+        "transform": "none"
+      },
+      {
+        "width": 98.1875,
+        "height": 193.28125,
+        "left": 734.796875,
+        "right": 832.984375,
+        "transform": "none"
+      },
+      {
+        "width": 98.203125,
+        "height": 193.296875,
+        "left": 844.984375,
+        "right": 943.1875,
+        "transform": "none"
+      },
+      {
+        "width": 98.203125,
+        "height": 193.296875,
+        "left": 955.1875,
+        "right": 1053.390625,
+        "transform": "none"
+      }
+    ],
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "pool",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 400.09375,
+        "bottom": 466.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": {
+        "top": 547.59375,
+        "bottom": 1090.78125,
+        "left": 289,
+        "right": 1259
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "marble",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 400.09375,
+        "bottom": 466.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": {
+        "top": 535.59375,
+        "bottom": 1164.59375,
+        "left": 336.5,
+        "right": 1341.5
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "tanks",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 400.09375,
+        "bottom": 466.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": {
+        "top": 535.59375,
+        "bottom": 1164.59375,
+        "left": 336.5,
+        "right": 1341.5
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "pong",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 400.09375,
+        "bottom": 466.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": {
+        "top": 535.59375,
+        "bottom": 1164.59375,
+        "left": 336.5,
+        "right": 1341.5
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "memory",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 400.09375,
+        "bottom": 466.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": {
+        "top": 565.09375,
+        "bottom": 1251.96875,
+        "left": 306,
+        "right": 1372
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "property",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 400.09375,
+        "bottom": 466.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": {
+        "top": 727.09375,
+        "bottom": 1687.09375,
+        "left": 359,
+        "right": 1319
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "terra",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "relative",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 277,
+        "right": 1089
+      },
+      "toolbar": {
+        "top": 404.09375,
+        "bottom": 468.09375,
+        "left": 296,
+        "right": 1070
+      },
+      "board": {
+        "top": 563.59375,
+        "bottom": 1028.59375,
+        "left": 311,
+        "right": 1055
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "ladders",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 400.09375,
+        "bottom": 466.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": null,
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "chess",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 400.09375,
+        "bottom": 466.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": null,
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "dama",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 400.09375,
+        "bottom": 466.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": null,
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "scidama",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 291.5,
+        "bottom": 369.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 400.09375,
+        "bottom": 466.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": null,
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "phone",
+    "width": 1440,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 103.5,
+        "bottom": 181.09375,
+        "left": 274,
+        "right": 1404
+      },
+      "toolbar": {
+        "top": 212.09375,
+        "bottom": 278.09375,
+        "left": 289,
+        "right": 1389
+      },
+      "board": null,
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "circuit",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 256.515625,
+        "bottom": 354.203125,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 379.203125,
+        "bottom": 570.203125,
+        "left": 23,
+        "right": 367
+      },
+      "board": {
+        "top": 714.703125,
+        "bottom": 929.703125,
+        "left": 23,
+        "right": 367
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "blocks",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 256.515625,
+        "bottom": 354.203125,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 379.203125,
+        "bottom": 570.203125,
+        "left": 23,
+        "right": 367
+      },
+      "board": {
+        "top": 662.703125,
+        "bottom": 1227.703125,
+        "left": 23,
+        "right": 367
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "sumo",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 278.515625,
+        "bottom": 354.109375,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 379.109375,
+        "bottom": 570.109375,
+        "left": 23,
+        "right": 367
+      },
+      "board": {
+        "top": 730.609375,
+        "bottom": 946.609375,
+        "left": 23,
+        "right": 367
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "snake",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 256.515625,
+        "bottom": 354.203125,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 379.203125,
+        "bottom": 570.203125,
+        "left": 23,
+        "right": 367
+      },
+      "board": {
+        "top": 695.203125,
+        "bottom": 1023.203125,
+        "left": 31,
+        "right": 359
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "uno",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 255.53125,
+        "bottom": 353.21875,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 379.21875,
+        "bottom": 570.21875,
+        "left": 24,
+        "right": 366
+      },
+      "board": {
+        "top": 675.3125,
+        "bottom": 944.5,
+        "left": 24,
+        "right": 366
+      },
+      "overflow": false
+    },
+    "cards": [
+      {
+        "width": 106,
+        "height": 205,
+        "left": 28,
+        "right": 134,
+        "transform": "none"
+      },
+      {
+        "width": 106,
+        "height": 205,
+        "left": 142,
+        "right": 248,
+        "transform": "none"
+      },
+      {
+        "width": 106,
+        "height": 205,
+        "left": 256,
+        "right": 362,
+        "transform": "none"
+      },
+      {
+        "width": 106,
+        "height": 205,
+        "left": 28,
+        "right": 134,
+        "transform": "none"
+      },
+      {
+        "width": 106,
+        "height": 205,
+        "left": 142,
+        "right": 248,
+        "transform": "none"
+      },
+      {
+        "width": 106,
+        "height": 203,
+        "left": 256,
+        "right": 362,
+        "transform": "none"
+      },
+      {
+        "width": 106,
+        "height": 203,
+        "left": 28,
+        "right": 134,
+        "transform": "none"
+      }
+    ],
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "pool",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 278.515625,
+        "bottom": 354.109375,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 379.109375,
+        "bottom": 570.109375,
+        "left": 23,
+        "right": 367
+      },
+      "board": {
+        "top": 674.609375,
+        "bottom": 867.234375,
+        "left": 23,
+        "right": 367
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "marble",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 256.515625,
+        "bottom": 354.203125,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 379.203125,
+        "bottom": 570.203125,
+        "left": 23,
+        "right": 367
+      },
+      "board": {
+        "top": 662.703125,
+        "bottom": 878.703125,
+        "left": 23,
+        "right": 367
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "tanks",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 278.515625,
+        "bottom": 354.109375,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 379.109375,
+        "bottom": 570.109375,
+        "left": 23,
+        "right": 367
+      },
+      "board": {
+        "top": 635.609375,
+        "bottom": 851.609375,
+        "left": 23,
+        "right": 367
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "pong",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": -100.484375,
+        "bottom": -24.890625,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 0.109375,
+        "bottom": 191.109375,
+        "left": 23,
+        "right": 367
+      },
+      "board": {
+        "top": 283.609375,
+        "bottom": 499.609375,
+        "left": 23,
+        "right": 367
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "memory",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 256.515625,
+        "bottom": 354.203125,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 379.203125,
+        "bottom": 570.203125,
+        "left": 23,
+        "right": 367
+      },
+      "board": {
+        "top": 659.203125,
+        "bottom": 1495.078125,
+        "left": 34,
+        "right": 356
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "property",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 278.515625,
+        "bottom": 354.109375,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 379.109375,
+        "bottom": 570.109375,
+        "left": 23,
+        "right": 367
+      },
+      "board": {
+        "top": 932.109375,
+        "bottom": 1276.109375,
+        "left": 23,
+        "right": 367
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "terra",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "relative",
+      "cue": {
+        "top": 252.515625,
+        "bottom": 350.203125,
+        "left": 16,
+        "right": 374
+      },
+      "toolbar": {
+        "top": 377.203125,
+        "bottom": 519.203125,
+        "left": 27,
+        "right": 363
+      },
+      "board": {
+        "top": 655.703125,
+        "bottom": 858.203125,
+        "left": 33,
+        "right": 357
+      },
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "ladders",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 278.515625,
+        "bottom": 354.109375,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 379.109375,
+        "bottom": 570.109375,
+        "left": 23,
+        "right": 367
+      },
+      "board": null,
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "chess",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 256.515625,
+        "bottom": 354.203125,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 379.203125,
+        "bottom": 570.203125,
+        "left": 23,
+        "right": 367
+      },
+      "board": null,
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "dama",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 256.515625,
+        "bottom": 354.203125,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 379.203125,
+        "bottom": 570.203125,
+        "left": 23,
+        "right": 367
+      },
+      "board": null,
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "scidama",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": 256.515625,
+        "bottom": 354.203125,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 379.203125,
+        "bottom": 570.203125,
+        "left": 23,
+        "right": 367
+      },
+      "board": null,
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  },
+  {
+    "game": "phone",
+    "width": 390,
+    "errors": [],
+    "layout": {
+      "statusPosition": "static",
+      "cue": {
+        "top": -72.484375,
+        "bottom": 25.203125,
+        "left": 14,
+        "right": 376
+      },
+      "toolbar": {
+        "top": 50.203125,
+        "bottom": 241.203125,
+        "left": 23,
+        "right": 367
+      },
+      "board": null,
+      "overflow": false
+    },
+    "fitOverflow": false,
+    "status": "passed"
+  }
+]

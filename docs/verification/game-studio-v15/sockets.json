@@ -1,0 +1,47 @@
+{
+  "clients": 8,
+  "results": [
+    {
+      "check": "eight-player state and input delivery",
+      "status": "passed",
+      "elapsedMs": 1114,
+      "stateFramesPerSeat": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ],
+      "bytesPerSecondPerSeat": [
+        14254,
+        14254,
+        14254,
+        14254,
+        14254,
+        14254,
+        14254,
+        14254
+      ],
+      "actionReceiptMedianMs": 16
+    },
+    {
+      "check": "slow receiver coalescing and invalid ACK",
+      "status": "passed"
+    },
+    {
+      "check": "inactive tab releases its controls",
+      "status": "passed"
+    },
+    {
+      "check": "disconnect releases controls",
+      "status": "passed"
+    },
+    {
+      "check": "private card projections over live sockets",
+      "status": "passed"
+    }
+  ]
+}

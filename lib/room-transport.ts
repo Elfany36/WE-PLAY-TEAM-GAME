@@ -2,22 +2,24 @@ import {stableRoomRequest} from './room-params.ts';
 import {roomReceipt} from './network-clock.ts';
 import {applyRoomDelta} from './room-delta.ts';
 import type {RoomRevisionFeed} from './room-revisions.ts';
-export type TransportStats={live:boolean;streaming:boolean;rtt:number;totalRtt:number;serverMs:number;jitter:number;bytesPerSecond:number;lastReceipt:number;receivedBytes:number;sentBytes:number;failures:number};
+export type TransportStats={live:boolean;streaming:boolean;rtt:number;totalRtt:number;serverMs:number;jitter:number;bytesPerSecond:number;lastReceipt:number;lastStateReceipt:number;stateInterval:number;receivedBytes:number;sentBytes:number;failures:number};
 type Options={timeout?:number;retries?:number};
 const aborted=()=>new DOMException('Room session changed or request aborted.','AbortError');
 /** One private snapshot/receipt path for WebSocket and HTTP fallback. */
 export class RoomTransport{
- private bases=new Map<string,any>();private latest:{id:string;room:any}|null=null;
+ private bases=new Map<string,any>();private pins=new Map<string,number>();private latest:{id:string;room:any}|null=null;
  private samples:{at:number;bytes:number}[]=[];private generation=0;private roomMode:string|undefined;
  private controllers=new Set<AbortController>();private live:RoomRevisionFeed|null=null;
- readonly stats:TransportStats={live:false,streaming:false,rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,receivedBytes:0,sentBytes:0,failures:0};
+ readonly stats:TransportStats={live:false,streaming:false,rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,lastStateReceipt:0,stateInterval:0,receivedBytes:0,sentBytes:0,failures:0};
+ get autonomous(){return this.stats.streaming&&!!this.live?.autonomous}
  observeLatency(elapsed:number){if(!Number.isFinite(elapsed)||elapsed<0)return;const value=Math.round(elapsed);this.stats.jitter=this.stats.jitter*.8+Math.abs(value-this.stats.rtt)*.2;this.stats.rtt=value;this.stats.totalRtt=value;this.stats.serverMs=0}
  attachLive(feed:RoomRevisionFeed|null){this.live=feed;this.stats.streaming=!!feed?.streaming&&this.roomMode!=='phone'}
- reset(){this.generation++;for(const controller of this.controllers)controller.abort();this.controllers.clear();this.live=null;this.roomMode=undefined;this.bases.clear();this.latest=null;this.samples=[];Object.assign(this.stats,{live:false,streaming:false,rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,receivedBytes:0,sentBytes:0,failures:0})}
+ reset(){this.generation++;for(const controller of this.controllers)controller.abort();this.controllers.clear();this.live=null;this.roomMode=undefined;this.bases.clear();this.pins.clear();this.latest=null;this.samples=[];Object.assign(this.stats,{live:false,streaming:false,rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,lastStateReceipt:0,stateInterval:0,receivedBytes:0,sentBytes:0,failures:0})}
+ private trimBases(){let disposable=this.bases.size-this.pins.size;for(const id of this.bases.keys()){if(disposable<=48)break;if(this.pins.has(id)||id===this.latest?.id)continue;this.bases.delete(id);disposable--}}
  private decode(data:any,raw:string,elapsed:number,tx=0){
   if(data.patch){const base=this.bases.get(data.baseSnapshot);if(!base){this.latest=null;throw Object.assign(Error('Refreshing the complete room snapshot.'),{status:409,resync:true})}data.room=applyRoomDelta(base,data.patch);delete data.patch}
   if(data.room){this.roomMode=data.room.mode;this.stats.streaming=!!this.live?.streaming&&this.roomMode!=='phone'}
-  if(data.snapshotId&&data.room){this.bases.set(data.snapshotId,data.room);while(this.bases.size>32)this.bases.delete(this.bases.keys().next().value!);const r=data.room,previous=this.latest?.room;if(!previous||r.code!==previous.code||(r.revision??0)>(previous.revision??0)||r.revision===previous.revision&&r.serverNow>=previous.serverNow)this.latest={id:data.snapshotId,room:r}}
+  if(data.snapshotId&&data.room){this.bases.set(data.snapshotId,data.room);const r=data.room,previous=this.latest?.room;if(!previous||r.code!==previous.code||(r.revision??0)>(previous.revision??0)||r.revision===previous.revision&&r.serverNow>=previous.serverNow){this.latest={id:data.snapshotId,room:r};const now=performance.now(),gap=this.stats.lastStateReceipt?now-this.stats.lastStateReceipt:0;if(gap)this.stats.stateInterval=this.stats.stateInterval?this.stats.stateInterval*.8+gap*.2:gap;this.stats.lastStateReceipt=now}this.trimBases()}
   const receipt=roomReceipt(data,elapsed),rx=new TextEncoder().encode(raw).byteLength,time=performance.now();
   this.stats.jitter=this.stats.lastReceipt?this.stats.jitter*.8+Math.abs(receipt.network.rtt-this.stats.rtt)*.2:0;Object.assign(this.stats,receipt.network,{lastReceipt:time,failures:0});this.stats.receivedBytes+=rx;this.stats.sentBytes+=tx;this.samples.push({at:time,bytes:rx+tx});this.samples=this.samples.filter(s=>time-s.at<5000);this.stats.bytesPerSecond=this.samples.reduce((n,s)=>n+s.bytes,0)/Math.max(1,(time-this.samples[0].at)/1000);
   if(data.room)data.room={...data.room,...receipt};if(data.unchanged)Object.assign(data,receipt);return data;
@@ -28,7 +30,7 @@ export class RoomTransport{
   const max=options.retries||0,generation=this.generation;let recovered=false;
   for(let attempt=0;;attempt++){
    if(generation!==this.generation||init.signal?.aborted)throw aborted();
-   const url=new URL(endpoint,typeof location==='undefined'?'http://localhost':location.href);url.searchParams.set('wire','1');const stable=stableRoomRequest(url,init,this.latest?.id);
+   const url=new URL(endpoint,typeof location==='undefined'?'http://localhost':location.href);url.searchParams.set('wire','1');const baseId=this.latest?.id,stable=stableRoomRequest(url,init,baseId);if(baseId)this.pins.set(baseId,(this.pins.get(baseId)||0)+1);
    const controller=new AbortController(),abort=()=>controller.abort(),started=performance.now(),timeout=setTimeout(abort,options.timeout||8000);this.controllers.add(controller);init.signal?.addEventListener('abort',abort,{once:true});
    try{
     const liveRequest=this.roomMode==='phone'?null:this.live?.request(url,{...stable,signal:controller.signal});
@@ -44,7 +46,7 @@ export class RoomTransport{
     // An evicted delta base gets one immediate full GET, even without ordinary retries.
     if(resync&&!recovered&&(init.method||'GET').toUpperCase()==='GET'){recovered=true;attempt--;continue}
     if(attempt>=max||!retry)throw error;await new Promise(resolve=>setTimeout(resolve,Math.min(1600,200*2**attempt)));
-   }finally{clearTimeout(timeout);this.controllers.delete(controller);init.signal?.removeEventListener('abort',abort)}
+   }finally{clearTimeout(timeout);this.controllers.delete(controller);init.signal?.removeEventListener('abort',abort);if(baseId&&generation===this.generation){const count=(this.pins.get(baseId)||1)-1;if(count)this.pins.set(baseId,count);else this.pins.delete(baseId);this.trimBases()}}
   }
  }
 }

@@ -1,0 +1,38 @@
+[
+  {
+    "rtt": 3000,
+    "jitter": 80,
+    "legacyWindow": true,
+    "frames": 12,
+    "maxStateGapMs": 2860,
+    "controlAckMedianMs": 3049,
+    "maxControlReceiptBytes": 197,
+    "wireBytesPerSecond": 1371,
+    "window": 4,
+    "status": "passed"
+  },
+  {
+    "rtt": 3000,
+    "jitter": 80,
+    "legacyWindow": false,
+    "frames": 68,
+    "maxStateGapMs": 243,
+    "controlAckMedianMs": 3034,
+    "maxControlReceiptBytes": 197,
+    "wireBytesPerSecond": 4342,
+    "window": 33,
+    "status": "passed"
+  },
+  {
+    "rtt": 5000,
+    "jitter": 80,
+    "legacyWindow": false,
+    "frames": 86,
+    "maxStateGapMs": 253,
+    "controlAckMedianMs": 5055,
+    "maxControlReceiptBytes": 197,
+    "wireBytesPerSecond": 4018,
+    "window": 53,
+    "status": "passed"
+  }
+]

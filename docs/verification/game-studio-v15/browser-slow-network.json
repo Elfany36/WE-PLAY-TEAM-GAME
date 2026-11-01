@@ -1,0 +1,18 @@
+[
+  {
+    "mode": "tanks",
+    "profile": "Real ordered WebSocket/HTTP proxy: 3000 ms RTT with ±80 ms jitter",
+    "errors": [],
+    "firstDisplayedMovementMs": 7.5,
+    "reverseFramesWhileHeld": 0,
+    "maxDisplayedPauseMs": 216.7,
+    "maxDisplayedStep": 2.934,
+    "displaySamples": 292,
+    "states": 70,
+    "wsInputs": 8,
+    "httpControls": 0,
+    "controlAckMedianMs": 3069,
+    "controlsApplied": true,
+    "status": "passed"
+  }
+]

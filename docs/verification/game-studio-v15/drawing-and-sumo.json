@@ -1,0 +1,32 @@
+[
+  {
+    "width": 1440,
+    "mode": "phone",
+    "strokePoints": 16,
+    "undoRedoExact": true,
+    "exportBytes": 47149,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "sumo",
+    "liveDuelSelected": true,
+    "winnerWaitNotice": true,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "phone",
+    "strokePoints": 16,
+    "undoRedoExact": true,
+    "exportBytes": 47149,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "sumo",
+    "liveDuelSelected": true,
+    "winnerWaitNotice": true,
+    "status": "passed"
+  }
+]

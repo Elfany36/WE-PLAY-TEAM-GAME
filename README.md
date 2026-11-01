@@ -130,3 +130,9 @@ See [v12 verification and deployment notes](docs/verification/live-play-v12.md) 
 The latest GitHub redesign is integrated with bounded live control delivery, measured socket round trips, stable movement corrections and Sumo tournament viewing. Auto layout is the default; website, room and viewport tools can be hidden independently. UNO cards stay straight and readable, pool balls are larger with matching physics, and Moonlit Harbor adds a fourth arena. Terraria gameplay is unchanged.
 
 See [v14 verification](docs/verification/live-play-v14.md) for the 389 tests, all-game layouts, eight-player sockets, delayed-transport measurements and publication checks. These release notes supersede the deployment-pending statements in the older v12/v13 reports.
+
+## Game studio and slow-network update (v15)
+
+Adaptive live-state windows prevent multi-second acknowledgement stalls, movement receipts are smaller, pending delta bases remain available, and casual bots advance without browser polling. Separate website, room, game-details and viewport toggles keep Auto layout spacious. Four table scenes, eight Snake maps, four kart tracks and five action arenas add variety; Foundry tank supplies, collision-safe tank starts, brighter shells, larger pool balls and larger Block Drop rival wells improve play. Terraria's game and original viewport are preserved.
+
+See [v15 verification](docs/verification/game-studio-v15.md) for 400 passing tests, desktop/phone checks and measured continuous delivery at 3000–5000 ms RTT. Network transit time remains visible in the diagnostics.

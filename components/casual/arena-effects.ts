@@ -13,17 +13,23 @@ export function paintImpact(c:CanvasRenderingContext2D,x:number,y:number,age:num
  c.restore();
 }
 
-export function paintTankShell(c:CanvasRenderingContext2D,shell:PartyGame['shots'][number],now:number,effects=true){
- const radius=TANK_SHELL_RADIUS,angle=Math.atan2(shell.vy,shell.vx);
- if(effects&&shell.bounceAt)paintImpact(c,shell.bounceX??shell.x,shell.bounceY??shell.y,now-shell.bounceAt,23,'#b4f5ff');
- c.save();c.translate(shell.x,shell.y);c.rotate(angle);
- const trail=c.createLinearGradient(-64,0,4,0);trail.addColorStop(0,'#ff982c00');trail.addColorStop(.6,'#ff982c88');trail.addColorStop(1,'#fff1a4ee');
+const shellSprites=new Map<string,HTMLCanvasElement>();
+function shellSprite(own:boolean,effects:boolean){const key=String(own)+effects,known=shellSprites.get(key);if(known)return known;const art=document.createElement('canvas');art.width=224;art.height=128;const c=art.getContext('2d')!,radius=TANK_SHELL_RADIUS;c.scale(2,2);
+ c.save();c.translate(80,32);
+ const trail=c.createLinearGradient(-64,0,4,0);trail.addColorStop(0,own?'#35e8d000':'#ff682c00');trail.addColorStop(.6,own?'#35e8d0aa':'#ff682cbb');trail.addColorStop(1,'#fff1a4ee');
  c.fillStyle=trail;c.beginPath();c.moveTo(-64,0);c.lineTo(-7,-radius*.7);c.lineTo(5,0);c.lineTo(-7,radius*.7);c.closePath();c.fill();
  // The bright body matches the shared collision radius. The halo adds contrast on every map.
- c.shadowColor='#ffd34e';c.shadowBlur=effects?17:0;c.fillStyle='#ffc43b';c.strokeStyle='#593522';c.lineWidth=2;
- c.beginPath();c.roundRect(-12,-radius,25,radius*2,radius);c.fill();c.stroke();
+ c.shadowColor=own?'#62ffdf':'#ffd34e';c.shadowBlur=effects?17:0;c.fillStyle=own?'#55f0cb':'#ffad30';c.strokeStyle='#15273b';c.lineWidth=3;
+ c.beginPath();c.moveTo(15,0);c.quadraticCurveTo(7,-radius,-9,-radius);c.lineTo(-13,-radius-3);c.lineTo(-12,radius+3);c.lineTo(-9,radius);c.quadraticCurveTo(7,radius,15,0);c.closePath();c.fill();c.stroke();
  c.shadowBlur=0;c.fillStyle='#fffcec';c.beginPath();c.ellipse(5,0,7,radius*.65,0,0,Math.PI*2);c.fill();
  c.fillStyle='#ff7a31';c.fillRect(-14,-4,6,8);c.restore();
+ shellSprites.set(key,art);return art;
+}
+
+export function paintTankShell(c:CanvasRenderingContext2D,shell:PartyGame['shots'][number],now:number,effects=true,own=false){
+ const radius=TANK_SHELL_RADIUS,angle=Math.atan2(shell.vy,shell.vx);
+ if(effects&&shell.bounceAt)paintImpact(c,shell.bounceX??shell.x,shell.bounceY??shell.y,now-shell.bounceAt,23,'#b4f5ff');
+ c.save();c.translate(shell.x,shell.y);c.rotate(angle);c.drawImage(shellSprite(own,effects),-80,-32,112,64);c.restore();
 }
 
 export function paintSpeedTrail(c:CanvasRenderingContext2D,x:number,y:number,vx:number,vy:number,color:string){

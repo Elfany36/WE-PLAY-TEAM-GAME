@@ -76,8 +76,8 @@ test('stream envelopes cannot create seats, change rooms, inject paths or exceed
 
 test('applied live states acknowledge their revision so a slow stream can coalesce obsolete snapshots',t=>{
  const e=environment(t);e.feed.start();const socket=e.open();assert.equal(socket.sent[0].stateAck,true);
- socket.message({type:'state',data:{snapshotId:'state-1',room:{revision:7}}});assert.deepEqual(socket.sent.at(-1),{type:'ack',revision:7});
- socket.message({type:'state',data:{snapshotId:'state-2',revision:8,patch:[0,{}]}});assert.deepEqual(socket.sent.at(-1),{type:'ack',revision:8});
+ socket.message({type:'state',data:{snapshotId:'state-1',room:{revision:7}}});assert.deepEqual(socket.sent.at(-1),{type:'ack',revision:7,stateWindow:4});
+ socket.message({type:'state',data:{snapshotId:'state-2',revision:8,patch:[0,{}]}});assert.deepEqual(socket.sent.at(-1),{type:'ack',revision:8,stateWindow:4});
 });
 
 test('seat ownership controls foreground presence and socket latency stays a real measurement',t=>{

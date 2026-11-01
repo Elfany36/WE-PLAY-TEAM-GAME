@@ -41,14 +41,14 @@ test('complete seeded AI Sumo tournaments continue after every win and crown one
 });
 
 test('new pool tables use larger separated balls, matching contacts and cue placement; legacy tables retain their radius',()=>{
- const g=room('pool').game as PoolGame;assert.equal(poolBallRadius(g),14);
- for(let i=0;i<g.balls.length;i++)for(let j=i+1;j<g.balls.length;j++)assert(Math.hypot(g.balls[i].x-g.balls[j].x,g.balls[i].y-g.balls[j].y)>=28);
+ const g=room('pool').game as PoolGame;assert.equal(poolBallRadius(g),16);
+ for(let i=0;i<g.balls.length;i++)for(let j=i+1;j<g.balls.length;j++)assert(Math.hypot(g.balls[i].x-g.balls[j].x,g.balls[i].y-g.balls[j].y)>=32);
  for(const b of g.balls)b.pocketed=b.number>1;Object.assign(g.balls[0],{x:300,y:280,vx:0,vy:0});Object.assign(g.balls[1],{x:324,y:280,vx:0,vy:0});
  assert(!validCuePosition(g,300,280));const legacy=structuredClone(g);delete legacy.ballRadius;assert.equal(poolBallRadius(legacy),10);assert(validCuePosition(legacy,300,280));
- stepPool(g,.05);assert(Math.hypot(g.balls[0].x-g.balls[1].x,g.balls[0].y-g.balls[1].y)>=28);stepPool(legacy,.05);assert.equal(legacy.balls[0].x,300);
+ stepPool(g,.05);assert(Math.hypot(g.balls[0].x-g.balls[1].x,g.balls[0].y-g.balls[1].y)>=32);stepPool(legacy,.05);assert.equal(legacy.balls[0].x,300);
 });
 
 test('Moonlit Harbor has distinct bounded cover and every tank spawn is clear',()=>{
- assert.equal(CLUB_MAPS.length,4);for(const p of clubTrack('harbor',32))assert(distanceToClubTrack('harbor',p.x,p.y)<.001);assert.equal(clubTrack('harbor'),clubTrack('harbor'));const g=room('tanks',7).game as PartyGame,walls=tankWalls('harbor',g.worldScale);assert.equal(g.map,'harbor');assert.notDeepEqual(walls,tankWalls('garden',g.worldScale));assert(walls.length<=10);
+ assert(CLUB_MAPS.length>=4);for(const p of clubTrack('harbor',32))assert(distanceToClubTrack('harbor',p.x,p.y)<.001);assert.equal(clubTrack('harbor'),clubTrack('harbor'));const g=room('tanks',7).game as PartyGame,walls=tankWalls('harbor',g.worldScale);assert.equal(g.map,'harbor');assert.notDeepEqual(walls,tankWalls('garden',g.worldScale));assert(walls.length<=10);
  for(const a of g.actors)for(const w of walls){const x=Math.max(w.x,Math.min(a.x,w.x+w.w)),y=Math.max(w.y,Math.min(a.y,w.y+w.h));assert(Math.hypot(a.x-x,a.y-y)>=34)}
 });

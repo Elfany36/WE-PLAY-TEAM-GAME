@@ -2,12 +2,12 @@
   "schema": 1,
   "releases": [
     {
-      "siteVersion": 11,
-      "sourceCommit": "3b7bea49b3e93039edf97d4951f83c4693327a2f"
-    },
-    {
       "siteVersion": 12,
       "sourceCommit": "9fd6be6e804e41c5ec888bb6fcfbcc417abe1bf6"
+    },
+    {
+      "siteVersion": 13,
+      "sourceCommit": "6cd5646582a84f59eef45fb84b7d0694b2dafa51"
     }
   ],
   "files": [
@@ -22,6 +22,16 @@
       "bytes": 76
     },
     {
+      "path": "_next/static/73499760-d83f-4abe-b37e-5aec80ea5dfb/_buildManifest.js",
+      "sha256": "47f02b34be6dc481257b6efce4c19e19111f37ef5c437f8ffed44f0da97fa9bb",
+      "bytes": 159
+    },
+    {
+      "path": "_next/static/73499760-d83f-4abe-b37e-5aec80ea5dfb/_ssgManifest.js",
+      "sha256": "653f3e53e89b4f8548ff86c19e92bb3c6b84b6be7485a320b1e00893ed877479",
+      "bytes": 76
+    },
+    {
       "path": "_next/static/chunks/ActionWorld-Ck2OWBM7.js",
       "sha256": "587286e5c82d19d0b92890c428af3cd55a5ffbd5be2f5b0e6e770d09a532402f",
       "bytes": 29873
@@ -30,6 +40,16 @@
       "path": "_next/static/chunks/ActionWorld-DeXf8GqX.js",
       "sha256": "7e277f53f291e3a8d8837da2240d6b0230085b79478c1fc6e7c54717fee713f4",
       "bytes": 28898
+    },
+    {
+      "path": "_next/static/chunks/ActionWorld-XJxAeITM.js",
+      "sha256": "4fecbcd310ec557120462a33204136dd46d5374ab1818f663f2d3269bd8a5751",
+      "bytes": 32874
+    },
+    {
+      "path": "_next/static/chunks/AnimatedToken-BdOAjmac.js",
+      "sha256": "dbbdf0e2c8e6fd52607ffd1593ea1c258c82bff44390cdf8273cced8b77137df",
+      "bytes": 18842
     },
     {
       "path": "_next/static/chunks/AnimatedToken-CC_aAWWq.js",
@@ -47,9 +67,19 @@
       "bytes": 871
     },
     {
+      "path": "_next/static/chunks/AppBoundary-Bq_DnToU.js",
+      "sha256": "bc41388ad0743f9f3abe13ab7e67f00af51cf48f9924e0a0891c50dc051454c6",
+      "bytes": 871
+    },
+    {
       "path": "_next/static/chunks/Arena-7sBowSgJ.js",
       "sha256": "7048d4a7e0f2f1bc76615d6e8934065f2a8fc4cd68c9dcf538a993528566e625",
       "bytes": 444163
+    },
+    {
+      "path": "_next/static/chunks/Arena-CGMXa04q.js",
+      "sha256": "a0265fb5b91cfed3407ab231927ae7802f81dba16a465fee1e14052a3d306034",
+      "bytes": 444593
     },
     {
       "path": "_next/static/chunks/Art-CA4h6EQV.js",
@@ -59,6 +89,11 @@
     {
       "path": "_next/static/chunks/Art-CRxcG-FG.js",
       "sha256": "8bb5b7af66efa13b8aeae3b0fb2cbf804e2cd290ff041565a7fb5ecbebf2a187",
+      "bytes": 20700
+    },
+    {
+      "path": "_next/static/chunks/Art-gcV0kmhH.js",
+      "sha256": "ca62c7ee12b8e23ba58781807bf7d8a80a51df67cf192f06738137682ee96167",
       "bytes": 20700
     },
     {
@@ -72,6 +107,11 @@
       "bytes": 10039
     },
     {
+      "path": "_next/static/chunks/BlocksArena-qWVV6fV1.js",
+      "sha256": "852cb6de971671830b49cb80e87dc4e688e49a88e9cee81d828dd9661610ca0d",
+      "bytes": 12335
+    },
+    {
       "path": "_next/static/chunks/CasualArcade-DeFOndFI.js",
       "sha256": "fa56aeaa72dc22936d2678e14bf92e2ff5601a1bfbeb99ff17b0d5b922346240",
       "bytes": 151051
@@ -82,9 +122,19 @@
       "bytes": 151051
     },
     {
+      "path": "_next/static/chunks/CasualArcade-DxcLL23Y.js",
+      "sha256": "b4cfdcccf28d6e7c60e059a3535ba1f01e85e0c223375143426e790172aadc23",
+      "bytes": 155071
+    },
+    {
       "path": "_next/static/chunks/CasualArcade-V_C2LYCl.js",
       "sha256": "db7154a7adb1d91383f7a6c3bdf804aec51a3c53003bcf597047e366e373e7c1",
       "bytes": 143355
+    },
+    {
+      "path": "_next/static/chunks/Documentation-BKCob9lL.js",
+      "sha256": "b2d1dad2f3f81f65aba641f5b5c445765d854a31632cafd2206dd4af16dfa194",
+      "bytes": 186381
     },
     {
       "path": "_next/static/chunks/Documentation-CSn7ZVlt.js",
@@ -107,6 +157,21 @@
       "bytes": 25810
     },
     {
+      "path": "_next/static/chunks/FlexibleSurface-BiJ0Lp2T.js",
+      "sha256": "7be09463ed164ef0ec253ded33f26c979706b149c678df6c6961920f6aea455c",
+      "bytes": 31963
+    },
+    {
+      "path": "_next/static/chunks/GameGuide-BJlE-TiK.js",
+      "sha256": "6719f1274841e3c71535e64e9fc35ddab7b7eddbc7b5792fb5276e069a63929c",
+      "bytes": 419
+    },
+    {
+      "path": "_next/static/chunks/GameRecovery-B79c2lJI.js",
+      "sha256": "9a91ca7310ea2ead6f9c55f341e1df7a9b9ba91d0bbb49ace913839f7b67582b",
+      "bytes": 1405
+    },
+    {
       "path": "_next/static/chunks/GameRecovery-BQV6EO2s.js",
       "sha256": "f75bfb73aabb647fab7a1efd30df49f97a98bde6a74883707d1d47c662ff8e37",
       "bytes": 1405
@@ -115,6 +180,11 @@
       "path": "_next/static/chunks/LearningVisual-Dm9o5m0I.js",
       "sha256": "b238ff8da0a69cbf85f67998d8a58355c5a7754accd37a020448a797cb5917e2",
       "bytes": 46179
+    },
+    {
+      "path": "_next/static/chunks/LearningVisual-_7ff3oPl.js",
+      "sha256": "cdb544ba9deffe6e9dfdff64aeac20ad088e453e4ea9373339b75d743066b909",
+      "bytes": 45953
     },
     {
       "path": "_next/static/chunks/MarkupApp-BT9h6JBh.js",
@@ -127,6 +197,11 @@
       "bytes": 59457
     },
     {
+      "path": "_next/static/chunks/MarkupApp-D3MQ3Mhm.js",
+      "sha256": "0bb18c6ad8f584393e06522238d09a41f7a8a369cc0159a9d482b22f30577ce0",
+      "bytes": 60290
+    },
+    {
       "path": "_next/static/chunks/MarkupApp-bahoF6O5.js",
       "sha256": "526770ca547913a08c7b06c620267f690e86d32a6855c3bc69d33194795c1c65",
       "bytes": 59457
@@ -134,6 +209,11 @@
     {
       "path": "_next/static/chunks/MemoryBoard-BLrH-adC.js",
       "sha256": "0f1b43cfe0115841eaed63a08f10db7fb33233e13b22853d61381f3f71ba219e",
+      "bytes": 153813
+    },
+    {
+      "path": "_next/static/chunks/MemoryBoard-CCjND3SX.js",
+      "sha256": "860613734f06c74c38b07961cea3e0e35356b9e2ae0dac3e0a4fe606f99a9b6d",
       "bytes": 153813
     },
     {
@@ -147,6 +227,11 @@
       "bytes": 25356
     },
     {
+      "path": "_next/static/chunks/PartyArena-DKfHBb6F.js",
+      "sha256": "181f69105ca8c320d31f02b90a9a999d2f1545ba298d094cb81a31df61492566",
+      "bytes": 26817
+    },
+    {
       "path": "_next/static/chunks/PartyArena-RcL1jgLs.js",
       "sha256": "5bc21a0d8112638f8facbad283a34b6019faa015aefe2269ad9341b9557ec904",
       "bytes": 20510
@@ -154,6 +239,11 @@
     {
       "path": "_next/static/chunks/PhoneStudio-6NRT0rJU.js",
       "sha256": "268a8cb86dc00bdd4b213cb7c026d06d3e0a970be88eb27b59c0baab666bc93b",
+      "bytes": 15318
+    },
+    {
+      "path": "_next/static/chunks/PhoneStudio-COLii5iu.js",
+      "sha256": "2e560bef79387053eb6ab6610ae31c40247fb0baa6db40052473dc8892151b79",
       "bytes": 15318
     },
     {
@@ -167,14 +257,29 @@
       "bytes": 11065
     },
     {
+      "path": "_next/static/chunks/PoolTable-Cek8Wro2.js",
+      "sha256": "7ec4af963950ae663f741ad9d6efb42698c672fe44406a88d886480d8b98dcb2",
+      "bytes": 13515
+    },
+    {
       "path": "_next/static/chunks/PoolTable-DLpE-1q7.js",
       "sha256": "ccdbbf3557acaad5a66a788ee98b60db22feb38981e76669dc16f2db011d3164",
       "bytes": 13318
     },
     {
+      "path": "_next/static/chunks/PracticeStudio-B5Agi0WF.js",
+      "sha256": "d843a5f906a17d6a66f6d65a142e2a6a99315709bd5c06f003da9ec34cb6ea9f",
+      "bytes": 12042
+    },
+    {
       "path": "_next/static/chunks/PracticeStudio-CYEX1KlI.js",
       "sha256": "bf859b5e99a6c7ad8113800b214996195119e24af3523eaa6732e09582d8d537",
       "bytes": 12042
+    },
+    {
+      "path": "_next/static/chunks/PropertyTable-B2tFzIgv.js",
+      "sha256": "384bcfe0b2c50037b634a2a0108eed3d36b9eaae9662e65f4ac322df632f7666",
+      "bytes": 17271
     },
     {
       "path": "_next/static/chunks/PropertyTable-BgUvRcAy.js",
@@ -192,6 +297,11 @@
       "bytes": 13415
     },
     {
+      "path": "_next/static/chunks/StrategyBoard-C2xw_i0e.js",
+      "sha256": "30794be02a39733aa9953b05bf9e465e68c4a09152e7e08b123295efe99dadf4",
+      "bytes": 13498
+    },
+    {
       "path": "_next/static/chunks/StrategyBoard-yuAE4fJh.js",
       "sha256": "bf7df69b3d90209e10db4f3752081dd2966c1070e5264f4775fda0e76e3e7000",
       "bytes": 13415
@@ -199,6 +309,11 @@
     {
       "path": "_next/static/chunks/app-route-prefetch-policy-4X-xFOkS.js",
       "sha256": "d0f6dcc487df88dd1a3720a72f9400eee1dbf4c3968a1a9c2cec3e11bfee2cc6",
+      "bytes": 937
+    },
+    {
+      "path": "_next/static/chunks/app-route-prefetch-policy-CXn9yaRz.js",
+      "sha256": "574220adb72453e318956b9754ef528ad80fced1c6203842c05ea921345ff7d7",
       "bytes": 937
     },
     {
@@ -212,8 +327,23 @@
       "bytes": 937
     },
     {
+      "path": "_next/static/chunks/arena-effects-BFg-NRyh.js",
+      "sha256": "ed1df1099eb4df0dbffde18078924cbb7335174c054c6ba4971b5f4ce8f9f650",
+      "bytes": 1493
+    },
+    {
       "path": "_next/static/chunks/arrow-down-DffCoIGz.js",
       "sha256": "cdf5c930b09576bda156be6225477bb0fd7905b1fc271d3cd01797075e8a0ed2",
+      "bytes": 165
+    },
+    {
+      "path": "_next/static/chunks/arrow-down-vsywGqY-.js",
+      "sha256": "dd95fca9296d6d73a2bdbf6d6d0a1b968e65488198325b7cc4542045ec693f4a",
+      "bytes": 165
+    },
+    {
+      "path": "_next/static/chunks/arrow-left-BVLH0Pdx.js",
+      "sha256": "429a9c8f45b02a957f1989232a18613cf913831ef76c308b79e643a79a5ec151",
       "bytes": 165
     },
     {
@@ -225,6 +355,16 @@
       "path": "_next/static/chunks/arrow-right--z2x1AHm.js",
       "sha256": "cbd6f7ef075a63e87a21c6ab92c6536be5b835039e929f90df6d2643071c5f6c",
       "bytes": 165
+    },
+    {
+      "path": "_next/static/chunks/arrow-right-Bg6rGd2M.js",
+      "sha256": "848d5f4814f0f6c9270f74eb390e3638bea722e105472e29874c2110ce5cf27e",
+      "bytes": 165
+    },
+    {
+      "path": "_next/static/chunks/arrow-up-Bdk81YH0.js",
+      "sha256": "ff3ae7a37aad3570e1016b6c7738187ed99863421fac0261eff386d48d82a214",
+      "bytes": 25720
     },
     {
       "path": "_next/static/chunks/arrow-up-BiO2NfJt.js",
@@ -242,9 +382,24 @@
       "bytes": 6100
     },
     {
+      "path": "_next/static/chunks/blocks-DDK-6MZa.js",
+      "sha256": "89073585770a16a7cb0830ef1bbb55286fb8a56423908ee07cdcbbe19dd54d5e",
+      "bytes": 6100
+    },
+    {
       "path": "_next/static/chunks/blocks-Dyhf1EwD.js",
       "sha256": "5bd43a4076ee2ff4e77e4b2f55fb063d2dd2a71277ec906eb1dd67e167a33a90",
       "bytes": 5767
+    },
+    {
+      "path": "_next/static/chunks/book-open-Drpbuhqz.js",
+      "sha256": "9aef88ecc2dea6fc0575f913e419be9b91d67ca6f20d9d53c1d70cafde73e40a",
+      "bytes": 289
+    },
+    {
+      "path": "_next/static/chunks/check-BTWFhEbD.js",
+      "sha256": "20556cc18f5b76d2378f38fa330e6c31dca4c5901487700b6b6d62bf99b01d7d",
+      "bytes": 124
     },
     {
       "path": "_next/static/chunks/check-DJZX5RP4.js",
@@ -252,9 +407,24 @@
       "bytes": 124
     },
     {
+      "path": "_next/static/chunks/chevron-down-CqVnkT0Q.js",
+      "sha256": "82bedd0b26defbd6c1fb5378b3b739e1184e59c4fe257c77048c31df45159454",
+      "bytes": 128
+    },
+    {
+      "path": "_next/static/chunks/chevron-right-7PkDtPSI.js",
+      "sha256": "8ca416345191a560d6833270fd8bcedaf8eccadfc67cb1e9df7fb42a4319a2f5",
+      "bytes": 130
+    },
+    {
       "path": "_next/static/chunks/chevron-right-DI39ekXv.js",
       "sha256": "d41d6633a613c70a1c29240815328bdda03bdb37fa180ad914a5236f9901ffb4",
       "bytes": 130
+    },
+    {
+      "path": "_next/static/chunks/client-room-D53lD5sr.js",
+      "sha256": "01259c4fd5b2b24d01c485fadba860ac6ea77029329089e34dfc887e373a5593",
+      "bytes": 729
     },
     {
       "path": "_next/static/chunks/client-room-DHPlg3Fg.js",
@@ -262,9 +432,19 @@
       "bytes": 729
     },
     {
+      "path": "_next/static/chunks/client-state-BzfLNAho.js",
+      "sha256": "ab0c2f6f509015ff160fc66f75b59fdaa8e6240dbba9e5be3e7a23a8cc55352b",
+      "bytes": 1258
+    },
+    {
       "path": "_next/static/chunks/client-state-Dch6SG4y.js",
       "sha256": "ab0c2f6f509015ff160fc66f75b59fdaa8e6240dbba9e5be3e7a23a8cc55352b",
       "bytes": 1258
+    },
+    {
+      "path": "_next/static/chunks/createLucideIcon-BSF_xwBE.js",
+      "sha256": "47f7ada108e61f067f5340100c2050940324370ac6b34a66d9de884e32f0e076",
+      "bytes": 1427
     },
     {
       "path": "_next/static/chunks/createLucideIcon-Bd6d3ygI.js",
@@ -272,9 +452,19 @@
       "bytes": 1427
     },
     {
+      "path": "_next/static/chunks/crown-B6yGFf5q.js",
+      "sha256": "0a0438bdf605ee36c7e02e08cd70112829cba27b04692341acea9629c548f0ac",
+      "bytes": 362
+    },
+    {
       "path": "_next/static/chunks/crown-mOCvIa2e.js",
       "sha256": "0f870ab3429909ee4e2a75f7cdc9c93d24548f3fa2f5003e63cfcf5a07fd3d93",
       "bytes": 362
+    },
+    {
+      "path": "_next/static/chunks/download-DgAzzBCT.js",
+      "sha256": "305554cd6b70c949f528cd2d1abb21ffdf3c71e65d0645f444192ce0ba5049a1",
+      "bytes": 232
     },
     {
       "path": "_next/static/chunks/download-ajYVrKHQ.js",
@@ -282,9 +472,19 @@
       "bytes": 232
     },
     {
+      "path": "_next/static/chunks/eye-DkrL3UIZ.js",
+      "sha256": "09dac4d9d98046f4ec8699a8dd82151567b9864a873e6f6c560756d991914f90",
+      "bytes": 381
+    },
+    {
       "path": "_next/static/chunks/eye-oWOiW77q.js",
       "sha256": "8c40152e3ae8205f46523fe312f0775a20ef23e61c4dbfcdd3a131c9797bf100",
       "bytes": 381
+    },
+    {
+      "path": "_next/static/chunks/flag-B46d7GbF.js",
+      "sha256": "f097ecc6e174a78d38df14bf3df6b62bc238621ba2cd9153216f7f7a892fa347",
+      "bytes": 254
     },
     {
       "path": "_next/static/chunks/flag-r0b8BHo5.js",
@@ -297,9 +497,19 @@
       "bytes": 190152
     },
     {
+      "path": "_next/static/chunks/gift-BJyZqq8U.js",
+      "sha256": "283127e866a94df7cd1ae45ff8390b57e3dacd1df8d585077b9e905b0ad32c9b",
+      "bytes": 349
+    },
+    {
       "path": "_next/static/chunks/gift-CpK3ougJ.js",
       "sha256": "2107c4ad2dc3545bc5b338e7ca19b052a5f90cb1f5cbf3782cf886619ed95336",
       "bytes": 349
+    },
+    {
+      "path": "_next/static/chunks/heart-C3_TVaja.js",
+      "sha256": "e5ae79b42c676dbedf4b170b680a25d9533cfa47a78a5c73547ff8a8d2f273a2",
+      "bytes": 8356
     },
     {
       "path": "_next/static/chunks/index-BcdrzA-E.js",
@@ -317,8 +527,18 @@
       "bytes": 195433
     },
     {
+      "path": "_next/static/chunks/index-Ly2CtkFQ.js",
+      "sha256": "811bb77ae342d04dd47cbabd4fe28d7ea7167796cc8392c42a3e0b7ea17c3b05",
+      "bytes": 195530
+    },
+    {
       "path": "_next/static/chunks/info-BTYZaYfP.js",
       "sha256": "379cf0aef2f122d15e0fbc6c7cb9e1f462cebf60e857490186b5b3b29fb3bae6",
+      "bytes": 204
+    },
+    {
+      "path": "_next/static/chunks/info-yx0h4FbG.js",
+      "sha256": "25c9497a1608615a642de05e248711452ae4b44c5f981f49a85719c3e6e97c8b",
       "bytes": 204
     },
     {
@@ -332,8 +552,18 @@
       "bytes": 4444
     },
     {
+      "path": "_next/static/chunks/ink-CxlbTTk9.js",
+      "sha256": "a3f95a4d800920568f16b9d5ab5b86c82a63a94acdce6c4db0402af78095ca16",
+      "bytes": 4444
+    },
+    {
       "path": "_next/static/chunks/layout-segment-context-BXun3Eyo.js",
       "sha256": "29116b87851705cb7be58941c3149640cf7111239cc05d9e51dd8380dd175b65",
+      "bytes": 494
+    },
+    {
+      "path": "_next/static/chunks/layout-segment-context-BkV-l69q.js",
+      "sha256": "5c04df6568a82c3ad35adc1877c5ac0677ea37c9b4e3ed98cd37d9686835971f",
       "bytes": 494
     },
     {
@@ -345,6 +575,11 @@
       "path": "_next/static/chunks/layout-segment-context-DCmkLWUm.js",
       "sha256": "7254167a81708f0ea69514e407411fc7d44a4f1a240836be9202b82c7919f1cc",
       "bytes": 494
+    },
+    {
+      "path": "_next/static/chunks/monitor-BV0uNBaa.js",
+      "sha256": "a20ce83dbfa675349306c267c638523b19c0d3ef5014910cc46dbf2da4f51a9f",
+      "bytes": 259
     },
     {
       "path": "_next/static/chunks/monitor-CItFniQs.js",
@@ -362,9 +597,19 @@
       "bytes": 14685
     },
     {
+      "path": "_next/static/chunks/pause-BO9bngEg.js",
+      "sha256": "6d7b634b674a184de7f209dae57704a88e196f8689d35b9621a5c91ac4957884",
+      "bytes": 4143
+    },
+    {
       "path": "_next/static/chunks/pause-Bxk6OsYy.js",
       "sha256": "5e2b45612b68fd5065b909f01456367f3ca8b7791b3b824c9dc6a77ec903f715",
       "bytes": 3601
+    },
+    {
+      "path": "_next/static/chunks/pool-8g7aOOPZ.js",
+      "sha256": "6c7bf9b935f4e8770498d7aa154ad2607560ef476188977dfae0ea996cad16b8",
+      "bytes": 6414
     },
     {
       "path": "_next/static/chunks/pool-CJlXbAeS.js",
@@ -382,14 +627,29 @@
       "bytes": 4142954
     },
     {
+      "path": "_next/static/chunks/reference-CkS8UfGl.js",
+      "sha256": "dca04cc2fe3666a2f5286c1530a67c7da166f9cbd7c96d360d646f3c9b62a8b2",
+      "bytes": 4142954
+    },
+    {
       "path": "_next/static/chunks/rolldown-runtime-C60lm6uB.js",
       "sha256": "5db5ba82eef00d1dee7e86e663098c9427d01183a88d357437daff295aec3e75",
       "bytes": 694
     },
     {
+      "path": "_next/static/chunks/room-lifecycle-Cb5Xyken.js",
+      "sha256": "fec6d58d36260f592724b09dd4ece80899d599281c2168b96ccd553404e0650b",
+      "bytes": 2011
+    },
+    {
       "path": "_next/static/chunks/room-lifecycle-Dwt9DzWp.js",
       "sha256": "31a89bee6e4e5c7da10a4165229e7a65837a90ebce8d83e6dabb5bcbac455c13",
       "bytes": 1709
+    },
+    {
+      "path": "_next/static/chunks/rotate-ccw-ClIet28D.js",
+      "sha256": "a0061f823d14a1692732ad78cfad014295620213b13fb3dc3048d90de9ee8297",
+      "bytes": 200
     },
     {
       "path": "_next/static/chunks/rotate-ccw-DHFeFKzR.js",
@@ -407,6 +667,16 @@
       "bytes": 36074
     },
     {
+      "path": "_next/static/chunks/rules-CsruPd4S.js",
+      "sha256": "2167beed8a4a83bcb1f7046ae322ee362c8bc1319e41c38caba88ed6d0693f12",
+      "bytes": 36074
+    },
+    {
+      "path": "_next/static/chunks/search-C_Fbyf_-.js",
+      "sha256": "dc8224a842d7e0c7fd8455013ffda4bf94866e9ec8d7070a4f732c1ed10ce5e0",
+      "bytes": 400
+    },
+    {
       "path": "_next/static/chunks/search-Rd_mkX_M.js",
       "sha256": "4043d87ddd0206dd954291884ea7a84128219a48fdf8e54847ce0c5a76c05a81",
       "bytes": 400
@@ -422,8 +692,18 @@
       "bytes": 503
     },
     {
+      "path": "_next/static/chunks/shield-check-B4lq5BLw.js",
+      "sha256": "2ee4fa266be7fd73f4c8693e6925a01c758a0bab6393cc8604adff81410481fd",
+      "bytes": 503
+    },
+    {
       "path": "_next/static/chunks/sparkles-B-GlTURg.js",
       "sha256": "fb24a3e72af59b6783f07428c289a0c7fc68df36979452435841823a992a5ea3",
+      "bytes": 494
+    },
+    {
+      "path": "_next/static/chunks/sparkles-_WT_uA6E.js",
+      "sha256": "67f60e13427ea745acddd409af63851645b730b7dc0bad5d0ef513c2bc740396",
       "bytes": 494
     },
     {
@@ -437,7 +717,17 @@
       "bytes": 42889
     },
     {
+      "path": "_next/static/chunks/strategy-CSVPbIgN.js",
+      "sha256": "c9aa984718a0c8e2d5aea2b6d2d4409f6414e1669e6f658484a97659f0112ce9",
+      "bytes": 42889
+    },
+    {
       "path": "_next/static/chunks/streamed-icons-4cWnkkuT.js",
+      "sha256": "7eb2a6b44b9c0faa7300c8dd36b0fae7a35d9f65e139dd9046b3df193aa83bc8",
+      "bytes": 772
+    },
+    {
+      "path": "_next/static/chunks/streamed-icons-CXU-0Utx.js",
       "sha256": "7eb2a6b44b9c0faa7300c8dd36b0fae7a35d9f65e139dd9046b3df193aa83bc8",
       "bytes": 772
     },
@@ -452,9 +742,29 @@
       "bytes": 228
     },
     {
+      "path": "_next/static/chunks/use-live-callback-lkbQYHXE.js",
+      "sha256": "e4476c30c30c59813c074e81ddee7a25c05c77a7ae07a8768292fb620ea27eb0",
+      "bytes": 228
+    },
+    {
+      "path": "_next/static/chunks/visual-motion-D7nPaxe2.js",
+      "sha256": "28ccda08ab663663d6a3c470d44b9d4b41eabad3db8e49c2f72d47c02ffe8636",
+      "bytes": 408
+    },
+    {
       "path": "_next/static/chunks/zap-LwYG0DzW.js",
       "sha256": "c22b9494c1cfe4ddfb90f0c57114495e04b9e0dff2a13ada98be3243831d5daa",
       "bytes": 273
+    },
+    {
+      "path": "_next/static/chunks/zap-lt9XIhry.js",
+      "sha256": "b508a8ec933b51d6c02b3cea8712d9e193bf943aa0a849bec6badf1f862c63c4",
+      "bytes": 273
+    },
+    {
+      "path": "_next/static/css/index.BFUrqZvI.css",
+      "sha256": "756654eb1e7d271b966edc612471b54bcd49530bcd2163687f3b5d18e2c1a8e5",
+      "bytes": 463301
     },
     {
       "path": "_next/static/css/index.NGuMGbv2.css",
@@ -491,6 +801,10 @@
     {
       "siteVersion": 10,
       "sourceCommit": "466302e6184ebaf0974c7e3ccff086e70eace52b"
+    },
+    {
+      "siteVersion": 11,
+      "sourceCommit": "3b7bea49b3e93039edf97d4951f83c4693327a2f"
     }
   ]
 }

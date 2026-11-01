@@ -1,5 +1,10 @@
 import {ROOM_HINT_HEADERS} from './room-params.ts';
 
+export const STATE_INTERVAL=100,MAX_STATE_WINDOW=64;
+/** Keep the reliable pipe full over slow round trips, with a hard memory bound. */
+export function stateWindow(rtt:number){return Number.isFinite(rtt)?Math.max(4,Math.min(MAX_STATE_WINDOW,Math.ceil(Math.max(0,rtt)/STATE_INTERVAL)+3)):4}
+export const fastControls=new Set(['direction','drive','party-control','block-input']);
+
 /** Rebuild a room-scoped request; sockets cannot select another room or mint seats. */
 export function roomStreamRequest(value:any,code:string,kind:'casual'|'arena'){
  const fail=(message:string)=>{throw Object.assign(Error(message),{status:400})};
@@ -13,5 +18,5 @@ export function roomStreamRequest(value:any,code:string,kind:'casual'|'arena'){
  const body=value.body;
  if(!body||typeof body!=='object'||Array.isArray(body)||body.code!==code||['create','join','leave','disconnect','draft-phone','submit-phone'].includes(body.action))fail('Use your current room and seat.');
  const text=JSON.stringify(body);if(new TextEncoder().encode(text).length>4000)fail('The room request is too large.');
- headers.set('Content-Type','application/json');return new Request(url,{method:'POST',headers,body:text});
+ headers.set('Content-Type','application/json');if(value.receiptOnly===true&&kind==='casual'&&fastControls.has(body.action))headers.set('X-Room-Control-Receipt','1');return new Request(url,{method:'POST',headers,body:text});
 }
