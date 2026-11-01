@@ -1,0 +1,14 @@
+[
+  {
+    "scenario": "large-flip-hand",
+    "hidden": []
+  },
+  {
+    "scenario": "choose-color",
+    "hidden": []
+  },
+  {
+    "scenario": "accept-penalty",
+    "hidden": []
+  }
+]

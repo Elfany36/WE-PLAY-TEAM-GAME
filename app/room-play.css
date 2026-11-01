@@ -1,0 +1,181 @@
+/* Stable game chrome: status and tools occupy space beside or above the scene. */
+.room-main,.party-board-panel,.surface-content,.game-options,.room-sidebar{min-width:0}
+.room-sidebar{position:static!important;max-height:none!important;overflow:visible}
+.casual-arcade .game-turn-cue{position:relative;inset:auto;z-index:auto;gap:12px;box-shadow:none;margin:12px 0 16px;padding:12px 16px}
+.turn-cue-icon{flex-shrink:0}
+.turn-cue-copy{flex:1;min-width:0;overflow-wrap:anywhere}
+.turn-cue-status{display:grid;flex-shrink:0;align-items:center;min-height:28px}
+.turn-cue-status>*{grid-area:1/1}
+.turn-cue-status .turn-arrival{position:static;inset:auto;transform:none;z-index:auto;display:flex;align-items:center;gap:7px;min-width:0;width:auto;max-width:none;padding:6px 10px;border:1px solid var(--attention-line);border-radius:30px;box-shadow:none;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .15s}
+.turn-cue-status .turn-arrival.visible{opacity:1;visibility:visible;transform:none}
+.turn-cue-status .turn-arrival strong{font-size:12px!important;line-height:1.4;letter-spacing:0}
+.turn-arrival.visible+.turn-cue-ready{visibility:hidden}
+.surface-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:10px 2px 14px;z-index:auto}
+.surface-toolbar>strong{flex:1;min-width:120px;overflow-wrap:anywhere}
+.surface-toolbar .view-buttons{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.surface-toolbar .view-buttons button{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:9px 11px;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--text)}
+.surface-toolbar .view-buttons button[aria-pressed=true]{background:var(--button-bg);color:var(--button-text);border-color:var(--button-bg)}
+.surface-bottom{gap:12px;align-items:center;padding:10px 2px;min-height:44px}
+.surface-bottom>span{overflow-wrap:anywhere;line-height:1.6}
+.surface-drag-handle{flex-shrink:0;min-width:40px;min-height:40px}
+.surface-resize-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:14px;border:1px solid var(--border);border-radius:10px;margin-bottom:12px}
+.surface-resize-controls label{min-width:0}.surface-resize-controls input{width:100%}.surface-resize-controls>span{grid-column:1/-1;line-height:1.6}
+.club-hud,.action-hud{position:static!important;flex-wrap:wrap;min-width:0;gap:8px!important;margin-bottom:12px}
+.club-hud>*,.action-hud>*{min-width:0;max-width:100%;overflow-wrap:anywhere;white-space:normal!important}
+.club-controls,.action-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.club-controls .button,.action-controls .button{min-height:44px;white-space:normal;line-height:1.5;max-width:100%}
+.action-keys,.club-dpad,.snake-dpad{flex-shrink:0;touch-action:none}
+.action-keys button,.club-dpad button,.snake-dpad button{touch-action:none;min-width:44px;min-height:44px}
+.club-arena>canvas,.action-world>canvas,.blocks-arena>canvas,.pool-experience>canvas,.snake-stadium>canvas{display:block;touch-action:none;max-width:100%}
+.room-sidebar .party-rules{margin:0;padding:0;border:1px solid var(--border);border-radius:14px;background:var(--surface);overflow:hidden}
+.room-sidebar .party-rules>summary{min-height:48px;padding:14px;display:flex;align-items:center;gap:8px;font-weight:750;font-size:14px;cursor:pointer}
+.room-sidebar .party-rules[open]>summary{border-bottom:1px solid var(--border);background:var(--surface-soft)}
+.room-sidebar .party-rules>:not(summary){margin:14px 18px;line-height:1.8;font-size:13px}
+.room-sidebar .party-rules ol{padding-left:16px}.room-sidebar .party-rules li+li{margin-top:10px}.room-sidebar .party-rules a{overflow-wrap:anywhere}
+.game-help{margin-top:16px;border:1px solid var(--border);border-radius:10px;background:var(--surface-soft)}
+.game-help>summary{display:flex;align-items:center;gap:8px;cursor:pointer;padding:12px 14px;font-size:13px;font-weight:700;min-height:44px}
+.game-help>p{padding:0 14px 14px;margin:0!important;font-size:13px!important;line-height:1.8}
+.game-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.game-options>label{display:flex;flex-direction:column;gap:8px;min-width:0;font-size:13px;line-height:1.5}
+.game-options select{max-width:100%;width:100%;min-width:0;min-height:44px;text-overflow:ellipsis}
+.game-options>fieldset,.game-options>.game-ai-note{grid-column:1/-1}
+.map-picker,.club-map-picker{min-width:0!important;margin:8px 0 16px!important}
+.map-picker>div,.club-map-picker>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.map-picker button,.club-map-picker button{position:relative;min-width:0;padding:7px;border:1px solid var(--border);border-radius:12px;background:var(--surface);text-align:left;overflow:hidden;transition:border-color .15s,box-shadow .15s}
+.map-picker button[aria-pressed=true],.club-map-picker button[aria-pressed=true]{outline:2px solid var(--accent);outline-offset:1px;box-shadow:0 0 0 4px var(--accent-soft)}
+.map-picker button[aria-pressed=true]:after,.club-map-picker button[aria-pressed=true]:after{content:'✓';position:absolute;right:12px;top:12px;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--button-bg);color:var(--button-text);font-weight:800;border:2px solid var(--surface)}
+.map-picker svg,.club-map-picker svg{display:block;width:100%;height:auto;border-radius:8px}
+.map-picker strong,.club-map-picker strong{display:block;margin:10px 4px 5px;font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+.map-picker small,.club-map-picker small{display:block;margin:0 4px 6px;font-size:11px!important;line-height:1.65;overflow-wrap:anywhere}
+.uno-hand-heading{gap:10px}.uno-hand-heading button{min-height:44px}.uno-hand{padding:26px 12px 16px!important;scrollbar-gutter:stable;max-width:100%}.uno-hand-card{flex-shrink:0}
+.uno-action-row{align-items:center;gap:10px}.uno-action-row .button{white-space:normal}
+.room-shell:fullscreen .game-turn-cue{position:relative;inset:auto;display:flex!important}
+.room-shell:fullscreen .flexible-surface{height:auto;min-height:0}
+.room-shell:fullscreen .room-main{padding:4px;min-width:0;overflow:auto!important}
+.room-shell:fullscreen .room-sidebar{position:static;max-height:none}
+:where(button,a,input,select,summary):focus-visible{outline:3px solid var(--focus,var(--accent));outline-offset:3px}
+@media(max-width:760px){
+ .casual-arcade .game-turn-cue{padding:11px 12px;gap:9px}
+ .turn-cue-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .surface-toolbar>strong{width:auto}.surface-toolbar .view-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}
+ .surface-toolbar .view-buttons button{font-size:12px!important;min-width:0;padding:9px 6px}
+ .game-options{grid-template-columns:minmax(0,1fr)}
+ .map-picker>div,.club-map-picker>div{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .surface-resize-controls{grid-template-columns:minmax(0,1fr)}
+ .club-controls .button,.action-controls>.button{flex:1 1 125px}
+ .club-hud,.action-hud{padding:10px!important}
+ .club-hud>strong,.action-hud>strong{font-size:13px!important}
+ .club-hud>span,.action-hud>span{font-size:12px!important}
+ .uno-hand-heading h3{flex-basis:100%}.uno-action-row .button{min-width:100px}
+}
+@media(prefers-reduced-motion:reduce){.map-picker button,.club-map-picker button,.turn-cue-status .turn-arrival{transition:none}}
+/* A fullscreen scene shares the available height with controls, rather than taking a second viewport. */
+.room-shell:fullscreen{align-items:stretch}
+.room-shell:fullscreen .room-main{height:100%;min-height:0;display:flex;flex-direction:column;overflow:hidden!important;box-sizing:border-box}
+.room-shell:fullscreen .game-turn-cue{flex-shrink:0;margin:0 0 8px;padding:9px 12px}
+.room-shell:fullscreen .party-live-layout{flex:1;min-height:0;grid-template-rows:minmax(0,1fr)}
+.room-shell:fullscreen .party-board-panel{display:flex;flex-direction:column;min-height:0;height:100%;padding:7px;box-sizing:border-box}
+.room-shell:fullscreen .flexible-surface{display:flex;flex:1;flex-direction:column;min-height:0;height:100%}
+.room-shell:fullscreen .surface-toolbar,.room-shell:fullscreen .surface-bottom{flex-shrink:0}
+.room-shell:fullscreen .flexible-surface>.adjustable-surface{flex:1;min-height:0!important;height:auto!important;overflow:auto!important;overscroll-behavior:contain}
+.room-shell:fullscreen .surface-bottom{padding:4px;min-height:36px}
+.room-shell:fullscreen .game-round-footer{flex-shrink:0;margin-block:8px 0!important;min-height:44px;gap:8px!important}
+.room-shell:fullscreen .game-help,.room-shell:fullscreen .race-live-order,.room-shell:fullscreen .arena-player-strip{display:none}
+.room-shell:fullscreen .pool-stage>canvas{width:min(100%,var(--board-fit-width,100%));margin-inline:auto;height:auto}
+@media(max-width:760px){
+ .room-shell:fullscreen .surface-toolbar{gap:5px;padding:6px 2px 9px}
+ .room-shell:fullscreen .surface-toolbar .view-buttons{grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+ .room-shell:fullscreen .surface-toolbar .view-buttons button{gap:3px;padding:7px 3px;font-size:10px!important;min-height:40px;flex-wrap:wrap}
+ .room-shell:fullscreen .club-controls,.room-shell:fullscreen .action-controls{gap:5px;margin-top:9px}
+ .room-shell:fullscreen .blocks-arena .club-controls .button[aria-label]{flex:0 0 40px;min-width:40px;min-height:40px;padding:8px;font-size:0!important}
+ .room-shell:fullscreen .blocks-arena .club-controls .button:not([aria-label]){min-height:40px;flex:1;padding:8px}
+ .room-shell:fullscreen .surface-bottom{font-size:10px}
+}
+/* Keep UNO actions outside the scrolling private hand, including large Flip hands. */
+.room-shell:fullscreen .party-live-layout.uno .surface-content{height:100%;min-height:0}
+.room-shell:fullscreen .uno-experience{height:100%;min-height:0;display:flex;flex-direction:column;gap:8px}
+.room-shell:fullscreen .uno-opponents{flex-shrink:0;max-height:100px;overflow:auto;margin:0;gap:6px;grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+.room-shell:fullscreen .uno-seat{padding:7px;min-height:48px}
+.room-shell:fullscreen .uno-table{flex-shrink:0;padding:10px 20px;border-radius:35px;border-width:5px}
+.room-shell:fullscreen .uno-table:before{inset:12px;border-radius:26px}
+.room-shell:fullscreen .uno-table-caption{font-size:9px;margin-bottom:5px;gap:8px;flex-wrap:wrap}
+.room-shell:fullscreen .uno-table-center{min-height:92px;gap:20px}
+.room-shell:fullscreen .uno-deck,.room-shell:fullscreen .uno-discard{width:49px}
+.room-shell:fullscreen .uno-deck>span,.room-shell:fullscreen .uno-discard>span{margin-top:5px;font-size:9px}
+.room-shell:fullscreen .uno-active-color>span{width:26px;height:26px;margin-bottom:5px}
+.room-shell:fullscreen .uno-active-color strong{font-size:14px}.room-shell:fullscreen .uno-active-color small{font-size:9px}
+.room-shell:fullscreen .uno-turn-status{margin-top:5px;font-size:12px;line-height:1.4}
+.room-shell:fullscreen .uno-hand-section{display:flex;flex:1;min-height:0;flex-direction:column;overflow:hidden;margin-top:5px}
+.room-shell:fullscreen .uno-hand-heading{flex-shrink:0;margin-bottom:3px;gap:5px;align-items:center}
+.room-shell:fullscreen .uno-hand-heading h3{font-size:16px;margin:0}
+.room-shell:fullscreen .uno-hand{flex:1;min-height:80px;max-height:none;align-content:start;gap:10px;padding:16px 9px 10px!important;margin:0;overflow:auto}
+.room-shell:fullscreen .uno-hand-card{width:65px;animation:none}
+.room-shell:fullscreen .uno-action-row{flex-shrink:0;min-height:44px;margin-top:5px;padding:8px 0 0;gap:8px}
+.room-shell:fullscreen .uno-action-row p{font-size:11px;min-width:120px;line-height:1.5}
+.room-shell:fullscreen .uno-action-row .button{font-size:12px!important;min-height:42px}
+.room-shell:fullscreen .uno-color-picker{flex-shrink:0;margin:7px 0;padding:10px}
+.room-shell:fullscreen .uno-color-picker>strong{margin-bottom:7px}.room-shell:fullscreen .uno-color-picker button:not(.text-link){min-height:40px}
+.room-shell:fullscreen .uno-challenge-review{max-height:130px;overflow:auto;margin:0;flex-shrink:0}
+.room-shell:fullscreen .flip-pairing-note{display:none}
+@media(max-width:760px){.room-shell:fullscreen .uno-hand-heading h3{flex-basis:auto;font-size:14px}.room-shell:fullscreen .uno-hand-tools{margin-left:auto}.room-shell:fullscreen .uno-hand-card{width:50px}.room-shell:fullscreen .uno-hand-card>span{font-size:8px;min-height:22px}.room-shell:fullscreen .uno-hand-tools button{font-size:11px;min-height:36px}.room-shell:fullscreen .uno-active-color{min-width:70px}.room-shell:fullscreen .uno-table{padding:8px 12px}}
+@media(max-width:760px){
+ /* Keep the game at one full viewport; the optional roster and guides follow below it. */
+ .room-shell:fullscreen{display:block;overflow-y:auto}
+ .room-shell:fullscreen .room-main{height:calc(100dvh - 14px)}
+ .room-shell:fullscreen .room-sidebar{height:auto;margin-top:14px}
+}
+/* Fullscreen keeps the primary status compact; detailed instructions remain in Guides & controls. */
+.room-shell:fullscreen .game-turn-cue p{display:none}
+.room-shell:fullscreen .game-turn-cue strong{font-size:13px!important}
+.room-shell:fullscreen .game-turn-cue .turn-cue-icon{width:32px;height:32px}
+.room-shell:fullscreen .game-round-footer{display:flex;flex-wrap:nowrap;justify-content:space-between;align-items:center}
+.room-shell:fullscreen .game-round-footer>.danger-action{width:auto;flex-shrink:0;min-width:100px}
+.room-shell:fullscreen .game-round-footer .party-activity{min-width:0}
+.room-shell:fullscreen .game-round-footer .party-activity summary{font-size:11px!important}
+.room-shell:fullscreen .game-round-footer .party-activity[open]{max-height:120px;overflow:auto}
+@media(max-width:760px){
+ .room-shell:fullscreen .club-hud{padding:8px 10px!important;margin-bottom:8px}
+ .room-shell:fullscreen .club-hud>span{display:none}
+ .room-shell:fullscreen .action-hud{padding:8px!important;gap:5px!important}
+ .room-shell:fullscreen .action-hud>strong,.room-shell:fullscreen .action-hud>span{padding:4px 7px;font-size:11px!important;line-height:1.4}
+ .room-shell:fullscreen .action-hud>span:last-of-type{display:none}
+}
+.room-shell:fullscreen .uno-action-row p{display:none}
+.room-shell:fullscreen .uno-action-row:not(:has(button)){display:none}
+@media(max-width:760px){.map-picker>div,.club-map-picker>div{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+.room-shell:fullscreen .uno-hand-section{padding:0}
+@media(max-width:760px){
+ .room-shell:fullscreen .uno-table-caption{font-size:8px;flex-wrap:nowrap;white-space:nowrap;gap:4px}
+ .room-shell:fullscreen .uno-table-center{min-height:80px}
+ .room-shell:fullscreen .uno-deck,.room-shell:fullscreen .uno-discard{width:42px}
+ .room-shell:fullscreen .uno-paired-face{display:none}
+}
+.room-shell:fullscreen .uno-seat{padding:7px!important}
+.room-shell:fullscreen .uno-seat strong{font-size:12px!important;line-height:1.3}
+.room-shell:fullscreen .uno-seat span{font-size:10px!important;line-height:1.4}
+@media(max-width:760px){
+ .room-shell:fullscreen .uno-table{height:146px;padding:8px 12px}
+ .room-shell:fullscreen .uno-table-center{height:80px;min-height:80px}
+ .room-shell:fullscreen .uno-deck>span,.room-shell:fullscreen .uno-discard>span{white-space:nowrap;font-size:8px;line-height:1.2}
+ .room-shell:fullscreen .uno-table-caption,.room-shell:fullscreen .uno-table-caption span{font-size:8px!important;line-height:1.2}
+ .room-shell:fullscreen .uno-turn-status{font-size:11px!important;line-height:1.2}
+}
+/* Narrow phones keep setup controls and reference tabs within their page column. */
+.arcade-start-panel,.solo-practice-panel,.party-start-online,.party-start-local,.panel-title>div,.party-panel-title>div{min-width:0;max-width:100%;overflow-wrap:anywhere}
+:is(.arcade-start-panel,.solo-practice-panel,.party-start-online,.party-start-local) :is(input,select){min-width:0;width:100%;max-width:100%}
+:is(.arcade-start-panel,.solo-practice-panel,.party-start-online,.party-start-local) button{max-width:100%;white-space:normal}
+@media(max-width:600px){
+ .arcade-controls,.party-setup-grid{grid-template-columns:minmax(0,1fr)!important;min-width:0}
+ .documentation-tabs{flex-wrap:wrap;gap:4px}
+ .documentation-tabs>button{flex:1 1 85px;min-width:0;justify-content:center;min-height:44px;padding:10px 7px;gap:5px}
+ .local-name-grid{grid-template-columns:minmax(0,1fr)}
+ .local-name-grid label{min-width:0}.local-name-grid input{width:100%;min-width:0}
+}
+.room-shell:fullscreen .uno-hand-section.choosing-action .uno-hand,.room-shell:fullscreen .uno-hand-section.choosing-action .uno-hand-heading{display:none}
+.room-shell:fullscreen .uno-hand-section.choosing-action{overflow:auto}
+/* In fullscreen, the scene HUD supplies live status; avoid a second generic banner. */
+.room-shell:fullscreen .game-turn-cue[data-simultaneous=true]{display:none!important}
+.room-shell:fullscreen .surface-bottom{display:none}
+.room-shell:fullscreen .game-round-footer .party-activity{margin:0;padding:0;flex:1}
+.room-shell:fullscreen .game-round-footer>.danger-action{align-self:center;margin:0}
+@media(max-width:760px){.room-shell:fullscreen .surface-toolbar>strong{display:none}}

@@ -1,0 +1,1648 @@
+[
+  {
+    "mode": "snake",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": 59,
+    "cueOverlapsCanvas": false,
+    "full": {
+      "active": true,
+      "overflow": 0,
+      "cue": "relative",
+      "toolbar": true,
+      "layout": [
+        {
+          "class": "room-main",
+          "height": 976,
+          "scroll": 976,
+          "width": 1116,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-live-layout snake",
+          "height": 838,
+          "scroll": 838,
+          "width": 1108,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-board-panel",
+          "height": 838,
+          "scroll": 836,
+          "width": 1108,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "flexible-surface view-screen is-fullscreen",
+          "height": 800,
+          "scroll": 800,
+          "width": 1070,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "adjustable-surface",
+          "height": 692,
+          "scroll": 735,
+          "width": 1070,
+          "fit": "120px",
+          "minHeight": "0px"
+        },
+        {
+          "class": "surface-content",
+          "height": 711,
+          "scroll": 711,
+          "width": 1029,
+          "fit": "",
+          "minHeight": "0px"
+        }
+      ],
+      "hiddenControls": []
+    },
+    "liveStates": 27,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "sumo",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": 55,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 40,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "tanks",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": 20,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 51,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "pong",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": 35,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 42,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "marble",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": 18,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 34,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "blocks",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": 45,
+    "cueOverlapsCanvas": false,
+    "full": {
+      "active": true,
+      "overflow": 0,
+      "cue": "relative",
+      "toolbar": true,
+      "layout": [
+        {
+          "class": "room-main",
+          "height": 976,
+          "scroll": 976,
+          "width": 1116,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-live-layout blocks expanded-game",
+          "height": 838,
+          "scroll": 838,
+          "width": 1108,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-board-panel",
+          "height": 838,
+          "scroll": 836,
+          "width": 1108,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "flexible-surface view-screen is-fullscreen",
+          "height": 800,
+          "scroll": 800,
+          "width": 1070,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "adjustable-surface",
+          "height": 692,
+          "scroll": 690,
+          "width": 1070,
+          "fit": "676.4903183097038px",
+          "minHeight": "0px"
+        },
+        {
+          "class": "surface-content",
+          "height": 660,
+          "scroll": 660,
+          "width": 1029,
+          "fit": "",
+          "minHeight": "0px"
+        }
+      ],
+      "hiddenControls": []
+    },
+    "liveStates": 59,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "circuit",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": 57,
+    "cueOverlapsCanvas": false,
+    "full": {
+      "active": true,
+      "overflow": 0,
+      "cue": "relative",
+      "toolbar": true,
+      "layout": [
+        {
+          "class": "room-main",
+          "height": 976,
+          "scroll": 976,
+          "width": 1116,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-live-layout circuit expanded-game",
+          "height": 838,
+          "scroll": 838,
+          "width": 1108,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-board-panel",
+          "height": 838,
+          "scroll": 836,
+          "width": 1108,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "flexible-surface view-screen is-fullscreen",
+          "height": 800,
+          "scroll": 800,
+          "width": 1070,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "adjustable-surface",
+          "height": 692,
+          "scroll": 690,
+          "width": 1070,
+          "fit": "759.2px",
+          "minHeight": "0px"
+        },
+        {
+          "class": "surface-content",
+          "height": 651,
+          "scroll": 651,
+          "width": 1029,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "action-world kart-world",
+          "height": 638,
+          "scroll": 638,
+          "width": 1029,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "",
+          "height": 465,
+          "scroll": 463,
+          "width": 744,
+          "fit": "",
+          "minHeight": "0px"
+        }
+      ],
+      "hiddenControls": []
+    },
+    "liveStates": 47,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "terra",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": 54,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 44,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "pool",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": 13,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "uno",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": {
+      "active": true,
+      "overflow": 0,
+      "cue": "relative",
+      "toolbar": true,
+      "layout": [
+        {
+          "class": "room-main",
+          "height": 976,
+          "scroll": 976,
+          "width": 1116,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-live-layout uno",
+          "height": 838,
+          "scroll": 838,
+          "width": 1108,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-board-panel",
+          "height": 838,
+          "scroll": 836,
+          "width": 1108,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "flexible-surface view-screen is-fullscreen",
+          "height": 800,
+          "scroll": 798,
+          "width": 1070,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "adjustable-surface",
+          "height": 690,
+          "scroll": 688,
+          "width": 1068,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "surface-content",
+          "height": 660,
+          "scroll": 660,
+          "width": 1023,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "uno-experience ",
+          "height": 660,
+          "scroll": 660,
+          "width": 1023,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "uno-opponents ",
+          "height": 56,
+          "scroll": 56,
+          "width": 1023,
+          "fit": "",
+          "minHeight": "auto"
+        },
+        {
+          "class": "uno-table",
+          "height": 177,
+          "scroll": 167,
+          "width": 1023,
+          "fit": "",
+          "minHeight": "auto"
+        },
+        {
+          "class": "uno-hand-section",
+          "height": 405,
+          "scroll": 405,
+          "width": 1023,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "uno-hand-heading",
+          "height": 44,
+          "scroll": 44,
+          "width": 1023,
+          "fit": "",
+          "minHeight": "auto"
+        },
+        {
+          "class": "uno-hand ",
+          "height": 300,
+          "scroll": 300,
+          "width": 1023,
+          "fit": "",
+          "minHeight": "80px"
+        },
+        {
+          "class": "uno-action-row",
+          "height": 53,
+          "scroll": 52,
+          "width": 1023,
+          "fit": "",
+          "minHeight": "44px"
+        }
+      ],
+      "hiddenControls": []
+    },
+    "liveStates": 1,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "ladders",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "memory",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 1,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "property",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "chess",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "dama",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "scidama",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "phone",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 102.8125
+      },
+      {
+        "label": "Auto layout",
+        "width": 112.046875
+      },
+      {
+        "label": "Resize",
+        "width": 81.859375
+      },
+      {
+        "label": "Fullscreen",
+        "width": 105.171875
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 0,
+    "liveRevisions": 3,
+    "errors": []
+  },
+  {
+    "mode": "snake",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": 60,
+    "cueOverlapsCanvas": false,
+    "full": {
+      "active": true,
+      "overflow": 0,
+      "cue": "relative",
+      "toolbar": true,
+      "layout": [
+        {
+          "class": "room-main",
+          "height": 830,
+          "scroll": 830,
+          "width": 376,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-live-layout snake",
+          "height": 639,
+          "scroll": 639,
+          "width": 368,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-board-panel",
+          "height": 639,
+          "scroll": 637,
+          "width": 368,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "flexible-surface view-screen is-fullscreen",
+          "height": 617,
+          "scroll": 617,
+          "width": 346,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "adjustable-surface",
+          "height": 469,
+          "scroll": 672,
+          "width": 346,
+          "fit": "120px",
+          "minHeight": "0px"
+        },
+        {
+          "class": "surface-content",
+          "height": 656,
+          "scroll": 656,
+          "width": 313,
+          "fit": "",
+          "minHeight": "0px"
+        }
+      ],
+      "hiddenControls": []
+    },
+    "liveStates": 26,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "sumo",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": 60,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 18,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "tanks",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": 61,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 16,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "pong",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": 61,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 17,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "marble",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": 61,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 19,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "blocks",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": 60,
+    "cueOverlapsCanvas": false,
+    "full": {
+      "active": true,
+      "overflow": 0,
+      "cue": "relative",
+      "toolbar": true,
+      "layout": [
+        {
+          "class": "room-main",
+          "height": 830,
+          "scroll": 830,
+          "width": 376,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-live-layout blocks expanded-game",
+          "height": 639,
+          "scroll": 639,
+          "width": 368,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-board-panel",
+          "height": 639,
+          "scroll": 637,
+          "width": 368,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "flexible-surface view-screen is-fullscreen",
+          "height": 617,
+          "scroll": 617,
+          "width": 346,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "adjustable-surface",
+          "height": 469,
+          "scroll": 467,
+          "width": 346,
+          "fit": "139.5109041827171px",
+          "minHeight": "0px"
+        },
+        {
+          "class": "surface-content",
+          "height": 445,
+          "scroll": 445,
+          "width": 313,
+          "fit": "",
+          "minHeight": "0px"
+        }
+      ],
+      "hiddenControls": []
+    },
+    "liveStates": 45,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "circuit",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": 60,
+    "cueOverlapsCanvas": false,
+    "full": {
+      "active": true,
+      "overflow": 0,
+      "cue": "relative",
+      "toolbar": true,
+      "layout": [
+        {
+          "class": "room-main",
+          "height": 830,
+          "scroll": 830,
+          "width": 376,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-live-layout circuit expanded-game",
+          "height": 639,
+          "scroll": 639,
+          "width": 368,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-board-panel",
+          "height": 639,
+          "scroll": 637,
+          "width": 368,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "flexible-surface view-screen is-fullscreen",
+          "height": 617,
+          "scroll": 617,
+          "width": 346,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "adjustable-surface",
+          "height": 469,
+          "scroll": 467,
+          "width": 346,
+          "fit": "270.4px",
+          "minHeight": "0px"
+        },
+        {
+          "class": "surface-content",
+          "height": 445,
+          "scroll": 445,
+          "width": 313,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "action-world kart-world",
+          "height": 432,
+          "scroll": 432,
+          "width": 313,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "",
+          "height": 169,
+          "scroll": 167,
+          "width": 270,
+          "fit": "",
+          "minHeight": "0px"
+        }
+      ],
+      "hiddenControls": []
+    },
+    "liveStates": 39,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "terra",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": 57,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 43,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "pool",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": 13,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "uno",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 162
+      },
+      {
+        "label": "Auto layout",
+        "width": 162
+      },
+      {
+        "label": "Resize",
+        "width": 162
+      },
+      {
+        "label": "Fullscreen",
+        "width": 162
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": {
+      "active": true,
+      "overflow": 0,
+      "cue": "relative",
+      "toolbar": true,
+      "layout": [
+        {
+          "class": "room-main",
+          "height": 830,
+          "scroll": 830,
+          "width": 376,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-live-layout uno",
+          "height": 639,
+          "scroll": 639,
+          "width": 368,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "party-board-panel",
+          "height": 639,
+          "scroll": 637,
+          "width": 368,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "flexible-surface view-screen is-fullscreen",
+          "height": 617,
+          "scroll": 615,
+          "width": 346,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "adjustable-surface",
+          "height": 467,
+          "scroll": 465,
+          "width": 344,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "surface-content",
+          "height": 445,
+          "scroll": 445,
+          "width": 307,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "uno-experience ",
+          "height": 445,
+          "scroll": 445,
+          "width": 307,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "uno-opponents ",
+          "height": 64,
+          "scroll": 64,
+          "width": 307,
+          "fit": "",
+          "minHeight": "auto"
+        },
+        {
+          "class": "uno-table",
+          "height": 146,
+          "scroll": 136,
+          "width": 307,
+          "fit": "",
+          "minHeight": "auto"
+        },
+        {
+          "class": "uno-hand-section choosing-action",
+          "height": 213,
+          "scroll": 213,
+          "width": 307,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "uno-hand-heading",
+          "height": 0,
+          "scroll": 0,
+          "width": 0,
+          "fit": "",
+          "minHeight": "0px"
+        },
+        {
+          "class": "uno-hand ",
+          "height": 0,
+          "scroll": 0,
+          "width": 0,
+          "fit": "",
+          "minHeight": "80px"
+        },
+        {
+          "class": "uno-action-row",
+          "height": 0,
+          "scroll": 0,
+          "width": 0,
+          "fit": "",
+          "minHeight": "44px"
+        }
+      ],
+      "hiddenControls": []
+    },
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "ladders",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 1,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "memory",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "property",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "chess",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "dama",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "scidama",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "phone",
+    "width": 390,
+    "pageOverflow": 0,
+    "cuePosition": "relative",
+    "toolbarButtons": [
+      {
+        "label": "Fit screen",
+        "width": 163
+      },
+      {
+        "label": "Auto layout",
+        "width": 163
+      },
+      {
+        "label": "Resize",
+        "width": 163
+      },
+      {
+        "label": "Fullscreen",
+        "width": 163
+      }
+    ],
+    "guide": true,
+    "canvasFps": null,
+    "cueOverlapsCanvas": false,
+    "full": null,
+    "liveStates": 0,
+    "liveRevisions": 3,
+    "errors": []
+  }
+]

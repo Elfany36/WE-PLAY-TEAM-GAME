@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "unacknowledgedStateLimit": 4,
+  "invalidFutureAckIgnored": true,
+  "resumedAtLatestRevision": true
+}
