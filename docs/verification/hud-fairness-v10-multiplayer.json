@@ -1,0 +1,62 @@
+[
+  {
+    "mode": "snake",
+    "status": "passed",
+    "scope": "Two local browser clients + real workerd; synthetic 110 ms CDP latency",
+    "authoritativeMovement": 5,
+    "inputAcknowledged": true,
+    "canvases": [
+      {
+        "fps": "60",
+        "width": 414,
+        "height": 414
+      },
+      {
+        "fps": "60",
+        "width": 414,
+        "height": 414
+      }
+    ],
+    "errors": []
+  },
+  {
+    "mode": "circuit",
+    "status": "passed",
+    "scope": "Two local browser clients + real workerd; synthetic 110 ms CDP latency",
+    "authoritativeMovement": 415.328,
+    "inputAcknowledged": true,
+    "canvases": [
+      {
+        "fps": "60",
+        "width": 582,
+        "height": 363
+      },
+      {
+        "fps": "60",
+        "width": 582,
+        "height": 363
+      }
+    ],
+    "errors": []
+  },
+  {
+    "mode": "blocks",
+    "status": "passed",
+    "scope": "Two local browser clients + real workerd; synthetic 110 ms CDP latency",
+    "authoritativeMovement": 4.472,
+    "inputAcknowledged": true,
+    "canvases": [
+      {
+        "fps": "60",
+        "width": 582,
+        "height": 958
+      },
+      {
+        "fps": "60",
+        "width": 582,
+        "height": 958
+      }
+    ],
+    "errors": []
+  }
+]

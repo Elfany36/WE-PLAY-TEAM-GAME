@@ -62,8 +62,8 @@ test('adjacent UNO bots expose one turn per think instead of skipping three turn
  game.discard=[deck.find(c=>c.id==='red-0')!];game.color='red';game.direction=1;game.currentId=bots[0];game.initialWild=false;game.pending=null;game.drawnId=null;state.ai!.nextAt=0;
  state=advanceCasual(state,now+1000).state;game=state.game as UnoGame;
  assert.equal(game.turn,2);assert.equal(game.lastPlay?.playerId,bots[0]);assert.equal(state.ai!.cursor,1);
- const unchanged=advanceCasual(state,now+1699);assert.equal(unchanged.changed,false);
- state=advanceCasual(state,now+1700).state;game=state.game as UnoGame;
+ const nextThink=state.ai!.nextAt;assert(nextThink>=now+1900&&nextThink<now+2400);const unchanged=advanceCasual(state,nextThink-1);assert.equal(unchanged.changed,false);
+ state=advanceCasual(state,nextThink).state;game=state.game as UnoGame;
  assert.equal(game.turn,3);assert.equal(game.lastPlay?.playerId,bots[1]);assert.equal(state.ai!.cursor,2);
 });
 

@@ -106,3 +106,9 @@ See [the current verification and publication tracker](docs/verification/game-co
 New rooms request Southeast Asia placement using `apac-se`; this is best effort and does not relocate existing rooms. Stable polling URLs and header-based snapshot hints allow browser preflight reuse, while game responses remain uncacheable. Snake follows received grid trails with short prediction; other action games cap speculation at 300 ms, use finite correction thresholds, and reset on resume. Terra also checks corrections against terrain and filters camera jitter. The dedicated service root opens the arcade.
 
 See [the v9 verification tracker](docs/verification/network-visual-v9.md) for tests, browser preflight counts and explicit production/geographic measurement limits.
+
+## HUD, fair AI and simulation update (v10)
+
+Turn-based games now show clear turn-arrival notices and persistent contrasting status, including fullscreen. Leave, End round and Resume controls have distinct colors and larger touch targets in both themes. Bots have varied reactions and legal choices; memory bots learn separately, forget faces and can miss pairs without inspecting hidden cards.
+
+Active action rooms have a foreground-only server simulation heartbeat. Rendering compensates for transit time before applying its bounded prediction allowance, high-refresh devices avoid excessive whole-world paints, and selected game scenes warm during setup. See [the v10 verification tracker](docs/verification/hud-fairness-v10.md) for the 332 tests, all-game HUD checks, multiplayer evidence and remaining production measurement limits.

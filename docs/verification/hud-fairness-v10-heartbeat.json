@@ -1,0 +1,9 @@
+{
+  "scope": "Real local workerd WebSocket; no HTTP polling for 12.5 seconds",
+  "phase": "playing",
+  "ticks": 190,
+  "revisionSignals": 99,
+  "privatePayloads": 0,
+  "hiddenStopsTicks": true,
+  "foregroundResumes": true
+}

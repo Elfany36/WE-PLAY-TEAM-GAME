@@ -12,5 +12,6 @@ export {default as SnakeBoard} from './SnakeBoard';
 
 export const LadderBoard=memo(LadderBoardView,(a,b)=>a.showPaths===b.showPaths&&sameGameView(a.room,b.room));
 
-const LazyMemoryBoard=lazy(()=>import('./MemoryBoard'));
+export const preloadMemoryBoard=()=>import('./MemoryBoard');
+const LazyMemoryBoard=lazy(preloadMemoryBoard);
 export function MemoryBoard(props:React.ComponentProps<typeof LazyMemoryBoard>){return <Suspense fallback={<p className="memory-loading" role="status">Preparing your card deck…</p>}><LazyMemoryBoard {...props}/></Suspense>}

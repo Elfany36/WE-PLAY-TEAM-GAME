@@ -18,3 +18,4 @@ createRoot(document.getElementById('root')!).render(<React.StrictMode><AppBounda
 import '../app/optimization-v6.css';
 
 import '../app/optimization-v8.css';
+import '../app/hud-v10.css';

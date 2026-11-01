@@ -1,0 +1,26 @@
+[
+  {
+    "mode": "chess",
+    "status": "passed",
+    "remoteTurnNotification": true,
+    "fullscreenCueVisible": true,
+    "mobileNotification": {
+      "width": 358,
+      "height": 77.89063262939453,
+      "left": 16,
+      "right": 374
+    }
+  },
+  {
+    "mode": "uno",
+    "status": "passed",
+    "remoteTurnNotification": true,
+    "fullscreenCueVisible": true,
+    "mobileNotification": {
+      "width": 358,
+      "height": 77.89063262939453,
+      "left": 16,
+      "right": 374
+    }
+  }
+]

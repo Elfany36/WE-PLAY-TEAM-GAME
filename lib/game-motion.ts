@@ -1,4 +1,8 @@
 export type Pose={x:number;y:number;angle?:number};
+/** Transit time must not consume the entire between-receipt prediction allowance. */
+export function predictionWindow(rtt:number,step=50){return Math.min(900,Math.max(300,Math.max(0,rtt)/2+step+250))}
+/** Keep high-refresh displays from doing 144 expensive whole-world paints per second. */
+export function renderFrameDue(now:number,last:number,playing:boolean){return !last||(playing?Math.floor(now*60/1000)>Math.floor(last*60/1000):now-last>=80)}
 /** A small dead zone suppresses camera shake from subpixel receipt corrections. */
 export function followCamera(current:Pose,target:Pose,dt:number,warp=12){
  if(Math.hypot(target.x-current.x,target.y-current.y)>warp)return {...target};

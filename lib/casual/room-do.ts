@@ -2,17 +2,40 @@ import {DurableObject} from 'cloudflare:workers';
 import {createArenaAPI} from '../arena-api.ts';
 import {createCasualAPI} from './api.ts';
 import {RoomStore} from './room-store.ts';
+import {roomBatch} from '../room-batch.ts';
+import {advanceCasual,type CasualState} from './engine.ts';
 type AuthorityState={players:{id:string;tokenHash:string;retired?:boolean}[]};
-type Subscription={playerId:string;tokenHash:string;expiresAt:number;revision:number};
+type Subscription={playerId:string;tokenHash:string;expiresAt:number;revision:number;activeAt?:number};
 /** Durable authority; sockets only announce committed revisions, never private game state. */
 class RoomAuthority extends DurableObject<Cloudflare.Env>{
  private readonly db:RoomStore;
  private authentication=new Map<WebSocket,{timer:ReturnType<typeof setTimeout>;done:()=>void}>();
  private notificationTimer:ReturnType<typeof setTimeout>|undefined;
  private kind:'casual'|'arena';
+ private tickTimer:ReturnType<typeof setTimeout>|undefined;
+ private tickRunning=false;
+ private tickFailures=0;
  constructor(ctx:DurableObjectState,env:Cloudflare.Env,kind:'casual'|'arena'){
-  super(ctx,env);this.kind=kind;this.db=new RoomStore(ctx.storage,()=>this.scheduleNotification(),kind==='arena'?'arena_rooms':'casual_rooms');
-  ctx.blockConcurrencyWhile(()=>this.db.load());
+  super(ctx,env);this.kind=kind;this.db=new RoomStore(ctx.storage,()=>{this.scheduleNotification();this.armTick()},kind==='arena'?'arena_rooms':'casual_rooms');
+  ctx.blockConcurrencyWhile(async()=>{await this.db.load();this.armTick()});
+ }
+ private foreground(now:number,state:AuthorityState){return this.ctx.getWebSockets().map(socket=>socket.deserializeAttachment() as Subscription|null).filter((s):s is Subscription=>!!s&&s.expiresAt>now&&!!s.activeAt&&now-s.activeAt<10000&&state.players.some(p=>!p.retired&&p.id===s.playerId&&p.tokenHash===s.tokenHash))}
+ private armTick(){
+  if(this.tickTimer||this.tickRunning||this.kind!=='casual')return;
+  const row=this.db.snapshot();if(!row)return;const state=JSON.parse(row.state) as CasualState;
+  if(state.phase!=='playing'||!state.game||!('lastTickAt'in state.game)||!this.foreground(Date.now(),state).length)return;
+  this.tickTimer=setTimeout(()=>{this.tickTimer=undefined;this.ctx.waitUntil(this.tick())},Math.min(2000,100*2**this.tickFailures));
+ }
+ private async tick(){
+  if(this.tickRunning)return;this.tickRunning=true;
+  try{
+   const row=this.db.snapshot();if(!row)return;
+   await roomBatch<CasualState>(this.db,'casual:'+row.code,async()=>{const current=this.db.snapshot();if(!current)throw Error('Room expired');return{state:JSON.parse(current.state),revision:current.revision}},async(state,revision)=>!!(await this.db.prepare('UPDATE casual_rooms SET state=?, revision=revision+1 WHERE code=? AND revision=?').bind(JSON.stringify(state),row.code,revision).run()).meta.changes,()=>Error('Room busy'),task=>this.ctx.waitUntil(task),true).run((state,now)=>{
+    const active=this.foreground(now,state);if(!active.length)return{state,changed:false,result:()=>undefined};
+    const next=advanceCasual(state,now);for(const session of active){const player=next.state.players.find(p=>p.id===session.playerId);if(player&&now-player.lastSeen>5000){player.lastSeen=now;next.changed=true}}
+    return{state:next.state,changed:next.changed,result:()=>undefined};
+   });this.tickFailures=0;
+  }catch{this.tickFailures=Math.min(5,this.tickFailures+1)}finally{this.tickRunning=false;this.armTick()}
  }
  async alarm(){await this.db.expire(Date.now())}
  private scheduleNotification(){
@@ -52,16 +75,16 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
  }
  async webSocketMessage(socket:WebSocket,message:string|ArrayBuffer){
   if(typeof message!=='string'||message.length>256){socket.close(1008,'Invalid room update message');return}
-  let value:{type?:string;token?:string};try{value=JSON.parse(message)}catch{socket.close(1008,'Invalid room update message');return}
+  let value:{type?:string;token?:string;active?:boolean};try{value=JSON.parse(message)}catch{socket.close(1008,'Invalid room update message');return}
   if(!value||typeof value!=='object'||Array.isArray(value)){socket.close(1008,'Invalid room update message');return}
   const row=this.db.snapshot();if(!row){socket.close(4001,'Room expired');return}
   const prior=socket.deserializeAttachment() as Subscription|null;
-  if(prior){if(Date.now()>=prior.expiresAt){socket.close(4001,'Room expired');return}if(value.type==='ping'){socket.send('{"type":"pong"}');return}socket.close(1008,'Read-only room updates');return}
+  if(prior){if(Date.now()>=prior.expiresAt){socket.close(4001,'Room expired');return}if(value.type==='ping'){socket.serializeAttachment({...prior,activeAt:value.active===true?Date.now():0});this.armTick();socket.send('{"type":"pong"}');return}socket.close(1008,'Read-only room updates');return}
   if(value.type!=='auth'||typeof value.token!=='string'||!/^[a-f0-9]{64}$/.test(value.token)){socket.close(4001,'Join the room first');return}
   const tokenHash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value.token))),n=>n.toString(16).padStart(2,'0')).join(''),current=this.db.snapshot();if(!current){socket.close(4001,'Room expired');return}const state=JSON.parse(current.state) as AuthorityState,player=state.players.find(p=>!p.retired&&p.tokenHash===tokenHash);
   if(!player){socket.close(4001,'Room session ended');return}
   const auth=this.authentication.get(socket);if(auth){clearTimeout(auth.timer);auth.done();this.authentication.delete(socket)}
-  socket.serializeAttachment({playerId:player.id,tokenHash,expiresAt:current.created_at+86400000,revision:current.revision} satisfies Subscription);
+  socket.serializeAttachment({playerId:player.id,tokenHash,expiresAt:current.created_at+86400000,revision:current.revision,activeAt:value.active===true?Date.now():0} satisfies Subscription);this.armTick();
   socket.send(JSON.stringify({type:'ready',revision:current.revision}));
  }
  webSocketClose(socket:WebSocket,code:number,reason:string){const auth=this.authentication.get(socket);if(auth){clearTimeout(auth.timer);auth.done();this.authentication.delete(socket)}try{socket.close(code===1000||code>=3000&&code<=4999?code:1000,'Room updates closed')}catch{}}
