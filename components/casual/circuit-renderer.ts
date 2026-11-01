@@ -1,6 +1,6 @@
 import type {CasualPublic} from '../../lib/casual/engine';
 import {circuitObstacles,trackPoints,circuitWorld,circuitProps,CIRCUIT_SHOULDER,KART_RADIUS,TRACKS,type CircuitGame,type CircuitProp} from '../../lib/casual/circuit';
-import {PLAYER_COLORS} from '../../lib/casual/rules';
+import {ARCADE_COLORS as PLAYER_COLORS} from '../../lib/casual/arcade-colors';
 import {shortestAngle} from '../../lib/game-motion';
 import {paintImpact,paintSpeedTrail} from './arena-effects';
 let motionPreference:MediaQueryList|null=null;
@@ -56,6 +56,7 @@ export function drawRace(c:CanvasRenderingContext2D,g:CircuitGame,r:CasualPublic
  for(const d of g.drivers)if(!r.players.find(p=>p.id===d.id)?.retired&&Math.abs(d.x-camera.x)<1200&&Math.abs(d.y-camera.y)<1200)depthOrder.push(d);depthOrder.sort((a,b)=>a.y-b.y);for(const item of depthOrder){if('speed'in item){const player=r.players.find(p=>p.id===item.id);if(player){const color=PLAYER_COLORS[player.color%12];if(effects){if(item.hitAt)paintImpact(c,item.x,item.y,time-item.hitAt,42);if(item.boostUntil>time||item.drifting>.15)paintSpeedTrail(c,item.x,item.y,item.vx??Math.cos(item.angle)*item.speed,item.vy??Math.sin(item.angle)*item.speed,'#ffe3a4')}kart(c,item,color.fill,color.ink,time)}}else prop(c,item,g.track)}
  for(const d of g.drivers){const p=r.players.find(p=>p.id===d.id);if(!p||p.retired||Math.hypot(d.x-camera.x,d.y-camera.y)>1200)continue;c.save();c.translate(d.x,d.y-52);c.rotate((camera.angle||0)+Math.PI/2);c.font='700 13px system-ui';c.textAlign='center';const label=p.isYou?'YOU':p.name+(d.bot?' · BOT':''),w=c.measureText(label).width;rounded(c,-w/2-8,-15,w+16,23,7,'#153340e8');c.fillStyle='#fff5df';c.fillText(label,0,1);c.restore()}
  c.restore();
+ if(c.canvas.dataset?.hideHud==='true')return;
  rounded(c,18,18,210,58,12,'#122c3de8');c.fillStyle='#d3e8dd';c.font='700 11px system-ui';c.textAlign='left';c.fillText('POCKET KART · '+track.name.toUpperCase(),30,39);c.fillStyle='#fff7dc';c.font='700 16px system-ui';c.fillText('LAP '+Math.min(g.laps,own.lap+1)+' / '+g.laps+'   ·   ~1 MIN / LAP',30,62);
  rounded(c,18,516,137,64,13,'#122c3de8');c.fillStyle='#fff4ce';c.font='900 30px system-ui';c.fillText(String(Math.round(Math.abs(own.speed)*.22)).padStart(2,'0'),31,552);c.font='11px system-ui';c.fillText('km/h',92,550);c.fillStyle='#b4d7ca';c.fillText(own.speed<0?'REVERSE':own.drifting>.1?'DRIFTING':own.boostUntil>time?'BOOST':'KEEP YOUR LINE',31,570);
  rounded(c,340,536,240,44,10,'#122c3de8');c.fillStyle='#8acfe7';c.fillRect(352,564,Math.min(216,own.drifting/2*216),4);c.fillStyle='#fff0cf';c.font='700 12px system-ui';c.fillText(own.drifting>.65?'TURBO READY · RELEASE DRIFT':'HOLD DRIFT TO CHARGE TURBO',352,554);

@@ -1,4 +1,6 @@
 import type {PartyGame,ClubActor} from './party.ts';
+/** A small, signaled crosswind, derived from match ticks so pause and prediction agree. */
+export function glacierGust(g:PartyGame){const elapsed=g.tick*50%20000,cycle=Math.floor(g.tick*50/20000);return{active:g.kind==='marble'&&g.map==='glacier'&&g.rules===2&&elapsed>=16000,direction:cycle%2?-1:1,remaining:Math.ceil(((elapsed>=16000?20000:16000)-elapsed)/1000)}}
 export const FOUNDRY_PADS=[{x:480,y:90},{x:480,y:510}] as const;
 /** Match ticks keep the schedule deterministic and pause-safe. */
 export function foundrySupply(g:PartyGame){const elapsed=g.tick*50%20000;return{cycle:Math.floor(g.tick*50/20000),open:elapsed>=16000,remaining:Math.ceil(((elapsed>=16000?20000:16000)-elapsed)/1000)}}

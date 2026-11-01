@@ -6,7 +6,7 @@ import {blockSpeed,blockCells,blockFits,applyBlockMove,stepBlocks,BLOCK_COLORS,t
 import {blockViewSize} from '../../lib/casual/block-layout';
 import {tableScene} from '../../lib/casual/scenes';
 import {PieceMotion} from '../../lib/casual/visual-motion';
-import {PLAYER_COLORS} from '../../lib/casual/rules';
+import {ARCADE_COLORS as PLAYER_COLORS} from '../../lib/casual/arcade-colors';
 import {renderFrameDue,GameClock,predictionWindow} from '../../lib/game-motion';
 import {traceMotion} from '../../lib/motion-trace';
 import {watchCanvas} from '../../lib/canvas-visibility';

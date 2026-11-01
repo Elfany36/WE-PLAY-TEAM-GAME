@@ -26,3 +26,4 @@ import '../app/room-play.css';
 import '../app/arcade-v13.css';
 import '../app/arcade-v14.css';
 import '../app/studio-v15.css';
+import '../app/arcade-v16.css';
