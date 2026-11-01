@@ -1,0 +1,20 @@
+{
+  "fixture": "600 eight-Snake full-state messages with 160 body segments each; local JSON parse and receipt pipeline, including UTF-8 byte accounting",
+  "frameBytes": 24182,
+  "beforeMs": [
+    179.57,
+    207.97,
+    165.12,
+    162.42,
+    161.25
+  ],
+  "afterMs": [
+    119.18,
+    107.87,
+    108.22,
+    104.68,
+    107
+  ],
+  "medianBeforeMs": 165.12,
+  "medianAfterMs": 107.87
+}

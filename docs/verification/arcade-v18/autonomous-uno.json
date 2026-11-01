@@ -1,0 +1,8 @@
+{
+  "mode": "uno",
+  "status": "passed",
+  "turnBefore": 3,
+  "turnAfter": 4,
+  "receivedStateFrames": 2,
+  "httpPollsDuringWait": 0
+}

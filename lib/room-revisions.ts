@@ -1,7 +1,7 @@
 import {ROOM_HINT_HEADERS} from './room-params.ts';
 import {stateWindow,MAX_STATE_WINDOW,fastControls} from './room-stream.ts';
 
-type Handlers={revision:(revision:number)=>void;status:(live:boolean)=>void;state?:(data:any)=>boolean|void;latency?:(elapsed:number)=>void};
+type Handlers={revision:(revision:number)=>void;status:(live:boolean)=>void;state?:(data:any,wireBytes?:number)=>boolean|void;latency?:(elapsed:number)=>void};
 type Pending={resolve:(response:Response)=>void;reject:(error:Error)=>void;cleanup:()=>void;sentAt:number};
 const HEARTBEAT=3000,STALE_AFTER=9000;
 const unavailable=()=>Object.assign(Error('Reconnecting live room updates.'),{status:503});
@@ -72,7 +72,7 @@ export class RoomRevisionFeed{
    if(data.type==='pong'){this.lastMessage=Date.now();const sent=this.pings.get(data.id);if(sent!==undefined){this.pings.delete(data.id);this.measure(performance.now()-sent)}return}
    if((data.type==='ready'||data.type==='revision')&&revision){this.lastMessage=Date.now();this.handlers.revision(data.revision)}
    if(data.type==='state'&&this.protocol===2&&data.data&&typeof data.data==='object'){
-    this.lastMessage=Date.now();const accepted=this.handlers.state?.(data.data),revision=data.data.room?.revision??data.data.revision;
+    this.lastMessage=Date.now();const accepted=this.handlers.state?.(data.data,new TextEncoder().encode(event.data).byteLength),revision=data.data.room?.revision??data.data.revision;
     if(accepted!==false&&Number.isSafeInteger(revision)&&revision>=0)try{socket.send(JSON.stringify({type:'ack',revision,stateWindow:stateWindow(this.roundTrip)}))}catch{this.disconnect(socket,true)}
    }
    if(data.type==='response'&&typeof data.id==='string'&&Number.isInteger(data.status)&&data.status>=200&&data.status<=599){

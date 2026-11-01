@@ -1,3 +1,4 @@
+import {poolShotSpeed} from './pool-power.ts';
 import type {CasualState} from './engine.ts';
 import {CasualError} from './error.ts';
 import {finish,livePlayers,nextPlayer} from './shared.ts';
@@ -38,5 +39,5 @@ export function advancePool(s:CasualState,now:number){const g=s.game as PoolGame
  if(now>=g.deadline&&s.phase==='playing'){finish(s,[],'The 15-minute table session ended in a draw.',now);changed=true}return changed}
 export function poolAction(s:CasualState,a:Record<string,any>,id:string,now:number){const g=s.game as PoolGame;if(now<g.startAt)throw new CasualError('Wait for the table countdown.',409);if(g.currentId!==id)throw new CasualError('Wait for your turn at the table.',403);if(a.turn!==g.turn||g.moving)throw new CasualError('Wait for the balls to stop and refresh your turn.',409);const cue=g.balls[0];if(a.action==='pool-place'){if(!g.inHand||!validCuePosition(g,a.x,a.y))throw new CasualError('Place the cue ball on clear felt, away from pockets and other balls.');cue.x=a.x;cue.y=a.y;return}
  if(a.action!=='pool-shot'||!Number.isFinite(a.angle)||Math.abs(a.angle)>Math.PI*4||!Number.isFinite(a.power)||a.power<.1||a.power>1||!Number.isInteger(a.pocket)||a.pocket<0||a.pocket>5)throw new CasualError('Choose a valid shot direction, power and called pocket.');
- g.shot={by:id,at:now,angle:a.angle,power:a.power,cueOrigin:{x:cue.x,y:cue.y},first:null,potted:[],rails:[],called:a.pocket,break:g.breaking,eightEligible:!!g.groups[id]&&poolRemaining(g,id)===0};g.moving=true;g.inHand=false;g.lastTickAt=now;cue.vx=Math.cos(a.angle)*(120+a.power*680);cue.vy=Math.sin(a.angle)*(120+a.power*680);g.message='Balls in motion…';
+ g.shot={by:id,at:now,angle:a.angle,power:a.power,cueOrigin:{x:cue.x,y:cue.y},first:null,potted:[],rails:[],called:a.pocket,break:g.breaking,eightEligible:!!g.groups[id]&&poolRemaining(g,id)===0};g.moving=true;g.inHand=false;g.lastTickAt=now;cue.vx=Math.cos(a.angle)*poolShotSpeed(a.power);cue.vy=Math.sin(a.angle)*poolShotSpeed(a.power);g.message='Balls in motion…';
 }

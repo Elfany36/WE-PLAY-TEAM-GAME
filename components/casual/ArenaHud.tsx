@@ -16,7 +16,7 @@ export default function ArenaHud({room,actorId}:{room:CasualPublic;actorId:strin
    {g.kind==='tanks'&&<><GameMeter label="Hull" value={actor.alive?actor.hp:0} max={3} tone="health"/><GameMeter label={(actor.reloadUntil||0)>room.serverNow?'Reloading':'Ammo'} value={actor.ammo??5} max={5} tone="gold"/><span className="hud-chip"><Shield size={15}/> {actor.armor??0} armor</span></>}
    {g.kind==='sumo'&&<><GameMeter label="Stamina" value={actor.stamina??100} max={100}/><span className="hud-chip"><Zap size={15}/>{bout?.winner===actor.id?'Qualified':!sumoActive(g,actor.id)?'Watching':actor.alive?'In the ring':'Ring out'}</span></>}
    {g.kind==='marble'&&<><span className="hud-chip"><Flag size={16}/> Lap {Math.min(2,actor.lap+1)} / 2</span><span className="hud-chip"><Heart size={16}/> {actor.deaths} falls</span>{g.map==='glacier'&&<span className="hud-chip">{glacierGust(g).active?'Crosswind active':'Wind in '+glacierGust(g).remaining+'s'}</span>}</>}
-   {g.kind==='pong'&&<span className="hud-score">{g.actors[0]?.score||0}<small> : </small>{g.actors[1]?.score||0}</span>}
+   {g.kind==='pong'&&<span className="hud-chip">First to 11 · win by two</span>}
    {g.kind==='tanks'&&g.map==='foundry'&&<span className="hud-chip">{foundrySupply(g).open?'Supplies open':'Supplies in '+foundrySupply(g).remaining+'s'}</span>}
   </div>
   <span className="hud-clock"><Clock3 size={15}/>{Math.floor(remaining/60)}:{String(remaining%60).padStart(2,'0')}</span>

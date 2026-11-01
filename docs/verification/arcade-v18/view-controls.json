@@ -1,0 +1,26 @@
+[
+  {
+    "width": 1440,
+    "chatModulesBeforeOpen": 0,
+    "chatModulesAfterOpen": 2,
+    "fullscreen": {
+      "x": 31,
+      "y": 303.6875,
+      "width": 649,
+      "height": 547
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "chatModulesBeforeOpen": 0,
+    "chatModulesAfterOpen": 2,
+    "fullscreen": {
+      "x": 21,
+      "y": 442.6875,
+      "width": 219.1875,
+      "height": 361
+    },
+    "status": "passed"
+  }
+]

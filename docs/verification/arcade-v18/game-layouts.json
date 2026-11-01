@@ -1,0 +1,590 @@
+[
+  {
+    "width": 1440,
+    "mode": "snake",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 24,
+      "width": 280,
+      "height": 260.375
+    },
+    "board": {
+      "x": 274,
+      "y": -13.625,
+      "width": 822,
+      "height": 859.484375
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "pool",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 178.390625,
+      "width": 280,
+      "height": 260.375
+    },
+    "board": {
+      "x": 274,
+      "y": 300.78125,
+      "width": 822,
+      "height": 806.1875
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "uno",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 178.390625,
+      "width": 280,
+      "height": 362.375
+    },
+    "board": {
+      "x": 274,
+      "y": 300.78125,
+      "width": 822,
+      "height": 1010.78125
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "tanks",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 178.390625,
+      "width": 280,
+      "height": 484.75
+    },
+    "board": {
+      "x": 274,
+      "y": 394.375,
+      "width": 822,
+      "height": 977.78125
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "sumo",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 24,
+      "width": 280,
+      "height": 440.75
+    },
+    "board": {
+      "x": 274,
+      "y": -13.625,
+      "width": 822,
+      "height": 930.796875
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "memory",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 24,
+      "width": 280,
+      "height": 260.375
+    },
+    "board": {
+      "x": 274,
+      "y": 44.78125,
+      "width": 822,
+      "height": 767.9375
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "property",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 178.390625,
+      "width": 280,
+      "height": 260.375
+    },
+    "board": {
+      "x": 274,
+      "y": 300.78125,
+      "width": 822,
+      "height": 1877.640625
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "chess",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 178.390625,
+      "width": 280,
+      "height": 260.375
+    },
+    "board": {
+      "x": 274,
+      "y": 300.78125,
+      "width": 822,
+      "height": 1371.421875
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "dama",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 178.390625,
+      "width": 280,
+      "height": 260.375
+    },
+    "board": {
+      "x": 274,
+      "y": 300.78125,
+      "width": 822,
+      "height": 1315.421875
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "scidama",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 178.390625,
+      "width": 280,
+      "height": 260.375
+    },
+    "board": {
+      "x": 274,
+      "y": 300.78125,
+      "width": 822,
+      "height": 1443.765625
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "blocks",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 178.390625,
+      "width": 280,
+      "height": 260.375
+    },
+    "board": {
+      "x": 274,
+      "y": 300.78125,
+      "width": 822,
+      "height": 1230.6875
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "circuit",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 24,
+      "width": 280,
+      "height": 260.375
+    },
+    "board": {
+      "x": 274,
+      "y": -13.625,
+      "width": 822,
+      "height": 898.75
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "marble",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 24,
+      "width": 280,
+      "height": 260.375
+    },
+    "board": {
+      "x": 274,
+      "y": -13.625,
+      "width": 822,
+      "height": 862.796875
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "pong",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 24,
+      "width": 280,
+      "height": 260.375
+    },
+    "board": {
+      "x": 274,
+      "y": -13.625,
+      "width": 822,
+      "height": 862.796875
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "ladders",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 178.390625,
+      "width": 280,
+      "height": 260.375
+    },
+    "board": {
+      "x": 274,
+      "y": 300.78125,
+      "width": 822,
+      "height": 1293.640625
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "phone",
+    "overflow": false,
+    "sidebar": {
+      "x": 1124,
+      "y": 178.390625,
+      "width": 280,
+      "height": 372.953125
+    },
+    "board": {
+      "x": 274,
+      "y": 300.78125,
+      "width": 822,
+      "height": 540.140625
+    },
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "terra",
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "snake",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 1369.09375,
+      "width": 362,
+      "height": 260.375
+    },
+    "board": {
+      "x": 14,
+      "y": 391.21875,
+      "width": 362,
+      "height": 881.484375
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "pool",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 1360.765625,
+      "width": 362,
+      "height": 260.375
+    },
+    "board": {
+      "x": 14,
+      "y": 323.53125,
+      "width": 362,
+      "height": 940.84375
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "uno",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 2140.578125,
+      "width": 362,
+      "height": 320
+    },
+    "board": {
+      "x": 14,
+      "y": 360.65625,
+      "width": 362,
+      "height": 1683.53125
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "tanks",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 1388.578125,
+      "width": 362,
+      "height": 320
+    },
+    "board": {
+      "x": 14,
+      "y": 391.125,
+      "width": 362,
+      "height": 901.0625
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "sumo",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 1322.40625,
+      "width": 362,
+      "height": 320
+    },
+    "board": {
+      "x": 14,
+      "y": 391.125,
+      "width": 362,
+      "height": 834.890625
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "memory",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 1652.109375,
+      "width": 362,
+      "height": 260.375
+    },
+    "board": {
+      "x": 14,
+      "y": 323.53125,
+      "width": 362,
+      "height": 1232.1875
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "property",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 2402.609375,
+      "width": 362,
+      "height": 260.375
+    },
+    "board": {
+      "x": 14,
+      "y": 323.53125,
+      "width": 362,
+      "height": 1982.6875
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "chess",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 1541.84375,
+      "width": 362,
+      "height": 260.375
+    },
+    "board": {
+      "x": 14,
+      "y": 323.53125,
+      "width": 362,
+      "height": 1121.921875
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "dama",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 1485.84375,
+      "width": 362,
+      "height": 260.375
+    },
+    "board": {
+      "x": 14,
+      "y": 323.53125,
+      "width": 362,
+      "height": 1065.921875
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "scidama",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 1697.453125,
+      "width": 362,
+      "height": 260.375
+    },
+    "board": {
+      "x": 14,
+      "y": 356.28125,
+      "width": 362,
+      "height": 1244.78125
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "blocks",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 1739.109375,
+      "width": 362,
+      "height": 260.375
+    },
+    "board": {
+      "x": 14,
+      "y": 323.53125,
+      "width": 362,
+      "height": 1319.1875
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "circuit",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 1300.359375,
+      "width": 362,
+      "height": 260.375
+    },
+    "board": {
+      "x": 14,
+      "y": 391.21875,
+      "width": 362,
+      "height": 812.75
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "marble",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 1314.5,
+      "width": 362,
+      "height": 260.375
+    },
+    "board": {
+      "x": 14,
+      "y": 391.21875,
+      "width": 362,
+      "height": 826.890625
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "pong",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 783.90625,
+      "width": 362,
+      "height": 260.375
+    },
+    "board": {
+      "x": 14,
+      "y": -7.875,
+      "width": 362,
+      "height": 695.390625
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "ladders",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 1416.796875,
+      "width": 362,
+      "height": 260.375
+    },
+    "board": {
+      "x": 14,
+      "y": 323.53125,
+      "width": 362,
+      "height": 996.875
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "phone",
+    "overflow": false,
+    "sidebar": {
+      "x": 14,
+      "y": 812.0625,
+      "width": 362,
+      "height": 80
+    },
+    "board": {
+      "x": 14,
+      "y": 61.53125,
+      "width": 362,
+      "height": 654.140625
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "terra",
+    "overflow": false,
+    "status": "passed"
+  }
+]

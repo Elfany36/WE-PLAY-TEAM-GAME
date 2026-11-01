@@ -45,9 +45,9 @@ test('remote Snake trails start at the interpolated point, not a newer future he
  assert.deepEqual(snakeTrailAt(head,recorded,[head,{x:4,y:2}]),[head,{x:4,y:2},{x:3,y:2}]);
 });
 
-test('local Snake turns use the next displayed boundary without double-counting transport delay',()=>{
+test('online Snake turns allow for snapshot transit and input delivery at the same server boundary',()=>{
  const g={tick:10,lastTickAt:1000},tick=snakeTurnTick(g,1070,175,30,400);
- assert(tick<=12);assert.equal(snakeTurnTick(g,1070,175,30,400,tick),tick+1);
+ assert.equal(tick,14);assert.equal(snakeTurnTick(g,1070,175,30,400,tick),tick+1);
  assert.equal(snakeTurnTick(g,1000,175,0,0),11);
 });
 

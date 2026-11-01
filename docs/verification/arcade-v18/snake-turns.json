@@ -1,0 +1,131 @@
+[
+  {
+    "run": 0,
+    "profile": "two real browser clients; ordered 400 ms RTT, ±80 ms jitter",
+    "turns": [
+      {
+        "key": "ArrowDown",
+        "maxStep": 0.108,
+        "reverse": 0,
+        "samples": 68
+      },
+      {
+        "key": "ArrowLeft",
+        "maxStep": 0.108,
+        "reverse": 0,
+        "samples": 67
+      },
+      {
+        "key": "ArrowUp",
+        "maxStep": 0.108,
+        "reverse": 0,
+        "samples": 66
+      },
+      {
+        "key": "ArrowRight",
+        "maxStep": 0.108,
+        "reverse": 0,
+        "samples": 66
+      },
+      {
+        "key": "ArrowDown",
+        "maxStep": 0.108,
+        "reverse": 0,
+        "samples": 67
+      },
+      {
+        "key": "ArrowLeft",
+        "maxStep": 0.108,
+        "reverse": 0,
+        "samples": 66
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "run": 1,
+    "profile": "two real browser clients; ordered 400 ms RTT, ±80 ms jitter",
+    "turns": [
+      {
+        "key": "ArrowDown",
+        "maxStep": 0.172,
+        "reverse": 0,
+        "samples": 68
+      },
+      {
+        "key": "ArrowLeft",
+        "maxStep": 0.108,
+        "reverse": 0,
+        "samples": 66
+      },
+      {
+        "key": "ArrowUp",
+        "maxStep": 0.108,
+        "reverse": 0,
+        "samples": 66
+      },
+      {
+        "key": "ArrowRight",
+        "maxStep": 0.107,
+        "reverse": 0,
+        "samples": 66
+      },
+      {
+        "key": "ArrowDown",
+        "maxStep": 0.127,
+        "reverse": 0,
+        "samples": 66
+      },
+      {
+        "key": "ArrowLeft",
+        "maxStep": 0.108,
+        "reverse": 0,
+        "samples": 67
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "run": 2,
+    "profile": "two real browser clients; ordered 400 ms RTT, ±80 ms jitter",
+    "turns": [
+      {
+        "key": "ArrowDown",
+        "maxStep": 0.107,
+        "reverse": 0,
+        "samples": 67
+      },
+      {
+        "key": "ArrowLeft",
+        "maxStep": 0.108,
+        "reverse": 0,
+        "samples": 66
+      },
+      {
+        "key": "ArrowUp",
+        "maxStep": 0.108,
+        "reverse": 0,
+        "samples": 66
+      },
+      {
+        "key": "ArrowRight",
+        "maxStep": 0.107,
+        "reverse": 0,
+        "samples": 66
+      },
+      {
+        "key": "ArrowDown",
+        "maxStep": 0.108,
+        "reverse": 0,
+        "samples": 66
+      },
+      {
+        "key": "ArrowLeft",
+        "maxStep": 0.108,
+        "reverse": 0,
+        "samples": 66
+      }
+    ],
+    "status": "passed"
+  }
+]

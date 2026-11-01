@@ -16,16 +16,16 @@ export class RoomTransport{
  attachLive(feed:RoomRevisionFeed|null){this.live=feed;this.stats.streaming=!!feed?.streaming&&this.roomMode!=='phone'}
  reset(){this.generation++;for(const controller of this.controllers)controller.abort();this.controllers.clear();this.live=null;this.roomMode=undefined;this.bases.clear();this.pins.clear();this.latest=null;this.samples=[];Object.assign(this.stats,{live:false,streaming:false,rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,lastStateReceipt:0,stateInterval:0,receivedBytes:0,sentBytes:0,failures:0})}
  private trimBases(){let disposable=this.bases.size-this.pins.size;for(const id of this.bases.keys()){if(disposable<=48)break;if(this.pins.has(id)||id===this.latest?.id)continue;this.bases.delete(id);disposable--}}
- private decode(data:any,raw:string,elapsed:number,tx=0){
+ private decode(data:any,raw:string|number,elapsed:number,tx=0){
   if(data.patch){const base=this.bases.get(data.baseSnapshot);if(!base){this.latest=null;throw Object.assign(Error('Refreshing the complete room snapshot.'),{status:409,resync:true})}data.room=applyRoomDelta(base,data.patch);delete data.patch}
   if(data.room){this.roomMode=data.room.mode;this.stats.streaming=!!this.live?.streaming&&this.roomMode!=='phone'}
   if(data.snapshotId&&data.room){this.bases.set(data.snapshotId,data.room);const r=data.room,previous=this.latest?.room;if(!previous||r.code!==previous.code||(r.revision??0)>(previous.revision??0)||r.revision===previous.revision&&r.serverNow>=previous.serverNow){this.latest={id:data.snapshotId,room:r};const now=performance.now(),gap=this.stats.lastStateReceipt?now-this.stats.lastStateReceipt:0;if(gap)this.stats.stateInterval=this.stats.stateInterval?this.stats.stateInterval*.8+gap*.2:gap;this.stats.lastStateReceipt=now}this.trimBases()}
-  const receipt=roomReceipt(data,elapsed),rx=new TextEncoder().encode(raw).byteLength,time=performance.now();
+  const receipt=roomReceipt(data,elapsed),rx=typeof raw==='number'?raw:new TextEncoder().encode(raw).byteLength,time=performance.now();
   this.stats.jitter=this.stats.lastReceipt?this.stats.jitter*.8+Math.abs(receipt.network.rtt-this.stats.rtt)*.2:0;Object.assign(this.stats,receipt.network,{lastReceipt:time,failures:0});this.stats.receivedBytes+=rx;this.stats.sentBytes+=tx;this.samples.push({at:time,bytes:rx+tx});this.samples=this.samples.filter(s=>time-s.at<5000);this.stats.bytesPerSecond=this.samples.reduce((n,s)=>n+s.bytes,0)/Math.max(1,(time-this.samples[0].at)/1000);
   if(data.room)data.room={...data.room,...receipt};if(data.unchanged)Object.assign(data,receipt);return data;
  }
  /** Push transit is estimated from the last measured request RTT, never treated as zero. */
- receive(data:any){return this.decode(data,JSON.stringify(data),this.stats.totalRtt)}
+ receive(data:any,wireBytes?:number){const measured=typeof wireBytes==='number'&&Number.isSafeInteger(wireBytes)&&wireBytes>=0&&wireBytes<=2_000_000;return this.decode(data,measured?wireBytes:JSON.stringify(data),this.stats.totalRtt)}
  async send(endpoint:string,init:RequestInit={},options:Options={}):Promise<any>{
   const max=options.retries||0,generation=this.generation;let recovered=false;
   for(let attempt=0;;attempt++){

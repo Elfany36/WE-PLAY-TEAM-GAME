@@ -1,0 +1,134 @@
+[
+  {
+    "width": 1440,
+    "method": "drag",
+    "shots": [
+      {
+        "power": 0.83,
+        "angle": 0,
+        "pocket": 0
+      }
+    ],
+    "orientation": "vertical",
+    "powerControls": [
+      {
+        "width": 255.421875,
+        "height": 64
+      },
+      {
+        "width": 255.421875,
+        "height": 72
+      }
+    ],
+    "hudTextColor": "rgb(255, 248, 231)",
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "method": "cancel",
+    "shots": [],
+    "orientation": "vertical",
+    "powerControls": [
+      {
+        "width": 255.421875,
+        "height": 64
+      },
+      {
+        "width": 255.421875,
+        "height": 72
+      }
+    ],
+    "hudTextColor": "rgb(255, 248, 231)",
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "method": "keyboard",
+    "shots": [
+      {
+        "power": 0.11,
+        "angle": 0,
+        "pocket": 0
+      }
+    ],
+    "orientation": "vertical",
+    "powerControls": [
+      {
+        "width": 255.421875,
+        "height": 64
+      },
+      {
+        "width": 255.421875,
+        "height": 72
+      }
+    ],
+    "hudTextColor": "rgb(255, 248, 231)",
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "method": "drag",
+    "shots": [
+      {
+        "power": 0.89,
+        "angle": 0,
+        "pocket": 0
+      }
+    ],
+    "orientation": "horizontal",
+    "powerControls": [
+      {
+        "width": 149,
+        "height": 64
+      },
+      {
+        "width": 149,
+        "height": 72
+      }
+    ],
+    "hudTextColor": "rgb(255, 248, 231)",
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "method": "cancel",
+    "shots": [],
+    "orientation": "horizontal",
+    "powerControls": [
+      {
+        "width": 149,
+        "height": 64
+      },
+      {
+        "width": 149,
+        "height": 72
+      }
+    ],
+    "hudTextColor": "rgb(255, 248, 231)",
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "method": "keyboard",
+    "shots": [
+      {
+        "power": 0.11,
+        "angle": 0,
+        "pocket": 0
+      }
+    ],
+    "orientation": "horizontal",
+    "powerControls": [
+      {
+        "width": 149,
+        "height": 64
+      },
+      {
+        "width": 149,
+        "height": 72
+      }
+    ],
+    "hudTextColor": "rgb(255, 248, 231)",
+    "status": "passed"
+  }
+]

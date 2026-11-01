@@ -1,0 +1,62 @@
+[
+  {
+    "width": 1440,
+    "state": "large",
+    "hand": {
+      "cards": 40,
+      "scrollable": true,
+      "overflow": "auto",
+      "width": 784,
+      "height": 456,
+      "scrollHeight": 1335,
+      "rows": "189.281px 212.266px 204.281px 204.281px 204.281px 204.281px",
+      "maxHeight": "456px",
+      "firstHeight": 189.265625,
+      "className": "uno-hand uno-large-hand"
+    },
+    "actionArea": true,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "state": "wild",
+    "choices": 4,
+    "choiceBounds": {
+      "left": 31,
+      "right": 1135,
+      "top": 748.21875,
+      "bottom": 839.609375
+    },
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "state": "large",
+    "hand": {
+      "cards": 40,
+      "scrollable": true,
+      "overflow": "auto",
+      "width": 336,
+      "height": 456,
+      "scrollHeight": 3054,
+      "rows": "194.984px 195px 209.984px 194.984px 208.984px 195px 209.984px 209.984px 209px 195px 209.984px 209px 210px 209.984px",
+      "maxHeight": "456px",
+      "firstHeight": 194.984375,
+      "className": "uno-hand uno-large-hand"
+    },
+    "actionArea": true,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "state": "wild",
+    "choices": 4,
+    "choiceBounds": {
+      "left": 21,
+      "right": 369,
+      "top": 597,
+      "bottom": 738.390625
+    },
+    "status": "passed"
+  }
+]

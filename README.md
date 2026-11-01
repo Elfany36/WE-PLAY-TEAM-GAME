@@ -136,3 +136,9 @@ See [v14 verification](docs/verification/live-play-v14.md) for the 389 tests, al
 Adaptive live-state windows prevent multi-second acknowledgement stalls, movement receipts are smaller, pending delta bases remain available, and casual bots advance without browser polling. Separate website, room, game-details and viewport toggles keep Auto layout spacious. Four table scenes, eight Snake maps, four kart tracks and five action arenas add variety; Foundry tank supplies, collision-safe tank starts, brighter shells, larger pool balls and larger Block Drop rival wells improve play. Terraria's game and original viewport are preserved.
 
 See [v15 verification](docs/verification/game-studio-v15.md) for 400 passing tests, desktop/phone checks and measured continuous delivery at 3000–5000 ms RTT. Network transit time remains visible in the diagnostics.
+
+## Recording fixes and cleaner game views (v18)
+
+The latest GitHub updates are integrated with complete Snake ribbons, safer online turn deadlines, bounded route-finding bots, a dedicated score panel and independent chat. Pool has a larger responsive power control, gentler low shots and clearer shot planning for bots. Website spacing, hand controls, tank health and Playground tabs are corrected; recent room activity is removed. Hidden chat loads on demand, and live receipts avoid redundant world serialization.
+
+See [v18 verification](docs/verification/arcade-v18.md) for 435 passing tests, all-game desktop/phone checks, 18 delayed Snake turns and controlled multiplayer measurements. Terraria gameplay and its original viewport are preserved.

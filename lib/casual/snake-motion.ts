@@ -37,10 +37,22 @@ export function sampledSnake(history:SnakeSnapshot[],id:string,clock:number,spee
 }
 export function snakeBuffer(rtt:number){return Math.min(700,Math.max(100,Math.max(0,rtt)*.5+100))}
 export function snakeHorizon(rtt:number,speed:number){return Math.min(1000,Math.max(speed*2,Math.max(0,rtt)*.5+speed+250))}
-/** Match the visible clock. Adding another round trip here delayed every local turn. */
+/** Schedule the boundary the input can actually reach at the room authority. */
 export function snakeTurnTick(g:{tick:number;lastTickAt:number},serverNow:number,speed:number,age:number,rtt:number,previousTick=g.tick){
- const phase=Math.max(0,serverNow-g.lastTickAt)+Math.max(0,age)+Math.min(450,Math.max(0,rtt)/2);
+ // The snapshot has already spent half an RTT in transit. The input needs the
+ // other half to reach the authority; predicting the earlier boundary folds the
+ // snake back when the server confirms the actual turn.
+ const margin=rtt>=120?speed:0;
+ const phase=Math.max(0,serverNow-g.lastTickAt)+Math.max(0,age)+Math.max(0,rtt)+margin;
  return Math.max(g.tick+Math.max(1,Math.ceil(phase/Math.max(40,speed))),previousTick+1);
+}
+
+/** The wire keeps only recent heads; a long body is the rest of the same path. */
+export function snakeRecordedTrail(w:{body:Point[];trail?:Point[]}){
+ const trail=w.trail?.length?w.trail:w.body;
+ if(!trail.length||trail.length>=w.body.length)return trail;
+ const tail=trail.at(-1)!,at=w.body.findIndex(p=>p.x===tail.x&&p.y===tail.y);
+ return at<0?w.body:[...trail,...w.body.slice(at+1)];
 }
 
 type Prediction={body:Point[];tick:number;startAt:number;turns:PredictedTurn[];direction:Direction;turnIndex:number;frames:Point[][];occupied:Set<string>;food:Set<string>;walls:Point[]|undefined;stopped:boolean;sampleAt?:number;sampleFraction?:number};
