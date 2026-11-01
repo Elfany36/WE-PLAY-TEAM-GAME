@@ -6,17 +6,20 @@ import {trackPoints,distanceToTrack} from './circuit.ts';
 export const PARTY_MODES=['sumo','tanks','pong','marble'] as const;
 export type PartyKind=typeof PARTY_MODES[number];
 export const isParty=(mode:string):mode is PartyKind=>PARTY_MODES.includes(mode as PartyKind);
-export type ClubMap='garden'|'canyon'|'neon';
-export const CLUB_MAPS=[{id:'garden',name:'Clover Gardens',ground:'#bad4ad',road:'#dbe7cf',ink:'#426a57'},{id:'canyon',name:'Copper Canyon',ground:'#deb791',road:'#f2dabb',ink:'#93634d'},{id:'neon',name:'Midnight Arcade',ground:'#182c42',road:'#415a72',ink:'#91d8cb'}] as const;
+export type ClubMap='garden'|'canyon'|'neon'|'harbor';
+export const CLUB_MAPS=[{id:'garden',name:'Clover Gardens',ground:'#bad4ad',road:'#dbe7cf',ink:'#426a57'},{id:'canyon',name:'Copper Canyon',ground:'#deb791',road:'#f2dabb',ink:'#93634d'},{id:'neon',name:'Midnight Arcade',ground:'#182c42',road:'#415a72',ink:'#91d8cb'},{id:'harbor',name:'Moonlit Harbor',ground:'#18374a',road:'#b0c7b6',ink:'#79ddd1'}] as const;
 export type ClubInput={seq:number;at:number;dx:number;dy:number;aim:number;fire:boolean;dash:boolean;brake:boolean;fireSeq?:number;dashSeq?:number;targetY?:number;tx?:number;ty?:number};
 export type ClubActor={id:string;x:number;y:number;vx:number;vy:number;angle:number;alive:boolean;hp:number;score:number;deaths:number;cooldown:number;respawnAt:number;shieldUntil:number;checkpoint:number;lap:number;z:number;vz:number;finishedAt:number|null;armor?:number;stamina?:number;knockbackUntil?:number;hitAt?:number;hullAngle?:number;lastShotAt?:number;ammo?:number;reloadUntil?:number;lastFireSeq?:number;lastDashSeq?:number;spawnedAt?:number;eliminatedAt?:number};
 export type PartyGame={kind:PartyKind;rules?:2;bracket?:SumoBracket;worldScale?:number;map:ClubMap;actors:ClubActor[];inputs:Record<string,ClubInput>;startAt:number;lastTickAt:number;deadline:number;pausedAt:number|null;tick:number;shots:{x:number;y:number;vx:number;vy:number;owner:string;bounces:number;until:number;bounceAt?:number;bounceX?:number;bounceY?:number}[];ball:{rally?:number;hitAt?:number;lastHit?:string;x:number;y:number;vx:number;vy:number;serveAt:number};winnerIds:string[];ended:boolean;scores:Record<string,number>};
 export const TANK_RADIUS=34,TANK_SHELL_RADIUS=9;
 const tankWallCache=new Map<string,{x:number;y:number;w:number;h:number}[]>();
 const clamp=(n:number,a:number,b:number)=>Math.max(a,Math.min(b,n));
-export function clubTrack(map:ClubMap,count=192){return trackPoints(map==='canyon'?'coast':map==='neon'?'night':'meadow',count,3)}
+const harborTrackCache=new Map<number,{x:number;y:number}[]>();
+export function clubTrack(map:ClubMap,count=192){if(map!=='harbor')return trackPoints(map==='canyon'?'coast':map==='neon'?'night':'meadow',count,3);let points=harborTrackCache.get(count);if(!points){points=trackPoints('coast',count,3).map((p,i)=>({x:6000-p.x,y:p.y+Math.sin(i/count*Math.PI*4)*18}));if(harborTrackCache.size>=8)harborTrackCache.delete(harborTrackCache.keys().next().value!);harborTrackCache.set(count,points)}return points}
+/** Road checks use the same immutable geometry that the new map paints. */
+export function distanceToClubTrack(map:ClubMap,x:number,y:number){if(map!=='harbor')return distanceToTrack(map==='canyon'?'coast':map==='neon'?'night':'meadow',x,y,3);const points=clubTrack(map);let best=Infinity;for(let i=0;i<points.length;i++){const a=points[i],b=points[(i+1)%points.length],dx=b.x-a.x,dy=b.y-a.y,t=clamp(((x-a.x)*dx+(y-a.y)*dy)/(dx*dx+dy*dy||1),0,1);best=Math.min(best,(x-a.x-dx*t)**2+(y-a.y-dy*t)**2)}return Math.sqrt(best)}
 export const partyScale=(g:PartyGame)=>g.worldScale||1;
-export function tankWalls(map:ClubMap,scale=1){const key=map+scale,known=tankWallCache.get(key);if(known)return known;const walls=[{x:250,y:135,w:44,h:125},{x:666,y:360,w:44,h:125},{x:420,y:255,w:120,h:42},{x:200,y:430,w:150,h:32},{x:610,y:135,w:150,h:32}];if(map==='canyon')walls.push({x:440,y:80,w:40,h:90},{x:450,y:440,w:40,h:90});if(map==='neon')walls.push({x:90,y:280,w:90,h:30},{x:780,y:280,w:90,h:30});const result=scale===1?walls:walls.map(w=>({x:w.x*scale,y:w.y*scale,w:w.w*scale,h:w.h*scale}));tankWallCache.set(key,result);return result}
+export function tankWalls(map:ClubMap,scale=1){const key=map+scale,known=tankWallCache.get(key);if(known)return known;const walls=[{x:250,y:135,w:44,h:125},{x:666,y:360,w:44,h:125},{x:420,y:255,w:120,h:42},{x:200,y:430,w:150,h:32},{x:610,y:135,w:150,h:32}];if(map==='canyon')walls.push({x:440,y:80,w:40,h:90},{x:450,y:440,w:40,h:90});if(map==='neon')walls.push({x:90,y:280,w:90,h:30},{x:780,y:280,w:90,h:30});if(map==='harbor'){walls.splice(0,walls.length,{x:195,y:165,w:105,h:32},{x:660,y:405,w:105,h:32},{x:420,y:145,w:36,h:100},{x:504,y:355,w:36,h:100},{x:345,y:290,w:110,h:32},{x:505,y:280,w:110,h:32},{x:140,y:355,w:90,h:32},{x:730,y:215,w:90,h:32})}const result=scale===1?walls:walls.map(w=>({x:w.x*scale,y:w.y*scale,w:w.w*scale,h:w.h*scale}));tankWallCache.set(key,result);return result}
 const starts=[[100,100],[860,500],[860,100],[100,500],[520,100],[520,500],[100,300],[860,300]];
 export function newParty(s:CasualState,now:number):PartyGame{
  const kind=s.mode as PartyKind,worldScale=kind==='tanks'?1.5:kind==='sumo'?1.3:1,map=s.settings.arena||'garden',ps=livePlayers(s),pts=clubTrack(map,32),a=pts[0],b=pts[1],angle=Math.atan2(b.y-a.y,b.x-a.x);
@@ -28,7 +31,7 @@ export function sumoRadius(g:PartyGame,now:number){return (238-Math.min(85,Math.
 export function marbleObstacles(g:PartyGame,now:number){if(g.rules!==2)return [];const pts=clubTrack(g.map);return[18,65,118,168].map((index,i)=>{const p=pts[index],next=pts[(index+1)%192],angle=Math.atan2(next.y-p.y,next.x-p.x),offset=Math.sin((g.tick*50+Math.max(0,Math.min(50,now-g.lastTickAt)))/1600+i*1.7)*24;return{x:p.x-Math.sin(angle)*offset,y:p.y+Math.cos(angle)*offset,radius:17,angle:angle+Math.PI/2}})}
 function collideActors(g:PartyGame,radius:number,push:number){for(let i=0;i<g.actors.length;i++)for(let j=i+1;j<g.actors.length;j++){const a=g.actors[i],b=g.actors[j];if(g.kind==='sumo'&&!sameSumoBout(g,a.id,b.id)||!a.alive||!b.alive||a.z>12||b.z>12)continue;const dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy);if(d>=radius*2)continue;const nx=d?dx/d:Math.cos((i+j)*2.4),ny=d?dy/d:Math.sin((i+j)*2.4),overlap=(radius*2-d)/2;a.x-=nx*overlap;a.y-=ny*overlap;b.x+=nx*overlap;b.y+=ny*overlap;const speed=(a.vx-b.vx)*nx+(a.vy-b.vy)*ny;if(speed>0){if(g.rules===2&&g.kind==='sumo'){push=65+Math.min(110,speed*.2);a.knockbackUntil=b.knockbackUntil=g.lastTickAt+350}a.vx-=nx*(speed*.65+push);a.vy-=ny*(speed*.65+push);b.vx+=nx*(speed*.65+push);b.vy+=ny*(speed*.65+push)}}}
 /** Small, bounded substeps keep fast projectiles and circle collisions stable. */
-export function stepParty(g:PartyGame,dt:number,now:number){
+export function stepParty(g:PartyGame,dt:number,now:number,resolveRound=true){
  if(now<g.startAt||g.ended)return;const steps=Math.ceil(dt/.01),h=dt/steps,scale=partyScale(g),walls=g.kind==='tanks'?tankWalls(g.map,scale):[],bumpers=g.kind==='marble'?marbleObstacles(g,now):[];
  for(let sub=0;sub<steps;sub++){
   const at=now-dt*1000+(sub+1)*h*1000;
@@ -54,7 +57,7 @@ export function stepParty(g:PartyGame,dt:number,now:number){
    }else{
     if((input?.dash||(input?.dashSeq||0)>(a.lastDashSeq||0))&&a.z===0&&at>=a.cooldown&&(g.rules!==2||(a.stamina??100)>=40)){if(g.rules===2)a.stamina=(a.stamina??100)-40;a.lastDashSeq=input?.dashSeq||input?.seq||0;a.vz=205;a.cooldown=at+1100}a.vz-=520*h;a.z=Math.max(0,a.z+a.vz*h);if(!a.z)a.vz=0;
     a.x+=a.vx*h;a.y+=a.vy*h;if(a.z<18)for(const p of bumpers){const dx=a.x-p.x,dy=a.y-p.y,d=Math.hypot(dx,dy);if(d<37){const nx=d?dx/d:1,ny=d?dy/d:0;a.x=p.x+nx*37;a.y=p.y+ny*37;const speed=a.vx*nx+a.vy*ny;if(speed<0){a.vx-=nx*speed*1.65;a.vy-=ny*speed*1.65}}}const pts=clubTrack(g.map),cp=clubTrack(g.map,32)[a.checkpoint],pit=[30,92,145].some(i=>Math.hypot(a.x-pts[i].x,a.y-pts[i].y)<34);
-    if(a.z<6&&at>a.shieldUntil&&(distanceToTrack(g.map==='canyon'?'coast':g.map==='neon'?'night':'meadow',a.x,a.y,3)>64||pit)){a.alive=false;a.respawnAt=at+900;a.deaths++;a.vx=a.vy=0;continue}
+    if(a.z<6&&at>a.shieldUntil&&(distanceToClubTrack(g.map,a.x,a.y)>64||pit)){a.alive=false;a.respawnAt=at+900;a.deaths++;a.vx=a.vy=0;continue}
     if(Math.hypot(a.x-cp.x,a.y-cp.y)<85){a.checkpoint=(a.checkpoint+1)%32;if(a.checkpoint===1){a.lap++;if(a.lap===2)a.finishedAt=at}a.score=a.lap*32+(a.checkpoint+31)%32}
    }
   }
@@ -75,7 +78,7 @@ export function stepParty(g:PartyGame,dt:number,now:number){
    if(b.x<15||b.x>945){const winner=g.actors[b.x<15?1:0];if(winner)winner.score++;b.rally=0;b.x=480;b.y=300;b.vx=(winner===g.actors[0]?1:-1)*290;b.vy=(g.tick%2?1:-1)*130;b.serveAt=at+900}
   }
  }
- if(!g.bracket)for(const a of g.actors)g.scores[a.id]=a.score;g.tick++;if(g.bracket)stepSumoBracket(g,now);
+ if(!g.bracket)for(const a of g.actors)g.scores[a.id]=a.score;g.tick++;if(g.bracket&&resolveRound)stepSumoBracket(g,now);
  if(g.kind==='sumo'&&!g.bracket&&g.actors.filter(a=>a.alive).length<=1){g.winnerIds=g.actors.filter(a=>a.alive).map(a=>a.id);g.ended=true}
  if(g.kind==='pong'&&g.actors.some(a=>a.score>=11&&a.score-Math.min(...g.actors.map(p=>p.score))>=2)){g.winnerIds=g.actors.filter(a=>a.score===Math.max(...g.actors.map(a=>a.score))).map(a=>a.id);g.ended=true}
  if(g.kind==='marble'&&g.actors.some(a=>a.finishedAt!==null)){g.winnerIds=g.actors.filter(a=>a.finishedAt===Math.min(...g.actors.map(a=>a.finishedAt??Infinity))).map(a=>a.id);g.ended=true}

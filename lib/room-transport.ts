@@ -11,6 +11,7 @@ export class RoomTransport{
  private samples:{at:number;bytes:number}[]=[];private generation=0;private roomMode:string|undefined;
  private controllers=new Set<AbortController>();private live:RoomRevisionFeed|null=null;
  readonly stats:TransportStats={live:false,streaming:false,rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,receivedBytes:0,sentBytes:0,failures:0};
+ observeLatency(elapsed:number){if(!Number.isFinite(elapsed)||elapsed<0)return;const value=Math.round(elapsed);this.stats.jitter=this.stats.jitter*.8+Math.abs(value-this.stats.rtt)*.2;this.stats.rtt=value;this.stats.totalRtt=value;this.stats.serverMs=0}
  attachLive(feed:RoomRevisionFeed|null){this.live=feed;this.stats.streaming=!!feed?.streaming&&this.roomMode!=='phone'}
  reset(){this.generation++;for(const controller of this.controllers)controller.abort();this.controllers.clear();this.live=null;this.roomMode=undefined;this.bases.clear();this.latest=null;this.samples=[];Object.assign(this.stats,{live:false,streaming:false,rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,receivedBytes:0,sentBytes:0,failures:0})}
  private decode(data:any,raw:string,elapsed:number,tx=0){

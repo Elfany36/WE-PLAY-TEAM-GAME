@@ -1,0 +1,43 @@
+/* Auto layout follows the document; only an explicit fitted/custom view constrains it. */
+.casual-arcade:not([data-game=terra]) .view-content .adjustable-surface{height:auto!important;max-height:none!important;overflow:visible!important}
+.casual-arcade:not([data-game=terra]) .view-content .surface-content{height:auto!important;max-height:none!important;overflow:visible!important}
+.casual-arcade:not([data-game=terra]) .view-screen .adjustable-surface{height:auto!important;max-height:none!important;overflow:visible!important}
+.casual-arcade:not([data-game=terra]) .view-screen .surface-content{height:auto!important;max-height:none!important;overflow:visible!important;--board-fit-width:100%!important}
+.casual-arcade:not([data-game=terra]) .view-screen :is(.club-arena>canvas,.action-world>canvas,.blocks-arena>canvas,.snake-stadium>canvas,.pool-stage>canvas){width:auto!important;height:auto!important;max-width:100%!important;max-height:max(240px,calc(100dvh - 300px));object-fit:contain;margin-inline:auto}
+.casual-arcade:not([data-game=terra]) .room-shell:fullscreen{display:block!important;overflow-y:auto!important;overflow-x:hidden!important}
+.casual-arcade:not([data-game=terra]) .room-shell:fullscreen .room-main{overflow:visible!important}
+.casual-arcade:not([data-game=terra]) .game-turn-cue{position:static!important;inset:auto!important}
+.casual-arcade:not([data-game=terra]) .party-board-panel{outline:none!important}
+.game-guide{margin:14px 0 4px;border:1px solid var(--border);background:var(--surface-soft);border-radius:12px;overflow:hidden}
+.game-guide>summary{display:flex;align-items:center;gap:10px;list-style:none;cursor:pointer;min-height:46px;padding:12px 15px;font-size:13px;font-weight:750}
+.game-guide>summary::-webkit-details-marker{display:none}
+.game-guide>summary>svg:last-child{margin-left:auto}
+.game-guide[open]>summary>svg:last-child{transform:rotate(180deg)}
+.game-guide>div{padding:0 15px 15px;border-top:1px solid var(--border)}
+.game-guide p{font-size:12px;line-height:1.8;margin:12px 0 0}
+.sumo-bracket{display:block!important;padding:12px 15px!important;margin:0 0 12px}
+.sumo-bracket>summary{display:flex;gap:8px;align-items:center;min-height:30px;font-size:12px;font-weight:750;cursor:pointer}
+.sumo-bracket-content{display:flex;gap:16px;flex-wrap:wrap;padding-top:14px}
+.sumo-bracket-content label{flex:1;min-width:180px}
+.sumo-bracket-content ol{flex:2;min-width:180px}
+.sumo-waiting{padding:10px 14px;border:1px solid var(--attention-line);border-radius:10px;background:var(--attention-fill);color:var(--attention-ink);font-size:12px;line-height:1.6;margin:0 0 12px}
+.strategy-sidebar>.game-guide{margin:0}
+.uno-hand-section{min-height:0!important;max-height:none!important;overflow:visible!important}
+.uno-hand-heading{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-block:18px 14px}
+.uno-hand-tools{display:flex;gap:8px;flex-wrap:wrap}
+.uno-hand-heading button{min-height:42px;display:inline-flex;align-items:center;gap:7px;white-space:normal;padding:10px 12px}
+.uno-hand{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(94px,1fr))!important;gap:12px!important;align-items:start;padding:10px 4px 16px!important;margin:0!important;height:auto!important;max-height:none!important;overflow:visible!important}
+.uno-hand .uno-hand-card,.uno-hand .uno-hand-card:hover{position:relative!important;inset:auto!important;display:flex!important;flex-direction:column;align-items:center;width:100%!important;height:auto!important;min-height:0!important;transform:none!important;margin:0!important;padding:6px!important;opacity:1!important}
+.uno-hand-card .uno-card-art{width:100%!important;max-width:112px;height:auto!important;aspect-ratio:2/3}
+.uno-hand-card>span,.uno-paired-face{position:static!important;max-width:100%;font-size:10px!important;line-height:1.5;text-align:center;overflow-wrap:anywhere;margin-top:5px}
+.uno-hand-card>b{position:static!important;margin-top:5px}
+.uno-hand.uno-large-hand{display:grid!important;max-height:min(48dvh,460px)!important;overflow-y:auto!important;overscroll-behavior:contain;scrollbar-gutter:stable}
+.uno-hand-section.choosing-action>.uno-hand{max-height:190px!important;overflow-y:auto!important}
+.interface-hidden .main-content{max-width:none!important;padding-inline:clamp(12px,2vw,30px)}
+.interface-hidden .party-live-layout{width:100%}
+.interface-restore{position:static}
+.room-tools-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:9px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);font-size:12px;font-weight:700}
+.room-shell.sidebar-hidden{grid-template-columns:minmax(0,1fr)!important}
+.room-shell.sidebar-hidden>.room-sidebar{display:none!important}
+@media(min-width:1200px){.interface-hidden .room-shell{grid-template-columns:minmax(0,1fr) 270px}.interface-hidden .room-shell.sidebar-hidden{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:760px){.sumo-bracket-content{gap:10px}.sumo-waiting{font-size:11px}.interface-hidden .main-content{padding-inline:10px}.uno-hand{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}.uno-hand-heading h3{width:100%}}

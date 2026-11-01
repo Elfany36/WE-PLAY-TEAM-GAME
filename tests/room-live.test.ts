@@ -79,3 +79,8 @@ test('applied live states acknowledge their revision so a slow stream can coales
  socket.message({type:'state',data:{snapshotId:'state-1',room:{revision:7}}});assert.deepEqual(socket.sent.at(-1),{type:'ack',revision:7});
  socket.message({type:'state',data:{snapshotId:'state-2',revision:8,patch:[0,{}]}});assert.deepEqual(socket.sent.at(-1),{type:'ack',revision:8});
 });
+
+test('seat ownership controls foreground presence and socket latency stays a real measurement',t=>{
+ const e=environment(t);e.feed.start();const socket=e.open();e.feed.setActive(false);assert.equal(socket.sent.at(-1).active,false);e.feed.setActive(true);assert.equal(socket.sent.at(-1).active,true);assert(Number.isSafeInteger(socket.sent.at(-1).id));
+ const transport=new RoomTransport();transport.observeLatency(438.2);assert.equal(transport.stats.rtt,438);assert.equal(transport.stats.totalRtt,438);transport.observeLatency(NaN);assert.equal(transport.stats.rtt,438);
+});

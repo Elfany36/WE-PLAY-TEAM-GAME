@@ -4,14 +4,14 @@ export function mergeControlPackets(older:ControlPacket|null,newer:ControlPacket
 export function retryableControlError(error:any){return ![400,401,403,404,410].includes(error?.status)&&!(error?.status===409&&/older round|not running|not accepting|out\.|start a round/i.test(error?.message||''))}
 export class ControlChannel{
  private waiting:ControlPacket|null=null;private active=0;private barriers=0;private generation=0;private version=0;private failures=0;private timer:ReturnType<typeof setTimeout>|null=null;
- private send:(packet:ControlPacket)=>Promise<void>;private onError:(e:unknown)=>void;private delay:(n:number)=>number;private concurrency:number;
- constructor(send:(packet:ControlPacket)=>Promise<void>,onError:(e:unknown)=>void=()=>{},delay=(n:number)=>Math.min(1000,80*2**Math.min(n-1,4)),concurrency=1){this.send=send;this.onError=onError;this.delay=delay;this.concurrency=concurrency}
+ private send:(packet:ControlPacket)=>Promise<void>;private onError:(e:unknown)=>void;private delay:(n:number)=>number;private concurrency:number|(()=>number);
+ constructor(send:(packet:ControlPacket)=>Promise<void>,onError:(e:unknown)=>void=()=>{},delay=(n:number)=>Math.min(1000,80*2**Math.min(n-1,4)),concurrency:number|(()=>number)=1){this.send=send;this.onError=onError;this.delay=delay;this.concurrency=concurrency}
  get inFlight(){return this.active}
  enqueue(packet:ControlPacket){this.waiting=mergeControlPackets(this.waiting,packet);this.version++;this.failures=0;this.cancelTimer();this.pump()}
  reset(){this.generation++;this.version++;this.waiting=null;this.active=0;this.barriers=0;this.failures=0;this.cancelTimer()}
  private cancelTimer(){if(this.timer!==null){clearTimeout(this.timer);this.timer=null}}
  // Kart one-shot commands have independent server sequence receipts. They may be retried
  // out of order without holding newer steering or a key release behind a slow receipt.
- private pump(){if(this.active>=this.concurrency||this.barriers||!this.waiting)return;const packet=this.waiting,epoch=this.generation,version=this.version,oneShot=!!(packet.use||packet.recover),barrier=oneShot&&packet.action!=='drive';this.waiting=null;this.active++;if(barrier)this.barriers++;void this.dispatch(packet,epoch,version,barrier,oneShot)}
+ private pump(){const limit=typeof this.concurrency==='function'?this.concurrency():this.concurrency;if(this.active>=limit||this.barriers||!this.waiting)return;const packet=this.waiting,epoch=this.generation,version=this.version,oneShot=!!(packet.use||packet.recover),barrier=oneShot&&packet.action!=='drive';this.waiting=null;this.active++;if(barrier)this.barriers++;void this.dispatch(packet,epoch,version,barrier,oneShot)}
  private async dispatch(packet:ControlPacket,epoch:number,version:number,barrier:boolean,oneShot:boolean){let retry=false;try{await this.send(packet);if(epoch===this.generation&&version===this.version)this.failures=0}catch(error){if(epoch===this.generation&&(version===this.version||oneShot)){this.onError(error);if(retryableControlError(error)&&++this.failures<=6){this.waiting=mergeControlPackets(packet,this.waiting||packet);retry=true}}}finally{if(epoch!==this.generation)return;this.active--;if(barrier)this.barriers--;if(this.waiting){if(retry){this.cancelTimer();this.timer=setTimeout(()=>{this.timer=null;this.pump()},this.delay(this.failures))}else this.pump()}}}
 }

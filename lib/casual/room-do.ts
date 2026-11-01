@@ -29,6 +29,17 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
   if(state.phase!=='playing'||!state.game||!('lastTickAt'in state.game)||!this.foreground(Date.now(),state).length)return;
   this.tickTimer=setTimeout(()=>{this.tickTimer=undefined;this.ctx.waitUntil(this.tick())},Math.min(2000,50*2**this.tickFailures));
  }
+ private async releaseInput(socket:WebSocket,session:Subscription){
+  if(this.kind!=='casual')return;
+  const row=this.db.snapshot();if(!row)return;
+  const state=JSON.parse(row.state) as CasualState;
+  if(!state.game||!['circuit','sumo','tanks','pong','marble','blocks'].includes(state.game.kind)||!('inputs'in state.game)||!state.game.inputs[session.playerId])return;
+  if(this.ctx.getWebSockets().some(other=>{if(other===socket)return false;const s=other.deserializeAttachment() as Subscription|null;return s?.playerId===session.playerId&&s.tokenHash===session.tokenHash&&!!s.activeAt&&Date.now()-s.activeAt<10000}))return;
+  await roomBatch<CasualState>(this.db,'casual:'+row.code,async()=>{const current=this.db.snapshot();if(!current)throw Error('Room expired');return{state:JSON.parse(current.state),revision:current.revision}},async(next,revision)=>!!(await this.db.prepare('UPDATE casual_rooms SET state=?, revision=revision+1 WHERE code=? AND revision=?').bind(JSON.stringify(next),row.code,revision).run()).meta.changes,()=>Error('Room busy'),task=>this.ctx.waitUntil(task),true).run((next)=>{
+   const game=next.game,player=next.players.find(p=>!p.retired&&p.id===session.playerId&&p.tokenHash===session.tokenHash);if(!player||!game||!['circuit','sumo','tanks','pong','marble','blocks'].includes(game.kind)||!('inputs'in game)||!game.inputs[session.playerId])return{state:next,changed:false,result:()=>undefined};
+   delete game.inputs[session.playerId];return{state:next,changed:true,result:()=>undefined};
+  });
+ }
  private async tick(){
   if(this.tickRunning)return;this.tickRunning=true;
   try{
@@ -102,7 +113,7 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
    if(!state.players.some(p=>!p.retired&&p.id===prior.playerId&&p.tokenHash===prior.tokenHash)){socket.close(4001,'Room session ended');return}
    if(value.type==='ping'){
     const fresh=value.active===true&&(!prior.activeAt||now-prior.activeAt>=10000||value.resync===true);
-    socket.serializeAttachment({...prior,activeAt:value.active===true?now:0,...(fresh?{revision:-1,base:undefined,pending:[]}:{})});this.armTick();socket.send('{"type":"pong"}');if(fresh)this.notify();return;
+    socket.serializeAttachment({...prior,activeAt:value.active===true?now:0,...(fresh?{revision:-1,base:undefined,pending:[]}:{})});this.armTick();socket.send(JSON.stringify({type:'pong',...(Number.isSafeInteger(value.id)?{id:value.id}:{})}));if(value.active!==true)await this.releaseInput(socket,prior);if(fresh)this.notify();return;
    }
 
    if(value.type==='request'&&prior.protocol===2){
@@ -126,7 +137,7 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
   socket.serializeAttachment({playerId:player.id,tokenHash,expiresAt:current.created_at+86400000,revision:protocol===2?-1:current.revision,activeAt:value.active===true?Date.now():0,protocol,stateAck:protocol===2&&value.stateAck===true,pending:[]} satisfies Subscription);this.armTick();
   socket.send(JSON.stringify({type:'ready',revision:current.revision,protocol}));if(protocol===2)this.notify();
  }
- webSocketClose(socket:WebSocket,code:number,reason:string){const auth=this.authentication.get(socket);if(auth){clearTimeout(auth.timer);auth.done();this.authentication.delete(socket)}try{socket.close(code===1000||code>=3000&&code<=4999?code:1000,'Room updates closed')}catch{}}
+ webSocketClose(socket:WebSocket,code:number,reason:string){const session=socket.deserializeAttachment() as Subscription|null;if(session)this.ctx.waitUntil(this.releaseInput(socket,session).catch(()=>{}));const auth=this.authentication.get(socket);if(auth){clearTimeout(auth.timer);auth.done();this.authentication.delete(socket)}try{socket.close(code===1000||code>=3000&&code<=4999?code:1000,'Room updates closed')}catch{}}
  webSocketError(socket:WebSocket){socket.close(1011,'Reconnect room updates')}
 }
 

@@ -124,3 +124,9 @@ Movement presentation uses finite recovery thresholds, stable marble rolling, ea
 Browsers and this Worker deployment do not expose raw UDP game sockets. This implementation uses encrypted WebSockets and HTTPS. A UDP-based WebRTC or WebTransport service would require additional supported infrastructure.
 
 See [v12 verification and deployment notes](docs/verification/live-play-v12.md) for the actual local checks, screenshots, measured limits and the deployment status.
+
+## Multiplayer and viewport completion (v14)
+
+The latest GitHub redesign is integrated with bounded live control delivery, measured socket round trips, stable movement corrections and Sumo tournament viewing. Auto layout is the default; website, room and viewport tools can be hidden independently. UNO cards stay straight and readable, pool balls are larger with matching physics, and Moonlit Harbor adds a fourth arena. Terraria gameplay is unchanged.
+
+See [v14 verification](docs/verification/live-play-v14.md) for the 389 tests, all-game layouts, eight-player sockets, delayed-transport measurements and publication checks. These release notes supersede the deployment-pending statements in the older v12/v13 reports.

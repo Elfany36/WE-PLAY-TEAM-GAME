@@ -16,6 +16,7 @@ import './hud-v10.css';
 import './arcade-v11.css';
 import './room-play.css';
 import './arcade-v13.css';
+import './arcade-v14.css';
 import {themeInitScript} from '../lib/client-state';
 export const metadata: Metadata = {title:'Markup — Your next line starts here',description:'Learn HTML and CSS with visual practice, source-linked documentation, a live playground, and twenty coding and casual games, six snake maps, and UNO rooms for up to twelve players.',icons:{icon:'/favicon.svg'}};
 export default function RootLayout({children}:{children:React.ReactNode}) {return <html lang="en" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{__html:themeInitScript}}/></head><body>{children}</body></html>}
