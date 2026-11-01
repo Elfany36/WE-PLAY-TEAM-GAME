@@ -16,3 +16,5 @@ import '../app/arcade-v5.css';
 createRoot(document.getElementById('root')!).render(<React.StrictMode><AppBoundary><MarkupApp/></AppBoundary></React.StrictMode>);
 
 import '../app/optimization-v6.css';
+
+import '../app/optimization-v8.css';

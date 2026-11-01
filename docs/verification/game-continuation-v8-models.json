@@ -1,0 +1,62 @@
+[
+  {
+    "mode": "uno",
+    "width": 1440,
+    "errors": [],
+    "seats": 12,
+    "cards": 20,
+    "hand": {
+      "clientWidth": 1008,
+      "scrollWidth": 1896
+    },
+    "horizontalOverflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "property",
+    "width": 1440,
+    "errors": [],
+    "spaces": 40,
+    "labelOverflow": [],
+    "horizontalOverflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "memory",
+    "width": 1440,
+    "errors": [],
+    "cards": 200,
+    "horizontalOverflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "uno",
+    "width": 390,
+    "errors": [],
+    "seats": 12,
+    "cards": 20,
+    "hand": {
+      "clientWidth": 348,
+      "scrollWidth": 1736
+    },
+    "horizontalOverflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "property",
+    "width": 390,
+    "errors": [],
+    "spaces": 40,
+    "labelOverflow": [],
+    "horizontalOverflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "memory",
+    "width": 390,
+    "errors": [],
+    "cards": 200,
+    "horizontalOverflow": false,
+    "status": "passed"
+  }
+]

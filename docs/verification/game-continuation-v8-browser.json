@@ -1,0 +1,212 @@
+{
+  "gameplay": [
+    {
+      "game": "sumo",
+      "width": 1440,
+      "errors": [],
+      "horizontalOverflow": false,
+      "canvas": [
+        {
+          "width": 742,
+          "height": 464,
+          "cssWidth": 742,
+          "cssHeight": 464,
+          "fps": "60"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "game": "ladders",
+      "width": 1440,
+      "errors": [],
+      "horizontalOverflow": false,
+      "canvas": [],
+      "status": "passed"
+    },
+    {
+      "game": "property",
+      "width": 1440,
+      "errors": [],
+      "horizontalOverflow": false,
+      "canvas": [],
+      "status": "passed"
+    },
+    {
+      "game": "chess",
+      "width": 1440,
+      "errors": [],
+      "moveHistory": [
+        "1. a4",
+        "2. d5"
+      ],
+      "horizontalOverflow": false,
+      "canvas": [],
+      "status": "passed"
+    },
+    {
+      "game": "dama",
+      "width": 1440,
+      "errors": [],
+      "moveHistory": [
+        "1. b3 \u2013 a4",
+        "2. e6 \u2013 d5"
+      ],
+      "horizontalOverflow": false,
+      "canvas": [],
+      "status": "passed"
+    },
+    {
+      "game": "scidama",
+      "width": 1440,
+      "errors": [],
+      "moveHistory": [
+        "1. b3 \u2013 a4",
+        "2. g6 \u2013 f5"
+      ],
+      "horizontalOverflow": false,
+      "canvas": [],
+      "status": "passed"
+    },
+    {
+      "game": "uno",
+      "width": 1440,
+      "errors": [],
+      "horizontalOverflow": false,
+      "canvas": [],
+      "status": "passed"
+    },
+    {
+      "game": "memory",
+      "width": 1440,
+      "errors": [],
+      "cards": 32,
+      "horizontalOverflow": false,
+      "canvas": [],
+      "status": "passed"
+    },
+    {
+      "game": "sumo",
+      "width": 390,
+      "errors": [],
+      "horizontalOverflow": false,
+      "canvas": [
+        {
+          "width": 320,
+          "height": 200,
+          "cssWidth": 320,
+          "cssHeight": 200,
+          "fps": "61"
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "game": "chess",
+      "width": 390,
+      "errors": [],
+      "moveHistory": [
+        "1. a4",
+        "2. d5"
+      ],
+      "horizontalOverflow": false,
+      "canvas": [],
+      "status": "passed"
+    },
+    {
+      "game": "uno",
+      "width": 390,
+      "errors": [],
+      "horizontalOverflow": false,
+      "canvas": [],
+      "status": "passed"
+    },
+    {
+      "game": "memory",
+      "width": 390,
+      "errors": [],
+      "cards": 32,
+      "horizontalOverflow": false,
+      "canvas": [],
+      "status": "passed"
+    }
+  ],
+  "additionalChecks": [
+    {
+      "game": "chess",
+      "width": 390,
+      "errors": [],
+      "moveHistory": [
+        "1. a4",
+        "2. d5"
+      ],
+      "horizontalOverflow": false,
+      "canvas": [],
+      "status": "passed",
+      "check": "human-view-v8"
+    },
+    {
+      "game": "uno",
+      "width": 1440,
+      "errors": [],
+      "privateCards": 7,
+      "horizontalOverflow": false,
+      "canvas": [],
+      "status": "passed",
+      "check": "human-view-v8"
+    },
+    {
+      "game": "uno",
+      "width": 390,
+      "errors": [],
+      "privateCards": 7,
+      "horizontalOverflow": false,
+      "canvas": [],
+      "status": "passed",
+      "check": "human-view-v8"
+    },
+    {
+      "game": "property",
+      "width": 390,
+      "errors": [],
+      "horizontalOverflow": false,
+      "canvas": [],
+      "status": "passed",
+      "check": "human-view-v8"
+    },
+    {
+      "game": "sumo",
+      "width": 1440,
+      "errors": [],
+      "horizontalOverflow": false,
+      "canvas": [
+        {
+          "width": 742,
+          "height": 464,
+          "cssWidth": 742,
+          "cssHeight": 464,
+          "fps": "60"
+        }
+      ],
+      "status": "passed",
+      "check": "sumo-active-v8"
+    },
+    {
+      "game": "sumo",
+      "width": 390,
+      "errors": [],
+      "horizontalOverflow": false,
+      "canvas": [
+        {
+          "width": 320,
+          "height": 200,
+          "cssWidth": 320,
+          "cssHeight": 200,
+          "fps": "60"
+        }
+      ],
+      "status": "passed",
+      "check": "sumo-active-v8"
+    }
+  ]
+}

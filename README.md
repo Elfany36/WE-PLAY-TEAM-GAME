@@ -81,7 +81,7 @@ The recording fixes replace memory's 3D backface flips with lightweight 2D trans
 
 All 17 arcade modes support computer seats using bounded, rule-based decisions. Hosts choose the AI count; friends keep their own seats and bots cannot inherit room ownership. The drawing relay companion uses simple templates and a generic description; it does not interpret arbitrary drawings. Terra companions follow and mine rather than plan an entire campaign.
 
-New rooms can use `https://markup-arcade.kendsfabros.workers.dev` after its public health check confirms Durable Objects. The frontend remembers a session’s original service so an existing room does not switch servers mid-round. The dedicated Worker is built from `worker/arcade-service.ts` and `wrangler.arcade.jsonc`; its initial rollout follows the GPT Site publication. It uses the account’s existing D1 database for legacy import, while each active arcade room owns local durable state. Transport remains authenticated HTTP with receipts, deltas, input coalescing and bounded prediction.
+The v6 health-probe selection was superseded by v7 below. The frontend remembers a session’s original service so an existing room does not switch servers mid-round. The dedicated Worker is built from `worker/arcade-service.ts` and `wrangler.arcade.jsonc`. Active rooms own local durable state. Authenticated HTTP carries receipts, deltas and coalesced inputs; v7 adds live revision notifications.
 
 This release fixes capped request reading before routing, durable cache state after failed writes, and one-time legacy D1 room import. Expiry and legacy player lookups now have indexes. Chess validates from the current FEN rather than replaying the full history. Memory symbols load with the memory board instead of every arcade visit.
 
@@ -92,3 +92,11 @@ See [the v6 verification ledger](docs/verification/optimization-v6.md). Its loca
 ## Urgent room receipt update (v7)
 
 New production rooms use the dedicated Durable Object service directly for both arcade and coding games. Live revision notifications reduce idle polling and the wait for another player's turn, while authenticated HTTP still carries actions and private game state. Existing rooms retain their original authority; create a new room after the current round to select the current dedicated service. The connection panel now separates round trip, server work and game-state age. See [the receipt fix evidence](docs/verification/network-receipts-v7.md) for measured results and production verification limits.
+
+## Game continuation (v8)
+
+UNO/Flip bot scores now carry between hands, penalty Wild choices obey challenge rules, Sci-Dama bots minimize signed consumption, and serial AI turns remain visible. Local views stay on human seats during AI turns. Solo UNO opens your hand automatically; pass-and-play between humans retains its privacy screen.
+
+Sumo has cached shaded wrestlers, animated limbs, dash trails and readiness meters. Strategy pieces have shaded models and movement that starts at the received server timeline, including the castling rook. Ladder boards, property buildings and ownership markers have more depth. Long property labels fit their spaces; large UNO hands scroll inside the hand panel and large tables use compact player bands. Memory reuses unchanged boards and owner lookups.
+
+See [the current verification and publication tracker](docs/verification/game-continuation-v8.md). Historical ledgers describe their own release, and all timing results are labeled by measurement environment.

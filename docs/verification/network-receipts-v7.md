@@ -4,7 +4,7 @@ Requested 1 November 2026 (Singapore), after reported 700–900 ms receipts acro
 
 ## Confirmed findings
 
-- The connected Cloudflare account currently lists `we-play-team-game`, while GET settings for the frontend's dedicated `markup-arcade` address returned Worker-not-found. The earlier deployment receipt is historical; the resource is currently absent.
+- At the start of this investigation, the connected Cloudflare account listed `we-play-team-game`, while GET settings for the frontend's dedicated `markup-arcade` address returned Worker-not-found. The missing dedicated service was restored after GPT Site v7 succeeded; the existing full-site Worker was preserved.
 - v6 caches one failed health probe for the page lifetime and can silently select the Sites/D1 path. New production rooms now select the dedicated authority directly; a temporary health failure cannot pin them to the older backend.
 - Coding rooms still used remote D1. Both arcade and coding APIs now have one SQLite-backed Durable Object per room. The active room request path uses local durable state.
 - The shared batching loop deliberately waited in 4 ms increments for D1 request ownership. Durable Objects now use direct completion wake-up; the D1 fallback retains its existing behavior.
@@ -40,4 +40,12 @@ Evidence: `network-receipts-v7-live.json`, `network-receipts-v7-load.json`, `net
 
 These are local runtime/browser measurements. The enforced environment network policy still blocks both production hosts, so no Internet ping target or production gameplay success is claimed. Native publishing, namespaces and bindings are checked separately. GitHub → GPT Site → Cloudflare publication receipts are reported in the conversation after successful operations.
 
-The interrupted visual/AI continuation is preserved in a separate checkout and resumes after this urgent release.
+## Published receipts
+
+- GitHub and Sites source commit: `a6c896d4263630f2063a35a462830d3693f0d73a`.
+- GPT Site version 7: `appgprj_6ae54f10b294819194c241daad869803~appgver_1551b545f8988191af806c973e50a38c`.
+- Site deployment `appgdep_6ae694246a608191ad31c04cd9e94f69`: succeeded.
+- Subsequent Cloudflare `markup-arcade` version `9e14e21b-f545-4dc8-be05-9ffb5e84e29a`: 100% deployed, public workers.dev route enabled.
+- Migration `room-authorities-v2`; native settings confirmed both `CASUAL_ROOMS` and `ARENA_ROOMS`, plus the existing D1 binding. No production game latency was measured.
+
+The interrupted visual/AI work resumes in [the v8 tracker](game-continuation-v8.md).

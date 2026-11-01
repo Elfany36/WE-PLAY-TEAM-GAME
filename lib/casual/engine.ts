@@ -177,9 +177,9 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
  }
  if(a.action==='start'){
   if(s.phase==='playing'||s.phase==='paused')throw new CasualError('A round is already running.',409);if(!activePlayers(s).length)throw new CasualError('Add a player first.');
-  const priorUno=s.game?.kind==='uno'?s.game:null;
+  const priorUno=s.game?.kind==='uno'?s.game:null,priorBotIds=s.players.filter(p=>p.bot&&!p.retired).map(p=>p.id);
   s.players=s.players.filter(p=>!p.bot&&!p.retired);
-  for(let i=0;i<(s.settings.bots||0)&&activePlayers(s).length<casualCapacity(s.mode);i++){const botId='bot-'+(s.round+1)+'-'+i;let botColor=0;while(s.players.some(p=>p.color===botColor))botColor++;s.players.push({...newPlayer(botId,['Pip','Coco','Sunny','Moss','Luna','Ash','Nova'][i], '',now,botColor),bot:true})}
+  for(let i=0;i<(s.settings.bots||0)&&activePlayers(s).length<casualCapacity(s.mode);i++){const botId=s.mode==='uno'&&priorUno&&!priorUno.matchWinner&&priorBotIds[i]?priorBotIds[i]:'bot-'+(s.round+1)+'-'+i;let botColor=0;while(s.players.some(p=>p.color===botColor))botColor++;s.players.push({...newPlayer(botId,['Pip','Coco','Sunny','Moss','Luna','Ash','Nova'][i], '',now,botColor),bot:true})}
   if(activePlayers(s).length<casualMinimum(s.mode))throw new CasualError('Add another player or a computer opponent.',409);
   s.ai=s.players.some(p=>p.bot)?{nextAt:now+1000,cursor:0}:undefined;
   s.round++;s.phase='playing';s.result=null;s.pauseReason='';s.players=s.players.filter(p=>!p.retired);s.players.forEach(p=>{p.ready=false;p.requests=[]});const first=s.players[0].id;

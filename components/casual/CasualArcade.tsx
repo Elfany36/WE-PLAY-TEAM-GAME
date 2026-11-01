@@ -1,4 +1,5 @@
 'use client';
+import {localViewer} from '../../lib/casual/local-view';
 import {RoomRevisionFeed} from '../../lib/room-revisions';
 import {casualPollPeriod} from '../../lib/casual/polling';
 import {chooseCasualEndpoint,legacyCasualEndpoint,sessionCasualEndpoint,invitationService,invitationEndpoint,joinCandidates} from '../../lib/casual/service';
@@ -93,8 +94,7 @@ export default function CasualArcade({name}:{name:string}){
   return()=>{stopped=true;feed.stop();clearTimeout(timer);controller?.abort();document.removeEventListener('visibilitychange',wake);window.removeEventListener('online',wake)};
  },[session?.token,session?.code,session?.apiOrigin]);
 
- let actor=local?.hostId;if(local?.game){const lg=local.game;if(lg.kind==='property')actor=localView&&!lg.players[localView]?.bust?localView:lg.debt?.payer||lg.currentId;else if('currentId'in lg)actor=lg.kind==='uno'&&localReview?localReview:lg.currentId}
- if(local?.players.find(p=>p.id===actor)?.bot)actor=local.hostId;
+ const actor=local?localViewer(local,localView,localReview):undefined;
  const localPublic=useMemo(()=>local?publicCasual(local,actor||local.hostId,Date.now()):null,[local,actor]);
  const room:CasualPublic|null=useMemo(()=>localPublic?{...localPublic,players:localPublic.players.map(p=>({...p,online:!p.retired}))}:remote,[localPublic,remote]);roomRef.current=room;
  const lease=useRoomLease(!local&&room?room.code+':'+room.youId:null);
