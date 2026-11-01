@@ -1,0 +1,26 @@
+[
+  {
+    "mode": "blanks",
+    "ok": true,
+    "privateStates": [
+      2,
+      2
+    ]
+  },
+  {
+    "mode": "survival",
+    "ok": true,
+    "privateStates": [
+      2,
+      2
+    ]
+  },
+  {
+    "mode": "quiz",
+    "ok": true,
+    "privateStates": [
+      2,
+      2
+    ]
+  }
+]

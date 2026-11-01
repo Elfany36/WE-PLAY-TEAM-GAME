@@ -1,15 +1,15 @@
 import {DurableObject} from 'cloudflare:workers';
 import {createArenaAPI} from '../arena-api.ts';
-import {casualBody,createCasualAPI} from './api.ts';
+import {createCasualAPI} from './api.ts';
 import {RoomStore} from './room-store.ts';
 import {roomBatch} from '../room-batch.ts';
-import {streamFrame,type StreamBase} from '../room-stream-frame.ts';
-import {takeRoomBudget} from '../room-budget.ts';
-import {CasualError} from './error.ts';
-import {advanceCasual,applyCasualAction,publicCasual,type CasualState} from './engine.ts';
+import {advanceCasual,publicCasual,type CasualState} from './engine.ts';
+import {publicArena,type ArenaState} from '../arena-engine.ts';
+import {roomSnapshot} from '../room-snapshots.ts';
+import {roomStreamRequest} from '../room-stream.ts';
 type AuthorityState={players:{id:string;tokenHash:string;retired?:boolean}[]};
-type Subscription={playerId:string;tokenHash:string;expiresAt:number;revision:number;activeAt?:number;realtime?:boolean};
-/** Durable authority. Opt-in socket snapshots are projected separately for each authenticated seat. */
+type Subscription={playerId:string;tokenHash:string;expiresAt:number;revision:number;activeAt?:number;protocol?:number;base?:string;windowAt?:number;requests?:number;stateAck?:boolean;pending?:number[]};
+/** Durable authority: private live snapshots and validated actions share the HTTP rule engine. */
 class RoomAuthority extends DurableObject<Cloudflare.Env>{
  private readonly db:RoomStore;
  private authentication=new Map<WebSocket,{timer:ReturnType<typeof setTimeout>;done:()=>void}>();
@@ -18,7 +18,6 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
  private tickTimer:ReturnType<typeof setTimeout>|undefined;
  private tickRunning=false;
  private tickFailures=0;
- private frames=new WeakMap<WebSocket,StreamBase>();
  constructor(ctx:DurableObjectState,env:Cloudflare.Env,kind:'casual'|'arena'){
   super(ctx,env);this.kind=kind;this.db=new RoomStore(ctx.storage,()=>{this.scheduleNotification();this.armTick()},kind==='arena'?'arena_rooms':'casual_rooms');
   ctx.blockConcurrencyWhile(async()=>{await this.db.load();this.armTick()});
@@ -28,23 +27,18 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
   if(this.tickTimer||this.tickRunning||this.kind!=='casual')return;
   const row=this.db.snapshot();if(!row)return;const state=JSON.parse(row.state) as CasualState;
   if(state.phase!=='playing'||!state.game||!('lastTickAt'in state.game)||!this.foreground(Date.now(),state).length)return;
-  this.tickTimer=setTimeout(()=>{this.tickTimer=undefined;this.ctx.waitUntil(this.tick())},Math.min(2000,100*2**this.tickFailures));
- }
- private casualBatch(){
-  const row=this.db.snapshot();if(!row)throw new CasualError('Room expired',410);
-  return roomBatch<CasualState>(this.db,'casual:'+row.code,async()=>{const current=this.db.snapshot();if(!current)throw new CasualError('Room expired',410);return{state:JSON.parse(current.state),revision:current.revision}},async(state,revision)=>!!(await this.db.prepare('UPDATE casual_rooms SET state=?, revision=revision+1 WHERE code=? AND revision=?').bind(JSON.stringify(state),row.code,revision).run()).meta.changes,()=>new CasualError('Room busy',409),task=>this.ctx.waitUntil(task),true);
+  this.tickTimer=setTimeout(()=>{this.tickTimer=undefined;this.ctx.waitUntil(this.tick())},Math.min(2000,50*2**this.tickFailures));
  }
  private async tick(){
   if(this.tickRunning)return;this.tickRunning=true;
-  try{await this.casualBatch().run((state,now)=>{const active=this.foreground(now,state);if(!active.length)return{state,changed:false,result:()=>undefined};const next=advanceCasual(state,now);for(const session of active){const player=next.state.players.find(p=>p.id===session.playerId);if(player&&now-player.lastSeen>5000){player.lastSeen=now;next.changed=true}}return{state:next.state,changed:next.changed,result:()=>undefined}});this.tickFailures=0;
+  try{
+   const row=this.db.snapshot();if(!row)return;
+   await roomBatch<CasualState>(this.db,'casual:'+row.code,async()=>{const current=this.db.snapshot();if(!current)throw Error('Room expired');return{state:JSON.parse(current.state),revision:current.revision}},async(state,revision)=>!!(await this.db.prepare('UPDATE casual_rooms SET state=?, revision=revision+1 WHERE code=? AND revision=?').bind(JSON.stringify(state),row.code,revision).run()).meta.changes,()=>Error('Room busy'),task=>this.ctx.waitUntil(task),true).run((state,now)=>{
+    const active=this.foreground(now,state);if(!active.length)return{state,changed:false,result:()=>undefined};
+    const next=advanceCasual(state,now);for(const session of active){const player=next.state.players.find(p=>p.id===session.playerId);if(player&&now-player.lastSeen>5000){player.lastSeen=now;next.changed=true}}
+    return{state:next.state,changed:next.changed,result:()=>undefined};
+   });this.tickFailures=0;
   }catch{this.tickFailures=Math.min(5,this.tickFailures+1)}finally{this.tickRunning=false;this.armTick()}
- }
- private async stopInput(socket:WebSocket,session:Subscription){
-  const row=this.db.snapshot();if(!row||this.kind!=='casual')return;
-  const state=JSON.parse(row.state) as CasualState;
-  const another=this.ctx.getWebSockets().some(s=>s!==socket&&(()=>{const a=s.deserializeAttachment() as Subscription|null;return a?.playerId===session.playerId&&!!a.activeAt&&Date.now()-a.activeAt<10000})());
-  if(another||!state.game||!('inputs'in state.game)||!state.game.inputs[session.playerId])return;
-  await this.casualBatch().run((state,now)=>{const next=structuredClone(state);if(next.game&&'inputs'in next.game)delete next.game.inputs[session.playerId];return{state:next,changed:true,result:()=>undefined}});
  }
  async alarm(){await this.db.expire(Date.now())}
  private scheduleNotification(){
@@ -60,10 +54,18 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
    const player=state.players.find(p=>p.id===session.playerId&&!p.retired&&p.tokenHash===session.tokenHash);
    if(!player||now>=session.expiresAt){socket.close(4001,'Room session ended');continue}
    if(session.revision>=row.revision)continue;
-   try{if(session.realtime&&this.kind==='casual'&&session.activeAt&&now-session.activeAt<10000){
-    if(socket.bufferedAmount>65536)continue;
-    const room={...publicCasual(state as CasualState,session.playerId,now),revision:row.revision},frame=streamFrame(room,this.frames.get(socket)),encoded=JSON.stringify(frame.packet);if(encoded.length>400000)socket.send(JSON.stringify({type:'revision',revision:row.revision,http:true}));else{socket.send(encoded);this.frames.set(socket,frame.base);}
-   }else socket.send(JSON.stringify({type:'revision',revision:row.revision}));socket.serializeAttachment({...session,revision:row.revision})}catch{socket.close(1011,'Reconnect room updates')}
+   try{
+    if(session.protocol===2&&!(this.kind==='casual'&&(state as CasualState).mode==='phone')){
+     if(!session.activeAt||now-session.activeAt>=10000)continue;
+     // Bound reliable-stream backlog. Slow clients receive the newest committed
+     // state after acknowledging a slot, rather than a queue of obsolete poses.
+     if(session.stateAck&&(session.pending?.length||0)>=4)continue;
+     const room=this.kind==='casual'?publicCasual(state as CasualState,session.playerId,now):publicArena(state as ArenaState,session.playerId,now);
+     const url=new URL('https://room.internal/api/'+this.kind);url.searchParams.set('wire','1');if(session.base)url.searchParams.set('base',session.base);
+     const data=roomSnapshot(new Request(url),{room:{...room,revision:row.revision},clock:{receivedAt:now,sentAt:now}});
+     socket.send(JSON.stringify({type:'state',data}));socket.serializeAttachment({...session,revision:row.revision,base:data.snapshotId,...(session.stateAck?{pending:[...(session.pending||[]),row.revision]}:{})});
+    }else{socket.send(JSON.stringify({type:'revision',revision:row.revision}));socket.serializeAttachment({...session,revision:row.revision})}
+   }catch{socket.close(1011,'Reconnect room updates')}
   }
  }
  async fetch(req:Request){
@@ -87,38 +89,44 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
  }
  async webSocketMessage(socket:WebSocket,message:string|ArrayBuffer){
   if(typeof message!=='string'||message.length>8192){socket.close(1008,'Invalid room update message');return}
-  let value:{type?:string;token?:string;active?:boolean;realtime?:boolean;id?:number;packet?:Record<string,any>};try{value=JSON.parse(message)}catch{socket.close(1008,'Invalid room update message');return}
+  let value:any;try{value=JSON.parse(message)}catch{socket.close(1008,'Invalid room update message');return}
   if(!value||typeof value!=='object'||Array.isArray(value)){socket.close(1008,'Invalid room update message');return}
   const row=this.db.snapshot();if(!row){socket.close(4001,'Room expired');return}
   const prior=socket.deserializeAttachment() as Subscription|null;
   if(prior){
-   const member=(JSON.parse(row.state) as AuthorityState).players.some(p=>p.id===prior.playerId&&!p.retired&&p.tokenHash===prior.tokenHash);
-   if(Date.now()>=prior.expiresAt||!member){socket.close(4001,'Room expired');return}
-   if(value.type==='ping'){socket.serializeAttachment({...prior,activeAt:value.active===true?Date.now():0});if(value.active!==true)await this.stopInput(socket,prior);this.armTick();socket.send(JSON.stringify({type:'pong',...(Number.isFinite(value.id)?{id:value.id}:{})}));if(value.active&&prior.realtime){socket.serializeAttachment({...socket.deserializeAttachment() as Subscription,revision:-1});this.scheduleNotification()}return}
-   if(prior.realtime&&value.type==='resync'){this.frames.delete(socket);socket.serializeAttachment({...prior,revision:-1});this.scheduleNotification();return}
-   if(prior.realtime&&value.type==='control'&&this.kind==='casual'){
-    const packet=value.packet,id=packet?.requestId;
-    try{
-     if(!packet||!['direction','drive','explore','party-control','block-input'].includes(packet.action))throw new CasualError('Use a live game control.',400);
-     if(!prior.activeAt||Date.now()-prior.activeAt>=10000)throw new CasualError('Controls are inactive.',409);
-     const b=await casualBody(new Request('https://room.internal/api/casual',{method:'POST',body:JSON.stringify({...packet,code:row.code})}));
-     const revision=await this.casualBatch().run((state,now)=>{const player=state.players.find(p=>p.id===prior.playerId&&!p.retired&&p.tokenHash===prior.tokenHash);if(!player)throw new CasualError('Room session ended',401);
-      if(player.requests.includes(b.requestId))return{state,changed:false,result:(_s,rev)=>rev};
-      const budget={traffic:player.traffic};if(!takeRoomBudget(budget,now,1))throw new CasualError('Too many controls.',429);
-      const next=applyCasualAction(state,b,player.id,now),p=next.players.find(p=>p.id===player.id)!;p.traffic=budget.traffic;return{state:next,changed:true,result:(_s,rev)=>rev};
-     });socket.send(JSON.stringify({type:'ack',id,revision}));
-    }catch(e){socket.send(JSON.stringify({type:'ack',id,error:e instanceof CasualError?e.message:'Control could not be applied.',status:e instanceof CasualError?e.status:503}))}return;
+   const now=Date.now();if(now>=prior.expiresAt){socket.close(4001,'Room session ended');return}
+   if(value.type==='ack'&&prior.stateAck){
+    if(Number.isSafeInteger(value.revision)&&prior.pending?.includes(value.revision)){socket.serializeAttachment({...prior,pending:prior.pending.filter(revision=>revision>value.revision)});this.scheduleNotification()}return;
    }
-   socket.close(1008,'Unsupported room update message');return;
+   const state=JSON.parse(row.state) as AuthorityState;
+   if(!state.players.some(p=>!p.retired&&p.id===prior.playerId&&p.tokenHash===prior.tokenHash)){socket.close(4001,'Room session ended');return}
+   if(value.type==='ping'){
+    const fresh=value.active===true&&(!prior.activeAt||now-prior.activeAt>=10000||value.resync===true);
+    socket.serializeAttachment({...prior,activeAt:value.active===true?now:0,...(fresh?{revision:-1,base:undefined,pending:[]}:{})});this.armTick();socket.send('{"type":"pong"}');if(fresh)this.notify();return;
+   }
+
+   if(value.type==='request'&&prior.protocol===2){
+    const requests=now-(prior.windowAt||0)>=1000?1:(prior.requests||0)+1;
+    socket.serializeAttachment({...prior,requests,windowAt:requests===1?now:prior.windowAt});
+    if(requests>60){socket.send(JSON.stringify({type:'response',id:value.id,status:429,data:{error:'Too many room requests.'}}));return}
+    try{
+     const request=roomStreamRequest(value,row.code,this.kind),api=(this.kind==='arena'?createArenaAPI:createCasualAPI)(this.db,task=>this.ctx.waitUntil(task),undefined,prior.tokenHash);
+     const response=await(request.method==='GET'?api.GET(request):api.POST(request));
+     socket.send(JSON.stringify({type:'response',id:value.id,status:response.status,data:await response.json()}));
+    }catch(error){socket.send(JSON.stringify({type:'response',id:value.id,status:(error as any)?.status||503,data:{error:(error as any)?.status?(error as Error).message:'Reconnect and try again.'}}))}
+    return;
+   }
+   socket.close(1008,'Invalid room update message');return;
   }
   if(value.type!=='auth'||typeof value.token!=='string'||!/^[a-f0-9]{64}$/.test(value.token)){socket.close(4001,'Join the room first');return}
   const tokenHash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value.token))),n=>n.toString(16).padStart(2,'0')).join(''),current=this.db.snapshot();if(!current){socket.close(4001,'Room expired');return}const state=JSON.parse(current.state) as AuthorityState,player=state.players.find(p=>!p.retired&&p.tokenHash===tokenHash);
   if(!player){socket.close(4001,'Room session ended');return}
   const auth=this.authentication.get(socket);if(auth){clearTimeout(auth.timer);auth.done();this.authentication.delete(socket)}
-  socket.serializeAttachment({playerId:player.id,tokenHash,expiresAt:current.created_at+86400000,revision:current.revision,activeAt:value.active===true?Date.now():0,...(this.kind==='casual'&&value.realtime===true?{realtime:true}:{})} satisfies Subscription);this.armTick();
-  socket.send(JSON.stringify({type:'ready',revision:current.revision,...(this.kind==='casual'&&value.realtime===true?{protocol:'state-v1'}:{})}));if(this.kind==='casual'&&value.realtime===true){const session=socket.deserializeAttachment() as Subscription;socket.serializeAttachment({...session,revision:-1});this.scheduleNotification()}
+  const protocol=value.protocol===2?2:1;
+  socket.serializeAttachment({playerId:player.id,tokenHash,expiresAt:current.created_at+86400000,revision:protocol===2?-1:current.revision,activeAt:value.active===true?Date.now():0,protocol,stateAck:protocol===2&&value.stateAck===true,pending:[]} satisfies Subscription);this.armTick();
+  socket.send(JSON.stringify({type:'ready',revision:current.revision,protocol}));if(protocol===2)this.notify();
  }
- webSocketClose(socket:WebSocket,code:number,reason:string){const session=socket.deserializeAttachment() as Subscription|null;if(session)this.ctx.waitUntil(this.stopInput(socket,session).catch(()=>{}));const auth=this.authentication.get(socket);if(auth){clearTimeout(auth.timer);auth.done();this.authentication.delete(socket)}try{socket.close(code===1000||code>=3000&&code<=4999?code:1000,'Room updates closed')}catch{}}
+ webSocketClose(socket:WebSocket,code:number,reason:string){const auth=this.authentication.get(socket);if(auth){clearTimeout(auth.timer);auth.done();this.authentication.delete(socket)}try{socket.close(code===1000||code>=3000&&code<=4999?code:1000,'Room updates closed')}catch{}}
  webSocketError(socket:WebSocket){socket.close(1011,'Reconnect room updates')}
 }
 

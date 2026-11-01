@@ -19,3 +19,8 @@ import '../app/optimization-v6.css';
 
 import '../app/optimization-v8.css';
 import '../app/hud-v10.css';
+
+import '../app/arcade-v11.css';
+
+import '../app/room-play.css';
+import '../app/arcade-v13.css';

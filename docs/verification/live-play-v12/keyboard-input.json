@@ -1,0 +1,91 @@
+[
+  {
+    "mode": "snake",
+    "keyboardAcknowledgementMs": 266,
+    "movement": {
+      "dx": 1,
+      "dy": 1
+    },
+    "neutralRelease": null,
+    "otherHumanControlsUntouched": true,
+    "errors": []
+  },
+  {
+    "mode": "sumo",
+    "keyboardAcknowledgementMs": 46,
+    "movement": {
+      "dx": -19.81,
+      "dy": 0
+    },
+    "neutralRelease": true,
+    "otherHumanControlsUntouched": true,
+    "errors": []
+  },
+  {
+    "mode": "tanks",
+    "keyboardAcknowledgementMs": 44,
+    "movement": {
+      "dx": 19.81,
+      "dy": 0
+    },
+    "neutralRelease": true,
+    "otherHumanControlsUntouched": true,
+    "errors": []
+  },
+  {
+    "mode": "pong",
+    "keyboardAcknowledgementMs": 45,
+    "movement": {
+      "dx": 0,
+      "dy": 107.5
+    },
+    "neutralRelease": true,
+    "otherHumanControlsUntouched": true,
+    "reconnected": true,
+    "errors": []
+  },
+  {
+    "mode": "marble",
+    "keyboardAcknowledgementMs": 58,
+    "movement": {
+      "dx": 6.89,
+      "dy": 0
+    },
+    "neutralRelease": true,
+    "otherHumanControlsUntouched": true,
+    "errors": []
+  },
+  {
+    "mode": "blocks",
+    "keyboardAcknowledgementMs": 44,
+    "movement": {
+      "dx": -2,
+      "dy": 0
+    },
+    "neutralRelease": null,
+    "otherHumanControlsUntouched": true,
+    "errors": []
+  },
+  {
+    "mode": "circuit",
+    "keyboardAcknowledgementMs": 56,
+    "movement": {
+      "dx": 8.3,
+      "dy": 1.18
+    },
+    "neutralRelease": true,
+    "otherHumanControlsUntouched": true,
+    "errors": []
+  },
+  {
+    "mode": "terra",
+    "keyboardAcknowledgementMs": 42,
+    "movement": {
+      "dx": 1.08,
+      "dy": 0.06
+    },
+    "neutralRelease": true,
+    "otherHumanControlsUntouched": true,
+    "errors": []
+  }
+]
