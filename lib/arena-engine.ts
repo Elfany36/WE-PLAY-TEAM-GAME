@@ -29,7 +29,7 @@ export function applyAction(state:ArenaState,action:any,playerId:string|null,now
  p.lastSeen=now;
  if(action.action==='disconnect'){p.lastSeen=now-HOST_TIMEOUT-1;s.chat=[];s.chatEpoch=(s.chatEpoch||0)+1;return{state:s}}
  if(action.action==='heartbeat')return {state:s};
- if(action.action==='chat'){try{s.chat=appendChat(s.chat,p.id,p.name,action.text,action.messageId,now,action.giftId)}catch(e){if(e instanceof ChatError)throw new ArenaError(e.message,e.status);throw e}return {state:s}}
+ if(action.action==='chat'){try{s.chat=appendChat(s.chat,p.id,p.name,action.text,action.messageId,now,action.giftId,{gifId:action.gifId,effect:action.effect})}catch(e){if(e instanceof ChatError)throw new ArenaError(e.message,e.status);throw e}return {state:s}}
  if(action.action==='leave'){
   s.chat=[];s.chatEpoch=(s.chatEpoch||0)+1;
   s.players=s.players.filter(x=>x.id!==p.id);if(!s.players.length)s.startedAt=null;

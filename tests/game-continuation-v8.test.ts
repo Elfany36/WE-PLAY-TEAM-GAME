@@ -36,7 +36,8 @@ test('Flip bot plays a legal number instead of a penalty Wild while holding anot
  const deck=flipDeck(),penalties=deck.filter(c=>c.face==='wild2'),blue=deck.find(c=>c.face==='5'&&c.color==='blue')!,top=deck.find(c=>c.face==='5'&&c.color==='red')!;
  game.currentId=id;game.hands[id]=[penalties[0],penalties[1],blue];game.discard=[top];game.color='red';
  game.initialWild=false;game.pending=null;game.drawnId=null;state.ai!.nextAt=0;
- let chosen='';advanceBots(state,now+1000,(player,action)=>{
+ advanceBots(state,now+1000,()=>assert.fail('Bot must think first'));
+ let chosen='';advanceBots(state,state.ai!.wait!.readyAt,(player,action)=>{
   chosen=action.cardId;applyCasualAction(state,action,player,now+1000,true);
  });
  assert.equal(chosen,blue.id);assert.equal(game.pending,null);
@@ -49,7 +50,8 @@ test('Sci-Dama bot minimizes its signed consumption difference',()=>{
  const piece=(square:string,owner:string,value:number):BoardPiece=>({id:square,owner,...squarePoint(square),type:'man',king:false,value});
  game.pieces=[piece('g4',game.whiteId,5),piece('c4',game.whiteId,5),piece('b5',game.blackId,110),piece('d5',game.blackId,5),piece('g6',game.blackId,25),piece('e2',game.blackId,110)];
  game.currentId=game.whiteId;state.ai!.nextAt=0;
- advanceBots(state,now+1000,(id,action)=>{applyCasualAction(state,action,id,now+1000,true)});
+ advanceBots(state,now+1000,()=>assert.fail('Bot must think first'));
+ advanceBots(state,state.ai!.wait!.readyAt,(id,action)=>{applyCasualAction(state,action,id,state.ai!.wait!.readyAt,true)});
  assert.deepEqual(game.lastMove?.path,['c4','e6']);
  assert.equal(game.lastMove?.calculations[0].points,10);
  assert.equal(state.ai?.rejected||0,0);
@@ -61,8 +63,14 @@ test('adjacent UNO bots expose one turn per think instead of skipping three turn
  for(const [index,id]of bots.entries())game.hands[id]=[1,2,3].map(n=>deck.find(c=>c.id===`red-${index*3+n}-0`)!);
  game.discard=[deck.find(c=>c.id==='red-0')!];game.color='red';game.direction=1;game.currentId=bots[0];game.initialWild=false;game.pending=null;game.drawnId=null;state.ai!.nextAt=0;
  state=advanceCasual(state,now+1000).state;game=state.game as UnoGame;
+ assert.equal(game.turn,1);assert.equal(state.ai!.cursor,0);
+ const first=state.ai!.wait!.readyAt;assert(first>=now+2000&&first<=now+4000);
+ assert.equal(advanceCasual(state,first-1).changed,false);
+ state=advanceCasual(state,first).state;game=state.game as UnoGame;
  assert.equal(game.turn,2);assert.equal(game.lastPlay?.playerId,bots[0]);assert.equal(state.ai!.cursor,1);
- const nextThink=state.ai!.nextAt;assert(nextThink>=now+1900&&nextThink<now+2400);const unchanged=advanceCasual(state,nextThink-1);assert.equal(unchanged.changed,false);
+ state=advanceCasual(state,first+50).state;
+ const nextThink=state.ai!.wait!.readyAt;assert(nextThink>=first+1050&&nextThink<=first+3050);
+ assert.equal(advanceCasual(state,nextThink-1).changed,false);
  state=advanceCasual(state,nextThink).state;game=state.game as UnoGame;
  assert.equal(game.turn,3);assert.equal(game.lastPlay?.playerId,bots[1]);assert.equal(state.ai!.cursor,2);
 });

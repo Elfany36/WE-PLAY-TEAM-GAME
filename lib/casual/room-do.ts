@@ -4,6 +4,7 @@ import {createCasualAPI} from './api.ts';
 import {RoomStore} from './room-store.ts';
 import {roomBatch} from '../room-batch.ts';
 import {advanceCasual,publicCasual,type CasualState} from './engine.ts';
+import {casualTickDelay} from './room-timing.ts';
 import {publicArena,type ArenaState} from '../arena-engine.ts';
 import {roomSnapshot} from '../room-snapshots.ts';
 import {roomStreamRequest,STATE_INTERVAL,MAX_STATE_WINDOW} from '../room-stream.ts';
@@ -16,6 +17,7 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
  private notificationTimer:ReturnType<typeof setTimeout>|undefined;
  private kind:'casual'|'arena';
  private tickTimer:ReturnType<typeof setTimeout>|undefined;
+ private tickAt=0;
  private tickRunning=false;
  private tickFailures=0;
  constructor(ctx:DurableObjectState,env:Cloudflare.Env,kind:'casual'|'arena'){
@@ -24,10 +26,16 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
  }
  private foreground(now:number,state:AuthorityState){return this.ctx.getWebSockets().map(socket=>socket.deserializeAttachment() as Subscription|null).filter((s):s is Subscription=>!!s&&s.expiresAt>now&&!!s.activeAt&&now-s.activeAt<10000&&state.players.some(p=>!p.retired&&p.id===s.playerId&&p.tokenHash===s.tokenHash))}
  private armTick(){
-  if(this.tickTimer||this.tickRunning||this.kind!=='casual')return;
+  if(this.tickRunning||this.kind!=='casual')return;
   const row=this.db.snapshot();if(!row)return;const state=JSON.parse(row.state) as CasualState;
-  if(state.phase!=='playing'||!state.game||!this.foreground(Date.now(),state).length)return;
-  this.tickTimer=setTimeout(()=>{this.tickTimer=undefined;this.ctx.waitUntil(this.tick())},Math.min(4000,('lastTickAt'in state.game?50:state.players.some(p=>p.bot&&!p.retired)?250:1000)*2**this.tickFailures));
+  const now=Date.now();
+  if(state.phase!=='playing'||!state.game||!this.foreground(now,state).length){if(this.tickTimer)clearTimeout(this.tickTimer);this.tickTimer=undefined;this.tickAt=0;return}
+  const delay=Math.min(4000,casualTickDelay(state,now)*2**this.tickFailures);
+  // A newly committed human move may need to wake an otherwise idle table sooner.
+  if(this.tickTimer&&this.tickAt<=now+delay)return;
+  if(this.tickTimer)clearTimeout(this.tickTimer);
+  this.tickAt=now+delay;
+  this.tickTimer=setTimeout(()=>{this.tickTimer=undefined;this.tickAt=0;this.ctx.waitUntil(this.tick())},delay);
  }
  private async releaseInput(socket:WebSocket,session:Subscription){
   if(this.kind!=='casual')return;
