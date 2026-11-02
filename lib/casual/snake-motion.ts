@@ -43,7 +43,10 @@ export function snakeTurnTick(g:{tick:number;lastTickAt:number},serverNow:number
  // other half to reach the authority; predicting the earlier boundary folds the
  // snake back when the server confirms the actual turn.
  const margin=rtt>=120?speed:0;
- const phase=Math.max(0,serverNow-g.lastTickAt)+Math.max(0,age)+Math.max(0,rtt)+margin;
+ // A countdown snapshot's lastTickAt is still in the future. Preserve that
+ // negative offset until transit and receipt age have been added; clamping it
+ // early schedules the first turn several cells too late on a slow link.
+ const phase=Math.max(0,serverNow-g.lastTickAt+Math.max(0,age)+Math.max(0,rtt))+margin;
  return Math.max(g.tick+Math.max(1,Math.ceil(phase/Math.max(40,speed))),previousTick+1);
 }
 

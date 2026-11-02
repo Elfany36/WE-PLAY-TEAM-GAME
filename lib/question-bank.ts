@@ -24,7 +24,17 @@ function questionOrder<T extends Fact|CodeTask>(key:string,pool:T[],seed:number)
  const known=orderCache.get(key);if(known)return known as T[];
  const order=shuffle(pool,rng(seed));if(orderCache.size>=32)orderCache.delete(orderCache.keys().next().value!);orderCache.set(key,order);return order;
 }
+const questionCache=new Map<string,Question>();
+/** A question stays identical until its seed/index changes; never cache player state. */
 export function questionAt(seed:number,index:number,mode:GameMode,topic='All'):Question{
+ const key=JSON.stringify([seed,index,mode,topic]);let question=questionCache.get(key);
+ if(!question){question=buildQuestion(seed,index,mode,topic);if(questionCache.size>=256)questionCache.delete(questionCache.keys().next().value!)}
+ else questionCache.delete(key);
+ questionCache.set(key,question);
+ // Consumers may edit answer/choice arrays without corrupting subsequent rooms.
+ return structuredClone(question);
+}
+function buildQuestion(seed:number,index:number,mode:GameMode,topic:string):Question{
  const random=rng((seed+Math.imul(index+1,131071))|0);
  if(mode!=='quiz'){
   const pool=codeTasks.filter(x=>topic==='All'||x.topic===topic);if(!pool.length)throw Error('No code tasks available');

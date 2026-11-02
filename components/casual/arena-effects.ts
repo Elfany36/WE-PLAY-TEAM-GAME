@@ -1,5 +1,11 @@
 import {TANK_SHELL_RADIUS,type PartyGame} from '../../lib/casual/party';
 
+/** A readable skill/cooldown arc; constant geometry and no particle allocations. */
+export function paintAbilityRing(c:CanvasRenderingContext2D,x:number,y:number,radius:number,progress:number,color:string){
+ c.save();c.translate(x,y);c.lineWidth=3;c.strokeStyle='#0b243bab';c.beginPath();c.arc(0,0,radius,0,Math.PI*2);c.stroke();
+ c.strokeStyle=color;c.lineCap='round';c.beginPath();c.arc(0,0,radius,-Math.PI/2,-Math.PI/2+Math.PI*2*Math.max(0,Math.min(1,progress)));c.stroke();c.restore();
+}
+
 /** Bounded, deterministic effects: no particle arrays or per-frame random state. */
 export function paintImpact(c:CanvasRenderingContext2D,x:number,y:number,age:number,radius=38,color='#ffe4a0'){
  if(age<0||age>320)return;

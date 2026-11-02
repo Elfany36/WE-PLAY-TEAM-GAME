@@ -1,0 +1,56 @@
+[
+  {
+    "width": 1440,
+    "idleFrames": 0,
+    "batchedWrites": 1,
+    "previewReloads": 2,
+    "quotaFailureShown": true,
+    "pagehideSaved": true,
+    "errors": []
+  },
+  {
+    "width": 390,
+    "idleFrames": 0,
+    "batchedWrites": 1,
+    "previewReloads": 2,
+    "quotaFailureShown": true,
+    "pagehideSaved": true,
+    "errors": []
+  },
+  {
+    "mode": "snake",
+    "local": true,
+    "visibleFrames": 42,
+    "offscreenFrames": 0,
+    "resumedFrames": 41,
+    "contextRecovery": true,
+    "errors": []
+  },
+  {
+    "mode": "tanks",
+    "local": true,
+    "visibleFrames": 42,
+    "offscreenFrames": 0,
+    "resumedFrames": 42,
+    "contextRecovery": true,
+    "errors": []
+  },
+  {
+    "mode": "blocks",
+    "local": true,
+    "visibleFrames": 42,
+    "offscreenFrames": 0,
+    "resumedFrames": 43,
+    "contextRecovery": true,
+    "errors": []
+  },
+  {
+    "mode": "pool",
+    "local": true,
+    "visibleFrames": 42,
+    "offscreenFrames": 0,
+    "resumedFrames": 42,
+    "contextRecovery": true,
+    "errors": []
+  }
+]

@@ -13,14 +13,6 @@ function project(path:Point[],p:Point):Projection{
  }
  return result;
 }
-function atDistance(path:Point[],amount:number,out:Point){
- for(let i=0;i<path.length-1;i++){
-  const a=path[i],b=path[i+1],length=distance(a,b);if(length<.00001)continue;
-  if(amount<=length){const t=Math.max(0,amount/length);out.x=a.x+(b.x-a.x)*t;out.y=a.y+(b.y-a.y)*t;return out}amount-=length;
- }
- const tail=path.at(-1)!;out.x=tail.x;out.y=tail.y;return out;
-}
-
 /** Trim recorded future segments to the current interpolated head. */
 export function snakeTrailAt(head:Point,recorded:Point[],fallback:Point[],out:Point[]=[]){
  out.length=0;out.push(head);
@@ -64,10 +56,22 @@ export class SnakePresentation{
   let state=this.states.get(id);
   if(!state||state.epoch!==epoch){state=this.create(id,body,trail,epoch);return state.out}
   if(trail.length<2)return state.out;
-  const elapsed=Math.max(0,Math.min(50,dt)),budget=elapsed/Math.max(40,speed)*1.8,head=state.path[0],target=trail[0],projection=project(trail,head),next={...head};
+  const elapsed=Math.max(0,Math.min(50,dt)),head=state.path[0],target=trail[0],projection=project(trail,head),budget=elapsed/Math.max(40,speed)*(1.08+Math.min(.17,projection.along*.25));
+  const advance=(next:Point)=>{
+   const current=state!.path[0];if(distance(current,next)<.00001)return;
+   const prior=state!.path[1],ax=next.x-current.x,ay=next.y-current.y,bx=prior?current.x-prior.x:0,by=prior?current.y-prior.y:0;
+   if(prior&&Math.abs(ax*by-ay*bx)<.00001&&ax*bx+ay*by>=0){current.x=next.x;current.y=next.y}else state!.path.unshift({...next});
+  };
   state.opacity=Math.min(1,state.opacity+elapsed/150);
   if(projection.distance<=.025){
-   atDistance(trail,Math.max(0,projection.along-budget),next);
+   // Visit every crossed vertex. Joining the old and new head directly cuts a
+   // diagonal through the inside of a corner, especially on a delayed frame.
+   let remaining=Math.min(budget,projection.along);
+   for(let i=projection.segment;i>=0&&remaining>.00001;i--){
+    const current=state.path[0],vertex=trail[i],length=distance(current,vertex);
+    if(length<=remaining){advance(vertex);remaining-=length}
+    else {const t=remaining/length;advance({x:current.x+(vertex.x-current.x)*t,y:current.y+(vertex.y-current.y)*t});break}
+   }
   }else{
    const recent=state.path[1]||head,tx=target.x-trail[1].x,ty=target.y-trail[1].y,length=Math.max(.001,Math.hypot(tx,ty)),dx=head.x-target.x,dy=head.y-target.y;
    const ahead=(dx*tx+dy*ty)/length,side=Math.abs(dx*ty-dy*tx)/length,sameDirection=(head.x-recent.x)*tx+(head.y-recent.y)*ty>=0;
@@ -75,13 +79,9 @@ export class SnakePresentation{
    if(!(ahead>0&&ahead<3&&side<.025&&sameDirection)){
     // A confirmed different route is a resync. Rewinding down our own body to
     // reach an old intersection makes the model fold into itself. Replace that
-    // route with a short fade; ordinary matching paths keep continuous motion.
-    state=this.create(id,body,trail,epoch,0);return state.out;
+    // route explicitly. Never blank a live snake on an authority correction.
+    state=this.create(id,body,trail,epoch);return state.out;
    }
-  }
-  if(distance(head,next)>.00001){
-   const prior=state.path[1],ax=next.x-head.x,ay=next.y-head.y,bx=prior?head.x-prior.x:0,by=prior?head.y-prior.y:0;
-   if(prior&&Math.abs(ax*by-ay*bx)<.00001&&ax*bx+ay*by>=0){head.x=next.x;head.y=next.y}else state.path.unshift(next);
   }
   state.out.length=body.length;
   // Walk the trail once, even for a long snake with many corners.

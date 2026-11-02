@@ -29,7 +29,7 @@ test('a Snake ribbon retains true corner vertices and exact traveled body length
 
 test('a corrected Snake route never animates backwards down its own body',()=>{
  const p=new SnakePresentation(),body=[{x:6,y:2},{x:5,y:2},{x:4,y:2},{x:3,y:2}];p.sample('p',body,body,16,175,'r');
- const corrected=[{x:4,y:4},{x:4,y:3},{x:4,y:2},{x:3,y:2}];const out=p.sample('p',corrected,corrected,16,175,'r');assert.deepEqual(out[0],corrected[0]);assert.equal(p.opacity('p'),0);assert.equal(p.ribbon('p').length,3);
+ const corrected=[{x:4,y:4},{x:4,y:3},{x:4,y:2},{x:3,y:2}];const out=p.sample('p',corrected,corrected,16,175,'r');assert.deepEqual(out[0],corrected[0]);assert.equal(p.opacity('p'),1);assert.equal(p.ribbon('p').length,3);
 });
 
 test('predicted online turns reach the same boundary as an input after both transit legs',()=>{
