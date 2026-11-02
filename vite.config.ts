@@ -19,7 +19,15 @@ const { d1, r2 } = hostingConfig;
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
 const managedLinux = readExecutionProfile() === "managed-linux";
 
+// The we-play-team-game build trigger sets WE_PLAY_REGIONAL_DEPLOY=1.
+// Keep its regional settings out of Sites builds and local previews.
+const regionalDeployment = process.env.WE_PLAY_REGIONAL_DEPLOY === "1";
 const localBindingConfig = {
+  ...(regionalDeployment ? {
+    placement: { region: "aws:ap-southeast-1" },
+    observability: { enabled: true, head_sampling_rate: 0.1, redact_query_string: true,
+      logs: { enabled: true, invocation_logs: true, persist: true, head_sampling_rate: 0.1 } },
+  } : {}),
   main: "./worker/index.ts",
   compatibility_flags: ["nodejs_compat"],
   // One Durable Object per casual room keeps game state in memory, so a poll
