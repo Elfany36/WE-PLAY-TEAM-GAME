@@ -1,0 +1,5 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';
+import {SnapshotPlaybackClock} from '../lib/snapshot-playback.ts';
+import {snakeHorizon,predictSnake,SnakeMotionBuffer} from '../lib/casual/snake-motion.ts';
+test('remote playback resumes near the latest snapshot after the page stopped painting',()=>{const c=new SnapshotPlaybackClock();c.sample(1000,0,100);c.read(16,100);c.sample(11000,10000,100);const resumed=c.read(10016,100);assert(resumed>=10600);assert(resumed<=11000)});
+test('Snake continues predicting turns beyond the old one-second and twelve-cell ceilings',()=>{const w:any={id:'p',alive:true,direction:'right',body:[{x:5,y:5},{x:4,y:5}]},g:any={worms:[w],food:[],obstacles:[],size:64,startAt:0,lastTickAt:0,tick:0};const turn:any=[{direction:'down',tick:14}],horizon=snakeHorizon(1800,125);assert(horizon>=2700);for(const result of [predictSnake(g,w,2000,125,turn),new SnakeMotionBuffer().predict(g,w,2000,125,turn)]){assert.equal(result[0].x,18);assert.equal(result[0].y,8)}assert(snakeHorizon(100000,125)<=5000)});

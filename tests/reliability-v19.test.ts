@@ -88,20 +88,21 @@ function visibleDocument(t:TestContext){
  return doc;
 }
 test('offscreen/context-lost canvases schedule no frames and resume exactly one loop',t=>{
- const doc=visibleDocument(t),canvas=new EventTarget() as HTMLCanvasElement,frames=new Map<number,FrameRequestCallback>();let sequence=0,painted=0,restored=0,notify!:(entries:{isIntersecting:boolean}[])=>void;
+ const doc=visibleDocument(t),canvas=new EventTarget() as HTMLCanvasElement,frames=new Map<number,FrameRequestCallback>();let sequence=0,painted=0,restored=0,failPaint=false,notify!:(entries:{isIntersecting:boolean}[])=>void;
  const saved=['requestAnimationFrame','cancelAnimationFrame','IntersectionObserver'].map(key=>[key,Object.getOwnPropertyDescriptor(globalThis,key)] as const);
  Object.defineProperty(globalThis,'requestAnimationFrame',{configurable:true,value:(fn:FrameRequestCallback)=>{frames.set(++sequence,fn);return sequence}});
  Object.defineProperty(globalThis,'cancelAnimationFrame',{configurable:true,value:(id:number)=>frames.delete(id)});
  Object.defineProperty(globalThis,'IntersectionObserver',{configurable:true,value:class{constructor(fn:typeof notify){notify=fn}observe(){}disconnect(){}}});
  t.after(()=>{for(const [key,value]of saved)if(value)Object.defineProperty(globalThis,key,value);else Reflect.deleteProperty(globalThis,key)});
  const run=()=>{const pending=[...frames.values()];frames.clear();for(const fn of pending)fn(100)};
- const loop=animateCanvas(canvas,()=>{painted++},()=>{restored++});assert.equal(frames.size,1);run();assert.equal(painted,1);assert.equal(frames.size,1);
+ const loop=animateCanvas(canvas,()=>{if(failPaint){failPaint=false;throw Error('transient draw failure')}painted++},()=>{restored++});assert.equal(frames.size,1);run();assert.equal(painted,1);assert.equal(frames.size,1);
  notify([{isIntersecting:false}]);assert.equal(frames.size,0);run();assert.equal(painted,1);
  notify([{isIntersecting:true}]);notify([{isIntersecting:true}]);assert.equal(frames.size,1);
  doc.hidden=true;doc.dispatchEvent(new Event('visibilitychange'));assert.equal(frames.size,0);
  doc.hidden=false;doc.dispatchEvent(new Event('visibilitychange'));assert.equal(frames.size,1);
  canvas.dispatchEvent(new Event('contextlost',{cancelable:true}));assert.equal(frames.size,0);
  canvas.dispatchEvent(new Event('contextrestored'));assert.equal(restored,1);assert.equal(frames.size,1);
+ failPaint=true;assert.throws(run,/transient draw failure/);assert.equal(frames.size,1);run();assert.equal(frames.size,1);assert.equal(restored,2);
  loop.dispose();assert.equal(frames.size,0);doc.dispatchEvent(new Event('visibilitychange'));notify([{isIntersecting:true}]);assert.equal(frames.size,0);
 });
 test('visible UI intervals have no background ticks and refresh immediately on return',t=>{

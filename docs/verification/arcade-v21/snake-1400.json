@@ -1,0 +1,30 @@
+[
+  {
+    "rtt": 1400,
+    "map": "ruins",
+    "size": 48,
+    "speed": 125,
+    "entities": [
+      {
+        "own": true,
+        "samples": 772,
+        "maxStep": 1.3273634458506536,
+        "jumps": 1,
+        "blank": 0,
+        "resets": 0
+      },
+      {
+        "own": false,
+        "samples": 772,
+        "maxStep": 0.43547460937500126,
+        "jumps": 0,
+        "blank": 0,
+        "resets": 0
+      }
+    ],
+    "fps": "60",
+    "status": "failed",
+    "error": "visible correction jumps",
+    "errors": []
+  }
+]

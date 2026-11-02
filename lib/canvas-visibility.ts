@@ -18,7 +18,7 @@ export function animateCanvas(canvas:HTMLCanvasElement,paint:FrameRequestCallbac
   if(!visibility.ready()){if(frame!==null)cancelAnimationFrame(frame);frame=null;return}
   if(frame===null)frame=requestAnimationFrame(draw);
  };
- const draw=(time:number)=>{frame=null;if(disposed||!visibility.ready())return;paint(time);sync()};
+ const draw=(time:number)=>{frame=null;if(disposed||!visibility.ready())return;try{paint(time)}catch(error){canvas.width=canvas.width;restore();throw error}finally{sync()}};
  const visibility=watchCanvas(canvas,restore,sync);
  sync();
  return{dispose:()=>{disposed=true;if(frame!==null)cancelAnimationFrame(frame);frame=null;visibility.dispose()}};

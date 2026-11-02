@@ -46,7 +46,7 @@ test('a two-tick corner stays on the received grid trail instead of crossing a d
 
 test('missing grid trails are held rather than inventing a five-tile path',()=>{
  const a=[{x:2,y:2}],b=[{x:7,y:2}];assert.deepEqual(snakePathBody(a,b,5,.5),a);assert.deepEqual(snakePathBody(a,b,5,1),b);
- assert(snakeHorizon(900,125)>=575&&snakeHorizon(900,125)<=1000);
+ assert(snakeHorizon(900,125)>=575&&snakeHorizon(900,125)<=5000);
  let s=createCasual('ABCDEFGH','human','Human','hash','snake',1,10000);s=applyCasualAction(s,{action:'start'},'human',10000);
  const g=s.game as SnakeGame;g.obstacles=[];g.food=[];g.worms[0].direction='right';g.worms[0].body=[{x:10,y:10},{x:9,y:10}];
  const motion=new SnakeMotionBuffer(),body=motion.sample([{game:g,at:g.lastTickAt}],'human',g.lastTickAt+5000,125,1500);

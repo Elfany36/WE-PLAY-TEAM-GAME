@@ -1,3 +1,4 @@
+import {predictionWindow} from '../game-motion.ts';
 import type {Point,Direction,SnakeGame,Worm} from './engine.ts';
 const delta:Record<Direction,Point>={up:{x:0,y:-1},right:{x:1,y:0},down:{x:0,y:1},left:{x:-1,y:0}};
 export type SnakeSnapshot={game:SnakeGame;at:number};
@@ -20,7 +21,7 @@ export function snakePathBody(a:Point[],b:Point[],steps:number,t:number,out:Poin
 /** Advance complete grid steps first, then interpolate one fractional step, including turns and growth. */
 export function predictSnake(g:SnakeGame,w:Worm,clock:number,speed:number,turns:PredictedTurn[]=[]){
  let body=w.body.map(p=>({...p})),direction=w.direction,turnIndex=0;if(!w.alive||clock<g.startAt||!body.length)return body;
- const steps=Math.min(12,Math.max(0,(clock-g.lastTickAt)/speed)),walls=blocked(g),size=g.size||32,occupied=new Set(body.map(p=>p.x+','+p.y)),food=new Set(g.food.map(p=>p.x+','+p.y));
+ const steps=Math.min(40,Math.max(0,(clock-g.lastTickAt)/speed)),walls=blocked(g),size=g.size||32,occupied=new Set(body.map(p=>p.x+','+p.y)),food=new Set(g.food.map(p=>p.x+','+p.y));
  for(let i=0;i<Math.ceil(steps);i++){
   const turn=turns[turnIndex];if(turn&&(typeof turn==='string'||turn.tick===undefined||turn.tick<=g.tick+i+1)){const proposed=typeof turn==='string'?turn:turn.direction;turnIndex++;if(delta[proposed].x!==-delta[direction].x||delta[proposed].y!==-delta[direction].y)direction=proposed;}
   const d=delta[direction],head={x:body[0].x+d.x,y:body[0].y+d.y},key=head.x+','+head.y,eats=food.has(key);if(!eats){const tail=body.at(-1)!;occupied.delete(tail.x+','+tail.y)}
@@ -36,7 +37,7 @@ export function sampledSnake(history:SnakeSnapshot[],id:string,clock:number,spee
  const w=a.game.worms.find(w=>w.id===id);return w?predictSnake(a.game,w,Math.min(clock,a.at+Math.min(speed,horizon)),speed):[];
 }
 export function snakeBuffer(rtt:number){return Math.min(700,Math.max(100,Math.max(0,rtt)*.5+100))}
-export function snakeHorizon(rtt:number,speed:number){return Math.min(1000,Math.max(speed*2,Math.max(0,rtt)*.5+speed+250))}
+export function snakeHorizon(rtt:number,speed:number){return Math.max(speed*2,predictionWindow(rtt,speed))}
 /** Schedule the boundary the input can actually reach at the room authority. */
 export function snakeTurnTick(g:{tick:number;lastTickAt:number},serverNow:number,speed:number,age:number,rtt:number,previousTick=g.tick){
  // The snapshot has already spent half an RTT in transit. The input needs the
@@ -71,7 +72,7 @@ export class SnakeMotionBuffer{
  predict(g:SnakeGame,w:Worm,clock:number,speed:number,turns:PredictedTurn[]){
   if(!w.alive||clock<g.startAt||!w.body.length)return w.body;
   let state=this.predictions.get(w.id);if(!state||state.body!==w.body||state.tick!==g.tick||state.startAt!==g.startAt||state.turns!==turns||state.walls!==g.obstacles){state={body:w.body,tick:g.tick,startAt:g.startAt,turns,direction:w.direction,turnIndex:0,frames:[w.body],occupied:new Set(w.body.map(p=>p.x+','+p.y)),food:new Set(g.food.map(p=>p.x+','+p.y)),walls:g.obstacles,stopped:false};this.predictions.set(w.id,state)}
-  const steps=Math.min(12,Math.max(0,(clock-g.lastTickAt)/speed)),walls=blocked(g),size=g.size||32;
+  const steps=Math.min(40,Math.max(0,(clock-g.lastTickAt)/speed)),walls=blocked(g),size=g.size||32;
   while(state.frames.length<=Math.ceil(steps)&&!state.stopped){const i=state.frames.length-1,body=state.frames[i],turn=turns[state.turnIndex];if(turn&&(typeof turn==='string'||turn.tick===undefined||turn.tick<=g.tick+i+1)){const proposed=typeof turn==='string'?turn:turn.direction;state.turnIndex++;if(delta[proposed].x!==-delta[state.direction].x||delta[proposed].y!==-delta[state.direction].y)state.direction=proposed}const d=delta[state.direction],head={x:body[0].x+d.x,y:body[0].y+d.y},key=head.x+','+head.y,eats=state.food.has(key);if(!eats){const tail=body.at(-1)!;state.occupied.delete(tail.x+','+tail.y)}if(head.x<0||head.y<0||head.x>=size||head.y>=size||walls.has(key)||state.occupied.has(key)){state.stopped=true;break}state.occupied.add(key);if(eats)state.food.delete(key);state.frames.push([head,...(eats?body:body.slice(0,-1))])}
   const at=Math.min(Math.floor(steps),state.frames.length-1),a=state.frames[at],b=state.frames[Math.min(at+1,state.frames.length-1)];state.sampleAt=at;state.sampleFraction=steps-Math.floor(steps);return this.blend(w.id,a,b,state.sampleFraction);
  }

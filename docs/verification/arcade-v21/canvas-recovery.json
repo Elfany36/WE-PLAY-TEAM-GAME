@@ -1,0 +1,17 @@
+[
+  {
+    "mode": "snake",
+    "framesAfterFault": 30,
+    "framesAfterRestore": 62
+  },
+  {
+    "mode": "sumo",
+    "framesAfterFault": 30,
+    "framesAfterRestore": 61
+  },
+  {
+    "mode": "circuit",
+    "framesAfterFault": 31,
+    "framesAfterRestore": 63
+  }
+]

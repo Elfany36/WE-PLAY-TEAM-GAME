@@ -30,6 +30,8 @@ export class SnapshotPlaybackClock {
 
  read(time: number, step: number) {
   if (!this.initialized) return 0;
+  // Returning to a tab must not replay seconds of invisible animation.
+  if(time-this.frame>1000)this.value=Math.max(this.value,this.latest-step*1.25-this.jitter);
   const elapsed = Math.max(0, Math.min(50, time - this.frame));
   this.frame = Math.max(this.frame, time);
   const target = Math.min(this.latest, this.latest + Math.max(0, time - this.received) - step * 1.25 - this.jitter);
