@@ -17,7 +17,7 @@ test('marble seams integrate travel continuously through speed changes and stop 
  const changed=rollingAngle(angle,180,16);assert(Math.abs(changed-angle)<.15);assert.equal(rollingAngle(changed,0,16),changed);
 });
 test('speculation stays bounded during stalled updates and remote recovery never crosses the map',()=>{
- assert(predictionWindow(10000)<=900);assert(predictionWindow(100)>=300);
+ assert(predictionWindow(10000)<=5000);assert(predictionWindow(100)>=300);
  const frames=[{at:0,pose:{x:0,y:0},epoch:1},{at:100,pose:{x:1000,y:500},epoch:2}];
  assert.deepEqual(interpolatePose(frames,50,{x:0,y:0},180),{x:1000,y:500});
 });

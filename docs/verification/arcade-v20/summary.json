@@ -1,0 +1,39 @@
+{
+  "automatedTests": 474,
+  "websocketCases": 15,
+  "httpCases": 10,
+  "responseMs": {
+    "min": 9.5,
+    "max": 113.4
+  },
+  "worldIntervalMedianMs": {
+    "min": 67,
+    "max": 143
+  },
+  "largestWorldGapMs": 259,
+  "fps": [
+    59,
+    60
+  ],
+  "largeMovementJumps": 0,
+  "initialDirectionChecks": true,
+  "keyReleaseChecks": true,
+  "seatIsolationChecks": true,
+  "slowHttpBeforeMs": {
+    "tanks": 874.9,
+    "sumo": 971.1,
+    "marble": 857.3,
+    "circuit": 921.3,
+    "pong": 784.4
+  },
+  "slowHttpAfterMs": {
+    "tanks": 67,
+    "sumo": 37.6,
+    "marble": 55,
+    "circuit": 105.3,
+    "pong": 28
+  },
+  "responsiveGameLayouts": 34,
+  "identityChecks": 10,
+  "stalledStreamChecks": 2
+}

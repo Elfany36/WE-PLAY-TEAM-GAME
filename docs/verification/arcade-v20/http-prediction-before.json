@@ -1,0 +1,340 @@
+[
+  {
+    "mode": "tanks",
+    "rtt": 400,
+    "transport": "http",
+    "label": "after-http",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 141,
+        "maxStep": 1.666,
+        "maxSpeed": 99.8,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 142,
+        "maxStep": 2.568,
+        "maxSpeed": 154.7,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 21.9,
+    "firstDirection": 0.7395580049237651,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 0,
+    "worldIntervalMedian": null,
+    "worldGapMax": null,
+    "status": "passed"
+  },
+  {
+    "mode": "sumo",
+    "rtt": 400,
+    "transport": "http",
+    "label": "after-http",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 111,
+        "maxStep": 1.824,
+        "maxSpeed": 109.2,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 112,
+        "maxStep": 11.387,
+        "maxSpeed": 681.9,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 11.3,
+    "firstDirection": 0.9790936284879308,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 0,
+    "worldIntervalMedian": null,
+    "worldGapMax": null,
+    "status": "passed"
+  },
+  {
+    "mode": "marble",
+    "rtt": 400,
+    "transport": "http",
+    "label": "after-http",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 168,
+        "maxStep": 2.848,
+        "maxSpeed": 170.5,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 170,
+        "maxStep": 6.563,
+        "maxSpeed": 395.4,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 26.7,
+    "firstDirection": 0.41567371514338447,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 0,
+    "worldIntervalMedian": null,
+    "worldGapMax": null,
+    "status": "passed"
+  },
+  {
+    "mode": "circuit",
+    "rtt": 400,
+    "transport": "http",
+    "label": "after-http",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 143,
+        "maxStep": 4.711,
+        "maxSpeed": 282.1,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 144,
+        "maxStep": 13.293,
+        "maxSpeed": 796,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 58.7,
+    "firstDirection": 0.6325441632124809,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 0,
+    "worldIntervalMedian": null,
+    "worldGapMax": null,
+    "status": "passed"
+  },
+  {
+    "mode": "pong",
+    "rtt": 400,
+    "transport": "http",
+    "label": "after-http",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 141,
+        "maxStep": 3.693,
+        "maxSpeed": 222.5,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 142,
+        "maxStep": 31.676,
+        "maxSpeed": 1908.2,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 27.5,
+    "firstDirection": 3.5903256525432994,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 0,
+    "worldIntervalMedian": null,
+    "worldGapMax": null,
+    "status": "passed"
+  },
+  {
+    "mode": "tanks",
+    "rtt": 1400,
+    "transport": "http",
+    "label": "after-http",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 194,
+        "maxStep": 0.664,
+        "maxSpeed": 39.5,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 195,
+        "maxStep": 9.373,
+        "maxSpeed": 561.3,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 874.9,
+    "firstDirection": -0.7529804135135691,
+    "status": "failed",
+    "error": "model moved opposite to the first control",
+    "errors": []
+  },
+  {
+    "mode": "sumo",
+    "rtt": 1400,
+    "transport": "http",
+    "label": "after-http",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 164,
+        "maxStep": 0,
+        "maxSpeed": 0,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 168,
+        "maxStep": 10.879,
+        "maxSpeed": 651.4,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 971.1,
+    "firstDirection": 0.4046502504641012,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 0,
+    "worldIntervalMedian": null,
+    "worldGapMax": null,
+    "status": "failed",
+    "error": "slow displayed control response",
+    "errors": []
+  },
+  {
+    "mode": "marble",
+    "rtt": 1400,
+    "transport": "http",
+    "label": "after-http",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 221,
+        "maxStep": 2.383,
+        "maxSpeed": 142.7,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 223,
+        "maxStep": 7.54,
+        "maxSpeed": 451.5,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 857.3,
+    "firstDirection": 0.026007224460954603,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 0,
+    "worldIntervalMedian": null,
+    "worldGapMax": null,
+    "status": "failed",
+    "error": "slow displayed control response",
+    "errors": []
+  },
+  {
+    "mode": "circuit",
+    "rtt": 1400,
+    "transport": "http",
+    "label": "after-http",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 195,
+        "maxStep": 3.752,
+        "maxSpeed": 226,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 197,
+        "maxStep": 12.991,
+        "maxSpeed": 777.9,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 921.3,
+    "firstDirection": -0.43973505065673973,
+    "status": "failed",
+    "error": "model moved opposite to the first control",
+    "errors": []
+  },
+  {
+    "mode": "pong",
+    "rtt": 1400,
+    "transport": "http",
+    "label": "after-http",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 194,
+        "maxStep": 2.526,
+        "maxSpeed": 151.3,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 196,
+        "maxStep": 28.438,
+        "maxSpeed": 1713.2,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 784.4,
+    "firstDirection": 2.653763147025529,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 0,
+    "worldIntervalMedian": null,
+    "worldGapMax": null,
+    "status": "failed",
+    "error": "slow displayed control response",
+    "errors": []
+  }
+]

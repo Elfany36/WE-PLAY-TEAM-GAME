@@ -1,0 +1,52 @@
+[
+  {
+    "mode": "sumo",
+    "width": 1440,
+    "status": "passed"
+  },
+  {
+    "mode": "tanks",
+    "width": 1440,
+    "status": "passed"
+  },
+  {
+    "mode": "marble",
+    "width": 1440,
+    "status": "passed"
+  },
+  {
+    "mode": "pong",
+    "width": 1440,
+    "status": "passed"
+  },
+  {
+    "mode": "snake",
+    "width": 1440,
+    "status": "passed"
+  },
+  {
+    "mode": "sumo",
+    "width": 390,
+    "status": "passed"
+  },
+  {
+    "mode": "tanks",
+    "width": 390,
+    "status": "passed"
+  },
+  {
+    "mode": "marble",
+    "width": 390,
+    "status": "passed"
+  },
+  {
+    "mode": "pong",
+    "width": 390,
+    "status": "passed"
+  },
+  {
+    "mode": "snake",
+    "width": 390,
+    "status": "passed"
+  }
+]

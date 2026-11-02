@@ -1,0 +1,28 @@
+[
+  {
+    "countdown": false,
+    "remainingAtDrop": -1432,
+    "firstWorldAfterStartMs": 378,
+    "firstHttpAfterStartMs": 2458,
+    "firstHttpMs": 1026,
+    "maxFallbackIntervalMs": 424,
+    "medianFallbackIntervalMs": 411,
+    "fallbacks": 15,
+    "pongsWhileStalled": 4,
+    "recovered": true,
+    "status": "passed"
+  },
+  {
+    "countdown": true,
+    "remainingAtDrop": 2108,
+    "firstWorldAfterStartMs": 453,
+    "firstHttpAfterStartMs": 1521,
+    "firstHttpMs": 3629,
+    "maxFallbackIntervalMs": 414,
+    "medianFallbackIntervalMs": 411,
+    "fallbacks": 8,
+    "pongsWhileStalled": 3,
+    "recovered": true,
+    "status": "passed"
+  }
+]

@@ -55,7 +55,7 @@ export function stepParty(g:PartyGame,dt:number,now:number,resolveRound=true){
   const at=now-dt*1000+(sub+1)*h*1000;
   for(const a of g.actors){
    if(a.finishedAt!==null||g.kind==='sumo'&&!sumoActive(g,a.id))continue;
-   if(!a.alive){if(a.respawnAt&&at>=a.respawnAt){a.alive=true;a.spawnedAt=at;a.hp=3;a.vx=a.vy=a.z=a.vz=0;a.cooldown=at;a.shieldUntil=at+1300;if(g.kind==='marble'){const path=clubTrack(g.map),cps=clubTrack(g.map,32);let index=(a.checkpoint+31)%32;for(let attempt=0;attempt<32&&[30,92,145].some(i=>Math.hypot(cps[index].x-path[i].x,cps[index].y-path[i].y)<85);attempt++)index=(index+31)%32;const p=cps[index];a.x=p.x;a.y=p.y}else{const p=tankSpawn(g.map,g.actors.indexOf(a),scale);a.x=p.x;a.y=p.y;a.ammo=5;a.armor=g.rules===2?2:0;a.reloadUntil=0}}else continue}
+   if(!a.alive){if(resolveRound&&a.respawnAt&&at>=a.respawnAt){a.alive=true;a.spawnedAt=at;a.hp=3;a.vx=a.vy=a.z=a.vz=0;a.cooldown=at;a.shieldUntil=at+1300;if(g.kind==='marble'){const path=clubTrack(g.map),cps=clubTrack(g.map,32);let index=(a.checkpoint+31)%32;for(let attempt=0;attempt<32&&[30,92,145].some(i=>Math.hypot(cps[index].x-path[i].x,cps[index].y-path[i].y)<85);attempt++)index=(index+31)%32;const p=cps[index];a.x=p.x;a.y=p.y}else{const p=tankSpawn(g.map,g.actors.indexOf(a),scale);a.x=p.x;a.y=p.y;a.ammo=5;a.armor=g.rules===2?2:0;a.reloadUntil=0}}else continue}
    const raw=g.inputs[a.id],input=raw&&at-raw.at<950?raw:null,dx=input?.dx||0,dy=input?.dy||0;
    if(g.kind==='pong'){const dyTarget=input?.targetY!==undefined?clamp((input.targetY-a.y)/30,-1,1):dy;a.y=clamp(a.y+dyTarget*430*h,120,480);continue}
    const norm=Math.max(1,Math.hypot(dx,dy)),speed=g.kind==='tanks'?155:g.kind==='marble'?180:190;

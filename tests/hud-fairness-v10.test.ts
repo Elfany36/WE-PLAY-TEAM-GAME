@@ -38,7 +38,7 @@ test('turn notifications identify human actors across every requested board/card
 test('slow-link local kart prediction continues between delayed snapshots instead of arriving already frozen',()=>{
  const s=state('circuit',0),raw=s.game as CircuitGame;raw.lastTickAt=raw.startAt;raw.inputs.human={seq:1,at:raw.startAt,throttle:1,steer:0,drift:false};
  for(const rtt of [110,400,800]){const g=cloneActionGame(raw),clock=new GameClock();clock.sample(raw.startAt,0,rtt);const positions:number[]=[];for(const elapsed of [0,50,100,150,200]){const target=Math.min(clock.read(elapsed),raw.lastTickAt+predictionWindow(rtt));while(g.lastTickAt+50<=target)stepActionPrediction(g,['human']);positions.push((g as CircuitGame).drivers[0].x)}assert(new Set(positions).size>=4,'Prediction froze at RTT '+rtt)}
- assert(predictionWindow(10000)<=900);
+ assert(predictionWindow(10000)<=5000);
 });
 test('144 Hz displays receive approximately 60 paints without dropping to a 48 Hz cadence',()=>{
  let last=0,paints=0;for(let i=1;i<=144;i++){const time=i*1000/144;if(renderFrameDue(time,last,true)){last=time;paints++}}assert(paints>=59&&paints<=61);

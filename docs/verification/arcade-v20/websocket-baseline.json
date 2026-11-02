@@ -1,0 +1,200 @@
+[
+  {
+    "mode": "tanks",
+    "rtt": 400,
+    "transport": "websocket",
+    "label": "before",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 141,
+        "maxStep": 3.815,
+        "maxSpeed": 229.8,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 144,
+        "maxStep": 2.907,
+        "maxSpeed": 174.1,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 6.7,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 14,
+    "worldIntervalMedian": 106,
+    "worldGapMax": 237,
+    "status": "passed"
+  },
+  {
+    "mode": "sumo",
+    "rtt": 400,
+    "transport": "websocket",
+    "label": "before",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 110,
+        "maxStep": 4.404,
+        "maxSpeed": 265.3,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 111,
+        "maxStep": 8.737,
+        "maxSpeed": 526.3,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 2.7,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 11,
+    "worldIntervalMedian": 95,
+    "worldGapMax": 236,
+    "status": "passed"
+  },
+  {
+    "mode": "circuit",
+    "rtt": 400,
+    "transport": "websocket",
+    "label": "before",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 139,
+        "maxStep": 3.094,
+        "maxSpeed": 184.2,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 142,
+        "maxStep": 5.101,
+        "maxSpeed": 305.4,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 37,
+    "fps": "59",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 16,
+    "worldIntervalMedian": 124,
+    "worldGapMax": 185,
+    "status": "passed"
+  },
+  {
+    "mode": "tanks",
+    "rtt": 1400,
+    "transport": "websocket",
+    "label": "before",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 195,
+        "maxStep": 2.82,
+        "maxSpeed": 168.9,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 197,
+        "maxStep": 7.986,
+        "maxSpeed": 481.1,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 4.6,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 14,
+    "worldIntervalMedian": 79,
+    "worldGapMax": 235,
+    "status": "passed"
+  },
+  {
+    "mode": "sumo",
+    "rtt": 1400,
+    "transport": "websocket",
+    "label": "before",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 164,
+        "maxStep": 3.226,
+        "maxSpeed": 179.6,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 167,
+        "maxStep": 6.213,
+        "maxSpeed": 359.9,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 27.9,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 11,
+    "worldIntervalMedian": 71,
+    "worldGapMax": 256,
+    "status": "passed"
+  },
+  {
+    "mode": "circuit",
+    "rtt": 1400,
+    "transport": "websocket",
+    "label": "before",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 198,
+        "maxStep": 3.386,
+        "maxSpeed": 204,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 198,
+        "maxStep": 7.775,
+        "maxSpeed": 465.5,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 58.2,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 15,
+    "worldIntervalMedian": 133,
+    "worldGapMax": 247,
+    "status": "passed"
+  }
+]

@@ -1,4 +1,5 @@
 'use client';
+import {expectsWorldUpdates,worldQuietLimit,worldRecoveryDelay} from '../../lib/casual/world-stream';
 import type {ChatDecoration} from '../../lib/chat-media';
 import {turnNotice} from '../../lib/casual/turn-notice';
 import {snakeTurnTick} from '../../lib/casual/snake-motion';
@@ -84,24 +85,31 @@ export default function CasualArcade({name}:{name:string}){
  useEffect(()=>{if(!local||local.mode!=='terra'&&local.phase!=='playing')return;const t=setInterval(()=>{if(local.mode!=='terra'&&document.hidden)return;setLocal(previous=>{if(!previous)return previous;try{const next=advanceCasual(previous,Date.now());return next.changed?next.state:previous}catch(e){setError((e as Error).message);return previous}})},fastModes.includes(local.mode)?50:100);return()=>clearInterval(t)},[!!local,local?.mode,local?.phase]);
  useEffect(()=>{
   if(!session)return;const s=session;let stopped=false,pending=false,frame=0,queuedState:CasualPublic|null=null,timer:ReturnType<typeof setTimeout>,controller:AbortController|null=null,failures=0,live=false,wantedRevision=-1,lastPollStarted=-Infinity,lastLiveResync=-Infinity;
-  const schedule=(ms:number)=>{clearTimeout(timer);if(!stopped)timer=setTimeout(poll,ms)};
+  const schedule=(ms:number)=>{clearTimeout(timer);if(!stopped)timer=setTimeout(poll,worldRecoveryDelay(roomRef.current,performance.now()-lastReceipt.current,ms))};
   const floor=()=>casualPollPeriod(roomRef.current,false)===200?200:120;
   async function poll(){
    if(stopped||pending)return;
    if(document.hidden){schedule(1500);return}
-   const currentRoom=roomRef.current,expectsTicks=currentRoom?.phase==='playing'&&(['snake','circuit','sumo','tanks','pong','marble','blocks'].includes(currentRoom.mode)||currentRoom.mode==='pool'&&currentRoom.game?.moving)&&currentRoom.serverNow>=(currentRoom.game?.startAt||0),snapshotAge=performance.now()-lastReceipt.current,quietLimit=expectsTicks?Math.max(650,Math.min(1000,(transport.stats.stateInterval||150)*4)):2000;if(transport.autonomous&&snapshotAge<quietLimit){schedule(quietLimit-snapshotAge);return;}if(lastReceipt.current&&snapshotAge<floor()&&wantedRevision<=(roomRef.current?.revision??-1)){schedule(floor()-snapshotAge);return}
+   const currentRoom=roomRef.current,receiptAge=performance.now()-lastReceipt.current,expectsTicks=expectsWorldUpdates(currentRoom,receiptAge),snapshotAge=performance.now()-(transport.stats.lastStateReceipt||lastReceipt.current),liveAge=performance.now()-(transport.stats.lastLiveStateReceipt),quietLimit=expectsTicks?worldQuietLimit(transport.stats.stateInterval):2000,staleStream=expectsTicks&&transport.autonomous&&liveAge>=quietLimit;if(transport.autonomous&&liveAge<quietLimit){schedule(quietLimit-liveAge);return;}if(!staleStream&&lastReceipt.current&&snapshotAge<floor()&&wantedRevision<=(roomRef.current?.revision??-1)){schedule(floor()-snapshotAge);return}
    const delay=floor()-(performance.now()-lastPollStarted);if(delay>0){schedule(delay);return}
    pending=true;controller=new AbortController();const started=performance.now();lastPollStarted=started;
    try{
     const current=roomRef.current,version=new URLSearchParams({...worldVersion(),...(current?.code===s.code&&current.revision!==undefined?{revision:current.revision}:{})} as any);
-    const staleStream=expectsTicks&&transport.autonomous&&snapshotAge>=quietLimit;if(staleStream&&performance.now()-lastLiveResync>3000){lastLiveResync=performance.now();liveFeed.current?.resync()}const d=await transport.send(endpoint()+'?code='+s.code+'&'+version.toString(),{signal:controller.signal,headers:{Authorization:'Bearer '+s.token}},{timeout:Math.min(12000,Math.max(floor()===200?3000:6000,transport.stats.totalRtt*1.6+1000)),forceHttp:staleStream});
+    if(staleStream&&performance.now()-lastLiveResync>3000){lastLiveResync=performance.now();liveFeed.current?.resync()}const d=await transport.send(endpoint()+'?code='+s.code+'&'+version.toString(),{signal:controller.signal,headers:{Authorization:'Bearer '+s.token}},{timeout:Math.min(12000,Math.max(floor()===200?3000:6000,transport.stats.totalRtt*1.6+1000)),forceHttp:staleStream});
     if(!stopped&&sessionRef.current?.token===s.token){
      if(d.room)adopt(d.room,true);
      else if(d.unchanged&&roomRef.current?.code===s.code&&roomRef.current.revision===d.revision)adopt({...roomRef.current,serverNow:d.serverNow,network:d.network},true);
      failures=0;
     }
    }catch(e){if(!stopped){failures++;setConnected(false);setConnectionError((e as any).name==='AbortError'?'The connection is slow. Reconnecting…':(e as Error).message);if([401,404,410].includes((e as any).status)){setSavedSession(null);setRemote(null);roomRef.current=null}}}
-   finally{pending=false;const elapsed=performance.now()-started,period=casualPollPeriod(roomRef.current,live,elapsed,transport.stats.streaming),dirty=wantedRevision>(roomRef.current?.revision??-1);schedule(failures?Math.min(2000,250*2**Math.min(failures,3)):Math.max(0,(dirty?floor():transport.autonomous&&expectsTicks?Math.min(period,1000):period)-elapsed))}
+   finally{
+    pending=false;
+    const now=performance.now(),elapsed=now-started,current=roomRef.current;
+    const period=casualPollPeriod(current,live,elapsed,transport.stats.streaming&&!staleStream),dirty=wantedRevision>(current?.revision??-1);
+    // A response can cross the countdown boundary; use the newly adopted state here.
+    const streamWait=transport.autonomous&&expectsWorldUpdates(current,now-lastReceipt.current)?Math.max(0,worldQuietLimit(transport.stats.stateInterval)-(now-transport.stats.lastLiveStateReceipt)):Infinity;
+    schedule(failures?Math.min(2000,250*2**Math.min(failures,3)):Math.min(streamWait,Math.max(0,(dirty?floor():period)-elapsed)));
+   }
   }
   const feed=new RoomRevisionFeed(endpoint()+'?code='+s.code,s.token,{latency:elapsed=>transport.observeLatency(elapsed),revision:revision=>{wantedRevision=Math.max(wantedRevision,revision);if(!pending&&revision>(roomRef.current?.revision??-1))schedule(Math.max(0,floor()-(performance.now()-lastPollStarted)))},status:ready=>{live=ready;transport.stats.live=ready;transport.attachLive(feed);if(!ready&&!pending)schedule(0)},state:(wire,wireBytes)=>{if(stopped||sessionRef.current?.token!==s.token)return;try{const data=transport.receive(wire,wireBytes);if(data.room){queuedState=data.room;if(!frame)frame=requestAnimationFrame(()=>{frame=0;const state=queuedState;queuedState=null;if(!stopped&&state)adopt(state,true)})}}catch{feed.resync();return false}}});
   liveFeed.current=feed;feed.setActive(leaseOwner.current);transport.attachLive(feed);feed.start();const wake=()=>{if(!document.hidden&&!pending)schedule(0)};
@@ -131,7 +139,7 @@ export default function CasualArcade({name}:{name:string}){
  const clearReview=useCallback(()=>setLocalReview(null),[]);
  function startLocal(){if(selected==='phone')return;setError('');setConnectionError('');setLocalReview(null);setLocalView(null);const n=localHumans(selected,settings.bots,count),t=Date.now();try{let s=createCasual('ONDEVICE','local-0',names[0].trim()||'Player 1','local',selected,crypto.getRandomValues(new Uint32Array(1))[0],t);for(let i=1;i<n;i++)s=applyCasualAction(s,{action:'join',id:'local-'+i,name:names[i].trim()||'Player '+(i+1),hash:'local-'+i},null,t);s=applyCasualAction(s,{action:'configure',mode:selected,...settings},s.hostId,t);s=applyCasualAction(s,{action:'start'},s.hostId,t);setOffset(0);setLocal(s)}catch(e){setError((e as Error).message)}}
  function exitLocal(){clearControls();setLocalReview(null);setLocalView(null);setLocal(null);setError('');setConfirmEnd(false)}
- if(!controlChannel.current)controlChannel.current=new ControlChannel(async packet=>{const expected=sessionRef.current,epoch=generation.current;if(!expected)return;try{const d=await request(packet,expected);if(epoch===generation.current&&expected.token===sessionRef.current?.token&&d.room)adopt(d.room)}catch(e){if((e as any)?.status===409&&/already applied/.test((e as Error).message))return;throw e}},e=>{if(retryableControlError(e)){setConnected(false);setConnectionError('Reconnecting controls. Your latest input will be retried automatically.')}},undefined,()=>transport.stats.streaming?Math.min(64,Math.max(8,Math.ceil(transport.stats.totalRtt/85)+4)):2);
+ if(!controlChannel.current)controlChannel.current=new ControlChannel(async packet=>{const expected=sessionRef.current,epoch=generation.current;if(!expected)return;try{const d=await request(packet,expected);if(epoch===generation.current&&expected.token===sessionRef.current?.token&&d.room)adopt(d.room)}catch(e){if((e as any)?.status===409&&/already applied/.test((e as Error).message))return;throw e}},e=>{if(retryableControlError(e)){setConnected(false);setConnectionError('Reconnecting controls. Your latest input will be retried automatically.')}},undefined,()=>transport.stats.streaming?Math.min(64,Math.max(8,Math.ceil(transport.stats.totalRtt/85)+4)):4);
  useEffect(()=>()=>controlChannel.current?.reset(),[]);
  const control=useLiveCallback((packet:Record<string,any>)=>{const r=roomRef.current,s=localRef.current;if(!r||r.phase!=='playing'||!s&&!lease.owns)return;if(s){setLocal(previous=>{if(!previous)return previous;try{return applyCasualAction(previous,{...packet,round:previous.round},typeof packet.localActor==='string'&&previous.players.some(p=>p.id===packet.localActor)?packet.localActor:previous.hostId,Date.now())}catch{return previous}});return}controlChannel.current!.enqueue({...packet,round:r.round,inputEpoch:r.game?.startAt,requestId:'control-'+r.round+'-'+packet.seq})});
  const flipCard=useLiveCallback((card:number)=>action('flip',{card}));
