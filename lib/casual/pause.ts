@@ -17,7 +17,7 @@ export function resumeTimeline(g:TimedGame,now:number){
  }else if(g.kind==='circuit'){
   g.raceStartedAt=(g.raceStartedAt??oldStart)+shift;
   if(g.firstFinish!==null)g.firstFinish+=shift;
-  for(const d of g.drivers){d.boostUntil=stamp(d.boostUntil);d.magnetUntil=stamp(d.magnetUntil||0);d.pulseAt=stamp(d.pulseAt||0);d.shieldUntil=stamp(d.shieldUntil);d.stunnedUntil=stamp(d.stunnedUntil);d.lastRecover=stamp(d.lastRecover);if(d.lapStartedAt!==undefined)d.lapStartedAt+=shift;if(d.finishedAt!==null)d.finishedAt+=shift;}
+  for(const d of g.drivers){d.boostUntil=stamp(d.boostUntil);if(d.gateAt!==undefined)d.gateAt=stamp(d.gateAt);d.magnetUntil=stamp(d.magnetUntil||0);d.pulseAt=stamp(d.pulseAt||0);d.shieldUntil=stamp(d.shieldUntil);d.stunnedUntil=stamp(d.stunnedUntil);d.lastRecover=stamp(d.lastRecover);if(d.lapStartedAt!==undefined)d.lapStartedAt+=shift;if(d.finishedAt!==null)d.finishedAt+=shift;}
   for(const b of g.boxes)b.readyAt=stamp(b.readyAt);
   for(const h of g.hazards)h.until=stamp(h.until);
   for(const s of g.shots)s.until=stamp(s.until);

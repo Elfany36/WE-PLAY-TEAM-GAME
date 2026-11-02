@@ -1,0 +1,142 @@
+[
+  {
+    "width": 1440,
+    "palette": "indigo",
+    "background": "rgb(246, 245, 250)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 1440,
+    "palette": "pink",
+    "background": "rgb(250, 245, 247)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 1440,
+    "palette": "cobalt",
+    "background": "rgb(245, 247, 250)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 1440,
+    "palette": "mint",
+    "background": "rgb(245, 250, 248)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 1440,
+    "palette": "amber",
+    "background": "rgb(250, 248, 245)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 1440,
+    "palette": "lavender",
+    "background": "rgb(248, 245, 250)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 1440,
+    "palette": "cherry",
+    "background": "rgb(250, 245, 245)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 1440,
+    "palette": "ocean",
+    "background": "rgb(245, 249, 250)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 1440,
+    "palette": "forest",
+    "background": "rgb(245, 250, 245)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 1440,
+    "palette": "graphite",
+    "background": "rgb(247, 247, 247)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 390,
+    "palette": "indigo",
+    "background": "rgb(246, 245, 250)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 390,
+    "palette": "pink",
+    "background": "rgb(250, 245, 247)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 390,
+    "palette": "cobalt",
+    "background": "rgb(245, 247, 250)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 390,
+    "palette": "mint",
+    "background": "rgb(245, 250, 248)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 390,
+    "palette": "amber",
+    "background": "rgb(250, 248, 245)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 390,
+    "palette": "lavender",
+    "background": "rgb(248, 245, 250)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 390,
+    "palette": "cherry",
+    "background": "rgb(250, 245, 245)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 390,
+    "palette": "ocean",
+    "background": "rgb(245, 249, 250)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 390,
+    "palette": "forest",
+    "background": "rgb(245, 250, 245)",
+    "overflow": 0,
+    "modalOverflow": 0
+  },
+  {
+    "width": 390,
+    "palette": "graphite",
+    "background": "rgb(247, 247, 247)",
+    "overflow": 0,
+    "modalOverflow": 0
+  }
+]

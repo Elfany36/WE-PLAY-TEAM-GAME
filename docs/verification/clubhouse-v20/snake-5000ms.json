@@ -1,0 +1,35 @@
+{
+  "rtt": 5000,
+  "allPlayers": [
+    {
+      "id": "3dbbd801-7325-4693-811b-7e9b1ca81069",
+      "own": true,
+      "frames": 346,
+      "maxStep": 0.10667026019921266,
+      "minimumOpacity": 1,
+      "largeSteps": 0
+    },
+    {
+      "id": "bot-1-0",
+      "own": false,
+      "frames": 346,
+      "maxStep": 0.10558639568718498,
+      "minimumOpacity": 1,
+      "largeSteps": 0
+    }
+  ],
+  "ready": 1,
+  "states": 35,
+  "alive": true,
+  "longestPause": 0,
+  "worldGaps": {
+    "max": 2579,
+    "afterWarmup": 275
+  },
+  "frames": 346,
+  "fps": 60,
+  "maxDisplayedCellStep": 0.10667026019921266,
+  "p95Speed": 6.346308809840818,
+  "stillFrames": 0,
+  "errors": []
+}

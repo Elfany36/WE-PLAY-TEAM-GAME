@@ -1,0 +1,78 @@
+[
+  {
+    "mode": "circuit",
+    "width": 1440,
+    "board": {
+      "overflow": 0,
+      "count": 4,
+      "progress": [
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "mode": "tanks",
+    "width": 1440,
+    "board": {
+      "overflow": 0,
+      "count": 4,
+      "progress": []
+    },
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "mode": "uno",
+    "width": 1440,
+    "board": {
+      "overflow": 0,
+      "count": 8,
+      "progress": []
+    },
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "mode": "circuit",
+    "width": 390,
+    "board": {
+      "overflow": 0,
+      "count": 4,
+      "progress": [
+        3,
+        3,
+        3,
+        3
+      ]
+    },
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "mode": "tanks",
+    "width": 390,
+    "board": {
+      "overflow": 0,
+      "count": 4,
+      "progress": []
+    },
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "mode": "uno",
+    "width": 390,
+    "board": {
+      "overflow": 0,
+      "count": 8,
+      "progress": []
+    },
+    "overflow": 0,
+    "errors": []
+  }
+]

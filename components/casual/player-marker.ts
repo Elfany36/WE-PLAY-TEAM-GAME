@@ -1,18 +1,13 @@
-/** A readable identity badge stays upright while the character rotates. */
-export function paintPlayerMarker(c:CanvasRenderingContext2D,x:number,y:number,label:string,color:string,own:boolean,scale=1){
- c.save();c.translate(x,y);c.scale(scale,scale);
- c.font=(own?'800 ':'600 ')+'12px system-ui';c.textAlign='center';c.textBaseline='middle';
- const text=own?'YOU · '+label:label,width=Math.min(150,Math.max(36,c.measureText(text).width+18));
- c.fillStyle='#101827f2';c.strokeStyle=own?'#ffffff':color;c.lineWidth=own?2:1;
- c.beginPath();c.roundRect(-width/2,-12,width,24,7);c.fill();c.stroke();
- c.fillStyle=own?'#ffffff':'#e3eaf4';c.fillText(text,0,0,width-14);
- if(own){c.fillStyle=color;c.beginPath();c.moveTo(-5,15);c.lineTo(5,15);c.lineTo(0,22);c.closePath();c.fill();c.strokeStyle='#101827';c.lineWidth=1;c.stroke()}
- c.restore();
+/** Static halo artwork is cached; only its position changes with the controlled model. */
+const halos=new Map<string,HTMLCanvasElement>();
+function halo(color:string){
+ let art=halos.get(color);if(art)return art;
+ art=document.createElement('canvas');art.width=256;art.height=216;const c=art.getContext('2d')!;c.translate(128,108);
+ c.strokeStyle=color;c.lineWidth=7;c.shadowColor=color;c.shadowBlur=20;c.beginPath();c.ellipse(0,0,82,66,0,0,Math.PI*2);c.stroke();c.stroke();c.shadowBlur=0;
+ c.strokeStyle='#071226d9';c.lineWidth=9;c.stroke();c.strokeStyle='#ffffffdf';c.lineWidth=5;c.stroke();c.strokeStyle=color;c.lineWidth=3;c.stroke();
+ c.fillStyle=color;for(const sign of [-1,1]){c.beginPath();c.moveTo(sign*97,0);c.lineTo(sign*108,-6);c.lineTo(sign*108,6);c.closePath();c.fill()}
+ if(halos.size>=48)halos.delete(halos.keys().next().value!);halos.set(color,art);return art;
 }
-
 export function paintControlledRing(c:CanvasRenderingContext2D,x:number,y:number,radius:number,color:string,scale=1){
- c.save();c.beginPath();c.ellipse(x,y,radius,radius*.8,0,0,Math.PI*2);
- c.strokeStyle='#101827';c.lineWidth=7*scale;c.stroke();
- c.strokeStyle='#fff';c.lineWidth=4*scale;c.stroke();
- c.strokeStyle=color;c.lineWidth=2*scale;c.stroke();c.restore();
+ const r=radius+Math.max(0,Math.min(3,(scale-1)*2)),factor=r/82;c.drawImage(halo(color),x-128*factor,y-108*factor,256*factor,216*factor);
 }

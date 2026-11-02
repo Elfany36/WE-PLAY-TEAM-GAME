@@ -1,0 +1,24 @@
+[
+  {
+    "width": 1440,
+    "idleFps": 13,
+    "movingFps": 60,
+    "shotRequests": 1,
+    "rollingBalls": 16,
+    "frames": 150,
+    "gradients": 0,
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "width": 390,
+    "idleFps": 13,
+    "movingFps": 60,
+    "shotRequests": 1,
+    "rollingBalls": 16,
+    "frames": 171,
+    "gradients": 0,
+    "overflow": 0,
+    "errors": []
+  }
+]
