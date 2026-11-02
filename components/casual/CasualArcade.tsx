@@ -7,6 +7,7 @@ import {RoomRevisionFeed} from '../../lib/room-revisions';
 import {casualPollPeriod} from '../../lib/casual/polling';
 import {chooseCasualEndpoint,legacyCasualEndpoint,sessionCasualEndpoint,invitationService,invitationEndpoint,joinCandidates} from '../../lib/casual/service';
 import {useRoomLease} from '../../lib/use-room-lease';
+import {visibleInterval} from '../../lib/visible-interval';
 import {RoomTransport} from '../../lib/room-transport';
 import ConnectionStats from '../games/ConnectionStats';
 import {leaveRoomOnExit,reloadRoomView} from '../../lib/room-lifecycle';
@@ -79,7 +80,7 @@ export default function CasualArcade({name}:{name:string}){
 
  useEffect(()=>leaveRoomOnExit(endpoint,()=>sessionRef.current,'markup-casual-session',()=>leaseOwner.current),[]);
  useEffect(()=>{const invite=new URLSearchParams(location.search).get('arcade')?.toUpperCase(),s=readStored('markup-casual-session',null,true);if(s&&typeof s.token==='string'&&/^[a-f0-9]{64}$/.test(s.token)&&typeof s.code==='string'&&/^[A-HJ-NP-Z2-9]{8}$/.test(s.code)&&(!invite||invite===s.code))setSavedSession(s);else if(invite){setCode(invite.slice(0,8));removeStored('markup-casual-session',true)}setMuted(readStored('markup-party-muted',true)!==false)},[]);
- useEffect(()=>{const t=setInterval(()=>{const r=roomRef.current;if(r?.mode==='terra'||r?.phase==='playing'&&!document.hidden)setClock(Date.now())},250);return()=>clearInterval(t)},[]);
+ useEffect(()=>{const current=local??remote;if(current?.mode==='terra'){const timer=setInterval(()=>setClock(Date.now()),250);return()=>clearInterval(timer)}if(current?.phase!=='playing')return;return visibleInterval(()=>setClock(Date.now()),250)},[local?.mode,local?.phase,remote?.mode,remote?.phase]);
  useEffect(()=>{if(!local||local.mode!=='terra'&&local.phase!=='playing')return;const t=setInterval(()=>{if(local.mode!=='terra'&&document.hidden)return;setLocal(previous=>{if(!previous)return previous;try{const next=advanceCasual(previous,Date.now());return next.changed?next.state:previous}catch(e){setError((e as Error).message);return previous}})},fastModes.includes(local.mode)?50:100);return()=>clearInterval(t)},[!!local,local?.mode,local?.phase]);
  useEffect(()=>{
   if(!session)return;const s=session;let stopped=false,pending=false,frame=0,queuedState:CasualPublic|null=null,timer:ReturnType<typeof setTimeout>,controller:AbortController|null=null,failures=0,live=false,wantedRevision=-1,lastPollStarted=-Infinity,lastLiveResync=-Infinity;

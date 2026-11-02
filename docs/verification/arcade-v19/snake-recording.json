@@ -1,0 +1,196 @@
+{
+  "fixture": "48x48 Garden Ruins, 125 ms steps, 32 rapid turns per run, local Chromium and ordered proxy",
+  "baseline": [
+    {
+      "rtt": 0,
+      "map": "ruins",
+      "size": 48,
+      "speed": 125,
+      "entities": [
+        {
+          "own": true,
+          "samples": 792,
+          "maxStep": 0.7055071681921348,
+          "jumps": 2,
+          "blank": 0,
+          "resets": 0
+        },
+        {
+          "own": false,
+          "samples": 792,
+          "maxStep": 0.15156515654335578,
+          "jumps": 0,
+          "blank": 0,
+          "resets": 0
+        }
+      ],
+      "fps": "60",
+      "status": "failed",
+      "error": "visible correction jumps",
+      "errors": []
+    },
+    {
+      "rtt": 400,
+      "map": "ruins",
+      "size": 48,
+      "speed": 125,
+      "entities": [
+        {
+          "own": true,
+          "samples": 779,
+          "maxStep": 0.15034585528551503,
+          "jumps": 0,
+          "blank": 0,
+          "resets": 0
+        },
+        {
+          "own": false,
+          "samples": 779,
+          "maxStep": 0.15231117158966878,
+          "jumps": 0,
+          "blank": 0,
+          "resets": 0
+        }
+      ],
+      "fps": "60",
+      "status": "passed"
+    },
+    {
+      "rtt": 900,
+      "map": "ruins",
+      "size": 48,
+      "speed": 125,
+      "entities": [
+        {
+          "own": true,
+          "samples": 546,
+          "maxStep": 0.15036802771663815,
+          "jumps": 0,
+          "blank": 0,
+          "resets": 2
+        },
+        {
+          "own": false,
+          "samples": 775,
+          "maxStep": 0.15307121726841322,
+          "jumps": 0,
+          "blank": 0,
+          "resets": 0
+        }
+      ],
+      "fps": "60",
+      "status": "passed"
+    }
+  ],
+  "fixed": [
+    {
+      "rtt": 0,
+      "map": "ruins",
+      "size": 48,
+      "speed": 125,
+      "entities": [
+        {
+          "own": true,
+          "samples": 792,
+          "maxStep": 0.15030420382934295,
+          "jumps": 0,
+          "blank": 0,
+          "resets": 0
+        },
+        {
+          "own": false,
+          "samples": 792,
+          "maxStep": 0.15100582790716288,
+          "jumps": 0,
+          "blank": 0,
+          "resets": 0
+        }
+      ],
+      "fps": "60",
+      "status": "passed"
+    },
+    {
+      "rtt": 400,
+      "map": "ruins",
+      "size": 48,
+      "speed": 125,
+      "entities": [
+        {
+          "own": true,
+          "samples": 732,
+          "maxStep": 1.32566053573985,
+          "jumps": 1,
+          "blank": 0,
+          "resets": 0
+        },
+        {
+          "own": false,
+          "samples": 782,
+          "maxStep": 0.1519551817186624,
+          "jumps": 0,
+          "blank": 0,
+          "resets": 0
+        }
+      ],
+      "fps": "60",
+      "status": "failed",
+      "error": "visible correction jumps",
+      "errors": []
+    },
+    {
+      "rtt": 900,
+      "map": "ruins",
+      "size": 48,
+      "speed": 125,
+      "entities": [
+        {
+          "own": true,
+          "samples": 530,
+          "maxStep": 0.15034649562963054,
+          "jumps": 0,
+          "blank": 0,
+          "resets": 1
+        },
+        {
+          "own": false,
+          "samples": 773,
+          "maxStep": 0.15191935008658675,
+          "jumps": 0,
+          "blank": 0,
+          "resets": 0
+        }
+      ],
+      "fps": "60",
+      "status": "passed"
+    }
+  ],
+  "jitter_repeat": [
+    {
+      "rtt": 400,
+      "map": "ruins",
+      "size": 48,
+      "speed": 125,
+      "entities": [
+        {
+          "own": true,
+          "samples": 659,
+          "maxStep": 0.15045228711962721,
+          "jumps": 0,
+          "blank": 0,
+          "resets": 1
+        },
+        {
+          "own": false,
+          "samples": 782,
+          "maxStep": 0.15196668672648883,
+          "jumps": 0,
+          "blank": 0,
+          "resets": 0
+        }
+      ],
+      "fps": "60",
+      "status": "passed"
+    }
+  ],
+  "limits": "Trace excludes respawn epochs and gaps over 100 ms. Delayed prediction can require authority resync: one 1.326-cell correction occurred in the first fixed 400 ms RTT run, zero on repeat. No fading in any merged-source run."
+}

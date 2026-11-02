@@ -146,4 +146,6 @@ See [v18 verification](docs/verification/arcade-v18.md) for 435 passing tests, a
 
 ### Arcade v19
 
-The slate and indigo interface restores the illustrated game library and adds flat map previews, clearer room setup, visible dockable player/chat panels, player-colored turn feedback, shared chassis collision hulls, and indexed simulation geometry. See [v19 verification](docs/verification/arcade-v19.md) for 445 tests, 145 local/online catalog combinations, responsive layouts and measured performance.
+The slate and indigo interface restores the illustrated game library and adds flat map previews, clearer room setup, visible dockable player/chat panels, player-colored turn feedback, shared chassis collision hulls, and indexed simulation geometry. See [v19 verification](docs/verification/arcade-v19.md) for 465 tests, 145 local/online catalog combinations, responsive layouts and measured performance.
+
+GitHub PR #5 runtime improvements are integrated. The Snake recording follow-up also prevents a new turn from rewriting a partially drawn cell on local and fast connections; see the replay evidence and network limits in the v19 report.

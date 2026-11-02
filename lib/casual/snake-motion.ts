@@ -42,8 +42,15 @@ export function snakeTurnTick(g:{tick:number;lastTickAt:number},serverNow:number
  // The snapshot has already spent half an RTT in transit. The input needs the
  // other half to reach the authority; predicting the earlier boundary folds the
  // snake back when the server confirms the actual turn.
- const margin=rtt>=120?speed:0;
- const phase=Math.max(0,serverNow-g.lastTickAt)+Math.max(0,age)+Math.max(0,rtt)+margin;
+ // Even a local or fast connection can receive input halfway through a drawn
+ // cell. Keep that step's direction: turning it retroactively moves the head
+ // sideways and forces presentation to replace its route. Reserve the next
+ // untouched boundary on every connection, including zero-latency local play.
+ const margin=speed;
+ // A countdown snapshot's lastTickAt is still in the future. Preserve that
+ // negative offset until transit and receipt age have been added; clamping it
+ // early schedules the first turn several cells too late on a slow link.
+ const phase=Math.max(0,serverNow-g.lastTickAt+Math.max(0,age)+Math.max(0,rtt))+margin;
  return Math.max(g.tick+Math.max(1,Math.ceil(phase/Math.max(40,speed))),previousTick+1);
 }
 

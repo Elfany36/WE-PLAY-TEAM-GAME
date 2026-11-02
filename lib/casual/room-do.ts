@@ -27,7 +27,7 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
  private foreground(now:number,state:AuthorityState){return this.ctx.getWebSockets().map(socket=>socket.deserializeAttachment() as Subscription|null).filter((s):s is Subscription=>!!s&&s.expiresAt>now&&!!s.activeAt&&now-s.activeAt<10000&&state.players.some(p=>!p.retired&&p.id===s.playerId&&p.tokenHash===s.tokenHash))}
  private armTick(){
   if(this.tickRunning||this.kind!=='casual')return;
-  const row=this.db.snapshot();if(!row)return;const state=JSON.parse(row.state) as CasualState;
+  const row=this.db.snapshot();if(!row)return;const state=this.db.inspectState<CasualState>()!;
   const now=Date.now();
   if(state.phase!=='playing'||!state.game||!this.foreground(now,state).length){if(this.tickTimer)clearTimeout(this.tickTimer);this.tickTimer=undefined;this.tickAt=0;return}
   const delay=Math.min(4000,casualTickDelay(state,now)*2**this.tickFailures);
@@ -40,7 +40,7 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
  private async releaseInput(socket:WebSocket,session:Subscription){
   if(this.kind!=='casual')return;
   const row=this.db.snapshot();if(!row)return;
-  const state=JSON.parse(row.state) as CasualState;
+  const state=this.db.inspectState<CasualState>()!;
   if(!state.game||!['circuit','sumo','tanks','pong','marble','blocks'].includes(state.game.kind)||!('inputs'in state.game)||!state.game.inputs[session.playerId])return;
   if(this.ctx.getWebSockets().some(other=>{if(other===socket)return false;const s=other.deserializeAttachment() as Subscription|null;return s?.playerId===session.playerId&&s.tokenHash===session.tokenHash&&!!s.activeAt&&Date.now()-s.activeAt<10000}))return;
   await roomBatch<CasualState>(this.db,'casual:'+row.code,async()=>{const current=this.db.snapshot();if(!current)throw Error('Room expired');return{state:JSON.parse(current.state),revision:current.revision}},async(next,revision)=>!!(await this.db.prepare('UPDATE casual_rooms SET state=?, revision=revision+1 WHERE code=? AND revision=?').bind(JSON.stringify(next),row.code,revision).run()).meta.changes,()=>Error('Room busy'),task=>this.ctx.waitUntil(task),true).run((next)=>{
@@ -59,14 +59,20 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
    });this.tickFailures=0;
   }catch{this.tickFailures=Math.min(5,this.tickFailures+1)}finally{this.tickRunning=false;this.armTick()}
  }
- async alarm(){await this.db.expire(Date.now())}
+ async alarm(){
+  await this.db.expire(Date.now());
+  if(!this.db.snapshot()){
+   clearTimeout(this.tickTimer);clearTimeout(this.notificationTimer);this.tickTimer=undefined;this.tickAt=0;this.notificationTimer=undefined;
+   for(const socket of this.ctx.getWebSockets())try{socket.close(4001,'Room expired')}catch{}
+  }
+ }
  private scheduleNotification(){
   if(this.notificationTimer||!this.ctx.getWebSockets().length)return;
   this.notificationTimer=setTimeout(()=>{this.notificationTimer=undefined;this.notify()},STATE_INTERVAL);
  }
  private notify(){
   const row=this.db.snapshot();if(!row)return;
-  const state=JSON.parse(row.state) as AuthorityState,now=Date.now();
+  const state=this.db.inspectState<AuthorityState>()!,now=Date.now();
   for(const socket of this.ctx.getWebSockets()){
    const session=socket.deserializeAttachment() as Subscription|null;
    if(!session?.playerId)continue;
@@ -117,7 +123,7 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
    if(value.type==='ack'&&prior.stateAck){
     if(Number.isSafeInteger(value.revision)&&prior.pending?.includes(value.revision)){socket.serializeAttachment({...prior,pending:prior.pending.filter(revision=>revision>value.revision),...(Number.isInteger(value.stateWindow)&&value.stateWindow>=4&&value.stateWindow<=MAX_STATE_WINDOW?{stateWindow:value.stateWindow}:{})});this.scheduleNotification()}return;
    }
-   const state=JSON.parse(row.state) as AuthorityState;
+   const state=this.db.inspectState<AuthorityState>()!;
    if(!state.players.some(p=>!p.retired&&p.id===prior.playerId&&p.tokenHash===prior.tokenHash)){socket.close(4001,'Room session ended');return}
    if(value.type==='ping'){
     const fresh=value.active===true&&(!prior.activeAt||now-prior.activeAt>=10000||value.resync===true);
@@ -138,7 +144,7 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
    socket.close(1008,'Invalid room update message');return;
   }
   if(value.type!=='auth'||typeof value.token!=='string'||!/^[a-f0-9]{64}$/.test(value.token)){socket.close(4001,'Join the room first');return}
-  const tokenHash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value.token))),n=>n.toString(16).padStart(2,'0')).join(''),current=this.db.snapshot();if(!current){socket.close(4001,'Room expired');return}const state=JSON.parse(current.state) as AuthorityState,player=state.players.find(p=>!p.retired&&p.tokenHash===tokenHash);
+  const tokenHash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value.token))),n=>n.toString(16).padStart(2,'0')).join(''),current=this.db.snapshot();if(!current){socket.close(4001,'Room expired');return}const state=this.db.inspectState<AuthorityState>()!,player=state.players.find(p=>!p.retired&&p.tokenHash===tokenHash);
   if(!player){socket.close(4001,'Room session ended');return}
   const auth=this.authentication.get(socket);if(auth){clearTimeout(auth.timer);auth.done();this.authentication.delete(socket)}
   const protocol=value.protocol===2?2:1;

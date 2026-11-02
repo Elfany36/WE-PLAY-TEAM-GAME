@@ -1,0 +1,50 @@
+[
+  {
+    "mode": "blanks",
+    "width": 1440,
+    "overflow": 0,
+    "stats": 3,
+    "questionVisible": true,
+    "errors": []
+  },
+  {
+    "mode": "survival",
+    "width": 1440,
+    "overflow": 0,
+    "stats": 3,
+    "questionVisible": true,
+    "errors": []
+  },
+  {
+    "mode": "quiz",
+    "width": 1440,
+    "overflow": 0,
+    "stats": 3,
+    "questionVisible": true,
+    "errors": []
+  },
+  {
+    "mode": "blanks",
+    "width": 390,
+    "overflow": 0,
+    "stats": 3,
+    "questionVisible": true,
+    "errors": []
+  },
+  {
+    "mode": "survival",
+    "width": 390,
+    "overflow": 0,
+    "stats": 3,
+    "questionVisible": true,
+    "errors": []
+  },
+  {
+    "mode": "quiz",
+    "width": 390,
+    "overflow": 0,
+    "stats": 3,
+    "questionVisible": true,
+    "errors": []
+  }
+]
