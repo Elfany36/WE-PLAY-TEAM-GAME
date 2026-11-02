@@ -91,10 +91,10 @@ test('Solar Speedway can be completed by ordinary bot controls with finite colli
  assert(g.drivers.every(d=>d.lap>0));assert(g.drivers.every(d=>[d.x,d.y,d.angle,d.speed].every(Number.isFinite)));
 });
 
-test('a newer frontend preserves online choices when the room server is still an older release',()=>{
+test('a failed health request keeps every current online choice available',()=>{
  const settings={cards:20,speed:175,arena:'glacier' as const,scene:'cherry' as const,track:'cinder',map:'sunspire' as const};
  assert.equal(readOnlineContent({version:17}),BASE_ONLINE_CONTENT);
- for(const mode of ['tanks','circuit','snake','uno'])assert(!onlineContentAvailable(mode,settings,BASE_ONLINE_CONTENT));
+ for(const mode of ['tanks','circuit','snake','uno'])assert(onlineContentAvailable(mode,settings,BASE_ONLINE_CONTENT));
  const current=readOnlineContent({content:{maps:['classic','sunspire'],arenas:['garden','glacier'],tracks:['meadow','cinder'],scenes:['garden','cherry']}});
  for(const mode of ['tanks','circuit','snake','uno','terra'])assert(onlineContentAvailable(mode,settings,current));
  assert.equal(readOnlineContent({content:{maps:['<script>']}}),BASE_ONLINE_CONTENT);

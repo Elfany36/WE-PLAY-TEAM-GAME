@@ -29,3 +29,4 @@ import '../app/studio-v15.css';
 import '../app/arcade-v16.css';
 import '../app/arcade-v17.css';
 import '../app/arcade-v18.css';
+import '../app/arcade-v19.css';

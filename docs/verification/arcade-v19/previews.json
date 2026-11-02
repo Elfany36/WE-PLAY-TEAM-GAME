@@ -1,0 +1,34 @@
+[
+  {
+    "width": 1440,
+    "theme": "light",
+    "normal": "rgb(220, 222, 243)",
+    "hover": "rgb(68, 54, 179)",
+    "poster": 88,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "theme": "dark",
+    "normal": "rgb(51, 56, 85)",
+    "hover": "rgb(195, 184, 255)",
+    "poster": 88,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "theme": "light",
+    "normal": "rgb(220, 222, 243)",
+    "hover": "rgb(68, 54, 179)",
+    "poster": 88,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "theme": "dark",
+    "normal": "rgb(82, 82, 129)",
+    "hover": "rgb(195, 184, 255)",
+    "poster": 88,
+    "status": "passed"
+  }
+]

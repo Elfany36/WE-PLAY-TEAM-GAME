@@ -1,8 +1,8 @@
 'use client';
 import type {ChatDecoration} from '../../lib/chat-media';
-import {lazy,Suspense,useEffect,useState,type ReactNode} from 'react';
+import {memo,lazy,Suspense,type ReactNode} from 'react';
 import type {CasualPublic} from '../../lib/casual/engine';
-import {Crown,BrainCircuit,Wifi,WifiOff} from 'lucide-react';
+import {Crown,BrainCircuit,Wifi,WifiOff,MessageCircle} from 'lucide-react';
 import {nameInitial} from '../../lib/text-presentation';
 import {ARCADE_COLORS} from '../../lib/casual/arcade-colors';
 import GameMeter from './GameMeter';
@@ -12,15 +12,14 @@ import {PlayerToken} from './Art';
 import {casualLeaderboard} from '../../lib/casual/leaderboard';
 import {playerStanding} from '../../lib/casual/scoreboard';
 import type {ChatMessage} from '../../lib/room-chat';
+import {DockPanel} from './RoomWorkspace';
 const cardColors:Record<string,string>={red:'#db3456',yellow:'#bd880b',green:'#27866c',blue:'#356cca',pink:'#b62b82',orange:'#c96620',teal:'#157b7b',purple:'#7b42b6'};
 const GameChat=lazy(()=>import('../games/GameChat'));
-type Props={room:CasualPublic;guide?:ReactNode;busy:boolean;local:boolean;connected:boolean;hideExtras?:boolean;onAction:(action:string,extra?:Record<string,any>)=>void;onSend:(text:string,giftId?:string,decoration?:ChatDecoration)=>Promise<void>};
-export default function RoomSidebar({room,busy,local,connected,hideExtras=false,onAction,onSend,guide}:Props){
- const [open,setOpen]=useState(true),match=room.phase!=='lobby'&&room.mode!=='terra',turnBased=['memory','ladders','uno','property','pool','chess','dama','scidama'].includes(room.mode);
- useEffect(()=>{const media=matchMedia('(max-width:759px)'),update=()=>setOpen(!media.matches);update();media.addEventListener('change',update);return()=>media.removeEventListener('change',update)},[]);
- return <aside className={'room-sidebar'+(match?' match-sidebar':'')} aria-label="Players, scores and chat">
-  <details className="room-roster-card" open={open} onToggle={e=>setOpen(e.currentTarget.open)}>
-   <summary><span>{room.mode==='terra'?'Players & scores':<><Crown size={19}/> Players & scores</>}</span><b>{room.players.filter(p=>!p.retired).length} / {casualCapacity(room.mode)}</b></summary>
+type Props={room:CasualPublic;guide?:ReactNode;busy:boolean;local:boolean;connected:boolean;onAction:(action:string,extra?:Record<string,any>)=>void;onSend:(text:string,giftId?:string,decoration?:ChatDecoration)=>Promise<void>};
+function RoomSidebar({room,busy,local,connected,onAction,onSend,guide}:Props){
+ const turnBased=['memory','ladders','uno','property','pool','chess','dama','scidama'].includes(room.mode);
+ return <><DockPanel id="players" title="Players & scores" icon={<Crown size={18}/>}>
+  <div className="roster-capacity">{room.players.filter(p=>!p.retired).length} / {casualCapacity(room.mode)} seats</div>
    <div className="room-roster-list">{casualLeaderboard(room).map((p,index)=>{
     const actor=room.mode==='tanks'?room.game?.actors?.find((a:any)=>a.id===p.id):null;
     const pool=room.mode==='pool'?room.game:null;
@@ -41,7 +40,10 @@ export default function RoomSidebar({room,busy,local,connected,hideExtras=false,
     </div>;
    })}</div>
    {room.phase==='lobby'&&!local&&<button className="button outline roster-ready" disabled={busy} onClick={()=>onAction('ready')}>{room.players.find(p=>p.isYou)?.ready?'Unready':'Ready to play'}</button>}
-  </details>
-  {!hideExtras&&<>{guide}<Suspense fallback={<p className="chat-loading" role="status">Opening room chat…</p>}><GameChat legacy={room.mode==='terra'} docked roomCode={room.code} resetKey={room.mode+':'+room.chatEpoch} youId={room.youId} messages={(room.chat||[]) as ChatMessage[]} local={local} disabled={!local&&!connected} onSend={onSend}/></Suspense></>}
- </aside>;
+  {guide}</DockPanel>
+  <DockPanel id="chat" title="Chat" icon={<MessageCircle size={18}/>}><Suspense fallback={<p className="chat-loading" role="status">Opening room chat…</p>}><GameChat embedded docked roomCode={room.code} resetKey={room.mode+':'+room.chatEpoch} youId={room.youId} messages={(room.chat||[]) as ChatMessage[]} local={local} disabled={!local&&!connected} onSend={onSend}/></Suspense></DockPanel>
+ </>;
 }
+
+function rosterKey(room:CasualPublic){const g=room.game;return JSON.stringify([room.code,room.mode,room.phase,room.youId,room.isHost,room.chatEpoch,room.botThinking?.playerId,casualLeaderboard(room).map(p=>[p.id,p.name,p.color,p.ready,p.retired,p.online,p.canRemove,p.bot,p.isHost,p.isYou,playerStanding(room,p.id),g?.currentId===p.id,room.mode==='tanks'?g?.actors?.filter((a:any)=>a.id===p.id).map((a:any)=>[a.alive,a.hp,a.armor,a.ammo]):null,room.mode==='pool'?g?.balls?.filter((b:any)=>!b.pocketed).map((b:any)=>b.number):null,room.mode==='uno'?g?.opponentBacks?.[p.id]:null])])}
+export default memo(RoomSidebar,(a,b)=>a.busy===b.busy&&a.local===b.local&&a.connected===b.connected&&a.guide===b.guide&&a.onAction===b.onAction&&a.onSend===b.onSend&&a.room.chat?.length===b.room.chat?.length&&a.room.chat?.at(-1)?.clientId===b.room.chat?.at(-1)?.clientId&&rosterKey(a.room)===rosterKey(b.room));

@@ -1,0 +1,146 @@
+[
+  {
+    "width": 2560,
+    "title": "Players & scores",
+    "side": "left",
+    "status": "passed"
+  },
+  {
+    "width": 2560,
+    "title": "Players & scores",
+    "side": "above",
+    "status": "passed"
+  },
+  {
+    "width": 2560,
+    "title": "Players & scores",
+    "side": "below",
+    "status": "passed"
+  },
+  {
+    "width": 2560,
+    "title": "Players & scores",
+    "side": "right",
+    "status": "passed"
+  },
+  {
+    "width": 2560,
+    "title": "Chat",
+    "side": "left",
+    "status": "passed"
+  },
+  {
+    "width": 2560,
+    "title": "Chat",
+    "side": "above",
+    "status": "passed"
+  },
+  {
+    "width": 2560,
+    "title": "Chat",
+    "side": "below",
+    "status": "passed"
+  },
+  {
+    "width": 2560,
+    "title": "Chat",
+    "side": "right",
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "title": "Players & scores",
+    "side": "left",
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "title": "Players & scores",
+    "side": "above",
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "title": "Players & scores",
+    "side": "below",
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "title": "Players & scores",
+    "side": "right",
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "title": "Chat",
+    "side": "left",
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "title": "Chat",
+    "side": "above",
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "title": "Chat",
+    "side": "below",
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "title": "Chat",
+    "side": "right",
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "title": "Players & scores",
+    "side": "left",
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "title": "Players & scores",
+    "side": "above",
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "title": "Players & scores",
+    "side": "below",
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "title": "Players & scores",
+    "side": "right",
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "title": "Chat",
+    "side": "left",
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "title": "Chat",
+    "side": "above",
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "title": "Chat",
+    "side": "below",
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "title": "Chat",
+    "side": "right",
+    "status": "passed"
+  }
+]

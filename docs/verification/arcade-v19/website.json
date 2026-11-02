@@ -1,0 +1,194 @@
+[
+  {
+    "width": 1440,
+    "section": "Overview",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 17,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "section": "Learning paths",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 25,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "section": "Documentation",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 13,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "section": "Practice studio",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 13,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "section": "Playground",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 20,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "section": "Coding games",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 13,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "section": "Casual arcade",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 13,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "section": "Achievements",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 13,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "section": "Overview",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 4,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "section": "Learning paths",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 12,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "section": "Documentation",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 3,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "section": "Practice studio",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 3,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "section": "Playground",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 10,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "section": "Coding games",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 3,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "section": "Casual arcade",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 3,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "section": "Achievements",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 3,
+    "status": "passed"
+  },
+  {
+    "width": 320,
+    "section": "Overview",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 4,
+    "status": "passed"
+  },
+  {
+    "width": 320,
+    "section": "Learning paths",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 10,
+    "status": "passed"
+  },
+  {
+    "width": 320,
+    "section": "Documentation",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 3,
+    "status": "passed"
+  },
+  {
+    "width": 320,
+    "section": "Practice studio",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 3,
+    "status": "passed"
+  },
+  {
+    "width": 320,
+    "section": "Playground",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 10,
+    "status": "passed"
+  },
+  {
+    "width": 320,
+    "section": "Coding games",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 3,
+    "status": "passed"
+  },
+  {
+    "width": 320,
+    "section": "Casual arcade",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 3,
+    "status": "passed"
+  },
+  {
+    "width": 320,
+    "section": "Achievements",
+    "overflow": false,
+    "overlaps": [],
+    "visibleControls": 3,
+    "status": "passed"
+  }
+]

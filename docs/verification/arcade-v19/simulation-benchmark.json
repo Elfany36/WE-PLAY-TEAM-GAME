@@ -1,0 +1,38 @@
+[
+  {
+    "mode": "circuit",
+    "ticks": 1200,
+    "players": 8,
+    "samples": 20,
+    "beforeMs": 49.20820800000001,
+    "afterMs": 31.048695999999836,
+    "changePercent": -36.90342066510565
+  },
+  {
+    "mode": "tanks",
+    "ticks": 1200,
+    "players": 8,
+    "samples": 20,
+    "beforeMs": 43.2144159999998,
+    "afterMs": 30.358400999999958,
+    "changePercent": -29.749366507694795
+  },
+  {
+    "mode": "marble",
+    "ticks": 1200,
+    "players": 8,
+    "samples": 20,
+    "beforeMs": 23.00926299999992,
+    "afterMs": 20.506164999999783,
+    "changePercent": -10.878653523149119
+  },
+  {
+    "mode": "sumo",
+    "ticks": 1200,
+    "players": 8,
+    "samples": 20,
+    "beforeMs": 3.2632999999996173,
+    "afterMs": 3.2378920000001017,
+    "changePercent": -0.7785983513473704
+  }
+]

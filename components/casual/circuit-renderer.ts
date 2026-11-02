@@ -1,7 +1,8 @@
+import {KART_HULL} from '../../lib/casual/collision';
 import {paintKartBody} from './model-art';
 import {raceTerrain} from './race-terrain';
 import type {CasualPublic} from '../../lib/casual/engine';
-import {circuitObstacles,trackPoints,circuitWorld,circuitProps,CIRCUIT_SHOULDER,KART_RADIUS,TRACKS,type CircuitGame,type CircuitProp} from '../../lib/casual/circuit';
+import {circuitObstacles,trackPoints,circuitWorld,circuitProps,CIRCUIT_SHOULDER,KART_RADIUS,CIRCUIT_BARRIER,CIRCUIT_BOAT,TRACKS,type CircuitGame,type CircuitProp} from '../../lib/casual/circuit';
 import {ARCADE_COLORS as PLAYER_COLORS} from '../../lib/casual/arcade-colors';
 import {shortestAngle} from '../../lib/game-motion';
 import {paintImpact,paintSpeedTrail} from './arena-effects';
@@ -18,8 +19,8 @@ function scene(g:CircuitGame){
 function rounded(c:CanvasRenderingContext2D,x:number,y:number,w:number,h:number,r:number,fill:string){c.fillStyle=fill;c.beginPath();c.roundRect(x,y,w,h,r);c.fill()}
 function paintProp(c:CanvasRenderingContext2D,p:Prop,track:string){
  c.save();c.translate(p.x,p.y);c.fillStyle='#071c2945';c.beginPath();c.ellipse(5,12,29,17,0,0,7);c.fill();
- if(p.kind===7){c.rotate(p.angle);rounded(c,-20,-24,40,48,7,'#142a35');rounded(c,-17,-22,34,42,5,'#b97043');c.strokeStyle='#ffe3a0';c.lineWidth=5;c.beginPath();c.moveTo(-12,-14);c.lineTo(12,10);c.moveTo(-12,2);c.lineTo(4,18);c.stroke()}else if(track==='night'&&p.kind<5){const h=40+p.kind*11;rounded(c,-26,-h,52,h+14,5,'#152e44');rounded(c,-23,-h-5,46,h,5,['#23405c','#33475e','#204c58'][p.kind%3]);c.fillStyle=['#8fe2d3','#d5a3ff','#ffdf93'][p.kind%3];for(let y=-h+9;y<-2;y+=13)for(let x=-16;x<20;x+=13)c.fillRect(x,y,5,6);c.strokeStyle='#7fe2d155';c.lineWidth=2;c.strokeRect(-23,-h-5,46,h)}
- else if(track==='coast'&&p.kind<3){c.rotate(p.angle);rounded(c,-22,-30,44,60,8,'#fff1d3');rounded(c,-15,-21,30,38,9,['#d96764','#609eac','#e0ad57'][p.kind]);c.fillStyle='#24485b';c.fillRect(-11,-8,22,14);c.strokeStyle='#735f4c';c.lineWidth=3;c.beginPath();c.moveTo(0,-40);c.lineTo(0,38);c.stroke()}
+ if(p.kind===7){c.rotate(p.angle);rounded(c,-CIRCUIT_BARRIER.halfLength,-CIRCUIT_BARRIER.halfWidth,CIRCUIT_BARRIER.halfLength*2,CIRCUIT_BARRIER.halfWidth*2,7,'#142a35');rounded(c,-17,-22,34,42,5,'#b97043');c.strokeStyle='#ffe3a0';c.lineWidth=5;c.beginPath();c.moveTo(-12,-14);c.lineTo(12,10);c.moveTo(-12,2);c.lineTo(4,18);c.stroke()}else if(track==='night'&&p.kind<5){const h=40+p.kind*11;rounded(c,-26,-h,52,h+14,5,'#152e44');rounded(c,-23,-h-5,46,h,5,['#23405c','#33475e','#204c58'][p.kind%3]);c.fillStyle=['#8fe2d3','#d5a3ff','#ffdf93'][p.kind%3];for(let y=-h+9;y<-2;y+=13)for(let x=-16;x<20;x+=13)c.fillRect(x,y,5,6);c.strokeStyle='#7fe2d155';c.lineWidth=2;c.strokeRect(-23,-h-5,46,h)}
+ else if(track==='coast'&&p.kind<3){c.rotate(p.angle);rounded(c,-CIRCUIT_BOAT.halfLength,-CIRCUIT_BOAT.halfWidth,CIRCUIT_BOAT.halfLength*2,CIRCUIT_BOAT.halfWidth*2,8,'#fff1d3');rounded(c,-15,-21,30,38,9,['#d96764','#609eac','#e0ad57'][p.kind]);c.fillStyle='#24485b';c.fillRect(-11,-8,22,14);c.strokeStyle='#735f4c';c.lineWidth=3;c.beginPath();c.moveTo(0,-40);c.lineTo(0,38);c.stroke()}
  else if(track==='cinder'&&p.kind<5){c.fillStyle='#664766';c.beginPath();c.moveTo(-27,12);c.lineTo(-20,-20);c.lineTo(0,-47);c.lineTo(25,-17);c.lineTo(28,12);c.closePath();c.fill();c.fillStyle='#eac186';c.beginPath();c.moveTo(0,-47);c.lineTo(25,-17);c.lineTo(7,-8);c.closePath();c.fill();c.strokeStyle='#ffce9155';c.lineWidth=2;c.beginPath();c.moveTo(0,-47);c.lineTo(7,-8);c.lineTo(0,8);c.stroke()}
  else if(track==='ridge'&&p.kind<5){c.fillStyle='#806e62';c.fillRect(-4,-5,8,31);for(let i=2;i>=0;i--){c.fillStyle=['#43988f','#56b09d','#74ceba'][i];c.beginPath();c.moveTo(-24+i*5,8-i*17);c.lineTo(0,-32-i*14);c.lineTo(24-i*5,8-i*17);c.fill()}c.fillStyle='#e7ffed';c.beginPath();c.moveTo(-6,-44);c.lineTo(0,-60);c.lineTo(7,-44);c.fill()}
  else if(p.kind===5){c.rotate(p.angle);rounded(c,-8,-9,16,18,4,'#44565a');c.strokeStyle='#e6dcb8';c.lineWidth=4;c.beginPath();c.moveTo(0,0);c.lineTo(0,-47);c.stroke();c.fillStyle=track==='night'?'#9cf4e0':'#fff4c5';c.shadowColor=c.fillStyle;c.shadowBlur=track==='night'?14:0;c.beginPath();c.arc(0,-48,9,0,7);c.fill()}
@@ -34,7 +35,7 @@ function kart(c:CanvasRenderingContext2D,d:CircuitGame['drivers'][number],color:
  c.save();c.translate(d.x,d.y);c.rotate(d.angle+Math.PI/2);
  c.fillStyle='#061a2c66';c.beginPath();c.ellipse(3,7,27,37,0,0,7);c.fill();
  if(d.boostUntil>time){const flame=45+Math.sin(time*.04)*9;c.fillStyle='#f59c53';c.beginPath();c.moveTo(-12,27);c.quadraticCurveTo(-4,flame,0,flame+13);c.quadraticCurveTo(4,flame,12,27);c.fill();c.fillStyle='#fff4a9';c.beginPath();c.moveTo(-6,27);c.lineTo(0,flame);c.lineTo(6,27);c.fill()}
- for(const x of [-23,23])for(const y of [-20,21]){c.save();c.translate(x,y);if(y<0)c.rotate((d.steering||0)*.38);rounded(c,-6,-11,12,22,4,'#142735');rounded(c,-5,-8,3,16,1,'#51606b');c.restore()}
+ for(const x of [-23,23])for(const y of [-20,21]){c.save();c.translate(x,y);if(y<0)c.rotate((d.steering||0)*.38);rounded(c,-6,-(KART_HULL.halfLength-28),12,(KART_HULL.halfLength-28)*2,4,'#142735');rounded(c,-5,-8,3,16,1,'#51606b');c.restore()}
  paintKartBody(c,{fill:color,ink});
  if(d.drifting>.15){c.strokeStyle=d.drifting>.65?'#8edbff':'#f7cf7d';c.lineWidth=2;for(const x of [-26,26]){c.beginPath();c.moveTo(x,23);c.lineTo(x+Math.sin(time*.03)*7,37);c.stroke()}}
  if((d.magnetUntil||0)>time){c.strokeStyle='#ceb4ff';c.lineWidth=2;c.setLineDash([4,6]);c.beginPath();c.arc(0,0,54,0,7);c.stroke();c.setLineDash([])}if(time-(d.pulseAt||0)<450){c.strokeStyle='#a8e9f3';c.globalAlpha=1-(time-d.pulseAt!)/450;c.lineWidth=4;c.beginPath();c.arc(0,0,(time-d.pulseAt!)*.6,0,7);c.stroke();c.globalAlpha=1}

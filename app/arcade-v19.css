@@ -1,0 +1,162 @@
+/* Slate surfaces and indigo interaction states. Game artwork keeps its own palette. */
+:root,:root[data-theme=light]{--page:#f7f8fc;--surface:#fff;--surface-soft:#eef1f8;--surface-raised:#fff;--text:#20283d;--muted:#536079;--subtle:#63708a;--border:#ccd3e2;--accent:#5146cb;--accent-soft:#e9e7ff;--accent-text:#4436aa;--button-bg:#5146cb;--button-text:#fff;--focus:#7164ee;--forest:#242541;--success-bg:#e4f6ef;--success-text:#22654e;--ink:var(--text);--bg:var(--page);--line:var(--border);--hover:#e2e5f3;--pressed:#d8d4ff;--button-hover:#4436b3;--button-pressed:#35288e}
+:root[data-theme=dark]{--page:#111522;--surface:#1b2032;--surface-soft:#242b40;--surface-raised:#252c42;--text:#eef0fa;--muted:#bcc4dc;--subtle:#a2aecb;--border:#47516e;--accent:#b1a7ff;--accent-soft:#39335c;--accent-text:#d2cbff;--button-bg:#a99afa;--button-text:#1c153a;--focus:#b4acff;--forest:#25243c;--success-bg:#183d35;--success-text:#a1e9cf;--ink:var(--text);--bg:var(--page);--line:var(--border);--hover:#303951;--pressed:#4c4278;--button-hover:#c3b8ff;--button-pressed:#9281ed}
+:root[data-theme] body{background:var(--page);color:var(--text)}
+:root[data-theme] .sidebar{background:#222338;border-color:#41415f;color:#f3f0ff}
+:root[data-theme] .sidebar :is(.nav-item.active,.nav-item:hover){background:#454066;color:#fff}
+:root[data-theme] .grow-card{background:#393653;border-color:#605b82}
+:root[data-theme] .topbar{background:var(--surface);border-color:var(--border)}
+:root[data-theme] :is(button,a,input,select,textarea){transition:background-color .16s,border-color .16s,color .16s,box-shadow .16s}
+:root[data-theme] button:not(:disabled):hover{border-color:var(--accent)}
+:root[data-theme] :is(.button.outline,.disclosure-toggle,.interface-toggle,.dashboard-toggle,.theme-toggle,.party-icon-button,.surface-toolbar button,.club-filters button):not(:disabled):hover{background:var(--hover);color:var(--text);border-color:var(--accent)}
+:root[data-theme] .button.dark:not(:disabled):hover{background:var(--button-hover);color:var(--button-text);filter:none}
+:root[data-theme] .button.dark:not(:disabled):active{background:var(--button-pressed);transform:translateY(1px);filter:none}
+:root[data-theme] :is(.button.outline,.disclosure-toggle,.interface-toggle,.surface-toolbar button,.club-filters button):not(:disabled):active{background:var(--pressed);color:var(--text);transform:translateY(1px)}
+:root[data-theme] :is(.club-filters button,.surface-toolbar button)[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-text)}
+:root[data-theme] button:disabled{opacity:.5;cursor:not-allowed}
+:root[data-theme] :is(input,select,textarea):focus-visible{border-color:var(--focus);box-shadow:0 0 0 3px color-mix(in srgb,var(--focus) 20%,transparent)}
+.casual-arcade{min-width:0}
+.casual-arcade .selected-game-summary{display:flex!important;align-items:center;gap:16px;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin:20px 0}
+.casual-arcade .selected-game-summary>.party-poster{display:block!important;position:static!important;flex:0 0 88px;width:88px!important;height:52px!important;max-width:88px;object-fit:contain;overflow:hidden;border-radius:7px}
+.casual-arcade .selected-game-summary>div{display:grid;gap:3px;flex:1;min-width:0}
+.casual-arcade .selected-game-summary span{font-size:12px;color:var(--muted)}
+.casual-arcade .party-game-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:18px!important}
+.casual-arcade .party-game-card{min-width:0!important;display:flex!important;flex-direction:column;text-align:left;border-radius:14px!important;overflow:hidden;background:var(--surface)!important;border:1px solid var(--border)!important;box-shadow:0 2px 5px #11152a08!important;padding:0!important}
+.casual-arcade .party-game-card:hover{border-color:var(--accent)!important;box-shadow:0 5px 18px #5146cb22!important;transform:translateY(-2px)}
+.casual-arcade .party-game-card.selected{border:2px solid var(--accent)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)!important}
+.casual-arcade .party-game-art{display:block!important;position:relative;height:auto!important;aspect-ratio:420/230;min-height:0!important;width:100%!important;overflow:hidden}
+.casual-arcade .party-game-art>.party-poster{position:static!important;display:block!important;width:100%!important;height:100%!important;max-width:100%;object-fit:contain;padding:0!important}
+.casual-arcade .party-game-art>span{position:absolute;right:10px;bottom:8px;font-size:10px;opacity:.65}
+.casual-arcade .party-game-card>div:not(.party-game-art){padding:16px!important;flex:1;display:flex;flex-direction:column;gap:8px}
+.casual-arcade .party-game-card h2{font-size:18px!important;line-height:1.3;margin:0;display:flex;justify-content:space-between;gap:8px}
+.casual-arcade .party-game-card h2 svg{width:15px;flex-shrink:0}
+.casual-arcade .party-game-card p{font-size:12px!important;line-height:1.6;margin:0;min-height:0}
+.casual-arcade .party-game-card small{font-size:9px;letter-spacing:.08em}
+.casual-arcade .party-game-card footer{margin-top:auto;padding-top:12px;gap:6px;flex-wrap:wrap;font-size:10px}
+.casual-arcade .party-game-card footer b{color:var(--accent)}
+/* Flat previews reveal the play space without decorative columns or cropping. */
+.casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker){border:0!important;padding:0!important;min-width:0;margin:0 0 12px!important;grid-column:1/-1}
+.casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker)>div{display:grid!important;grid-template-columns:repeat(auto-fill,minmax(min(100%,195px),1fr))!important;gap:16px!important}
+.casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker) legend{font-size:15px;font-weight:750;margin:0 0 14px;padding:0;color:var(--text)}
+.casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker) button{position:relative;display:flex!important;flex-direction:column!important;align-items:stretch;justify-content:start;gap:8px!important;padding:9px 9px 14px!important;min-width:0;min-height:0!important;background:var(--surface)!important;color:var(--text)!important;border:1px solid var(--border)!important;border-radius:13px!important;overflow:hidden;box-shadow:none!important;text-align:left;transform:none!important}
+.casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker) button:hover{background:var(--hover)!important;border-color:var(--accent)!important}
+.casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker) button:active{background:var(--pressed)!important}
+.casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker) button[aria-pressed=true]{background:var(--accent-soft)!important;border:2px solid var(--accent)!important;padding:8px 8px 13px!important}
+.casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker) button[aria-pressed=true]:after{content:'✓';position:absolute;right:16px;top:16px;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:var(--button-bg);color:var(--button-text);box-shadow:0 2px 8px #1115;font-weight:900}
+.casual-arcade :is(.map-preview,.table-scene-art){position:static!important;display:block!important;width:100%!important;height:auto!important;max-width:100%;aspect-ratio:320/216;object-fit:contain;transform:none!important;border-radius:8px;margin:0!important;filter:none!important}
+.casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker) strong{font-size:14px!important;line-height:1.4;margin:0 4px!important}
+.casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker) small{font-size:12px!important;line-height:1.6;letter-spacing:0;margin:0 4px;color:var(--muted)!important}
+.casual-arcade .game-options{gap:20px!important;padding:20px!important;background:var(--surface-soft)!important;border:0!important;border-radius:12px}
+.casual-arcade .game-options>label{gap:9px;font-size:13px;min-width:0}
+.casual-arcade .game-ai-note{grid-column:1/-1;font-size:12px;margin:0}
+.casual-arcade .setup-display-name{display:grid;gap:9px;max-width:390px;margin:24px 0 20px;font-size:14px;font-weight:650}
+.casual-arcade .party-setup-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:20px!important;margin:0 0 24px}
+.casual-arcade .party-setup-grid>section{display:flex;flex-direction:column;gap:18px;min-width:0;background:var(--surface)!important;border:1px solid var(--border)!important;border-radius:16px;padding:22px!important;box-shadow:0 4px 18px #131a3010}
+.casual-arcade .party-panel-title{display:flex;gap:13px;align-items:center;margin:0!important}
+.casual-arcade .party-panel-title>span{display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;border-radius:12px;background:var(--accent-soft);color:var(--accent);border:0}
+.casual-arcade .party-panel-title h2{font-size:20px!important;line-height:1.3;margin:0 0 5px}
+.casual-arcade .party-panel-title p{font-size:12px;line-height:1.6;margin:0}
+.casual-arcade .party-setup-grid :is(label,.local-name-grid){margin:0}
+.casual-arcade .party-setup-grid .button{width:100%;min-height:46px!important;justify-content:center;white-space:normal}
+.casual-arcade .party-setup-grid small{font-size:12px;line-height:1.7}
+.casual-arcade .party-setup-grid .setup-card-note{font-size:14px;line-height:1.7;margin:0;flex:1}
+.casual-arcade .party-code-input{font-size:20px!important;line-height:1.5;font-family:ui-monospace,monospace!important;letter-spacing:.2em;height:48px}
+.casual-arcade .local-name-grid label{display:flex;gap:8px;align-items:center;min-width:0}
+.casual-arcade .local-name-grid input{width:100%;min-width:0}
+.casual-arcade :is(input,select){min-height:44px;border-radius:9px;padding:10px 12px;font-size:14px}
+/* Each panel is a stable sibling: moving it preserves chat drafts and focus. */
+.casual-arcade .room-shell.room-workspace{display:grid!important;gap:20px!important;align-items:start!important;width:100%!important;max-width:none!important;margin:0!important;min-width:0;grid-template-columns:unset!important}
+:root[data-theme] .main-shell .casual-arcade .room-shell.room-workspace[style]{grid-template-columns:var(--dock-columns)!important}
+.casual-arcade .room-workspace>.room-main{grid-area:game;min-width:0;width:100%;max-width:none;margin:0;position:relative}
+.casual-arcade .room-workspace :is(.party-live-layout,.party-board-panel,.surface-content){max-width:100%!important;width:100%!important;margin-left:0!important;margin-right:0!important;min-width:0}
+.casual-arcade .room-workspace .party-live-layout{display:block!important}
+.dock-panel{display:flex!important;flex-direction:column;min-width:0;max-width:100%;min-height:0;position:relative;overflow:hidden;border:1px solid var(--border)!important;border-radius:14px;background:var(--surface)!important;color:var(--text);box-shadow:0 3px 14px #12182d0c}
+.dock-panel-header{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:12px;flex:0 0 auto;background:var(--surface-soft);border-bottom:1px solid var(--border)}
+.dock-panel-header>strong{display:flex;align-items:center;gap:8px;font-size:13px;line-height:1.4;min-width:0}
+.dock-panel-header>strong svg{flex-shrink:0;color:var(--accent)}
+.dock-panel-header>div{display:flex;gap:4px;flex-shrink:0}
+.dock-panel-header button,.dock-panel-tools>button{display:flex;align-items:center;justify-content:center;gap:5px;min-width:32px;min-height:34px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--muted);font-size:11px}
+.dock-panel-header button:hover,.dock-panel-tools>button:hover{background:var(--hover);color:var(--text)}
+.dock-panel-content{display:flex;flex-direction:column;flex:1;min-height:0;overflow:auto;padding:12px}
+.dock-panel-content[hidden]{display:none!important}
+.dock-panel.is-collapsed{min-height:0!important}
+.dock-panel.is-collapsed .dock-panel-header{border:0}
+.dock-panel-tools{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px;background:var(--surface-soft);border-bottom:1px solid var(--border);overflow:auto;flex:0 0 auto;max-height:220px}
+.dock-panel-tools label{display:grid;gap:5px;min-width:0;font-size:11px}
+.dock-panel-tools label:first-child{grid-column:1/-1}
+.dock-panel-tools :is(select,input){width:100%;min-width:0;min-height:32px!important;padding:5px!important;font-size:12px!important}
+.dock-resize{position:absolute;bottom:1px;right:1px;display:grid;place-items:center;background:var(--surface-soft);color:var(--muted);border:0;border-radius:8px 0 10px;cursor:nwse-resize;touch-action:none;width:26px;height:26px;z-index:3}
+.dock-panel[data-dock=right]>.dock-resize{right:auto;left:1px;border-radius:0 8px 0 10px;cursor:nesw-resize}
+.dock-panel .roster-capacity{font-size:11px;color:var(--muted);margin-bottom:10px}
+.dock-panel .room-roster-list{display:flex;flex-direction:column;gap:10px;padding:0;min-width:0}
+.dock-panel .room-roster-player{display:flex!important;align-items:center;position:relative;gap:10px;padding:12px!important;border:1px solid var(--border)!important;border-radius:10px!important;min-width:0;flex-shrink:0;background:var(--surface)!important}
+.dock-panel .room-roster-player>div{flex:1;min-width:0}
+.dock-panel .room-roster-player strong{font-size:13px;line-height:1.5;overflow-wrap:anywhere}
+.dock-panel .room-roster-player small{font-size:11px;line-height:1.5}
+.dock-panel .room-roster-player.is-you{border-color:var(--accent)!important;background:var(--accent-soft)!important}
+.dock-panel .room-roster-player.is-current{box-shadow:inset 3px 0 var(--accent)}
+.dock-panel .roster-portrait{width:35px;height:42px;flex:0 0 35px;border-radius:11px;background:var(--seat-color);color:var(--seat-ink)}
+.dock-panel .roster-portrait b{color:var(--seat-ink)!important}
+.dock-panel .roster-rank{font-size:10px;width:15px;flex-shrink:0;color:var(--muted)}
+.dock-panel .roster-presence{position:static;margin-left:auto;color:var(--muted);flex-shrink:0}
+.dock-panel .roster-you{font-size:8px;padding:2px 4px;background:var(--surface-soft);color:var(--accent);border-radius:3px}
+.dock-panel .roster-ready{margin:12px 0}
+.dock-panel .text-link{font-size:10px;flex-shrink:0}
+.dock-panel-chat .dock-panel-content{padding:0;overflow:hidden}
+.dock-panel .social-chat.is-embedded{display:flex!important;flex-direction:column;width:100%!important;max-width:none!important;height:100%;min-height:0;border:0!important;border-radius:0;position:static!important;background:var(--surface)!important;box-shadow:none!important}
+.dock-panel .social-chat.is-embedded .chat-body{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;background:var(--surface)!important;padding-bottom:10px}
+.dock-panel .social-chat.is-embedded .chat-messages{height:auto!important;max-height:none!important;min-height:60px;flex:1;overflow:auto;background:var(--surface)!important}
+.dock-panel .social-chat :is(.chat-tools,.chat-room-label,.chat-caption){flex-shrink:0;background:var(--surface-soft)!important}
+.dock-panel .social-chat .chat-room-label{font-size:10px;padding:10px 12px}
+.dock-panel .social-chat .chat-room-label small{display:none}
+.dock-panel .social-chat .chat-tools{display:flex;flex-wrap:wrap;gap:6px;padding:9px}
+.dock-panel .social-chat .chat-tools button{flex:1;min-height:32px;padding:5px 7px;font-size:10px;gap:4px;background:var(--surface);border:1px solid var(--border);color:var(--text)}
+.dock-panel .social-chat form{flex-shrink:0;display:flex;gap:7px;padding:10px 12px 16px;background:var(--surface)!important}
+.dock-panel .social-chat form input{min-width:0;width:100%;font-size:12px!important;padding:8px!important;min-height:38px!important}
+.dock-panel .social-chat form button{flex:0 0 38px;background:var(--button-bg)!important;color:var(--button-text)!important;padding:8px}
+.dock-panel .social-chat form button span{display:none}
+.dock-panel .social-chat .chat-tray{max-height:210px;flex-shrink:0;overflow:auto;background:var(--surface)!important}
+.dock-panel .chat-empty{padding:20px 14px;color:var(--muted);font-size:12px}
+.dock-panel .chat-empty p{font-size:12px;line-height:1.7}
+.dock-panel .chat-messages article{background:var(--surface-soft)!important;border-color:var(--border);color:var(--text)}
+.dock-panel .chat-messages article.own{background:var(--accent-soft)!important}
+.dock-panel .chat-messages :is(p,strong){color:var(--text)!important}
+.dock-panel .chat-messages :is(time,small){color:var(--muted)!important}
+/* The club emblem uses the active player's palette, with a stronger own-turn glow. */
+.casual-arcade:not([data-game=terra]) .table-hud{overflow:visible;border:1px solid color-mix(in srgb,var(--turn-color) 28%,var(--border))!important;border-radius:13px!important;background:color-mix(in srgb,var(--turn-color) 5%,var(--surface))!important;box-shadow:none!important;padding:15px 17px!important;margin:8px 0 22px!important;gap:14px!important}
+.casual-arcade:not([data-game=terra]) .table-hud.is-your-turn{border-color:var(--turn-color)!important;box-shadow:inset 0 0 20px color-mix(in srgb,var(--turn-color) 10%,transparent),0 0 0 2px color-mix(in srgb,var(--turn-color) 18%,transparent),0 0 22px color-mix(in srgb,var(--turn-color) 27%,transparent)!important}
+.casual-arcade:not([data-game=terra]) .table-hud .table-hud-emblem{display:grid!important;width:42px;height:42px;flex:0 0 42px;border:1px solid color-mix(in srgb,var(--turn-color) 45%,transparent);background:color-mix(in srgb,var(--turn-color) 10%,var(--surface));color:var(--turn-color);border-radius:12px}
+.casual-arcade .table-hud-title>strong{color:var(--text)!important;font-size:15px!important;line-height:1.45!important}
+.casual-arcade .table-hud-title>small{color:var(--muted)!important;font-size:9px!important;letter-spacing:.12em}
+.casual-arcade .table-hud-stats>span{padding:6px 9px!important;min-width:0;background:var(--surface-soft)!important}
+.casual-arcade .table-hud-stats strong{color:var(--text)!important;font-size:12px!important}
+.casual-arcade .table-hud-stats small{color:var(--muted)!important;font-size:9px!important}
+.casual-arcade .table-hud-stats svg{color:var(--muted)}
+.casual-arcade .pool-shot-feedback{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 14px;margin-bottom:16px;background:var(--surface-soft);border-radius:10px}
+.casual-arcade .pool-shot-feedback p{margin:0;flex:1;min-width:140px;font-size:13px;line-height:1.7}
+.casual-arcade .pool-shot-feedback .pool-table-state{font-size:11px;color:var(--muted);background:var(--surface);padding:6px 9px}
+@media(min-width:1600px){.casual-arcade .party-game-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(max-width:1150px){.casual-arcade .party-game-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.casual-arcade .party-setup-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}.casual-arcade .party-start-local{grid-column:1/-1}}
+@media(max-width:760px){.casual-arcade .party-game-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}.casual-arcade .party-game-card>div:not(.party-game-art){padding:12px!important}.casual-arcade .party-game-card h2{font-size:16px!important}.casual-arcade .party-setup-grid{grid-template-columns:1fr!important}.casual-arcade .party-setup-grid>section{padding:20px!important}.casual-arcade .selected-game-summary{gap:12px;padding:12px;flex-wrap:wrap}.casual-arcade .selected-game-summary .button{margin-left:auto}.casual-arcade .game-options{padding:14px!important}.casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker)>div{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker) strong{font-size:12px!important}.casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker) small{font-size:11px!important}.casual-arcade .table-hud{gap:10px!important}.casual-arcade .table-hud-stats{flex-basis:100%}.casual-arcade .room-shell.room-workspace{gap:18px!important}.casual-arcade .party-playing-heading h1{font-size:28px!important}.dock-panel .dock-panel-header button{min-height:38px}.dock-panel .roster-presence{margin-right:6px}}
+@media(max-width:360px){.casual-arcade .party-game-grid{grid-template-columns:1fr!important}.casual-arcade .selected-game-summary>.party-poster{flex-basis:60px;width:60px!important}.casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker) small{font-size:10px!important}}
+@media(prefers-reduced-motion:reduce){:root[data-theme] :is(button,a,input,select,textarea){transition:none}}
+
+:root[data-theme] .brand-mark{background:#bdb4ff;color:#272044}:root[data-theme] .brand-period{color:#bdb4ff}:root[data-theme] .nav-item>span:last-child:not(:first-child){border-color:var(--border)}
+:root[data-theme] .dock-panel .room-roster-player strong{color:var(--text)!important}:root[data-theme] .dock-panel .room-roster-player small{color:var(--muted)!important}
+
+.dock-panel-tools{max-height:min(220px,calc(100% - 62px));flex-shrink:1;min-height:0}
+/* Override the older oversized library typography while retaining the original art. */
+:root[data-theme] .casual-arcade .party-game-card>div:not(.party-game-art){padding:16px!important;gap:8px!important}
+:root[data-theme] .casual-arcade .party-game-card h2{font-size:18px!important;line-height:1.35!important;margin:0!important}
+:root[data-theme] .casual-arcade .party-game-card p{font-size:12px!important;line-height:1.65!important;flex:0 0 auto!important;margin:0!important}
+:root[data-theme] .casual-arcade .party-game-card small{font-size:9px!important;line-height:1.7!important;letter-spacing:.07em!important}
+:root[data-theme] .casual-arcade .party-game-card footer{font-size:10px!important;line-height:1.5!important;gap:7px!important;margin-top:auto!important}
+:root[data-theme] .casual-arcade :is(.map-picker,.club-map-picker,.table-scene-picker) button[aria-pressed=true]{box-shadow:none!important;outline:0!important}
+:root[data-theme] .casual-arcade .party-setup-grid .button:not(:focus-visible){box-shadow:none!important;outline:0}
+@media(max-width:760px){:root[data-theme] .casual-arcade .party-game-card h2{font-size:16px!important}:root[data-theme] .casual-arcade .party-game-card>div:not(.party-game-art){padding:12px!important}}
+/* Live rooms use the workspace, including very wide monitors. */
+:root[data-theme] .main-shell .main-content:has(.has-party-room){max-width:none!important;width:100%!important;margin-inline:0!important}
+:root[data-theme] .main-shell .casual-arcade.has-party-room{max-width:none!important;width:100%!important;margin-inline:0!important}
+.dock-panel .roster-portrait{position:relative;display:grid;place-items:center}
+.dock-panel .roster-portrait b{font-size:22px!important;line-height:1!important;padding:0 0 5px}
+.dock-panel .roster-portrait i{position:absolute;right:4px;bottom:3px;font-size:7px;line-height:1;font-style:normal;font-weight:800;color:var(--seat-ink)}

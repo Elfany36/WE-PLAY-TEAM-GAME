@@ -1,0 +1,62 @@
+[
+  {
+    "mode": "ladders",
+    "ownColor": "#ff70b5",
+    "otherColor": "#4dbbff",
+    "status": "passed"
+  },
+  {
+    "mode": "memory",
+    "ownColor": "#ff70b5",
+    "otherColor": "#4dbbff",
+    "status": "passed"
+  },
+  {
+    "mode": "uno",
+    "ownColor": "#ff70b5",
+    "otherColor": "#4dbbff",
+    "status": "passed"
+  },
+  {
+    "mode": "chess",
+    "ownColor": "#ff70b5",
+    "otherColor": "#4dbbff",
+    "status": "passed"
+  },
+  {
+    "mode": "dama",
+    "ownColor": "#ff70b5",
+    "otherColor": "#4dbbff",
+    "status": "passed"
+  },
+  {
+    "mode": "scidama",
+    "ownColor": "#ff70b5",
+    "otherColor": "#4dbbff",
+    "status": "passed"
+  },
+  {
+    "mode": "property",
+    "ownColor": "#ff70b5",
+    "otherColor": "#4dbbff",
+    "status": "passed"
+  },
+  {
+    "mode": "pool",
+    "ownColor": "#ff70b5",
+    "otherColor": "#4dbbff",
+    "status": "passed"
+  },
+  {
+    "mode": "phone",
+    "ownColor": "#ff70b5",
+    "otherColor": null,
+    "status": "passed"
+  },
+  {
+    "mode": "blocks",
+    "ownColor": "#ff70b5",
+    "otherColor": null,
+    "status": "passed"
+  }
+]

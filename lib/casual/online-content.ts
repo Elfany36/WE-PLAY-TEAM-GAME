@@ -1,8 +1,12 @@
 import type {CasualSettings} from './engine.ts';
+import {SNAKE_MAP_IDS} from './maps.ts';
+import {CLUB_MAPS} from './party.ts';
+import {TRACKS} from './circuit.ts';
+import {TABLE_SCENE_IDS} from './scenes.ts';
 import {hasTableScene} from './scenes.ts';
 export type OnlineContent={maps:string[];arenas:string[];tracks:string[];scenes:string[]};
-/** Baseline content remains usable while the frontend and room server update separately. */
-export const BASE_ONLINE_CONTENT:OnlineContent={maps:['classic','ruins','crossroads','islands','switchback','neon','citadel','orbit'],arenas:['garden','canyon','neon','harbor','foundry'],tracks:['meadow','coast','night','ridge'],scenes:['garden','midnight','sunset','aurora']};
+/** A health timeout must never remove valid choices from the current release. */
+export const BASE_ONLINE_CONTENT:OnlineContent={maps:[...SNAKE_MAP_IDS],arenas:CLUB_MAPS.map(m=>m.id),tracks:TRACKS.map(t=>t.id),scenes:[...TABLE_SCENE_IDS]};
 export function readOnlineContent(value:unknown):OnlineContent{
  const data=value as {content?:OnlineContent}|null,content=data?.content;
  if(!content||!(['maps','arenas','tracks','scenes'] as const).every(k=>Array.isArray(content[k])&&content[k].length<=64&&content[k].every(id=>typeof id==='string'&&/^[a-z-]{1,24}$/.test(id))))return BASE_ONLINE_CONTENT;

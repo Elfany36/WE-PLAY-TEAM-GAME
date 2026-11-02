@@ -1,3 +1,5 @@
+import {KART_HULL,hullAt,hullCircleContact,hullContact,hullSupport} from './collision.ts';
+import {nearestOnPath} from './path-geometry.ts';
 import type {CasualState} from './engine.ts';
 import {CasualError} from './error.ts';
 import {random,livePlayers,finish} from './shared.ts';
@@ -7,6 +9,7 @@ export type CircuitGame={kind:'circuit';rules?:2;track:string;worldScale?:number
 export const TRACKS=[{id:'meadow',name:'Clover Circuit',road:'#727886',ground:'#7eaf67',sky:'#dcebd7'},{id:'coast',name:'Sunset Harbor',road:'#91786c',ground:'#ddbd86',sky:'#e9c8b9'},{id:'night',name:'Moonlit Motorway',road:'#4d536b',ground:'#233c4c',sky:'#1d2b42'},{id:'ridge',name:'Aurora Ridge',road:'#547384',ground:'#386e66',sky:'#b7e6db'},{id:'cinder',name:'Solar Speedway',road:'#705062',ground:'#d18b54',sky:'#f6c38b'}];
 export const CIRCUIT_SCALE=6.6,ROAD_HALF_WIDTH=96;
 export const KART_RADIUS=39,CIRCUIT_SHOULDER=220;
+export const CIRCUIT_BARRIER={halfLength:20,halfWidth:24} as const,CIRCUIT_BOAT={halfLength:22,halfWidth:30} as const;
 export type CircuitProp={x:number;y:number;angle:number;kind:number;radius:number};
 const sceneryCache=new Map<string,CircuitProp[]>();
 /** Rendering and collision use the same scenery positions and footprints. */
@@ -15,19 +18,23 @@ const solidCache=new Map<string,CircuitProp[]>();
 function circuitSolids(g:CircuitGame){const key=g.track+':'+g.worldScale+':'+g.rules;let props=solidCache.get(key);if(!props){props=[...circuitProps(g),...circuitObstacles(g)];solidCache.set(key,props)}return props}
 const chicaneCache=new Map<string,CircuitProp[]>();
 export function circuitObstacles(g:Pick<CircuitGame,'track'|'worldScale'|'rules'>){if(g.rules!==2)return [];const key=g.track+':'+(g.worldScale||1),known=chicaneCache.get(key);if(known)return known;const points=trackPoints(g.track,192,g.worldScale||1),props=[18,42,66,90,114,138,162,180].map((i,n)=>{const a=points[i],b=points[(i+1)%192],angle=Math.atan2(b.y-a.y,b.x-a.x),side=n%2?1:-1;return{x:a.x-Math.sin(angle)*38*side,y:a.y+Math.cos(angle)*38*side,angle,kind:7,radius:26}});chicaneCache.set(key,props);return props}
-export function constrainKart(g:CircuitGame,d:Driver,now=g.lastTickAt){
- for(const p of circuitSolids(g)){const dx=d.x-p.x,dy=d.y-p.y,min=KART_RADIUS+p.radius;if(Math.abs(dx)>min||Math.abs(dy)>min)continue;const distance=Math.hypot(dx,dy);if(distance<min){const nx=distance?dx/distance:-Math.cos(d.angle),ny=distance?dy/distance:-Math.sin(d.angle);d.x=p.x+nx*min;d.y=p.y+ny*min;if(Math.abs(d.speed)>60)d.hitAt=now;d.speed*=.45;if(d.vx!==undefined){const toward=d.vx*nx+(d.vy||0)*ny;if(toward<0){d.vx-=nx*toward;d.vy=(d.vy||0)-ny*toward}}}}
- const points=trackPoints(g.track,192,g.worldScale||1);let best=Infinity,x=d.x,y=d.y;for(let i=0;i<points.length;i++){const a=points[i],b=points[(i+1)%points.length],dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((d.x-a.x)*dx+(d.y-a.y)*dy)/(dx*dx+dy*dy||1))),px=a.x+dx*t,py=a.y+dy*t,distance=(d.x-px)**2+(d.y-py)**2;if(distance<best){best=distance;x=px;y=py}}if(best>CIRCUIT_SHOULDER*CIRCUIT_SHOULDER){const distance=Math.sqrt(best);d.x=x+(d.x-x)*CIRCUIT_SHOULDER/distance;d.y=y+(d.y-y)*CIRCUIT_SHOULDER/distance;if(Math.abs(d.speed)>60)d.hitAt=now;d.speed*=.6}
+export function circuitPropHull(p:CircuitProp,track:string){return p.kind===7?hullAt(p,CIRCUIT_BARRIER):track==='coast'&&p.kind<3?hullAt(p,CIRCUIT_BOAT):null}
+const solidBuckets=new WeakMap<CircuitProp[],Map<string,CircuitProp[]>>();
+function nearbySolids(g:CircuitGame,x:number,y:number){const solids=circuitSolids(g);let buckets=solidBuckets.get(solids);if(!buckets){buckets=new Map();for(const p of solids){const margin=Math.max(p.radius,40)+55;for(let bx=Math.floor((p.x-margin)/160);bx<=Math.floor((p.x+margin)/160);bx++)for(let by=Math.floor((p.y-margin)/160);by<=Math.floor((p.y+margin)/160);by++){const key=bx+','+by,list=buckets.get(key)||[];list.push(p);buckets.set(key,list)}}solidBuckets.set(solids,buckets)}return buckets.get(Math.floor(x/160)+','+Math.floor(y/160))||[]}
+export function constrainKart(g:CircuitGame,d:Driver,now=g.lastTickAt,pass=0){
+ let moved=false;const h=hullAt(d,KART_HULL);
+ for(const p of nearbySolids(g,d.x,d.y)){h.x=d.x;h.y=d.y;const box=circuitPropHull(p,g.track),contact=box?hullContact(h,box):hullCircleContact(h,p,p.radius);if(!contact)continue;moved=true;let {nx,ny,depth}=contact;
+  // If the shoulder projects us back into scenery, resolve toward the lane.
+  if(pass>0){const road=nearestOnPath(trackPoints(g.track,192,g.worldScale||1),p.x,p.y),length=Math.hypot(road.x-p.x,road.y-p.y);if(length>1){nx=(road.x-p.x)/length;ny=(road.y-p.y)/length;const extent=hullSupport(h,nx,ny)+(box?hullSupport(box,nx,ny):p.radius)+.01;d.x=p.x+nx*extent;d.y=p.y+ny*extent}else{d.x+=nx*(depth+.001);d.y+=ny*(depth+.001)}}else{d.x+=nx*(depth+.001);d.y+=ny*(depth+.001)}if(Math.abs(d.speed)>60)d.hitAt=now;d.speed*=.45;if(d.vx!==undefined){const toward=d.vx*nx+(d.vy||0)*ny;if(toward<0){d.vx-=nx*toward;d.vy=(d.vy||0)-ny*toward}}}
+ const near=nearestOnPath(trackPoints(g.track,192,g.worldScale||1),d.x,d.y);if(near.distance>0){const nx=(d.x-near.x)/near.distance,ny=(d.y-near.y)/near.distance,limit=CIRCUIT_SHOULDER-hullSupport(h,nx,ny);if(near.distance>limit){moved=true;d.x=near.x+nx*limit;d.y=near.y+ny*limit;if(Math.abs(d.speed)>60)d.hitAt=now;d.speed*=.6}}
+ const world=circuitWorld(g),ex=hullSupport(h,1,0),ey=hullSupport(h,0,1);d.x=Math.max(ex,Math.min(world.width-ex,d.x));d.y=Math.max(ey,Math.min(world.height-ey,d.y));
+ if(moved&&pass<3)constrainKart(g,d,now,pass+1);
 }
 export function circuitWorld(g:Pick<CircuitGame,'worldScale'>){const scale=g.worldScale||1;return {width:2000*scale,height:1400*scale}}
 export function checkpointCount(g:Pick<CircuitGame,'worldScale'>){return g.worldScale?96:16}
 const pointCache=new Map<string,{x:number;y:number}[]>();
 export function trackPoints(track:string,count=192,scale=1){const key=track+':'+count+':'+scale,cached=pointCache.get(key);if(cached)return cached;const points=Array.from({length:count},(_,i)=>{const a=i/count*Math.PI*2-Math.PI/2;const k=track==='cinder'?1+.09*Math.sin(a*5)+.04*Math.cos(a*2):track==='coast'?1+.16*Math.sin(a*3):track==='night'?1+.14*Math.cos(a*4):track==='ridge'?1+.10*Math.sin(a*3)+.035*Math.cos(a*5):1+.10*Math.sin(a*2);return{x:(1000+Math.cos(a)*720*k)*scale,y:(700+Math.sin(a)*470*k)*scale}});pointCache.set(key,points);return points}
-export function distanceToTrack(track:string,x:number,y:number,scale=1){
- const points=trackPoints(track,192,scale);let best=Infinity;
- for(let i=0;i<points.length;i++){const a=points[i],b=points[(i+1)%points.length],dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((x-a.x)*dx+(y-a.y)*dy)/(dx*dx+dy*dy||1))),d=(x-a.x-dx*t)**2+(y-a.y-dy*t)**2;if(d<best)best=d}
- return Math.sqrt(best);
-}
+export function distanceToTrack(track:string,x:number,y:number,scale=1){return nearestOnPath(trackPoints(track,192,scale),x,y).distance}
 export function trackLength(track:string,scale=CIRCUIT_SCALE){const p=trackPoints(track,192,scale);return p.reduce((n,a,i)=>n+Math.hypot(a.x-p[(i+1)%p.length].x,a.y-p[(i+1)%p.length].y),0)}
 export function circuitCheckpoint(g:CircuitGame,index:number){const count=checkpointCount(g),p=trackPoints(g.track,count,g.worldScale||1);return p[(index+count)%count]}
 /** The same checkpoint recovery is available to players and stalled computer drivers. */
@@ -51,9 +58,9 @@ if(input.drift&&Math.abs(input.steer)>.25&&d.speed>140)d.drifting+=dt;else if(d.
  for(const box of g.boxes)if(box.readyAt<=now&&!d.item&&Math.hypot(d.x-box.x,d.y-box.y)<((d.magnetUntil||0)>now?180:60)){d.item=(g.rules===2?(['boost','oil','spark','shield','pulse','magnet'] as const):(['boost','oil','spark','shield'] as const))[Math.floor(randomValue()*(g.rules===2?6:4))%(g.rules===2?6:4)];box.readyAt=now+4500}
   if(d.bot&&g.rules===2){if(d.botCheckpoint!==d.checkpoint){d.botCheckpoint=d.checkpoint;d.botProgressAt=now}if(now-(d.botProgressAt??now)>4500&&Math.abs(d.speed)<75){recoverKart(g,d,now);d.botProgressAt=now}}
  }
- for(let i=0;i<drivers.length;i++)for(let j=i+1;j<drivers.length;j++){const a=drivers[i],b=drivers[j],distance=Math.hypot(a.x-b.x,a.y-b.y);if(distance<KART_RADIUS*2){const push=(KART_RADIUS*2-distance)/2,dx=distance?(a.x-b.x)/distance:Math.cos((i+j)*2.4),dy=distance?(a.y-b.y)/distance:Math.sin((i+j)*2.4);a.x+=dx*push;a.y+=dy*push;b.x-=dx*push;b.y-=dy*push;if(g.rules===2){const avx=a.vx??Math.cos(a.angle)*a.speed,avy=a.vy??Math.sin(a.angle)*a.speed,bvx=b.vx??Math.cos(b.angle)*b.speed,bvy=b.vy??Math.sin(b.angle)*b.speed,closing=(avx-bvx)*dx+(avy-bvy)*dy;if(closing<0){const impulse=-closing*.6;a.vx=avx+dx*impulse;a.vy=avy+dy*impulse;b.vx=bvx-dx*impulse;b.vy=bvy-dy*impulse;a.speed=a.vx*Math.cos(a.angle)+a.vy*Math.sin(a.angle);b.speed=b.vx*Math.cos(b.angle)+b.vy*Math.sin(b.angle);if(closing< -30)a.hitAt=b.hitAt=now}}constrainKart(g,a,now);constrainKart(g,b,now)}}
- for(const shot of g.shots){shot.x+=shot.vx*dt;shot.y+=shot.vy*dt;for(const d of drivers)if(d.id!==shot.owner&&d.finishedAt===null&&Math.hypot(d.x-shot.x,d.y-shot.y)<48){if(d.shieldUntil<now){d.stunnedUntil=now+1100;d.speed*=.35}shot.until=0;break}}
- for(const h of g.hazards)for(const d of drivers)if(d.id!==h.owner&&d.finishedAt===null&&Math.hypot(d.x-h.x,d.y-h.y)<58){if(d.shieldUntil<now){d.stunnedUntil=now+1300;d.speed*=.25}h.until=0;break}
+ for(let i=0;i<drivers.length;i++)for(let j=i+1;j<drivers.length;j++){const a=drivers[i],b=drivers[j];if(a.finishedAt!==null||b.finishedAt!==null)continue;const hit=hullContact(hullAt(a,KART_HULL),hullAt(b,KART_HULL));if(!hit)continue;const {nx,ny,depth}=hit,push=(depth+.001)/2;a.x+=nx*push;a.y+=ny*push;b.x-=nx*push;b.y-=ny*push;if(g.rules===2){const avx=a.vx??Math.cos(a.angle)*a.speed,avy=a.vy??Math.sin(a.angle)*a.speed,bvx=b.vx??Math.cos(b.angle)*b.speed,bvy=b.vy??Math.sin(b.angle)*b.speed,closing=(avx-bvx)*nx+(avy-bvy)*ny;if(closing<0){const impulse=-closing*.6;a.vx=avx+nx*impulse;a.vy=avy+ny*impulse;b.vx=bvx-nx*impulse;b.vy=bvy-ny*impulse;a.speed=a.vx*Math.cos(a.angle)+a.vy*Math.sin(a.angle);b.speed=b.vx*Math.cos(b.angle)+b.vy*Math.sin(b.angle);if(closing< -30)a.hitAt=b.hitAt=now}}constrainKart(g,a,now);constrainKart(g,b,now)}
+ for(const shot of g.shots){shot.x+=shot.vx*dt;shot.y+=shot.vy*dt;for(const d of drivers)if(d.id!==shot.owner&&d.finishedAt===null&&hullCircleContact(hullAt(d,KART_HULL),shot,9)){if(d.shieldUntil<now){d.stunnedUntil=now+1100;d.speed*=.35}shot.until=0;break}}
+ for(const h of g.hazards)for(const d of drivers)if(d.id!==h.owner&&d.finishedAt===null&&hullCircleContact(hullAt(d,KART_HULL),h,19)){if(d.shieldUntil<now){d.stunnedUntil=now+1300;d.speed*=.25}h.until=0;break}
  g.hazards=g.hazards.filter(x=>x.until>now);g.shots=g.shots.filter(x=>x.until>now);g.tick++;
 }
 export function advanceCircuit(s:CasualState,now:number){const g=s.game as CircuitGame;if(now<g.startAt)return false;if(now-g.lastTickAt>8000){s.phase='paused';g.pausedAt=now;s.pauseReason='The room stopped receiving updates. Resume the race when everyone is back.';return true}let changed=false;const ids=livePlayers(s).map(p=>p.id);while(g.lastTickAt+50<=Math.min(now,g.deadline)){g.lastTickAt+=50;stepCircuit(g,ids,.05,g.lastTickAt,()=>random(s));changed=true}if(now>=g.deadline||g.drivers.filter(d=>ids.includes(d.id)).every(d=>d.finishedAt!==null)){const rank=circuitRank(g).filter(d=>ids.includes(d.id));finish(s,rank.length?[rank[0].id]:[],'Race complete. Finish time, then validated checkpoint progress, determines placing.',now);changed=true}return changed}

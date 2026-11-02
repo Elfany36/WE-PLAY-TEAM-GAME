@@ -1,0 +1,1053 @@
+[
+  {
+    "mode": "uno",
+    "scene": "garden",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "uno",
+    "scene": "midnight",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "uno",
+    "scene": "sunset",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "uno",
+    "scene": "aurora",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "uno",
+    "scene": "cobalt",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "uno",
+    "scene": "cherry",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "uno",
+    "scene": "lagoon",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "uno",
+    "scene": "royal",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "ladders",
+    "scene": "garden",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "ladders",
+    "scene": "midnight",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "ladders",
+    "scene": "sunset",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "ladders",
+    "scene": "aurora",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "ladders",
+    "scene": "cobalt",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "ladders",
+    "scene": "cherry",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "ladders",
+    "scene": "lagoon",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "ladders",
+    "scene": "royal",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "memory",
+    "scene": "garden",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "memory",
+    "scene": "midnight",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "memory",
+    "scene": "sunset",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "memory",
+    "scene": "aurora",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "memory",
+    "scene": "cobalt",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "memory",
+    "scene": "cherry",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "memory",
+    "scene": "lagoon",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "memory",
+    "scene": "royal",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "classic",
+    "snakeSize": 32,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "classic",
+    "snakeSize": 48,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "classic",
+    "snakeSize": 64,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "ruins",
+    "snakeSize": 32,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "ruins",
+    "snakeSize": 48,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "ruins",
+    "snakeSize": 64,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "crossroads",
+    "snakeSize": 32,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "crossroads",
+    "snakeSize": 48,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "crossroads",
+    "snakeSize": 64,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "islands",
+    "snakeSize": 32,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "islands",
+    "snakeSize": 48,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "islands",
+    "snakeSize": 64,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "switchback",
+    "snakeSize": 32,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "switchback",
+    "snakeSize": 48,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "switchback",
+    "snakeSize": 64,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "neon",
+    "snakeSize": 32,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "neon",
+    "snakeSize": 48,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "neon",
+    "snakeSize": 64,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "citadel",
+    "snakeSize": 32,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "citadel",
+    "snakeSize": 48,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "citadel",
+    "snakeSize": 64,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "orbit",
+    "snakeSize": 32,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "orbit",
+    "snakeSize": 48,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "orbit",
+    "snakeSize": 64,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "sunspire",
+    "snakeSize": 32,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "sunspire",
+    "snakeSize": 48,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "sunspire",
+    "snakeSize": 64,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "tidepool",
+    "snakeSize": 32,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "tidepool",
+    "snakeSize": 48,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "tidepool",
+    "snakeSize": 64,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "lotus",
+    "snakeSize": 32,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "lotus",
+    "snakeSize": 48,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "lotus",
+    "snakeSize": 64,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "frost",
+    "snakeSize": 32,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "frost",
+    "snakeSize": 48,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "snake",
+    "map": "frost",
+    "snakeSize": 64,
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "property",
+    "scene": "garden",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "property",
+    "scene": "midnight",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "property",
+    "scene": "sunset",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "property",
+    "scene": "aurora",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "property",
+    "scene": "cobalt",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "property",
+    "scene": "cherry",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "property",
+    "scene": "lagoon",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "property",
+    "scene": "royal",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "phone",
+    "scene": "garden",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "phone",
+    "scene": "midnight",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "phone",
+    "scene": "sunset",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "phone",
+    "scene": "aurora",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "phone",
+    "scene": "cobalt",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "phone",
+    "scene": "cherry",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "phone",
+    "scene": "lagoon",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "phone",
+    "scene": "royal",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "circuit",
+    "track": "meadow",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "circuit",
+    "track": "coast",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "circuit",
+    "track": "night",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "circuit",
+    "track": "ridge",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "circuit",
+    "track": "cinder",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "chess",
+    "scene": "garden",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "chess",
+    "scene": "midnight",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "chess",
+    "scene": "sunset",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "chess",
+    "scene": "aurora",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "chess",
+    "scene": "cobalt",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "chess",
+    "scene": "cherry",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "chess",
+    "scene": "lagoon",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "chess",
+    "scene": "royal",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "dama",
+    "scene": "garden",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "dama",
+    "scene": "midnight",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "dama",
+    "scene": "sunset",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "dama",
+    "scene": "aurora",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "dama",
+    "scene": "cobalt",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "dama",
+    "scene": "cherry",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "dama",
+    "scene": "lagoon",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "dama",
+    "scene": "royal",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "scidama",
+    "scene": "garden",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "scidama",
+    "scene": "midnight",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "scidama",
+    "scene": "sunset",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "scidama",
+    "scene": "aurora",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "scidama",
+    "scene": "cobalt",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "scidama",
+    "scene": "cherry",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "scidama",
+    "scene": "lagoon",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "scidama",
+    "scene": "royal",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "sumo",
+    "arena": "garden",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "sumo",
+    "arena": "canyon",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "sumo",
+    "arena": "neon",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "sumo",
+    "arena": "harbor",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "sumo",
+    "arena": "foundry",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "sumo",
+    "arena": "glacier",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "tanks",
+    "arena": "garden",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "tanks",
+    "arena": "canyon",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "tanks",
+    "arena": "neon",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "tanks",
+    "arena": "harbor",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "tanks",
+    "arena": "foundry",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "tanks",
+    "arena": "glacier",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "pong",
+    "arena": "garden",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "pong",
+    "arena": "canyon",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "pong",
+    "arena": "neon",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "pong",
+    "arena": "harbor",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "pong",
+    "arena": "foundry",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "pong",
+    "arena": "glacier",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "marble",
+    "arena": "garden",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "marble",
+    "arena": "canyon",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "marble",
+    "arena": "neon",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "marble",
+    "arena": "harbor",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "marble",
+    "arena": "foundry",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "marble",
+    "arena": "glacier",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "blocks",
+    "scene": "garden",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "blocks",
+    "scene": "midnight",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "blocks",
+    "scene": "sunset",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "blocks",
+    "scene": "aurora",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "blocks",
+    "scene": "cobalt",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "blocks",
+    "scene": "cherry",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "blocks",
+    "scene": "lagoon",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "blocks",
+    "scene": "royal",
+    "online": true,
+    "local": true,
+    "humans": 1
+  },
+  {
+    "mode": "pool",
+    "scene": "garden",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "pool",
+    "scene": "midnight",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "pool",
+    "scene": "sunset",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "pool",
+    "scene": "aurora",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "pool",
+    "scene": "cobalt",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "pool",
+    "scene": "cherry",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "pool",
+    "scene": "lagoon",
+    "online": true,
+    "local": true,
+    "humans": 2
+  },
+  {
+    "mode": "pool",
+    "scene": "royal",
+    "online": true,
+    "local": true,
+    "humans": 2
+  }
+]

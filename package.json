@@ -16,8 +16,8 @@
     "build:pages": "node scripts/build-pages.mjs",
     "test": "node --experimental-strip-types --test --test-isolation=none tests/*.test.ts",
     "check": "tsc --noEmit",
-    "prebuild": "node --experimental-strip-types scripts/generate-question-facts.mjs",
-    "prebuild:pages": "node --experimental-strip-types scripts/generate-question-facts.mjs",
+    "prebuild": "node --experimental-strip-types scripts/generate-question-facts.mjs && node --experimental-strip-types scripts/generate-map-previews.mjs",
+    "prebuild:pages": "node --experimental-strip-types scripts/generate-question-facts.mjs && node --experimental-strip-types scripts/generate-map-previews.mjs",
     "test:non-relay": "node scripts/test-non-relay.mjs",
     "postbuild": "node scripts/retain-client-assets.mjs dist/client",
     "postbuild:pages": "node scripts/retain-client-assets.mjs dist-pages"

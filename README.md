@@ -142,3 +142,8 @@ See [v15 verification](docs/verification/game-studio-v15.md) for 400 passing tes
 The latest GitHub updates are integrated with complete Snake ribbons, safer online turn deadlines, bounded route-finding bots, a dedicated score panel and independent chat. Pool has a larger responsive power control, gentler low shots and clearer shot planning for bots. Website spacing, hand controls, tank health and Playground tabs are corrected; recent room activity is removed. Hidden chat loads on demand, and live receipts avoid redundant world serialization.
 
 See [v18 verification](docs/verification/arcade-v18.md) for 435 passing tests, all-game desktop/phone checks, 18 delayed Snake turns and controlled multiplayer measurements. Terraria gameplay and its original viewport are preserved.
+
+
+### Arcade v19
+
+The slate and indigo interface restores the illustrated game library and adds flat map previews, clearer room setup, visible dockable player/chat panels, player-colored turn feedback, shared chassis collision hulls, and indexed simulation geometry. See [v19 verification](docs/verification/arcade-v19.md) for 445 tests, 145 local/online catalog combinations, responsive layouts and measured performance.
