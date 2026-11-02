@@ -1,0 +1,58 @@
+[
+  {
+    "mode": "sumo",
+    "format": "bracket",
+    "bots": 1,
+    "ringVisible": false,
+    "status": "passed"
+  },
+  {
+    "mode": "sumo",
+    "format": "classic",
+    "bots": 1,
+    "ringVisible": false,
+    "status": "passed"
+  },
+  {
+    "mode": "sumo",
+    "format": "bracket",
+    "bots": 3,
+    "ringVisible": false,
+    "status": "passed"
+  },
+  {
+    "mode": "sumo",
+    "format": "classic",
+    "bots": 3,
+    "ringVisible": true,
+    "status": "passed"
+  },
+  {
+    "mode": "circuit",
+    "format": null,
+    "bots": 1,
+    "ringVisible": false,
+    "status": "passed"
+  },
+  {
+    "mode": "tanks",
+    "format": null,
+    "bots": 1,
+    "ringVisible": true,
+    "status": "passed"
+  },
+  {
+    "mode": "marble",
+    "format": null,
+    "bots": 1,
+    "ringVisible": true,
+    "status": "passed"
+  },
+  {
+    "mode": "pong",
+    "format": null,
+    "bots": 1,
+    "ringVisible": true,
+    "status": "passed"
+  }
+]
