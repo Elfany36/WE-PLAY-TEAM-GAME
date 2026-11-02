@@ -1,0 +1,14 @@
+[
+  {
+    "name": "quiz question, unchanged index",
+    "iterations": 1000,
+    "medianMs": 0.06257888400000002,
+    "digest": "9366347f722772c102148fb03b7e3006f3ab215d5feb85b7919de92e15851070"
+  },
+  {
+    "name": "quiz private room projection",
+    "iterations": 1000,
+    "medianMs": 0.08797647299999994,
+    "digest": "5b24d98c4ab7afcec15b2d880faaa39e5b95d5e65038971c6e5ef958df8853e6"
+  }
+]

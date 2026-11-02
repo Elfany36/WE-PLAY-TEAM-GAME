@@ -19,6 +19,7 @@ function newRoomCode(){let code='';for(let i=0;i<8;i++)code+=ALPHABET[crypto.get
  * (local tooling) the original D1 path is used.
  */
 export async function routeArena(req:Request,env:RoomEnv,keepAlive?:(task:Promise<unknown>)=>void,options:{legacyImport?:boolean}={}):Promise<Response>{
+ if(!['GET','POST','OPTIONS'].includes(req.method))return failure(req,new ArenaError('Method not allowed.',405));
  let request=req;
  const direct=(db?:D1Database)=>{const api=createArenaAPI(db,keepAlive);return request.method==='GET'?api.GET(request):request.method==='POST'?api.POST(request):api.OPTIONS(request)};
  const rooms=env.ARENA_ROOMS;
@@ -35,7 +36,9 @@ export async function routeArena(req:Request,env:RoomEnv,keepAlive?:(task:Promis
  if(!code)return direct();
  const headers=new Headers(req.headers);headers.delete('X-Room-Code');headers.set('X-Room-Key',code);headers.set('X-Room-Legacy',options.legacyImport===false?'deny':'allow');if(create)headers.set('X-Room-Code',code);
  // Rebuilt from parts: the framework's request object is not a native Request.
- const res=await roomStub(rooms,'arena:'+code).fetch(new Request(req.url,{method:req.method,headers,body:req.method==='POST'?text:undefined}));
+ let res:Response;
+ try{res=await roomStub(rooms,'arena:'+code).fetch(new Request(req.url,{method:req.method,headers,body:req.method==='POST'?text:undefined}))}
+ catch{return failure(req,new ArenaError('The room service is reconnecting. Please try again.',503))}
  if(res.status===101&&res.webSocket)return new Response(null,{status:101,headers:new Headers(res.headers),webSocket:res.webSocket});
  // Stub responses have immutable headers, which the framework still edits.
  return new Response(res.body,{status:res.status,statusText:res.statusText,headers:new Headers(res.headers)});

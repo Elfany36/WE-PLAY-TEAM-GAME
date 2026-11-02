@@ -1,0 +1,348 @@
+[
+  {
+    "mode": "snake",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 23,
+    "liveRevisions": 0,
+    "errors": [],
+    "fullscreen": {
+      "active": true,
+      "overflow": 0,
+      "hiddenControls": []
+    }
+  },
+  {
+    "mode": "sumo",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 20,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "tanks",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 17,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "pong",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 12,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "marble",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 15,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "blocks",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 27,
+    "liveRevisions": 0,
+    "errors": [],
+    "fullscreen": {
+      "active": true,
+      "overflow": 0,
+      "hiddenControls": []
+    }
+  },
+  {
+    "mode": "circuit",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 22,
+    "liveRevisions": 0,
+    "errors": [],
+    "fullscreen": {
+      "active": true,
+      "overflow": 0,
+      "hiddenControls": []
+    }
+  },
+  {
+    "mode": "terra",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 22,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "pool",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "uno",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 3,
+    "liveRevisions": 0,
+    "errors": [],
+    "fullscreen": {
+      "active": true,
+      "overflow": 0,
+      "hiddenControls": []
+    }
+  },
+  {
+    "mode": "ladders",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 3,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "memory",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "property",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 3,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "chess",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "dama",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "scidama",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "phone",
+    "width": 1440,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 0,
+    "liveRevisions": 4,
+    "errors": []
+  },
+  {
+    "mode": "snake",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 12,
+    "liveRevisions": 0,
+    "errors": [],
+    "fullscreen": {
+      "active": true,
+      "overflow": 0,
+      "hiddenControls": []
+    }
+  },
+  {
+    "mode": "sumo",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 13,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "tanks",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 11,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "pong",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 13,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "marble",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 13,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "blocks",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 26,
+    "liveRevisions": 0,
+    "errors": [],
+    "fullscreen": {
+      "active": true,
+      "overflow": 0,
+      "hiddenControls": []
+    }
+  },
+  {
+    "mode": "circuit",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 21,
+    "liveRevisions": 0,
+    "errors": [],
+    "fullscreen": {
+      "active": true,
+      "overflow": 0,
+      "hiddenControls": []
+    }
+  },
+  {
+    "mode": "terra",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 21,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "pool",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "uno",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 5,
+    "liveRevisions": 0,
+    "errors": [],
+    "fullscreen": {
+      "active": true,
+      "overflow": 0,
+      "hiddenControls": []
+    }
+  },
+  {
+    "mode": "ladders",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "memory",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "property",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "chess",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 3,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "dama",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "scidama",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 2,
+    "liveRevisions": 0,
+    "errors": []
+  },
+  {
+    "mode": "phone",
+    "width": 390,
+    "pageOverflow": 0,
+    "cueOverlapsCanvas": false,
+    "liveStates": 0,
+    "liveRevisions": 5,
+    "errors": []
+  }
+]

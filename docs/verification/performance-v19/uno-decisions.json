@@ -1,0 +1,20 @@
+[
+  {
+    "scenario": "large-flip-hand",
+    "hidden": [],
+    "count": 40,
+    "overlaps": []
+  },
+  {
+    "scenario": "choose-color",
+    "hidden": [],
+    "count": 7,
+    "overlaps": []
+  },
+  {
+    "scenario": "accept-penalty",
+    "hidden": [],
+    "count": 7,
+    "overlaps": []
+  }
+]

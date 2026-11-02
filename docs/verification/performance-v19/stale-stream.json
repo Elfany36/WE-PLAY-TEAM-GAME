@@ -1,0 +1,8 @@
+{
+  "healthyHttpGets": 1,
+  "missingStateFallbackGets": 3,
+  "firstFallbackMs": 946,
+  "worldTickContinued": true,
+  "streamResumed": true,
+  "errors": []
+}

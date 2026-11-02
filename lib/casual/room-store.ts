@@ -5,6 +5,7 @@ type Storage={get<T>(key:string):Promise<T|undefined>;put(key:string,value:unkno
 /** Local authority adapter. Failed durable writes never change the cached revision. */
 export class RoomStore implements CasualDatabase{
  private row:StoredRoom|null=null;
+ private inspected:unknown;
  private migration:Promise<void>|null=null;
  readonly roomScheduling='durable-object' as const;
  private storage:Storage;
@@ -12,8 +13,10 @@ export class RoomStore implements CasualDatabase{
  private table:'casual_rooms'|'arena_rooms';
  constructor(storage:Storage,onCommit?:()=>void,table:'casual_rooms'|'arena_rooms'='casual_rooms'){this.storage=storage;this.onCommit=onCommit;this.table=table}
  snapshot(){return this.row?{...this.row}:null}
- private committed(next:StoredRoom){this.row=next;this.onCommit?.()}
- async load(){this.row=(await this.storage.get<StoredRoom>('row'))??null}
+ /** Disposable read-only view for scheduling/authentication/fanout. Mutations read their own copy. */
+ inspectState<T>():Readonly<T>|null{if(!this.row)return null;if(this.inspected===undefined)this.inspected=JSON.parse(this.row.state);return this.inspected as Readonly<T>}
+ private committed(next:StoredRoom){this.row=next;this.inspected=undefined;this.onCommit?.()}
+ async load(){this.row=(await this.storage.get<StoredRoom>('row'))??null;this.inspected=undefined}
  async importLegacy(db:CasualDatabase|undefined,code:string){
   if(this.row||!db)return;
   this.migration??=(async()=>{const old=await db.prepare('SELECT state,revision,created_at FROM '+this.table+' WHERE code=?').bind(code).first<Omit<StoredRoom,'code'>>();if(!old||Date.now()-old.created_at>ROOM_TTL)return;const next={code,...old};await this.storage.setAlarm(next.created_at+ROOM_TTL+60_000);await this.storage.put('row',next);this.committed(next)})();
@@ -24,8 +27,8 @@ export class RoomStore implements CasualDatabase{
  private async run(sql:string,a:any[]){const r=this.row;
   if(sql.startsWith('UPDATE '+this.table+' SET state=?, revision=revision+1 WHERE code=? AND revision=?')){if(!r||r.code!==a[1]||r.revision!==a[2])return{meta:{changes:0}};const next={...r,state:a[0],revision:r.revision+1};await this.storage.put('row',next);this.committed(next);return{meta:{changes:1}}}
   if(sql.startsWith('INSERT INTO '+this.table)){if(r)throw new Error('UNIQUE constraint failed: casual_rooms.code');const next={code:a[0],state:a[1],revision:0,created_at:a[2]};await this.storage.setAlarm(next.created_at+ROOM_TTL+60_000);await this.storage.put('row',next);this.committed(next);return{meta:{changes:1}}}
-  if(sql.startsWith('DELETE FROM '+this.table+' WHERE created_at < ?')){if(r&&r.created_at<a[0]){await this.storage.deleteAll();this.row=null;return{meta:{changes:1}}}return{meta:{changes:0}}}
+  if(sql.startsWith('DELETE FROM '+this.table+' WHERE created_at < ?')){if(r&&r.created_at<a[0]){await this.storage.deleteAll();this.row=null;this.inspected=undefined;return{meta:{changes:1}}}return{meta:{changes:0}}}
   throw new Error('Unsupported room statement.');
  }
- async expire(now:number){if(this.row&&now-this.row.created_at<ROOM_TTL){await this.storage.setAlarm(this.row.created_at+ROOM_TTL+60_000);return}await this.storage.deleteAll();this.row=null}
+ async expire(now:number){if(this.row&&now-this.row.created_at<ROOM_TTL){await this.storage.setAlarm(this.row.created_at+ROOM_TTL+60_000);return}await this.storage.deleteAll();this.row=null;this.inspected=undefined}
 }

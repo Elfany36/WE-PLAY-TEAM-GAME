@@ -1,0 +1,22 @@
+[
+  {
+    "width": 1440,
+    "ms": 490,
+    "ack": "dropped-receipt-once",
+    "shown": 1,
+    "turn": 1,
+    "lostReceipt": 1,
+    "httpReplays": 1,
+    "errors": []
+  },
+  {
+    "width": 390,
+    "ms": 471,
+    "ack": "dropped-receipt-once",
+    "shown": 1,
+    "turn": 1,
+    "lostReceipt": 1,
+    "httpReplays": 1,
+    "errors": []
+  }
+]
