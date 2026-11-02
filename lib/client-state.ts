@@ -1,3 +1,4 @@
+import {WEBSITE_THEME_IDS} from './website-themes.ts';
 export type Progress = {name:string;done:string[];days:string[]};
 export const emptyProgress: Progress = {name:'Builder',done:[],days:[]};
 function validDay(value:string){if(!/^\d{4}-\d{2}-\d{2}$/.test(value))return false;const parsed=new Date(value+'T00:00:00Z');return Number.isFinite(parsed.valueOf())&&parsed.toISOString().slice(0,10)===value;}
@@ -10,4 +11,4 @@ export function writeStored(key:string,value:unknown,session=false):boolean {try
 export function removeStored(key:string,session=false){try{(session?sessionStorage:localStorage).removeItem(key)}catch{}}
 export function localDate(date=new Date()){return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;}
 export function progressXP(p:Progress){return [...new Set(p.done)].reduce((total,id)=>total+(/^(?:html|css)-(?:[1-9]|1[0-2])$/.test(id)?100:/^challenge-[0-8]$/.test(id)?150:/^practice-(?:[0-9]|1[0-5])$/.test(id)?50:id==='arena-practice'||id==='arena-win'?100:0),0)}
-export const themeInitScript="try{var t=JSON.parse(localStorage.getItem('markup-theme')||'null');document.documentElement.dataset.theme=t==='light'||t==='dark'?t:(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){document.documentElement.dataset.theme='light'}";
+export const themeInitScript="try{var t=JSON.parse(localStorage.getItem('markup-theme')||'null'),p=JSON.parse(localStorage.getItem('markup-site-theme')||'null');document.documentElement.dataset.theme=t==='light'||t==='dark'?t:(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.dataset.siteTheme="+JSON.stringify(WEBSITE_THEME_IDS)+".includes(p)?p:'indigo'}catch(e){document.documentElement.dataset.theme='light';document.documentElement.dataset.siteTheme='indigo'}";

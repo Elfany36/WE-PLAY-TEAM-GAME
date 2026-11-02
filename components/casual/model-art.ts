@@ -22,3 +22,14 @@ export function paintKartBody(c:CanvasRenderingContext2D,color:Color){
   for(const x of [-11,11]){rect(b,x-3,-32,6,3,1,'#fff6b3');rect(b,x-3,22,6,3,1,'#ff5b85')}
  }),-52,-64);
 }
+
+/** The bumper moves, but its lighting and bevel do not need rebuilding each frame. */
+export function paintMarbleBumper(c:CanvasRenderingContext2D,x:number,y:number){
+ c.drawImage(sprite('marble-bumper',b=>{
+  rect(b,-19,-14,38,36,9,'#102a4055');
+  b.fillStyle='#183544';b.beginPath();b.arc(0,0,20,0,Math.PI*2);b.fill();
+  const metal=b.createRadialGradient(-6,-8,2,0,0,20);metal.addColorStop(0,'#fff1bd');metal.addColorStop(.55,'#e4ab62');metal.addColorStop(1,'#ac684c');b.fillStyle=metal;b.beginPath();b.arc(0,0,17,0,Math.PI*2);b.fill();
+  b.strokeStyle='#ffe6aa';b.lineWidth=1.5;b.stroke();b.strokeStyle='#8c503e';b.lineWidth=3;b.beginPath();b.moveTo(-9,-5);b.lineTo(9,5);b.stroke();
+  for(const a of [0,Math.PI/2,Math.PI,Math.PI*1.5]){b.fillStyle='#e7eee3';b.beginPath();b.arc(Math.cos(a)*13,Math.sin(a)*13,1.5,0,Math.PI*2);b.fill()}
+ }),x-52,y-64);
+}

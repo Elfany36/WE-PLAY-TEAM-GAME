@@ -5,6 +5,8 @@ import type {CasualPublic} from '../../lib/casual/engine';
 import {Crown,BrainCircuit,Wifi,WifiOff,MessageCircle} from 'lucide-react';
 import {nameInitial} from '../../lib/text-presentation';
 import {ARCADE_COLORS} from '../../lib/casual/arcade-colors';
+import MatchBoard from './MatchBoard';
+import {matchStat} from '../../lib/casual/match-stats';
 import GameMeter from './GameMeter';
 import PoolBallBadge from './PoolBallBadge';
 import {casualCapacity} from '../../lib/casual/engine';
@@ -19,7 +21,7 @@ type Props={room:CasualPublic;guide?:ReactNode;busy:boolean;local:boolean;connec
 function RoomSidebar({room,busy,local,connected,onAction,onSend,guide}:Props){
  const turnBased=['memory','ladders','uno','property','pool','chess','dama','scidama'].includes(room.mode);
  return <><DockPanel id="players" title="Players & scores" icon={<Crown size={18}/>}>
-  <div className="roster-capacity">{room.players.filter(p=>!p.retired).length} / {casualCapacity(room.mode)} seats</div>
+  {room.mode!=='terra'?<MatchBoard embedded room={room} open setOpen={()=>{}} busy={busy} local={local} onAction={onAction}/>:<><div className="roster-capacity">{room.players.filter(p=>!p.retired).length} / {casualCapacity(room.mode)} seats</div>
    <div className="room-roster-list">{casualLeaderboard(room).map((p,index)=>{
     const actor=room.mode==='tanks'?room.game?.actors?.find((a:any)=>a.id===p.id):null;
     const pool=room.mode==='pool'?room.game:null;
@@ -40,10 +42,10 @@ function RoomSidebar({room,busy,local,connected,onAction,onSend,guide}:Props){
     </div>;
    })}</div>
    {room.phase==='lobby'&&!local&&<button className="button outline roster-ready" disabled={busy} onClick={()=>onAction('ready')}>{room.players.find(p=>p.isYou)?.ready?'Unready':'Ready to play'}</button>}
-  {guide}</DockPanel>
+  </>}{guide}</DockPanel>
   <DockPanel id="chat" title="Chat" icon={<MessageCircle size={18}/>}><Suspense fallback={<p className="chat-loading" role="status">Opening room chat…</p>}><GameChat embedded docked roomCode={room.code} resetKey={room.mode+':'+room.chatEpoch} youId={room.youId} messages={(room.chat||[]) as ChatMessage[]} local={local} disabled={!local&&!connected} onSend={onSend}/></Suspense></DockPanel>
  </>;
 }
 
-function rosterKey(room:CasualPublic){const g=room.game;return JSON.stringify([room.code,room.mode,room.phase,room.youId,room.isHost,room.chatEpoch,room.botThinking?.playerId,casualLeaderboard(room).map(p=>[p.id,p.name,p.color,p.ready,p.retired,p.online,p.canRemove,p.bot,p.isHost,p.isYou,playerStanding(room,p.id),g?.currentId===p.id,room.mode==='tanks'?g?.actors?.filter((a:any)=>a.id===p.id).map((a:any)=>[a.alive,a.hp,a.armor,a.ammo]):null,room.mode==='pool'?g?.balls?.filter((b:any)=>!b.pocketed).map((b:any)=>b.number):null,room.mode==='uno'?g?.opponentBacks?.[p.id]:null])])}
+function rosterKey(room:CasualPublic){const g=room.game;return JSON.stringify([room.code,room.round,room.mode,room.phase,room.youId,room.isHost,room.chatEpoch,room.botThinking?.playerId,casualLeaderboard(room).map(p=>[p.id,p.name,p.color,p.ready,p.retired,p.online,p.canRemove,p.bot,p.isHost,p.isYou,playerStanding(room,p.id),room.mode!=='terra'?matchStat(room,p.id):null,g?.currentId===p.id,room.mode==='tanks'?g?.actors?.filter((a:any)=>a.id===p.id).map((a:any)=>[a.alive,a.hp,a.armor,a.ammo]):null,room.mode==='pool'?g?.balls?.filter((b:any)=>!b.pocketed).map((b:any)=>b.number):null,room.mode==='uno'?g?.opponentBacks?.[p.id]:null])])}
 export default memo(RoomSidebar,(a,b)=>a.busy===b.busy&&a.local===b.local&&a.connected===b.connected&&a.guide===b.guide&&a.onAction===b.onAction&&a.onSend===b.onSend&&a.room.chat?.length===b.room.chat?.length&&a.room.chat?.at(-1)?.clientId===b.room.chat?.at(-1)?.clientId&&rosterKey(a.room)===rosterKey(b.room));

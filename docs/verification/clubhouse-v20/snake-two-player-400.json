@@ -1,0 +1,51 @@
+{
+  "rtt": 400,
+  "jitter": 80,
+  "turns": 16,
+  "results": [
+    {
+      "seat": "1be32676-9350-40cf-bbc4-6d1e63ce0b7c",
+      "players": [
+        {
+          "own": true,
+          "samples": 600,
+          "maxStep": 0.17050567701689623,
+          "jumps": 0,
+          "minimumOpacity": 1,
+          "outside": 0
+        },
+        {
+          "own": false,
+          "samples": 600,
+          "maxStep": 0.17398995535714334,
+          "jumps": 0,
+          "minimumOpacity": 1,
+          "outside": 0
+        }
+      ],
+      "errors": []
+    },
+    {
+      "seat": "b7c6cbdf-5de4-4ed3-a2ae-6b6104a19f09",
+      "players": [
+        {
+          "own": false,
+          "samples": 600,
+          "maxStep": 0.10638136329118097,
+          "jumps": 0,
+          "minimumOpacity": 1,
+          "outside": 0
+        },
+        {
+          "own": true,
+          "samples": 600,
+          "maxStep": 0.10678754787688405,
+          "jumps": 0,
+          "minimumOpacity": 1,
+          "outside": 0
+        }
+      ],
+      "errors": []
+    }
+  ]
+}
