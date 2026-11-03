@@ -1,0 +1,30 @@
+[
+  {
+    "mode": "generals",
+    "width": 1440,
+    "models": 15,
+    "errors": [],
+    "passed": true
+  },
+  {
+    "mode": "fleet",
+    "width": 1440,
+    "models": 15,
+    "errors": [],
+    "passed": true
+  },
+  {
+    "mode": "generals",
+    "width": 390,
+    "models": 15,
+    "errors": [],
+    "passed": true
+  },
+  {
+    "mode": "fleet",
+    "width": 390,
+    "models": 15,
+    "errors": [],
+    "passed": true
+  }
+]

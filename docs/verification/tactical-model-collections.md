@@ -1,0 +1,11 @@
+# Generals and Hidden Fleet model collections
+
+The model update preserves the drag-and-drop controls and the game authority. All fifteen Generals sets now have distinct silhouettes, crowns, side ornaments, trim and layered bases. Ranks use readable emblems; every rank in a given set has exactly the same concealed-back artwork. No art path depends on a hidden enemy rank.
+
+Hidden Fleet has distinct carrier decks, battleship batteries, destroyer launchers, submarine sails and patrol silhouettes. Finishes vary hull profiles, trim, outriggers and deck architecture. Aircraft, road and island themes each have five class-specific drawings, retaining the original occupied tiles. Artwork uses small SVG geometry without external textures, SVG ID collisions, filters or continuous animation. A bounded 256-entry drawing cache reuses identical models.
+
+The customization dialog can inspect all General ranks and concealed backs, and all Fleet themes, unit classes and orientations. Preview controls change only the inspection view, not the match rules or placement. Fleet previews start in the selected game theme, and character badges in the lobby, commander strip and standings use that theme. Color changes are coalesced for 120 ms before automatic saving; closing the dialog or using the explicit save button flushes the latest selection. Existing per-game model IDs, colors and saved selections remain compatible.
+
+Validation: 543 tests pass, including concealed-back equality across all 15 ranks in all 15 sets, 40 distinct theme/class/orientation previews for each fleet finish, cache eviction and SVG integrity. TypeScript and both production builds pass with retained-asset checks. Desktop (1440 px) and mobile (390 px) Chromium checks select all 15 models in both games, use the new preview controls, save colors and verify those colors appear in play, with no page errors or horizontal overflow. Contact sheets of all collections and all 20 Fleet unit classes were visually reviewed. Existing drag placement and hidden-information authority are unchanged.
+
+Browser results: [tactical-model-results.json](tactical-model-results.json). The immediate-close check confirms the last model selection reaches the server.

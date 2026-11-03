@@ -1,7 +1,8 @@
+import {FLEET_STYLES,FLEET_UNITS,type FleetStyle} from './fleet.ts';
 import {generalArt,fleetDrawing} from './tactical-visuals.ts';
 import {MODEL_SETS,MODEL_COLLECTIONS,type ModelFamily} from './model-catalog.ts';
 
-type Options={part?:'head'|'hull'|'turret';piece?:string;dark?:boolean;king?:boolean;value?:number};
+export type ModelOptions={fleetStyle?:FleetStyle;fleetUnit?:string;vertical?:boolean;part?:'head'|'hull'|'turret';piece?:string;dark?:boolean;king?:boolean;value?:number};
 const edge='#183442',paper='#fff3d2',glass='#a7e9ed';
 const r=(x:number,y:number,w:number,h:number,fill:string,rx=4,stroke=edge)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${fill}" stroke="${stroke}" stroke-width="2"/>`;
 const circle=(x:number,y:number,rad:number,fill:string,stroke=edge)=>`<circle cx="${x}" cy="${y}" r="${rad}" fill="${fill}" stroke="${stroke}" stroke-width="2"/>`;
@@ -99,7 +100,7 @@ function marble(id:string,i:number,fill:string){
 function paddle(id:string,i:number,fill:string){
  return r(38,4,24,92,edge,9)+r(41,7,18,86,'url(#body)',7)+path('M44 13v74',undefined,'#ffffff99',2)+Array.from({length:3},(_,n)=>emblem(i,50,26+n*24,.36,id==='wood'?'#a47652':paper)).join('')+(id==='neon'?path('M42 15v71M58 15v71',undefined,glass,2):'');
 }
-function board(family:string,id:string,i:number,fill:string,o:Options){
+function board(family:string,id:string,i:number,fill:string,o:ModelOptions){
  const material:Record<string,string>={wood:'#b78050',narra:'#ad6a45',bamboo:'#c5ba79',obsidian:'#4a4561',basalt:'#515e67',jade:'#82bb9c',copper:'#ca916d',royal:'#d9b46e',brass:'#d9b46e',pearl:'#f4e8da',porcelain:'#f4ede4',slate:'#8392a3'};
  const base=material[id]||fill,side=o.dark?'#294a8e':paper,stroke=o.dark?'#101e49':edge;
  if(family==='chess'){
@@ -186,11 +187,14 @@ function cue(id:string,i:number,fill:string){
 }
 const urls=new Map<string,string>();
 /** Pure, allowlisted SVGs shared by collection thumbnails, identity badges and world renderers. */
-export function modelSvg(family:ModelFamily,model:string,color:string,options:Options={}){
+export function modelSvg(family:ModelFamily,model:string,color:string,options:ModelOptions={}){
  const ids=MODEL_SETS[family],id=ids.includes(model)?model:ids[0],index=ids.indexOf(id),fill=/^#[a-f\d]{6}$/i.test(color)?color:'#56e98b';
  let art='';
  if(family==='generals')art=generalArt(index,fill,Number.isInteger(options.value)&&options.value!>=0&&options.value!<=14?options.value:13,options.piece==='back');
- else if(family==='fleet')art='<g transform="translate(0 22) scale(.2 .55)">'+fleetDrawing('naval',index,fill,5)+'</g>';
+ else if(family==='fleet'){
+  const unit=FLEET_UNITS.find(u=>u.id===options.fleetUnit)||FLEET_UNITS[0],style=FLEET_STYLES.includes(options.fleetStyle!)?options.fleetStyle!:'naval',drawing=fleetDrawing(style,index,fill,unit.length,FLEET_UNITS.indexOf(unit));
+  art='<g transform="'+(options.vertical?'translate(77 0) rotate(90)':'translate(0 23)')+' scale('+(1/unit.length)+' .54)">'+drawing+'</g>';
+ }
  else if(family==='kart')art=kart(id,index,fill);
  else if(family==='tank')art=tank(id,index,fill,options.part);
  else if(family==='sumo')art=sumo(id,index,fill);
@@ -203,8 +207,8 @@ export function modelSvg(family:ModelFamily,model:string,color:string,options:Op
  else art=token(family,id,index,fill);
  return `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><linearGradient id="body" x2=".9" y2="1"><stop stop-color="${paper}"/><stop offset=".28" stop-color="${fill}"/><stop offset="1" stop-color="${fill}"/></linearGradient><radialGradient id="orb" cx=".3" cy=".25" r=".8"><stop stop-color="#fff"/><stop offset=".25" stop-color="${fill}"/><stop offset=".8" stop-color="${fill}"/><stop offset="1" stop-color="${edge}"/></radialGradient></defs>${art}</svg>`;
 }
-export function modelDataUrl(family:ModelFamily,model:string,color:string,options:Options={}){
- const key=[family,model,color,options.part,options.piece,options.dark,options.king,options.value].join(':');let url=urls.get(key);
+export function modelDataUrl(family:ModelFamily,model:string,color:string,options:ModelOptions={}){
+ const key=[family,model,color,options.part,options.piece,options.dark,options.king,options.value,options.fleetStyle,options.fleetUnit,options.vertical].join(':');let url=urls.get(key);
  if(!url){url='data:image/svg+xml,'+encodeURIComponent(modelSvg(family,model,color,options));if(urls.size>=384)urls.delete(urls.keys().next().value!);urls.set(key,url)}return url;
 }
 /** Body decoration never changes the server's snake ribbon or collision cell. */

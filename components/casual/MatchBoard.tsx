@@ -1,4 +1,5 @@
 'use client';
+import type {FleetStyle} from '../../lib/casual/fleet';
 import {memo,type CSSProperties} from 'react';
 import {Crown,ChevronDown,BrainCircuit,Shield} from 'lucide-react';
 import {casualCapacity,type CasualPublic} from '../../lib/casual/engine';
@@ -12,7 +13,7 @@ import PoolBallBadge from './PoolBallBadge';
 
 type Props={embedded?:boolean;room:CasualPublic;open:boolean;setOpen:(open:boolean)=>void;busy:boolean;local:boolean;onAction:(action:string,extra?:{playerId:string})=>void};
 const colors:Record<string,string>={red:'#db3456',yellow:'#bd880b',green:'#27866c',blue:'#356cca',pink:'#b62b82',orange:'#c96620',teal:'#157b7b',purple:'#7b42b6'};
-const Portrait=memo(function Portrait({player,mode}:{player:CasualPublic['players'][number];mode:string}){const image=useAvatar(player.id);return image?<img src={image} alt="" width={34} height={38}/>:<CharacterModel mode={mode} player={player} size={38}/>});
+const Portrait=memo(function Portrait({player,mode,fleetStyle}:{player:CasualPublic['players'][number];mode:string;fleetStyle?:FleetStyle}){const image=useAvatar(player.id);return image?<img src={image} alt="" width={34} height={38}/>:<CharacterModel mode={mode} fleetStyle={fleetStyle} player={player} size={38}/>});
 export default function MatchBoard({embedded=false,room,open,setOpen,busy,local,onAction}:Props){
  const players=casualLeaderboard(room).filter(p=>!p.retired),g=room.game,playing=room.phase!=='lobby';
  const Heading=embedded?'header':'summary';
@@ -25,7 +26,7 @@ export default function MatchBoard({embedded=false,room,open,setOpen,busy,local,
    const backs=g?.kind==='uno'&&!p.isYou?g.opponentBacks?.[p.id]:null;
    return <li key={p.id} className={(p.isYou?'is-you ':'')+(turn?'is-current ':'')+(index===0&&playing?'is-leading':'')} style={{'--player-color':color.fill,'--player-ink':color.ink} as CSSProperties}>
     <span className="match-place" aria-label={'Rank '+(index+1)}>{index===0&&playing?<Crown size={15}/>:String(index+1).padStart(2,'0')}</span>
-    <span className="match-avatar" aria-hidden="true"><Portrait player={p} mode={room.mode}/><i className={p.online?'online':'offline'}/></span>
+    <span className="match-avatar" aria-hidden="true"><Portrait player={p} mode={room.mode} fleetStyle={room.settings.fleetStyle}/><i className={p.online?'online':'offline'}/></span>
     <div className="match-identity"><strong title={p.name}>{p.name}</strong><div className="match-tags">{p.isYou&&!local&&<b>YOU</b>}{p.bot&&<span>BOT</span>}{p.isHost&&room.phase==='lobby'&&<span>HOST</span>}{thinking?<span className="is-thinking"><BrainCircuit size={11}/>Thinking</span>:turn&&playing?<span className="is-turn">Playing</span>:!p.online?<span>Reconnecting</span>:!playing&&<span>{p.ready?'Ready':'In lobby'}</span>}</div></div>
     {playing&&<div className="match-score"><strong>{stat.value}</strong><small>{stat.label}</small></div>}
     {playing&&<div className="match-detail">{stat.detail}</div>}
