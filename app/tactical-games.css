@@ -37,3 +37,10 @@
 .general-arrival.clash{border-color:#ffae82;animation-duration:600ms}
 @keyframes general-arrival{from{transform:scale(.4);opacity:1}to{transform:scale(1.2);opacity:0}}
 @media(prefers-reduced-motion:reduce){.generals-cell img{transition:none}.general-arrival{animation:none;display:none}}
+.tactical-preview-tools{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:14px;margin:0 0 18px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.tactical-preview-tools label{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px;font-weight:600}
+.tactical-preview-tools select{max-width:100%;min-height:36px;border:1px solid var(--line);border-radius:8px;padding:6px;background:var(--card);color:inherit}
+.tactical-preview-tools small{flex-basis:100%;font-size:11px;line-height:1.5;color:var(--muted)}
+@media(max-width:600px){.tactical-preview-tools label{flex-basis:100%;justify-content:space-between}.tactical-preview-tools select{max-width:65%}}
+.appearance-dialog .tactical-preview-tools label{flex-direction:row;align-items:center;text-align:left}
+.appearance-dialog .tactical-preview-tools input[type=checkbox]{width:18px;height:18px;min-height:18px;flex:0 0 18px;margin:0;accent-color:var(--tactical-accent,#387d86)}
