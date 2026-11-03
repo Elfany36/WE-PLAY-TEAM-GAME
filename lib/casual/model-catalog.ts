@@ -3,6 +3,8 @@ function collection(title:string,subject:string,note:string,items:string){
  return {title,subject,note,models:items.split(';').map(item=>{const [id,label]=item.trim().split('|');return {id,label}})};
 }
 export const MODEL_COLLECTIONS={
+ generals:collection('Generals command atelier','army set','Uniform backs keep enemy ranks secret. Finishes never change the arbiter rules.','classic|Royal ivory;brass|Brushed brass;navy|Naval academy;jade|Jade command;obsidian|Obsidian guard;capiz|Capiz pearl;narra|Carved narra;chrome|Chrome sentinel;crystal|Crystal corps;copper|Copper brigade;ceramic|Ceramic legion;aurora|Aurora guard;midnight|Midnight command;sunrise|Sunrise regiment;heritage|Heritage gold'),
+ fleet:collection('Hidden Fleet design dock','fleet finish','Five model footprints stay identical across ship, aircraft, vehicle and island themes.','classic|Harbor steel;pearl|Pearl fleet;stealth|Stealth graphite;copper|Copper convoy;arctic|Arctic expedition;coral|Coral patrol;cobalt|Cobalt command;mint|Mint rescue;royal|Royal admiral;sunset|Sunset squadron;neon|Neon horizon;wood|Timber island;crystal|Crystal passage;storm|Storm watch;celestial|Celestial flotilla'),
  ladders:collection('Garden trail companions','trail companion','Your companion moves along the numbered path.',
   'sprout|Garden sprout;snail|Trail snail;frog|Pond frog;ladybird|Ladybird;butterfly|Butterfly;bee|Honey bee;tortoise|Tortoise;mushroom|Toadstool;boot|Hiking boot;compass|Trail compass;watering-can|Watering can;acorn|Acorn scout;hedgehog|Hedgehog;firefly|Firefly;sunflower|Sunflower'),
  memory:collection('Memory garden mascots','garden mascot','Your mascot identifies your seat. Matching cards stay the same for everyone.',
@@ -42,7 +44,7 @@ export type GameModelFamily=keyof typeof MODEL_COLLECTIONS;
 export const LEGACY_MODEL_SETS={token:['pawn','rocket','fox','leaf','boat','cat','crown','gem'],board:['classic','crystal','wood','neon']} as const;
 export type ModelFamily=GameModelFamily|keyof typeof LEGACY_MODEL_SETS;
 export const MODEL_SETS={...Object.fromEntries(Object.entries(MODEL_COLLECTIONS).map(([family,c])=>[family,c.models.map(m=>m.id)])),...LEGACY_MODEL_SETS} as unknown as Record<ModelFamily,readonly string[]>;
-const modeFamilies:Record<string,GameModelFamily>={ladders:'ladders',memory:'memory',snake:'snake',uno:'uno',property:'property',phone:'phone',circuit:'kart',terra:'terra',chess:'chess',dama:'dama',scidama:'scidama',sumo:'sumo',tanks:'tank',pong:'pong',marble:'marble',blocks:'blocks',pool:'pool'};
+const modeFamilies:Record<string,GameModelFamily>={generals:'generals',fleet:'fleet',ladders:'ladders',memory:'memory',snake:'snake',uno:'uno',property:'property',phone:'phone',circuit:'kart',terra:'terra',chess:'chess',dama:'dama',scidama:'scidama',sumo:'sumo',tanks:'tank',pong:'pong',marble:'marble',blocks:'blocks',pool:'pool'};
 export function modelFamily(mode:string):ModelFamily{return modeFamilies[mode]||'token'}
 export function modelLabel(family:ModelFamily,id:string){return (family in MODEL_COLLECTIONS?MODEL_COLLECTIONS[family as GameModelFamily].models.find(m=>m.id===id)?.label:undefined)||id.replaceAll('-',' ')}
 /** Named customization colors are separate from the twelve gameplay seat colors. */

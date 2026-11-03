@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+<title id="title">Fleet — midnight on the tactical sea</title><desc id="desc">An original sculpted naval ship crosses a midnight teal ocean grid. A small aircraft, a distant island, and brass hit and miss markers suggest a hidden-fleet strategy game.</desc>
+<defs>
+<linearGradient id="sea" x2="1" y2="1"><stop stop-color="#122039"/><stop offset=".55" stop-color="#123f50"/><stop offset="1" stop-color="#10213c"/></linearGradient>
+<radialGradient id="light"><stop stop-color="#4aaea9" stop-opacity=".3"/><stop offset="1" stop-color="#4aaea9" stop-opacity="0"/></radialGradient>
+<linearGradient id="hull" x2="0" y2="1"><stop stop-color="#497a91"/><stop offset=".5" stop-color="#214866"/><stop offset="1" stop-color="#11263f"/></linearGradient>
+<linearGradient id="side" x2="0" y2="1"><stop stop-color="#203e59"/><stop offset="1" stop-color="#0b192d"/></linearGradient>
+<linearGradient id="deck" x2=".7" y2="1"><stop stop-color="#d5e6df"/><stop offset=".5" stop-color="#93b8c0"/><stop offset="1" stop-color="#567d95"/></linearGradient>
+<linearGradient id="bridge" x2="1" y2="1"><stop stop-color="#e6ebe0"/><stop offset=".5" stop-color="#a1bdc2"/><stop offset="1" stop-color="#5f8099"/></linearGradient>
+<linearGradient id="sand" x2="0" y2="1"><stop stop-color="#e8d5a5"/><stop offset="1" stop-color="#948d78"/></linearGradient>
+<radialGradient id="hit"><stop stop-color="#fff4c2"/><stop offset=".4" stop-color="#efb46e"/><stop offset="1" stop-color="#d67b67"/></radialGradient>
+<filter id="shadow" x="-.5" y="-.8" width="2" height="2.8" color-interpolation-filters="sRGB"><feGaussianBlur in="SourceAlpha" stdDeviation="7" result="blur"/><feOffset in="blur" dx="3" dy="12" result="offset"/><feFlood flood-color="#050d20" flood-opacity=".5" result="color"/><feComposite in="color" in2="offset" operator="in" result="shade"/><feMerge><feMergeNode in="shade"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<g id="miss"><circle r="9" fill="#102b43" stroke="#85bfc4" stroke-opacity=".6"/><circle r="3" fill="#cee1d8"/></g>
+<g id="target"><circle r="19" fill="#dca777" fill-opacity=".09" stroke="#dfad78" stroke-opacity=".55"/><circle r="10" fill="url(#hit)"/><path d="M-24 0h9m30 0h9M0-24v9m0 30v9" stroke="#f2cf95" stroke-width="1.5"/><path d="m-4-4 8 8m0-8-8 8" stroke="#704d45" stroke-width="1.7" stroke-linecap="round"/></g>
+</defs>
+<rect width="720" height="420" rx="28" fill="url(#sea)"/><ellipse cx="369" cy="223" rx="321" ry="207" fill="url(#light)"/>
+<rect x="29" y="29" width="662" height="362" rx="22" fill="none" stroke="#8fb5ce" stroke-opacity=".18"/>
+<path d="M45 67V46h35m560 328h35v-21" fill="none" stroke="#a2dcdb" stroke-opacity=".65" stroke-width="2"/>
+<g fill="none" stroke="#76b2bd" stroke-opacity=".19" stroke-width=".8"><path d="M73.0 131.0l164.8 219.2"/><path d="M113.9 123.2l164.8 219.2"/><path d="M154.8 115.4l164.8 219.2"/><path d="M195.7 107.6l164.8 219.2"/><path d="M236.6 99.8l164.8 219.2"/><path d="M277.5 92.0l164.8 219.2"/><path d="M318.4 84.2l164.8 219.2"/><path d="M359.3 76.4l164.8 219.2"/><path d="M400.2 68.6l164.8 219.2"/><path d="M441.1 60.8l164.8 219.2"/><path d="M482.0 53.0l164.8 219.2"/><path d="M73.0 131.0l409.0 -78.0"/><path d="M93.6 158.4l409.0 -78.0"/><path d="M114.2 185.8l409.0 -78.0"/><path d="M134.8 213.2l409.0 -78.0"/><path d="M155.4 240.6l409.0 -78.0"/><path d="M176.0 268.0l409.0 -78.0"/><path d="M196.6 295.4l409.0 -78.0"/><path d="M217.2 322.8l409.0 -78.0"/><path d="M237.8 350.2l409.0 -78.0"/></g>
+<path d="m73 131 409-78 165 219-409 78Z" fill="none" stroke="#8ac8cc" stroke-opacity=".22" stroke-width="1.2"/>
+<g opacity=".48" fill="#c1d8d5"><circle cx="85.5" cy="115.1" r="1.5"/><circle cx="126.3" cy="107.3" r="1.5"/><circle cx="167.2" cy="99.5" r="1.5"/><circle cx="208.2" cy="91.7" r="1.5"/><circle cx="249.0" cy="83.9" r="1.5"/><circle cx="289.9" cy="76.1" r="1.5"/><circle cx="330.8" cy="68.3" r="1.5"/><circle cx="371.8" cy="60.5" r="1.5"/><circle cx="412.6" cy="52.7" r="1.5"/><circle cx="453.6" cy="44.9" r="1.5"/></g>
+<g transform="translate(572 94)"><ellipse cy="21" rx="61" ry="17" fill="#091e33" opacity=".35"/><path d="M-56 9q9-15 26-16 10-24 27-12 26-11 37 12 28 1 23 19-55 18-113-3Z" fill="url(#sand)"/><path d="M-44 5q14-10 27-9 20-28 37-4 18-3 25 15-43 10-89-2Z" fill="#578c85"/><path d="m-18 0 18-20 17 21" fill="#789b8c"/><path d="M-10-5 0-17 10-5" fill="#b1b9a1"/><path d="M-57 21q56 13 116-1" fill="none" stroke="#a2dad5" stroke-opacity=".4" stroke-width="2"/></g>
+<g transform="translate(164 76) rotate(-23)" filter="url(#shadow)"><path d="M0-37 7-15 42 3 42 10 8 1 7 22 21 32 21 37 0 31-21 37-21 32-7 22-8 1-42 10-42 3-7-15Z" fill="#c5d9d5" stroke="#203e57" stroke-width="2"/><path d="M0-28v53M-31 6l24-7m38 7L7-1" fill="none" stroke="#91b4bf" stroke-width="2"/><path d="M-3-15h6v13h-6Z" fill="#406b84"/><path d="M-8 25 0 29 8 25" fill="none" stroke="#deb77f" stroke-width="2"/></g>
+<g fill="none" stroke-linecap="round"><path d="M117 283q-28 12-44 7m68 14q-43 22-74 14m93 6q-47 29-80 19" stroke="#9dd5d3" stroke-opacity=".35" stroke-width="2"/><path d="M197 333q136 32 333-64m-367 46q151 39 363-66" stroke="#87c8cc" stroke-opacity=".18" stroke-width="4"/></g>
+<g transform="translate(361 223) rotate(-12)" filter="url(#shadow)">
+<ellipse cx="-3" cy="28" rx="224" ry="33" fill="#071c30" opacity=".55"/>
+<path d="M-217 7-178 30 154 20 195-12 189 10 155 42-176 51-213 28Z" fill="url(#side)" stroke="#0f2c43" stroke-width="1.5"/>
+<path d="M-217 7-181-18 115-34 195-12 154 20-178 30Z" fill="url(#hull)" stroke="#8ab5c2" stroke-width="1.8"/>
+<path d="M-188 3-174-11 113-26 171-10 144 10-172 19Z" fill="url(#deck)" stroke="#274e68" stroke-width="1"/>
+<path d="M-208 8-178 23 152 14 184-10M-174 36l324-9" fill="none" stroke="#97c9cb" stroke-opacity=".5" stroke-width="1.2"/>
+<g stroke="#c8e1dc" stroke-width="1.2" opacity=".8"><path d="M-173-13v-7m38 4v-7m38 5v-7m38 5v-7m38 5v-7m38 5v-7m38 5v-7m38 5v-7m38 5v-7M-170 19v-7m41 6v-7m41 6v-7m41 6v-7m41 6v-7m41 6v-7m41 6v-7m41 6v-7"/><path d="M-171-20 114-35M-167 12 144 3" stroke-opacity=".5"/></g>
+<g transform="translate(-133 1)"><ellipse rx="29" ry="13" fill="#355b75" stroke="#d7d9ba" stroke-width="1"/><ellipse rx="24" ry="10" fill="none" stroke="#83b7bb" stroke-dasharray="3 3"/><path d="M-9-5v10m18-10v10M-9 0H9" stroke="#d9daba" stroke-width="2"/></g>
+<path d="M-82-8-16-13 2-3-6 9-75 12-90 3Z" fill="#456c83" stroke="#b7d0ce"/>
+<path d="M-77-17-25-23-13-14-18 3-75 8Z" fill="#83a9b5"/><path d="M-77-17-64-25-24-28-13-21-25-23Z" fill="#d4e1d7"/>
+<g transform="translate(5 -14)"><path d="M-25 1 23-4 42 7 40 25-22 29Z" fill="#6d93a7" stroke="#315a76"/><path d="M-25 1-13-24 22-29 40-13 23-4Z" fill="url(#bridge)"/><path d="M23-4 40-13 42 7 40 25 24 14Z" fill="#345e7b"/><path d="M-13-24 22-29 40-13 4-7Z" fill="#e1e7dc"/><path d="M-17-16 14-21 27-12 0-6Z" fill="#234c69"/><path d="m-9-16 2 9m9-11 2 10m9-10 1 6" stroke="#9fd2d2" stroke-width="1"/><path d="M5-10v-37m-13 6 24-4m-18 9 15-3" stroke="#e2d2a9" stroke-width="2" stroke-linecap="round"/><path d="M-11-50q14-11 28 0-10 12-28 0Z" fill="#8ebac3" stroke="#e2e7d5"/><path d="M-10-49h25" stroke="#4c7d96"/></g>
+<g transform="translate(92 -5)"><ellipse cy="7" rx="26" ry="12" fill="#3c627c"/><path d="M-21-6 13-10 25-2 19 12-18 13Z" fill="#749bad" stroke="#2c526e"/><path d="M-21-6-7-15 17-13 25-2 1 0Z" fill="#d4e2d9"/><path d="M8-7 65-10 67-5 11 1Z" fill="#b6d1cf" stroke="#264d69" stroke-width="1.4"/><path d="M58-9v5" stroke="#e7d4a5" stroke-width="2"/></g>
+<g transform="translate(-66 -31)"><path d="M-8 1h18v-19H-8Z" fill="#315874"/><path d="M-8-18 5-21 14-15 10-11-8-11Z" fill="#a4c4c7"/><path d="M-5-14h14" stroke="#dbcea5" stroke-width="2"/></g>
+<g fill="#d3bb87"><circle cx="-183" cy="3" r="2"/><circle cx="164" cy="-10" r="2"/><circle cx="152" cy="17" r="2"/></g>
+</g>
+<path d="M525 211q73 14 73 83" fill="none" stroke="#e4bb80" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="4 7"/>
+<use href="#target" transform="translate(598 303)"/><use href="#target" transform="translate(333 100) scale(.7)"/>
+<use href="#miss" transform="translate(302 341)"/><use href="#miss" transform="translate(105 185)"/><use href="#miss" transform="translate(541 331) scale(.8)"/><use href="#miss" transform="translate(442 80) scale(.8)"/>
+<g transform="translate(643 172)" fill="none" stroke="#a3d1d3" stroke-opacity=".55"><circle r="26"/><circle r="16" stroke-dasharray="3 5"/><path d="M-32 0h14m36 0h14M0-32v14m0 36v14"/><path d="M0 0 19-16" stroke="#edc58a" stroke-width="2"/></g>
+<g fill="#a9c8d1" opacity=".35"><rect x="48" y="365" width="36" height="3" rx="1.5"/><rect x="91" y="365" width="14" height="3" rx="1.5"/><rect x="112" y="365" width="22" height="3" rx="1.5"/></g>
+</svg>

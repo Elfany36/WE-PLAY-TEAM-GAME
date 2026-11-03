@@ -5,6 +5,8 @@ const move=[a('up','Move up','ArrowUp','ArrowUp','KeyW'),a('down','Move down','A
 const party=move.map(x=>({...x,key:({up:'w',down:'s',left:'a',right:'d'} as Record<string,string>)[x.id]}));
 const board=[a('previous','Previous square','ArrowLeft','ArrowLeft'),a('next','Next square','ArrowRight','ArrowRight'),a('choose','Select focused square',' ','Space','Enter')];
 export const CONTROL_PROFILES:Record<string,{note:string;actions:ControlAction[]}>= {
+ generals:{note:'Focus the board. Select a piece, then an adjacent tile; setup swaps pieces.',actions:[...move,a('choose','Select tile',' ','Space','Enter'),a('cancel','Cancel selection','Backspace','Backspace')]},
+ fleet:{note:'Focus the grid. Move your target, select a tile, or rotate a model during deployment.',actions:[...move,a('choose','Select tile',' ','Space','Enter'),a('rotate','Rotate model','r','KeyR')]},
  snake:{note:'Arrow keys or WASD turn your snake. Touch arrows and swipes always work.',actions:move},
  circuit:{note:'Steer with keys; touch controls remain available.',actions:[...move.map(x=>({...x,label:({up:'Accelerate',down:'Reverse / brake',left:'Steer left',right:'Steer right'} as Record<string,string>)[x.id]})),a('drift','Drift',' ','Space'),a('item','Use item','e','KeyE'),a('recover','Recover kart','r','KeyR')]},
  terra:{note:'Aim with the pointer. Number keys select tool slots.',actions:[move[2],move[3],a('jump','Jump',' ','Space','ArrowUp','KeyW'),a('use','Use aimed tool','f','KeyF'),a('inventory','Inventory','e','KeyE')]},

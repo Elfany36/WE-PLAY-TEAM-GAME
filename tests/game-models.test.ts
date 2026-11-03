@@ -11,7 +11,7 @@ test('every game owns at least fifteen named, visually distinct and allowlisted 
   const art=new Set<string>();for(const id of ids){assert.match(id,/^[a-z0-9-]+$/);assert(modelLabel(family,id).length>2);assert.deepEqual(validateAppearance({models:{[family]:id}}),{models:{[family]:id}});art.add(modelSvg(family,id,'#56e98b'))}
   assert.equal(art.size,ids.length,mode+' has duplicate art');
  }
- assert.equal(Object.keys(MODEL_COLLECTIONS).length,17);assert.equal(CUSTOM_COLORS.length,24);assert.equal(new Set(CUSTOM_COLORS.map(c=>c.fill)).size,24);
+ assert.equal(Object.keys(MODEL_COLLECTIONS).length,CASUAL_MODES.length);assert.equal(CUSTOM_COLORS.length,24);assert.equal(new Set(CUSTOM_COLORS.map(c=>c.fill)).size,24);
 });
 test('all game models are cosmetic, preserve simulations, and retain other game selections',()=>{
  for(const mode of CASUAL_MODES){let room=createCasual('MODELS24','p','Player','hash',mode,42,10000);room.settings.bots=1;room=applyCasualAction(room,{action:'start'},'p',10000);const before=structuredClone(room.game),family=modelFamily(mode);

@@ -13,4 +13,4 @@ export const TABLE_SCENES=[
 export type TableScene=typeof TABLE_SCENES[number]['id'];
 export const TABLE_SCENE_IDS=TABLE_SCENES.map(s=>s.id);
 export function tableScene(id:unknown){return TABLE_SCENES.find(s=>s.id===id)||TABLE_SCENES[0]}
-export const hasTableScene=(mode:string)=>['uno','memory','ladders','property','chess','dama','scidama','pool','blocks','phone'].includes(mode);
+export const hasTableScene=(mode:string)=>['uno','memory','ladders','property','chess','dama','scidama','pool','blocks','phone','generals','fleet'].includes(mode);

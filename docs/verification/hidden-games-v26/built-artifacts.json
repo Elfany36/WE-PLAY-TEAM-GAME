@@ -1,0 +1,38 @@
+[
+  {
+    "build": "hosted",
+    "mode": "generals",
+    "width": 1440,
+    "status": "passed",
+    "modelCount": 15,
+    "colorCount": 24,
+    "noOverflow": true
+  },
+  {
+    "build": "hosted",
+    "mode": "fleet",
+    "width": 390,
+    "status": "passed",
+    "modelCount": 15,
+    "colorCount": 24,
+    "noOverflow": true
+  },
+  {
+    "build": "pages",
+    "mode": "generals",
+    "width": 390,
+    "status": "passed",
+    "modelCount": 15,
+    "colorCount": 24,
+    "noOverflow": true
+  },
+  {
+    "build": "pages",
+    "mode": "fleet",
+    "width": 1440,
+    "status": "passed",
+    "modelCount": 15,
+    "colorCount": 24,
+    "noOverflow": true
+  }
+]

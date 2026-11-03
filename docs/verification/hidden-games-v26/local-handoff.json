@@ -1,0 +1,16 @@
+[
+  {
+    "mode": "generals",
+    "players": 2,
+    "privateDeployment": true,
+    "privateBattleHandoff": true,
+    "status": "passed"
+  },
+  {
+    "mode": "fleet",
+    "players": 2,
+    "privateDeployment": true,
+    "privateBattleHandoff": true,
+    "status": "passed"
+  }
+]

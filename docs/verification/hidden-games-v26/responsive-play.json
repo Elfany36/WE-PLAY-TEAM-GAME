@@ -1,0 +1,34 @@
+[
+  {
+    "mode": "generals",
+    "width": 1440,
+    "status": "passed",
+    "modelCount": 15,
+    "colorCount": 24,
+    "noOverflow": true
+  },
+  {
+    "mode": "fleet",
+    "width": 1440,
+    "status": "passed",
+    "modelCount": 15,
+    "colorCount": 24,
+    "noOverflow": true
+  },
+  {
+    "mode": "generals",
+    "width": 390,
+    "status": "passed",
+    "modelCount": 15,
+    "colorCount": 24,
+    "noOverflow": true
+  },
+  {
+    "mode": "fleet",
+    "width": 390,
+    "status": "passed",
+    "modelCount": 15,
+    "colorCount": 24,
+    "noOverflow": true
+  }
+]

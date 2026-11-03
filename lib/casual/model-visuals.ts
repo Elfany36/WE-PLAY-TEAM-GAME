@@ -1,3 +1,4 @@
+import {generalArt,fleetDrawing} from './tactical-visuals.ts';
 import {MODEL_SETS,MODEL_COLLECTIONS,type ModelFamily} from './model-catalog.ts';
 
 type Options={part?:'head'|'hull'|'turret';piece?:string;dark?:boolean;king?:boolean;value?:number};
@@ -188,7 +189,9 @@ const urls=new Map<string,string>();
 export function modelSvg(family:ModelFamily,model:string,color:string,options:Options={}){
  const ids=MODEL_SETS[family],id=ids.includes(model)?model:ids[0],index=ids.indexOf(id),fill=/^#[a-f\d]{6}$/i.test(color)?color:'#56e98b';
  let art='';
- if(family==='kart')art=kart(id,index,fill);
+ if(family==='generals')art=generalArt(index,fill,Number.isInteger(options.value)&&options.value!>=0&&options.value!<=14?options.value:13,options.piece==='back');
+ else if(family==='fleet')art='<g transform="translate(0 22) scale(.2 .55)">'+fleetDrawing('naval',index,fill,5)+'</g>';
+ else if(family==='kart')art=kart(id,index,fill);
  else if(family==='tank')art=tank(id,index,fill,options.part);
  else if(family==='sumo')art=sumo(id,index,fill);
  else if(family==='snake')art=options.part==='head'?snakeHead(id,index,fill):path('M21 78Q78 94 70 55T32 29',undefined,edge,22)+path('M21 78Q78 94 70 55T32 29',undefined,fill,18)+`<g transform="translate(8 -6) scale(.65)">${snakeHead(id,index,fill)}</g>`+emblem(index,65,68,.45);

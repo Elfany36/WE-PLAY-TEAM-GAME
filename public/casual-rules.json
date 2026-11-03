@@ -1,6 +1,62 @@
 {
-  "reviewed": "2026-10-30",
+  "reviewed": "2026-11-03",
   "games": [
+    {
+      "id": "generals",
+      "name": "Game of the Generals",
+      "eyebrow": "A FLAG. A BLUFF. A BRILLIANT PLAN.",
+      "description": "Command a secret army on an ivory-and-brass field. Outsmart your opponent while the digital arbiter keeps every enemy rank concealed.",
+      "tag": "2 players · hidden ranks · AI",
+      "rules": [
+        "Two commanders each control 21 pieces on a board of 9 columns and 8 rows. Arrange them secretly in your nearest three rows; six home squares remain empty. Both commanders deploy before battle.",
+        "Move one piece exactly one square horizontally or vertically. All pieces, including Spies and the Flag, may move. You may not jump, move diagonally, or share a square with a friendly piece.",
+        "Move onto an enemy to challenge. The server acts as arbiter and reveals only whether the attacker, defender or neither survives. Enemy ranks and captured enemy identities stay hidden until the match ends.",
+        "Higher officers defeat lower ranks. Spy defeats all officers, including Sergeant, but loses to Private. Private defeats Spy. Equal ranks remove both pieces. An attacking Flag defeats a defending Flag; any other piece defeats a Flag.",
+        "Win by capturing the enemy Flag, leaving the opponent with no legal move, or bringing your Flag to the far row and surviving the opponent’s next turn. This site follows the Philippine Game of the Generals Organization’s survive-the-reply convention.",
+        "The army has one each of five General ranks, Colonel, Lieutenant Colonel, Major, Captain, First Lieutenant, Second Lieutenant and Sergeant, plus six Privates, two Spies and one Flag.",
+        "Classic command has no move clock. Rapid and Club modes add explicit 30/60-second move clocks; a missed move forfeits. Deployment has a ten-minute limit. Offer a mutual draw or resign at any time. Historical tournament chase adjudications are not automated.",
+        "Online spectators see no ranks or secret setup. Same-device play uses a pass-device privacy screen. Saved keys and 15 cosmetic army sets never change challenge results."
+      ],
+      "sources": [
+        {
+          "label": "Philippine Game of the Generals Organization: rules",
+          "url": "https://philggo.wixsite.com/home/rules"
+        },
+        {
+          "label": "Original Ideal publisher instructions, 1980 scan",
+          "url": "https://www.houseofgames.ca/Rules/Generals%20rules.pdf"
+        }
+      ],
+      "variant": "Original digital artwork and server arbiter. Flag timing follows PhilGGO. Timed play and ten-minute deployment are clearly labeled site conventions; no affiliation or tournament certification is claimed."
+    },
+    {
+      "id": "fleet",
+      "name": "Hidden Fleet",
+      "eyebrow": "QUIET WATERS. CLEVER MOVES.",
+      "description": "Chart a secret fleet, conceal every model, then search tile by tile. Ships, aircraft, convoys and islands await beneath a beautiful tactical grid.",
+      "tag": "2 players · secret placement · AI",
+      "rules": [
+        "Place five models of lengths 5, 4, 3, 3 and 2 on your private grid. Rotate horizontally or vertically. Models may touch but cannot overlap or extend outside the grid. Both players must conceal and deploy before searching.",
+        "Your opponent sees only unsearched tiles. Your own waters remain available for defense. All models stay fixed after deployment. A target tile can be searched only once.",
+        "Hit an occupied tile to damage that segment. With the default Streak rule, a hit keeps your turn and a miss passes to the other player, as requested for this game.",
+        "Destroy every occupied tile of a model to reveal its wreck and trigger its destruction effect. A partial hit does not reveal the rest of the model. Destroy all five models to win.",
+        "Naval, aircraft, vehicle and island themes are cosmetic: they all occupy the same straight 5/4/3/3/2 footprints. The highlighted placement tiles define occupancy, including thin-looking bows, wings or decoration.",
+        "Choose compact 8×8, classic 10×10 or grand 12×12 grids. Classic alternating fire passes the turn after either hit or miss. The optional search clock passes a missed turn; untimed search is also available.",
+        "Deployment has a ten-minute limit. Offer a mutual draw or resign. Spectators see only shots and fully destroyed models. Shared-device players pass the screen behind a privacy cover.",
+        "Keyboard or pointer controls, saved key bindings, 15 fleet finishes, 24 named colors, online chat, fullscreen and reconnect support use the same lobby features as the other games."
+      ],
+      "sources": [
+        {
+          "label": "Hasbro: classic Battleship instructions and baseline mechanics",
+          "url": "https://instructions.hasbro.com/en-us/instruction/Battleship-Classic-Board-Game-Strategy-Game"
+        },
+        {
+          "label": "Hasbro: five-ship instruction PDF",
+          "url": "https://assets-us-01.kc-usercontent.com/500e0a65-283d-00ef-33b2-7f1f20488fe2/7b9b16c7-2343-4b0a-aea6-093314e11deb/B77441020_Retro_Battleship_INST_FFR.pdf"
+        }
+      ],
+      "variant": "Hidden Fleet is this site’s original tile-battle implementation with original artwork. Hit-keeps-turn is the user-requested house rule; the classic alternating option follows the published baseline. Model themes and board sizes are site variants."
+    },
     {
       "id": "uno",
       "name": "UNO · Classic & Flip",

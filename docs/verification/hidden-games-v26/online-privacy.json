@@ -1,0 +1,98 @@
+[
+  {
+    "mode": "fleet",
+    "rtt": 60,
+    "players": 2,
+    "spectators": 1,
+    "privateStreams": [
+      45,
+      27,
+      25
+    ],
+    "stolenBaseRejected": true,
+    "customSelectKey": true,
+    "reload": true,
+    "completeMatch": true,
+    "status": "passed"
+  },
+  {
+    "mode": "fleet",
+    "rtt": 90,
+    "players": 2,
+    "spectators": 1,
+    "privateStreams": [
+      46,
+      28,
+      27
+    ],
+    "stolenBaseRejected": true,
+    "customSelectKey": true,
+    "reload": true,
+    "completeMatch": true,
+    "status": "passed"
+  },
+  {
+    "mode": "fleet",
+    "rtt": 400,
+    "players": 2,
+    "spectators": 1,
+    "privateStreams": [
+      50,
+      32,
+      30
+    ],
+    "stolenBaseRejected": true,
+    "customSelectKey": true,
+    "reload": true,
+    "completeMatch": true,
+    "status": "passed"
+  },
+  {
+    "mode": "generals",
+    "rtt": 60,
+    "players": 2,
+    "spectators": 1,
+    "privateStreams": [
+      20,
+      17,
+      13
+    ],
+    "stolenBaseRejected": true,
+    "customSelectKey": true,
+    "reload": true,
+    "completeMatch": false,
+    "status": "passed"
+  },
+  {
+    "mode": "generals",
+    "rtt": 90,
+    "players": 2,
+    "spectators": 1,
+    "privateStreams": [
+      18,
+      16,
+      14
+    ],
+    "stolenBaseRejected": true,
+    "customSelectKey": true,
+    "reload": true,
+    "completeMatch": false,
+    "status": "passed"
+  },
+  {
+    "mode": "generals",
+    "rtt": 400,
+    "players": 2,
+    "spectators": 1,
+    "privateStreams": [
+      21,
+      16,
+      15
+    ],
+    "stolenBaseRejected": true,
+    "customSelectKey": true,
+    "reload": true,
+    "completeMatch": false,
+    "status": "passed"
+  }
+]

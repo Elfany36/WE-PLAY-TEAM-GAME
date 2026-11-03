@@ -1,5 +1,7 @@
 # Original arcade artwork
 
+The 2026-11-03 hidden-game additions include original `club-generals.svg` and `club-fleet.svg` covers, plus code-drawn army and fleet miniatures in `lib/casual/tactical-visuals.ts`. They use original geometric artwork and internal gradients with no third-party image requests, copied game logos or publisher artwork.
+
 All artwork in this directory was drawn as original SVG vector code for this project on 2026-10-30. No stock assets, commercial characters, game logos, tracing, external image sources, or AI-generated bitmap sources were used. The shared visual language is a handcrafted toy/pixel-fantasy world with warm highlights, slate outlines, softly dimensional forms, and clearly readable silhouettes.
 
 ## Racing
