@@ -2,12 +2,12 @@ import {Clock3,Flag,Heart,Shield,Zap} from 'lucide-react';
 import type {CasualPublic} from '../../lib/casual/engine';
 import type {PartyGame} from '../../lib/casual/party';
 import {CLUB_MAPS} from '../../lib/casual/party';
-import {ARCADE_COLORS} from '../../lib/casual/arcade-colors';
+import {playerColor} from '../../lib/casual/appearance';
 import {sumoActive,sumoBout} from '../../lib/casual/sumo-bracket';
 import {arenaSupply,glacierGust} from '../../lib/casual/arena-events';
 import GameMeter from './GameMeter';
 export default function ArenaHud({room,actorId}:{room:CasualPublic;actorId:string}){
- const g=room.game as PartyGame,actor=g.actors.find(a=>a.id===actorId)||g.actors[0],player=room.players.find(p=>p.id===actor?.id),color=ARCADE_COLORS[(player?.color||0)%ARCADE_COLORS.length];
+ const g=room.game as PartyGame,actor=g.actors.find(a=>a.id===actorId)||g.actors[0],player=room.players.find(p=>p.id===actor?.id),color=playerColor(player);
  if(!actor)return null;
  const remaining=Math.max(0,Math.ceil((g.deadline-room.serverNow)/1000)),name=CLUB_MAPS.find(m=>m.id===g.map)?.name||'Arena',bout=sumoBout(g,actor.id),supply=arenaSupply(g);
  return <div className={'club-hud arena-hud hud-'+g.kind}>

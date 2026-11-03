@@ -7,6 +7,8 @@ export const TABLE_SCENES=[
  {id:'cherry',name:'Cherry Arcade',felt:'#5a1d49',feltLight:'#a63574',accent:'#ffd867',wood:'#ac7356',light:'#ffe6d7',dark:'#ce84a3',ink:'#491b3e'},
  {id:'lagoon',name:'Lagoon Palace',felt:'#073d56',feltLight:'#107e91',accent:'#69ffe2',wood:'#c89b4e',light:'#d7fff4',dark:'#38a8a5',ink:'#103e53'},
  {id:'royal',name:'Starlight Carnival',felt:'#28134d',feltLight:'#62409a',accent:'#ffcf68',wood:'#9d64aa',light:'#fff0d4',dark:'#bd86d0',ink:'#462a64'},
+ {id:'blossom',name:'Sakura Tea House',felt:'#542f55',feltLight:'#925b83',accent:'#ffe1a2',wood:'#b6816d',light:'#ffeedc',dark:'#c296b4',ink:'#442b48'},
+ {id:'obsidian',name:'Obsidian Observatory',felt:'#172944',feltLight:'#30557b',accent:'#b6e5ff',wood:'#65637f',light:'#e7edff',dark:'#8b99c1',ink:'#213451'},
 ] as const;
 export type TableScene=typeof TABLE_SCENES[number]['id'];
 export const TABLE_SCENE_IDS=TABLE_SCENES.map(s=>s.id);

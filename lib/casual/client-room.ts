@@ -1,5 +1,5 @@
 import type {CasualPublic} from './engine.ts';
-export function sameGameView(a:CasualPublic,b:CasualPublic){return a.code===b.code&&a.round===b.round&&a.phase===b.phase&&a.youId===b.youId&&a.isHost===b.isHost&&a.game===b.game&&a.players===b.players}
+export function sameGameView(a:CasualPublic,b:CasualPublic){return a.code===b.code&&a.round===b.round&&a.phase===b.phase&&a.youId===b.youId&&a.viewingId===b.viewingId&&a.isHost===b.isHost&&a.game===b.game&&a.players===b.players}
 export function roomScene(room:CasualPublic|null){return room?.mode==='snake'&&room.game?.obstacles?room.code+':'+room.round+':'+room.game.mapId+':'+room.game.size:undefined}
 /** Reuse terrain only for the exact world revision acknowledged by the server. */
 export function restoreRoomTerrain(previous:CasualPublic|null,next:CasualPublic):CasualPublic|null{

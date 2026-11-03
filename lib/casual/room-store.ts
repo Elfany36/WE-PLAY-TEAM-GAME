@@ -1,7 +1,8 @@
 import {ROOM_TTL} from './engine.ts';
 export type StoredRoom={code:string;state:string;revision:number;created_at:number};
-export type CasualDatabase={roomScheduling?:'durable-object';prepare(sql:string):{bind(...values:any[]):{first<T>():Promise<T|null>;run():Promise<{meta:{changes?:number}}>}}};
-type Storage={get<T>(key:string):Promise<T|undefined>;put(key:string,value:unknown):Promise<void>;deleteAll():Promise<void>;setAlarm(at:number):Promise<void>};
+export type StoredAvatar={hash:string;data:string};
+export type CasualDatabase={deleteAvatar?:(id:string)=>Promise<void>;getAvatar?:(id:string,hash?:string)=>Promise<StoredAvatar|undefined>;putAvatar?:(id:string,value:StoredAvatar,retainHash?:string)=>Promise<void>;roomScheduling?:'durable-object';prepare(sql:string):{bind(...values:any[]):{first<T>():Promise<T|null>;run():Promise<{meta:{changes?:number}}>}}};
+type Storage={get<T>(key:string):Promise<T|undefined>;put(key:string,value:unknown):Promise<void>;delete?(key:string):Promise<unknown>;deleteAll():Promise<void>;setAlarm(at:number):Promise<void>};
 /** Local authority adapter. Failed durable writes never change the cached revision. */
 export class RoomStore implements CasualDatabase{
  private row:StoredRoom|null=null;
@@ -12,6 +13,9 @@ export class RoomStore implements CasualDatabase{
  private onCommit?:()=>void;
  private table:'casual_rooms'|'arena_rooms';
  constructor(storage:Storage,onCommit?:()=>void,table:'casual_rooms'|'arena_rooms'='casual_rooms'){this.storage=storage;this.onCommit=onCommit;this.table=table}
+ async deleteAvatar(id:string){await this.storage.delete?.('avatar:'+id)}
+ async getAvatar(id:string,hash?:string){const slot=await this.storage.get<StoredAvatar&{previous?:StoredAvatar}>('avatar:'+id);return !hash||slot?.hash===hash?slot:slot?.previous?.hash===hash?slot.previous:undefined}
+ async putAvatar(id:string,value:StoredAvatar,retainHash?:string){const old=retainHash?await this.getAvatar(id,retainHash):undefined;await this.storage.put('avatar:'+id,{...value,...(old&&old.hash!==value.hash?{previous:{hash:old.hash,data:old.data}}:{})})}
  snapshot(){return this.row?{...this.row}:null}
  /** Disposable read-only view for scheduling/authentication/fanout. Mutations read their own copy. */
  inspectState<T>():Readonly<T>|null{if(!this.row)return null;if(this.inspected===undefined)this.inspected=JSON.parse(this.row.state);return this.inspected as Readonly<T>}

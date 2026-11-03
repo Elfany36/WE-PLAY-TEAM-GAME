@@ -6,7 +6,7 @@ export type UnoColor=typeof UNO_COLORS[number]|'pink'|'orange'|'teal'|'purple';
 export type UnoCard={id:string;color:UnoColor|null;face:string;other?:{color:UnoColor|null;face:string}};
 export type UnoGame={kind:'uno';sameColors?:boolean;variant?:'classic'|'flip';flipSide?:0|1;flipContinue?:boolean;flipWinner?:string;hands:Record<string,UnoCard[]>;stock:UnoCard[];discard:UnoCard[];color:UnoColor;direction:1|-1;currentId:string;dealerId:string;turn:number;deadline:number;drawnId:string|null;initialWild:boolean;unoWindow:null|{playerId:string;turn:number};pending:null|{offenderId:string;targetId:string;illegal:boolean;evidence:UnoCard[];winnerId:string|null;amount?:number;untilColor?:boolean};review:null|{viewerId:string;offenderId:string;illegal:boolean;cards:UnoCard[]};scores:Record<string,number>;handNumber:number;matchWinner:string|null;dryPasses:number;lastPlay:null|{card:UnoCard;playerId:string;at:number};handPoints:number};
 const TURN=45000;
-const players=(s:CasualState)=>s.players.filter(p=>!p.retired);
+const players=(s:CasualState)=>s.players.filter(p=>!p.retired&&p.role!=='spectator');
 const name=(s:CasualState,id:string)=>s.players.find(p=>p.id===id)?.name||'Player';
 function log(s:CasualState,text:string,at:number){s.events=[...s.events.slice(-11),{id:++s.eventId,text,at}]}
 function random(s:CasualState){let x=s.random||1;x^=x<<13;x^=x>>>17;x^=x<<5;s.random=x>>>0;return s.random/4294967296}

@@ -1,0 +1,11 @@
+{
+  "results": [
+    "seven kart choices; hotrod and custom color saved",
+    "mid-round spectator joined and changed camera perspective",
+    "PNG upload replicated to spectator portrait",
+    "snapshots contain only image hash; anonymous image reads denied",
+    "watcher switched to player after round",
+    "mobile picker fits"
+  ],
+  "errors": []
+}
