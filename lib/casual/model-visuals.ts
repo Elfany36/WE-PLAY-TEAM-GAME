@@ -105,9 +105,9 @@ function board(family:string,id:string,i:number,fill:string,o:ModelOptions){
  const base=material[id]||fill,side=o.dark?'#294a8e':paper,stroke=o.dark?'#101e49':edge;
  if(family==='chess'){
   const shapes:Record<string,string>={p:circle(50,29,14,base)+path('M39 43h22l-4 18 14 15H29l14-15Z',base),r:path('M25 17h12v12h9V17h9v12h9V17h12v23L65 49v25H35V49L25 40Z',base)+path('M36 48h28M35 65h30'),n:path('M30 75V63l13-21-16 7-7-12 18-18 4-12 10 8c20 2 28 17 26 32l-8 28Z',base)+path('M48 18 36 37M56 29h1',undefined,edge,4),b:path('M50 9c-27 25-28 38-10 42l-4 20h28l-4-20c18-4 17-17-10-42Z',base)+path('M55 22 43 39M34 51h32'),q:path('m25 29 14 13 11-22 11 22 14-13-10 33H35Z',base)+circle(24,25,5,paper)+circle(50,16,6,paper)+circle(76,25,5,paper)+r(35,63,30,12,base,1),k:path('M50 8v21M40 17h20',undefined,stroke,6)+path('M32 32h36l-9 18 5 23H36l5-23Z',base)+path('M34 49h32')};
-  return (shapes[o.piece||'n']||shapes.n)+emblem(i,50,64,.3,paper)+path('M29 75h42l7 10H22Z',base)+r(23,85,54,6,side,1,stroke)+path('M30 81h40',undefined,paper,2);
+  return (shapes[o.piece||'n']||shapes.n)+emblem(i,50,64,.3,paper)+path('M29 75h42l7 10H22Z',base)+r(23,85,54,6,side,1,stroke)+path('M30 81h40',undefined,fill,3);
  }
- const chip=`<ellipse cx="50" cy="58" rx="34" ry="27" fill="${side}" stroke="${stroke}" stroke-width="3"/><ellipse cx="50" cy="48" rx="34" ry="27" fill="${base}" stroke="${stroke}" stroke-width="3"/><ellipse cx="50" cy="48" rx="27" ry="20" fill="none" stroke="${paper}" stroke-width="2"/>`;
+ const chip=`<ellipse cx="50" cy="58" rx="34" ry="27" fill="${side}" stroke="${stroke}" stroke-width="3"/><ellipse cx="50" cy="48" rx="34" ry="27" fill="${base}" stroke="${stroke}" stroke-width="3"/><ellipse cx="50" cy="48" rx="27" ry="20" fill="none" stroke="${material[id]?fill:paper}" stroke-width="2"/>`;
  const art=family==='scidama'?emblem(i,50,36,.45,paper):emblem(i,50,48,1,paper);
  const value=family==='scidama'&&o.value!==undefined?`<rect x="30" y="40" width="40" height="23" rx="5" fill="${paper}"/><text x="50" y="57" font-size="17" font-family="system-ui,sans-serif" font-weight="900" text-anchor="middle" fill="${edge}">${Number.isFinite(o.value)?o.value:0}</text>`:'';
  return chip+art+value+(o.king?emblem(10,50,22,.9,paper):'');

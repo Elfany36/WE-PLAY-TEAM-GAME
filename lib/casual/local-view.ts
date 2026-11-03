@@ -2,7 +2,8 @@ import type {CasualState} from './engine.ts';
 
 /** Pass the device between humans; computer turns never grant a computer seat. */
 export function localViewer(state:CasualState,preferred:string|null=null,review:string|null=null){
- const humans=state.players.filter(p=>!p.bot&&!p.retired),game=state.game;
+ const observer=state.players.find(p=>p.id===state.hostId&&!p.retired&&p.role==='spectator');if(observer)return observer.id;
+ const humans=state.players.filter(p=>!p.bot&&!p.retired&&p.role!=='spectator'),game=state.game;
  const fallback=humans.find(p=>p.id===preferred)?.id??humans.find(p=>p.id===state.hostId)?.id??humans[0]?.id??state.hostId;
  if(!game)return fallback;
  let actor=fallback;

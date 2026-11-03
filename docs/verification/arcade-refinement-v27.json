@@ -1,0 +1,1162 @@
+{
+  "sourceBase": "46593de7fa81789329cb49324bee0bb14fee0fbc",
+  "automatedTests": 551,
+  "retainedAssets": 755,
+  "environment": "Chromium; local Workers; ordered HTTP/WebSocket proxy with injected RTT; not real Internet measurements",
+  "lint": {
+    "modifiedProductionFilesErrors": 116,
+    "githubBaselineErrors": 116,
+    "newProductionModulesErrors": 0
+  },
+  "cases": {
+    "customization": [
+      {
+        "mode": "generals",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "fleet",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "uno",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "ladders",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "memory",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "snake",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "property",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "phone",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "circuit",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "terra",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "chess",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "dama",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "scidama",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "sumo",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "tanks",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "pong",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "marble",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "blocks",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "pool",
+        "width": 390,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "generals",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "fleet",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "uno",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "ladders",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "memory",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "snake",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "property",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "phone",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "circuit",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "terra",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "chess",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "dama",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "scidama",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "sumo",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "tanks",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "pong",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "marble",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "blocks",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      },
+      {
+        "mode": "pool",
+        "width": 1440,
+        "status": "passed",
+        "models": 15,
+        "colors": 24,
+        "autoSave": true,
+        "reset": true,
+        "randomize": true,
+        "previewOnly": true
+      }
+    ],
+    "localSpectators": [
+      {
+        "mode": "generals",
+        "width": 390,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "fleet",
+        "width": 390,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "uno",
+        "width": 390,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "ladders",
+        "width": 1440,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "memory",
+        "width": 1440,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "snake",
+        "width": 390,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "property",
+        "width": 1440,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "phone",
+        "width": 390,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "circuit",
+        "width": 390,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "terra",
+        "width": 1440,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "chess",
+        "width": 1440,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "dama",
+        "width": 1440,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "scidama",
+        "width": 1440,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "sumo",
+        "width": 1440,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "tanks",
+        "width": 1440,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "pong",
+        "width": 1440,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "marble",
+        "width": 1440,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "blocks",
+        "width": 1440,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      },
+      {
+        "mode": "pool",
+        "width": 1440,
+        "transport": "local",
+        "status": "passed",
+        "privateIdentity": true,
+        "manualAndAutoFollow": true
+      }
+    ],
+    "responsiveLayouts": [
+      {
+        "width": 390,
+        "theme": "light",
+        "style": "studio",
+        "status": "passed"
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "style": "arcade",
+        "status": "passed"
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "style": "notebook",
+        "status": "passed"
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "style": "studio",
+        "status": "passed"
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "style": "arcade",
+        "status": "passed"
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "style": "notebook",
+        "status": "passed"
+      },
+      {
+        "width": 680,
+        "theme": "light",
+        "style": "studio",
+        "status": "passed"
+      },
+      {
+        "width": 680,
+        "theme": "light",
+        "style": "arcade",
+        "status": "passed"
+      },
+      {
+        "width": 680,
+        "theme": "light",
+        "style": "notebook",
+        "status": "passed"
+      },
+      {
+        "width": 680,
+        "theme": "dark",
+        "style": "studio",
+        "status": "passed"
+      },
+      {
+        "width": 680,
+        "theme": "dark",
+        "style": "arcade",
+        "status": "passed"
+      },
+      {
+        "width": 680,
+        "theme": "dark",
+        "style": "notebook",
+        "status": "passed"
+      },
+      {
+        "width": 1440,
+        "theme": "light",
+        "style": "studio",
+        "status": "passed"
+      },
+      {
+        "width": 1440,
+        "theme": "light",
+        "style": "arcade",
+        "status": "passed"
+      },
+      {
+        "width": 1440,
+        "theme": "light",
+        "style": "notebook",
+        "status": "passed"
+      },
+      {
+        "width": 1440,
+        "theme": "dark",
+        "style": "studio",
+        "status": "passed"
+      },
+      {
+        "width": 1440,
+        "theme": "dark",
+        "style": "arcade",
+        "status": "passed"
+      },
+      {
+        "width": 1440,
+        "theme": "dark",
+        "style": "notebook",
+        "status": "passed"
+      }
+    ],
+    "onlineSpectators": [
+      {
+        "mode": "generals",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          6,
+          4
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "fleet",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          6,
+          4
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "uno",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          8,
+          4
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "ladders",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          6,
+          4
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "memory",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          6,
+          4
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "snake",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          8,
+          5
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "property",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          6,
+          4
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "phone",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "transport": "http-with-revision-notifications",
+        "socketFrames": [
+          0,
+          0
+        ],
+        "httpFrames": [
+          6,
+          4
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "circuit",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          6,
+          4
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "terra",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          72,
+          45
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "chess",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          6,
+          4
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "dama",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          7,
+          5
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "scidama",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          6,
+          4
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "sumo",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          8,
+          5
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "tanks",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          42,
+          16
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "pong",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          11,
+          7
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "marble",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          12,
+          6
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "blocks",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          7,
+          3
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "pool",
+        "rtt": 90,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          9,
+          6
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "generals",
+        "rtt": 400,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          8,
+          3
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "fleet",
+        "rtt": 400,
+        "observers": 2,
+        "status": "passed",
+        "socketFrames": [
+          7,
+          4
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      }
+    ],
+    "roundScope": [
+      {
+        "mode": "generals",
+        "rtt": 90,
+        "observers": 2,
+        "nextRoundResetsFollow": true,
+        "status": "passed",
+        "transport": "websocket",
+        "socketFrames": [
+          12,
+          9
+        ],
+        "httpFrames": [
+          0,
+          0
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "phone",
+        "rtt": 90,
+        "observers": 2,
+        "nextRoundResetsFollow": true,
+        "status": "passed",
+        "transport": "http-with-revision-notifications",
+        "socketFrames": [
+          0,
+          0
+        ],
+        "httpFrames": [
+          7,
+          6
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      },
+      {
+        "mode": "snake",
+        "rtt": 90,
+        "observers": 2,
+        "nextRoundResetsFollow": true,
+        "status": "passed",
+        "transport": "websocket",
+        "socketFrames": [
+          12,
+          8
+        ],
+        "httpFrames": [
+          0,
+          0
+        ],
+        "forgedInputRejected": true,
+        "privateProjection": true,
+        "reload": true
+      }
+    ],
+    "production": [
+      {
+        "port": 4173,
+        "width": 390,
+        "mode": "generals",
+        "status": "passed"
+      },
+      {
+        "port": 4173,
+        "width": 1440,
+        "mode": "generals",
+        "status": "passed"
+      },
+      {
+        "port": 4173,
+        "width": 390,
+        "mode": "fleet",
+        "status": "passed"
+      },
+      {
+        "port": 4173,
+        "width": 1440,
+        "mode": "fleet",
+        "status": "passed"
+      },
+      {
+        "port": 4173,
+        "width": 1440,
+        "mode": "snake",
+        "status": "passed"
+      },
+      {
+        "port": 4173,
+        "width": 1440,
+        "mode": "circuit",
+        "status": "passed"
+      },
+      {
+        "port": 4173,
+        "width": 1440,
+        "mode": "sumo",
+        "status": "passed"
+      },
+      {
+        "port": 4173,
+        "width": 1440,
+        "mode": "uno",
+        "status": "passed"
+      },
+      {
+        "port": 4174,
+        "width": 390,
+        "mode": "generals",
+        "status": "passed"
+      },
+      {
+        "port": 4174,
+        "width": 1440,
+        "mode": "generals",
+        "status": "passed"
+      },
+      {
+        "port": 4174,
+        "width": 390,
+        "mode": "fleet",
+        "status": "passed"
+      },
+      {
+        "port": 4174,
+        "width": 1440,
+        "mode": "fleet",
+        "status": "passed"
+      },
+      {
+        "port": 4174,
+        "width": 1440,
+        "mode": "snake",
+        "status": "passed"
+      },
+      {
+        "port": 4174,
+        "width": 1440,
+        "mode": "circuit",
+        "status": "passed"
+      },
+      {
+        "port": 4174,
+        "width": 1440,
+        "mode": "sumo",
+        "status": "passed"
+      },
+      {
+        "port": 4174,
+        "width": 1440,
+        "mode": "uno",
+        "status": "passed"
+      },
+      {
+        "mode": "generals",
+        "width": 390,
+        "input": "touch",
+        "check": "drag",
+        "status": "passed"
+      },
+      {
+        "mode": "fleet",
+        "width": 390,
+        "input": "touch",
+        "check": "drag",
+        "status": "passed"
+      },
+      {
+        "mode": "generals",
+        "width": 1440,
+        "input": "mouse",
+        "check": "drag",
+        "status": "passed"
+      },
+      {
+        "mode": "fleet",
+        "width": 1440,
+        "input": "mouse",
+        "check": "drag",
+        "status": "passed"
+      }
+    ]
+  }
+}

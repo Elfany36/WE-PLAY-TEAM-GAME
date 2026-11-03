@@ -36,3 +36,4 @@ import '../app/usability-v23.css';
 import '../app/customization-v24.css';
 import '../app/player-setup-v25.css';
 import '../app/tactical-games.css';
+import '../app/arcade-refinement.css';

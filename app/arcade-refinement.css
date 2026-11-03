@@ -1,0 +1,381 @@
+/* Quiet surfaces, a consistent spacing scale, and a single visible focus boundary. */
+:root[data-theme] .casual-arcade {
+  --arcade-gap: 24px;
+  --arcade-radius: 14px;
+  --arcade-field: 44px;
+  color: var(--text);
+}
+:root[data-theme] .casual-arcade :is(button, input, select, textarea) { font-family: inherit; }
+:root[data-theme] .casual-arcade :is(.button, .disclosure-toggle, .party-icon-button, .danger-action),
+:root[data-theme] .appearance-dialog .button,
+:root[data-theme] .controls-dialog .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: var(--arcade-field, 44px);
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: none !important;
+  background-image: none !important;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: 0;
+  text-shadow: none;
+  white-space: normal;
+  transform: none;
+}
+:root[data-theme] .casual-arcade :is(.button.outline, .disclosure-toggle),
+:root[data-theme] :is(.appearance-dialog, .controls-dialog) .button.outline {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+  outline: none;
+}
+:root[data-theme] .casual-arcade :is(button, input, select):not(:focus-visible),
+:root[data-theme] :is(.appearance-dialog, .controls-dialog) :is(button, input, select):not(:focus-visible) {
+  outline: none !important;
+}
+:root[data-theme] .casual-arcade :is(button, input, select, textarea):focus-visible,
+:root[data-theme] :is(.appearance-dialog, .controls-dialog) :is(button, input, select):focus-visible {
+  outline: 2px solid var(--focus) !important;
+  outline-offset: 3px !important;
+  box-shadow: none !important;
+}
+:root[data-theme] .casual-arcade :is(.button, .disclosure-toggle):hover:not(:disabled),
+:root[data-theme] :is(.appearance-dialog, .controls-dialog) .button.outline:hover:not(:disabled) {
+  background: var(--hover);
+  border-color: var(--accent);
+  filter: none;
+  transform: none;
+}
+:root[data-theme] .casual-arcade .button.dark:hover:not(:disabled) { background: var(--button-hover, var(--button-bg)); }
+:root[data-theme] .casual-arcade :is(label, fieldset, section, .party-board-panel) { min-width: 0; }
+:root[data-theme] .casual-arcade label { gap: 8px; font-size: 13px; line-height: 1.45; }
+:root[data-theme] .casual-arcade :is(input:not([type=checkbox]):not([type=range]):not([type=color]), select) {
+  min-height: var(--arcade-field);
+  padding: 11px 13px;
+  border: 1px solid var(--border) !important;
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: none !important;
+  font-size: 14px;
+  line-height: 1.45;
+}
+:root[data-theme] .casual-arcade :is(.setup-game-selector, .setup-ai-count, .setup-player-count) {
+  margin: 0;
+  padding: 0 !important;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+:root[data-theme] .casual-arcade :is(.setup-game-selector, .setup-ai-count, .setup-player-count) select { width: 100%; }
+:root[data-theme] .casual-arcade :is(.game-options label, .party-setup-grid label) > small { font-size: 12px; line-height: 1.6; }
+
+/* Discovery and cards share one media ratio and one selected boundary. */
+:root[data-theme] .casual-arcade .party-page-heading { margin: 0 0 28px; gap: 20px; align-items: center; }
+:root[data-theme] .casual-arcade .party-page-heading h1 { font-size: clamp(32px, 4vw, 46px); line-height: 1.15; }
+:root[data-theme] .casual-arcade .party-page-heading p { margin-top: 12px; max-width: 65ch; font-size: 14px; line-height: 1.7; }
+:root[data-theme] .casual-arcade .club-discovery { margin: 0 0 22px; gap: 18px; align-items: end; flex-wrap: wrap; }
+:root[data-theme] .casual-arcade .club-search { flex: 1; min-width: min(280px, 100%); }
+:root[data-theme] .casual-arcade .club-filters { display: flex; gap: 7px; flex-wrap: wrap; }
+:root[data-theme] .casual-arcade .club-filters button {
+  min-height: 39px; padding: 9px 13px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--muted); border-radius: 9px; box-shadow: none;
+  font-size: 12px; font-weight: 650;
+}
+:root[data-theme] .casual-arcade .club-filters button[aria-pressed=true] { background: var(--accent-soft); color: var(--accent-text); border-color: var(--accent); }
+:root[data-theme] .casual-arcade .selected-game-summary {
+  display: flex; align-items: center; gap: 18px; padding: 18px; margin-bottom: 24px;
+  border: 1px solid var(--border); border-radius: var(--arcade-radius); background: var(--surface);
+  box-shadow: none; min-height: 0;
+}
+:root[data-theme] .casual-arcade .selected-game-summary > :is(img, svg) {
+  width: 128px; height: 76px; flex-shrink: 0; object-fit: contain;
+  border-radius: 9px; background: var(--surface-soft); padding: 0;
+}
+:root[data-theme] .casual-arcade .selected-game-summary > div { min-width: 0; display: grid; gap: 6px; }
+:root[data-theme] .casual-arcade .selected-game-summary strong { font-size: 18px; line-height: 1.35; }
+:root[data-theme] .casual-arcade .selected-game-summary span { font-size: 12px; line-height: 1.5; }
+:root[data-theme] .casual-arcade .selected-game-summary > button { margin-left: auto; flex-shrink: 0; }
+:root[data-theme] .casual-arcade .party-game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(275px, 100%), 1fr)); gap: 20px; }
+:root[data-theme] .casual-arcade .party-game-card {
+  display: flex; flex-direction: column; padding: 0; border: 1px solid var(--border) !important;
+  background: var(--surface) !important; box-shadow: none !important; outline: none;
+  transform: none !important; overflow: hidden; text-align: left;
+}
+:root[data-theme] .casual-arcade .party-game-card:hover { border-color: var(--accent) !important; box-shadow: none !important; }
+:root[data-theme] .casual-arcade .party-game-card.selected { border-color: var(--accent) !important; background: var(--accent-soft) !important; box-shadow: none !important; }
+:root[data-theme] .casual-arcade .party-game-art { width: 100%; height: auto !important; aspect-ratio: 16 / 9; overflow: hidden; }
+:root[data-theme] .casual-arcade .party-game-art > :is(img, svg) { width: 100%; height: 100%; object-fit: contain; transform: none !important; }
+:root[data-theme] .casual-arcade .party-game-card > div:last-child { display: flex; flex-direction: column; gap: 11px; padding: 18px; flex: 1; }
+:root[data-theme] .casual-arcade .party-game-card h2 { font-size: 21px !important; line-height: 1.25; gap: 12px; margin: 0; }
+:root[data-theme] .casual-arcade .party-game-card p { font-size: 13px !important; line-height: 1.75; margin: 0; }
+:root[data-theme] .casual-arcade .party-game-card small { font-size: 10px !important; line-height: 1.55; letter-spacing: .08em; }
+:root[data-theme] .casual-arcade .party-game-card footer { margin-top: auto; padding-top: 7px; gap: 10px; flex-wrap: wrap; }
+:root[data-theme] .casual-arcade .party-game-card footer :is(span, b) { font-size: 12px !important; line-height: 1.5; }
+
+/* Each section has real padding; headings and disclosure actions have breathing room. */
+:root[data-theme] .casual-arcade .studio-disclosure { margin: 0 0 24px; padding: 0; border: 1px solid var(--border); border-radius: var(--arcade-radius); background: var(--surface); overflow: hidden; }
+:root[data-theme] .casual-arcade .studio-disclosure > header { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px 22px; margin: 0; background: transparent; }
+:root[data-theme] .casual-arcade .studio-disclosure > header > div { min-width: 0; display: grid; gap: 6px; }
+:root[data-theme] .casual-arcade .studio-disclosure > header h2 { font-size: 20px; line-height: 1.35; margin: 0; }
+:root[data-theme] .casual-arcade .studio-disclosure > header p { margin: 0; font-size: 13px; line-height: 1.6; }
+:root[data-theme] .casual-arcade .studio-disclosure > header .disclosure-toggle { flex-shrink: 0; min-height: 40px; font-size: 12px; }
+:root[data-theme] .casual-arcade .studio-disclosure > div:not([hidden]) { padding: 0 22px 22px; }
+/* Older arcade layers marked these layout resets important. Keep their scope explicit. */
+:root[data-theme] .casual-arcade .studio-disclosure { border: 1px solid var(--border) !important; padding: 0 !important; background: var(--surface) !important; }
+:root[data-theme] .casual-arcade .studio-disclosure > header { padding: 20px 22px !important; }
+:root[data-theme] .casual-arcade .game-options { padding: 0 !important; background: transparent !important; }
+:root[data-theme] .casual-arcade .club-setup-heading { margin: 32px 0 18px; padding: 0; display: grid; gap: 9px; }
+:root[data-theme] .casual-arcade .club-setup-heading h2 { margin: 0; font-size: clamp(24px, 3vw, 32px); line-height: 1.3; letter-spacing: -.035em; }
+:root[data-theme] .casual-arcade .club-setup-heading .eyebrow { font-size: 11px; letter-spacing: .12em; line-height: 1.6; }
+:root[data-theme] .casual-arcade .game-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap: 22px; padding: 0; margin: 0; }
+:root[data-theme] .casual-arcade .game-options > fieldset { grid-column: 1 / -1; margin: 0; padding: 0; border: 0; }
+:root[data-theme] .casual-arcade .game-options legend { padding: 0 0 12px; font-size: 14px; font-weight: 650; }
+:root[data-theme] .casual-arcade :is(.club-map-picker, .table-scene-picker) > div { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(140px, 100%), 1fr)); gap: 12px; }
+:root[data-theme] .casual-arcade :is(.club-map-picker, .table-scene-picker) button { padding: 10px; min-width: 0; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); box-shadow: none !important; }
+:root[data-theme] .casual-arcade :is(.club-map-picker, .table-scene-picker) button[aria-pressed=true] { background: var(--accent-soft); border-color: var(--accent); outline: none; }
+:root[data-theme] .casual-arcade :is(.club-map-picker, .table-scene-picker) :is(img, svg) { display: block; width: 100%; height: auto; aspect-ratio: 40 / 27; object-fit: contain; border-radius: 6px; }
+:root[data-theme] .casual-arcade :is(.club-map-picker, .table-scene-picker) strong { display: block; font-size: 13px; margin-top: 10px; line-height: 1.5; }
+:root[data-theme] .casual-arcade :is(.club-map-picker, .table-scene-picker) small { font-size: 11px; line-height: 1.6; margin-top: 5px; }
+:root[data-theme] .casual-arcade .setup-display-name { margin: 0 0 24px; max-width: 560px; font-size: 13px; }
+:root[data-theme] .casual-arcade .party-setup-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: start; margin-bottom: 24px; }
+:root[data-theme] .casual-arcade .party-setup-grid > section { display: flex; flex-direction: column; gap: 17px; min-height: 0; padding: 22px; border: 1px solid var(--border); border-radius: var(--arcade-radius); background: var(--surface); box-shadow: none; }
+:root[data-theme] .casual-arcade .party-panel-title { display: flex; gap: 12px; align-items: center; padding: 0; margin: 0; }
+:root[data-theme] .casual-arcade .party-panel-title > span { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px; background: var(--surface-soft); color: var(--accent); flex-shrink: 0; }
+:root[data-theme] .casual-arcade .party-panel-title h2 { font-size: 19px; line-height: 1.3; margin: 0; }
+:root[data-theme] .casual-arcade .party-panel-title p { font-size: 12px; line-height: 1.6; margin: 5px 0 0; }
+:root[data-theme] .casual-arcade .party-setup-grid .button { width: 100%; margin: 0; }
+:root[data-theme] .casual-arcade .party-setup-grid :is(.setup-card-note, .local-watch-note) { font-size: 13px; line-height: 1.75; margin: 0; }
+:root[data-theme] .casual-arcade .party-setup-grid > section > small { font-size: 12px; line-height: 1.7; margin: 0; }
+:root[data-theme] .casual-arcade .local-name-grid { display: grid; gap: 10px; margin: 0; }
+:root[data-theme] .casual-arcade .local-name-grid label { display: flex; flex-direction: row; align-items: center; gap: 9px; min-width: 0; }
+:root[data-theme] .casual-arcade .local-name-grid input { min-width: 0; width: 100%; }
+:root[data-theme] .local-mode-picker { display: flex; gap: 5px; padding: 4px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-soft); }
+:root[data-theme] .local-mode-picker button { flex: 1; min-height: 38px; display: flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid transparent; border-radius: 7px; font-size: 12px; color: var(--muted); }
+:root[data-theme] .local-mode-picker button[aria-pressed=true] { background: var(--surface); color: var(--text); border-color: var(--border); }
+
+/* Player identity and actions stay together, before and during a game. */
+:root[data-theme] .casual-arcade .character-toolbar {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px;
+  padding: 22px; margin: 0 0 24px; min-height: 0; height: auto;
+  border: 1px solid var(--border); border-radius: var(--arcade-radius);
+  background: var(--surface); background-image: none; box-shadow: none !important;
+}
+:root[data-theme] .casual-arcade .character-toolbar > div:first-child { min-width: 0; }
+:root[data-theme] .casual-arcade .character-toolbar h2 { margin: 6px 0 8px; font-size: 22px; line-height: 1.3; }
+:root[data-theme] .casual-arcade .character-toolbar p { margin: 0; font-size: 13px; line-height: 1.7; max-width: 78ch; }
+:root[data-theme] .casual-arcade .character-toolbar .eyebrow { font-size: 10px; letter-spacing: .09em; line-height: 1.7; }
+:root[data-theme] .casual-arcade .character-choice { display: flex; align-items: center; justify-content: flex-start; gap: 14px; flex-wrap: wrap; min-width: 0; padding: 0; }
+:root[data-theme] .casual-arcade .character-choice > .character-model { width: 64px; height: 64px; object-fit: contain; flex-shrink: 0; padding: 4px; border-radius: 10px; background: var(--surface-soft); }
+:root[data-theme] .character-selected-name { display: grid; gap: 5px; flex: 1 1 170px; min-width: 0; }
+:root[data-theme] .character-selected-name strong { font-size: 15px; line-height: 1.4; overflow-wrap: anywhere; }
+:root[data-theme] .character-selected-name small { font-size: 12px; line-height: 1.6; }
+:root[data-theme] .character-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+:root[data-theme] .casual-arcade .character-choice :is(.character-customize-button, .control-customize-button) { width: auto; padding: 11px 15px; min-height: 44px; background: var(--surface); color: var(--text); border: 1px solid var(--border); box-shadow: none; font-weight: 650; }
+:root[data-theme] .casual-arcade .character-choice :is(.character-customize-button, .control-customize-button) > svg { color: var(--accent); }
+:root[data-theme] .casual-arcade .character-choice :is(.character-customize-button, .control-customize-button):hover { background: var(--hover); border-color: var(--accent); }
+:root[data-theme] .casual-arcade .character-confirmed { flex-basis: 100%; margin: 0; padding: 0; border: 0; border-radius: 0; background: transparent; color: var(--muted); font-size: 12px; }
+:root[data-theme] .casual-arcade .character-toolbar:not(.character-preflight) { padding: 17px 20px; gap: 12px; }
+:root[data-theme] .casual-arcade .character-toolbar:not(.character-preflight) h2 { font-size: 18px; margin: 4px 0; }
+:root[data-theme] .casual-arcade .character-toolbar:not(.character-preflight) p { font-size: 12px; }
+:root[data-theme] .casual-arcade .room-role-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; padding: 16px 20px; margin: 0 0 24px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); box-shadow: none; }
+:root[data-theme] .room-role-bar label { min-width: 180px; }
+:root[data-theme] .room-role-bar small { flex: 1; font-size: 12px; line-height: 1.65; }
+:root[data-theme] .casual-arcade .party-lobby > section { padding: 24px; border: 1px solid var(--border); border-radius: var(--arcade-radius); background: var(--surface); background-image: none; }
+:root[data-theme] .casual-arcade .party-lobby > section > :is(h1, p, label, .game-options, .party-invite-code, .party-lobby-start) { margin-bottom: 22px; }
+:root[data-theme] .casual-arcade .party-lobby > section h1 { line-height: 1.3; font-size: clamp(24px, 3vw, 34px); }
+:root[data-theme] .casual-arcade .party-lobby-start { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; padding-top: 6px; }
+:root[data-theme] .casual-arcade .party-lobby-start small { font-size: 12px; line-height: 1.7; }
+
+/* Spectators keep their own identity while choosing a public camera perspective. */
+:root[data-theme] .spectator-bar { margin: 0 0 24px; padding: 20px; border: 1px solid var(--border); border-radius: var(--arcade-radius); background: var(--surface); }
+:root[data-theme] .spectator-heading { display: flex; align-items: center; gap: 13px; }
+:root[data-theme] .spectator-mark { display: grid; place-items: center; flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; color: var(--accent); background: var(--accent-soft); }
+:root[data-theme] .spectator-heading > div { min-width: 0; flex: 1; }
+:root[data-theme] .spectator-heading .eyebrow { font-size: 10px; letter-spacing: .12em; }
+:root[data-theme] .spectator-heading h2 { font-size: 20px; line-height: 1.35; margin: 5px 0; overflow-wrap: anywhere; }
+:root[data-theme] .spectator-heading p { font-size: 12px; line-height: 1.6; margin: 0; }
+:root[data-theme] .spectator-live-state { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border); border-radius: 20px; padding: 7px 10px; color: var(--muted); font-size: 11px; }
+:root[data-theme] .spectator-live-state.playing { color: var(--success-text); background: var(--success-bg); border-color: transparent; }
+:root[data-theme] .spectator-follow-controls { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border); }
+:root[data-theme] .spectator-follow-controls .watch-auto { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; padding: 10px 13px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface); font-size: 12px; }
+:root[data-theme] .spectator-follow-controls .watch-auto.selected { color: var(--accent-text); background: var(--accent-soft); border-color: var(--accent); }
+:root[data-theme] .watch-player-select { display: flex; align-items: end; gap: 7px; flex: 1; min-width: min(300px, 100%); }
+:root[data-theme] .watch-player-select label { flex: 1; min-width: 0; }
+:root[data-theme] .watch-player-select label > span { font-size: 11px; color: var(--muted); }
+:root[data-theme] .watch-player-select select { width: 100%; font-size: 12px; }
+:root[data-theme] .watch-player-select > button { display: grid; place-items: center; width: 40px; min-height: 44px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface); flex-shrink: 0; }
+:root[data-theme] .spectator-follow-controls > small { display: flex; align-items: center; gap: 6px; flex-basis: 100%; font-size: 12px; line-height: 1.65; }
+
+/* Dialogs retain a fixed header/footer and a comfortable, scrollable body. */
+:root[data-theme] .appearance-dialog,
+:root[data-theme] .controls-dialog { width: min(960px, calc(100vw - 32px)); max-height: calc(100dvh - 40px); padding: 0; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); color: var(--text); box-shadow: 0 16px 48px #08132138; }
+:root[data-theme] :is(.appearance-dialog, .controls-dialog)::backdrop { background: #0b152b80; backdrop-filter: none; }
+:root[data-theme] :is(.appearance-dialog, .controls-dialog) > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 22px 24px; background: var(--surface); border-bottom: 1px solid var(--border); }
+:root[data-theme] :is(.appearance-dialog, .controls-dialog) > header h2 { font-size: 25px; line-height: 1.3; margin: 7px 0 0; }
+:root[data-theme] :is(.appearance-dialog, .controls-dialog) > header small { font-size: 10px; line-height: 1.7; letter-spacing: .09em; }
+:root[data-theme] :is(.appearance-dialog, .controls-dialog) > header > button { display: grid; place-items: center; width: 40px; height: 40px; padding: 8px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); flex-shrink: 0; }
+:root[data-theme] .appearance-body { padding: 24px; gap: 22px; }
+:root[data-theme] .appearance-hero { display: flex; align-items: center; gap: 24px; padding: 20px; margin-bottom: 20px; border: 1px solid var(--border); border-radius: 14px; background: var(--surface-soft); background-image: none; box-shadow: none; }
+:root[data-theme] .appearance-hero .model-preview { width: 160px; height: 160px; padding: 0; object-fit: contain; flex-shrink: 0; filter: none; }
+:root[data-theme] .appearance-hero > div { min-width: 0; display: grid; gap: 10px; }
+:root[data-theme] .appearance-hero strong { font-size: 23px; line-height: 1.35; }
+:root[data-theme] .appearance-hero small { font-size: 10px; letter-spacing: .08em; line-height: 1.6; }
+:root[data-theme] .appearance-hero span { font-size: 13px; line-height: 1.75; }
+:root[data-theme] .appearance-hero .model-preview-stage {
+  width: 208px; min-height: 208px; flex-shrink: 0; display: grid; place-items: center;
+  padding: 22px; gap: 0; border: 1px solid var(--border); border-radius: 12px;
+}
+:root[data-theme] .model-preview-stage.preview-background-light { background: #f2f0e9; }
+:root[data-theme] .model-preview-stage.preview-background-dark { background: #172738; border-color: #45566b; }
+:root[data-theme] .model-preview-stage.preview-background-grid {
+  background-color: var(--surface);
+  background-image: linear-gradient(45deg, var(--surface-soft) 25%, transparent 25%), linear-gradient(-45deg, var(--surface-soft) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--surface-soft) 75%), linear-gradient(-45deg, transparent 75%, var(--surface-soft) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+}
+:root[data-theme] .model-preview-tools { margin: 0 0 20px; border: 1px solid var(--border); border-radius: 12px; }
+:root[data-theme] .model-preview-tools > summary { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; padding: 14px 16px; cursor: pointer; font-size: 13px; font-weight: 650; }
+:root[data-theme] .model-preview-tools > summary > small { font-size: 11px; line-height: 1.6; font-weight: 450; }
+:root[data-theme] .model-preview-fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 18px; padding: 2px 16px 18px; align-items: end; }
+:root[data-theme] .model-preview-fields label { min-width: 0; font-size: 12px; gap: 8px; }
+:root[data-theme] .model-preview-fields select { width: 100%; min-height: 42px; padding: 9px 11px; border: 1px solid var(--border); border-radius: 8px; color: var(--text); background: var(--surface); font-size: 13px; }
+:root[data-theme] .preview-angle > span { font-variant-numeric: tabular-nums; color: var(--muted); font-size: 12px; }
+:root[data-theme] .preview-angle input { width: 100%; accent-color: var(--accent); min-height: 26px; }
+:root[data-theme] .preview-background-picker { display: flex; gap: 6px; flex-wrap: wrap; }
+:root[data-theme] .preview-background-picker button,
+:root[data-theme] .preview-reset,
+:root[data-theme] .appearance-collection-tools button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 39px;
+  padding: 9px 11px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface);
+  color: var(--text); font-size: 12px; line-height: 1.5; box-shadow: none;
+}
+:root[data-theme] .preview-background-picker button[aria-pressed=true] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-text); }
+:root[data-theme] .appearance-collection-tools { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+:root[data-theme] .appearance-collection-tools > span { flex: 1; min-width: 180px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+:root[data-theme] .uno-spectator-note { display: flex; align-items: center; gap: 14px; padding: 20px; margin-top: 20px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+:root[data-theme] .uno-spectator-note > svg { color: var(--accent); }
+:root[data-theme] .uno-spectator-note h3 { font-size: 15px; margin: 0 0 6px; }
+:root[data-theme] .uno-spectator-note p { font-size: 12px; line-height: 1.7; }
+:root[data-theme] .appearance-body fieldset { min-width: 0; padding: 0; margin: 0; border: 0; }
+:root[data-theme] .appearance-body legend { font-size: 15px; font-weight: 650; line-height: 1.5; padding: 0 0 16px; }
+:root[data-theme] .appearance-models { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(140px, 100%), 1fr)); gap: 12px; margin: 0 0 24px; }
+:root[data-theme] .appearance-models button { display: grid; grid-template-rows: 104px auto; align-items: center; justify-items: center; gap: 10px; padding: 12px; min-height: 154px; min-width: 0; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); box-shadow: none; }
+:root[data-theme] .appearance-models button > img { width: 100%; height: 104px; object-fit: contain; filter: none; }
+:root[data-theme] .appearance-models button > span { display: flex; align-items: center; justify-content: center; gap: 6px; max-width: 100%; font-size: 12px; font-weight: 650; line-height: 1.5; text-align: center; overflow-wrap: anywhere; }
+:root[data-theme] .appearance-models button.selected { padding: 12px; border: 1px solid var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+:root[data-theme] .appearance-color-label { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; font-size: 16px; line-height: 1.5; margin: 0 0 14px; }
+:root[data-theme] .appearance-color-label small { font-size: 12px; font-weight: 500; }
+:root[data-theme] .appearance-colors { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 10px; margin: 0 0 20px; width: 100%; }
+:root[data-theme] .appearance-colors button { display: grid; place-items: center; width: 100%; min-width: 0; max-width: 58px; height: auto; aspect-ratio: 1; min-height: 44px; padding: 0; border: 1px solid #65708466; border-radius: 10px; outline: none; box-shadow: none; }
+:root[data-theme] .appearance-colors button[aria-pressed=true] { outline: none; box-shadow: none; border: 2px solid var(--text); }
+:root[data-theme] .appearance-custom-color { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin: 0; padding: 18px 0; border-top: 1px solid var(--border); }
+:root[data-theme] .appearance-custom-color label { display: flex; flex-direction: row; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 13px; }
+:root[data-theme] .appearance-custom-color input[type=color] { width: 52px; height: 42px; padding: 3px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); }
+:root[data-theme] .appearance-custom-color code { font-size: 12px; }
+:root[data-theme] .appearance-upload { margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--border); gap: 12px; }
+:root[data-theme] .appearance-upload > small { font-size: 12px; line-height: 1.7; }
+:root[data-theme] :is(.appearance-dialog, .controls-dialog) > footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; padding: 18px 24px; background: var(--surface); border-top: 1px solid var(--border); }
+:root[data-theme] :is(.appearance-dialog, .controls-dialog) > footer > small { font-size: 12px; line-height: 1.6; flex: 1; min-width: 180px; }
+:root[data-theme] .tactical-preview-tools { gap: 16px; padding: 18px; margin: 0 0 22px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+:root[data-theme] .tactical-preview-tools label { gap: 8px; font-size: 12px; line-height: 1.5; }
+:root[data-theme] .tactical-preview-tools select { min-height: 42px; border: 1px solid var(--border); border-radius: 8px; padding: 9px 12px; background: var(--surface); color: var(--text); font-size: 13px; }
+:root[data-theme] .tactical-preview-tools small { font-size: 12px; line-height: 1.7; }
+:root[data-theme] .control-binding-list { padding: 8px 24px; }
+:root[data-theme] .control-binding-list > div { gap: 16px; padding: 16px 0; }
+:root[data-theme] .control-binding-list strong { font-size: 14px; line-height: 1.5; }
+:root[data-theme] .control-binding-list button { border-radius: 9px; box-shadow: none; min-height: 44px; }
+:root[data-theme] .control-save-status { padding: 16px 24px; font-size: 12px; line-height: 1.7; }
+
+/* The screenshots' tactical footer and tools remain readable at normal zoom. */
+:root[data-theme] .casual-arcade .tactical-table .fleet-mini-manual p { max-width: 104ch; font-size: 12px !important; line-height: 1.8; }
+:root[data-theme] .casual-arcade .tactical-table .fleet-mini-manual { gap: 12px; margin: 0 24px 24px; align-items: start; }
+:root[data-theme] .casual-arcade .tactical-board-label { padding-bottom: 14px; gap: 14px; flex-wrap: wrap; }
+:root[data-theme] .casual-arcade .tactical-board-label > span { font-size: 12px !important; line-height: 1.5; }
+:root[data-theme] .casual-arcade .tactical-table .tactical-board-legend { gap: 16px; margin-top: 14px; font-size: 11px; line-height: 1.6; }
+:root[data-theme] .casual-arcade .fleet-placement-tools { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+:root[data-theme] .casual-arcade .fleet-placement-tools > button:first-child { grid-column: 1 / -1; }
+:root[data-theme] .casual-arcade .fleet-placement-tools .button { min-width: 0; min-height: 42px; padding: 9px 12px; font-size: 12px; }
+:root[data-theme] .casual-arcade .fleet-unit-roster > button { padding: 12px; min-height: 58px; }
+:root[data-theme] .casual-arcade .fleet-unit-roster > button strong { font-size: 13px !important; line-height: 1.5; }
+:root[data-theme] .casual-arcade .fleet-unit-roster > button small { font-size: 11px !important; line-height: 1.6; }
+:root[data-theme] .casual-arcade .fleet-placement-status { font-size: 12px !important; line-height: 1.7 !important; margin: 16px 0 !important; }
+:root[data-theme] .casual-arcade[data-role=spectator] :is(.club-controls, .snake-controls, .kart-controls, .terra-controls) { display: none; }
+
+/* Shared navigation and room tools use the same clear, quiet controls. */
+:root[data-site-theme][data-theme] .theme-controls { display: flex; align-items: center; gap: 8px; }
+:root[data-site-theme][data-theme] :is(.theme-toggle, .interface-toggle, .dashboard-toggle) {
+  border: 1px solid var(--border); border-radius: 10px; background: var(--surface);
+  color: var(--text); box-shadow: none; text-shadow: none; transform: none;
+}
+:root[data-site-theme][data-theme] .search-wrap { gap: 10px; align-items: center; padding: 0 12px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); }
+:root[data-site-theme][data-theme] .search-wrap input { min-width: 0; min-height: 42px; padding: 8px 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; font-size: 14px; }
+:root[data-site-theme][data-theme] .search-wrap:focus-within { outline: 2px solid var(--focus); outline-offset: 2px; }
+:root[data-site-theme][data-theme] .search-wrap input:focus-visible { outline: none; }
+:root[data-theme] .casual-arcade .dock-panel-header { padding: 14px; gap: 10px; }
+:root[data-theme] .casual-arcade .dock-panel-header > strong { font-size: 13px; line-height: 1.5; }
+:root[data-theme] .casual-arcade .dock-panel-header button { min-height: 40px; min-width: 36px; font-size: 12px; color: var(--text); }
+:root[data-theme] .casual-arcade .match-identity > strong { font-size: 14px; line-height: 1.5; }
+:root[data-theme] .casual-arcade .match-tags { gap: 6px; margin-top: 5px; }
+:root[data-theme] .casual-arcade .match-tags :is(b, span) { font-size: 10px; line-height: 1.5; }
+:root[data-theme] .casual-arcade .watcher-list { padding: 14px; gap: 9px; font-size: 12px; line-height: 1.6; }
+
+@media (max-width: 1050px) {
+  :root[data-theme] .casual-arcade .party-setup-grid { grid-template-columns: 1fr 1fr; }
+  :root[data-theme] .casual-arcade .party-start-local { grid-column: 1 / -1; }
+}
+@media (max-width: 700px) {
+  :root[data-theme] .casual-arcade { --arcade-gap: 18px; }
+  :root[data-theme] .casual-arcade .party-setup-grid { grid-template-columns: 1fr; gap: 16px; }
+  :root[data-theme] .casual-arcade .party-start-local { grid-column: auto; }
+  :root[data-theme] .casual-arcade .studio-disclosure > header { padding: 18px !important; gap: 14px; flex-wrap: wrap; }
+  :root[data-theme] .casual-arcade .studio-disclosure > div:not([hidden]) { padding: 0 18px 18px; }
+  :root[data-theme] .casual-arcade .game-options { gap: 18px; }
+  :root[data-theme] .casual-arcade .character-toolbar { padding: 18px; gap: 16px; }
+  :root[data-theme] .casual-arcade .character-actions { flex-basis: 100%; }
+  :root[data-theme] .casual-arcade .character-actions > .button { flex: 1; justify-content: center; }
+  :root[data-theme] .appearance-dialog,
+:root[data-theme] .controls-dialog { width: calc(100vw - 24px); max-height: calc(100dvh - 24px); border-radius: 14px; }
+  :root[data-theme] :is(.appearance-dialog, .controls-dialog) > header { padding: 18px; }
+  :root[data-theme] :is(.appearance-dialog, .controls-dialog) > header h2 { font-size: 22px; }
+  :root[data-theme] .appearance-body { padding: 18px; }
+  :root[data-theme] .appearance-hero { padding: 16px; gap: 16px; }
+  :root[data-theme] .appearance-hero .model-preview { width: 128px; height: 128px; }
+  :root[data-theme] .appearance-hero strong { font-size: 20px; }
+  :root[data-theme] .appearance-models { grid-template-columns: repeat(auto-fill, minmax(min(126px, 100%), 1fr)); gap: 10px; }
+  :root[data-theme] .appearance-models button { padding: 10px; grid-template-rows: 96px auto; min-height: 148px; }
+  :root[data-theme] .appearance-models button.selected { padding: 10px; }
+  :root[data-theme] .appearance-models button > img { height: 96px; }
+  :root[data-theme] .appearance-colors { grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 9px; }
+  :root[data-theme] :is(.appearance-dialog, .controls-dialog) > footer { padding: 16px 18px; gap: 12px; }
+  :root[data-theme] .spectator-bar { padding: 17px; }
+  :root[data-theme] .spectator-heading { flex-wrap: wrap; }
+  :root[data-theme] .spectator-heading h2 { font-size: 18px; }
+  :root[data-theme] .spectator-live-state { margin-left: 57px; }
+  :root[data-theme] .spectator-follow-controls { align-items: stretch; }
+  :root[data-theme] .watch-player-select { flex-basis: 100%; }
+  :root[data-theme] .casual-arcade .party-lobby > section { padding: 18px; }
+}
+@media (max-width: 460px) {
+  :root[data-theme] .casual-arcade .selected-game-summary { padding: 14px; gap: 12px; flex-wrap: wrap; }
+  :root[data-theme] .casual-arcade .selected-game-summary > :is(img, svg) { width: 96px; height: 60px; }
+  :root[data-theme] .casual-arcade .selected-game-summary > div { flex: 1; }
+  :root[data-theme] .casual-arcade .selected-game-summary > button { width: 100%; margin: 0; }
+  :root[data-theme] .casual-arcade .studio-disclosure > header .disclosure-toggle { padding: 9px 12px; font-size: 11px; }
+  :root[data-theme] .casual-arcade .character-actions { flex-direction: column; align-items: stretch; }
+  :root[data-theme] .casual-arcade .character-actions > .button { width: 100%; }
+  :root[data-theme] .appearance-hero { align-items: center; flex-direction: column; text-align: center; }
+  :root[data-theme] .appearance-hero .model-preview { width: 150px; height: 150px; }
+  :root[data-theme] .appearance-colors { grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 9px; }
+  :root[data-theme] .appearance-custom-color { gap: 14px; }
+  :root[data-theme] :is(.appearance-dialog, .controls-dialog) > footer > .button { flex: 1; }
+  :root[data-theme] .casual-arcade .tactical-table .fleet-mini-manual { margin: 0 14px 18px; }
+  :root[data-theme] .casual-arcade .room-role-bar { padding: 16px; }
+  :root[data-theme] .room-role-bar label { width: 100%; }
+}

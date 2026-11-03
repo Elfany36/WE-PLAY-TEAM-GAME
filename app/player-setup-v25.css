@@ -1,16 +1,4 @@
-.character-preflight{border:2px solid color-mix(in srgb,#d477d5 65%,var(--border));box-shadow:0 0 0 5px #c85ac414,0 8px 30px #9f5ee61a;background:linear-gradient(120deg,#a94fc012,transparent 60%),var(--surface);scroll-margin-top:20px}
-.character-preflight h2{font-size:clamp(21px,2.2vw,29px)}
-.character-choice{justify-content:flex-start;gap:12px;flex-wrap:wrap}
-.character-choice .character-customize-button{background:#843a91;color:#fff;border:2px solid #edbaef;box-shadow:0 0 0 4px #b94fbb24,0 0 22px #b94fbb30;font-weight:800;min-height:50px;padding:12px 18px}
-.character-choice .control-customize-button{background:#155b79;color:#fff;border:2px solid #91d8ec;box-shadow:0 0 0 4px #36a4cc20,0 0 22px #36a4cc29;font-weight:800;min-height:50px;padding:12px 18px}
-.character-choice .character-customize-button:hover{background:#692a78}.character-choice .control-customize-button:hover{background:#114b65}
-.setup-role-glow{border:2px solid color-mix(in srgb,#7dbd70 70%,var(--border));box-shadow:0 0 0 4px #81b75d15;background:linear-gradient(120deg,#81b75d15,transparent),var(--surface-soft);padding:16px;border-radius:18px}
-.setup-role-glow label{font-weight:800;color:var(--text)}
-.setup-role-glow select{border:2px solid #7aaf6f;min-height:46px;background:var(--surface);color:var(--text)}
-.setup-ai-count,.setup-player-count{padding:14px!important;border:2px solid color-mix(in srgb,#d7a14e 70%,var(--border));border-radius:15px;background:linear-gradient(130deg,#d7a14e15,transparent),var(--surface-soft);box-shadow:0 0 0 4px #d7a14e12}
-.setup-ai-count select,.setup-player-count select{border:2px solid #ba8d49!important;min-height:46px;background:var(--surface);color:var(--text)}
-.setup-game-selector{padding:14px;border:2px solid color-mix(in srgb,#8f90e8 70%,var(--border));border-radius:15px;box-shadow:0 0 0 4px #8f90e815;background:linear-gradient(130deg,#8f90e815,transparent),var(--surface-soft)}
-.setup-game-selector select{border:2px solid #8585c9!important;min-height:48px;font-weight:750;background:var(--surface);color:var(--text)}
+/* Setup controls use the shared, theme-aware arcade foundation. */
 .controls-dialog{margin:auto;width:min(700px,calc(100vw - 24px));max-height:calc(100dvh - 24px);border:1px solid var(--border);border-radius:24px;padding:0;background:var(--surface);color:var(--text)}
 .controls-dialog[open]{display:flex;flex-direction:column}.controls-dialog::backdrop{background:#081829b5}
 .controls-dialog header,.controls-dialog footer{padding:20px;display:flex;gap:12px;justify-content:space-between;align-items:center;flex-shrink:0;background:var(--surface-soft)}
