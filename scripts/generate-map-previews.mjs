@@ -30,4 +30,4 @@ for(const s of TABLE_SCENES)for(const kind of ['board','cards','pool']){let body
  else for(let i=0;i<3;i++)body+=rect(83+i*50,57+(i%2)*14,50,77,'#fff5da',7)+rect(88+i*50,62+(i%2)*14,40,67,['#ff6288','#42bcd7','#9a74e7'][i],4)+circle(108+i*50,95+(i%2)*14,12,'#fff1dc');
  save(`table-${s.id}-${kind}`,body,s.felt);
 }
-console.log('Generated 89 map and table previews from shared game geometry.');
+console.log('Generated '+(SNAKE_MAPS.length*SNAKE_SIZES.length+TRACKS.length+CLUB_MAPS.length*4+TABLE_SCENES.length*3)+' map and table previews from shared game geometry.');

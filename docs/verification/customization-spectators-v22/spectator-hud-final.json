@@ -1,0 +1,138 @@
+[
+  {
+    "mode": "circuit",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 782,
+        "height": 489,
+        "opaque": 3824,
+        "fps": "58"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "tanks",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 782,
+        "height": 489,
+        "opaque": 3824,
+        "fps": "60"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "sumo",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 782,
+        "height": 489,
+        "opaque": 3824,
+        "fps": "61"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "marble",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 782,
+        "height": 489,
+        "opaque": 3824,
+        "fps": "61"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "circuit",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 346,
+        "height": 216,
+        "opaque": 748,
+        "fps": "60"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "tanks",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 346,
+        "height": 216,
+        "opaque": 748,
+        "fps": "61"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "sumo",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 346,
+        "height": 216,
+        "opaque": 748,
+        "fps": "61"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "marble",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 346,
+        "height": 216,
+        "opaque": 748,
+        "fps": "61"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  }
+]

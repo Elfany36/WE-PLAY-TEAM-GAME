@@ -1,0 +1,80 @@
+[
+  {
+    "mode": "tanks",
+    "width": 1440,
+    "actors": 4,
+    "sampleMs": 1800,
+    "renderFps": 59,
+    "gradientCalls": {
+      "linear": 0,
+      "radial": 0
+    },
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "mode": "marble",
+    "width": 1440,
+    "actors": 4,
+    "sampleMs": 1800,
+    "renderFps": 60,
+    "gradientCalls": {
+      "linear": 0,
+      "radial": 0
+    },
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "mode": "circuit",
+    "width": 1440,
+    "actors": 4,
+    "sampleMs": 1800,
+    "renderFps": 59,
+    "gradientCalls": {
+      "linear": 0,
+      "radial": 0
+    },
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "mode": "tanks",
+    "width": 390,
+    "actors": 4,
+    "sampleMs": 1800,
+    "renderFps": 60,
+    "gradientCalls": {
+      "linear": 0,
+      "radial": 0
+    },
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "mode": "marble",
+    "width": 390,
+    "actors": 4,
+    "sampleMs": 1800,
+    "renderFps": 60,
+    "gradientCalls": {
+      "linear": 0,
+      "radial": 0
+    },
+    "overflow": 0,
+    "errors": []
+  },
+  {
+    "mode": "circuit",
+    "width": 390,
+    "actors": 4,
+    "sampleMs": 1800,
+    "renderFps": 60,
+    "gradientCalls": {
+      "linear": 0,
+      "radial": 0
+    },
+    "overflow": 0,
+    "errors": []
+  }
+]

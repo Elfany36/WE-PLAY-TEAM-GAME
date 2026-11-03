@@ -5,7 +5,7 @@ import {circuitRank} from './circuit.ts';
 /** Use the same progress order as each authoritative game, including an empty lobby. */
 export function casualLeaderboard(room:CasualPublic|null){
  if(!room)return[];
- const game=room.game,players=[...room.players];
+ const game=room.game,players=room.players.filter(p=>p.role!=='spectator');
  if(!game)return players;
  const ordered=game.kind==='circuit'?circuitRank(game):'actors'in game?partyRank(game):null;
  if(ordered){const places=new Map(ordered.map((p:{id:string},i:number)=>[p.id,i]));return players.sort((a,b)=>(places.get(a.id)??Infinity)-(places.get(b.id)??Infinity));}

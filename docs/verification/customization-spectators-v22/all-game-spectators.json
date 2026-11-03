@@ -1,0 +1,466 @@
+[
+  {
+    "mode": "snake",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 574,
+        "height": 574,
+        "opaque": 3295
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "sumo",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 782,
+        "height": 489,
+        "opaque": 3824,
+        "fps": "60"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "tanks",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 782,
+        "height": 489,
+        "opaque": 3824,
+        "fps": "59"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "pong",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 782,
+        "height": 489,
+        "opaque": 3824,
+        "fps": "61"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "marble",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 782,
+        "height": 489,
+        "opaque": 3824,
+        "fps": "61"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "blocks",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 782,
+        "height": 659,
+        "opaque": 5154,
+        "fps": "59"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "circuit",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 782,
+        "height": 489,
+        "opaque": 3824,
+        "fps": "58"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "terra",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 734,
+        "height": 459,
+        "opaque": 3370,
+        "fps": "54"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "pool",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 678,
+        "height": 380,
+        "opaque": 2577,
+        "fps": "13"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "uno",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "ladders",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "memory",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "property",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "chess",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "dama",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "scidama",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "phone",
+    "width": 1440,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "snake",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 346,
+        "height": 346,
+        "opaque": 1198
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "sumo",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 346,
+        "height": 216,
+        "opaque": 748,
+        "fps": "61"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "tanks",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 346,
+        "height": 216,
+        "opaque": 748,
+        "fps": "60"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "pong",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 346,
+        "height": 216,
+        "opaque": 748,
+        "fps": "61"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "marble",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 346,
+        "height": 216,
+        "opaque": 748,
+        "fps": "61"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "blocks",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 346,
+        "height": 569,
+        "opaque": 1969,
+        "fps": "61"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": "none",
+    "errors": []
+  },
+  {
+    "mode": "circuit",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 346,
+        "height": 216,
+        "opaque": 748,
+        "fps": "60"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "terra",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 322,
+        "height": 201,
+        "opaque": 648,
+        "fps": "57"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "pool",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [
+      {
+        "width": 346,
+        "height": 194,
+        "opaque": 672,
+        "fps": "13"
+      }
+    ],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "uno",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "ladders",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "memory",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "property",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "chess",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "dama",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "scidama",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  },
+  {
+    "mode": "phone",
+    "width": 390,
+    "overflow": 0,
+    "canvas": [],
+    "recovery": [],
+    "role": "spectator",
+    "controls": null,
+    "errors": []
+  }
+]

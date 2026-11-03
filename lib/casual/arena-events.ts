@@ -3,6 +3,8 @@ import type {PartyGame,ClubActor} from './party.ts';
 export function glacierGust(g:PartyGame){const elapsed=g.tick*50%20000,cycle=Math.floor(g.tick*50/20000);return{active:g.kind==='marble'&&g.map==='glacier'&&g.rules===2&&elapsed>=16000,direction:cycle%2?-1:1,remaining:Math.ceil(((elapsed>=16000?20000:16000)-elapsed)/1000)}}
 export const FOUNDRY_PADS=[{x:480,y:90},{x:480,y:510}] as const;
 const SUPPLIES={
+ bamboo:{name:'Bamboo repair station',hint:'Restore one hull point',color:'#e6f3a2',pads:FOUNDRY_PADS},
+ relay:{name:'Depot resupply',hint:'Refill five shells',color:'#ffbce5',pads:FOUNDRY_PADS},
  garden:{name:'Garden med bay',hint:'Restore one hull point',color:'#9dffba',pads:FOUNDRY_PADS},
  canyon:{name:'Canyon ammo drop',hint:'Refill five shells',color:'#ffcd85',pads:[{x:530,y:90},{x:400,y:510}]},
  neon:{name:'Neon charge',hint:'Gain armor and two shells',color:'#c5b4ff',pads:FOUNDRY_PADS},
@@ -19,8 +21,8 @@ export function foundrySupply(g:PartyGame){const elapsed=g.tick*50%20000;return{
 export function collectFoundrySupply(g:PartyGame,a:ClubActor,now:number){
  const event=arenaSupply(g),scale=g.worldScale||1;if(!event.enabled||!a.alive||!event.open||a.supplyCycle===event.cycle||!event.pads.some(p=>Math.hypot(a.x-p.x*scale,a.y-p.y*scale)<36))return false;
  a.supplyCycle=event.cycle;a.supplyAt=now;
- if(g.map==='garden'||g.map==='harbor')a.hp=Math.min(3,a.hp+1);
- if(g.map==='canyon'||g.map==='foundry'){a.ammo=5;a.reloadUntil=0}
+ if(g.map==='garden'||g.map==='harbor'||g.map==='bamboo')a.hp=Math.min(3,a.hp+1);
+ if(g.map==='canyon'||g.map==='foundry'||g.map==='relay'){a.ammo=5;a.reloadUntil=0}
  if(g.map==='neon'||g.map==='harbor'){a.ammo=Math.min(5,(a.ammo??0)+(g.map==='neon'?2:3));a.reloadUntil=0}
  if(g.map==='glacier')a.armor=2;
  else if(g.map==='neon'||g.map==='foundry')a.armor=Math.min(2,(a.armor||0)+1);

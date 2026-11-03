@@ -1,3 +1,4 @@
+import {validateAppearance,type Appearance} from './appearance.ts';
 import {TABLE_SCENE_IDS,type TableScene} from './scenes.ts';
 import {advanceBots,botsDue,type BotBrain} from './bots.ts';
 import {compareSnake} from './snake-rank.ts';
@@ -21,10 +22,10 @@ export type CasualMode='ladders'|'memory'|'snake'|'uno'|'property'|'phone'|'circ
 export const CASUAL_MODES=['ladders','memory','snake','uno','property','phone','circuit','terra','chess','dama','scidama','sumo','tanks','pong','marble','blocks','pool'] as const;
 export const casualCapacity=(mode:string)=>isStrategy(mode)||['pong','pool'].includes(mode)?2:mode==='uno'?12:8;
 export const casualMinimum=(mode:string)=>isStrategy(mode)||['uno','property','phone','sumo','tanks','pong','pool'].includes(mode)?2:1;
-export type CasualSettings={scene?:TableScene;arcadeV2?:boolean;unoSameColor?:boolean;sumoFormat?:'bracket'|'classic';blockPace?:'arcade'|'expert'|'blitz';cards:number;speed:number;map?:SnakeMapId;snakeSize?:32|48|64;battle?:boolean;difficulty?:'cozy'|'standard'|'expert';unoFlip?:boolean;track?:string;bots?:number;relayRounds?:number;relaySeconds?:number;arena?:'garden'|'canyon'|'neon'|'harbor'|'foundry'|'glacier'};
+export type CasualSettings={scene?:TableScene;arcadeV2?:boolean;unoSameColor?:boolean;sumoFormat?:'bracket'|'classic';blockPace?:'arcade'|'expert'|'blitz';cards:number;speed:number;map?:SnakeMapId;snakeSize?:32|48|64;battle?:boolean;difficulty?:'cozy'|'standard'|'expert';unoFlip?:boolean;track?:string;bots?:number;relayRounds?:number;relaySeconds?:number;arena?:'garden'|'canyon'|'neon'|'harbor'|'foundry'|'glacier'|'bamboo'|'relay'};
 export type Direction='up'|'right'|'down'|'left';
 export type Point={x:number;y:number};
-export type CasualPlayer={id:string;name:string;tokenHash:string;joinedAt:number;lastSeen:number;color:number;ready:boolean;retired:boolean;requests:string[];traffic?:RoomTraffic;bot?:boolean};
+export type CasualPlayer={id:string;name:string;tokenHash:string;joinedAt:number;lastSeen:number;color:number;ready:boolean;retired:boolean;requests:string[];role?:'player'|'spectator';appearance?:Appearance;traffic?:RoomTraffic;bot?:boolean};
 export type LadderGame={kind:'ladders';positions:Record<string,number>;currentId:string;turn:number;deadline:number;lockUntil:number;lastRoll:null|{playerId:string;die:number;from:number;landing:number;to:number;jump:'ladder'|'snake'|null;overshoot:boolean;at:number}};
 export type MemoryGame={kind:'memory';deck:{key:number;matchedBy:string|null}[];revealed:number[];currentId:string;turn:number;deadline:number;resolveAt:number|null;scores:Record<string,number>;moves:number};
 export type Worm={id:string;body:Point[];trail?:Point[];previous?:Point[];direction:Direction;queue:Direction[];queueTicks?:number[];alive:boolean;score:number;lastSeq:number;deathAt:number|null;deathPoint:Point|null;reason:string;respawnAt?:number;kills?:number;deaths?:number;best?:number;protectedUntil?:number};
@@ -36,14 +37,14 @@ export const SLIDES:Record<number,number>={17:6,30:9,47:26,59:38,66:45,75:53,83:
 export const DIRECTIONS:Record<Direction,Point>={up:{x:0,y:-1},right:{x:1,y:0},down:{x:0,y:1},left:{x:-1,y:0}};
 export const opposite=(a:Direction,b:Direction)=>DIRECTIONS[a].x+DIRECTIONS[b].x===0&&DIRECTIONS[a].y+DIRECTIONS[b].y===0;
 export const samePoint=(a:Point,b:Point)=>a.x===b.x&&a.y===b.y;
-export const activePlayers=(s:CasualState)=>s.players.filter(p=>!p.retired);
+export const activePlayers=(s:CasualState)=>s.players.filter(p=>!p.retired&&p.role!=='spectator');
 function event(s:CasualState,text:string,at:number){s.events=[...s.events.slice(-11),{id:++s.eventId,text,at}]}
 function random(s:CasualState){let x=s.random||1;x^=x<<13;x^=x>>>17;x^=x<<5;s.random=x>>>0;return s.random/4294967296}
 function shuffled<T>(s:CasualState,input:T[]){const a=[...input];for(let i=a.length-1;i>0;i--){const j=Math.floor(random(s)*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function newPlayer(id:string,name:string,tokenHash:string,now:number,color:number):CasualPlayer{return{id,name,tokenHash,joinedAt:now,lastSeen:now,color,ready:false,retired:false,requests:[]}}
 export function createCasual(code:string,id:string,name:string,tokenHash:string,mode:CasualMode,seed:number,now:number):CasualState{return{schema:1,code,hostId:id,mode,phase:'lobby',createdAt:now,round:0,random:seed||1,settings:{cards:20,speed:350,map:'classic',snakeSize:48},players:[newPlayer(id,name,tokenHash,now,0)],game:null,result:null,events:[{id:1,text:name+' opened the room.',at:now}],eventId:1,pauseReason:''}}
 export function boardPoint(square:number){const row=Math.floor((square-1)/10),col=(square-1)%10;return{x:(row%2?9-col:col)*100+50,y:950-row*100}}
-function nextId(s:CasualState,id:string){const list=activePlayers(s);if(!list.length)return '';const old=s.players.findIndex(p=>p.id===id);for(let j=1;j<=s.players.length;j++){const p=s.players[(old+j+s.players.length)%s.players.length];if(!p.retired)return p.id}return list[0].id}
+function nextId(s:CasualState,id:string){const list=activePlayers(s);if(!list.length)return '';const old=s.players.findIndex(p=>p.id===id);for(let j=1;j<=s.players.length;j++){const p=s.players[(old+j+s.players.length)%s.players.length];if(!p.retired&&p.role!=='spectator')return p.id}return list[0].id}
 function finish(s:CasualState,winnerIds:string[],reason:string,now:number){s.phase='finished';s.result={winnerIds,reason};event(s,reason,now)}
 function moveTurn(s:CasualState,g:LadderGame|MemoryGame,now:number){g.currentId=nextId(s,g.currentId);g.turn++;g.deadline=now+(g.kind==='memory'?memoryTurn(s):TURN_MS);}
 const memoryTurn=(s:CasualState)=>s.settings.difficulty==='expert'?15000:s.settings.difficulty==='standard'?30000:45000;
@@ -122,17 +123,21 @@ function advanceGame(s:CasualState,now:number):{state:CasualState;changed:boolea
 export function applyCasualAction(input:CasualState,a:Record<string,any>,id:string|null,now:number,internal=false):CasualState{
  const s=internal?input:advanceOwned(structuredClone(input),now).state;s.chat=activeChat(s.chat,now);
  if(a.action==='join'){
-  if(s.phase==='lobby'||s.phase==='finished')s.players=s.players.filter(p=>!p.bot);
-  if(s.phase==='playing'||s.phase==='paused')throw new CasualError('This round is running. Join after the host opens the next lobby.',409);
-  if(activePlayers(s).length>=casualCapacity(s.mode))throw new CasualError('This room is full. Up to '+casualCapacity(s.mode)+' players can join.',409);
+  if(s.phase==='lobby'||s.phase==='finished')s.players=s.players.filter(p=>!p.bot&&!p.retired);
+  if(a.role!=='spectator'&&(s.phase==='playing'||s.phase==='paused'))throw new CasualError('This round is running. Join after the host opens the next lobby.',409);
+  if(a.role!=='spectator'&&activePlayers(s).length>=casualCapacity(s.mode))throw new CasualError('This room is full. Up to '+casualCapacity(s.mode)+' players can join.',409);
+  if(s.players.length>=64)throw new CasualError('This room has reached its membership limit. Open the next lobby before inviting more people.',409);
   if(s.players.some(p=>p.id===a.id))throw new CasualError('You already joined this room.',409);
-  const empty=activePlayers(s).length===0;s.players=s.players.filter(p=>!p.retired);const used=new Set(s.players.map(p=>p.color));let color=0;while(used.has(color))color++;
-  s.players.push(newPlayer(a.id,a.name,a.hash,now,color));if(empty){s.hostId=a.id;s.phase='lobby';s.game=null;s.result=null}event(s,a.name+' joined the room.',now);return s;
+  if(a.role!==undefined&&!['player','spectator'].includes(a.role))throw new CasualError('Choose player or spectator.');
+  if(a.role==='spectator'&&s.players.filter(p=>!p.retired&&p.role==='spectator').length>=12)throw new CasualError('The 12 spectator seats are full.',409);
+  const empty=!s.players.some(p=>!p.retired&&!p.bot);if(s.phase==='lobby'||s.phase==='finished')s.players=s.players.filter(p=>!p.retired);const used=new Set(s.players.map(p=>p.color));let color=0;while(used.has(color))color++;
+  s.players.push({...newPlayer(a.id,a.name,a.hash,now,color),...(a.appearance?{appearance:validateAppearance(a.appearance)}:{}),...(a.role==='spectator'?{role:'spectator' as const}:{})});if(empty){s.hostId=a.id;s.phase='lobby';s.game=null;s.result=null}event(s,a.name+' joined the room.',now);return s;
  }
  const p=s.players.find(p=>p.id===id&&!p.retired);if(!p)throw new CasualError('Your session ended. Join the room again.',401);p.lastSeen=now;
  if(a.requestId){if(p.requests.includes(a.requestId))throw new CasualError('That action was already applied. The room has been refreshed.',409);p.requests=[...p.requests.slice(-23),a.requestId]}
  if(a.action==='disconnect'){p.lastSeen=now-HOST_TIMEOUT-1;s.chat=[];s.chatEpoch=(s.chatEpoch||0)+1;return s}
  if(a.action==='heartbeat')return s;
+ if(a.action==='appearance'){p.appearance={...validateAppearance(a.appearance),...(p.appearance?.avatar?{avatar:p.appearance.avatar}:{})};return s;}
  if(a.action==='chat'){try{s.chat=appendChat(s.chat,p.id,p.name,a.text,a.messageId,now,a.giftId,s.mode==='terra'?{}:{gifId:a.gifId,effect:a.effect})}catch(e){if(e instanceof ChatError)throw new CasualError(e.message,e.status);throw e}return s}
  if(a.action==='leave'||a.action==='remove-inactive'){
   const target=a.action==='leave'?p:s.players.find(x=>x.id===a.playerId&&!x.retired);
@@ -142,8 +147,8 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
    if(!target||target.id===p.id||now-target.lastSeen<HOST_TIMEOUT)throw new CasualError('Only a player inactive for 45 seconds can be removed.',409);
   }
   if(!target)throw new CasualError('That player is no longer here.',409);s.chat=[];s.chatEpoch=(s.chatEpoch||0)+1;target.retired=true;
-  if(s.hostId===target.id)s.hostId=activePlayers(s).filter(p=>!p.bot).sort((a,b)=>a.joinedAt-b.joinedAt)[0]?.id||'';
-  const g=s.game;if(g&&(s.phase==='playing'||s.phase==='paused')){
+  if(s.hostId===target.id)s.hostId=s.players.filter(p=>!p.retired&&!p.bot).sort((a,b)=>a.joinedAt-b.joinedAt)[0]?.id||'';
+  const g=s.game;if(target.role!=='spectator'&&g&&(s.phase==='playing'||s.phase==='paused')){
    if(g.kind==='uno')leaveUno(s,target.id,now);
    else if(g.kind==='property')bankruptEstate(s,g,target.id,now);
    else if(g.kind==='phone')leavePhone(s,target.id,now);
@@ -155,13 +160,23 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
    else if(g.kind==='snake'){const worm=g.worms.find(w=>w.id===target.id);if(worm){worm.alive=false;worm.body=[];worm.reason='Left the round';worm.deathAt=now}const alive=g.worms.filter(w=>w.alive);if(!s.settings.battle&&alive.length<=1)finish(s,alive.map(w=>w.id),'A player left. The remaining snake wins.',now)}
    else if((g.kind==='ladders'||g.kind==='memory')&&g.currentId===target.id){if(g.kind==='memory'){g.revealed=[];g.resolveAt=null}moveTurn(s,g,now)}
   }
-  if(!activePlayers(s).some(p=>!p.bot)){s.players=s.players.filter(p=>!p.bot);s.phase='lobby';s.game=null;s.result=null;s.ai=undefined}
+  if(!s.players.some(p=>!p.retired&&!p.bot)){s.players=s.players.filter(p=>!p.bot);s.phase='lobby';s.game=null;s.result=null;s.ai=undefined}
   event(s,target.name+' left the room.',now);return s;
  }
  if(a.action==='claim-host'){
   const host=s.players.find(x=>x.id===s.hostId&&!x.retired);if(host&&now-host.lastSeen<HOST_TIMEOUT)throw new CasualError('The host is still connected.',409);
   s.hostId=p.id;event(s,p.name+' became the host.',now);return s;
  }
+ if(a.action==='role'){
+  if(!['lobby','finished'].includes(s.phase))throw new CasualError('Change your role in the lobby after this round.',409);
+  if(!['player','spectator'].includes(a.role))throw new CasualError('Choose player or spectator.');
+  if(a.role!==p.role&&!(a.role==='player'&&!p.role)){
+   if(a.role==='player'&&activePlayers(s).filter(x=>!x.bot).length>=casualCapacity(s.mode))throw new CasualError('All player seats are occupied.',409);
+   if(a.role==='spectator'&&s.players.filter(x=>!x.retired&&x.role==='spectator').length>=12)throw new CasualError('The 12 spectator seats are full.',409);
+   s.players=s.players.filter(x=>!x.bot);p.role=a.role;p.ready=false;
+  }return s;
+ }
+ if(p.role==='spectator'&&!['configure','start','lobby','pause','resume','end',...(p.id===s.hostId&&s.game?.kind==='phone'&&s.game.revealing?['reveal-phone']:[])].includes(a.action))throw new CasualError('Spectators can watch and chat. Choose Player in the next lobby to play.',403);
  if(a.action==='ready'){if(s.phase!=='lobby')throw new CasualError('Ready controls are available in the lobby.',409);p.ready=!p.ready;return s}
  if(['configure','start','lobby','pause','resume'].includes(a.action)&&p.id!==s.hostId)throw new CasualError('Only the room host can do that.',403);
  if(a.action==='configure'){
@@ -177,13 +192,13 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
   s.phase='lobby';s.game=null;s.result=null;s.players=s.players.filter(p=>!p.retired&&!p.bot);s.players.forEach(p=>p.ready=false);return s;
  }
  if(a.action==='start'){
-  if(s.phase==='playing'||s.phase==='paused')throw new CasualError('A round is already running.',409);if(!activePlayers(s).length)throw new CasualError('Add a player first.');
+  if(s.phase==='playing'||s.phase==='paused')throw new CasualError('A round is already running.',409);if(!activePlayers(s).filter(p=>!p.bot).length&&!s.settings.bots)throw new CasualError('Add a player or computer opponent first.');
   const priorUno=s.game?.kind==='uno'?s.game:null,priorBotIds=s.players.filter(p=>p.bot&&!p.retired).map(p=>p.id);
   s.players=s.players.filter(p=>!p.bot&&!p.retired);
   for(let i=0;i<(s.settings.bots||0)&&activePlayers(s).length<casualCapacity(s.mode);i++){const botId=s.mode==='uno'&&priorUno&&!priorUno.matchWinner&&priorBotIds[i]?priorBotIds[i]:'bot-'+(s.round+1)+'-'+i;let botColor=0;while(s.players.some(p=>p.color===botColor))botColor++;s.players.push({...newPlayer(botId,['Pip','Coco','Sunny','Moss','Luna','Ash','Nova'][i], '',now,botColor),bot:true})}
   if(activePlayers(s).length<casualMinimum(s.mode))throw new CasualError('Add another player or a computer opponent.',409);
   s.ai=s.players.some(p=>p.bot)?{nextAt:now+1000,cursor:0}:undefined;
-  s.round++;s.phase='playing';s.result=null;s.pauseReason='';s.players=s.players.filter(p=>!p.retired);s.players.forEach(p=>{p.ready=false;p.requests=[]});const first=s.players[0].id;
+  s.round++;s.phase='playing';s.result=null;s.pauseReason='';s.players=s.players.filter(p=>!p.retired);s.players.forEach(p=>{p.ready=false;p.requests=[]});const first=activePlayers(s)[0].id;
   if(isParty(s.mode))s.game=newParty(s,now);
   else if(s.mode==='blocks')s.game=newBlocks(s,now);
   else if(s.mode==='pool')s.game=newPool(s,now);
@@ -193,8 +208,8 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
   else if(s.mode==='phone')s.game=newPhone(s,now);
   else if(s.mode==='circuit')s.game=newCircuit(s,now);
   else if(s.mode==='terra')s.game=newTerra(s,now);
-  else if(s.mode==='ladders')s.game={kind:'ladders',positions:Object.fromEntries(s.players.map(p=>[p.id,0])),currentId:first,turn:1,deadline:now+TURN_MS,lockUntil:now,lastRoll:null};
-  else if(s.mode==='memory'){const keys=shuffled(s,Array.from({length:100},(_,i)=>i)).slice(0,s.settings.cards/2);s.game={kind:'memory',deck:shuffled(s,[...keys,...keys]).map(key=>({key,matchedBy:null})),revealed:[],currentId:first,turn:1,deadline:now+memoryTurn(s),resolveAt:null,scores:Object.fromEntries(s.players.map(p=>[p.id,0])),moves:0}}
+  else if(s.mode==='ladders')s.game={kind:'ladders',positions:Object.fromEntries(activePlayers(s).map(p=>[p.id,0])),currentId:first,turn:1,deadline:now+TURN_MS,lockUntil:now,lastRoll:null};
+  else if(s.mode==='memory'){const keys=shuffled(s,Array.from({length:100},(_,i)=>i)).slice(0,s.settings.cards/2);s.game={kind:'memory',deck:shuffled(s,[...keys,...keys]).map(key=>({key,matchedBy:null})),revealed:[],currentId:first,turn:1,deadline:now+memoryTurn(s),resolveAt:null,scores:Object.fromEntries(activePlayers(s).map(p=>[p.id,0])),moves:0}}
   else s.game=newSnake(s,now);event(s,'Round '+s.round+' started.',now);return s;
  }
  if(a.action==='pause'||a.action==='resume'){
@@ -205,6 +220,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
  if(a.action==='end'){
   if(p.id!==s.hostId)throw new CasualError('Only the host can end a round.',403);if(s.phase!=='playing'&&s.phase!=='paused')throw new CasualError('There is no running round.',409);finish(s,[],'The host ended this round. No winner was declared.',now);return s;
  }
+ if(p.role==='spectator'&&!(a.action==='reveal-phone'&&p.id===s.hostId&&s.game?.kind==='phone'&&s.game.revealing))throw new CasualError('Spectators cannot send game actions.',403);
  if(s.phase!=='playing'||!s.game)throw new CasualError('Wait for the host to start a round.',409);
  if(a.round!==s.round)throw new CasualError('This action belongs to an older round.',409);
  const g=s.game;
@@ -253,4 +269,4 @@ export function publicCasual(s:CasualState,id:string,now:number){
  else if(s.game?.kind==='snake')game={...s.game,worms:s.game.worms.map(({queue,queueTicks,lastSeq,...w})=>({...w,...(w.id===id?{pendingTurns:queue,pendingTicks:queueTicks,inputAck:lastSeq}:{})}))};
  return{code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,...(s.mode!=='terra'&&s.phase==='playing'&&s.ai?.wait&&s.ai.wait.readyAt>now?{botThinking:{playerId:s.ai.wait.playerId,until:s.ai.wait.readyAt}}:{}),chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,traffic,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&(p.bot||now-lastSeen<20000),canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
 }
-export type CasualPublic=ReturnType<typeof publicCasual>&{revision?:number;network?:{rtt:number;totalRtt?:number;serverMs?:number}};
+export type CasualPublic=ReturnType<typeof publicCasual>&{viewingId?:string;revision?:number;network?:{rtt:number;totalRtt?:number;serverMs?:number}};
