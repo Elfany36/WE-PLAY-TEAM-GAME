@@ -3,8 +3,8 @@ export function interpolationDelay(rtt:number){return Math.min(700,Math.max(100,
 export type Pose={x:number;y:number;angle?:number};
 /** A fallback snapshot may age through a full request plus the following return leg. */
 export function predictionWindow(rtt:number,step=50){return Math.min(5000,Math.max(300,Math.max(0,rtt)*1.5+step+250))}
-/** Do not rewrite a physics segment that is already partially on screen. */
-export function predictionInputAt(time:number,base:number,step=50){return base+(Math.ceil(Math.max(0,time-base)/step)+1)*step}
+/** Apply new intent at the next physics boundary, without adding an extra input tick. */
+export function predictionInputAt(time:number,base:number,step=50){return base+Math.max(1,Math.ceil(Math.max(0,time-base)/step))*step}
 /** Keep high-refresh displays from doing 144 expensive whole-world paints per second. */
 export function renderFrameDue(now:number,last:number,playing:boolean){return !last||(playing?Math.floor(now*60/1000)>Math.floor(last*60/1000):now-last>=80)}
 /** A small dead zone suppresses camera shake from subpixel receipt corrections. */

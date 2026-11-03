@@ -1,0 +1,12 @@
+{
+  "defaultsNeverBlock": true,
+  "modelClickAutosaves": true,
+  "mapRetainsModel": true,
+  "rapidCloseAndMapRetainsModel": true,
+  "gameChangeResetsModel": true,
+  "rejoinResetsModel": true,
+  "keyPreferencesPersistOnReload": true,
+  "resetRestoresDefaults": true,
+  "hostControlsRealVariant": true,
+  "status": "passed"
+}

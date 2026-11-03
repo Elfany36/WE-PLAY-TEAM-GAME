@@ -1,0 +1,38 @@
+[
+  {
+    "rtt": 60,
+    "players": 2,
+    "customKeys": "I J K L",
+    "views": [
+      {
+        "frames": 269,
+        "jumps": 0,
+        "maxStep": 0.10643285566217209
+      },
+      {
+        "frames": 274,
+        "jumps": 0,
+        "maxStep": 0.10644377365913371
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "rtt": 90,
+    "players": 2,
+    "customKeys": "I J K L",
+    "views": [
+      {
+        "frames": 269,
+        "jumps": 0,
+        "maxStep": 0.10645936233424536
+      },
+      {
+        "frames": 271,
+        "jumps": 0,
+        "maxStep": 0.10587871835420337
+      }
+    ],
+    "status": "passed"
+  }
+]

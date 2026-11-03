@@ -18,7 +18,7 @@ export function playerStanding(room:CasualPublic,id:string){
  if(['chess','dama','scidama'].includes(g.kind))return(id===g.whiteId?'White':'Black')+' · '+g.pieces.filter((p:any)=>p.owner===id).length+' pieces'+(g.scores?.[id]!==undefined?' · '+g.scores[id]+' pts':'');
  if(g.actors){const a=g.actors.find((a:any)=>a.id===id);if(!a)return'';
   if(g.kind==='sumo')return(g.bracket?(g.bracket.champion===id?'Champion':sumoBout(g,id)?.winner===id?'Advanced · waiting':sumoBout(g,id)&&a.alive?'In a duel':'Eliminated'):a.alive?'In the ring':'Out')+' · '+(g.scores[id]||0)+' wins';
-  if(g.kind==='marble')return'Lap '+Math.min(2,a.lap+1)+' / 2 · '+a.deaths+' falls';
+  if(g.kind==='marble')return'Lap '+Math.min(g.raceLaps||2,a.lap+1)+' / '+(g.raceLaps||2)+' · '+a.deaths+' falls';
   return a.score+(g.kind==='tanks'?' KOs':' points');
  }
  return(g.scores?.[id]||0)+' points';

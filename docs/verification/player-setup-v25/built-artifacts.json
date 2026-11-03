@@ -1,0 +1,12 @@
+[
+  {
+    "build": "hosted",
+    "width": 1440,
+    "status": "passed"
+  },
+  {
+    "build": "pages",
+    "width": 390,
+    "status": "passed"
+  }
+]

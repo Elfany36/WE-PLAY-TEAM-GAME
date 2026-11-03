@@ -25,7 +25,7 @@ test('changing games clears confirmation and rejects delayed confirmation for an
  let room=createCasual('MODELS24','p','Player','hash','circuit',42,10000);room.settings.characterSelection=true;room.settings.bots=1;
  const appearance={models:{kart:'solar',sumo:'panda'}};room=applyCasualAction(room,{action:'appearance',appearance,confirmCharacter:true,confirmForRound:1,confirmForMode:'circuit'},'p',10000);
  room=applyCasualAction(room,{action:'configure',mode:'sumo',cards:20,speed:350,bots:1},'p',10000);
- assert.equal(room.players[0].characterRound,undefined);assert.throws(()=>applyCasualAction(room,{action:'ready'},'p',10000),/character/);
+ assert.equal(room.players[0].characterRound,undefined);assert.equal(applyCasualAction(room,{action:'ready'},'p',10000).players[0].ready,true);
  assert.throws(()=>applyCasualAction(room,{action:'appearance',appearance,confirmCharacter:true,confirmForRound:1,confirmForMode:'circuit'},'p',10000),/upcoming round/);
  assert.throws(()=>applyCasualAction(room,{action:'appearance',appearance:{models:{kart:'solar'}},confirmCharacter:true,confirmForRound:1,confirmForMode:'sumo'},'p',10000),/model/);
  room=applyCasualAction(room,{action:'appearance',appearance,confirmCharacter:true,confirmForRound:1,confirmForMode:'sumo'},'p',10000);assert.equal(applyCasualAction(room,{action:'start'},'p',10000).game?.kind,'sumo');

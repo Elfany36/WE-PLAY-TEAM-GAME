@@ -78,10 +78,10 @@ test('HTTP snapshots and control acknowledgements cannot refresh live world heal
 });
 
 
-test('a newly pressed or released control cannot rewrite the in-flight physics segment',()=>{
+test('a newly pressed or released control targets the next physics step without an extra tick',()=>{
  for(const base of [1000,1003,174253.25])for(let phase=1;phase<50;phase++){
   const at=predictionInputAt(base+phase,base);
-  assert(at>base+50,'current segment was rewritten');assert.equal(at,base+100);
+  assert(at>base+phase);assert.equal(at,base+50);
   assert(at-50-(base+phase)<50,'input waited longer than the next segment');
  }
  assert.equal(predictionInputAt(1000,1000),1050);

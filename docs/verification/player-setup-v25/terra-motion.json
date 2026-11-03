@@ -1,0 +1,10 @@
+{
+  "mode": "terra",
+  "players": 2,
+  "rtt": 90,
+  "customKeysWork": true,
+  "released": true,
+  "compactReceipts": 9,
+  "preservedWorldViewport": true,
+  "status": "passed"
+}

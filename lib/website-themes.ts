@@ -21,3 +21,6 @@ export const WEBSITE_THEMES=[
 export type WebsiteTheme=typeof WEBSITE_THEMES[number]['id'];
 export const WEBSITE_THEME_IDS=WEBSITE_THEMES.map(theme=>theme.id);
 export function websiteTheme(value:unknown):WebsiteTheme{return WEBSITE_THEMES.find(theme=>theme.id===value)?.id||'indigo'}
+export const WEBSITE_STYLES=[{id:'studio',name:'Studio',description:'Soft corners and a calm workspace'},{id:'arcade',name:'Arcade',description:'Crisp corners, bold edges and a lively grid'},{id:'notebook',name:'Notebook',description:'Paper lines, rounded tabs and editorial spacing'}] as const;
+export type WebsiteStyle=typeof WEBSITE_STYLES[number]['id'];
+export function websiteStyle(value:unknown):WebsiteStyle{return WEBSITE_STYLES.find(style=>style.id===value)?.id||'studio'}

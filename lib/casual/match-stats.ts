@@ -16,7 +16,7 @@ export function matchStat(room:CasualPublic,id:string){
  else if(g?.kind==='blocks'){const b=g.boards.find((b:{id:string})=>b.id===id);value=b?.score||0;label='Points'}
  else if(g?.kind==='property'){value='$'+(g.players[id]?.cash||0).toLocaleString();label='Cash'}
  else if(g&&['chess','dama','scidama'].includes(g.kind)){value=g.pieces.filter((p:{owner:string})=>p.owner===id).length;label='Pieces'}
- else if(g?.actors){const a=g.actors.find((a:{id:string})=>a.id===id);value=g.kind==='marble'?Math.min(2,(a?.lap||0)+1)+'/2':g.kind==='sumo'?g.scores[id]||0:a?.score||0;label=g.kind==='marble'?'Laps':g.kind==='sumo'?'Wins':g.kind==='tanks'?'KOs':'Points'}
+ else if(g?.actors){const a=g.actors.find((a:{id:string})=>a.id===id);value=g.kind==='marble'?Math.min(g.raceLaps||2,(a?.lap||0)+1)+'/'+(g.raceLaps||2):g.kind==='sumo'?g.scores[id]||0:a?.score||0;label=g.kind==='marble'?'Laps':g.kind==='sumo'?'Wins':g.kind==='tanks'?'KOs':'Points'}
  else if(g?.kind==='phone'){value=g.submitted[id]?'✓':'…';label=g.submitted[id]?'Ready':'Creating'}
  return{value,label,detail:playerStanding(room,id),progress:progress===undefined?undefined:Math.max(0,Math.min(1,progress))};
 }

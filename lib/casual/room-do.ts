@@ -87,7 +87,7 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
      if(session.stateAck&&(session.pending?.length||0)>=(session.stateWindow||4))continue;
      const room=this.kind==='casual'?publicCasual(state as CasualState,session.playerId,now):publicArena(state as ArenaState,session.playerId,now);
      const url=new URL('https://room.internal/api/'+this.kind);url.searchParams.set('wire','1');if(session.base)url.searchParams.set('base',session.base);
-     const data=roomSnapshot(new Request(url),{room:{...room,revision:row.revision},clock:{receivedAt:now,sentAt:now}});
+     const data=roomSnapshot(new Request(url),{room:{...room,revision:row.revision},clock:{receivedAt:now,sentAt:now,stateInterval:STATE_INTERVAL}});
      socket.send(JSON.stringify({type:'state',data}));socket.serializeAttachment({...session,revision:row.revision,base:data.snapshotId,...(session.stateAck?{pending:[...(session.pending||[]),row.revision]}:{})});
     }else{socket.send(JSON.stringify({type:'revision',revision:row.revision}));socket.serializeAttachment({...session,revision:row.revision})}
    }catch{socket.close(1011,'Reconnect room updates')}

@@ -2,7 +2,7 @@ import {ROOM_TTL} from './engine.ts';
 export type StoredRoom={code:string;state:string;revision:number;created_at:number};
 export type StoredAvatar={hash:string;data:string};
 export type CasualDatabase={deleteAvatar?:(id:string)=>Promise<void>;getAvatar?:(id:string,hash?:string)=>Promise<StoredAvatar|undefined>;putAvatar?:(id:string,value:StoredAvatar,retainHash?:string)=>Promise<void>;roomScheduling?:'durable-object';prepare(sql:string):{bind(...values:any[]):{first<T>():Promise<T|null>;run():Promise<{meta:{changes?:number}}>}}};
-type Storage={get<T>(key:string):Promise<T|undefined>;put(key:string,value:unknown):Promise<void>;delete?(key:string):Promise<unknown>;deleteAll():Promise<void>;setAlarm(at:number):Promise<void>};
+type Storage={get<T>(key:string):Promise<T|undefined>;put(key:string,value:unknown):Promise<void>;delete?(key:string):Promise<unknown>;deleteAll():Promise<void>;setAlarm(at:number):Promise<void>;sql?:SqlStorage};
 /** Local authority adapter. Failed durable writes never change the cached revision. */
 export class RoomStore implements CasualDatabase{
  private row:StoredRoom|null=null;
@@ -12,6 +12,7 @@ export class RoomStore implements CasualDatabase{
  private storage:Storage;
  private onCommit?:()=>void;
  private table:'casual_rooms'|'arena_rooms';
+ private sqlReady=false;
  constructor(storage:Storage,onCommit?:()=>void,table:'casual_rooms'|'arena_rooms'='casual_rooms'){this.storage=storage;this.onCommit=onCommit;this.table=table}
  async deleteAvatar(id:string){await this.storage.delete?.('avatar:'+id)}
  async getAvatar(id:string,hash?:string){const slot=await this.storage.get<StoredAvatar&{previous?:StoredAvatar}>('avatar:'+id);return !hash||slot?.hash===hash?slot:slot?.previous?.hash===hash?slot.previous:undefined}
@@ -20,19 +21,35 @@ export class RoomStore implements CasualDatabase{
  /** Disposable read-only view for scheduling/authentication/fanout. Mutations read their own copy. */
  inspectState<T>():Readonly<T>|null{if(!this.row)return null;if(this.inspected===undefined)this.inspected=JSON.parse(this.row.state);return this.inspected as Readonly<T>}
  private committed(next:StoredRoom){this.row=next;this.inspected=undefined;this.onCommit?.()}
- async load(){this.row=(await this.storage.get<StoredRoom>('row'))??null;this.inspected=undefined}
+ private sql(){const sql=this.storage.sql;if(sql&&!this.sqlReady){sql.exec('CREATE TABLE IF NOT EXISTS room_runtime_v25 (singleton INTEGER PRIMARY KEY CHECK(singleton=1), code TEXT NOT NULL, state TEXT NOT NULL, revision INTEGER NOT NULL, created_at INTEGER NOT NULL)');this.sqlReady=true}return sql}
+ private async persist(next:StoredRoom,revision?:number){
+  const sql=this.sql();
+  if(sql){
+   // SQLite's synchronous API avoids awaiting each KV write in the hot simulation path.
+   // Cloudflare's output gate still holds receipts and snapshots until durable commit.
+   if(revision===undefined)sql.exec('INSERT OR REPLACE INTO room_runtime_v25(singleton,code,state,revision,created_at) VALUES(1,?,?,?,?)',next.code,next.state,next.revision,next.created_at);
+   else if(sql.exec('UPDATE room_runtime_v25 SET state=?, revision=? WHERE singleton=1 AND code=? AND revision=?',next.state,next.revision,next.code,revision).rowsWritten!==1)return false;
+  }else await this.storage.put('row',next);
+  return true;
+ }
+ async load(){
+  const sql=this.sql(),stored=sql?.exec<StoredRoom>('SELECT code,state,revision,created_at FROM room_runtime_v25 WHERE singleton=1').toArray()[0];
+  if(stored)this.row=stored;
+  else{this.row=(await this.storage.get<StoredRoom>('row'))??null;if(this.row&&sql)await this.persist(this.row)}
+  this.inspected=undefined;
+ }
  async importLegacy(db:CasualDatabase|undefined,code:string){
   if(this.row||!db)return;
-  this.migration??=(async()=>{const old=await db.prepare('SELECT state,revision,created_at FROM '+this.table+' WHERE code=?').bind(code).first<Omit<StoredRoom,'code'>>();if(!old||Date.now()-old.created_at>ROOM_TTL)return;const next={code,...old};await this.storage.setAlarm(next.created_at+ROOM_TTL+60_000);await this.storage.put('row',next);this.committed(next)})();
+  this.migration??=(async()=>{const old=await db.prepare('SELECT state,revision,created_at FROM '+this.table+' WHERE code=?').bind(code).first<Omit<StoredRoom,'code'>>();if(!old||Date.now()-old.created_at>ROOM_TTL)return;const next={code,...old};await this.storage.setAlarm(next.created_at+ROOM_TTL+60_000);await this.persist(next);this.committed(next)})();
   try{await this.migration}catch(error){this.migration=null;throw error}
  }
  prepare(sql:string){return{bind:(...a:any[])=>({first:async<T>()=>this.first(sql,a) as T|null,run:()=>this.run(sql,a)})}}
  private first(sql:string,a:any[]){if(sql.startsWith('SELECT state,revision,created_at FROM '+this.table+' WHERE code=?')){const r=this.row;return r&&r.code===a[0]?{state:r.state,revision:r.revision,created_at:r.created_at}:null}throw new Error('Unsupported room query.')}
  private async run(sql:string,a:any[]){const r=this.row;
-  if(sql.startsWith('UPDATE '+this.table+' SET state=?, revision=revision+1 WHERE code=? AND revision=?')){if(!r||r.code!==a[1]||r.revision!==a[2])return{meta:{changes:0}};const next={...r,state:a[0],revision:r.revision+1};await this.storage.put('row',next);this.committed(next);return{meta:{changes:1}}}
-  if(sql.startsWith('INSERT INTO '+this.table)){if(r)throw new Error('UNIQUE constraint failed: casual_rooms.code');const next={code:a[0],state:a[1],revision:0,created_at:a[2]};await this.storage.setAlarm(next.created_at+ROOM_TTL+60_000);await this.storage.put('row',next);this.committed(next);return{meta:{changes:1}}}
-  if(sql.startsWith('DELETE FROM '+this.table+' WHERE created_at < ?')){if(r&&r.created_at<a[0]){await this.storage.deleteAll();this.row=null;this.inspected=undefined;return{meta:{changes:1}}}return{meta:{changes:0}}}
+  if(sql.startsWith('UPDATE '+this.table+' SET state=?, revision=revision+1 WHERE code=? AND revision=?')){if(!r||r.code!==a[1]||r.revision!==a[2])return{meta:{changes:0}};const next={...r,state:a[0],revision:r.revision+1};if(!await this.persist(next,r.revision))return{meta:{changes:0}};this.committed(next);return{meta:{changes:1}}}
+  if(sql.startsWith('INSERT INTO '+this.table)){if(r)throw new Error('UNIQUE constraint failed: casual_rooms.code');const next={code:a[0],state:a[1],revision:0,created_at:a[2]};await this.storage.setAlarm(next.created_at+ROOM_TTL+60_000);await this.persist(next);this.committed(next);return{meta:{changes:1}}}
+  if(sql.startsWith('DELETE FROM '+this.table+' WHERE created_at < ?')){if(r&&r.created_at<a[0]){await this.storage.deleteAll();this.sqlReady=false;this.row=null;this.inspected=undefined;return{meta:{changes:1}}}return{meta:{changes:0}}}
   throw new Error('Unsupported room statement.');
  }
- async expire(now:number){if(this.row&&now-this.row.created_at<ROOM_TTL){await this.storage.setAlarm(this.row.created_at+ROOM_TTL+60_000);return}await this.storage.deleteAll();this.row=null;this.inspected=undefined}
+ async expire(now:number){if(this.row&&now-this.row.created_at<ROOM_TTL){await this.storage.setAlarm(this.row.created_at+ROOM_TTL+60_000);return}await this.storage.deleteAll();this.sqlReady=false;this.row=null;this.inspected=undefined}
 }

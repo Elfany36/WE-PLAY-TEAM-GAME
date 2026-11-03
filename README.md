@@ -157,3 +157,5 @@ The [desktop online follow-up](docs/verification/arcade-v21.md) documents Snake 
 The [character-flow and website follow-up](docs/verification/character-flow-v23.md) adds explicit per-round model confirmation, 18 saved themes, visible setup transitions, origin compatibility and reduced hidden rendering work.
 
 The [game customization follow-up](docs/verification/game-customization-v24.md) adds 15 game-specific designs for each of 17 arcade games, 24 named colors, matching live artwork, persistent per-game selections and game-aware character confirmation.
+
+The [optional setup and live movement update](docs/verification/player-setup-v25.md) replaces mandatory confirmation with automatic selection and ready-to-use defaults. Characters persist across map changes and reset on game changes or rejoining. Per-game saved controls, clearer setup, 32 named rule presets, three interface styles, synchronous room storage and 50 ms live snapshots are verified with 519 tests and controlled two-browser multiplayer checks. See the [hosting research](docs/verification/player-setup-v25-hosting.md) for free hosting limits and measurement scope.
