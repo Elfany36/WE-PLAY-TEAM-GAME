@@ -1,0 +1,30 @@
+[
+  {
+    "mode": "generals",
+    "width": 1440,
+    "input": "mouse",
+    "passed": true,
+    "errors": []
+  },
+  {
+    "mode": "fleet",
+    "width": 1440,
+    "input": "mouse",
+    "passed": true,
+    "errors": []
+  },
+  {
+    "mode": "generals",
+    "width": 390,
+    "input": "touch",
+    "passed": true,
+    "errors": []
+  },
+  {
+    "mode": "fleet",
+    "width": 390,
+    "input": "touch",
+    "passed": true,
+    "errors": []
+  }
+]
