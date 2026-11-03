@@ -153,3 +153,5 @@ The v20 recording follow-up repairs stale-world recovery and slow-fallback predi
 GitHub PR #5 runtime improvements are integrated. The Snake recording follow-up also prevents a new turn from rewriting a partially drawn cell on local and fast connections; see the replay evidence and network limits in the v19 report.
 
 The [desktop online follow-up](docs/verification/arcade-v21.md) documents Snake prediction, canvas recovery, playback resume and board placement fixes, including the remaining very-slow-link correction.
+
+The [character-flow and website follow-up](docs/verification/character-flow-v23.md) adds explicit per-round model confirmation, 18 saved themes, visible setup transitions, origin compatibility and reduced hidden rendering work.

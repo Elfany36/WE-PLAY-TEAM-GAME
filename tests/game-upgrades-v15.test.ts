@@ -1,3 +1,4 @@
+import {postWithCharacters} from './helpers/character-client.ts';
 import {test} from 'node:test';import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
 import {createCasual,applyCasualAction,type CasualMode} from '../lib/casual/engine.ts';
@@ -35,7 +36,7 @@ test('authenticated compact receipts still validate and commit input, without ex
    }};
   },
  };
- const http=createCasualAPI(db as any),send=(api:ReturnType<typeof createCasualAPI>,body:any,token?:string,receipt=false)=>api.POST(new Request('http://localhost/api/casual',{method:'POST',headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{}),...(receipt?{'X-Room-Control-Receipt':'1'}:{})},body:JSON.stringify(body)}));
+ const http=createCasualAPI(db as any),send=(api:ReturnType<typeof createCasualAPI>,body:any,token?:string,receipt=false)=>postWithCharacters(api,new Request('http://localhost/api/casual',{method:'POST',headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{}),...(receipt?{'X-Room-Control-Receipt':'1'}:{})},body:JSON.stringify(body)}));
  try{const created=await(await send(http,{action:'create',mode:'tanks',name:'Host',bots:1,arcadeV2:true})).json() as any,token=created.token,code=created.room.code,started=await(await send(http,{action:'start',code,requestId:'start-001'},token)).json() as any;const bytes=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(token)),hash=Array.from(new Uint8Array(bytes),n=>n.toString(16).padStart(2,'0')).join(''),live=createCasualAPI(db as any,undefined,undefined,hash),packet={action:'party-control',code,round:started.room.round,inputEpoch:started.room.game.startAt,seq:1,dx:1,dy:0,aim:0,requestId:'control-1'};
   for(let i=0;i<2;i++){const response=await send(live,packet,undefined,true),d=await response.json() as any;assert.equal(response.status,200);assert.equal(d.ack,'control-1');assert(Number.isSafeInteger(d.revision));assert(!d.room);assert(!d.snapshotId)}
   const response=await send(http,{...packet,seq:2,requestId:'control-2'},token,true),d=await response.json() as any;assert(d.room);assert.equal(d.room.game.inputs[d.room.youId].seq,2);const bad=await send(http,{...packet,seq:3,requestId:'control-3'},'a'.repeat(64),true);assert.equal(bad.status,401);

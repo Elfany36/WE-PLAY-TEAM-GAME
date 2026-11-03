@@ -1,0 +1,38 @@
+[
+  {
+    "mode": "snake",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "circuit",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "phone",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "snake",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "circuit",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "phone",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  }
+]

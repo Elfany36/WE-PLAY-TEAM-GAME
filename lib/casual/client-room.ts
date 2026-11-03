@@ -11,3 +11,10 @@ export function restoreRoomTerrain(previous:CasualPublic|null,next:CasualPublic)
  if(previous?.code===next.code&&previous.round===next.round&&previous.game?.version===next.game.version&&previous.game.tiles)return{...next,game:{...next.game,tiles:previous.game.tiles}};
  return null;
 }
+
+/** Keep stable UI metadata out of the rendering work caused by world movement. */
+export function shareRoomMetadata(previous:CasualPublic|null,next:CasualPublic):CasualPublic{
+ if(!previous||previous.code!==next.code||previous.youId!==next.youId)return next;
+ const share=<T>(before:T,after:T):T=>JSON.stringify(before)===JSON.stringify(after)?before:after;
+ return {...next,players:share(previous.players,next.players),settings:share(previous.settings,next.settings),chat:share(previous.chat,next.chat),events:share(previous.events,next.events)};
+}

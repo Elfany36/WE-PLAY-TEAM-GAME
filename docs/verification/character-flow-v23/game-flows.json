@@ -1,0 +1,206 @@
+[
+  {
+    "mode": "snake",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "sumo",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "circuit",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "ladders",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "tanks",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "marble",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "pong",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "pool",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "uno",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "memory",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "property",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "chess",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "dama",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "scidama",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "blocks",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "terra",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "phone",
+    "width": 1440,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "snake",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "sumo",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "circuit",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "ladders",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "tanks",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "marble",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "pong",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "pool",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "uno",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "memory",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "property",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "chess",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "dama",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "scidama",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "blocks",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "terra",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "mode": "phone",
+    "width": 390,
+    "overflow": false,
+    "status": "passed"
+  }
+]

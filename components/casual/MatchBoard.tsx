@@ -1,5 +1,5 @@
 'use client';
-import type {CSSProperties} from 'react';
+import {memo,type CSSProperties} from 'react';
 import {Crown,ChevronDown,BrainCircuit,Shield} from 'lucide-react';
 import {casualCapacity,type CasualPublic} from '../../lib/casual/engine';
 import {casualLeaderboard} from '../../lib/casual/leaderboard';
@@ -12,7 +12,7 @@ import PoolBallBadge from './PoolBallBadge';
 
 type Props={embedded?:boolean;room:CasualPublic;open:boolean;setOpen:(open:boolean)=>void;busy:boolean;local:boolean;onAction:(action:string,extra?:{playerId:string})=>void};
 const colors:Record<string,string>={red:'#db3456',yellow:'#bd880b',green:'#27866c',blue:'#356cca',pink:'#b62b82',orange:'#c96620',teal:'#157b7b',purple:'#7b42b6'};
-function Portrait({id,name}:{id:string;name:string}){const image=useAvatar(id);return image?<img src={image} alt="" width={34} height={38}/>:<>{nameInitial(name)}</>}
+const Portrait=memo(function Portrait({id,name}:{id:string;name:string}){const image=useAvatar(id);return image?<img src={image} alt="" width={34} height={38}/>:<>{nameInitial(name)}</>});
 export default function MatchBoard({embedded=false,room,open,setOpen,busy,local,onAction}:Props){
  const players=casualLeaderboard(room).filter(p=>!p.retired),g=room.game,playing=room.phase!=='lobby';
  const Heading=embedded?'header':'summary';

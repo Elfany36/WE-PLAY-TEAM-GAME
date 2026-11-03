@@ -1,0 +1,7 @@
+{
+  "twoHumans": true,
+  "hostWaitedForGuest": true,
+  "confirmationDidNotStart": true,
+  "rematchRequiredFreshConfirmation": true,
+  "status": "passed"
+}

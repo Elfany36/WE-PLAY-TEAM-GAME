@@ -1,0 +1,104 @@
+[
+  {
+    "mode": "tanks",
+    "rtt": 1400,
+    "transport": "http",
+    "label": "after-http",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 195,
+        "maxStep": 0.357,
+        "maxSpeed": 21.5,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 198,
+        "maxStep": 8.309,
+        "maxSpeed": 497.6,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 43.3,
+    "firstDirection": 0.6860729955851639,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 0,
+    "worldIntervalMedian": null,
+    "worldGapMax": null,
+    "status": "passed"
+  },
+  {
+    "mode": "sumo",
+    "rtt": 1400,
+    "transport": "http",
+    "label": "after-http",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 165,
+        "maxStep": 0,
+        "maxSpeed": 0,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 169,
+        "maxStep": 10.688,
+        "maxSpeed": 643.8,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 31,
+    "firstDirection": 0.4814048287458945,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 0,
+    "worldIntervalMedian": null,
+    "worldGapMax": null,
+    "status": "passed"
+  },
+  {
+    "mode": "circuit",
+    "rtt": 1400,
+    "transport": "http",
+    "label": "after-http",
+    "initialSpeed": 0,
+    "views": [
+      {
+        "viewer": "remote",
+        "frames": 195,
+        "maxStep": 1.453,
+        "maxSpeed": 44.6,
+        "jumps": 0,
+        "epochs": 0
+      },
+      {
+        "viewer": "own",
+        "frames": 198,
+        "maxStep": 10.302,
+        "maxSpeed": 613.2,
+        "jumps": 0,
+        "epochs": 0
+      }
+    ],
+    "responseMs": 70.6,
+    "firstDirection": 0.6782082664246359,
+    "fps": "60",
+    "released": true,
+    "otherSeatNeutral": true,
+    "controlsSent": 0,
+    "worldIntervalMedian": null,
+    "worldGapMax": null,
+    "status": "passed"
+  }
+]

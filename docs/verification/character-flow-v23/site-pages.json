@@ -1,0 +1,114 @@
+[
+  {
+    "route": "overview",
+    "width": 1440,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "learning-paths",
+    "width": 1440,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "documentation",
+    "width": 1440,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "practice-studio",
+    "width": 1440,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "playground",
+    "width": 1440,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "games",
+    "width": 1440,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "achievements",
+    "width": 1440,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "casual-arcade",
+    "width": 1440,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "overview",
+    "width": 390,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "learning-paths",
+    "width": 390,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "documentation",
+    "width": 390,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "practice-studio",
+    "width": 390,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "playground",
+    "width": 390,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "games",
+    "width": 390,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "achievements",
+    "width": 390,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "route": "casual-arcade",
+    "width": 390,
+    "overflow": false,
+    "errors": [],
+    "status": "passed"
+  }
+]

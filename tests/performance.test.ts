@@ -1,3 +1,4 @@
+import {postWithCharacters} from './helpers/character-client.ts';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {DatabaseSync} from 'node:sqlite';
@@ -50,7 +51,7 @@ test('Snake scene acknowledgments restore only a matching room, map and round',(
 });
 function apiFixture(){const sql=new DatabaseSync(':memory:');sql.exec('CREATE TABLE casual_rooms(code TEXT PRIMARY KEY,state TEXT,revision INTEGER,created_at INTEGER);CREATE TABLE arena_rooms(code TEXT PRIMARY KEY,state TEXT,revision INTEGER,created_at INTEGER)');const db:any={prepare(q:string){return{bind(...args:any[]){return{async first(){await wait();return sql.prepare(q).get(...args)},async run(){await wait();return{meta:{changes:Number(sql.prepare(q).run(...args).changes)}}}}}}}};return{sql,casual:createCasualAPI(db),arena:createArenaAPI(db)}}
 let seq=0;
-async function post(api:{POST:(r:Request)=>Promise<Response>},body:any,token?:string){const response=await api.POST(new Request('http://localhost/api',{method:'POST',headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:JSON.stringify({requestId:'perf-request-'+(++seq),...body})}));return{status:response.status,...await response.json() as any}}
+async function post(api:{POST:(r:Request)=>Promise<Response>},body:any,token?:string){const response=await postWithCharacters(api,new Request('http://localhost/api',{method:'POST',headers:{'Content-Type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:JSON.stringify({requestId:'perf-request-'+(++seq),...body})}));return{status:response.status,...await response.json() as any}}
 test('unchanged casual polls use a small response and cannot skip a due turn deadline',async()=>{
  const {sql,casual}=apiFixture();try{const h=await post(casual,{action:'create',mode:'ladders',name:'Host'});let r=await post(casual,{action:'start',code:h.room.code},h.token);const get=async()=>{const response=await casual.GET(new Request('http://localhost/api?code='+h.room.code+'&revision='+r.room.revision,{headers:{Authorization:'Bearer '+h.token}}));return await response.json() as any};assert.equal((await get()).unchanged,true);
  const row=sql.prepare('SELECT state FROM casual_rooms WHERE code=?').get(h.room.code) as any,state=JSON.parse(row.state);state.game.deadline=Date.now()-1;sql.prepare('UPDATE casual_rooms SET state=? WHERE code=?').run(JSON.stringify(state),h.room.code);const updated=await get();assert(updated.room);assert.equal(updated.room.game.turn,2);assert(!updated.unchanged);

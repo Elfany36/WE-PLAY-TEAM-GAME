@@ -1,5 +1,5 @@
 'use client';
-import {createContext,useContext,useEffect,useState,useRef,type ReactNode} from 'react';
+import {createContext,useContext,useEffect,useState,useRef,useMemo,type ReactNode} from 'react';
 import type {CasualPublic} from '../../lib/casual/engine';
 const Avatars=createContext<Record<string,string>>({});
 export function useAvatar(id?:string){return useContext(Avatars)[id||'']}
@@ -7,7 +7,7 @@ export function useAvatar(id?:string){return useContext(Avatars)[id||'']}
 export default function AvatarImages({room,endpoint,token,localImage,localPortraits,children}:{room:CasualPublic|null;endpoint:string;token?:string;localImage?:string;localPortraits?:Record<string,string>;children:ReactNode}){
  const [images,setImages]=useState<Record<string,string>>({}),cache=useRef(new Map<string,{url?:string;controller:AbortController;request?:Promise<string|undefined>}>());
  const roomCode=room?.code;
- const versions=JSON.stringify(room?.players.filter(p=>!p.retired&&p.appearance?.avatar).map(p=>[p.id,p.appearance!.avatar])||[]);
+ const versions=useMemo(()=>JSON.stringify(room?.players.filter(p=>!p.retired&&p.appearance?.avatar).map(p=>[p.id,p.appearance!.avatar])||[]),[room?.players]);
  useEffect(()=>{const entries=cache.current;return()=>{for(const entry of entries.values()){entry.controller.abort();if(entry.url)URL.revokeObjectURL(entry.url)}entries.clear()}},[roomCode,endpoint,token]);
  useEffect(()=>{
   if(!roomCode||!token)return;let stopped=false;const pairs=JSON.parse(versions) as [string,string][],wanted=new Set(pairs.map(([,hash])=>hash));
@@ -19,7 +19,7 @@ export default function AvatarImages({room,endpoint,token,localImage,localPortra
   })).then(rows=>{if(!stopped)setImages(Object.fromEntries(rows.filter((r):r is readonly [string,string]=>!!r)))});
   return()=>{stopped=true};
  },[roomCode,endpoint,token,versions]);
- const local=room?.code==='ONDEVICE'&&localImage?{...images,'local-0':localImage,...localPortraits}:room?.code==='ONDEVICE'?{...images,...localPortraits}:images;
+ const local=useMemo(()=>roomCode==='ONDEVICE'&&localImage?{...images,'local-0':localImage,...localPortraits}:roomCode==='ONDEVICE'?{...images,...localPortraits}:images,[roomCode,images,localImage,localPortraits]);
  return <Avatars.Provider value={local}>{children}</Avatars.Provider>;
 }
 export async function cropAvatar(file:File){

@@ -9,6 +9,14 @@ export const WEBSITE_THEMES=[
  {id:'ocean',name:'Ocean Dive',accent:'#85d6e5',background:'#132b33',description:'Turquoise and deep water'},
  {id:'forest',name:'Forest Retreat',accent:'#a3dba3',background:'#192d20',description:'Green leaves and moss'},
  {id:'graphite',name:'Graphite',accent:'#c6cbd1',background:'#202125',description:'A quiet monochrome workspace'},
+ {"id":"tangerine","name":"Tangerine Sky","accent":"#eeb696","background":"#2c1b11","description":"Sunset orange and warm cream"},
+ {"id":"teal","name":"Tidal Teal","accent":"#9aead7","background":"#132b25","description":"Sea green and soft aqua"},
+ {"id":"plum","name":"Plum Velvet","accent":"#e3a0e3","background":"#291529","description":"Rich plum and orchid"},
+ {"id":"copper","name":"Copper Hearth","accent":"#d9b8ab","background":"#261c18","description":"Earthy copper and clay"},
+ {"id":"sand","name":"Sandstone","accent":"#d1c7b2","background":"#23201a","description":"Quiet sand and parchment"},
+ {"id":"ice","name":"Arctic Ice","accent":"#afc8d4","background":"#192024","description":"Cool blue and silver"},
+ {"id":"slate","name":"Slate Blue","accent":"#b8bfcc","background":"#1c1e22","description":"Soft blue-gray and ink"},
+ {"id":"rosewood","name":"Rosewood","accent":"#d2b1ba","background":"#241a1c","description":"Muted rose and warm wood"},
 ] as const;
 export type WebsiteTheme=typeof WEBSITE_THEMES[number]['id'];
 export const WEBSITE_THEME_IDS=WEBSITE_THEMES.map(theme=>theme.id);
