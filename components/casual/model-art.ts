@@ -1,17 +1,21 @@
+import {paintGameModel} from './model-sprite';
 type Color={fill:string;ink:string};
 const sprites=new Map<string,HTMLCanvasElement>();
 function rect(c:CanvasRenderingContext2D,x:number,y:number,w:number,h:number,r:number,fill:string|CanvasGradient){c.fillStyle=fill;c.beginPath();c.roundRect(x,y,w,h,r);c.fill()}
 function sprite(key:string,paint:(c:CanvasRenderingContext2D)=>void){let image=sprites.get(key);if(!image){image=document.createElement('canvas');image.width=104;image.height=128;const c=image.getContext('2d')!;c.translate(52,64);paint(c);if(sprites.size>=128)sprites.delete(sprites.keys().next().value!);sprites.set(key,image)}return image}
-export function paintMarbleModel(c:CanvasRenderingContext2D,color:Color){
+export function paintMarbleModel(c:CanvasRenderingContext2D,color:Color,model='classic'){
+ if(paintGameModel(c,'marble',model,color.fill,-30.3,-30.3,60.6,60.6))return;
  c.drawImage(sprite('marble:'+color.fill,b=>{const gradient=b.createRadialGradient(-7,-9,1,0,0,22);gradient.addColorStop(0,'#ffffff');gradient.addColorStop(.2,color.fill);gradient.addColorStop(.75,color.fill);gradient.addColorStop(1,color.ink);b.fillStyle=gradient;b.beginPath();b.arc(0,0,20,0,7);b.fill();b.strokeStyle='#ffffff99';b.lineWidth=1.5;b.stroke();b.fillStyle='#fff9';b.beginPath();b.ellipse(-6,-9,6,3,-.5,0,7);b.fill()}),-52,-64);
 }
 export function paintTankTurret(c:CanvasRenderingContext2D,color:Color){
  c.drawImage(sprite('turret:'+color.fill,b=>{const gradient=b.createLinearGradient(-15,-16,17,16);gradient.addColorStop(0,'#efffdf');gradient.addColorStop(.22,color.fill);gradient.addColorStop(.75,color.ink);gradient.addColorStop(1,'#0b2b3c');rect(b,-18,-16,36,32,11,gradient);b.strokeStyle='#dcfff0';b.lineWidth=1;b.stroke();rect(b,-9,-9,15,18,5,'#193b48');rect(b,-6,-6,9,12,3,color.fill);rect(b,8,-10,3,20,1,'#fff6c1');for(const y of [-11,11]){b.fillStyle='#dcf3e5';b.beginPath();b.arc(-12,y,1.8,0,7);b.fill()}}),-52,-64);
 }
-export function paintPaddleModel(c:CanvasRenderingContext2D,color:string){
+export function paintPaddleModel(c:CanvasRenderingContext2D,color:string,model='classic'){
+ if(paintGameModel(c,'pong',model,color,-62.5,-63.044,125,126.088))return;
  c.drawImage(sprite('paddle:'+color,b=>{rect(b,-15,-58,30,116,13,'#0b1a30');const gradient=b.createLinearGradient(-12,0,12,0);gradient.addColorStop(0,'#f1ffee');gradient.addColorStop(.3,color);gradient.addColorStop(.75,color);gradient.addColorStop(1,'#1c546a');rect(b,-11,-55,22,110,9,gradient);rect(b,-7,-45,3,90,2,'#ffffff99');for(let y=-28;y<=28;y+=9)rect(b,1,y,6,2,1,'#173c5855');rect(b,-8,-52,16,5,2,'#ffffff7a');rect(b,-7,47,14,5,2,'#ffffff7a')}),-52,-64);
 }
 export function paintKartBody(c:CanvasRenderingContext2D,color:Color,model='classic'){
+ if(paintGameModel(c,'kart',model,color.fill,-50,-50,100,100))return;
  c.drawImage(sprite('kart:'+model+':'+color.fill,b=>{
   if(model!=='classic'){paintCustomKart(b,color,model);return}
   const metal=b.createLinearGradient(-22,0,22,0);metal.addColorStop(0,color.ink);metal.addColorStop(.25,color.fill);metal.addColorStop(.65,color.fill);metal.addColorStop(1,color.ink);

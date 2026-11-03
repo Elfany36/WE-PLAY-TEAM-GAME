@@ -1,0 +1,9 @@
+{
+  "twoOnlinePlayers": true,
+  "perGameChoicesPersist": true,
+  "changedGameRequiresFreshChoices": true,
+  "noAutomaticStart": true,
+  "reloadedActiveRoomKeepsModels": true,
+  "desktopAndPhone": true,
+  "status": "passed"
+}

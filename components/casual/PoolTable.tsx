@@ -1,4 +1,5 @@
 'use client';
+import {playerColor,playerModel} from '../../lib/casual/appearance';
 import {useEffect,useRef,useState} from 'react';
 import {Crosshair,Move,Pause,Play} from 'lucide-react';
 import type {CasualPublic} from '../../lib/casual/engine';
@@ -18,7 +19,7 @@ export default function PoolTable({room,busy,local,onAction}:{room:CasualPublic;
    if(can&&!place){c!.save();c!.beginPath();c!.rect(50,50,900,460);c!.clip();const aim=poolAim(m,angle);c!.strokeStyle='#e6ffefaa';c!.lineWidth=1.6;c!.setLineDash([5,7]);c!.beginPath();c!.moveTo(cue.x,cue.y);c!.lineTo(aim.x,aim.y);c!.stroke();c!.setLineDash([]);c!.strokeStyle=aim.target===null?'#e6ffef99':'#ffe3a0';c!.beginPath();c!.arc(aim.x,aim.y,radius,0,7);c!.stroke();if(aim.target!==null){const target=m.balls.find(b=>b.number===aim.target)!;const hit=Math.atan2(target.y-aim.y,target.x-aim.x);c!.lineWidth=2;c!.beginPath();c!.moveTo(target.x,target.y);c!.lineTo(target.x+Math.cos(hit)*65,target.y+Math.sin(hit)*65);c!.stroke()}c!.restore()}
 
    const shotAge=m.shot?now-m.shot.at:Infinity,striking=m.moving&&shotAge>=0&&shotAge<230;
-   if(can&&!place||striking){const origin=striking&&m.shot?.cueOrigin?m.shot.cueOrigin:cue,rotation=striking?m.shot?.angle??angle:angle,pose=poolCuePose(striking?shotAge:Infinity,power,radius);paintPoolCue(c!,origin.x,origin.y,rotation,pose.offset,pose.opacity)}
+   if(can&&!place||striking){const origin=striking&&m.shot?.cueOrigin?m.shot.cueOrigin:cue,rotation=striking?m.shot?.angle??angle:angle,pose=poolCuePose(striking?shotAge:Infinity,power,radius);const owner=r.players.find(p=>p.id===m.currentId);paintPoolCue(c!,origin.x,origin.y,rotation,pose.offset,pose.opacity,playerModel(owner,'pool'),playerColor(owner).fill)}
 
    const displayed:{id:string;x:number;y:number;angle:number}[]=[];for(const b of m.balls){if(b.pocketed)continue;const n=peek?.balls.find(n=>n.number===b.number)||b,pose=smooth.resolve(String(b.number),{x:b.x+(n.x-b.x)*f,y:b.y+(n.y-b.y)*f},dt,changed,180,1000);c!.save();const placed=placements.get(b.number);if(placed)c!.globalAlpha=Math.max(0,Math.min(1,(time-placed)/180));const spin=roll.sample(b.number,pose.x,pose.y,radius);paintPoolBall(c!,b.number,pose.x,pose.y,radius,motion.matches?0:spin.phase,motion.matches?0:spin.axis);displayed.push({id:String(b.number),x:pose.x,y:pose.y,angle:spin.phase});c!.restore()}
    for(const impact of m.impacts||[]){const age=now-impact.at;if(age<0||age>250)continue;c!.strokeStyle='#f2e7bd';c!.globalAlpha=(1-age/250)*impact.strength*.65;c!.lineWidth=1.5;c!.beginPath();c!.arc(impact.x,impact.y,7+age*.07,0,7);c!.stroke();c!.globalAlpha=1}

@@ -33,3 +33,4 @@ import '../app/arcade-v19.css';
 import '../app/arcade-v20.css';
 import '../app/website-themes.css';
 import '../app/usability-v23.css';
+import '../app/customization-v24.css';

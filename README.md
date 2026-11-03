@@ -155,3 +155,5 @@ GitHub PR #5 runtime improvements are integrated. The Snake recording follow-up 
 The [desktop online follow-up](docs/verification/arcade-v21.md) documents Snake prediction, canvas recovery, playback resume and board placement fixes, including the remaining very-slow-link correction.
 
 The [character-flow and website follow-up](docs/verification/character-flow-v23.md) adds explicit per-round model confirmation, 18 saved themes, visible setup transitions, origin compatibility and reduced hidden rendering work.
+
+The [game customization follow-up](docs/verification/game-customization-v24.md) adds 15 game-specific designs for each of 17 arcade games, 24 named colors, matching live artwork, persistent per-game selections and game-aware character confirmation.

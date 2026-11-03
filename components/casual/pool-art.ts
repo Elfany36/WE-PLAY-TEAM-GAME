@@ -2,6 +2,7 @@ import {POCKETS} from '../../lib/casual/pool';
 import {tableScene} from '../../lib/casual/scenes';
 
 const colors=['#fff8e7','#ffc62b','#2879e3','#ee405d','#884ad2','#ff922f','#19a887','#962d55','#101d30','#ffc62b','#2879e3','#ee405d','#884ad2','#ff922f','#19a887','#962d55'];
+import {paintGameModel} from './model-sprite';
 let light:HTMLCanvasElement|null=null,cueArt:HTMLCanvasElement|null=null;
 function sphereLight(){
  if(light)return light;light=document.createElement('canvas');light.width=96;light.height=96;const c=light.getContext('2d')!;c.translate(48,48);c.beginPath();c.arc(0,0,40,0,Math.PI*2);c.clip();
@@ -17,7 +18,8 @@ export function paintPoolBall(c:CanvasRenderingContext2D,n:number,x:number,y:num
  if(n){c.translate(shift,0);c.scale(face,1);c.fillStyle='#fffdf0';c.beginPath();c.arc(0,0,8.2,0,Math.PI*2);c.fill();c.fillStyle='#132238';c.font='850 11px system-ui';c.textAlign='center';c.textBaseline='middle';c.fillText(String(n),0,.5)}else{c.fillStyle='#d5ae8666';for(const a of [0,2.1,4.2]){c.beginPath();c.arc(Math.cos(a+phase)*6,Math.sin(a+phase)*6,1.1,0,Math.PI*2);c.fill()}}
  c.restore();c.drawImage(sphereLight(),-24,-24,48,48);c.restore();c.strokeStyle='#07182d70';c.lineWidth=.65;c.beginPath();c.arc(0,0,20,0,Math.PI*2);c.stroke();c.restore();
 }
-export function paintPoolCue(c:CanvasRenderingContext2D,x:number,y:number,angle:number,pull:number,opacity=1){
+export function paintPoolCue(c:CanvasRenderingContext2D,x:number,y:number,angle:number,pull:number,opacity=1,model='classic',color='#b77842'){
+ c.save();c.translate(x,y);c.rotate(angle);c.globalAlpha=opacity;c.translate(-pull,0);c.scale(-1,1);const painted=paintGameModel(c,'pool',model,color,-18,-106,350,200);c.restore();if(painted)return;
  if(!cueArt){cueArt=document.createElement('canvas');cueArt.width=640;cueArt.height=40;const b=cueArt.getContext('2d')!;b.scale(2,2);b.translate(310,10);const wood=b.createLinearGradient(-300,0,0,0);wood.addColorStop(0,'#152437');wood.addColorStop(.13,'#234354');wood.addColorStop(.34,'#32282b');wood.addColorStop(.36,'#dbb070');wood.addColorStop(.8,'#f4d7a0');wood.addColorStop(1,'#fff0c6');b.fillStyle=wood;b.beginPath();b.moveTo(0,-2.5);b.lineTo(-298,-6);b.quadraticCurveTo(-307,0,-298,6);b.lineTo(0,2.5);b.closePath();b.fill();b.strokeStyle='#101d2f';b.lineWidth=.6;b.stroke();b.fillStyle='#fff7de88';b.fillRect(-205,-3.2,190,.7);b.strokeStyle='#bdcaaf66';for(let x=-295;x<-222;x+=3){b.beginPath();b.moveTo(x,-5.5);b.lineTo(x+4,5.5);b.stroke()}for(const x of [-300,-220,-213,-8]){b.fillStyle='#d4dbe1';b.fillRect(x,-4,2,8)}b.fillStyle='#f5f2df';b.fillRect(-8,-2.8,7,5.6);b.fillStyle='#38a9c6';b.fillRect(-1,-2.9,3,5.8)}
  c.save();c.translate(x,y);c.rotate(angle);c.globalAlpha=opacity;c.drawImage(cueArt,-pull-310,-10,320,20);c.restore();
 }

@@ -1,18 +1,8 @@
 import {ARCADE_COLORS} from './arcade-colors.ts';
 import {CasualError} from './error.ts';
-export const MODEL_SETS={
- token:['pawn','rocket','fox','leaf','boat','cat','crown','gem'],
- kart:['classic','formula','buggy','mini','van','hover','hotrod'],
- tank:['classic','scout','bulwark','twin'],
- snake:['classic','coral','dragon','robot'],
- sumo:['classic','masked','robot','bear'],
- marble:['classic','orbit','star','prism'],
- board:['classic','crystal','wood','neon'],
-} as const;
-export type ModelFamily=keyof typeof MODEL_SETS;
+import {MODEL_SETS,type ModelFamily} from './model-catalog.ts';
+export {MODEL_SETS,MODEL_COLLECTIONS,CUSTOM_COLORS,modelFamily,modelLabel,type ModelFamily,type GameModelFamily} from './model-catalog.ts';
 export type Appearance={color?:string;models?:Partial<Record<ModelFamily,string>>;avatar?:string;useAvatar?:boolean};
-export const MODEL_LABELS:Record<string,string>={pawn:'Classic pawn',rocket:'Rocket',fox:'Fox',leaf:'Sprout',boat:'Sailboat',cat:'Cat',crown:'Crown',gem:'Gem',classic:'Club classic',formula:'Formula',buggy:'Dune buggy',mini:'Mini coupe',van:'Camper van',hover:'Hover pod',hotrod:'Hot rod',scout:'Scout',bulwark:'Bulwark',twin:'Twin barrel',coral:'Coral stripes',dragon:'Dragon',robot:'Robot',masked:'Masked hero',bear:'Bear',orbit:'Orbit',star:'Star',prism:'Prism',crystal:'Crystal',wood:'Carved wood',neon:'Neon'};
-export function modelFamily(mode:string):ModelFamily{return mode==='circuit'?'kart':mode==='tanks'?'tank':['chess','dama','scidama'].includes(mode)?'board':mode==='snake'?'snake':mode==='sumo'?'sumo':mode==='marble'?'marble':'token'}
 /** Allowlisted cosmetics only. Avatar versions can only be assigned by the upload API. */
 export function validateAppearance(value:unknown):Appearance{
  if(!value||typeof value!=='object'||Array.isArray(value))throw new CasualError('Choose a valid character appearance.');
@@ -23,4 +13,9 @@ export function validateAppearance(value:unknown):Appearance{
  return out;
 }
 export function playerColor(p?:{color:number;appearance?:Appearance}){const fallback=ARCADE_COLORS[(p?.color||0)%ARCADE_COLORS.length],fill=p?.appearance?.color;if(!fill)return fallback;const [r,g,b]=fill.slice(1).match(/../g)!.map(x=>parseInt(x,16)/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4),luminance=r*.2126+g*.7152+b*.0722;return{fill,ink:1.05/(luminance+.05)>=4.5?'#ffffff':'#000000'}}
-export function playerModel(p:{color:number;appearance?:Appearance}|undefined,family:ModelFamily){return p?.appearance?.models?.[family]||(family==='token'?MODEL_SETS.token[(p?.color||0)%8]:'classic')}
+export function playerModel(p:{color:number;appearance?:Appearance}|undefined,family:ModelFamily){
+ const saved=p?.appearance?.models?.[family];if(saved&&MODEL_SETS[family].includes(saved))return saved;
+ const legacy=['chess','dama','scidama'].includes(family)?p?.appearance?.models?.board:undefined;
+ if(legacy&&MODEL_SETS[family].includes(legacy))return legacy;
+ return family==='token'?MODEL_SETS.token[(p?.color||0)%MODEL_SETS.token.length]:MODEL_SETS[family][0];
+}
