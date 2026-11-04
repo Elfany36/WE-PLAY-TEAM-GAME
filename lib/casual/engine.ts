@@ -189,6 +189,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
    else if(g.kind==='snake'){const worm=g.worms.find(w=>w.id===target.id);if(worm){worm.alive=false;worm.body=[];worm.reason='Left the round';worm.deathAt=now}const alive=g.worms.filter(w=>w.alive);if(!s.settings.battle&&alive.length<=1)finish(s,alive.map(w=>w.id),'A player left. The remaining snake wins.',now)}
    else if((g.kind==='ladders'||g.kind==='memory')&&g.currentId===target.id){if(g.kind==='memory'){g.revealed=[];g.resolveAt=null}moveTurn(s,g,now)}
   }
+  if((s.phase==='playing'||s.phase==='paused')&&!activePlayers(s).length)finish(s,[],'All players left the round.',now);
   if(!s.players.some(p=>!p.retired&&!p.bot)){s.players=s.players.filter(p=>!p.bot);s.phase='lobby';s.game=null;s.result=null;s.ai=undefined}
   event(s,target.name+' left the room.',now);return s;
  }

@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "customSlashDraws": true,
+  "searchDoesNotStealFocus": true,
+  "errors": []
+}
