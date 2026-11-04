@@ -1,0 +1,65 @@
+[
+  {
+    "mode": "solitaire",
+    "rtt": 90,
+    "sameDeal": true,
+    "independentBoards": true,
+    "undo": true,
+    "reload": true,
+    "status": "passed",
+    "socketFrames": [
+      12,
+      9,
+      9
+    ]
+  },
+  {
+    "mode": "solitaire",
+    "rtt": 400,
+    "sameDeal": true,
+    "independentBoards": true,
+    "undo": true,
+    "reload": true,
+    "status": "passed",
+    "socketFrames": [
+      12,
+      8,
+      9
+    ]
+  },
+  {
+    "mode": "sketch",
+    "rtt": 90,
+    "players": 7,
+    "privateWords": true,
+    "chatLock": true,
+    "liveStrokes": true,
+    "reconnectCanvas": true,
+    "httpFallback": true,
+    "completeTurn": true,
+    "status": "passed",
+    "socketFrames": [
+      33,
+      23,
+      24
+    ]
+  },
+  {
+    "mode": "sketch",
+    "rtt": 400,
+    "pendingResize": true,
+    "players": 7,
+    "privateWords": true,
+    "chatLock": true,
+    "liveStrokes": true,
+    "reconnectCanvas": true,
+    "httpFallback": true,
+    "completeTurn": true,
+    "status": "passed",
+    "socketFrames": [
+      21,
+      16,
+      17
+    ]
+  }
+]

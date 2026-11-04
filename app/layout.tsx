@@ -30,6 +30,7 @@ import './player-setup-v25.css';
 import './tactical-games.css';
 import './arcade-refinement.css';
 import './arcade-v28.css';
+import './arcade-v29.css';
 import {themeInitScript,styleInitScript} from '../lib/client-state';
 export const metadata: Metadata = {title:'Markup — Your next line starts here',description:'Learn HTML and CSS with visual practice, source-linked documentation, a live playground, and twenty coding and casual games, twelve snake maps, and UNO rooms for up to twelve players.',icons:{icon:'/favicon.svg'}};
 export default function RootLayout({children}:{children:React.ReactNode}) {return <html lang="en" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{__html:themeInitScript+styleInitScript}}/></head><body>{children}</body></html>}

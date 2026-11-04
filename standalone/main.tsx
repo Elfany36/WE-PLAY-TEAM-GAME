@@ -38,3 +38,5 @@ import '../app/player-setup-v25.css';
 import '../app/tactical-games.css';
 import '../app/arcade-refinement.css';
 import '../app/arcade-v28.css';
+
+import '../app/arcade-v29.css';

@@ -1,0 +1,16 @@
+[
+  {
+    "width": 390,
+    "tables": 10,
+    "portrait": true,
+    "viewportResize": true,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "tables": 10,
+    "portrait": true,
+    "viewportResize": true,
+    "status": "passed"
+  }
+]

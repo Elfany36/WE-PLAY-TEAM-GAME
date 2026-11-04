@@ -26,7 +26,7 @@ export function newSketch(s:CasualState,now:number):SketchGame{
 function startDrawing(g:SketchGame,index:number,now:number){g.word=g.choices[index];g.used.push(g.word);g.stage='draw';g.startedAt=now;g.deadline=now+g.seconds*1000;g.choices=[];g.hintAt=now+g.seconds*1000/3}
 function reveal(s:CasualState,g:SketchGame,now:number){
  if(g.stage==='reveal')return;
- if(!g.artistAwarded&&g.word){const points=Math.round(300*Object.keys(g.guessed).length/Math.max(1,g.eligible.length));g.scores[g.artistId]=(g.scores[g.artistId]||0)+points;g.artistAwarded=true}
+ if(!g.artistAwarded&&g.word){const points=Math.min(300,Math.round(300*g.eligible.filter(id=>g.guessed[id]).length/Math.max(1,g.eligible.length)));g.scores[g.artistId]=(g.scores[g.artistId]||0)+points;g.artistAwarded=true}
  g.stage='reveal';g.choices=[];g.deadline=now+5000;g.hintAt=Number.MAX_SAFE_INTEGER;event(s,g.word?'Answer: '+g.word+'.':'The artist left. Next drawing.',now);
 }
 function nextTurn(s:CasualState,g:SketchGame,now:number){

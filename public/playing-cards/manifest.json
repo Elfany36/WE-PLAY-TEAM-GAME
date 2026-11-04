@@ -1,0 +1,268 @@
+{
+  "source": "https://github.com/AustinGabriel/Public-Domain-and-CC0-Playing-Cards",
+  "sourceCommit": "3765067c32fcef42a30e87022332db729658e7cd",
+  "license": "CC0-1.0",
+  "viewBox": "0 0 1500 2100",
+  "files": [
+    {
+      "name": "clubs-10.svg",
+      "bytes": 10715,
+      "sha256": "6922c618b6403f09832943f8295122d13913ba2cc91b746167861d142c376960"
+    },
+    {
+      "name": "clubs-2.svg",
+      "bytes": 4898,
+      "sha256": "b923a8964553ec40f19be49baf721173f5a91cbf4c1c332fe5ca750e514e072a"
+    },
+    {
+      "name": "clubs-3.svg",
+      "bytes": 5246,
+      "sha256": "6f7dbb2ecd246a46cb30b46764b3f61465649dff61dfe9b13f8fec15705a324c"
+    },
+    {
+      "name": "clubs-4.svg",
+      "bytes": 5589,
+      "sha256": "810f4ce85a1867d9e54d17d5845cd4930d1c3728c52830c1e537a14a64ffa4d6"
+    },
+    {
+      "name": "clubs-5.svg",
+      "bytes": 6825,
+      "sha256": "bc918967307dfc095abd00d15f153184ebbb7718eb86f2b22284b976aa1797b2"
+    },
+    {
+      "name": "clubs-6.svg",
+      "bytes": 7960,
+      "sha256": "9ce7ba8202ee6034dae6b573db1443c94182fd8fc56a9fc862a16d3f4be67d61"
+    },
+    {
+      "name": "clubs-7.svg",
+      "bytes": 7961,
+      "sha256": "9f9648f8e0f0628c1be82c771e763b4f20b51a7af12ed37804508af8a55fb4ff"
+    },
+    {
+      "name": "clubs-8.svg",
+      "bytes": 9609,
+      "sha256": "80a490f0171c7eac88f042c43cc37f0b73590315d6e26063f5ebc9feb22a477b"
+    },
+    {
+      "name": "clubs-9.svg",
+      "bytes": 10309,
+      "sha256": "084f6f68f43af9d523bef17c9cdfbd36992c2e7d84716394ebda6198f00ed468"
+    },
+    {
+      "name": "clubs-ace.svg",
+      "bytes": 3295,
+      "sha256": "5cafe896268f55350ead31a998421a601deaed5b89ceb50f183ac99a9f6cf455"
+    },
+    {
+      "name": "clubs-jack.svg",
+      "bytes": 310005,
+      "sha256": "dc07e094724a2967a276f4889c41a30d3a78004e4bd15309ec6a9ee5ab26b8b1"
+    },
+    {
+      "name": "clubs-king.svg",
+      "bytes": 536290,
+      "sha256": "f1a6732ef8cce7e45428397683e56636ce82a3595f5255430388b8c2e6058764"
+    },
+    {
+      "name": "clubs-queen.svg",
+      "bytes": 490618,
+      "sha256": "b7dce41ae03a30af55f6fb7f275569f33ba7607f02f56320beb73e8bbb6484e2"
+    },
+    {
+      "name": "diamonds-10.svg",
+      "bytes": 3831,
+      "sha256": "a747bb7bb25883d2f060afd2ed48a815d44449687b065c7491d12cc981d2882f"
+    },
+    {
+      "name": "diamonds-2.svg",
+      "bytes": 2528,
+      "sha256": "fa7d2a1a8fa71c1f79b145229345fc60c60418040675fef8c47dddf464c2ec51"
+    },
+    {
+      "name": "diamonds-3.svg",
+      "bytes": 2411,
+      "sha256": "68c12e7237e339eff6d43e5f8df0e7468c84ce6f71a3edc67dfbde07cb12b730"
+    },
+    {
+      "name": "diamonds-4.svg",
+      "bytes": 2307,
+      "sha256": "fac9c35e38928f5db4ee32bb1a41b69b648ce0f45f8b58a23bff2f2ed0e8f33b"
+    },
+    {
+      "name": "diamonds-5.svg",
+      "bytes": 2892,
+      "sha256": "fc87ce8288a4b463afba2d43460e4d4a64a7d2eadb996276537aee244c8f197c"
+    },
+    {
+      "name": "diamonds-6.svg",
+      "bytes": 3186,
+      "sha256": "0a27561a3a46e9703e97cc743ba61b74f8a1d3a9202d469414d13a876ec2bb63"
+    },
+    {
+      "name": "diamonds-7.svg",
+      "bytes": 3016,
+      "sha256": "9df13e5c7f91408f1f8987e87ae782690a53dada7d7b8aea4d8b611b26bc02ee"
+    },
+    {
+      "name": "diamonds-8.svg",
+      "bytes": 3460,
+      "sha256": "13beac774230023f71b9a8491fe2bd33d37979c2d8c865b18fca6794d80ca644"
+    },
+    {
+      "name": "diamonds-9.svg",
+      "bytes": 3830,
+      "sha256": "5c15f4d91e5bba75d0275f81a555ce680a20999196bf02091f6fc0031af76dd7"
+    },
+    {
+      "name": "diamonds-ace.svg",
+      "bytes": 1681,
+      "sha256": "bbd7cda0ea6fc201f13707d1562c2b2c4c064ca5ed836ed4d38b347dbea61b87"
+    },
+    {
+      "name": "diamonds-jack.svg",
+      "bytes": 268971,
+      "sha256": "67d5684476a125f3a4624c1b1bbdbcb58177f177e0162f72dea293f082b13628"
+    },
+    {
+      "name": "diamonds-king.svg",
+      "bytes": 325193,
+      "sha256": "7269cd6c22f3b25a22f734eb24844ff530374a7c822e3fca0a817fa4b271a872"
+    },
+    {
+      "name": "diamonds-queen.svg",
+      "bytes": 249268,
+      "sha256": "1163af3f831e2c17a8c7e0c3f9eca48c6bba279bf5e4181d6b6b182c7ced154a"
+    },
+    {
+      "name": "hearts-10.svg",
+      "bytes": 7148,
+      "sha256": "e3838c3fddc535ba233983bab8f9c5f9a5ed70c0dc5fb07a66e811cdf2eec2ff"
+    },
+    {
+      "name": "hearts-2.svg",
+      "bytes": 3632,
+      "sha256": "d038dfa533545f68ba2c85a651fa77db828a926c9458d774aec28aef03ee5d83"
+    },
+    {
+      "name": "hearts-3.svg",
+      "bytes": 3792,
+      "sha256": "38879173f3ef8ce3f76f02c6b2646500808edd4cf919a0d2549747b63d5b4a96"
+    },
+    {
+      "name": "hearts-4.svg",
+      "bytes": 3965,
+      "sha256": "5400bbbb272c6b23f56732aa1bb79d0112aeceb7f8abc698302e69efdf2d2b48"
+    },
+    {
+      "name": "hearts-5.svg",
+      "bytes": 4827,
+      "sha256": "3a04237ae654ecce2cfa8dca82d22f006a073181fb5363079f29348467b24c43"
+    },
+    {
+      "name": "hearts-6.svg",
+      "bytes": 5398,
+      "sha256": "c7a735e7e8f1fe3f4b0505e8455158cee3b607dcece054c5be38538fc9593286"
+    },
+    {
+      "name": "hearts-7.svg",
+      "bytes": 5505,
+      "sha256": "3dc11848db9280f4b78b608f7924d0230f39ddc209b82689b13a7bd1322fa144"
+    },
+    {
+      "name": "hearts-8.svg",
+      "bytes": 6225,
+      "sha256": "22db04be505b8c73445609dbf698f0ceff399e41f1e67dc556c82fe8b7a2afb8"
+    },
+    {
+      "name": "hearts-9.svg",
+      "bytes": 6871,
+      "sha256": "4b015e0ac3f495592c3868af7f7b01a33aae47468c47bc2ba8801e8e718178ed"
+    },
+    {
+      "name": "hearts-ace.svg",
+      "bytes": 2508,
+      "sha256": "6faf0944f409f2520b053db82f19cb8e8e8b46ab469fa07598f620814651a591"
+    },
+    {
+      "name": "hearts-jack.svg",
+      "bytes": 418736,
+      "sha256": "76bd45c9c49195525e915a3bcb72da5d208a645fcb9bc4226b96bf6bca5d1f37"
+    },
+    {
+      "name": "hearts-king.svg",
+      "bytes": 413553,
+      "sha256": "ec8d58e138d53dcc15c0c7446840ac8c33fab973ce5f775f8dec7e62d491964d"
+    },
+    {
+      "name": "hearts-queen.svg",
+      "bytes": 311219,
+      "sha256": "7c3d10ee4c07d3164074127d564886db7397d170c2358478e98b0eef40f2086c"
+    },
+    {
+      "name": "spades-10.svg",
+      "bytes": 7822,
+      "sha256": "decdddbfc7de541d0f272025e241d67f280e583e2d36cd3bffabdb5f959014fd"
+    },
+    {
+      "name": "spades-2.svg",
+      "bytes": 3955,
+      "sha256": "9206d6b3de7771deb6fa1ebbb6899018363bc81fd4c6c1f3100fb06dd4ed442b"
+    },
+    {
+      "name": "spades-3.svg",
+      "bytes": 4061,
+      "sha256": "fc29f77377c026c0f5d1ab88daea49d919fc7d9706a1d7018c20c15329afbb7e"
+    },
+    {
+      "name": "spades-4.svg",
+      "bytes": 4158,
+      "sha256": "68357f6768ea90249c9215c257a57cdc4f2230e42252334499f3e916e8da4fa7"
+    },
+    {
+      "name": "spades-5.svg",
+      "bytes": 5146,
+      "sha256": "2b4c0ae0aab6ca7634388ac0f3e3f05d24b18a273445abe23967aa4b4fc4f5ac"
+    },
+    {
+      "name": "spades-6.svg",
+      "bytes": 6037,
+      "sha256": "3462f247a321be3023cc77bc22fd090b36dfe65d34660119ad1d8b1cf5d63415"
+    },
+    {
+      "name": "spades-7.svg",
+      "bytes": 5791,
+      "sha256": "72a0e5729aab9c6b835113c74932fb35a6d625a3971c608e1fec5769f372753d"
+    },
+    {
+      "name": "spades-8.svg",
+      "bytes": 7196,
+      "sha256": "9ba455bdc45c40c0fc7b0a94b85f7ca601a693e9bbfe0c7d1ddcac83d1c1f2d7"
+    },
+    {
+      "name": "spades-9.svg",
+      "bytes": 7662,
+      "sha256": "4f54d002401c8b6d512c2e775cd98302f3cd2e9065019b76a0f349ad5ccb5a8c"
+    },
+    {
+      "name": "spades-ace.svg",
+      "bytes": 13835,
+      "sha256": "e9b1bff0552adc3531337d15f0dd04072e4b4704838d5fae20cfb2975fd26739"
+    },
+    {
+      "name": "spades-jack.svg",
+      "bytes": 446126,
+      "sha256": "bfdc9dae7598bf66e22c4f88b438e7097b54b6371587be3bd0dc40a57fdc7223"
+    },
+    {
+      "name": "spades-king.svg",
+      "bytes": 270739,
+      "sha256": "c011d5a58c1deeeedafd4fb466521b60ebb1c87d0aa9e34d09d6d3405e876406"
+    },
+    {
+      "name": "spades-queen.svg",
+      "bytes": 293929,
+      "sha256": "a6b50b37396cbe02eb12b8d883ee74aead466b4601395cfe5df338cd4cd80b48"
+    }
+  ]
+}

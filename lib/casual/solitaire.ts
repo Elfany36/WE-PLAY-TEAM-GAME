@@ -77,6 +77,9 @@ function settle(s:CasualState,id:string,now:number){
  if(['pyramid','tripeaks'].includes(g.variant)&&!canDraw(b,g.variant)&&!solPairOptions(b,g.variant).length)b.status='stuck';
  const remaining=s.players.filter(p=>!p.retired&&p.role!=='spectator'&&g.boards[p.id]);if(remaining.length===1&&b.status==='stuck')return;if(remaining.every(p=>g.boards[p.id].status!=='playing')){const best=Math.max(...remaining.map(p=>g.scores[p.id]||0));finishBattle(s,remaining.length>1?remaining.filter(p=>g.scores[p.id]===best).map(p=>p.id):[],remaining.length>1?'Every board finished. Most cleared cards wins.':'This deal ended. Choose a new deal from the lobby.',now)}
 }
+export function leaveSolitaire(s:CasualState,id:string,now:number){
+ const g=s.game as SolitaireGame;if(g.boards[id]){g.boards[id].status='conceded';g.boards[id].version++}const remaining=s.players.filter(p=>!p.retired&&p.role!=='spectator'&&g.boards[p.id]);if(!remaining.length){finishBattle(s,[],'All players left the deal.',now);return}settle(s,remaining[0].id,now);
+}
 export function solitaireAction(s:CasualState,a:Record<string,unknown>,id:string,now:number){
  const g=s.game as SolitaireGame,b=g.boards[id];if(!b)throw new CasualError('Watch this board without moving its cards.',403);
  if(a.boardVersion!==b.version)throw new CasualError('The board changed. Select your card again.',409);
@@ -94,9 +97,9 @@ export function solitaireAction(s:CasualState,a:Record<string,unknown>,id:string
   else if(solSpider(g.variant)){for(const col of b.columns)col.push(b.stock.pop()!)}else for(let i=0;i<(g.variant==='klondike-three'?3:1)&&b.stock.length;i++)b.waste.push(b.stock.pop()!);
  }else if(a.action==='sol-remove'){
   if(g.variant!=='pyramid'&&g.variant!=='tripeaks')throw new CasualError('Remove pairs only in Pyramid or single cards in TriPeaks.');
-  const cards=a.cards as SolPlace[];const valid=solPairOptions(b,g.variant).some(pair=>pair.length===cards.length&&pair.every(ref=>cards.some(c=>c.zone===ref.zone&&c.index===ref.index)));
+  const cards=a.cards as SolPlace[];if(cards.some(ref=>ref.offset!==undefined&&ref.offset!==0))throw new CasualError('Choose an exposed card, without a stack offset.');const valid=solPairOptions(b,g.variant).find(pair=>pair.length===cards.length&&pair.every(ref=>cards.some(c=>c.zone===ref.zone&&c.index===ref.index)));
   if(!valid)throw new CasualError(g.variant==='tripeaks'?'Choose an uncovered card one rank away.':'Choose uncovered cards totaling thirteen.');
-  const last=solCards(b,cards[0])[0];for(const ref of cards)removeSource(b,ref);if(g.variant==='tripeaks')b.waste.push(last);b.removed+=cards.length;
+  const last=solCards(b,valid[0])[0];for(const ref of valid)removeSource(b,ref);if(g.variant==='tripeaks')b.waste.push(last);b.removed+=cards.length;
  }else throw new CasualError('Choose a Solitaire action.');
  b.history.push(before);if(b.history.length>12)b.history.shift();b.moves++;b.version++;g.turn++;reveal(b,g.variant);settle(s,id,now);
 }

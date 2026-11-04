@@ -1,4 +1,4 @@
-import {newSolitaire,solitaireAction,advanceSolitaire,publicSolitaire,type SolitaireGame} from './solitaire.ts';
+import {newSolitaire,solitaireAction,advanceSolitaire,publicSolitaire,leaveSolitaire,type SolitaireGame} from './solitaire.ts';
 import {newSketch,sketchAction,advanceSketch,sketchChat,leaveSketch,publicSketch,type SketchGame} from './sketch.ts';
 import {newGameSettings,newGameActionFields,type NewGameSettings} from './new-game-settings.ts';
 import {newGenerals,generalsAction,advanceGenerals,publicGenerals,type GeneralsGame} from './generals.ts';
@@ -179,7 +179,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
    else if(g.kind==='property')bankruptEstate(s,g,target.id,now);
    else if(g.kind==='phone')leavePhone(s,target.id,now);
    else if(g.kind==='sketch')leaveSketch(s,target.id,now);
-   else if(g.kind==='solitaire'&&g.boards[target.id])g.boards[target.id].status='conceded';
+   else if(g.kind==='solitaire')leaveSolitaire(s,target.id,now);
    else if((g.kind==='chess'||g.kind==='dama'||g.kind==='scidama'))leaveStrategy(s,target.id,now);
    else if(g.kind==='generals'||g.kind==='fleet'){finishBattle(s,g.ids.filter(id=>id!==target.id),'A commander left. Their opponent wins by forfeit.',now)}
    else if(g.kind==='pool'){finish(s,activePlayers(s).map(p=>p.id),'A player left the table. The remaining player wins.',now)}
