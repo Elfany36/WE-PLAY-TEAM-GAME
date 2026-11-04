@@ -5,6 +5,8 @@ const move=[a('up','Move up','ArrowUp','ArrowUp','KeyW'),a('down','Move down','A
 const party=move.map(x=>({...x,key:({up:'w',down:'s',left:'a',right:'d'} as Record<string,string>)[x.id]}));
 const board=[a('previous','Previous square','ArrowLeft','ArrowLeft'),a('next','Next square','ArrowRight','ArrowRight'),a('choose','Select focused square',' ','Space','Enter')];
 export const CONTROL_PROFILES:Record<string,{note:string;actions:ControlAction[]}>= {
+ solitaire:{note:'Select a card, then its destination; drag also works. Double-click sends an eligible card to its foundation.',actions:[a('draw','Draw stock',' ','Space'),a('undo','Undo move','z','KeyZ'),a('hint','Show legal hint','h','KeyH')]},
+ sketch:{note:'Draw with the pointer. Type guesses in chat. Only the current artist can use drawing tools.',actions:[a('undo','Undo stroke','z','KeyZ'),a('eraser','Toggle eraser','e','KeyE')]},
  generals:{note:'Focus the board. Select a piece, then an adjacent tile; setup swaps pieces.',actions:[...move,a('choose','Select tile',' ','Space','Enter'),a('cancel','Cancel selection','Backspace','Backspace')]},
  fleet:{note:'Focus the grid. Move your target, select a tile, or rotate a model during deployment.',actions:[...move,a('choose','Select tile',' ','Space','Enter'),a('rotate','Rotate model','r','KeyR')]},
  snake:{note:'Arrow keys or WASD turn your snake. Touch arrows and swipes always work.',actions:move},

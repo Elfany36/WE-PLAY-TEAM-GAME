@@ -7,6 +7,7 @@ export const computerLimit=(mode:string,role:PlayRole='player')=>Math.min(8,casu
 export function spectatorComputerCount(mode:string,count=0){return Math.min(computerLimit(mode,'spectator'),Math.max(2,casualMinimum(mode),count))}
 export function createLocalLobby({mode,settings,names,humans=1,role='player',appearance={},seed,now}:{mode:CasualMode;settings:CasualSettings;names:string[];humans?:number;role?:PlayRole;appearance?:Appearance;seed:number;now:number}){
  if(mode==='phone'&&role!=='spectator')throw new CasualError('Private drawing tasks need separate devices. Choose Watch AI for a local relay.');
+ if(mode==='sketch'&&role!=='spectator'&&humans>1)throw new CasualError('Use separate devices for private drawing prompts, or play against AI.');
  let s=createCasual('ONDEVICE','local-0',names[0]?.trim()||(role==='spectator'?'Spectator':'Player 1'),'local',mode,seed,now);
  if(role==='spectator')s=applyCasualAction(s,{action:'role',role},s.hostId,now);
  else for(let i=1;i<Math.min(casualCapacity(mode),humans);i++)s=applyCasualAction(s,{action:'join',id:'local-'+i,name:names[i]?.trim()||'Player '+(i+1),hash:'local-'+i},null,now);

@@ -1,0 +1,201 @@
+/* The game stays central; reference material has its own compact dock. */
+:root[data-theme]:has(.has-party-room) { scroll-behavior: auto; }
+:root[data-theme] .has-party-room :is(.sol-playfield,.adjustable-surface) { scroll-behavior: auto; }
+:root[data-theme] .casual-arcade { --game-space: 20px; }
+:root[data-theme] .casual-arcade .surface-restore {
+ display: flex; justify-content: flex-end; width: fit-content; max-width: 100%;
+ margin: 0 0 10px auto; padding: 0 !important; min-height: 0;
+ background: transparent !important; border: 0; box-shadow: none;
+}
+:root[data-theme] .casual-arcade .surface-restore button { min-height: 40px; padding: 9px 13px; font-size: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 9px; }
+:root[data-theme] .casual-arcade .game-options > label > small { display: none; }
+:root[data-theme] .casual-arcade .party-playing-heading { margin-bottom: 18px; gap: 16px; }
+:root[data-theme] .casual-arcade .party-playing-heading h1 { line-height: 1.2; }
+:root[data-theme] .casual-arcade .tactical-title h2 > span { display: none; }
+:root[data-theme] .casual-arcade .fleet-shot-report { padding: 16px 20px; margin: 0 24px 20px; }
+:root[data-theme] .casual-arcade .fleet-shot-report strong { font-size: 15px; line-height: 1.5; }
+:root[data-theme] .casual-arcade .fleet-shot-report small { display: none; }
+:root[data-theme] .casual-arcade .fleet-shot-report p { font-size: 12px; line-height: 1.6; }
+:root[data-theme] .casual-arcade .fleet-placement-status { margin: 12px 0 !important; }
+:root[data-theme] .casual-arcade .dock-panel-guide .dock-panel-content { overflow: hidden; }
+:root[data-theme] .casual-arcade .game-info { display: flex; flex-direction: column; height: 100%; min-height: 0; text-align: left; }
+:root[data-theme] .game-info-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 12px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+:root[data-theme] .game-info-tabs button { display: flex; justify-content: center; align-items: center; gap: 7px; min-height: 38px; padding: 8px 9px; font-size: 12px; font-weight: 650; color: var(--muted); border: 1px solid transparent; background: var(--surface); border-radius: 8px; box-shadow: none; }
+:root[data-theme] .game-info-tabs button[aria-selected=true] { background: var(--accent-soft); color: var(--accent-text); border-color: var(--border); }
+:root[data-theme] .game-info > section { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 18px; font-size: 13px; line-height: 1.75; }
+:root[data-theme] .game-info > section[hidden] { display: none; }
+:root[data-theme] .game-info h3 { font-size: 16px; line-height: 1.4; margin: 0 0 14px; }
+:root[data-theme] .game-info :is(ol, ul) { margin: 0; padding-left: 20px; }
+:root[data-theme] .game-info li { padding-left: 3px; margin-bottom: 14px; }
+:root[data-theme] .game-info p { font-size: 13px; line-height: 1.75; margin: 0 0 16px; color: var(--muted); }
+:root[data-theme] .game-info-bindings { margin: 0 0 18px; }
+:root[data-theme] .game-info-bindings > div { display: flex; justify-content: space-between; align-items: center; gap: 14px; border-bottom: 1px solid var(--border); padding: 10px 0; }
+:root[data-theme] .game-info-bindings dd { margin: 0; flex-shrink: 0; }
+:root[data-theme] .game-info kbd { display: inline-block; min-width: 30px; text-align: center; padding: 3px 7px; font-size: 11px; background: var(--surface-soft); border: 1px solid var(--border); border-radius: 5px; color: var(--text); }
+:root[data-theme] .game-info-extra .game-guide { margin: 14px 0; border: 1px solid var(--border); background: var(--surface); box-shadow: none; }
+:root[data-theme] .game-info-extra .game-guide > summary { padding: 12px; font-size: 12px; gap: 8px; line-height: 1.6; }
+:root[data-theme] .game-info-extra .game-guide > div { padding: 0 12px 12px; font-size: 13px; line-height: 1.75; }
+:root[data-theme] .game-info-sources { padding-top: 14px; border-top: 1px solid var(--border); }
+:root[data-theme] .game-info-sources summary { cursor: pointer; font-size: 12px; }
+:root[data-theme] .game-info-sources a { display: flex; align-items: center; gap: 8px; margin-top: 12px; font-size: 12px; line-height: 1.6; color: var(--accent-text); overflow-wrap: anywhere; }
+:root[data-theme] .chat-locked-note { padding: 10px 14px; margin: 0; font-size: 12px; line-height: 1.6; color: var(--muted); background: var(--surface-soft); border-top: 1px solid var(--border); }
+
+/* Identity stays readable; only the observer's model is desaturated and faded. */
+:root[data-theme] .casual-arcade .watcher-list { display: block; padding: 16px; border-top: 1px solid var(--border); background: var(--surface); }
+:root[data-theme] .watcher-list > header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--muted); }
+:root[data-theme] .watcher-list > header strong { font-size: 12px; font-weight: 650; }
+:root[data-theme] .watcher-list > header > span { margin-left: auto; padding: 0; border: 0; background: transparent; font-size: 12px; }
+:root[data-theme] .watcher-list ul { display: grid; gap: 9px; padding: 0; margin: 0; list-style: none; }
+:root[data-theme] .watcher-list .watcher-person { display: flex; align-items: center; gap: 11px; padding: 10px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-soft); }
+:root[data-theme] .watcher-list .watcher-avatar { position: relative; display: grid; place-items: center; width: 43px; height: 46px; padding: 0; border: 0; border-radius: 8px; background: transparent; flex-shrink: 0; }
+:root[data-theme] .watcher-avatar > .character-model { filter: grayscale(1); opacity: .78; mask-image: linear-gradient(#000 72%,#0007); }
+:root[data-theme] .watcher-avatar > i { position: absolute; right: -2px; bottom: 0; display: grid; place-items: center; width: 18px; height: 18px; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 50%; }
+:root[data-theme] .watcher-list .watcher-identity { display: grid; gap: 5px; min-width: 0; padding: 0; background: transparent; border: 0; }
+:root[data-theme] .watcher-identity > strong { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; font-size: 14px; font-weight: 650; line-height: 1.4; color: var(--text); overflow-wrap: anywhere; }
+:root[data-theme] .watcher-identity > strong > b { padding: 2px 5px; border-radius: 4px; background: var(--accent-soft); color: var(--accent-text); font-size: 10px; text-transform: uppercase; letter-spacing: .03em; }
+:root[data-theme] .watcher-identity > small { display: flex; align-items: center; gap: 6px; width: auto; letter-spacing: 0; color: var(--muted); font-size: 12px; line-height: 1.4; }
+:root[data-theme] .casual-arcade .party-resume-panel { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin: 0 0 20px; padding: 18px; border: 1px solid var(--border); border-radius: 12px; background: var(--accent-soft); color: var(--text); }
+:root[data-theme] .party-resume-panel > div { flex: 1; min-width: min(190px,100%); }
+:root[data-theme] .party-resume-panel strong { display: block; margin-bottom: 5px; font-size: 15px; line-height: 1.4; }
+:root[data-theme] .party-resume-panel p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+:root[data-theme] .casual-arcade .party-resume-panel .button { min-height: 44px; font-size: 14px; }
+
+/* Text hierarchy applies to every game, with smaller coordinates kept separate. */
+:root[data-theme] .casual-arcade .eyebrow { font-size: 11px; line-height: 1.55; letter-spacing: .09em; }
+:root[data-theme] .casual-arcade :is(.dock-panel-header > strong,.match-identity > strong) { font-size: 14px; line-height: 1.5; }
+:root[data-theme] .casual-arcade :is(.match-tags b,.match-tags span,.match-board-heading > small,.match-score > small) { font-size: 11px; line-height: 1.5; }
+:root[data-theme] .casual-arcade :is(.game-info p,.game-info > section,.game-info li) { font-size: 14px; line-height: 1.7; }
+:root[data-theme] .casual-arcade :is(.tactical-status,.tactical-board-label > span,.tactical-board-legend) { font-size: 12px; line-height: 1.5; }
+:root[data-theme] .casual-arcade .fleet-coordinate { font-size: 10px; font-weight: 650; }
+:root[data-theme] .casual-arcade .tactical-stage-strip > span { font-size: 12px; line-height: 1.5; }
+
+/* Original card-table artwork: sharp ranks, quiet felt, generous touch targets. */
+:root[data-theme] .solitaire-table { container-type: inline-size; min-width: 0; padding: 22px; border: 1px solid #759d9877; border-radius: 18px; background: linear-gradient(145deg, #203d40, var(--sol-felt, #173139)); color: #eff5ee; }
+:root[data-theme] .solitaire-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 0 0 24px; }
+:root[data-theme] .solitaire-heading > div { display: flex; gap: 12px; align-items: center; min-width: 0; }
+:root[data-theme] .solitaire-heading small { display: block; font-size: 10px; line-height: 1.6; letter-spacing: .08em; color: #c8dcd4; }
+:root[data-theme] .solitaire-heading h2 { font-size: clamp(23px, 4cqw, 32px); line-height: 1.25; margin: 4px 0 0; color: #f5f5e9; }
+:root[data-theme] .main-content .solitaire-heading small { color: #d3e3dc; font-size: 11px; letter-spacing: .03em; }
+:root[data-theme] .sol-progress { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 7px; flex-shrink: 0; font-size: 15px; font-variant-numeric: tabular-nums; }
+:root[data-theme] .sol-progress small { flex-basis: 100%; text-align: right; letter-spacing: 0; }
+:root[data-theme] .sol-playfield { overflow-x: auto; max-width: 100%; scrollbar-width: thin; scrollbar-color: #afcab577 transparent; padding: 0 0 12px; overscroll-behavior-inline: contain; }
+:root[data-theme] .sol-layout { --sol-card-width: clamp(44px, 9cqw, 82px); --sol-card-height: calc(var(--sol-card-width) * 1.4); min-width: 350px; }
+:root[data-theme] .solitaire-freecell .sol-layout { min-width: 420px; }
+:root[data-theme] .solitaire-table[class*=spider] .sol-layout { min-width: 480px; --sol-card-width: clamp(44px, 7cqw, 72px); }
+:root[data-theme] .solitaire-tripeaks .sol-layout { min-width: 500px; --sol-card-width: clamp(42px, 7.5cqw, 74px); }
+:root[data-theme] .solitaire-pyramid .sol-layout { min-width: 390px; --sol-card-width: clamp(48px, 10cqw, 86px); }
+:root[data-theme] .sol-top-row { display: flex; justify-content: space-between; gap: 24px; align-items: start; margin-bottom: 28px; min-height: var(--sol-card-height); }
+:root[data-theme] :is(.sol-stock-row,.sol-foundations,.sol-free-cells) { display: flex; align-items: start; gap: 8px; }
+:root[data-theme] :is(.sol-stock,.sol-waste,.sol-slot) { position: relative; width: var(--sol-card-width); height: var(--sol-card-height); flex-shrink: 0; }
+:root[data-theme] :is(.sol-slot,.sol-empty-column,.sol-waste) { border: 1px solid #b4d3c555; background: #0b283c30; border-radius: 8px; }
+:root[data-theme] .sol-slot > button:not(.sol-card),
+:root[data-theme] .sol-empty-column { width: 100%; min-height: var(--sol-card-height); display: grid; place-items: center; padding: 0; color: #bed2c78c; font-size: 30px; background: transparent; border: 0; border-radius: 8px; }
+:root[data-theme] .sol-stock { display: grid; place-items: center; padding: 4px; min-height: 0; border: 2px solid #e6e8d2; border-radius: 8px; color: #dce9df; background: #23484d; box-shadow: 0 2px 5px #071c3033; }
+:root[data-theme] .sol-stock img { display: block; width: 95%; height: 95%; object-fit: contain; }
+:root[data-theme] .sol-stock > span { position: absolute; right: 4px; bottom: 4px; background: #142c3e; color: #fff; border-radius: 4px; padding: 2px 5px; font-size: 11px; }
+:root[data-theme] .sol-stock.empty-stock { border: 1px solid #b4d3c555; background: #0b283c30; box-shadow: none; }
+:root[data-theme] .sol-empty-mark { position: absolute; inset: 0; display: grid; place-items: center; color: #bed2c7; font-size: 11px; }
+:root[data-theme] .sol-card { position: absolute; inset: 0 auto auto 0; display: block; width: 100%; aspect-ratio: 5 / 7; min-height: 0; padding: 0; border: 1px solid #152d4240; border-radius: 7px; background: #fcf9ef; color: #253344; box-shadow: 0 2px 4px #0c1d3133; overflow: hidden; cursor: pointer; touch-action: none; text-align: left; }
+:root[data-theme] .sol-card.red { color: #b93752; }
+:root[data-theme] .sol-card { isolation: isolate; }
+:root[data-theme] .sol-card.face-up { background: #fcf9ef; }
+:root[data-theme] .sol-card.card-back { background: #23484d; border: 2px solid #e6e8d2; cursor: default; }
+:root[data-theme] .sol-card.card-back > img { position: absolute; inset: 4px; width: calc(100% - 8px); height: calc(100% - 8px); object-fit: contain; }
+:root[data-theme] .sol-card.selected { outline: 3px solid #f2d77f !important; outline-offset: 1px; box-shadow: 0 0 0 4px #233b47; }
+:root[data-theme] .sol-card.covered { cursor: default; }
+:root[data-theme] .sol-card-corner { position: absolute; z-index: 1; left: 4px; top: 4px; display: grid; justify-items: center; font-size: clamp(15px, 2.3cqw, 22px); line-height: .98; font-weight: 750; }
+:root[data-theme] .sol-card-corner i { font-size: .8em; font-style: normal; line-height: 1; }
+:root[data-theme] .sol-card-corner.bottom { left: auto; top: auto; right: 5px; bottom: 4px; transform: rotate(180deg); }
+:root[data-theme] .sol-card-pip { position: absolute; inset: 0; display: grid; place-items: center; font-size: clamp(24px, 4cqw, 44px); }
+:root[data-theme] .sol-card-art { position: absolute; inset: 0; display: block; width: 100%; height: 100%; pointer-events: none; }
+:root[data-theme] .solitaire-table.deal-won { border-color: #b7d9a5; }
+:root[data-theme] .sol-tableau { display: grid; grid-template-columns: repeat(var(--sol-columns), minmax(0,1fr)); gap: 8px; }
+:root[data-theme] .sol-column { position: relative; min-width: 0; }
+:root[data-theme] .sol-column .sol-card { width: 100%; max-height: 132px; }
+:root[data-theme] .sol-column .sol-card-corner:not(.bottom) { display: flex; align-items: center; gap: 3px; line-height: 1; }
+:root[data-theme] .sol-empty-column { border: 1px dashed #b4d3c555; }
+:root[data-theme] .sol-complete-runs { display: flex; align-items: center; flex-wrap: wrap; justify-content: end; gap: 7px; max-width: 280px; }
+:root[data-theme] .sol-complete-runs > span { display: grid; place-items: center; width: 27px; height: 38px; border: 1px solid #b4d3c555; border-radius: 5px; color: #bed2c777; font-size: 20px; }
+:root[data-theme] .sol-complete-runs > span.complete { background: #d6e8c5; color: #24523a; }
+:root[data-theme] .sol-shape { position: relative; height: 350px; margin-top: 10px; }
+:root[data-theme] .sol-shape.tripeaks { height: 290px; }
+:root[data-theme] .sol-shape > div { position: absolute; width: var(--sol-card-width); height: var(--sol-card-height); }
+:root[data-theme] .hint-target { outline: 2px dashed #f2d77f; outline-offset: 3px; border-radius: 8px; }
+:root[data-theme] .solitaire-tools { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; margin-top: 14px; padding-top: 18px; border-top: 1px solid #b4d3c533; }
+:root[data-theme] .casual-arcade .solitaire-tools .button.outline { min-height: 40px; font-size: 12px; padding: 9px 13px; color: #e3eee5; background: #16383b; border-color: #789b9388; }
+:root[data-theme] .sol-concede { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 9px 12px; margin-left: auto; color: #e0d6c0; font-size: 12px; background: transparent; border: 0; border-radius: 8px; }
+:root[data-theme] .sol-confirm-end { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; flex-basis: 100%; font-size: 13px; }
+:root[data-theme] .sol-hint-note { margin: 16px 0 0; font-size: 13px; line-height: 1.6; color: #e7e0b6; }
+:root[data-theme] .main-content .sol-hint-note { color: #f0e6b8; }
+:root[data-theme] .sol-local-view { margin-bottom: 18px; }
+
+/* A restrained art studio. Drawing uses an incremental high-DPI canvas. */
+:root[data-theme] .sketch-board { min-width: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 18px; background: var(--surface); color: var(--text); }
+:root[data-theme] .sketch-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 20px 22px; background: var(--surface); border-bottom: 1px solid var(--border); }
+:root[data-theme] .sketch-artist { display: flex; align-items: center; gap: 10px; min-width: 0; }
+:root[data-theme] .sketch-artist > div { display: grid; gap: 4px; min-width: 0; }
+:root[data-theme] .sketch-artist strong { font-size: 14px; line-height: 1.4; max-width: 18ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+:root[data-theme] .sketch-heading small { display: block; font-size: 10px; line-height: 1.5; letter-spacing: .08em; color: var(--muted); }
+:root[data-theme] .sketch-word { display: grid; justify-items: center; min-width: 0; flex: 1; gap: 5px; text-align: center; }
+:root[data-theme] .sketch-word strong { font-size: clamp(19px, 2.5vw, 27px); line-height: 1.35; overflow-wrap: anywhere; }
+:root[data-theme] .sketch-word > span { color: var(--muted); font-size: 14px; }
+:root[data-theme] .sketch-word .word-mask { font-size: 19px; letter-spacing: .03em; font-variant-ligatures: none; }
+:root[data-theme] .sketch-clock { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--border); background: var(--surface-soft); border-radius: 10px; padding: 9px 11px; font-size: 14px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+:root[data-theme] .sketch-word-choices { display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px; min-height: 380px; padding: 38px 24px; text-align: center; background: radial-gradient(ellipse at 50% 50%,var(--accent-soft),transparent 70%); }
+:root[data-theme] .sketch-private-mark { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
+:root[data-theme] .sketch-word-choices h3 { margin: 0; font-size: 28px; line-height: 1.3; }
+:root[data-theme] .sketch-word-choices p { margin: 0; font-size: 13px; color: var(--muted); }
+:root[data-theme] .sketch-word-choices > div { display: flex; align-items: stretch; justify-content: center; gap: 12px; width: 100%; flex-wrap: wrap; }
+:root[data-theme] .sketch-word-choices button { min-width: 140px; min-height: 66px; padding: 16px 24px; font-size: 18px; font-weight: 650; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); color: var(--text); box-shadow: none; }
+:root[data-theme] .sketch-word-choices button:hover { border-color: var(--accent); background: var(--accent-soft); }
+:root[data-theme] .sketch-tools { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 18px; flex-wrap: wrap; background: var(--surface-soft); border-bottom: 1px solid var(--border); }
+:root[data-theme] .sketch-colors { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+:root[data-theme] .sketch-colors button { display: grid; place-items: center; width: 30px; height: 30px; min-width: 30px; min-height: 30px; padding: 0; border: 1px solid #273e4c55; border-radius: 7px; box-shadow: none; }
+:root[data-theme] .sketch-colors button[aria-pressed=true] { outline: 2px solid var(--text); outline-offset: 2px; }
+:root[data-theme] .sketch-brush-tools { display: flex; align-items: center; gap: 6px; }
+:root[data-theme] .sketch-brush-tools :is(select,button) { display: grid; place-items: center; min-height: 38px !important; min-width: 38px; padding: 8px !important; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-size: 12px; }
+:root[data-theme] .sketch-brush-tools button[aria-pressed=true] { background: var(--accent-soft); border-color: var(--accent); }
+:root[data-theme] .sketch-paper { position: relative; background: #fff; padding: 0; }
+:root[data-theme] .sketch-canvas { display: block; width: 100%; height: auto; aspect-ratio: 1000 / 650; background: #fff; touch-action: none; outline-offset: -3px; }
+:root[data-theme] .sketch-canvas-wrap { position: relative; overflow: hidden; }
+:root[data-theme] .sketch-canvas.can-draw { cursor: crosshair; }
+:root[data-theme] .sketch-brush-preview { position: absolute; left: 0; top: 0; border: 1px solid #26384b; border-radius: 50%; box-shadow: 0 0 0 1px #fff; pointer-events: none; }
+:root[data-theme] .sketch-brush-preview[hidden] { display: none; }
+:root[data-theme] .sketch-reveal-badge { position: absolute; right: 16px; bottom: 16px; display: flex; align-items: center; gap: 7px; padding: 9px 13px; background: #e7f2e9; color: #235c3c; border: 1px solid #bad0bf; border-radius: 9px; font-size: 12px; pointer-events: none; }
+:root[data-theme] .sketch-round-status { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; border-top: 1px solid var(--border); padding: 14px 18px; }
+:root[data-theme] .sketch-round-status > div { display: flex; gap: 8px; flex-wrap: wrap; }
+:root[data-theme] .sketch-round-status > div > span { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; padding: 5px 8px; border: 1px solid var(--border); border-radius: 20px; color: var(--muted); }
+:root[data-theme] .sketch-round-status > div > span.guessed { color: var(--success-text); background: var(--success-bg); }
+:root[data-theme] .sketch-thinking-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--muted); }
+:root[data-theme] .sketch-round-status > span { font-size: 12px; line-height: 1.6; color: var(--muted); }
+:root[data-theme] .sketch-inline-guess { display: none; padding: 0 18px 16px; gap: 9px; }
+:root[data-theme] .sketch-inline-guess input { width: 100%; min-width: 0; }
+:root[data-theme] .sketch-feedback { font-size: 13px; line-height: 1.6; padding: 12px 18px; margin: 0; color: var(--success-text); background: var(--success-bg); border-top: 1px solid var(--border); }
+:root[data-theme] .sketch-feedback.error { color: var(--danger); background: var(--danger-soft, var(--surface-soft)); }
+@media (prefers-reduced-motion: no-preference) {
+ :root[data-theme] .sketch-reveal-badge { animation: sketch-reveal-in 160ms ease-out; }
+ :root[data-theme] .sketch-word-choices button { transition: border-color 120ms, background-color 120ms; }
+ :root[data-theme] .sol-card { transition: outline-color 100ms; }
+}
+@keyframes sketch-reveal-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 760px) {
+ :root[data-theme] .solitaire-table { padding: 15px; border-radius: 14px; }
+ :root[data-theme] .solitaire-heading { margin-bottom: 20px; gap: 12px; }
+ :root[data-theme] .solitaire-heading small { font-size: 9px; letter-spacing: .04em; }
+ :root[data-theme] .solitaire-tools { gap: 8px; }
+ :root[data-theme] .solitaire-tools .button { flex: 1; white-space: nowrap; }
+ :root[data-theme] .sol-concede { margin-left: 0; }
+ :root[data-theme] .sketch-heading { padding: 16px; gap: 12px; flex-wrap: wrap; }
+ :root[data-theme] .sketch-artist { flex: 1; }
+ :root[data-theme] .sketch-word { order: 3; flex-basis: 100%; padding-top: 14px; border-top: 1px solid var(--border); }
+ :root[data-theme] .sketch-word-choices { min-height: 330px; gap: 18px; padding: 30px 20px; }
+ :root[data-theme] .sketch-word-choices > div { flex-direction: column; }
+ :root[data-theme] .sketch-word-choices button { min-height: 52px; font-size: 17px; }
+ :root[data-theme] .sketch-tools { padding: 12px; gap: 12px; }
+ :root[data-theme] .sketch-colors { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); width: 100%; gap: 8px; }
+ :root[data-theme] .sketch-colors button { width: 100%; height: 38px; min-height: 38px; }
+ :root[data-theme] .sketch-brush-tools { width: 100%; justify-content: flex-end; }
+ :root[data-theme] .sketch-inline-guess { display: grid; grid-template-columns: minmax(0,1fr) auto; }
+ :root[data-theme] .sketch-clock { min-height: 40px; }
+ :root[data-theme] .game-info-tabs button { min-height: 40px; }
+}

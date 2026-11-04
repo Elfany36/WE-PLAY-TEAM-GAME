@@ -18,5 +18,5 @@ export function casualLeaderboard(room:CasualPublic|null){
   const boards=new Map<string,any>(game.boards.map((b:any)=>[b.id,b]));
   return players.sort((a,b)=>Number(boards.get(b.id)?.alive)-Number(boards.get(a.id)?.alive)||(boards.get(b.id)?.score||0)-(boards.get(a.id)?.score||0));
  }
- return players.sort((a,b)=>game.kind==='ladders'?(game.positions[b.id]||0)-(game.positions[a.id]||0):['memory','uno','pool'].includes(game.kind)?(game.scores[b.id]||0)-(game.scores[a.id]||0):0);
+ return players.sort((a,b)=>game.kind==='ladders'?(game.positions[b.id]||0)-(game.positions[a.id]||0):['memory','uno','pool','sketch','solitaire'].includes(game.kind)?(game.scores[b.id]||0)-(game.scores[a.id]||0):0);
 }

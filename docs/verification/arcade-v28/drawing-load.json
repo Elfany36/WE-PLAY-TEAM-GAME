@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "environment": "local Workers, eight authenticated active WebSocket viewers, direct loopback actions; not production Internet latency",
+  "players": 8,
+  "points": 6000,
+  "segments": 94,
+  "projectedFrames": [
+    96,
+    96,
+    96,
+    96,
+    96,
+    96,
+    96,
+    96
+  ],
+  "receivedBytes": [
+    220671,
+    220654,
+    220654,
+    220654,
+    220654,
+    220654,
+    220654,
+    220654
+  ],
+  "serverMs": {
+    "p50": 1,
+    "p95": 2,
+    "max": 3
+  },
+  "localRoundTripMs": {
+    "p50": 10.562741999999616,
+    "p95": 14.273135999999795,
+    "max": 21.90938300000016
+  },
+  "streamErrors": []
+}

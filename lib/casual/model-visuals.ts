@@ -196,6 +196,8 @@ export function modelSvg(family:ModelFamily,model:string,color:string,options:Mo
   art='<g transform="'+(options.vertical?'translate(77 0) rotate(90)':'translate(0 23)')+' scale('+(1/unit.length)+' .54)">'+drawing+'</g>';
  }
  else if(family==='kart')art=kart(id,index,fill);
+ else if(family==='solitaire')art=`<ellipse cx="51" cy="88" rx="32" ry="6" fill="#182c4320"/><g transform="rotate(-13 50 50)">${r(22,12,49,72,paper,7)}${path('M29 24h34M29 32h34',undefined,fill,2)}</g><g transform="rotate(9 50 50)">${r(33,17,49,72,fill,7)}${r(38,22,39,62,paper,4)}${r(42,26,31,54,fill,3)}${emblem(index,58,52,.85)}${circle(58,31,2,paper)}${circle(58,74,2,paper)}</g>`;
+ else if(family==='sketch')art=`<ellipse cx="49" cy="91" rx="30" ry="5" fill="#182c4320"/>${r(28,34,44,48,fill,12)}${circle(42,52,4,paper)}${circle(59,52,4,paper)}${circle(42,53,1.5,edge)}${circle(59,53,1.5,edge)}${path('M43 65q8 7 16 0',undefined,edge,2)}<g transform="rotate(${(index%5-2)*6} 50 50)">${index%3===0?path('M29 35 50 8 71 35Z',paper)+r(30,30,40,8,fill,2):index%3===1?path('M24 35q-3-20 26-20t26 20Z',fill)+circle(61,18,6,paper):r(24,22,52,14,fill,6)+path('M34 23 42 8h17l8 15Z',paper)}${emblem(index,50,30,.22)}</g>${path('M32 77 21 88M67 77l12 11',undefined,edge,5)}${r(73,47,8,35,paper,2)}${path('M72 48 78 35 82 48Z',fill)}`;
  else if(family==='tank')art=tank(id,index,fill,options.part);
  else if(family==='sumo')art=sumo(id,index,fill);
  else if(family==='snake')art=options.part==='head'?snakeHead(id,index,fill):path('M21 78Q78 94 70 55T32 29',undefined,edge,22)+path('M21 78Q78 94 70 55T32 29',undefined,fill,18)+`<g transform="translate(8 -6) scale(.65)">${snakeHead(id,index,fill)}</g>`+emblem(index,65,68,.45);

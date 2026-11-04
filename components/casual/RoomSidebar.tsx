@@ -1,8 +1,9 @@
 'use client';
+import SpectatorList from './SpectatorList';
 import type {ChatDecoration} from '../../lib/chat-media';
 import {memo,lazy,Suspense,type ReactNode} from 'react';
 import type {CasualPublic} from '../../lib/casual/engine';
-import {Crown,BrainCircuit,Wifi,WifiOff,MessageCircle} from 'lucide-react';
+import {BookOpen,Crown,BrainCircuit,Wifi,WifiOff,MessageCircle} from 'lucide-react';
 import {nameInitial} from '../../lib/text-presentation';
 import {ARCADE_COLORS} from '../../lib/casual/arcade-colors';
 import MatchBoard from './MatchBoard';
@@ -42,10 +43,11 @@ function RoomSidebar({room,busy,local,connected,onAction,onSend,guide}:Props){
     </div>;
    })}</div>
    {room.phase==='lobby'&&!local&&<button className="button outline roster-ready" disabled={busy} onClick={()=>onAction('ready')}>{room.players.find(p=>p.isYou)?.ready?'Unready':'Ready to play'}</button>}
-  </>}{guide}</DockPanel>
-  <DockPanel id="chat" title="Chat" icon={<MessageCircle size={18}/>}><Suspense fallback={<p className="chat-loading" role="status">Opening room chat…</p>}><GameChat embedded docked roomCode={room.code} resetKey={room.mode+':'+room.chatEpoch} youId={room.youId} messages={(room.chat||[]) as ChatMessage[]} local={local} disabled={!local&&!connected} onSend={onSend}/></Suspense></DockPanel>
+  </>}{room.mode==='terra'&&<SpectatorList room={room}/>}</DockPanel>
+  <DockPanel id="chat" title="Chat" icon={<MessageCircle size={18}/>}><Suspense fallback={<p className="chat-loading" role="status">Opening room chat…</p>}><GameChat embedded docked roomCode={room.code} resetKey={room.mode+':'+room.chatEpoch} youId={room.youId} messages={(room.chat||[]) as ChatMessage[]} local={local} disabled={!local&&!connected||room.mode==='sketch'&&room.phase==='playing'&&!!room.game?.chatLocked} placeholder={room.mode==='sketch'&&room.phase==='playing'?(room.game?.stage==='choose'?'Waiting for the artist…':room.game?.chatLocked?'Chat opens after the reveal':'Type your guess…'):undefined} lockedReason={room.mode==='sketch'&&room.phase==='playing'&&room.game?.chatLocked?'You can chat again after the answer is revealed.':undefined} onSend={onSend}/></Suspense></DockPanel>
+ <DockPanel id="guide" title="Game info" icon={<BookOpen size={18}/>}>{guide}</DockPanel>
  </>;
 }
 
-function rosterKey(room:CasualPublic){const g=room.game;return JSON.stringify([room.code,room.round,room.mode,room.phase,room.youId,room.isHost,room.chatEpoch,room.players.filter(p=>p.role==='spectator').map(p=>[p.id,p.name,p.retired]),room.botThinking?.playerId,casualLeaderboard(room).map(p=>[p.id,p.name,p.color,p.appearance,p.ready,p.retired,p.online,p.canRemove,p.bot,p.isHost,p.isYou,playerStanding(room,p.id),room.mode!=='terra'?matchStat(room,p.id):null,g?.currentId===p.id,room.mode==='tanks'?g?.actors?.filter((a:any)=>a.id===p.id).map((a:any)=>[a.alive,a.hp,a.armor,a.ammo]):null,room.mode==='pool'?g?.balls?.filter((b:any)=>!b.pocketed).map((b:any)=>b.number):null,room.mode==='uno'?g?.opponentBacks?.[p.id]:null])])}
+function rosterKey(room:CasualPublic){const g=room.game;return JSON.stringify([room.code,room.round,room.mode,room.phase,room.youId,room.isHost,room.chatEpoch,room.mode==='sketch'?[room.game?.stage,room.game?.chatLocked,room.game?.feedback?.at]:null,room.players.filter(p=>p.role==='spectator').map(p=>[p.id,p.name,p.color,p.appearance,p.retired,p.online,p.isHost,p.isYou]),room.botThinking?.playerId,casualLeaderboard(room).map(p=>[p.id,p.name,p.color,p.appearance,p.ready,p.retired,p.online,p.canRemove,p.bot,p.isHost,p.isYou,playerStanding(room,p.id),room.mode!=='terra'?matchStat(room,p.id):null,g?.currentId===p.id,room.mode==='tanks'?g?.actors?.filter((a:any)=>a.id===p.id).map((a:any)=>[a.alive,a.hp,a.armor,a.ammo]):null,room.mode==='pool'?g?.balls?.filter((b:any)=>!b.pocketed).map((b:any)=>b.number):null,room.mode==='uno'?g?.opponentBacks?.[p.id]:null])])}
 export default memo(RoomSidebar,(a,b)=>a.busy===b.busy&&a.local===b.local&&a.connected===b.connected&&a.guide===b.guide&&a.onAction===b.onAction&&a.onSend===b.onSend&&a.room.chat?.length===b.room.chat?.length&&a.room.chat?.at(-1)?.clientId===b.room.chat?.at(-1)?.clientId&&rosterKey(a.room)===rosterKey(b.room));

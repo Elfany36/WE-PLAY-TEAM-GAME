@@ -7,7 +7,9 @@ import {poolRemaining} from './pool.ts';
 export function matchStat(room:CasualPublic,id:string){
  const g=room.game;
  let value:string|number='—',label='Waiting',progress:number|undefined;
- if(g?.kind==='generals'){value=g.stage==='deploy'?21:g.pieces.filter((p:{owner:string})=>p.owner===id).length;label=g.stage==='deploy'?'Army pieces':'Pieces left'}
+ if(g?.kind==='solitaire'){value=(g.scores[id]||0)/10;label='Cards cleared'}
+ else if(g?.kind==='sketch'){value=g.scores[id]||0;label='Points'}
+ else if(g?.kind==='generals'){value=g.stage==='deploy'?21:g.pieces.filter((p:{owner:string})=>p.owner===id).length;label=g.stage==='deploy'?'Army pieces':'Pieces left'}
  else if(g?.kind==='fleet'){value=g.remaining[id]??5;label='Models afloat';progress=1-Number(value)/5}
  else if(g?.kind==='snake'){const w=g.worms.find((w:{id:string})=>w.id===id);value=room.settings.battle?w?.kills||0:w?.score||0;label=room.settings.battle?'KOs':'Apples'}
  else if(g?.kind==='circuit'){const d=g.drivers.find((d:{id:string})=>d.id===id);value=d?.finishedAt?'✓':Math.min(g.laps,(d?.lap||0)+1)+'/'+g.laps;label='Laps';const count=checkpointCount(g);progress=d?.finishedAt?1:((d?.lap||0)+((d?.checkpoint||1)+count-1)%count/count)/g.laps}

@@ -7,7 +7,8 @@ export function localViewer(state:CasualState,preferred:string|null=null,review:
  const fallback=humans.find(p=>p.id===preferred)?.id??humans.find(p=>p.id===state.hostId)?.id??humans[0]?.id??state.hostId;
  if(!game)return fallback;
  let actor=fallback;
- if(game.kind==='property')actor=preferred&&!game.players[preferred]?.bust?preferred:game.debt?.payer||game.currentId;
+ if(game.kind==='solitaire')actor=fallback;
+ else if(game.kind==='property')actor=preferred&&!game.players[preferred]?.bust?preferred:game.debt?.payer||game.currentId;
  else if((game.kind==='generals'||game.kind==='fleet')&&game.stage==='deploy')actor=humans.find(p=>game.ids.includes(p.id)&&!game.ready[p.id])?.id||fallback;
  else if('currentId'in game)actor=game.kind==='uno'&&review?review:game.currentId;
  return humans.some(p=>p.id===actor)?actor:fallback;

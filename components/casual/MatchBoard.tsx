@@ -1,4 +1,5 @@
 'use client';
+import SpectatorList from './SpectatorList';
 import type {FleetStyle} from '../../lib/casual/fleet';
 import {memo,type CSSProperties} from 'react';
 import {Crown,ChevronDown,BrainCircuit,Shield} from 'lucide-react';
@@ -37,7 +38,7 @@ export default function MatchBoard({embedded=false,room,open,setOpen,busy,local,
     {room.isHost&&p.canRemove&&room.phase!=='playing'&&room.phase!=='paused'&&<button className="text-link match-free-seat" disabled={busy} onClick={()=>onAction('remove-inactive',{playerId:p.id})}>Free seat</button>}
    </li>;
   })}</ol>
-  {room.players.some(p=>!p.retired&&p.role==='spectator')&&<div className="watcher-list"><small>WATCHING</small>{room.players.filter(p=>!p.retired&&p.role==='spectator').map(p=><span key={p.id}>{p.name}{p.isYou?' · you':''}</span>)}</div>}
+  <SpectatorList room={room}/>
   {room.phase==='lobby'&&!local&&room.players.find(p=>p.isYou)?.role!=='spectator'&&<button className="button outline match-ready" disabled={busy} onClick={()=>onAction('ready')}>{room.players.find(p=>p.isYou)?.ready?'Unready':'Ready to play'}</button>}
  </>;
  return embedded?<section className="match-board is-embedded">{content}</section>:<details className="match-board" open={open} onToggle={e=>setOpen(e.currentTarget.open)}>{content}</details>;

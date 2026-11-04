@@ -1,0 +1,22 @@
+[
+  {
+    "mode": "solitaire",
+    "width": 390,
+    "status": "passed"
+  },
+  {
+    "mode": "sketch",
+    "width": 390,
+    "status": "passed"
+  },
+  {
+    "mode": "solitaire",
+    "width": 1440,
+    "status": "passed"
+  },
+  {
+    "mode": "sketch",
+    "width": 1440,
+    "status": "passed"
+  }
+]

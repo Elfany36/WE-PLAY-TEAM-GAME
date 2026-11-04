@@ -5,6 +5,7 @@ export function casualTickDelay(s:CasualState,now:number){
  const g=s.game;if(!g)return 1000;
  if(['snake','circuit','terra','sumo','tanks','pong','marble','blocks'].includes(g.kind)||g.kind==='pool'&&g.moving)return 50;
  let delay=Math.max(25,Math.min(1000,g.deadline-now));
+ if(g.kind==='sketch'&&g.stage==='draw')delay=Math.min(delay,Math.max(25,g.hintAt-now));
  if(g.kind==='memory'&&g.resolveAt!==null)delay=Math.min(delay,Math.max(25,g.resolveAt-now));
  if(g.kind==='ladders'&&now<g.lockUntil)delay=Math.min(delay,Math.max(25,g.lockUntil-now));
  if(g.kind==='property'&&now<(g.motionUntil||0))delay=Math.min(delay,Math.max(25,(g.motionUntil||now)-now));

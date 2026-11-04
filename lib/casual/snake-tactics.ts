@@ -8,9 +8,9 @@ export function chooseSnakeDirection(g:SnakeGame,id:string,brain:FairBrain):Dire
  const size=g.size||32,total=size*size,blocked=new Uint8Array(total),danger=new Uint8Array(total),food=new Uint8Array(total),head=w.body[0],prior=moves.find(d=>d.direction===w.direction)!,profile=botProfile(brain,id);
  for(const p of g.obstacles||[])blocked[p.y*size+p.x]=1;
  for(const worm of g.worms){if(!worm.alive||!worm.body.length)continue;
-  const protectedOpponent=worm.id!==id&&((worm.protectedUntil||0)>g.lastTickAt||(w.protectedUntil||0)>g.lastTickAt);
-  if(!protectedOpponent)for(let i=0;i<worm.body.length-1;i++){const p=worm.body[i];blocked[p.y*size+p.x]=1}
-  if(worm.id!==id&&!protectedOpponent){const direction=moves.find(d=>d.direction===worm.direction)!;for(const d of moves){if(d.x===-direction.x&&d.y===-direction.y)continue;const x=worm.body[0].x+d.x,y=worm.body[0].y+d.y;if(x>=0&&y>=0&&x<size&&y<size)danger[y*size+x]=1}}
+  const turn=worm.queue.length&&(!worm.queueTicks?.length||worm.queueTicks[0]<=g.tick+1)?worm.queue[0]:worm.direction,delta=moves.find(d=>d.direction===turn)!,next={x:worm.body[0].x+delta.x,y:worm.body[0].y+delta.y},growing=g.food.some(p=>p.x===next.x&&p.y===next.y);
+  for(let i=0;i<worm.body.length-(growing?0:1);i++){const p=worm.body[i];blocked[p.y*size+p.x]=1}
+  if(worm.id!==id){const direction=moves.find(d=>d.direction===worm.direction)!;for(const d of moves){if(d.x===-direction.x&&d.y===-direction.y)continue;const x=worm.body[0].x+d.x,y=worm.body[0].y+d.y;if(x>=0&&y>=0&&x<size&&y<size)danger[y*size+x]=1}}
  }
  for(const p of g.food)food[p.y*size+p.x]=1;
  const queue=new Int32Array(total),depth=new Uint16Array(total),seen=new Uint8Array(total),limit=Math.min(total,1024),tail=w.body.at(-1)!;let best=-Infinity,choice:Direction|undefined;

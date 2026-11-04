@@ -1,3 +1,6 @@
+import {newSolitaire,solitaireAction,advanceSolitaire,publicSolitaire,type SolitaireGame} from './solitaire.ts';
+import {newSketch,sketchAction,advanceSketch,sketchChat,leaveSketch,publicSketch,type SketchGame} from './sketch.ts';
+import {newGameSettings,newGameActionFields,type NewGameSettings} from './new-game-settings.ts';
 import {newGenerals,generalsAction,advanceGenerals,publicGenerals,type GeneralsGame} from './generals.ts';
 import {newFleet,fleetAction,advanceFleet,publicFleet,type FleetGame} from './fleet.ts';
 import {hiddenSettings,type HiddenSettings} from './hidden-settings.ts';
@@ -22,11 +25,11 @@ import {newUno,unoAction,advanceUno,leaveUno,publicUno,type UnoGame} from './uno
 import {snakeMap,SNAKE_MAP_IDS,snakeStarts,SNAKE_SIZES,type SnakeMapId} from './maps.ts';
 import {CasualError} from './error.ts';
 export {CasualError} from './error.ts';
-export type CasualMode='ladders'|'memory'|'snake'|'uno'|'property'|'phone'|'circuit'|'terra'|'chess'|'dama'|'scidama'|'sumo'|'tanks'|'pong'|'marble'|'blocks'|'pool'|'generals'|'fleet';
-export const CASUAL_MODES=['ladders','memory','snake','uno','property','phone','circuit','terra','chess','dama','scidama','sumo','tanks','pong','marble','blocks','pool','generals','fleet'] as const;
+export type CasualMode='ladders'|'memory'|'snake'|'uno'|'property'|'phone'|'circuit'|'terra'|'chess'|'dama'|'scidama'|'sumo'|'tanks'|'pong'|'marble'|'blocks'|'pool'|'generals'|'fleet'|'solitaire'|'sketch';
+export const CASUAL_MODES=['ladders','memory','snake','uno','property','phone','circuit','terra','chess','dama','scidama','sumo','tanks','pong','marble','blocks','pool','generals','fleet','solitaire','sketch'] as const;
 export const casualCapacity=(mode:string)=>isStrategy(mode)||['pong','pool','generals','fleet'].includes(mode)?2:mode==='uno'?12:8;
-export const casualMinimum=(mode:string)=>isStrategy(mode)||['uno','property','phone','sumo','tanks','pong','pool','generals','fleet'].includes(mode)?2:1;
-export type CasualSettings=HiddenSettings&{roundSeconds?:60|120|180|300|600;winTarget?:5|10|11|20|21;raceLaps?:1|2|3|5;scene?:TableScene;characterSelection?:boolean;arcadeV2?:boolean;unoSameColor?:boolean;sumoFormat?:'bracket'|'classic';blockPace?:'arcade'|'expert'|'blitz';cards:number;speed:number;map?:SnakeMapId;snakeSize?:32|48|64;battle?:boolean;difficulty?:'cozy'|'standard'|'expert';unoFlip?:boolean;track?:string;bots?:number;relayRounds?:number;relaySeconds?:number;arena?:'garden'|'canyon'|'neon'|'harbor'|'foundry'|'glacier'|'bamboo'|'relay'};
+export const casualMinimum=(mode:string)=>isStrategy(mode)||['uno','property','phone','sketch','sumo','tanks','pong','pool','generals','fleet'].includes(mode)?2:1;
+export type CasualSettings=NewGameSettings&HiddenSettings&{roundSeconds?:60|120|180|300|600;winTarget?:5|10|11|20|21;raceLaps?:1|2|3|5;scene?:TableScene;characterSelection?:boolean;arcadeV2?:boolean;unoSameColor?:boolean;sumoFormat?:'bracket'|'classic';blockPace?:'arcade'|'expert'|'blitz';cards:number;speed:number;map?:SnakeMapId;snakeSize?:32|48|64;battle?:boolean;difficulty?:'cozy'|'standard'|'expert';unoFlip?:boolean;track?:string;bots?:number;relayRounds?:number;relaySeconds?:number;arena?:'garden'|'canyon'|'neon'|'harbor'|'foundry'|'glacier'|'bamboo'|'relay'};
 export type Direction='up'|'right'|'down'|'left';
 export type Point={x:number;y:number};
 export type CasualPlayer={id:string;name:string;tokenHash:string;joinedAt:number;lastSeen:number;color:number;ready:boolean;characterRound?:number;retired:boolean;requests:string[];role?:'player'|'spectator';appearance?:Appearance;traffic?:RoomTraffic;bot?:boolean};
@@ -34,7 +37,7 @@ export type LadderGame={kind:'ladders';positions:Record<string,number>;currentId
 export type MemoryGame={kind:'memory';deck:{key:number;matchedBy:string|null}[];revealed:number[];currentId:string;turn:number;deadline:number;resolveAt:number|null;scores:Record<string,number>;moves:number};
 export type Worm={id:string;body:Point[];trail?:Point[];previous?:Point[];direction:Direction;queue:Direction[];queueTicks?:number[];alive:boolean;score:number;lastSeq:number;deathAt:number|null;deathPoint:Point|null;reason:string;respawnAt?:number;kills?:number;deaths?:number;best?:number;protectedUntil?:number};
 export type SnakeGame={kind:'snake';size?:number;mapId?:SnakeMapId;obstacles?:Point[];worms:Worm[];food:Point[];tick:number;lastTickAt:number;startAt:number;deadline:number;pausedAt:number|null;participants:number};
-export type CasualState={schema:1;ai?:BotBrain;chat?:ChatMessage[];chatEpoch?:number;code:string;hostId:string;mode:CasualMode;phase:'lobby'|'playing'|'paused'|'finished';createdAt:number;round:number;random:number;settings:CasualSettings;players:CasualPlayer[];game:LadderGame|MemoryGame|SnakeGame|UnoGame|PropertyGame|PhoneGame|CircuitGame|TerraGame|StrategyGame|PartyGame|BlocksGame|PoolGame|GeneralsGame|FleetGame|null;result:null|{winnerIds:string[];reason:string};events:{id:number;text:string;at:number}[];eventId:number;pauseReason:string};
+export type CasualState={schema:1;ai?:BotBrain;chat?:ChatMessage[];chatEpoch?:number;code:string;hostId:string;mode:CasualMode;phase:'lobby'|'playing'|'paused'|'finished';createdAt:number;round:number;random:number;settings:CasualSettings;players:CasualPlayer[];game:LadderGame|MemoryGame|SnakeGame|UnoGame|PropertyGame|PhoneGame|CircuitGame|TerraGame|StrategyGame|PartyGame|BlocksGame|PoolGame|GeneralsGame|FleetGame|SolitaireGame|SketchGame|null;result:null|{winnerIds:string[];reason:string};events:{id:number;text:string;at:number}[];eventId:number;pauseReason:string};
 export const GRID_SIZE=32,TURN_MS=45000,HOST_TIMEOUT=45000,ROOM_TTL=86400000;
 export const LADDERS:Record<number,number>={2:23,8:34,20:39,32:51,41:79,54:72,64:87,76:94,89:99};
 export const SLIDES:Record<number,number>={17:6,30:9,47:26,59:38,66:45,75:53,83:62,91:71,98:80};
@@ -42,6 +45,12 @@ export const DIRECTIONS:Record<Direction,Point>={up:{x:0,y:-1},right:{x:1,y:0},d
 export const opposite=(a:Direction,b:Direction)=>DIRECTIONS[a].x+DIRECTIONS[b].x===0&&DIRECTIONS[a].y+DIRECTIONS[b].y===0;
 export const samePoint=(a:Point,b:Point)=>a.x===b.x&&a.y===b.y;
 export const activePlayers=(s:CasualState)=>s.players.filter(p=>!p.retired&&p.role!=='spectator');
+/** An absent host must not strand a paused arena; this grants resume only. */
+export function canResumeCasual(s:CasualState,id:string,now:number){
+ if(s.phase!=='paused'||!s.game||!['snake','circuit','terra','sumo','tanks','pong','marble','blocks','pool'].includes(s.game.kind))return false;
+ const viewer=s.players.find(p=>p.id===id&&!p.retired&&!p.bot),host=s.players.find(p=>p.id===s.hostId&&!p.retired);
+ return !!viewer&&(id===s.hostId||!host||now-host.lastSeen>=20000);
+}
 function event(s:CasualState,text:string,at:number){s.events=[...s.events.slice(-11),{id:++s.eventId,text,at}]}
 function random(s:CasualState){let x=s.random||1;x^=x<<13;x^=x>>>17;x^=x<<5;s.random=x>>>0;return s.random/4294967296}
 function shuffled<T>(s:CasualState,input:T[]){const a=[...input];for(let i=a.length-1;i>0;i--){const j=Math.floor(random(s)*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
@@ -61,7 +70,7 @@ function newSnake(s:CasualState,now:number):SnakeGame{
  const worms=activePlayers(s).map((p,i)=>{const[x,y,direction]=starts[i],delta=DIRECTIONS[direction];return{id:p.id,body:(s.settings.battle?[0,1,2,3]:[0,1,2]).map(j=>({x:x-delta.x*j,y:y-delta.y*j})),direction,queue:[],alive:true,score:0,lastSeq:0,deathAt:null,deathPoint:null,reason:'',kills:0,deaths:0,best:0,respawnAt:0,protectedUntil:0} as Worm});
  const map=snakeMap(s.settings.map,size);const g:SnakeGame={kind:'snake',size,mapId:map.id,obstacles:map.obstacles.map(p=>({...p})),worms,food:[],tick:0,lastTickAt:now+3000,startAt:now+3000,deadline:now+3000+(s.settings.roundSeconds?s.settings.roundSeconds*1000:s.settings.battle?300000:180000),pausedAt:null,participants:worms.length};spawnFood(s,g);return g;
 }
-function respawnWorm(s:CasualState,g:SnakeGame,w:Worm,now:number){const occupied=new Set([...g.worms.filter(v=>v.alive).flatMap(v=>v.body),...(g.obstacles||[])].map(p=>p.x+','+p.y));const size=g.size||32,candidates=[...snakeStarts(size)];for(let y=4;y<size-4;y+=4)for(let x=4;x<size-4;x+=4)candidates.push([x,y,'right']);for(const [x,y,direction]of candidates){const d=DIRECTIONS[direction],body=[0,1,2,3].map(i=>({x:x-d.x*i,y:y-d.y*i}));if([...body,{x:x+d.x,y:y+d.y},{x:x+2*d.x,y:y+2*d.y}].some(p=>p.x<0||p.y<0||p.x>=size||p.y>=size||occupied.has(p.x+','+p.y)))continue;w.body=body;w.trail=body.map(p=>({...p}));w.previous=body.map(p=>({...p}));w.direction=direction;w.queue=[];w.queueTicks=[];w.alive=true;w.score=0;w.respawnAt=0;w.protectedUntil=now+1200;w.reason='';return}w.respawnAt=now+500}
+function respawnWorm(s:CasualState,g:SnakeGame,w:Worm,now:number){const occupied=new Set([...g.worms.filter(v=>v.alive).flatMap(v=>v.body),...(g.obstacles||[])].map(p=>p.x+','+p.y));for(const other of g.worms)if(other.alive&&other.body.length)for(const delta of Object.values(DIRECTIONS)){const head=other.body[0];occupied.add((head.x+delta.x)+','+(head.y+delta.y))}const size=g.size||32,candidates=[...snakeStarts(size)];for(let y=4;y<size-4;y+=4)for(let x=4;x<size-4;x+=4)candidates.push([x,y,'right']);for(const [x,y,direction]of candidates){const d=DIRECTIONS[direction],body=[0,1,2,3].map(i=>({x:x-d.x*i,y:y-d.y*i}));if([...body,{x:x+d.x,y:y+d.y},{x:x+2*d.x,y:y+2*d.y}].some(p=>p.x<0||p.y<0||p.x>=size||p.y>=size||occupied.has(p.x+','+p.y)))continue;w.body=body;w.trail=body.map(p=>({...p}));w.previous=body.map(p=>({...p}));w.direction=direction;w.queue=[];w.queueTicks=[];w.alive=true;w.score=0;w.respawnAt=0;w.protectedUntil=0;w.reason='';return}w.respawnAt=now+500}
 /** Simultaneous proposals make head-on and head-swap outcomes independent of player order. */
 export function stepSnake(s:CasualState,now:number){
  const g=s.game as SnakeGame;if(s.settings.battle)for(const w of g.worms)if(!w.alive&&w.respawnAt&&now>=w.respawnAt&&!s.players.find(p=>p.id===w.id)?.retired)respawnWorm(s,g,w,now);const alive=g.worms.filter(w=>w.alive);for(const w of alive)w.previous=w.body.map(p=>({...p}));const heads=new Map<string,Point>(),growing=new Set<string>();
@@ -69,7 +78,7 @@ export function stepSnake(s:CasualState,now:number){
  const dead=new Map<string,string>(),killers=new Map<string,string>();
  for(const w of alive){const head=heads.get(w.id)!;if(head.x<0||head.y<0||head.x>=(g.size||32)||head.y>=(g.size||32)){dead.set(w.id,'Hit a wall');continue}
   if(g.obstacles?.some(p=>samePoint(p,head))){dead.set(w.id,'Hit an obstacle');continue}
-  for(const other of alive){if(s.settings.battle&&other.id!==w.id&&((other.protectedUntil||0)>now||(w.protectedUntil||0)>now))continue;const otherHead=heads.get(other.id)!;
+  for(const other of alive){const otherHead=heads.get(other.id)!;
    if(other.id!==w.id&&samePoint(head,otherHead)){dead.set(w.id,'Head-on collision');break}
    if(other.id!==w.id&&samePoint(head,other.body[0])&&samePoint(otherHead,w.body[0])){dead.set(w.id,'Head-swap collision');break}
    const body=growing.has(other.id)?other.body:other.body.slice(0,-1);
@@ -93,6 +102,7 @@ export function advanceCasual(input:CasualState,now:number):{state:CasualState;c
  if('lastTickAt'in g&&'startAt'in g&&g.kind!=='pool')due=now>=g.startAt&&(due||now-g.lastTickAt>8000||g.lastTickAt+(g.kind==='snake'?input.settings.speed:50)<=now);
  else if(g.kind==='chess'||g.kind==='dama')due=false;
  else if(g.kind==='phone'&&g.revealing)due=false;
+ else if(g.kind==='sketch'&&now>=g.hintAt)due=true;
  else if(g.kind==='memory'&&g.resolveAt!==null&&now>=g.resolveAt)due=true;
  if(botsDue(input,now))due=true;
  if(!due)return{state:input,changed:false};
@@ -105,6 +115,8 @@ function advanceGame(s:CasualState,now:number):{state:CasualState;changed:boolea
  if(now-s.createdAt>ROOM_TTL)throw new CasualError('This room expired after 24 hours. Create a fresh room.',410);let changed=false;const g=s.game;
  if(s.phase!=='playing'||!g)return{state:s,changed};
  if(isParty(g.kind))return{state:s,changed:advanceParty(s,now)};
+ if(g.kind==='solitaire')return{state:s,changed:advanceSolitaire(s,now)};
+ if(g.kind==='sketch')return{state:s,changed:advanceSketch(s,now)};
  if(g.kind==='generals')return{state:s,changed:advanceGenerals(s,now)};
  if(g.kind==='fleet')return{state:s,changed:advanceFleet(s,now)};
  if(g.kind==='blocks')return{state:s,changed:advanceBlocks(s,now)};
@@ -152,7 +164,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
   if(a.confirmCharacter&&['lobby','finished'].includes(s.phase)&&p.role!=='spectator'){p.characterRound=s.round+1;p.ready=true}
   return s;
  }
- if(a.action==='chat'){try{s.chat=appendChat(s.chat,p.id,p.name,a.text,a.messageId,now,a.giftId,s.mode==='terra'?{}:{gifId:a.gifId,effect:a.effect})}catch(e){if(e instanceof ChatError)throw new CasualError(e.message,e.status);throw e}return s}
+ if(a.action==='chat'){if(s.game?.kind==='sketch'){if(s.phase==='playing'&&(a.round!==s.round||a.turn!==s.game.turn))throw new CasualError('That drawing turn has ended.',409);sketchChat(s,p.id,a.text,a.messageId,now);return s}try{s.chat=appendChat(s.chat,p.id,p.name,a.text,a.messageId,now,a.giftId,s.mode==='terra'?{}:{gifId:a.gifId,effect:a.effect})}catch(e){if(e instanceof ChatError)throw new CasualError(e.message,e.status);throw e}return s}
  if(a.action==='leave'||a.action==='remove-inactive'){
   const target=a.action==='leave'?p:s.players.find(x=>x.id===a.playerId&&!x.retired);
   if(a.action==='remove-inactive'){
@@ -166,6 +178,8 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
    if(g.kind==='uno')leaveUno(s,target.id,now);
    else if(g.kind==='property')bankruptEstate(s,g,target.id,now);
    else if(g.kind==='phone')leavePhone(s,target.id,now);
+   else if(g.kind==='sketch')leaveSketch(s,target.id,now);
+   else if(g.kind==='solitaire'&&g.boards[target.id])g.boards[target.id].status='conceded';
    else if((g.kind==='chess'||g.kind==='dama'||g.kind==='scidama'))leaveStrategy(s,target.id,now);
    else if(g.kind==='generals'||g.kind==='fleet'){finishBattle(s,g.ids.filter(id=>id!==target.id),'A commander left. Their opponent wins by forfeit.',now)}
    else if(g.kind==='pool'){finish(s,activePlayers(s).map(p=>p.id),'A player left the table. The remaining player wins.',now)}
@@ -193,14 +207,14 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
  }
  if(p.role==='spectator'&&!['configure','start','lobby','pause','resume','end',...(p.id===s.hostId&&s.game?.kind==='phone'&&s.game.revealing?['reveal-phone']:[])].includes(a.action))throw new CasualError('Spectators can watch and chat. Choose Player in the next lobby to play.',403);
  if(a.action==='ready'){if(s.phase!=='lobby')throw new CasualError('Ready controls are available in the lobby.',409);p.ready=!p.ready;return s}
- if(['configure','start','lobby','pause','resume'].includes(a.action)&&p.id!==s.hostId)throw new CasualError('Only the room host can do that.',403);
+ if(['configure','start','lobby','pause','resume'].includes(a.action)&&p.id!==s.hostId&&!(a.action==='resume'&&canResumeCasual(s,p.id,now)))throw new CasualError('Only the room host can do that while connected.',403);
  if(a.action==='configure'){
   if(s.phase==='lobby'||s.phase==='finished')s.players=s.players.filter(p=>!p.bot);
   if(s.phase==='playing'||s.phase==='paused')throw new CasualError('Finish the round before changing the game.',409);
   if(!CASUAL_MODES.includes(a.mode))throw new CasualError('Choose a valid game.');for(const [key,values]of [['roundSeconds',[60,120,180,300,600]],['winTarget',[5,10,11,20,21]],['raceLaps',[1,2,3,5]]] as const)if(a[key]!==undefined&&!(values as readonly number[]).includes(a[key]))throw new CasualError('Choose a valid game variant.');
   if(activePlayers(s).length>casualCapacity(a.mode))throw new CasualError('This game has '+casualCapacity(a.mode)+' seats. Ask extra players to leave before switching.',409);
   if(!Number.isInteger(a.cards)||a.cards<12||a.cards>200||a.cards%2)throw new CasualError('Choose an even deck size from 12 to 200 cards.');
-  if(![125,175,250,350,500].includes(a.speed))throw new CasualError('Choose a valid snake speed.');for(const k of ['battle','unoFlip','arcadeV2','unoSameColor'])if(a[k]!==undefined&&typeof a[k]!=='boolean')throw new CasualError('Invalid game option.');if(a.arena!==undefined&&!CLUB_MAPS.some(m=>m.id===a.arena))throw new CasualError('Choose a valid arena.');if(a.difficulty&&!['cozy','standard','expert'].includes(a.difficulty))throw new CasualError('Choose a valid difficulty.');if(a.track&&!TRACKS.some(t=>t.id===a.track))throw new CasualError('Choose a track.');for(const [k,min,max]of [['bots',0,8],['relayRounds',3,9],['relaySeconds',20,180]] as const)if(a[k]!==undefined&&(!Number.isInteger(a[k])||a[k]<min||a[k]>max))throw new CasualError('Invalid '+k+' setting.');if(s.mode!==a.mode){delete s.settings.tacticalSeconds;delete s.settings.fleetSize;delete s.settings.fleetStyle;delete s.settings.fleetTurn;delete s.settings.roundSeconds;delete s.settings.winTarget;delete s.settings.raceLaps;s.chat=[];s.chatEpoch=(s.chatEpoch||0)+1;for(const player of s.players){player.appearance=player.appearance?.avatar?{avatar:player.appearance.avatar,useAvatar:false}:undefined;delete player.characterRound;}}s.mode=a.mode;if(a.snakeSize!==undefined&&!SNAKE_SIZES.includes(a.snakeSize))throw new CasualError('Choose a 32, 48 or 64 square arena.');if(a.map!==undefined&&!SNAKE_MAP_IDS.includes(a.map))throw new CasualError('Choose a valid map.');if(a.blockPace!==undefined&&!['arcade','expert','blitz'].includes(a.blockPace)||a.sumoFormat!==undefined&&!['bracket','classic'].includes(a.sumoFormat))throw new CasualError('Choose a valid match format.');if(a.scene!==undefined&&!TABLE_SCENE_IDS.includes(a.scene))throw new CasualError('Choose a valid table scene.');s.settings={...s.settings,...hiddenSettings(a),...(a.roundSeconds!==undefined?{roundSeconds:a.roundSeconds}:{}),...(a.winTarget!==undefined?{winTarget:a.winTarget}:{}),...(a.raceLaps!==undefined?{raceLaps:a.raceLaps}:{}),...(a.scene&&s.mode!=='terra'?{scene:a.scene}:{}),...(a.arcadeV2!==undefined?{arcadeV2:a.arcadeV2}:{}),...(a.unoSameColor!==undefined?{unoSameColor:a.unoSameColor}:{}),...(a.blockPace?{blockPace:a.blockPace}:{}),...(a.sumoFormat?{sumoFormat:a.sumoFormat}:{}),...(a.arena?{arena:a.arena}:{}),cards:a.cards,speed:a.speed,snakeSize:a.snakeSize||s.settings.snakeSize||48,map:a.map||s.settings.map||'classic',...(a.battle!==undefined?{battle:a.battle===true}:{}),...(a.difficulty?{difficulty:a.difficulty}:{}),...(a.unoFlip!==undefined?{unoFlip:a.unoFlip===true}:{}),...(a.track?{track:a.track}:{}),...(a.bots!==undefined?{bots:a.bots}:{}),...(a.relayRounds?{relayRounds:a.relayRounds}:{}),...(a.relaySeconds?{relaySeconds:a.relaySeconds}:{})};s.phase='lobby';s.game=null;s.result=null;activePlayers(s).forEach(p=>{p.ready=false;delete p.characterRound});return s;
+  if(![125,175,250,350,500].includes(a.speed))throw new CasualError('Choose a valid snake speed.');for(const k of ['battle','unoFlip','arcadeV2','unoSameColor'])if(a[k]!==undefined&&typeof a[k]!=='boolean')throw new CasualError('Invalid game option.');if(a.arena!==undefined&&!CLUB_MAPS.some(m=>m.id===a.arena))throw new CasualError('Choose a valid arena.');if(a.difficulty&&!['cozy','standard','expert'].includes(a.difficulty))throw new CasualError('Choose a valid difficulty.');if(a.track&&!TRACKS.some(t=>t.id===a.track))throw new CasualError('Choose a track.');for(const [k,min,max]of [['bots',0,8],['relayRounds',3,9],['relaySeconds',20,180]] as const)if(a[k]!==undefined&&(!Number.isInteger(a[k])||a[k]<min||a[k]>max))throw new CasualError('Invalid '+k+' setting.');if(s.mode!==a.mode){delete s.settings.tacticalSeconds;delete s.settings.fleetSize;delete s.settings.fleetStyle;delete s.settings.fleetTurn;delete s.settings.roundSeconds;delete s.settings.winTarget;delete s.settings.raceLaps;s.chat=[];s.chatEpoch=(s.chatEpoch||0)+1;for(const player of s.players){player.appearance=player.appearance?.avatar?{avatar:player.appearance.avatar,useAvatar:false}:undefined;delete player.characterRound;}}s.mode=a.mode;if(a.snakeSize!==undefined&&!SNAKE_SIZES.includes(a.snakeSize))throw new CasualError('Choose a 32, 48 or 64 square arena.');if(a.map!==undefined&&!SNAKE_MAP_IDS.includes(a.map))throw new CasualError('Choose a valid map.');if(a.blockPace!==undefined&&!['arcade','expert','blitz'].includes(a.blockPace)||a.sumoFormat!==undefined&&!['bracket','classic'].includes(a.sumoFormat))throw new CasualError('Choose a valid match format.');if(a.scene!==undefined&&!TABLE_SCENE_IDS.includes(a.scene))throw new CasualError('Choose a valid table scene.');s.settings={...s.settings,...newGameSettings(a),...hiddenSettings(a),...(a.roundSeconds!==undefined?{roundSeconds:a.roundSeconds}:{}),...(a.winTarget!==undefined?{winTarget:a.winTarget}:{}),...(a.raceLaps!==undefined?{raceLaps:a.raceLaps}:{}),...(a.scene&&s.mode!=='terra'?{scene:a.scene}:{}),...(a.arcadeV2!==undefined?{arcadeV2:a.arcadeV2}:{}),...(a.unoSameColor!==undefined?{unoSameColor:a.unoSameColor}:{}),...(a.blockPace?{blockPace:a.blockPace}:{}),...(a.sumoFormat?{sumoFormat:a.sumoFormat}:{}),...(a.arena?{arena:a.arena}:{}),cards:a.cards,speed:a.speed,snakeSize:a.snakeSize||s.settings.snakeSize||48,map:a.map||s.settings.map||'classic',...(a.battle!==undefined?{battle:a.battle===true}:{}),...(a.difficulty?{difficulty:a.difficulty}:{}),...(a.unoFlip!==undefined?{unoFlip:a.unoFlip===true}:{}),...(a.track?{track:a.track}:{}),...(a.bots!==undefined?{bots:a.bots}:{}),...(a.relayRounds?{relayRounds:a.relayRounds}:{}),...(a.relaySeconds?{relaySeconds:a.relaySeconds}:{})};s.phase='lobby';s.game=null;s.result=null;activePlayers(s).forEach(p=>{p.ready=false;delete p.characterRound});return s;
  }
  if(a.action==='lobby'){
   if(s.phase==='playing'||s.phase==='paused')throw new CasualError('Finish or end the current round first.',409);
@@ -217,6 +231,8 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
   s.ai=s.players.some(p=>p.bot)?{nextAt:now+1000,cursor:0}:undefined;
   s.round++;s.phase='playing';s.result=null;s.pauseReason='';s.players=s.players.filter(p=>!p.retired);s.players.forEach(p=>{p.ready=false});const first=activePlayers(s)[0].id;
   if(isParty(s.mode))s.game=newParty(s,now);
+  else if(s.mode==='solitaire')s.game=newSolitaire(s,now);
+  else if(s.mode==='sketch')s.game=newSketch(s,now);
   else if(s.mode==='generals')s.game=newGenerals(s,now);
   else if(s.mode==='fleet')s.game=newFleet(s,now);
   else if(s.mode==='blocks')s.game=newBlocks(s,now);
@@ -245,6 +261,8 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
  const g=s.game;
  if(a.inputEpoch!==undefined&&'startAt'in g&&a.inputEpoch!==g.startAt)throw new CasualError('This control belongs to an older round timeline.',409);
  if('actors'in g){partyAction(s,a,p.id,now);return s}
+ if(g.kind==='solitaire'){solitaireAction(s,{...a,...newGameActionFields(a)},p.id,now);return s}
+ if(g.kind==='sketch'){sketchAction(s,{...a,...newGameActionFields(a)},p.id,now);return s}
  if(g.kind==='generals'){generalsAction(s,a,p.id,now);return s}
  if(g.kind==='fleet'){fleetAction(s,a,p.id,now);return s}
  if(g.kind==='blocks'){blocksAction(s,a,p.id,now);return s}
@@ -281,7 +299,9 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
 export function publicCasual(s:CasualState,id:string,now:number){
  const me=s.players.find(p=>p.id===id&&!p.retired);if(!me)throw new CasualError('Your session ended. Join again.',401);
  const host=s.players.find(p=>p.id===s.hostId&&!p.retired);let game:any=s.game;
- if(s.game?.kind==='generals')game=publicGenerals(s.game,id,s.phase==='finished');
+ if(s.game?.kind==='solitaire')game=publicSolitaire(s.game,id);
+ else if(s.game?.kind==='sketch')game=publicSketch(s.game,id,now);
+ else if(s.game?.kind==='generals')game=publicGenerals(s.game,id,s.phase==='finished');
  else if(s.game?.kind==='fleet')game=publicFleet(s.game,id,s.phase==='finished');
  else if(s.game&&isStrategy(s.game.kind))game=publicStrategy(s.game as StrategyGame);
  else if(s.game?.kind==='blocks')game=publicBlocks(s.game);
@@ -290,6 +310,6 @@ export function publicCasual(s:CasualState,id:string,now:number){
  else if(s.game?.kind==='property')game={...s.game,chance:undefined,chest:undefined};
  else if(s.game?.kind==='memory'){const g=s.game;game={...g,deck:g.deck.map((c,index)=>({index,matchedBy:c.matchedBy,...(c.matchedBy||g.revealed.includes(index)?{key:c.key}:{})}))}}
  else if(s.game?.kind==='snake')game={...s.game,worms:s.game.worms.map(({queue,queueTicks,lastSeq,...w})=>({...w,...(w.id===id?{pendingTurns:queue,pendingTicks:queueTicks,inputAck:lastSeq}:{})}))};
- return{code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,...(s.mode!=='terra'&&s.phase==='playing'&&s.ai?.wait&&s.ai.wait.readyAt>now?{botThinking:{playerId:s.ai.wait.playerId,until:s.ai.wait.readyAt}}:{}),chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,traffic,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&(p.bot||now-lastSeen<20000),canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
+ return{code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,...(s.mode!=='terra'&&s.phase==='playing'&&s.ai?.wait&&s.ai.wait.readyAt>now?{botThinking:{playerId:s.ai.wait.playerId,until:s.ai.wait.readyAt}}:{}),chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canResume:canResumeCasual(s,id,now),canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,traffic,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&(p.bot||now-lastSeen<20000),canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
 }
 export type CasualPublic=ReturnType<typeof publicCasual>&{viewingId?:string;revision?:number;network?:{rtt:number;totalRtt?:number;serverMs?:number;snapshotInterval?:number}};

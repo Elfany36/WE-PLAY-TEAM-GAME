@@ -1,0 +1,36 @@
+{
+  "pair": [
+    {
+      "zone": "tableau",
+      "index": 22
+    },
+    {
+      "zone": "tableau",
+      "index": 27
+    }
+  ],
+  "clicks": [
+    {
+      "disabled": false,
+      "aria": "false",
+      "onClick": true,
+      "knownCard": "45",
+      "calls": [],
+      "selected": 1
+    },
+    {
+      "disabled": false,
+      "aria": "false",
+      "onClick": true,
+      "knownCard": "7",
+      "calls": [
+        {
+          "called": true,
+          "prevented": false
+        }
+      ],
+      "selected": 0
+    }
+  ],
+  "status": "passed"
+}

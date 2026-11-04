@@ -5,6 +5,8 @@ import {poolRemaining} from './pool.ts';
 /** One concise public standing per player; private hands and AI state stay private. */
 export function playerStanding(room:CasualPublic,id:string){
  const g=room.game as any;if(!g)return'';
+ if(g.kind==='solitaire')return (g.boards[id]?.status==='won'?'Completed':g.boards[id]?.status==='conceded'?'Deal ended':g.boards[id]?.status==='stuck'?'No moves':String((g.scores[id]||0)/10)+' cleared')+' · '+(g.boards[id]?.moves||0)+' moves';
+ if(g.kind==='sketch')return (g.stage==='reveal'?'Answer revealed':g.artistId===id?g.stage==='choose'?'Choosing':'Drawing':g.guessed[id]?'Guessed':'Guessing')+' · '+(g.scores[id]||0)+' points';
  if(g.kind==='generals')return g.stage==='deploy'?(g.ready[id]?'Army deployed':'Arranging army'):g.pieces.filter((p:any)=>p.owner===id).length+' pieces · '+(g.captures[id]||0)+' captures';
  if(g.kind==='fleet')return g.stage==='deploy'?(g.ready[id]?'Fleet concealed':'Placing models'):(g.remaining[id]||0)+' models afloat · '+g.shots.filter((shot:any)=>shot.by===id&&shot.hit).length+' hits';
  if(g.kind==='snake'){const w=g.worms.find((w:any)=>w.id===id);return w?(w.alive?w.score+' apples · '+w.body.length+' long':room.settings.battle?'Respawning':'Out')+(room.settings.battle?' · '+(w.kills||0)+' KOs':''):''}

@@ -42,12 +42,12 @@ test('public-state prediction agrees with authoritative room advancement through
   assert.deepEqual(mode==='circuit'?predicted.drivers:predicted.actors,mode==='circuit'?(state.game as CircuitGame).drivers:(state.game as PartyGame).actors);
  }
 });
-test('panel grids occupy only requested columns and stack without losing either panel',()=>{
- assert.equal(panelGrid(defaultPanelLayout,1400).gridTemplateAreas,'"game players" "game chat"');
- assert.equal(panelGrid(defaultPanelLayout,390).gridTemplateAreas,'"game" "players" "chat"');
- for(const a of ['left','right','above','below'] as const)for(const b of ['left','right','above','below'] as const){const layout=readPanelLayout({players:{...defaultPanelLayout.players,side:a},chat:{...defaultPanelLayout.chat,side:b}}),grid=panelGrid(layout,1600);assert(grid.gridTemplateAreas.includes('game'));assert(grid.gridTemplateAreas.includes('players'));assert(grid.gridTemplateAreas.includes('chat'));if(![a,b].includes('left')&&![a,b].includes('right'))assert.equal(grid.gridTemplateColumns,'minmax(0,1fr)')}
+test('panel grids occupy only requested columns and stack all three panels',()=>{
+ assert.equal(panelGrid(defaultPanelLayout,1400).gridTemplateAreas,'"game guide" "game players" "game chat"');
+ assert.equal(panelGrid(defaultPanelLayout,390).gridTemplateAreas,'"game" "guide" "players" "chat"');
+ for(const a of ['left','right','above','below'] as const)for(const b of ['left','right','above','below'] as const){const layout=readPanelLayout({players:{...defaultPanelLayout.players,side:a},chat:{...defaultPanelLayout.chat,side:b},guide:{...defaultPanelLayout.guide,side:b}}),grid=panelGrid(layout,1600);assert(grid.gridTemplateAreas.includes('game'));assert(grid.gridTemplateAreas.includes('players'));assert(grid.gridTemplateAreas.includes('chat'));assert(grid.gridTemplateAreas.includes('guide'));if(![a,b].includes('left')&&![a,b].includes('right'))assert.equal(grid.gridTemplateColumns,'minmax(0,1fr)')}
  assert.equal(readPanelLayout({chat:{side:'bad',width:1e9,height:-2}}).chat.height,220);
- assert(panelGrid(defaultPanelLayout,1400,{players:true}).gridTemplateRows.startsWith('60px'));
+ assert(panelGrid(defaultPanelLayout,1400,{players:true,guide:true}).gridTemplateRows.startsWith('60px 60px'));
 });
 test('every current choice remains available online after a missing health response',()=>{
  for(const map of SNAKE_MAP_IDS)assert(onlineContentAvailable('snake',{cards:32,speed:175,map},BASE_ONLINE_CONTENT));

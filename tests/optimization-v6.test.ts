@@ -11,7 +11,8 @@ const start=Date.now();
 function room(mode:CasualMode,bots=1){let s=createCasual('ABCDEFGH','human','Human','hash',mode,7123,start);s.settings.bots=bots;return applyCasualAction(s,{action:'start'},'human',start)}
 for(const mode of CASUAL_MODES)test(mode+' starts with computer seats, stays legal and keeps AI data private',()=>{
  let s=room(mode,7);assert.equal(s.players.filter(p=>p.bot).length,Math.min(7,casualCapacity(mode)-1));
- if(s.game&&'currentId'in s.game&&mode!=='phone')s.game.currentId=s.players[1].id;
+ if(s.game&&'currentId'in s.game&&!['phone','solitaire','sketch'].includes(mode))s.game.currentId=s.players[1].id;
+ if(s.game?.kind==='sketch')s.players.find(p=>p.id==='human')!.bot=true;
  if(s.game?.kind==='chess'){const whiteId=s.game.whiteId;s.game.currentId=whiteId;s.players.find(p=>p.id===whiteId)!.bot=true;s.players.find(p=>p.id==='human')!.bot=true}
  const before=JSON.stringify(s.game);for(let ms=50;ms<=10000&&s.phase==='playing';ms+=50)s=advanceCasual(s,start+ms).state;
  assert.notEqual(JSON.stringify(s.game),before);assert.equal(s.ai?.rejected||0,0,s.ai?.lastError);assert.equal(s.hostId,'human');
