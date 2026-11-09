@@ -1,0 +1,302 @@
+@font-face { font-family:'Arcade Pixel';src:url('/fonts/press-start-2p.woff') format('woff');font-weight:400;font-style:normal;font-display:swap; }
+/* The uploaded game's portrait, percentage, stock, item and cooldown arrangement. */
+:root[data-theme] .casual-arcade .pirate-native-crew { display:grid;grid-auto-flow:unset;grid-auto-columns:unset;grid-template-columns:repeat(var(--pirate-crew-count,3),minmax(0,1fr));gap:8px;padding:10px 0 0;margin:0;overflow:visible; }
+:root[data-theme] .casual-arcade .pirate-crew-card.pirate-native-card { display:grid;grid-template-columns:minmax(24px,22%) minmax(0,1fr) minmax(24px,18%);align-items:center;gap:7px;min-width:0;height:90px;margin:0;padding:8px!important;border:2px solid var(--crew-color)!important;border-radius:12px;background:linear-gradient(180deg,#30284eee,#120f1eee)!important;container-type:inline-size;box-shadow:inset 0 0 0 2px #ffffff0b;filter:none;color:#f5edff;pointer-events:none;font-family:'Arcade Pixel',monospace; }
+:root[data-theme] .pirate-native-portrait { display:grid;place-items:center;width:100%;max-width:46px;height:64px;overflow:hidden;border-radius:7px;background:#0e0b1acc; }
+:root[data-theme] .pirate-native-portrait>span { display:block;background-repeat:no-repeat;image-rendering:pixelated; }
+:root[data-theme] .pirate-native-vitals { display:flex;flex-direction:column;align-items:center;min-width:0;gap:6px; }
+:root[data-theme] .casual-arcade .pirate-native-name { display:block;max-width:100%;color:color-mix(in srgb,var(--crew-color) 40%,#fff)!important;font:400 8px/1.5 'Arcade Pixel',monospace;letter-spacing:-.03em;text-transform:uppercase;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+:root[data-theme] .casual-arcade .pirate-native-vitals>.pirate-damage { display:block;font:400 clamp(11px,8cqw,25px)/1.25 'Arcade Pixel',monospace;text-shadow:2px 2px #090614;white-space:nowrap; }
+:root[data-theme] .pirate-native-hearts { display:flex;align-items:center;justify-content:center;gap:2px;height:13px;color:#ffe08a;font:400 13px/1 'Arcade Pixel',monospace; }
+:root[data-theme] .pirate-native-hearts img { width:13px;height:12px;image-rendering:pixelated; }
+:root[data-theme] .pirate-native-item { display:grid;justify-items:center;gap:5px; }
+:root[data-theme] .pirate-native-slot { display:grid;place-items:center;position:relative;width:36px;height:36px;border:2px solid #79718e;border-radius:8px;background:#0b091bcc; }
+:root[data-theme] .pirate-native-slot>b { display:grid;place-items:center;width:24px;height:24px;border-radius:50%;font:400 7px/1 'Arcade Pixel',monospace;color:#14111f; }
+:root[data-theme] .pirate-native-slot>small { position:absolute;bottom:1px;right:0;font:400 8px/1 'Arcade Pixel',monospace;color:#fff; }
+:root[data-theme] .pirate-native-empty { width:20px;height:20px;border:2px dashed #57516a;border-radius:50%; }
+:root[data-theme] .pirate-native-bomb { width:23px;height:35px;background:url('/pirate-brawl/sprites/bomb.png') no-repeat -23px 0;background-size:253px 35px;image-rendering:pixelated; }
+:root[data-theme] .pirate-native-item .pirate-dash-meter { width:34px;height:5px;margin:0;border-radius:4px;background:#0a0816;accent-color:#9af0a1; }
+:root[data-theme] .pirate-native-item .pirate-dash-meter::-webkit-progress-value { background:#9af0a1; }
+:root[data-theme] .pirate-native-item .pirate-dash-meter::-moz-progress-bar { background:#9af0a1; }
+:root[data-theme] .pirate-native-kos { color:#ffe08a;font:400 6px/1.5 'Arcade Pixel',monospace;white-space:nowrap; }
+:root[data-theme] .pirate-native-clock { position:absolute;z-index:12;top:8px;left:50%;transform:translateX(-50%);display:grid;justify-items:center;gap:8px;max-width:calc(100% - 20px);pointer-events:none;color:#d6e3f8;text-align:center;font-family:'Arcade Pixel',monospace; }
+:root[data-theme] .pirate-native-clock time { display:block;padding:9px 15px;border-radius:10px;background:#14111fd9;color:#e6f0ff;font:400 15px/1.4 'Arcade Pixel',monospace;min-width:102px;text-shadow:2px 2px #0c0a19; }
+:root[data-theme] .pirate-native-clock>span { font:400 7px/1.7 'Arcade Pixel',monospace;text-transform:uppercase;white-space:nowrap;text-shadow:1px 1px #101020,-1px -1px #101020; }
+:root[data-theme] .details-hidden .pirate-native-clock { display:none; }
+@media(hover:hover) { .pirate-canvas[data-crosshair=enabled] { cursor:none; } }
+@media(hover:hover) { .club-arena>canvas[data-crosshair=enabled] { cursor:none; } }
+
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .game-window-title { display:none; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .game-window-bar { justify-content:flex-end; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .pirate-native-crew { position:absolute;left:12px;right:12px;bottom:max(8px,env(safe-area-inset-bottom));z-index:20;display:grid!important;grid-template-columns:repeat(var(--pirate-crew-count,3),minmax(0,1fr));justify-content:normal;gap:8px;padding:0;margin:0;pointer-events:none;overflow:visible; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .pirate-native-card { flex:initial;max-width:none;min-width:0;height:90px;grid-template-columns:minmax(24px,22%) minmax(0,1fr) minmax(24px,18%); }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate][data-game-hud=hidden] :is(.pirate-native-clock,.pirate-native-crew) { display:none!important; }
+
+/* Fullscreen windows have their own complete palette in every website theme. */
+:root[data-theme] .room-shell.room-workspace.is-immersive .dock-panel .match-board-list>li { background:#1b2f49!important;border:1px solid #6982a65c!important;color:#edf4ff!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .dock-panel .match-board-list>li.is-you { background:#284461!important;border-color:#97b7dd99!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .dock-panel :is(.match-identity>strong,.match-score>strong) { color:#f0f5ff!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .dock-panel :is(.match-score>small,.match-tags,.match-place,.match-detail) { color:#bdd0e9!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .dock-panel-header>strong>svg { color:#bdd6f1!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .dock-panel .match-tags .is-turn { color:#c5f0db!important;background:#234d43!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .chat-empty,:root[data-theme] .room-shell.room-workspace.is-immersive .chat-room-label { display:none!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .chat-tools { border:0;padding:5px 0;gap:5px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .chat-tools button { min-width:36px;min-height:36px;background:#213954;color:#d6e5f7;border-color:#6f8db466; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .chat-tools button>span { display:none; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .chat-body>form { grid-template-columns:auto minmax(0,1fr) auto;gap:6px;padding:8px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .chat-body>form>button { background:#315478;color:#f1f6ff;border:1px solid #8eafd166;min-width:38px;min-height:40px;border-radius:7px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .chat-body>form>button.chat-extras-toggle { background:transparent;color:#bdd3ee;border-color:transparent; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .chat-body>form>input { min-width:0;background:#1d334e;color:#f0f5ff;border-color:#7b96b266; }
+
+@media(max-width:760px) {
+ :root[data-theme] .casual-arcade .pirate-canvas-frame { aspect-ratio:4/3; }
+ :root[data-theme] .casual-arcade .pirate-canvas { height:100%!important;aspect-ratio:auto; }
+ :root[data-theme] .casual-arcade .pirate-native-crew,:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .pirate-native-crew { grid-template-columns:repeat(var(--pirate-mobile-columns,3),minmax(0,1fr))!important;left:8px;right:8px;gap:5px; }
+ :root[data-theme] .casual-arcade .pirate-crew-card.pirate-native-card,:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .pirate-native-card { height:77px;grid-template-columns:28px minmax(0,1fr) 25px;gap:4px;padding:5px!important;border-radius:8px; }
+ :root[data-theme] .pirate-native-portrait { width:28px;height:52px; }
+ :root[data-theme] .pirate-native-portrait>span { transform:scale(.8); }
+ :root[data-theme] .casual-arcade .pirate-native-vitals { gap:5px; }
+ :root[data-theme] .casual-arcade .pirate-native-name { font-size:6px; }
+ :root[data-theme] .casual-arcade .pirate-native-vitals>.pirate-damage { font-size:12px; }
+ :root[data-theme] .pirate-native-hearts { gap:0; }
+ :root[data-theme] .pirate-native-hearts img { width:9px;height:9px; }
+ :root[data-theme] .pirate-native-item { gap:4px; }
+ :root[data-theme] .pirate-native-slot { width:25px;height:29px; }
+ :root[data-theme] .pirate-native-slot>b { width:19px;height:19px;font-size:5px; }
+ :root[data-theme] .pirate-native-empty { width:15px;height:15px; }
+ :root[data-theme] .pirate-native-item .pirate-dash-meter { width:23px;height:4px; }
+ :root[data-theme] .pirate-native-kos { font-size:5px; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .game-window-bar { inset:8px 8px auto auto;flex-direction:row;width:auto; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .pirate-native-clock { left:8px;transform:none;width:80px;top:8px; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .pirate-native-clock time { min-width:80px;padding:11px 5px;font-size:11px; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .pirate-native-clock>span { position:absolute;top:57px;left:0;width:calc(100vw - 16px);font-size:6px; }
+}
+@media(max-width:359px) {
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .game-window-bar { top:52px; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .pirate-native-clock { left:50%;transform:translateX(-50%); }
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .pirate-native-clock>span { top:97px;left:calc(40px - 50vw + 8px); }
+}
+
+:root[data-theme] .casual-arcade .pirate-native-crew { max-width:calc(var(--pirate-crew-count,3) * 232px + (var(--pirate-crew-count,3) - 1) * 8px);margin-inline:auto; }
+:root[data-theme] .custom-round-input { display:flex;gap:6px;align-items:center; }
+:root[data-theme] .custom-round-input>input { min-width:0;width:100%; }
+:root[data-theme] .custom-round-input>button { min-width:64px;min-height:42px;padding:6px 9px;border:1px solid var(--border);border-radius:8px;background:var(--surface-soft);color:var(--text);display:flex;align-items:center;justify-content:center;gap:4px;font-size:12px; }
+:root[data-theme] .round-series-summary { display:grid;gap:10px;margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:12px; }
+:root[data-theme] .round-series-summary>div { display:flex;flex-wrap:wrap;gap:8px; }
+:root[data-theme] .round-series-summary>div>span { display:flex;gap:9px;align-items:center;padding:6px 9px;border:1px solid var(--border);border-radius:7px; }
+:root[data-theme] .round-series-summary b { font-size:11px;color:var(--muted); }
+:root[data-theme] .game-audio-settings { display:grid;gap:12px;padding:12px 0;min-width:0;color:var(--text); }
+:root[data-theme] .game-audio-settings>label { display:flex;flex-direction:column;align-items:stretch;gap:7px;color:inherit;font-size:12px;min-width:0; }
+:root[data-theme] .game-audio-settings select { display:block;width:100%;min-width:0;min-height:42px;padding:8px;border:1px solid var(--border);border-radius:8px;background:var(--surface-soft);color:var(--text);font:inherit;font-size:13px; }
+:root[data-theme] .game-audio-settings input[type=range] { width:100%;height:24px;min-height:24px;padding:0;accent-color:var(--accent); }
+:root[data-theme] .game-audio-settings>.audio-effect-toggle { flex-direction:row;align-items:center;min-height:36px;gap:9px; }
+:root[data-theme] .game-audio-settings input[type=checkbox] { width:18px;height:18px;min-height:18px;margin:0;accent-color:var(--accent); }
+:root[data-theme] .game-audio-settings>.audio-file-button { position:relative;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:9px 11px;border:1px solid var(--border);border-radius:8px;background:var(--surface-soft);font-size:12px;cursor:pointer;overflow:hidden; }
+:root[data-theme] .audio-file-button input { position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer; }
+:root[data-theme] .audio-file-button:focus-within { outline:2px solid var(--accent);outline-offset:2px; }
+:root[data-theme] .game-audio-settings>p { margin:0;font-size:12px; }
+:root[data-theme] .game-audio-dialog { width:min(380px,calc(100vw - 28px));max-height:calc(100dvh - 32px);overflow:auto;padding:20px;border:1px solid var(--border);border-radius:15px;background:var(--surface);color:var(--text); }
+:root[data-theme] .game-audio-dialog::backdrop { background:#0b152bb3; }
+:root[data-theme] .game-audio-dialog>header { display:flex;align-items:center;justify-content:space-between;gap:12px; }
+:root[data-theme] .game-audio-dialog h2 { margin:0;color:inherit;font-size:21px; }
+:root[data-theme] .game-audio-dialog>header>button { display:grid;place-items:center;width:38px;min-height:38px;padding:6px;background:transparent;color:inherit;border:1px solid var(--border);border-radius:8px; }
+
+:root[data-theme] .casual-arcade .pirate-native-card { grid-template-rows:auto minmax(0,1fr);column-gap:7px;row-gap:3px; }
+:root[data-theme] .pirate-native-card>.pirate-native-portrait { grid-row:1/3;grid-column:1; }
+:root[data-theme] .pirate-native-name { grid-column:2/4;grid-row:1;justify-self:center; }
+:root[data-theme] .pirate-native-vitals { grid-column:2;grid-row:2; }
+:root[data-theme] .pirate-native-item { grid-column:3;grid-row:2;gap:3px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .pirate-native-crew { left:50%!important;right:auto!important;transform:translateX(-50%);width:calc(100% - 24px);margin:0; }
+@media(max-width:760px) {
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=pirate] .pirate-native-crew { width:calc(100% - 16px); }
+ :root[data-theme] .casual-arcade .pirate-native-card { row-gap:1px; }
+ :root[data-theme] .pirate-native-slot { height:25px; }
+}
+/* A hidden sidebar must not reserve a grid track or cover a board. */
+:root[data-theme] .room-shell.room-workspace.is-immersive .strategy-table { position:relative;display:flex!important;align-items:center;justify-content:center;width:100%;height:100%!important;padding:76px 16px 16px!important;overflow:hidden!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .strategy-play-layout { display:contents!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .strategy-board-frame { flex:none;width:min(calc(100vw - 32px),calc(100dvh - 100px))!important;max-width:none!important;height:auto!important;aspect-ratio:1;margin:0!important;padding:7px!important;border:1px solid #a5bc9f!important;border-radius:14px!important;box-shadow:0 10px 32px #0002; }
+:root[data-theme] .room-shell.room-workspace.is-immersive :is(.strategy-status,.board-player-bands,.strategy-sidebar>.game-guide,.strategy-sidebar>.water-score-panel,.strategy-sidebar>.board-move-history,.board-draw-offer) { display:none!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .strategy-sidebar { display:contents!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .strategy-attention .strategy-status { display:block!important;position:absolute;z-index:15;bottom:8px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);margin:0;padding:8px 12px;border:1px solid #d3bc7355;border-radius:8px;background:#203349f5;color:#ffedb3;text-align:center; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .strategy-status>span { display:none; }
+:root[data-theme] .room-shell.room-workspace.is-immersive :is(.promotion-choice,.strategy-actions.is-urgent) { position:absolute!important;z-index:35;left:50%;top:50%;bottom:auto;transform:translate(-50%,-50%);width:min(420px,calc(100% - 24px));max-height:70dvh;margin:0;padding:18px;background:#162c46f5;color:#edf5ff;border:1px solid #8eaac788;border-radius:12px;overflow:auto; }
+:root[data-theme] .game-window-settings-slot .strategy-actions { display:flex;flex-direction:column;gap:8px;margin:0;padding:0;border:0;background:transparent; }
+:root[data-theme] .game-window-settings-slot .strategy-actions .button { min-width:0;width:100%;min-height:40px;padding:9px;justify-content:flex-start;color:inherit;border:1px solid #809cb866;background:#213b58; }
+/* Preserve the deployment footer's space instead of placing it over the last rank. */
+:root[data-theme] .room-shell.room-workspace.is-immersive .generals-layout:has(.tactical-deploy-actions) { padding-bottom:88px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .generals-layout:has(.tactical-deploy-actions) .generals-board { width:min(calc(100vw - 32px),calc((100dvh - 190px) * 9 / 8))!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .generals-layout>.tactical-sidebar { left:50%;transform:translateX(-50%);width:max-content; }
+/* The felt and private hand form one table, with room for large hands and choices. */
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-experience { display:flex!important;flex-direction:column;gap:12px!important;width:100%;height:100%!important;padding:76px 24px 16px!important;overflow:auto!important;background:radial-gradient(ellipse at 50% 30%,#286b60,#163f3c 74%,#122f32)!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-opponents { display:flex!important;flex:none;gap:8px;width:min(100%,1050px);max-height:76px;margin:0 auto;padding:2px;overflow:auto; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-seat { flex:0 0 180px;min-height:52px;padding:8px 10px;border:1px solid #8bbdb64d;background:#0e302f8c;border-radius:10px;color:#edf8f1; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-seat.current { background:#326f5f;border-color:#d6dca7; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-seat :is(strong,span) { color:inherit; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-mini-hand { display:none; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-table { flex:1 1 0;display:flex;flex-direction:column;justify-content:center;min-height:195px;width:100%;margin:0;padding:8px 16px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-table:before { display:none; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-table-caption { display:flex;justify-content:center;gap:20px;margin:0 0 14px;font-size:11px;color:#c0d9cd; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-table-center { height:auto!important;flex:none;justify-content:center;gap:clamp(22px,4vw,56px);min-height:0; }
+:root[data-theme] .room-shell.room-workspace.is-immersive :is(.uno-deck,.uno-discard) { width:clamp(65px,9vw,108px)!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive :is(.uno-deck>span,.uno-discard>span) { color:#daeade;font-size:11px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-active-color { color:#f4f8e9; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-active-color>span { width:34px;height:34px;border:3px solid #fff7df;box-shadow:0 2px 6px #0003; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-turn-status { border:0;background:transparent;color:#e4eed8;font-size:14px;margin:16px 0 0;padding:0; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand-section { flex:0 1 auto;display:flex;flex-direction:column;width:min(100%,1160px);min-height:0;max-height:48dvh!important;margin:0 auto!important;overflow:hidden!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand-heading { flex:none;align-items:center;margin:0;padding:6px 8px;color:#f2f6e7; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand-heading h3 { flex-basis:auto;width:auto!important;margin:0;color:inherit;font-size:16px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand-heading :is(h3>span,.text-link) { color:#c8ddd5;font-size:12px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand { flex:1 1 auto;display:flex!important;grid-template-columns:none!important;flex-wrap:wrap;justify-content:center;align-items:flex-start;align-content:flex-start;min-height:80px;max-height:30dvh!important;gap:10px!important;margin:0;padding:16px 10px 12px!important;overflow:auto;scroll-padding:16px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand-card { flex:0 0 clamp(72px,8vw,106px);width:clamp(72px,8vw,106px)!important;margin:0;transform:none!important;border:1px solid #a9c4b93d;border-radius:12px;background:#102d2e!important;padding:7px!important;box-shadow:0 3px 8px #001c2430!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand-card.playable { border-color:#d3e9a8!important;background:#294c40!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand-card.playable:focus-visible { outline:3px solid #f5efb2;outline-offset:2px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand-card>span { display:block;min-height:22px;margin-top:6px;color:#edf6e8!important;font-size:11px!important;line-height:1.4; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-action-row { flex:none;justify-content:center;gap:8px;min-height:0;margin:0!important;padding:8px;background:transparent!important;border:0!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-action-row>p { display:none; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-action-row .button { flex:0 1 auto;min-width:120px;min-height:42px;font-size:13px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive :is(.uno-color-picker,.uno-challenge-review,.uno-privacy) { flex:none;position:absolute;z-index:30;top:50%;left:50%;transform:translate(-50%,-50%);width:min(480px,calc(100% - 24px));max-height:70dvh;overflow:auto;margin:0;padding:18px;border:1px solid #97bbb47d;border-radius:14px;background:#173d39f7;color:#f3f8e9;box-shadow:0 10px 36px #0004; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-color-picker .text-link { color:#d6e8dc; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-call-window { flex:none;margin:0 auto;max-width:100%; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-call-window>small { display:none; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-spectator-note { flex:none;align-self:center;display:flex;width:auto;max-width:100%;margin:0;padding:10px 18px;background:#153a35ab;color:#d6e7df;border-color:#7ba49366; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .uno-spectator-note p { display:none; }
+/* One quiet card frame, with a stronger outline only for interaction or a match. */
+:root[data-theme] .casual-arcade .memory-tile { border:0!important;border-radius:11px!important;outline:0;box-shadow:0 2px 5px #001a2626!important;background:transparent!important; }
+:root[data-theme] .casual-arcade .memory-tile-inner { inset:0!important;border:0!important;border-radius:inherit;box-shadow:none!important;background:transparent!important; }
+:root[data-theme] .casual-arcade :is(.memory-front,.memory-back) { inset:0!important;border:1px solid #8bada494!important;border-radius:inherit;box-shadow:none!important; }
+:root[data-theme] .casual-arcade .memory-back { background:linear-gradient(145deg,#315d60,#1d3f47)!important;color:#b4d2b8!important; }
+:root[data-theme] .casual-arcade .memory-back:before { inset:5px;border:1px solid #a7c5b938;border-radius:7px; }
+:root[data-theme] .casual-arcade .memory-card-number { z-index:3;top:7px;left:8px;color:#d1e4d8;font-size:11px;line-height:1; }
+:root[data-theme] .casual-arcade .memory-tile.face-up .memory-card-number { color:#446452; }
+:root[data-theme] .casual-arcade .memory-tile.matched { box-shadow:0 0 0 2px var(--pair-color),0 3px 6px #001a261a!important; }
+:root[data-theme] .casual-arcade .memory-tile:focus-visible { outline:3px solid var(--accent);outline-offset:3px; }
+/* Grid tracks and forms must retain their own height in a resized room window. */
+:root[data-theme] .dock-panel .match-board-list { display:flex;flex-direction:column;align-items:stretch; }
+:root[data-theme] .dock-panel .match-board-list>li { flex:none;min-height:64px; }
+:root[data-theme] .dock-panel .social-chat.is-embedded .chat-body { min-height:0;padding-bottom:0; }
+:root[data-theme] .dock-panel .social-chat.is-embedded .chat-messages { flex:1 1 0;min-height:0; }
+:root[data-theme] .dock-panel .social-chat.is-embedded form { flex:none;display:grid;grid-template-columns:minmax(0,1fr) auto;padding:10px; }
+:root[data-theme] .dock-panel .social-chat :is(.chat-tray,.chat-style-preview) { flex:0 1 auto;min-height:0;max-height:50%;overflow:auto; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .dock-panel .chat-body>form { grid-template-columns:auto minmax(0,1fr) auto; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .match-board-list>li { grid-template-columns:18px 30px minmax(0,1fr) auto;gap:7px; }
+@media(max-width:760px) {
+ :root[data-theme] .room-shell.room-workspace.is-immersive .strategy-table { padding:116px 8px 12px!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .strategy-board-frame { width:min(calc(100vw - 16px),calc(100dvh - 140px))!important;padding:5px!important;border-radius:10px!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-experience { padding:116px 10px 12px!important;gap:8px; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-opponents { max-height:62px; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-seat { flex-basis:150px;min-height:48px; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-table { min-height:160px;padding:4px!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-table-caption { font-size:9px;gap:10px;flex-wrap:wrap;margin-bottom:10px; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand-card { flex-basis:76px;width:76px!important;padding:5px!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand { gap:7px!important;max-height:29dvh!important;padding:10px 4px!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand-section { max-height:43dvh!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand-heading h3 { font-size:14px; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand-heading { flex-wrap:wrap;gap:4px 12px;padding:4px; }
+}
+@media(max-height:500px) and (min-width:600px) {
+ :root[data-theme] .room-shell.room-workspace.is-immersive .strategy-table { padding:65px 8px 8px!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .strategy-board-frame { width:min(calc(100vw - 16px),calc(100dvh - 80px))!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-experience { display:grid!important;grid-template-columns:minmax(230px,.85fr) minmax(0,1.15fr);grid-template-rows:minmax(0,1fr);padding:68px 12px 10px!important;gap:16px; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-opponents { display:none!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-table { height:100%;min-height:0; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand-section { height:100%;max-height:none!important;min-height:0; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-hand { max-height:none!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive :is(.uno-deck,.uno-discard) { width:65px!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .uno-call-window { position:absolute;bottom:8px;left:12px;z-index:20; }
+}
+/* Coding games share the same window, so the stack and room panels stay available. */
+.coding-playfield { min-width:0; }
+.coding-playfield .active-game-layout { grid-template-columns:minmax(0,1fr); }
+.coding-playfield .active-game-layout.with-stack { grid-template-columns:minmax(0,1fr) minmax(160px,230px); }
+.coding-live-board .coding-roster-card { border:0;box-shadow:none;background:transparent;padding:0; }
+.coding-live-board .scoreboard-title { display:none; }
+.coding-guide { padding:16px;font-size:13px;line-height:1.8; }
+.coding-guide h3 { margin:0 0 10px;font-size:20px; }
+.coding-guide h4 { margin:18px 0 6px;font-size:14px; }
+.coding-guide p { margin:0;color:var(--muted); }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .coding-playfield { display:flex!important;flex-direction:column;width:100%;height:100%;padding:80px 24px 20px!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] :is(.active-game-header,.game-visual-progress,.game-turn-cue,.stack-legend,.stack-caption) { display:none!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .active-game-layout { flex:1;min-height:0;display:grid;width:min(1200px,100%);grid-template-columns:minmax(0,1fr);gap:24px;margin:auto;align-items:stretch; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .active-game-layout.with-stack { grid-template-columns:minmax(0,1fr) minmax(150px,220px); }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] :is(.game-question-area,.survival-area) { min-width:0;min-height:0;max-height:100%;overflow:auto; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .surface-content { overflow:auto!important;scroll-padding:16px;padding:4px!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] :is(.answer-card,.feedback-card,.round-finish,.eliminated-message) { width:100%;min-height:100%;margin:0;box-sizing:border-box;background:#14283e;color:#eff5ff;border-color:#5f7f9b66; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .answer-card { padding:clamp(18px,3vw,38px); }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .answer-card h3 { color:#eff5ff;font-size:clamp(20px,2vw,28px);line-height:1.45; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .question-type { color:#b9d5e3; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .survival-area { padding:16px;border:1px solid #66829d66;border-radius:12px;background:#14283e; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .stack-title { color:#e7f2ff; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .stack-board { width:100%;margin:14px auto; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .arena-score-row { color:#edf5ff;border-color:#7799b64d;background:#1c344d; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .arena-score-row :is(strong,b) { color:#edf5ff; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .arena-score-row small { color:#b9d1e7; }
+@media(max-width:760px) {
+ .coding-playfield .active-game-layout.with-stack { grid-template-columns:minmax(0,1fr); }
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .coding-playfield { padding:116px 10px 12px!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .active-game-layout.with-stack { grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) 80px;gap:10px; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .survival-area { display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 12px;overflow:hidden; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .stack-title { display:flex;flex-wrap:wrap;gap:6px;max-width:130px;font-size:12px;margin:0; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .stack-board { flex:none;width:54px;margin:0; }
+}
+@media(max-height:500px) and (min-width:600px) {
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .coding-playfield { padding:66px 12px 10px!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .active-game-layout.with-stack { grid-template-columns:minmax(0,1fr) 160px;gap:12px; }
+}
+
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-hud=hidden] :is(.uno-opponents,.uno-table-caption,.uno-hand-heading h3) { display:none!important; }
+/* Brush colors get a complete row on a narrow screen instead of a zero-width flex item. */
+:root[data-theme] .room-shell.room-workspace.is-immersive .sketch-tools { display:flex!important;flex-wrap:wrap!important;min-height:0;max-height:none;gap:8px;padding:4px!important;overflow:visible; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .sketch-colors { display:flex!important;flex:1 1 0;flex-wrap:nowrap!important;min-width:0;width:auto;gap:7px;overflow-x:auto;padding:4px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .sketch-colors>button { flex:0 0 30px;width:30px;height:30px;min-height:30px;margin:0; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .sketch-brush-tools { flex:0 0 auto;margin-left:auto; }
+/* The current property action occupies its own row below the board. */
+:root[data-theme] .room-shell.room-workspace.is-immersive .property-experience { display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:10px;padding:76px 12px 12px!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .estate-board-frame { grid-row:1;width:min(calc(100vw - 24px),calc(100dvh - 250px))!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .property-experience>.property-action-bar { position:static!important;grid-row:2;width:min(600px,100%);max-width:none;max-height:155px;margin:0!important;padding:12px;overflow:auto; }
+@media(max-width:760px) {
+ :root[data-theme] .room-shell.room-workspace.is-immersive .sketch-colors { flex:1 0 100%;width:100%; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .property-experience { padding-top:116px!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .estate-board-frame { width:min(calc(100vw - 24px),calc(100dvh - 290px))!important; }
+}
+@media(max-height:500px) and (min-width:600px) {
+ :root[data-theme] .room-shell.room-workspace.is-immersive .property-experience { grid-template-columns:minmax(0,1fr) minmax(220px,280px);grid-template-rows:minmax(0,1fr);gap:12px;padding:66px 12px 10px!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .estate-board-frame { grid-column:1;width:min(calc(100vw - 340px),calc(100dvh - 86px))!important; }
+ :root[data-theme] .room-shell.room-workspace.is-immersive .property-experience>.property-action-bar { grid-row:1;grid-column:2;max-height:100%; }
+}
+/* Card proportions are independent of the available height or grid row stretch. */
+:root[data-theme] .casual-arcade .memory-deck { align-items:start;grid-auto-rows:auto; }
+:root[data-theme] .casual-arcade .memory-tile { align-self:start;width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:1!important; }
+:root[data-theme] .casual-arcade .memory-front :is(svg,img) { object-fit:contain; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .game-question-area { grid-column:1;grid-row:1; }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .survival-area { grid-column:2;grid-row:1; }
+@media(max-width:760px) {
+ :root[data-theme] .room-shell.room-workspace.is-immersive[data-game-kind=coding] .survival-area { grid-column:1;grid-row:2; }
+}
+/* Block Drop changes its composition with the number of wells. Fit that ratio. */
+:root[data-theme] .casual-arcade .blocks-arena>canvas { aspect-ratio:var(--blocks-ratio,1.5)!important;object-fit:contain; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .blocks-arena>canvas { width:min(100vw,calc(100dvh * var(--blocks-ratio,1.5)))!important;max-width:100%!important;height:auto!important;max-height:100dvh!important;aspect-ratio:var(--blocks-ratio,1.5)!important; }
+/* Short landscape windows still keep the entire chat composer visible. */
+:root[data-theme] .room-shell.room-workspace.is-immersive .dock-panel-chat { --window-panel-height:clamp(180px,34dvh,290px);min-height:160px; }
+:root[data-theme] .dock-panel .social-chat.is-embedded .chat-messages { padding:8px!important; }
+:root[data-theme] .dock-panel .social-chat.is-embedded .chat-locked-note { flex:none;max-height:56px;overflow:auto;margin:0;padding:7px 10px;font-size:11px;line-height:1.4; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .action-world>canvas { min-height:0!important;min-width:0!important; }
+:root[data-theme] .game-window-settings-slot>.text-link { width:100%;min-height:40px;padding:8px;color:inherit; }
+.terra-pack-toggle { display:none; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .terra-hotbar { position:absolute!important;z-index:15;left:50%;right:auto;bottom:16px;transform:translateX(-50%);display:flex;gap:5px;width:min(850px,calc(100% - 24px));max-width:calc(100% - 24px);margin:0!important;padding:7px;overflow-x:auto;background:#142a40e8;border:1px solid #7b9bb366;border-radius:10px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .terra-hotbar>button { flex:1 0 58px;min-width:58px;min-height:48px;padding:6px;background:#1c3b50;color:#e8f4ed;border:1px solid #6f95a466;border-radius:7px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .terra-hotbar>.terra-pack-toggle { display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .terra-world>.action-hud { top:76px;bottom:auto;left:16px;max-width:calc(100% - 32px); }
+:root[data-theme] .room-shell.room-workspace.is-immersive[data-game-hud=hidden] .terra-hotbar { display:none!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .terra-inventory { position:absolute;z-index:35;left:50%;top:50%;transform:translate(-50%,-50%);width:min(760px,calc(100% - 24px));max-height:70dvh;overflow:auto;background:#162f44f5;color:#eef7ec;border:1px solid #839eb877;border-radius:12px;padding:16px; }
+@media(max-width:760px) { :root[data-theme] .room-shell.room-workspace.is-immersive .terra-world>.action-hud { top:116px;font-size:12px; } }
+@media(max-height:500px) and (min-width:600px) { :root[data-theme] .room-shell.room-workspace.is-immersive .terra-world>.action-hud { top:66px; } }
+
+:root[data-theme] .room-shell.room-workspace.is-immersive .property-experience>.property-action-bar { min-width:0!important;max-width:min(600px,100%)!important;box-sizing:border-box; }
+:root[data-theme] .casual-arcade[data-role=spectator] .room-shell.room-workspace.is-immersive .terra-hotbar { display:none!important; }
+:root[data-theme] .dock-panel .social-chat.is-embedded .chat-body { padding:0!important;margin:0;gap:0; }
+:root[data-theme] .dock-panel .social-chat.is-embedded .chat-messages { padding:0 8px!important; }
+:root[data-theme] .dock-panel .social-chat.is-embedded form input { font-size:13px!important; }
+:root[data-theme] .room-shell.room-workspace.is-immersive .match-tags { font-size:10px;line-height:1.35; }
+/* Oversized memory decks scroll from the first row; free space can still center a small deck. */
+:root[data-theme] .room-shell.room-workspace.is-immersive .memory-deck { margin-block:auto!important; }

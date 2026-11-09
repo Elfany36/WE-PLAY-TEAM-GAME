@@ -1,0 +1,19 @@
+{
+  "tests": {
+    "passed": 642,
+    "failed": 0
+  },
+  "examples": {
+    "cssDocumentsParsed": 327
+  },
+  "proportionsCases": 66,
+  "memoryDeckCases": 15,
+  "codingCases": 9,
+  "aiSimulationCases": 66,
+  "solitaireCases": 16,
+  "tankAudioRoundCases": 3,
+  "pirateLatencyAndSpectatorCases": 4,
+  "windowInteractionCases": 3,
+  "tacticalDragCases": 4,
+  "sketchLiveCases": 1
+}

@@ -1,4 +1,5 @@
 'use client';
+import {seriesRoundLabel} from '../../lib/casual/round-series';
 import SpectatorList from './SpectatorList';
 import type {FleetStyle} from '../../lib/casual/fleet';
 import {memo,type CSSProperties} from 'react';
@@ -16,19 +17,19 @@ type Props={embedded?:boolean;room:CasualPublic;open:boolean;setOpen:(open:boole
 const colors:Record<string,string>={red:'#db3456',yellow:'#bd880b',green:'#27866c',blue:'#356cca',pink:'#b62b82',orange:'#c96620',teal:'#157b7b',purple:'#7b42b6'};
 const Portrait=memo(function Portrait({player,mode,fleetStyle}:{player:CasualPublic['players'][number];mode:string;fleetStyle?:FleetStyle}){const image=useAvatar(player.id);return image?<img src={image} alt="" width={34} height={38}/>:<CharacterModel mode={mode} fleetStyle={fleetStyle} player={player} size={38}/>});
 export default function MatchBoard({embedded=false,room,open,setOpen,busy,local,onAction}:Props){
- const players=casualLeaderboard(room).filter(p=>!p.retired),g=room.game,playing=room.phase!=='lobby';
+ const players=casualLeaderboard(room).filter(p=>!p.retired).sort((a,b)=>room.series?.finished?(room.series.players.find(p=>p.id===b.id)?.wins||0)-(room.series.players.find(p=>p.id===a.id)?.wins||0):0),g=room.game,playing=room.phase!=='lobby';
  const Heading=embedded?'header':'summary';
  const content=<>
-  <Heading><span className="match-board-mark"><Crown size={20}/></span><span className="match-board-heading"><small>{playing?'ROUND '+room.round:'THE CREW'}</small><strong>{playing?'Match standings':'Player lobby'}</strong></span><span className="match-board-count">{players.length}<small>/{casualCapacity(room.mode)}</small></span>{!embedded&&<ChevronDown size={16}/>}</Heading>
+  <Heading><span className="match-board-mark"><Crown size={20}/></span><span className="match-board-heading"><small>{playing?seriesRoundLabel(room.series,room.phase,room.round).toUpperCase():'THE CREW'}</small><strong>{playing?'Match standings':'Player lobby'}</strong></span><span className="match-board-count">{players.length}<small>/{casualCapacity(room.mode)}</small></span>{!embedded&&<ChevronDown size={16}/>}</Heading>
   <ol className="match-board-list">{players.map((p,index)=>{
-   const color=playerColor(p),stat=matchStat(room,p.id),turn=room.phase==='playing'&&!!g&&(g.kind==='sketch'?g.artistId===p.id:['memory','ladders','uno','property','pool','chess','dama','scidama','generals','fleet'].includes(g.kind)&&g.stage!=='deploy'&&g.currentId===p.id),thinking=room.botThinking?.playerId===p.id;
+   const color=playerColor(p),stat=room.series?.finished?{value:String(room.series.players.find(x=>x.id===p.id)?.wins||0),label:'round wins',detail:'Match complete',progress:undefined}:matchStat(room,p.id),turn=room.phase==='playing'&&!!g&&(g.kind==='sketch'?g.artistId===p.id:['memory','ladders','uno','property','pool','chess','dama','scidama','generals','fleet'].includes(g.kind)&&g.stage!=='deploy'&&g.currentId===p.id),thinking=room.botThinking?.playerId===p.id;
    const actor=g?.kind==='tanks'?g.actors.find((a:{id:string})=>a.id===p.id):null;
    const balls=g?.kind==='pool'&&g.groups[p.id]?g.balls.filter((b:{number:number;pocketed:boolean})=>!b.pocketed&&b.number>0&&b.number!==8&&(g.groups[p.id]==='solids'?b.number<8:b.number>8)):null;
    const backs=g?.kind==='uno'&&!p.isYou?g.opponentBacks?.[p.id]:null;
    return <li key={p.id} className={(p.isYou?'is-you ':'')+(turn?'is-current ':'')+(index===0&&playing?'is-leading':'')} style={{'--player-color':color.fill,'--player-ink':color.ink} as CSSProperties}>
     <span className="match-place" aria-label={'Rank '+(index+1)}>{index===0&&playing?<Crown size={15}/>:String(index+1).padStart(2,'0')}</span>
     <span className="match-avatar" aria-hidden="true"><Portrait player={p} mode={room.mode} fleetStyle={room.settings.fleetStyle}/><i className={p.online?'online':'offline'}/></span>
-    <div className="match-identity"><strong title={p.name}>{p.name}</strong><div className="match-tags">{p.isYou&&!local&&<b>YOU</b>}{p.bot&&<span>BOT</span>}{p.isHost&&room.phase==='lobby'&&<span>HOST</span>}{thinking?<span className="is-thinking"><BrainCircuit size={11}/>Thinking</span>:turn&&playing?<span className="is-turn">Playing</span>:!p.online?<span>Reconnecting</span>:!playing&&<span>{p.ready?'Ready':'In lobby'}</span>}</div></div>
+    <div className="match-identity"><strong title={p.name}>{p.name}</strong><div className="match-tags">{p.isYou&&!local&&<b>YOU</b>}{p.bot&&<span>BOT</span>}{!!room.series?.limit&&!room.series.finished&&room.series.completed>0&&<span>{room.series.players.find(x=>x.id===p.id)?.wins||0} wins</span>}{p.isHost&&room.phase==='lobby'&&<span>HOST</span>}{thinking?<span className="is-thinking"><BrainCircuit size={11}/>Thinking</span>:turn&&playing?<span className="is-turn">Playing</span>:!p.online?<span>Reconnecting</span>:!playing&&<span>{p.ready?'Ready':'In lobby'}</span>}</div></div>
     {playing&&<div className="match-score"><strong>{stat.value}</strong><small>{stat.label}</small></div>}
     {playing&&<div className="match-detail">{stat.detail}</div>}
     {stat.progress!==undefined&&playing&&<div className="match-progress" aria-label={p.name+' progress'}><i style={{width:stat.progress*100+'%'}}/></div>}

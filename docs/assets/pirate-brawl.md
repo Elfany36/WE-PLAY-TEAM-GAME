@@ -2,7 +2,7 @@
 
 These assets were extracted byte-for-byte from the user-uploaded **Pirate Bomb Brawl_ Arena (3).html**, whose document title is **Pirate Bomb Brawl: Arena**. The user requested its addition to the arcade. The upload has 3,275,711 bytes and SHA-256 `401abc2699cf75a08531e9bb4ed0ad8783e36923c7400f00b60bc02686b24b74`.
 
-The supplied HTML contains no author, copyright or license notice. This record identifies the supplied material; it does not assert a public-domain or third-party license. No remote artwork or font was downloaded. The original HTML and its executable script are not served as an embedded game page.
+The supplied HTML contains no author, copyright or license notice. This record identifies the supplied material; it does not assert a public-domain or third-party license. The image and audio collection below comes entirely from that upload. The shared pixel HUD font is documented separately in [arcade-audio-and-hud.md](arcade-audio-and-hud.md). The original HTML and its executable script are not served as an embedded game page.
 
 `public/pirate-brawl/manifest.json` records the exact source identity and each extracted file's MIME type, byte length, SHA-256 and image dimensions. It contains 38 files: 36 PNG images (382,388 bytes total) and two OGG Vorbis tracks (2,017,672 bytes total). The images are suitable for loading only when this game opens; audio should load only when the player enables it.
 

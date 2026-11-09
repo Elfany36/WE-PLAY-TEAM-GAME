@@ -42,3 +42,4 @@ import '../app/arcade-v28.css';
 import '../app/arcade-v29.css';
 import '../app/arcade-v31.css';
 import '../app/game-window.css';
+import '../app/arcade-v33.css';

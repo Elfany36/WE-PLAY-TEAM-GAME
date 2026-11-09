@@ -1,6 +1,6 @@
 /** Bounded local performance measurement; uses isolated QA rooms and leaves them.
  * Start the matching production UI/API first. BASE, API_ORIGIN and RESULTS are optional.
- * Browser runs accept PLAYWRIGHT_MODULE, CHROMIUM_PATH and FULLSCREEN=1.
+ * Browser runs accept PLAYWRIGHT_MODULE, CHROMIUM_PATH and FULLSCREEN=1, AUDIO=on.
  * Run with node --experimental-strip-types; browser measurements use 4x CPU throttling.
  * Results describe this machine and workload, not public Internet latency.
  */
@@ -17,6 +17,7 @@ try{
  await context.close();console.log(JSON.stringify({loading:rows.loading}));
  session=await post({action:'create',mode:'pirate',name:'Performance QA',bots:5,pirateStocks:5,pirateMode:'chaos'});await post({action:'start',code:session.room.code},session.token);
  const ctx=await browser.newContext({viewport:{width:1440,height:1000}});await ctx.addInitScript(s=>sessionStorage.setItem('markup-casual-session',JSON.stringify(s)),{token:session.token,code:session.room.code,apiOrigin:base});
+ if(process.env.AUDIO==='on')await ctx.addInitScript(()=>localStorage.setItem('markup-game-audio-v33',JSON.stringify({music:'auto',musicVolume:.3,effects:true,effectsVolume:.5})));
  const p=await ctx.newPage(),c=await ctx.newCDPSession(p),bases=new Map(),ages=[],rounds=[],sent=new Map(),bytes=[],errors=[];let measuring=false,lastAck=0;
  p.on('pageerror',e=>errors.push(e.message));p.on('websocket',ws=>{ws.on('framesent',f=>{try{const v=JSON.parse(f.payload.toString());if(measuring&&v.body?.action==='pirate-input')sent.set(v.body.seq,Date.now())}catch{}});ws.on('framereceived',f=>{try{const v=JSON.parse(f.payload.toString()),d=v.data;if(!d||(!d.room&&!d.patch))return;let r=d.room;if(d.patch){const b=bases.get(d.baseSnapshot);if(!b)return;r=applyRoomDelta(b,d.patch)}if(d.snapshotId)bases.set(d.snapshotId,r);while(bases.size>96)bases.delete(bases.keys().next().value);if(!measuring||r.game?.kind!=='pirate')return;ages.push(Date.now()-r.game.lastTickAt);bytes.push(f.payload.length);const actor=r.game.world.fighters.find(a=>a.id===r.youId);if(actor.lastSeq>lastAck){const at=sent.get(actor.lastSeq);if(at)rounds.push(Date.now()-at);lastAck=actor.lastSeq}}catch{}})});
  await c.send('Performance.enable');await c.send('Emulation.setCPUThrottlingRate',{rate:4});await p.addInitScript(()=>{window.frameTimes=[];let last=0;function frame(t){if(last)window.frameTimes.push(t-last);last=t;requestAnimationFrame(frame)}requestAnimationFrame(frame)});

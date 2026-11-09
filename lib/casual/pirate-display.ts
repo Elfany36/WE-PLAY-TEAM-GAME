@@ -1,5 +1,5 @@
 export type PirateDisplay={camera:'follow'|'action'|'arena';quality:'auto'|'high'|'low';effects:boolean;shake:boolean;touch:boolean};
-export const PIRATE_DISPLAY: PirateDisplay={camera:'follow',quality:'auto',effects:true,shake:false,touch:true};
+export const PIRATE_DISPLAY: PirateDisplay={camera:'action',quality:'auto',effects:true,shake:false,touch:true};
 export function pirateDisplay(value:unknown):PirateDisplay{const v=value as Partial<PirateDisplay>|null;return{camera:['follow','action','arena'].includes(v?.camera||'')?v!.camera!:PIRATE_DISPLAY.camera,quality:['auto','high','low'].includes(v?.quality||'')?v!.quality!:PIRATE_DISPLAY.quality,effects:typeof v?.effects==='boolean'?v.effects:true,shake:v?.shake===true,touch:v?.touch!==false}}
 
 /** Keep raster work within a pixel budget without changing world or pointer coordinates. */

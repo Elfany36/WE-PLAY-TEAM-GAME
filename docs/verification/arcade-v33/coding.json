@@ -1,0 +1,47 @@
+[
+  {
+    "width": 1440,
+    "mode": "blanks",
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "survival",
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "quiz",
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "blanks",
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "survival",
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "quiz",
+    "status": "passed"
+  },
+  {
+    "width": 844,
+    "mode": "blanks",
+    "status": "passed"
+  },
+  {
+    "width": 844,
+    "mode": "survival",
+    "status": "passed"
+  },
+  {
+    "width": 844,
+    "mode": "quiz",
+    "status": "passed"
+  }
+]

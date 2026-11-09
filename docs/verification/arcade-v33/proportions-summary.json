@@ -1,0 +1,926 @@
+[
+  {
+    "game": "pirate",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0.082
+    }
+  },
+  {
+    "game": "solitaire",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "sketch",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0.021
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0.148
+    }
+  },
+  {
+    "game": "generals",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 72,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 72,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "fleet",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 100,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 100,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "uno",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 2,
+      "maximumRatioErrorPercent": 0.35
+    },
+    "fullscreen": {
+      "targets": 2,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "ladders",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "memory",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 32,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 32,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "snake",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "property",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "phone",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "circuit",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "terra",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0.218
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0.111
+    }
+  },
+  {
+    "game": "chess",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "dama",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "scidama",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "sumo",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "tanks",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "pong",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "marble",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "blocks",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "pool",
+    "width": 1440,
+    "height": 900,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "pirate",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "solitaire",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "sketch",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0.047
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0.254
+    }
+  },
+  {
+    "game": "generals",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 72,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 72,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "fleet",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 100,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 100,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "uno",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 2,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 2,
+      "maximumRatioErrorPercent": 0.51
+    }
+  },
+  {
+    "game": "ladders",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "memory",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 32,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 32,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "snake",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "property",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "phone",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "circuit",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "terra",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0.413
+    }
+  },
+  {
+    "game": "chess",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "dama",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "scidama",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "sumo",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "tanks",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "pong",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "marble",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "blocks",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "pool",
+    "width": 390,
+    "height": 844,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "pirate",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "solitaire",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "sketch",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0.096
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0.088
+    }
+  },
+  {
+    "game": "generals",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 72,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 72,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "fleet",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 100,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 100,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "uno",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 2,
+      "maximumRatioErrorPercent": 0.35
+    },
+    "fullscreen": {
+      "targets": 2,
+      "maximumRatioErrorPercent": 0.51
+    }
+  },
+  {
+    "game": "ladders",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "memory",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 32,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 32,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "snake",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "property",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "phone",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 0,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "circuit",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "terra",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0.379
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0.258
+    }
+  },
+  {
+    "game": "chess",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "dama",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "scidama",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 64,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "sumo",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "tanks",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "pong",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "marble",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "blocks",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  },
+  {
+    "game": "pool",
+    "width": 844,
+    "height": 390,
+    "status": "passed",
+    "website": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    },
+    "fullscreen": {
+      "targets": 1,
+      "maximumRatioErrorPercent": 0
+    }
+  }
+]

@@ -12,14 +12,14 @@ const GameWindowContext=createContext<WindowView|null>(null);
 export const useGameWindow=()=>useContext(GameWindowContext);
 
 /** Fullscreen changes presentation only: the game, seat and normal layout stay mounted. */
-export default function GameWindow({children,label='Game',status,actions,menuContent,panels=false,available=true,scopeKey='',className='',style}: {
- children:ReactNode;label?:string;status?:ReactNode;actions?:ReactNode;menuContent?:ReactNode;panels?:boolean;available?:boolean;scopeKey?:string;className?:string;style?:CSSProperties;
+export default function GameWindow({children,label='Game',status,actions,menuContent,panels=false,chatAvailable=true,available=true,scopeKey='',kind='',className='',style}: {
+ children:ReactNode;label?:string;status?:ReactNode;actions?:ReactNode;menuContent?:ReactNode;panels?:boolean;chatAvailable?:boolean;available?:boolean;scopeKey?:string;kind?:string;className?:string;style?:CSSProperties;
 }){
  const root=useRef<HTMLDivElement>(null),native=useRef(false),activeRef=useRef(false),menuRef=useRef(false),previousFocus=useRef<HTMLElement|null>(null),title=useId();
  const [active,setActive]=useState(false),[menu,setMenu]=useState(false),[hud,setHud]=useState(true),[controls,setControls]=useState(false),[visible,setVisible]=useState<Panels>({players:false,chat:false,guide:false}),[boxes,setBoxes]=useState<Partial<Record<Panel,GamePanelBox>>>({}),[settingsTarget,setSettingsTarget]=useState<HTMLDivElement|null>(null);
  activeRef.current=active;
  menuRef.current=menu;
- const focusGame=useCallback(()=>{const node=root.current;if(!node)return;const target=node.querySelector<HTMLElement>('canvas[tabindex],.sol-playfield button,.generals-cell[tabindex="0"],.fleet-tile[tabindex="0"],.memory-tile:not(:disabled),.answer-card input:not(:disabled),button[data-game-action]');(target||node).focus({preventScroll:true})},[]);
+ const focusGame=useCallback(()=>{const node=root.current;if(!node)return;const target=node.querySelector<HTMLElement>('canvas[tabindex],.sol-playfield button,.generals-cell[tabindex="0"],.fleet-tile[tabindex="0"],.memory-tile:not(:disabled),.answer-card textarea:not(:disabled),.answer-card input:not(:disabled),.answer-card button:not(:disabled),button[data-game-action]');(target||node).focus({preventScroll:true})},[]);
  const exit=useCallback(()=>{
   activeRef.current=false;setActive(false);setMenu(false);window.dispatchEvent(new Event('blur'));
   if(document.fullscreenElement===root.current)void document.exitFullscreen().catch(()=>{});
@@ -28,7 +28,7 @@ export default function GameWindow({children,label='Game',status,actions,menuCon
   const node=root.current;if(!node||activeRef.current||!available)return;
   previousFocus.current=document.activeElement instanceof HTMLElement?document.activeElement:null;
   window.dispatchEvent(new Event('blur'));activeRef.current=true;setActive(true);setMenu(false);setHud(true);setControls(false);
-  setVisible({players:panels&&innerWidth>=1000,chat:panels&&innerWidth>=1200,guide:false});
+  setVisible({players:false,chat:false,guide:false});
   // Embedded browsers can decline native fullscreen; the same window still fills its viewport.
   if(node.requestFullscreen)void node.requestFullscreen({navigationUI:'hide'}).then(()=>{
    if(!activeRef.current&&document.fullscreenElement===node)void document.exitFullscreen().catch(()=>{});
@@ -58,10 +58,10 @@ export default function GameWindow({children,label='Game',status,actions,menuCon
  },[active,exit,focusGame]);
  useEffect(()=>{if(!active)return;if(menu)root.current?.querySelector<HTMLElement>('.game-window-menu header button')?.focus({preventScroll:true});else focusGame()},[active,menu,focusGame]);
  const value=useMemo<WindowView>(()=>({active,menu,hud,controls,panels:visible,boxes,settingsTarget,enter,exit,showPanel,movePanel}),[active,menu,hud,controls,visible,boxes,settingsTarget,enter,exit,showPanel,movePanel]);
- return <GameWindowContext.Provider value={value}><div ref={root} className={className+(active?' is-immersive':'')} style={style} tabIndex={active?-1:undefined} role={active?'dialog':undefined} aria-modal={active?true:undefined} aria-labelledby={active?title:undefined} data-game-hud={hud?'shown':'hidden'} data-game-controls={controls?'shown':'hidden'} data-game-panels={panels?'available':undefined}>
+ return <GameWindowContext.Provider value={value}><div ref={root} className={className+(active?' is-immersive':'')} style={style} tabIndex={active?-1:undefined} role={active?'dialog':undefined} aria-modal={active?true:undefined} aria-labelledby={active?title:undefined} data-game-kind={kind||undefined} data-game-hud={hud?'shown':'hidden'} data-game-controls={controls?'shown':'hidden'} data-game-panels={panels?'available':undefined}>
   {active&&<><div className="game-window-bar"><div className="game-window-title"><Gamepad2 size={19}/><div><strong id={title}>{label}</strong>{hud&&status&&<span className="game-window-status" role="status">{status}</span>}</div></div><div className="game-window-actions" onPointerDown={e=>{if((e.target as HTMLElement).closest('button'))e.preventDefault()}}>
    {actions}<button type="button" onClick={()=>{setHud(v=>!v);focusGame()}} aria-label={hud?'Hide HUD':'Show HUD'} aria-pressed={hud} title={hud?'Hide HUD':'Show HUD'}>{hud?<Eye size={18}/>:<EyeOff size={18}/>}</button>
-   {panels&&<><button type="button" onClick={()=>showPanel('players',!visible.players)} aria-label={visible.players?'Hide leaderboard':'Show leaderboard'} aria-pressed={visible.players} title="Leaderboard"><Trophy size={18}/></button><button type="button" onClick={()=>showPanel('chat',!visible.chat)} aria-label={visible.chat?'Hide chat':'Show chat'} aria-pressed={visible.chat} title="Chat"><MessageCircle size={18}/></button></>}
+   {panels&&<><button type="button" onClick={()=>showPanel('players',!visible.players)} aria-label={visible.players?'Hide leaderboard':'Show leaderboard'} aria-pressed={visible.players} title="Leaderboard"><Trophy size={18}/></button>{chatAvailable&&<button type="button" onClick={()=>showPanel('chat',!visible.chat)} aria-label={visible.chat?'Hide chat':'Show chat'} aria-pressed={visible.chat} title="Chat"><MessageCircle size={18}/></button>}</>}
    <button type="button" onClick={()=>{window.dispatchEvent(new Event('blur'));setMenu(v=>!v)}} aria-label={menu?'Hide game menu':'Open game menu'} aria-expanded={menu} title="Game menu"><Settings2 size={18}/></button><button type="button" onClick={exit} aria-label="Exit fullscreen" title="Return to website"><X size={20}/></button>
   </div></div>{menu&&<section className="game-window-menu" aria-label="Game menu" onKeyDown={e=>{if(e.key!=='Escape')e.stopPropagation()}}><header><h2>Game menu</h2><button type="button" aria-label="Close game menu" onClick={()=>setMenu(false)}><X size={18}/></button></header><label><input type="checkbox" checked={hud} onChange={e=>setHud(e.target.checked)}/>Show HUD</label><label><input type="checkbox" checked={controls} onChange={e=>setControls(e.target.checked)}/>Show game controls</label>{panels&&<button type="button" onClick={()=>{showPanel('guide',!visible.guide);setMenu(false)}}><BookOpen size={17}/>Rules & controls</button>}<button type="button" onClick={()=>{setHud(false);setVisible({players:false,chat:false,guide:false});setMenu(false)}}><EyeOff size={17}/>Hide all overlays</button>{menuContent&&<div className="game-window-room-options">{menuContent}</div>}<div ref={setSettingsTarget} className="game-window-settings-slot"/><button type="button" onClick={exit}><ArrowLeft size={17}/>Return to website</button></section>}</>}
   {children}

@@ -3,11 +3,11 @@ import {useEffect,useRef,useState,useId,type CSSProperties,type PointerEvent} fr
 import {Eye,EyeOff,Expand,Minimize2,SlidersHorizontal,MoveDiagonal,Monitor} from 'lucide-react';
 import GameWindow,{useGameWindow} from '../games/GameWindow';
 type Mode='screen'|'content'|'custom';
-type Props={children:React.ReactNode;label?:string;focusOnMount?:boolean;allowHide?:boolean;fitOnMount?:boolean};
+type Props={children:React.ReactNode;label?:string;focusOnMount?:boolean;allowHide?:boolean;fitOnMount?:boolean;menuContent?:React.ReactNode};
 const primarySelector='.ladder-board,.snake-stadium>canvas,.strategy-board-frame,.estate-board-frame,.action-world>canvas,.club-arena>canvas,.blocks-arena>canvas,.pool-stage>canvas,.pirate-canvas,.sol-playfield,.sketch-paper,.generals-board,.fleet-battle-grids';
 
 /** Size changes trigger fitting. Ordinary state receipts never remeasure the DOM. */
-export default function GameSurface(props:Props){const gameWindow=useGameWindow();return gameWindow?<GameSurfaceView {...props}/>:<GameWindow label={props.label||'Game view'} className="standalone-game-window"><GameSurfaceView {...props}/></GameWindow>}
+export default function GameSurface(props:Props){const gameWindow=useGameWindow();return gameWindow?<GameSurfaceView {...props}/>:<GameWindow menuContent={props.menuContent} label={props.label||'Game view'} className="standalone-game-window"><GameSurfaceView {...props}/></GameWindow>}
 function GameSurfaceView({children,label='Game view',allowHide=true,fitOnMount=false}:Props){
  const gameWindow=useGameWindow();
  const id=useId(),panel=useRef<HTMLDivElement>(null),body=useRef<HTMLDivElement>(null),restore=useRef<HTMLButtonElement>(null),hide=useRef<HTMLButtonElement>(null);
