@@ -1,6 +1,6 @@
 import type {CasualPublic} from './engine.ts';
 
-const continuous = new Set(['snake','circuit','terra','sumo','tanks','pong','marble','blocks']);
+const continuous = new Set(['snake','circuit','terra','sumo','tanks','pong','marble','blocks','pirate']);
 
 /** A countdown can expire while its last snapshot is still in transit. */
 export function expectsWorldUpdates(room:CasualPublic|null,receiptAge=0){

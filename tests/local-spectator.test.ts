@@ -6,7 +6,7 @@ import {spectatorView,spectatorFollowId,spectatorPlayers} from '../lib/casual/sp
 import {casualBody} from '../lib/casual/api.ts';
 const now=10000,settings={cards:20,speed:350,bots:2};
 
-test('all twenty-one local games support a real spectator host and AI participants',()=>{
+test('all arcade games support a real spectator host and AI participants',()=>{
  for(const mode of CASUAL_MODES){let state=createLocalLobby({mode,role:'spectator',settings,names:['Observer'],seed:41,now});assert.equal(state.phase,'lobby');assert.equal(state.players[0].role,'spectator');state=applyCasualAction(state,{action:'start'},state.hostId,now);assert.equal(activePlayers(state).length,2);assert(activePlayers(state).every(p=>p.bot));assert.equal(localViewer(state,activePlayers(state)[0].id),state.hostId);
   const view=publicCasual(state,state.hostId,now),watched=spectatorView(view,activePlayers(state)[1].id);assert.equal(watched.youId,state.hostId);assert.equal(watched.viewingId,activePlayers(state)[1].id);assert.deepEqual(watched.game,view.game);if(mode!=='phone')assert(!JSON.stringify(state.game).includes(state.hostId),mode);else assert((state.game as any).chains.every((chain:any)=>chain.owner!==state.hostId));assert.throws(()=>applyCasualAction(state,{action:'flip',round:state.round,turn:1,card:0},state.hostId,now),/Spectators/);
   if(mode==='uno'){assert.deepEqual(watched.game.hand,[]);assert.deepEqual(watched.game.playable,[])}if(mode==='phone'){assert.equal(watched.game.task,null);assert.equal(watched.game.draft,undefined)}if(mode==='generals')assert.equal(watched.game.pieces.length,0);if(mode==='fleet')assert(Object.values(watched.game.fleets).every((p:any)=>!p.length));

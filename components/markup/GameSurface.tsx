@@ -3,7 +3,7 @@ import {useEffect,useRef,useState,useId,type CSSProperties,type PointerEvent} fr
 import {Eye,EyeOff,Expand,Minimize2,SlidersHorizontal,MoveDiagonal,Monitor} from 'lucide-react';
 type Mode='screen'|'content'|'custom';
 type Props={children:React.ReactNode;label?:string;focusOnMount?:boolean;allowHide?:boolean;fitOnMount?:boolean};
-const primarySelector='.ladder-board,.snake-stadium>canvas,.strategy-board-frame,.estate-board-frame,.action-world>canvas,.club-arena>canvas,.blocks-arena>canvas,.pool-stage>canvas,.sol-playfield,.sketch-paper,.generals-board,.fleet-battle-grids';
+const primarySelector='.ladder-board,.snake-stadium>canvas,.strategy-board-frame,.estate-board-frame,.action-world>canvas,.club-arena>canvas,.blocks-arena>canvas,.pool-stage>canvas,.pirate-canvas,.sol-playfield,.sketch-paper,.generals-board,.fleet-battle-grids';
 
 /** Size changes trigger fitting. Ordinary state receipts never remeasure the DOM. */
 export default function GameSurface({children,label='Game view',allowHide=true,fitOnMount=false}:Props){
@@ -20,7 +20,7 @@ export default function GameSurface({children,label='Game view',allowHide=true,f
  function scheduleFit(){cancelAnimationFrame(fitFrame.current);fitFrame.current=requestAnimationFrame(measure)}
  useEffect(()=>{
   if(mode!=='screen')return;const node=panel.current;if(!node)return;const resize=new ResizeObserver(scheduleFit);resize.observe(node);
-  for(const el of node.querySelectorAll('.club-controls,.action-controls,.blocks-buttons,.snake-controls,.pool-shot-controls,.game-guide,.game-help'))resize.observe(el);
+  for(const el of node.querySelectorAll('.club-controls,.action-controls,.blocks-buttons,.snake-controls,.pool-shot-controls,.game-guide,.game-help,.pirate-heading,.pirate-crew-hud,.pirate-settings,.pirate-touch-controls,.pirate-footnote'))resize.observe(el);
   scheduleFit();window.addEventListener('resize',scheduleFit);window.visualViewport?.addEventListener('resize',scheduleFit);node.addEventListener('toggle',scheduleFit,true);
   return()=>{cancelAnimationFrame(fitFrame.current);resize.disconnect();window.removeEventListener('resize',scheduleFit);window.visualViewport?.removeEventListener('resize',scheduleFit);node.removeEventListener('toggle',scheduleFit,true)};
  },[mode,hidden,detailsHidden,resizeOpen,full,width]);

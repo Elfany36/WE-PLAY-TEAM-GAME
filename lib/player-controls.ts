@@ -5,6 +5,7 @@ const move=[a('up','Move up','ArrowUp','ArrowUp','KeyW'),a('down','Move down','A
 const party=move.map(x=>({...x,key:({up:'w',down:'s',left:'a',right:'d'} as Record<string,string>)[x.id]}));
 const board=[a('previous','Previous square','ArrowLeft','ArrowLeft'),a('next','Next square','ArrowRight','ArrowRight'),a('choose','Select focused square',' ','Space','Enter')];
 export const CONTROL_PROFILES:Record<string,{note:string;actions:ControlAction[]}>= {
+ pirate:{note:'Move, double-jump and dash between platforms. Attack opens chests; Special throws a held bomb or casts your skill. Mouse aiming and gamepads are optional.',actions:[a('left','Move left','a','KeyA','ArrowLeft'),a('right','Move right','d','KeyD','ArrowRight'),a('jump','Jump / double jump',' ','Space','KeyW','ArrowUp'),a('down','Drop through / fast fall','s','KeyS','ArrowDown'),a('attack','Melee attack','f','KeyF'),a('special','Throw bomb / cast skill','g','KeyG'),a('dash','Dash','Shift','ShiftLeft','ShiftRight'),a('pause','Pause / resume (host)','p','KeyP')]},
  solitaire:{note:'Select a card, then its destination; drag also works. Double-click sends an eligible card to its foundation.',actions:[a('draw','Draw stock',' ','Space'),a('undo','Undo move','z','KeyZ'),a('hint','Show legal hint','h','KeyH')]},
  sketch:{note:'Draw with the pointer. Type guesses in chat. Only the current artist can use drawing tools.',actions:[a('undo','Undo stroke','z','KeyZ'),a('eraser','Toggle eraser','e','KeyE')]},
  generals:{note:'Focus the board. Select a piece, then an adjacent tile; setup swaps pieces.',actions:[...move,a('choose','Select tile',' ','Space','Enter'),a('cancel','Cancel selection','Backspace','Backspace')]},
@@ -27,10 +28,11 @@ export const CONTROL_PROFILES:Record<string,{note:string;actions:ControlAction[]
  property:{note:'Shortcuts act only when the matching action is available.',actions:[a('roll','Roll dice','r','KeyR'),a('end','End turn','e','KeyE')]},
  phone:{note:'Type sentences normally. Drawing shortcuts work outside text fields.',actions:[a('eraser','Toggle eraser','e','KeyE'),a('undo','Undo stroke','z','KeyZ'),a('redo','Redo stroke','y','KeyY'),a('fill','Toggle bucket','f','KeyF')]},
 };
+for(const [index,codes]of [['2',['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Comma','Period','Slash']],['3',['KeyJ','KeyL','KeyI','KeyK','KeyU','KeyO','KeyH']],['4',['Numpad4','Numpad6','Numpad8','Numpad5','Numpad0','NumpadDecimal','Numpad9']]] as const)CONTROL_PROFILES['pirate-local-'+index]={note:'Local pirate '+index+' has independent saved controls.',actions:CONTROL_PROFILES.pirate.actions.slice(0,7).map((action,i)=>({...action,codes:[codes[i]]}))};
 export type ControlBindings=Record<string,string>;
 const cache=new Map<string,ControlBindings>();
 const storageKey='markup-controls-v25';
-export function validControlCode(code:unknown):code is string{return typeof code==='string'&&/^(Key[A-Z]|Digit[0-9]|Arrow(Up|Down|Left|Right)|Space|Enter|Backspace|ShiftLeft|ShiftRight|Comma|Period|Slash|Semicolon|Quote|BracketLeft|BracketRight|Minus|Equal|Numpad[0-9])$/.test(code)}
+export function validControlCode(code:unknown):code is string{return typeof code==='string'&&/^(Key[A-Z]|Digit[0-9]|Arrow(Up|Down|Left|Right)|Space|Enter|Backspace|ShiftLeft|ShiftRight|Comma|Period|Slash|Semicolon|Quote|BracketLeft|BracketRight|Minus|Equal|Numpad([0-9]|Decimal))$/.test(code)}
 export function validateControlBindings(mode:string,value:unknown):ControlBindings{
  if(!value||typeof value!=='object'||Array.isArray(value))return{};const allowed=CONTROL_PROFILES[mode]?.actions||[],out:ControlBindings={};
  for(const row of allowed){const code=(value as Record<string,unknown>)[row.id];if(validControlCode(code))out[row.id]=code}return out;
@@ -46,6 +48,7 @@ export function controlKey(event:{key:string;code?:string},mode:string,bindings=
  if(!row&&profile.actions.some(row=>bindings[row.id]&&row.codes.includes(code)))return '';
  return row?.key??event.key;
 }
+export function controlAction(event:{code:string},mode:string){const bindings=controlBindings(mode);return CONTROL_PROFILES[mode]?.actions.find(row=>(bindings[row.id]?[bindings[row.id]]:row.codes).includes(event.code))?.id||''}
 export function controlHint(mode:string,action:string){const row=CONTROL_PROFILES[mode]?.actions.find(row=>row.id===action);if(!row)return '';const custom=controlBindings(mode)[action];return controlCodeLabel(custom||row.codes[0])}
 export function controlCodeLabel(code:string){return code.replace(/^Key/,'').replace(/^Digit/,'').replace('Arrow','').replace('Left',' Left').replace('Right',' Right').replace(/^ /,'').replace('Space','Space bar')}
 if(typeof window!=='undefined')window.addEventListener('storage',event=>{if(event.key===storageKey||event.key===null)cache.clear()});

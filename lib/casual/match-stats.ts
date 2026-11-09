@@ -7,7 +7,8 @@ import {poolRemaining} from './pool.ts';
 export function matchStat(room:CasualPublic,id:string){
  const g=room.game;
  let value:string|number='—',label='Waiting',progress:number|undefined;
- if(g?.kind==='solitaire'){value=(g.scores[id]||0)/10;label='Cards cleared'}
+ if(g?.kind==='pirate'){const f=g.world.fighters.find((f:{id:string})=>f.id===id);value=g.world.variant==='ko-race'?f?.ko||0:f?.st||0;label=g.world.variant==='ko-race'?'KOs':'Stocks'}
+ else if(g?.kind==='solitaire'){value=(g.scores[id]||0)/10;label='Cards cleared'}
  else if(g?.kind==='sketch'){value=g.scores[id]||0;label='Points'}
  else if(g?.kind==='generals'){value=g.stage==='deploy'?21:g.pieces.filter((p:{owner:string})=>p.owner===id).length;label=g.stage==='deploy'?'Army pieces':'Pieces left'}
  else if(g?.kind==='fleet'){value=g.remaining[id]??5;label='Models afloat';progress=1-Number(value)/5}

@@ -1,0 +1,539 @@
+{
+  "schema": 1,
+  "source": {
+    "filename": "Pirate Bomb Brawl_ Arena (3).html",
+    "sha256": "401abc2699cf75a08531e9bb4ed0ad8783e36923c7400f00b60bc02686b24b74",
+    "bytes": 3275711
+  },
+  "animationRows": [
+    "idle",
+    "run",
+    "jump",
+    "fall",
+    "attack",
+    "hit"
+  ],
+  "characterIds": [
+    "bomb-guy",
+    "bald-pirate",
+    "cucumber",
+    "big-guy",
+    "captain",
+    "whale"
+  ],
+  "characterNames": [
+    "Bomb Guy",
+    "Bald Pirate",
+    "Cucumber",
+    "Big Guy",
+    "Captain",
+    "Whale"
+  ],
+  "characterFacing": [
+    1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+  ],
+  "attackFacing": [
+    1,
+    1,
+    -1,
+    1,
+    1,
+    -1
+  ],
+  "assets": {
+    "ch": [
+      {
+        "src": "/pirate-brawl/characters/bomb-guy.png",
+        "w": 58,
+        "h": 58,
+        "n": {
+          "idle": 26,
+          "run": 14,
+          "jump": 4,
+          "fall": 2,
+          "attack": 3,
+          "hit": 8
+        }
+      },
+      {
+        "src": "/pirate-brawl/characters/bald-pirate.png",
+        "w": 63,
+        "h": 67,
+        "n": {
+          "idle": 34,
+          "run": 14,
+          "jump": 4,
+          "fall": 2,
+          "attack": 12,
+          "hit": 8
+        }
+      },
+      {
+        "src": "/pirate-brawl/characters/cucumber.png",
+        "w": 64,
+        "h": 68,
+        "n": {
+          "idle": 36,
+          "run": 12,
+          "jump": 4,
+          "fall": 2,
+          "attack": 11,
+          "hit": 8
+        }
+      },
+      {
+        "src": "/pirate-brawl/characters/big-guy.png",
+        "w": 77,
+        "h": 74,
+        "n": {
+          "idle": 38,
+          "run": 16,
+          "jump": 4,
+          "fall": 2,
+          "attack": 11,
+          "hit": 8
+        }
+      },
+      {
+        "src": "/pirate-brawl/characters/captain.png",
+        "w": 80,
+        "h": 72,
+        "n": {
+          "idle": 32,
+          "run": 14,
+          "jump": 4,
+          "fall": 2,
+          "attack": 7,
+          "hit": 8
+        }
+      },
+      {
+        "src": "/pirate-brawl/characters/whale.png",
+        "w": 68,
+        "h": 46,
+        "n": {
+          "idle": 44,
+          "run": 14,
+          "jump": 4,
+          "fall": 2,
+          "attack": 11,
+          "hit": 7
+        }
+      }
+    ],
+    "bomb": {
+      "src": "/pirate-brawl/sprites/bomb.png",
+      "w": 32,
+      "h": 51,
+      "n": 11
+    },
+    "boom": {
+      "src": "/pirate-brawl/sprites/explosion.png",
+      "w": 96,
+      "h": 108,
+      "n": 9
+    },
+    "heart": {
+      "src": "/pirate-brawl/sprites/heart.png",
+      "w": 22,
+      "h": 19,
+      "n": 1
+    },
+    "tiles": "/pirate-brawl/terrain/legacy-tiles.png",
+    "fx": {
+      "fire": {
+        "src": "/pirate-brawl/effects/fire.png",
+        "w": 48,
+        "h": 48,
+        "n": 11
+      },
+      "fireH": {
+        "src": "/pirate-brawl/effects/fireH.png",
+        "w": 48,
+        "h": 48,
+        "n": 5
+      },
+      "ice": {
+        "src": "/pirate-brawl/effects/ice.png",
+        "w": 32,
+        "h": 32,
+        "n": 15
+      },
+      "iceH": {
+        "src": "/pirate-brawl/effects/iceH.png",
+        "w": 32,
+        "h": 32,
+        "n": 12
+      },
+      "thun": {
+        "src": "/pirate-brawl/effects/thun.png",
+        "w": 64,
+        "h": 64,
+        "n": 13
+      },
+      "thunS": {
+        "src": "/pirate-brawl/effects/thunS.png",
+        "w": 48,
+        "h": 48,
+        "n": 14
+      },
+      "holy": {
+        "src": "/pirate-brawl/effects/holy.png",
+        "w": 32,
+        "h": 32,
+        "n": 7
+      },
+      "smoke": {
+        "src": "/pirate-brawl/effects/smoke.png",
+        "w": 64,
+        "h": 64,
+        "n": 13
+      },
+      "chest": {
+        "src": "/pirate-brawl/effects/chest.png",
+        "w": 32,
+        "h": 32,
+        "n": 8
+      },
+      "btn": {
+        "src": "/pirate-brawl/effects/btn.png",
+        "w": 32,
+        "h": 32,
+        "n": 2
+      }
+    },
+    "mu": {
+      "t": "/pirate-brawl/audio/menu.ogg",
+      "f": "/pirate-brawl/audio/battle.ogg"
+    },
+    "bg": {
+      "sky": "/pirate-brawl/backgrounds/sky.png",
+      "cb": "/pirate-brawl/backgrounds/cb.png",
+      "cm": "/pirate-brawl/backgrounds/cm.png",
+      "cs": "/pirate-brawl/backgrounds/cs.png",
+      "oc": "/pirate-brawl/backgrounds/oc.png",
+      "sa": "/pirate-brawl/backgrounds/sa.png",
+      "cas": "/pirate-brawl/backgrounds/cas.png",
+      "pfb": "/pirate-brawl/backgrounds/pfb.png",
+      "rui": "/pirate-brawl/backgrounds/rui.png"
+    },
+    "t": {
+      "tm": "/pirate-brawl/terrain/tm.png",
+      "ter": "/pirate-brawl/terrain/ter.png",
+      "pf": "/pirate-brawl/terrain/pf.png",
+      "rui": "/pirate-brawl/terrain/rui.png"
+    },
+    "dc": {
+      "palm1": "/pirate-brawl/decorations/palm1.png",
+      "palm2": "/pirate-brawl/decorations/palm2.png",
+      "palm4": "/pirate-brawl/decorations/palm4.png"
+    }
+  },
+  "files": [
+    {
+      "path": "/pirate-brawl/characters/bomb-guy.png",
+      "mimeType": "image/png",
+      "bytes": 18460,
+      "sha256": "c6ce2d1ec53a12dd0df9142846285a8a0d240082bf2a81b6b8f4e921ab23d1f7",
+      "width": 1508,
+      "height": 348
+    },
+    {
+      "path": "/pirate-brawl/characters/bald-pirate.png",
+      "mimeType": "image/png",
+      "bytes": 21120,
+      "sha256": "40e28242d7a4166e47f8dd87fa28663291573dc731fa0d43f5075194d64586e1",
+      "width": 2142,
+      "height": 402
+    },
+    {
+      "path": "/pirate-brawl/characters/cucumber.png",
+      "mimeType": "image/png",
+      "bytes": 20050,
+      "sha256": "7256724b476fe16943e92a58b399b8be1413339b682463dee14310a3b1b205d1",
+      "width": 2304,
+      "height": 408
+    },
+    {
+      "path": "/pirate-brawl/characters/big-guy.png",
+      "mimeType": "image/png",
+      "bytes": 30672,
+      "sha256": "e5c0da67e118600a7401fc36591aa7c5651e034add413c43cf25dad8783f6e3e",
+      "width": 2926,
+      "height": 444
+    },
+    {
+      "path": "/pirate-brawl/characters/captain.png",
+      "mimeType": "image/png",
+      "bytes": 27344,
+      "sha256": "dd211289c039c957ad26e062cd8de43d70a86411f419d926a423b905d7244b76",
+      "width": 2560,
+      "height": 432
+    },
+    {
+      "path": "/pirate-brawl/characters/whale.png",
+      "mimeType": "image/png",
+      "bytes": 23913,
+      "sha256": "ade6d65819bb2ad03a7610de0029acac346f3cda49d10d6f41d7178abd943584",
+      "width": 2992,
+      "height": 276
+    },
+    {
+      "path": "/pirate-brawl/sprites/bomb.png",
+      "mimeType": "image/png",
+      "bytes": 1748,
+      "sha256": "1b213e829b788251aba6d21be957c06ab31e6239552cf51a213d2592f9d2c34f",
+      "width": 352,
+      "height": 51
+    },
+    {
+      "path": "/pirate-brawl/sprites/explosion.png",
+      "mimeType": "image/png",
+      "bytes": 4547,
+      "sha256": "a29e314ad6a0d1134806f13f11f87dc08a670b946ee8f462ac1736f54e6b9e3c",
+      "width": 864,
+      "height": 108
+    },
+    {
+      "path": "/pirate-brawl/sprites/heart.png",
+      "mimeType": "image/png",
+      "bytes": 370,
+      "sha256": "5d755e2c6eb2df9ef6a39c00074f3c10a390a41372c3bc0435a7e90cadd9bb99",
+      "width": 22,
+      "height": 19
+    },
+    {
+      "path": "/pirate-brawl/terrain/legacy-tiles.png",
+      "mimeType": "image/png",
+      "bytes": 12866,
+      "sha256": "44e37c4318c822cbfce330a09691d98642bd64de0c3f913537ae66aa6d110d6f",
+      "width": 384,
+      "height": 320
+    },
+    {
+      "path": "/pirate-brawl/effects/fire.png",
+      "mimeType": "image/png",
+      "bytes": 2994,
+      "sha256": "835f9dc5f84db4e5d847943558fa781998f33012a888c7834f9e77a390b966eb",
+      "width": 528,
+      "height": 48
+    },
+    {
+      "path": "/pirate-brawl/effects/fireH.png",
+      "mimeType": "image/png",
+      "bytes": 1574,
+      "sha256": "78863e3707cdd85eb7d2613d76e72692f05ecf17d0b1392f8a08897e12714197",
+      "width": 240,
+      "height": 48
+    },
+    {
+      "path": "/pirate-brawl/effects/ice.png",
+      "mimeType": "image/png",
+      "bytes": 1467,
+      "sha256": "f23c5360054f25127d6ad4d8ba33865983873bb994a830c721ae12105fa49098",
+      "width": 480,
+      "height": 32
+    },
+    {
+      "path": "/pirate-brawl/effects/iceH.png",
+      "mimeType": "image/png",
+      "bytes": 1277,
+      "sha256": "c12576ea77914aa4dad87323892efa6a5821706fa7f76dfb47580fadf114e20d",
+      "width": 384,
+      "height": 32
+    },
+    {
+      "path": "/pirate-brawl/effects/thun.png",
+      "mimeType": "image/png",
+      "bytes": 28548,
+      "sha256": "81d9092e50ee0e55903e9e38b01a137e758a8005de9e13eb044c8a059bd31b41",
+      "width": 832,
+      "height": 64
+    },
+    {
+      "path": "/pirate-brawl/effects/thunS.png",
+      "mimeType": "image/png",
+      "bytes": 13216,
+      "sha256": "47081918d8cc9a939e767d87ebd725633f08396ecbc2b3cde17c294f80699297",
+      "width": 672,
+      "height": 48
+    },
+    {
+      "path": "/pirate-brawl/effects/holy.png",
+      "mimeType": "image/png",
+      "bytes": 630,
+      "sha256": "788b6116c1f20325d700a3de4dcf0e8edd5654b379a94b53537687748e7eafc1",
+      "width": 224,
+      "height": 32
+    },
+    {
+      "path": "/pirate-brawl/effects/smoke.png",
+      "mimeType": "image/png",
+      "bytes": 5169,
+      "sha256": "0c82a78f0f878a3c9380a3430ff420e8df1d64dc7cfa90f5dfa7ec456e177c46",
+      "width": 832,
+      "height": 64
+    },
+    {
+      "path": "/pirate-brawl/effects/chest.png",
+      "mimeType": "image/png",
+      "bytes": 1967,
+      "sha256": "28dd88483c8500a116d560b7f1da41de7999bda462fad65ea6afa164dc544a3d",
+      "width": 256,
+      "height": 32
+    },
+    {
+      "path": "/pirate-brawl/effects/btn.png",
+      "mimeType": "image/png",
+      "bytes": 501,
+      "sha256": "c9a2f94b0e890f2569024a4a656da5d25df4cda914bc2e07f0df984f325e4208",
+      "width": 64,
+      "height": 32
+    },
+    {
+      "path": "/pirate-brawl/audio/menu.ogg",
+      "mimeType": "audio/ogg",
+      "bytes": 953449,
+      "sha256": "ca9e8e83ee9008a37115999bb8e35adac9b270d2e594d011fe540f6fe2408c45"
+    },
+    {
+      "path": "/pirate-brawl/audio/battle.ogg",
+      "mimeType": "audio/ogg",
+      "bytes": 1064223,
+      "sha256": "dba64d0fc89f10a5c05db47387e2e5ecc098d6207e78454316d6132de383a7e4"
+    },
+    {
+      "path": "/pirate-brawl/backgrounds/sky.png",
+      "mimeType": "image/png",
+      "bytes": 677,
+      "sha256": "c872da09b10a6212d50c2c52d5bcd46db546aaaca4fee4e10179b962e848c8d7",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "path": "/pirate-brawl/backgrounds/cb.png",
+      "mimeType": "image/png",
+      "bytes": 3140,
+      "sha256": "7585ea2fd149c6cb4ef9a168564f97365faf5f90ba7cb76f0d44a8880ec23733",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "path": "/pirate-brawl/backgrounds/cm.png",
+      "mimeType": "image/png",
+      "bytes": 1110,
+      "sha256": "5eef67c1175d2d46e74e921ec889b87aa09245402262d06a94ac61ee18dbf7dd",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "path": "/pirate-brawl/backgrounds/cs.png",
+      "mimeType": "image/png",
+      "bytes": 750,
+      "sha256": "98a204380c8a05dd3bdbab9e911f4d59d3762d419fad02aa302f39ed97239c8b",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "path": "/pirate-brawl/backgrounds/oc.png",
+      "mimeType": "image/png",
+      "bytes": 2745,
+      "sha256": "f648e7560d83c922e7979293fd1edbaaf58485bb8e9c52481f3f4757c9de0faf",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "path": "/pirate-brawl/backgrounds/sa.png",
+      "mimeType": "image/png",
+      "bytes": 930,
+      "sha256": "2ddb79c7a7824940c909fe7e1e2e4b35a55dd1c002ad3ae4d29db96779372419",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "path": "/pirate-brawl/backgrounds/cas.png",
+      "mimeType": "image/png",
+      "bytes": 50008,
+      "sha256": "84ccdc9ff5066ce23c3e5e0aedbfaef37b6302eda22f702f2ae2fdd04b2f6010",
+      "width": 480,
+      "height": 240
+    },
+    {
+      "path": "/pirate-brawl/backgrounds/pfb.png",
+      "mimeType": "image/png",
+      "bytes": 3025,
+      "sha256": "8494225fd6f07702fbe62b89cea79cacb8f7640e7c790e9951450a061e899b1d",
+      "width": 160,
+      "height": 480
+    },
+    {
+      "path": "/pirate-brawl/backgrounds/rui.png",
+      "mimeType": "image/png",
+      "bytes": 30191,
+      "sha256": "c3b7d1486a90d0946c2ee9f4a03571b7badec3466032640f1ab9fcf0c0d0e73a",
+      "width": 1360,
+      "height": 880
+    },
+    {
+      "path": "/pirate-brawl/terrain/tm.png",
+      "mimeType": "image/png",
+      "bytes": 13049,
+      "sha256": "4f64c903f5420f16156b57e4aea121fdd24cd9b52f89b72860b7ce53693d92d8",
+      "width": 544,
+      "height": 160
+    },
+    {
+      "path": "/pirate-brawl/terrain/ter.png",
+      "mimeType": "image/png",
+      "bytes": 9114,
+      "sha256": "3dd848d19156d281aef3a516a4ba17af1617148678060254375cf0655c1f1d0a",
+      "width": 192,
+      "height": 192
+    },
+    {
+      "path": "/pirate-brawl/terrain/pf.png",
+      "mimeType": "image/png",
+      "bytes": 42349,
+      "sha256": "f2abbe25ef8f55558fd1a42743c9d6c3b0a4983a1e0b08231388a92860290ca9",
+      "width": 960,
+      "height": 320
+    },
+    {
+      "path": "/pirate-brawl/terrain/rui.png",
+      "mimeType": "image/png",
+      "bytes": 269,
+      "sha256": "0e2d522e0bfb6ac1787f43d3026422050cda8597ad51b3999fd3e04cc660f970",
+      "width": 48,
+      "height": 48
+    },
+    {
+      "path": "/pirate-brawl/decorations/palm1.png",
+      "mimeType": "image/png",
+      "bytes": 2284,
+      "sha256": "bd13c79a9cff7747625d82320cc4d6c096b98ee95b2f488bff25087e7ee5051a",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "path": "/pirate-brawl/decorations/palm2.png",
+      "mimeType": "image/png",
+      "bytes": 2195,
+      "sha256": "ddc84e8b906cf40f7da7236ac6c48a483e03826c7209dac0066b4556ee8ae746",
+      "width": 96,
+      "height": 96
+    },
+    {
+      "path": "/pirate-brawl/decorations/palm4.png",
+      "mimeType": "image/png",
+      "bytes": 2119,
+      "sha256": "3a9c761c80531828854fa1ef3bff8072ae81ec0e6c2ba3d8316f788b2c68cda5",
+      "width": 96,
+      "height": 96
+    }
+  ]
+}

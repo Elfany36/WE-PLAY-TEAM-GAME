@@ -7,11 +7,14 @@ export function invitationService(origin:unknown){return origin===CASUAL_SERVICE
 export function invitationEndpoint(value:unknown){return value==='arcade'?CASUAL_SERVICE_ORIGIN+'/api/casual':value==='site'?legacyCasualEndpoint():undefined}
 export function joinCandidates(primary:string,allowDedicated=true){return[...new Set([primary,legacyCasualEndpoint(),...(allowDedicated?[CASUAL_SERVICE_ORIGIN+'/api/casual']:[])])]}
 /** Known dedicated service is the default for new production rooms. No health-probe downgrade. */
-export async function chooseCasualEndpoint(){
+export async function chooseCasualEndpoint(mode?:string){
  const configured=multiplayerEndpoint('casual');
  if(typeof location==='undefined'||!(/\.chatgpt\.site$|\.github\.io$/.test(location.hostname)))return configured;
  const origin=new URL(configured,location.href).origin;
  if(origin!==location.origin&&!HOSTED_ORIGINS.includes(origin))return configured;
+ // A newly introduced game uses the matching website API while older room
+ // authorities remain available for their existing games and invitations.
+ if(mode==='pirate')return legacyCasualEndpoint();
  return CASUAL_SERVICE_ORIGIN+'/api/casual';
 }
 

@@ -1,3 +1,4 @@
+import {newPirate,advancePirate,pirateAction,leavePirate,publicPirate,pirateSettings,type PirateGame,type PirateSettings} from './pirate.ts';
 import {newSolitaire,solitaireAction,advanceSolitaire,publicSolitaire,leaveSolitaire,type SolitaireGame} from './solitaire.ts';
 import {newSketch,sketchAction,advanceSketch,sketchChat,leaveSketch,publicSketch,type SketchGame} from './sketch.ts';
 import {newGameSettings,newGameActionFields,type NewGameSettings} from './new-game-settings.ts';
@@ -25,11 +26,11 @@ import {newUno,unoAction,advanceUno,leaveUno,publicUno,type UnoGame} from './uno
 import {snakeMap,SNAKE_MAP_IDS,snakeStarts,SNAKE_SIZES,type SnakeMapId} from './maps.ts';
 import {CasualError} from './error.ts';
 export {CasualError} from './error.ts';
-export type CasualMode='ladders'|'memory'|'snake'|'uno'|'property'|'phone'|'circuit'|'terra'|'chess'|'dama'|'scidama'|'sumo'|'tanks'|'pong'|'marble'|'blocks'|'pool'|'generals'|'fleet'|'solitaire'|'sketch';
-export const CASUAL_MODES=['ladders','memory','snake','uno','property','phone','circuit','terra','chess','dama','scidama','sumo','tanks','pong','marble','blocks','pool','generals','fleet','solitaire','sketch'] as const;
-export const casualCapacity=(mode:string)=>isStrategy(mode)||['pong','pool','generals','fleet'].includes(mode)?2:mode==='uno'?12:8;
-export const casualMinimum=(mode:string)=>isStrategy(mode)||['uno','property','phone','sketch','sumo','tanks','pong','pool','generals','fleet'].includes(mode)?2:1;
-export type CasualSettings=NewGameSettings&HiddenSettings&{roundSeconds?:60|120|180|300|600;winTarget?:5|10|11|20|21;raceLaps?:1|2|3|5;scene?:TableScene;characterSelection?:boolean;arcadeV2?:boolean;unoSameColor?:boolean;sumoFormat?:'bracket'|'classic';blockPace?:'arcade'|'expert'|'blitz';cards:number;speed:number;map?:SnakeMapId;snakeSize?:32|48|64;battle?:boolean;difficulty?:'cozy'|'standard'|'expert';unoFlip?:boolean;track?:string;bots?:number;relayRounds?:number;relaySeconds?:number;arena?:'garden'|'canyon'|'neon'|'harbor'|'foundry'|'glacier'|'bamboo'|'relay'};
+export type CasualMode='ladders'|'memory'|'snake'|'uno'|'property'|'phone'|'circuit'|'terra'|'chess'|'dama'|'scidama'|'sumo'|'tanks'|'pong'|'marble'|'blocks'|'pool'|'generals'|'fleet'|'solitaire'|'sketch'|'pirate';
+export const CASUAL_MODES=['ladders','memory','snake','uno','property','phone','circuit','terra','chess','dama','scidama','sumo','tanks','pong','marble','blocks','pool','generals','fleet','solitaire','sketch','pirate'] as const;
+export const casualCapacity=(mode:string)=>isStrategy(mode)||['pong','pool','generals','fleet'].includes(mode)?2:mode==='uno'?12:mode==='pirate'?6:8;
+export const casualMinimum=(mode:string)=>isStrategy(mode)||['uno','property','phone','sketch','sumo','tanks','pong','pool','generals','fleet','pirate'].includes(mode)?2:1;
+export type CasualSettings=PirateSettings&NewGameSettings&HiddenSettings&{roundSeconds?:60|120|180|300|600;winTarget?:5|10|11|20|21;raceLaps?:1|2|3|5;scene?:TableScene;characterSelection?:boolean;arcadeV2?:boolean;unoSameColor?:boolean;sumoFormat?:'bracket'|'classic';blockPace?:'arcade'|'expert'|'blitz';cards:number;speed:number;map?:SnakeMapId;snakeSize?:32|48|64;battle?:boolean;difficulty?:'cozy'|'standard'|'expert';unoFlip?:boolean;track?:string;bots?:number;relayRounds?:number;relaySeconds?:number;arena?:'garden'|'canyon'|'neon'|'harbor'|'foundry'|'glacier'|'bamboo'|'relay'};
 export type Direction='up'|'right'|'down'|'left';
 export type Point={x:number;y:number};
 export type CasualPlayer={id:string;name:string;tokenHash:string;joinedAt:number;lastSeen:number;color:number;ready:boolean;characterRound?:number;retired:boolean;requests:string[];role?:'player'|'spectator';appearance?:Appearance;traffic?:RoomTraffic;bot?:boolean};
@@ -37,7 +38,7 @@ export type LadderGame={kind:'ladders';positions:Record<string,number>;currentId
 export type MemoryGame={kind:'memory';deck:{key:number;matchedBy:string|null}[];revealed:number[];currentId:string;turn:number;deadline:number;resolveAt:number|null;scores:Record<string,number>;moves:number};
 export type Worm={id:string;body:Point[];trail?:Point[];previous?:Point[];direction:Direction;queue:Direction[];queueTicks?:number[];alive:boolean;score:number;lastSeq:number;deathAt:number|null;deathPoint:Point|null;reason:string;respawnAt?:number;kills?:number;deaths?:number;best?:number;protectedUntil?:number};
 export type SnakeGame={kind:'snake';size?:number;mapId?:SnakeMapId;obstacles?:Point[];worms:Worm[];food:Point[];tick:number;lastTickAt:number;startAt:number;deadline:number;pausedAt:number|null;participants:number};
-export type CasualState={schema:1;ai?:BotBrain;chat?:ChatMessage[];chatEpoch?:number;code:string;hostId:string;mode:CasualMode;phase:'lobby'|'playing'|'paused'|'finished';createdAt:number;round:number;random:number;settings:CasualSettings;players:CasualPlayer[];game:LadderGame|MemoryGame|SnakeGame|UnoGame|PropertyGame|PhoneGame|CircuitGame|TerraGame|StrategyGame|PartyGame|BlocksGame|PoolGame|GeneralsGame|FleetGame|SolitaireGame|SketchGame|null;result:null|{winnerIds:string[];reason:string};events:{id:number;text:string;at:number}[];eventId:number;pauseReason:string};
+export type CasualState={schema:1;ai?:BotBrain;chat?:ChatMessage[];chatEpoch?:number;code:string;hostId:string;mode:CasualMode;phase:'lobby'|'playing'|'paused'|'finished';createdAt:number;round:number;random:number;settings:CasualSettings;players:CasualPlayer[];game:LadderGame|MemoryGame|SnakeGame|UnoGame|PropertyGame|PhoneGame|CircuitGame|TerraGame|StrategyGame|PartyGame|BlocksGame|PoolGame|GeneralsGame|FleetGame|SolitaireGame|SketchGame|PirateGame|null;result:null|{winnerIds:string[];reason:string};events:{id:number;text:string;at:number}[];eventId:number;pauseReason:string};
 export const GRID_SIZE=32,TURN_MS=45000,HOST_TIMEOUT=45000,ROOM_TTL=86400000;
 export const LADDERS:Record<number,number>={2:23,8:34,20:39,32:51,41:79,54:72,64:87,76:94,89:99};
 export const SLIDES:Record<number,number>={17:6,30:9,47:26,59:38,66:45,75:53,83:62,91:71,98:80};
@@ -47,7 +48,7 @@ export const samePoint=(a:Point,b:Point)=>a.x===b.x&&a.y===b.y;
 export const activePlayers=(s:CasualState)=>s.players.filter(p=>!p.retired&&p.role!=='spectator');
 /** An absent host must not strand a paused arena; this grants resume only. */
 export function canResumeCasual(s:CasualState,id:string,now:number){
- if(s.phase!=='paused'||!s.game||!['snake','circuit','terra','sumo','tanks','pong','marble','blocks','pool'].includes(s.game.kind))return false;
+ if(s.phase!=='paused'||!s.game||!['snake','circuit','terra','sumo','tanks','pong','marble','blocks','pool','pirate'].includes(s.game.kind))return false;
  const viewer=s.players.find(p=>p.id===id&&!p.retired&&!p.bot),host=s.players.find(p=>p.id===s.hostId&&!p.retired);
  return !!viewer&&(id===s.hostId||!host||now-host.lastSeen>=20000);
 }
@@ -115,6 +116,7 @@ function advanceGame(s:CasualState,now:number):{state:CasualState;changed:boolea
  if(now-s.createdAt>ROOM_TTL)throw new CasualError('This room expired after 24 hours. Create a fresh room.',410);let changed=false;const g=s.game;
  if(s.phase!=='playing'||!g)return{state:s,changed};
  if(isParty(g.kind))return{state:s,changed:advanceParty(s,now)};
+ if(g.kind==='pirate')return{state:s,changed:advancePirate(s,now)};
  if(g.kind==='solitaire')return{state:s,changed:advanceSolitaire(s,now)};
  if(g.kind==='sketch')return{state:s,changed:advanceSketch(s,now)};
  if(g.kind==='generals')return{state:s,changed:advanceGenerals(s,now)};
@@ -180,6 +182,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
    else if(g.kind==='phone')leavePhone(s,target.id,now);
    else if(g.kind==='sketch')leaveSketch(s,target.id,now);
    else if(g.kind==='solitaire')leaveSolitaire(s,target.id,now);
+   else if(g.kind==='pirate')leavePirate(s,target.id,now);
    else if((g.kind==='chess'||g.kind==='dama'||g.kind==='scidama'))leaveStrategy(s,target.id,now);
    else if(g.kind==='generals'||g.kind==='fleet'){finishBattle(s,g.ids.filter(id=>id!==target.id),'A commander left. Their opponent wins by forfeit.',now)}
    else if(g.kind==='pool'){finish(s,activePlayers(s).map(p=>p.id),'A player left the table. The remaining player wins.',now)}
@@ -215,7 +218,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
   if(!CASUAL_MODES.includes(a.mode))throw new CasualError('Choose a valid game.');for(const [key,values]of [['roundSeconds',[60,120,180,300,600]],['winTarget',[5,10,11,20,21]],['raceLaps',[1,2,3,5]]] as const)if(a[key]!==undefined&&!(values as readonly number[]).includes(a[key]))throw new CasualError('Choose a valid game variant.');
   if(activePlayers(s).length>casualCapacity(a.mode))throw new CasualError('This game has '+casualCapacity(a.mode)+' seats. Ask extra players to leave before switching.',409);
   if(!Number.isInteger(a.cards)||a.cards<12||a.cards>200||a.cards%2)throw new CasualError('Choose an even deck size from 12 to 200 cards.');
-  if(![125,175,250,350,500].includes(a.speed))throw new CasualError('Choose a valid snake speed.');for(const k of ['battle','unoFlip','arcadeV2','unoSameColor'])if(a[k]!==undefined&&typeof a[k]!=='boolean')throw new CasualError('Invalid game option.');if(a.arena!==undefined&&!CLUB_MAPS.some(m=>m.id===a.arena))throw new CasualError('Choose a valid arena.');if(a.difficulty&&!['cozy','standard','expert'].includes(a.difficulty))throw new CasualError('Choose a valid difficulty.');if(a.track&&!TRACKS.some(t=>t.id===a.track))throw new CasualError('Choose a track.');for(const [k,min,max]of [['bots',0,8],['relayRounds',3,9],['relaySeconds',20,180]] as const)if(a[k]!==undefined&&(!Number.isInteger(a[k])||a[k]<min||a[k]>max))throw new CasualError('Invalid '+k+' setting.');if(s.mode!==a.mode){delete s.settings.tacticalSeconds;delete s.settings.fleetSize;delete s.settings.fleetStyle;delete s.settings.fleetTurn;delete s.settings.roundSeconds;delete s.settings.winTarget;delete s.settings.raceLaps;s.chat=[];s.chatEpoch=(s.chatEpoch||0)+1;for(const player of s.players){player.appearance=player.appearance?.avatar?{avatar:player.appearance.avatar,useAvatar:false}:undefined;delete player.characterRound;}}s.mode=a.mode;if(a.snakeSize!==undefined&&!SNAKE_SIZES.includes(a.snakeSize))throw new CasualError('Choose a 32, 48 or 64 square arena.');if(a.map!==undefined&&!SNAKE_MAP_IDS.includes(a.map))throw new CasualError('Choose a valid map.');if(a.blockPace!==undefined&&!['arcade','expert','blitz'].includes(a.blockPace)||a.sumoFormat!==undefined&&!['bracket','classic'].includes(a.sumoFormat))throw new CasualError('Choose a valid match format.');if(a.scene!==undefined&&!TABLE_SCENE_IDS.includes(a.scene))throw new CasualError('Choose a valid table scene.');s.settings={...s.settings,...newGameSettings(a),...hiddenSettings(a),...(a.roundSeconds!==undefined?{roundSeconds:a.roundSeconds}:{}),...(a.winTarget!==undefined?{winTarget:a.winTarget}:{}),...(a.raceLaps!==undefined?{raceLaps:a.raceLaps}:{}),...(a.scene&&s.mode!=='terra'?{scene:a.scene}:{}),...(a.arcadeV2!==undefined?{arcadeV2:a.arcadeV2}:{}),...(a.unoSameColor!==undefined?{unoSameColor:a.unoSameColor}:{}),...(a.blockPace?{blockPace:a.blockPace}:{}),...(a.sumoFormat?{sumoFormat:a.sumoFormat}:{}),...(a.arena?{arena:a.arena}:{}),cards:a.cards,speed:a.speed,snakeSize:a.snakeSize||s.settings.snakeSize||48,map:a.map||s.settings.map||'classic',...(a.battle!==undefined?{battle:a.battle===true}:{}),...(a.difficulty?{difficulty:a.difficulty}:{}),...(a.unoFlip!==undefined?{unoFlip:a.unoFlip===true}:{}),...(a.track?{track:a.track}:{}),...(a.bots!==undefined?{bots:a.bots}:{}),...(a.relayRounds?{relayRounds:a.relayRounds}:{}),...(a.relaySeconds?{relaySeconds:a.relaySeconds}:{})};s.phase='lobby';s.game=null;s.result=null;activePlayers(s).forEach(p=>{p.ready=false;delete p.characterRound});return s;
+  if(![125,175,250,350,500].includes(a.speed))throw new CasualError('Choose a valid snake speed.');for(const k of ['battle','unoFlip','arcadeV2','unoSameColor'])if(a[k]!==undefined&&typeof a[k]!=='boolean')throw new CasualError('Invalid game option.');if(a.arena!==undefined&&!CLUB_MAPS.some(m=>m.id===a.arena))throw new CasualError('Choose a valid arena.');if(a.difficulty&&!['cozy','standard','expert'].includes(a.difficulty))throw new CasualError('Choose a valid difficulty.');if(a.track&&!TRACKS.some(t=>t.id===a.track))throw new CasualError('Choose a track.');for(const [k,min,max]of [['bots',0,8],['relayRounds',3,9],['relaySeconds',20,180]] as const)if(a[k]!==undefined&&(!Number.isInteger(a[k])||a[k]<min||a[k]>max))throw new CasualError('Invalid '+k+' setting.');if(s.mode!==a.mode){delete s.settings.tacticalSeconds;delete s.settings.fleetSize;delete s.settings.fleetStyle;delete s.settings.fleetTurn;delete s.settings.roundSeconds;delete s.settings.winTarget;delete s.settings.raceLaps;s.chat=[];s.chatEpoch=(s.chatEpoch||0)+1;for(const player of s.players){player.appearance=player.appearance?.avatar?{avatar:player.appearance.avatar,useAvatar:false}:undefined;delete player.characterRound;}}s.mode=a.mode;if(a.snakeSize!==undefined&&!SNAKE_SIZES.includes(a.snakeSize))throw new CasualError('Choose a 32, 48 or 64 square arena.');if(a.map!==undefined&&!SNAKE_MAP_IDS.includes(a.map))throw new CasualError('Choose a valid map.');if(a.blockPace!==undefined&&!['arcade','expert','blitz'].includes(a.blockPace)||a.sumoFormat!==undefined&&!['bracket','classic'].includes(a.sumoFormat))throw new CasualError('Choose a valid match format.');if(a.scene!==undefined&&!TABLE_SCENE_IDS.includes(a.scene))throw new CasualError('Choose a valid table scene.');s.settings={...s.settings,...newGameSettings(a),...pirateSettings(a),...hiddenSettings(a),...(a.roundSeconds!==undefined?{roundSeconds:a.roundSeconds}:{}),...(a.winTarget!==undefined?{winTarget:a.winTarget}:{}),...(a.raceLaps!==undefined?{raceLaps:a.raceLaps}:{}),...(a.scene&&s.mode!=='terra'?{scene:a.scene}:{}),...(a.arcadeV2!==undefined?{arcadeV2:a.arcadeV2}:{}),...(a.unoSameColor!==undefined?{unoSameColor:a.unoSameColor}:{}),...(a.blockPace?{blockPace:a.blockPace}:{}),...(a.sumoFormat?{sumoFormat:a.sumoFormat}:{}),...(a.arena?{arena:a.arena}:{}),cards:a.cards,speed:a.speed,snakeSize:a.snakeSize||s.settings.snakeSize||48,map:a.map||s.settings.map||'classic',...(a.battle!==undefined?{battle:a.battle===true}:{}),...(a.difficulty?{difficulty:a.difficulty}:{}),...(a.unoFlip!==undefined?{unoFlip:a.unoFlip===true}:{}),...(a.track?{track:a.track}:{}),...(a.bots!==undefined?{bots:a.bots}:{}),...(a.relayRounds?{relayRounds:a.relayRounds}:{}),...(a.relaySeconds?{relaySeconds:a.relaySeconds}:{})};s.phase='lobby';s.game=null;s.result=null;activePlayers(s).forEach(p=>{p.ready=false;delete p.characterRound});return s;
  }
  if(a.action==='lobby'){
   if(s.phase==='playing'||s.phase==='paused')throw new CasualError('Finish or end the current round first.',409);
@@ -232,6 +235,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
   s.ai=s.players.some(p=>p.bot)?{nextAt:now+1000,cursor:0}:undefined;
   s.round++;s.phase='playing';s.result=null;s.pauseReason='';s.players=s.players.filter(p=>!p.retired);s.players.forEach(p=>{p.ready=false});const first=activePlayers(s)[0].id;
   if(isParty(s.mode))s.game=newParty(s,now);
+  else if(s.mode==='pirate')s.game=newPirate(s,now);
   else if(s.mode==='solitaire')s.game=newSolitaire(s,now);
   else if(s.mode==='sketch')s.game=newSketch(s,now);
   else if(s.mode==='generals')s.game=newGenerals(s,now);
@@ -249,7 +253,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
   else s.game=newSnake(s,now);event(s,'Round '+s.round+' started.',now);return s;
  }
  if(a.action==='pause'||a.action==='resume'){
-  if(!s.game||!['snake','circuit','terra','sumo','tanks','pong','marble','blocks','pool'].includes(s.game.kind))throw new CasualError('Only simultaneous action games can be paused.');const g=s.game as SnakeGame|CircuitGame|TerraGame|PartyGame|BlocksGame|PoolGame;
+  if(!s.game||!['snake','circuit','terra','sumo','tanks','pong','marble','blocks','pool','pirate'].includes(s.game.kind))throw new CasualError('Only simultaneous action games can be paused.');const g=s.game as SnakeGame|CircuitGame|TerraGame|PartyGame|BlocksGame|PoolGame|PirateGame;
   if(a.action==='pause'){if(s.phase!=='playing')throw new CasualError('This arena is not running.',409);s.phase='paused';g.pausedAt=now;s.pauseReason='Paused by the host.';event(s,'The host paused the arena.',now)}
   else{if(s.phase!=='paused')throw new CasualError('This arena is not paused.',409);resumeTimeline(g,now);s.phase='playing';s.pauseReason='';event(s,'The arena resumes after a 3-second countdown.',now)}return s;
  }
@@ -262,6 +266,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
  const g=s.game;
  if(a.inputEpoch!==undefined&&'startAt'in g&&a.inputEpoch!==g.startAt)throw new CasualError('This control belongs to an older round timeline.',409);
  if('actors'in g){partyAction(s,a,p.id,now);return s}
+ if(g.kind==='pirate'){pirateAction(s,a,p.id,now);return s}
  if(g.kind==='solitaire'){solitaireAction(s,{...a,...newGameActionFields(a)},p.id,now);return s}
  if(g.kind==='sketch'){sketchAction(s,{...a,...newGameActionFields(a)},p.id,now);return s}
  if(g.kind==='generals'){generalsAction(s,a,p.id,now);return s}
@@ -300,6 +305,7 @@ export function applyCasualAction(input:CasualState,a:Record<string,any>,id:stri
 export function publicCasual(s:CasualState,id:string,now:number){
  const me=s.players.find(p=>p.id===id&&!p.retired);if(!me)throw new CasualError('Your session ended. Join again.',401);
  const host=s.players.find(p=>p.id===s.hostId&&!p.retired);let game:any=s.game;
+ if(s.game?.kind==='pirate')game=publicPirate(s.game);
  if(s.game?.kind==='solitaire')game=publicSolitaire(s.game,id);
  else if(s.game?.kind==='sketch')game=publicSketch(s.game,id,now);
  else if(s.game?.kind==='generals')game=publicGenerals(s.game,id,s.phase==='finished');
@@ -311,6 +317,6 @@ export function publicCasual(s:CasualState,id:string,now:number){
  else if(s.game?.kind==='property')game={...s.game,chance:undefined,chest:undefined};
  else if(s.game?.kind==='memory'){const g=s.game;game={...g,deck:g.deck.map((c,index)=>({index,matchedBy:c.matchedBy,...(c.matchedBy||g.revealed.includes(index)?{key:c.key}:{})}))}}
  else if(s.game?.kind==='snake')game={...s.game,worms:s.game.worms.map(({queue,queueTicks,lastSeq,...w})=>({...w,...(w.id===id?{pendingTurns:queue,pendingTicks:queueTicks,inputAck:lastSeq}:{})}))};
- return{code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,...(s.mode!=='terra'&&s.phase==='playing'&&s.ai?.wait&&s.ai.wait.readyAt>now?{botThinking:{playerId:s.ai.wait.playerId,until:s.ai.wait.readyAt}}:{}),chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canResume:canResumeCasual(s,id,now),canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,traffic,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&(p.bot||now-lastSeen<20000),canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
+ return{serverVersion:31,code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,...(s.mode!=='terra'&&s.phase==='playing'&&s.ai?.wait&&s.ai.wait.readyAt>now?{botThinking:{playerId:s.ai.wait.playerId,until:s.ai.wait.readyAt}}:{}),chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canResume:canResumeCasual(s,id,now),canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,traffic,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&(p.bot||now-lastSeen<20000),canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
 }
 export type CasualPublic=ReturnType<typeof publicCasual>&{viewingId?:string;revision?:number;network?:{rtt:number;totalRtt?:number;serverMs?:number;snapshotInterval?:number}};

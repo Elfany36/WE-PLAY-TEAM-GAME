@@ -1,8 +1,10 @@
+import {PIRATE_MODELS} from './pirate-models.ts';
 /** Each game owns its collection. Legacy token/board IDs remain readable for saved looks. */
 function collection(title:string,subject:string,note:string,items:string){
  return {title,subject,note,models:items.split(';').map(item=>{const [id,label]=item.trim().split('|');return {id,label}})};
 }
 export const MODEL_COLLECTIONS={
+ pirate:{title:'Pirate crew locker',subject:'pirate crew',note:'Six crews with different speed, jump and power. Pick an outfit before starting; live changes apply next round.',models:PIRATE_MODELS.map(m=>({id:m.id,label:m.name}))},
  solitaire:collection('The card cabinet','deck crest','A personal deck with matching backs and table details.','classic|Club ivory;botanical|Botanical;royal|Royal silk;constellation|Constellation;art-deco|Art deco;porcelain|Porcelain;sunset|Sunset;lotus|Lotus;nautical|Nautical;stained-glass|Stained glass;woodcut|Woodcut;moonstone|Moonstone;origami|Origami;heritage|Heritage;aurora|Aurora'),
  sketch:collection('The artists’ studio','artist companion','Original studio mascots keep your identity clear while you draw and guess.','pencil|Graphite pal;painter|Palette painter;brush|Brush buddy;marker|Marker mate;crayon|Crayon captain;fountain|Fountain pen;chalk|Chalk charm;watercolor|Watercolor sprite;robot|Studio robot;beret|Beret bird;pastel|Pastel pal;ink|Ink imp;quill|Quill owl;spray|Spray sprite;pixel|Pixel painter'),
  generals:collection('Generals command atelier','army set','Uniform backs keep enemy ranks secret. Finishes never change the arbiter rules.','classic|Royal ivory;brass|Brushed brass;navy|Naval academy;jade|Jade command;obsidian|Obsidian guard;capiz|Capiz pearl;narra|Carved narra;chrome|Chrome sentinel;crystal|Crystal corps;copper|Copper brigade;ceramic|Ceramic legion;aurora|Aurora guard;midnight|Midnight command;sunrise|Sunrise regiment;heritage|Heritage gold'),
@@ -46,7 +48,7 @@ export type GameModelFamily=keyof typeof MODEL_COLLECTIONS;
 export const LEGACY_MODEL_SETS={token:['pawn','rocket','fox','leaf','boat','cat','crown','gem'],board:['classic','crystal','wood','neon']} as const;
 export type ModelFamily=GameModelFamily|keyof typeof LEGACY_MODEL_SETS;
 export const MODEL_SETS={...Object.fromEntries(Object.entries(MODEL_COLLECTIONS).map(([family,c])=>[family,c.models.map(m=>m.id)])),...LEGACY_MODEL_SETS} as unknown as Record<ModelFamily,readonly string[]>;
-const modeFamilies:Record<string,GameModelFamily>={solitaire:'solitaire',sketch:'sketch',generals:'generals',fleet:'fleet',ladders:'ladders',memory:'memory',snake:'snake',uno:'uno',property:'property',phone:'phone',circuit:'kart',terra:'terra',chess:'chess',dama:'dama',scidama:'scidama',sumo:'sumo',tanks:'tank',pong:'pong',marble:'marble',blocks:'blocks',pool:'pool'};
+const modeFamilies:Record<string,GameModelFamily>={pirate:'pirate',solitaire:'solitaire',sketch:'sketch',generals:'generals',fleet:'fleet',ladders:'ladders',memory:'memory',snake:'snake',uno:'uno',property:'property',phone:'phone',circuit:'kart',terra:'terra',chess:'chess',dama:'dama',scidama:'scidama',sumo:'sumo',tanks:'tank',pong:'pong',marble:'marble',blocks:'blocks',pool:'pool'};
 export function modelFamily(mode:string):ModelFamily{return modeFamilies[mode]||'token'}
 export function modelLabel(family:ModelFamily,id:string){return (family in MODEL_COLLECTIONS?MODEL_COLLECTIONS[family as GameModelFamily].models.find(m=>m.id===id)?.label:undefined)||id.replaceAll('-',' ')}
 /** Named customization colors are separate from the twelve gameplay seat colors. */

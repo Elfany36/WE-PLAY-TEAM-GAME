@@ -10,6 +10,7 @@ export function spectatorFollowId(room:CasualPublic,preference=''){
  const players=spectatorPlayers(room),ids=new Set(players.map(p=>p.id)),g=room.game;
  if(preference&&ids.has(preference))return preference;
  if(!g)return players[0]?.id;
+ if(g.kind==='pirate')return g.world.fighters.find((f:{id:string;dead:number;st:number})=>!f.dead&&f.st>0&&ids.has(f.id))?.id||players[0]?.id;
  if(g.kind==='solitaire')return casualLeaderboard(room).find(p=>ids.has(p.id))?.id||players[0]?.id;
  if(g.currentId&&ids.has(g.currentId))return g.currentId;
  if(g.kind==='sumo'&&g.bracket){const bout=g.bracket.bouts.find((b:FollowBout)=>!b.winner&&b.b);if(bout&&ids.has(bout.a))return bout.a}

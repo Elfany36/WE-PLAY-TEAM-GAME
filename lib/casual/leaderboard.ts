@@ -9,6 +9,7 @@ export function casualLeaderboard(room:CasualPublic|null){
  if(!game)return players;
  const ordered=game.kind==='circuit'?circuitRank(game):'actors'in game?partyRank(game):null;
  if(ordered){const places=new Map(ordered.map((p:{id:string},i:number)=>[p.id,i]));return players.sort((a,b)=>(places.get(a.id)??Infinity)-(places.get(b.id)??Infinity));}
+ if(game.kind==='pirate'){const fighters=game.world.fighters;return players.sort((a,b)=>{const x=fighters.find((f:{id:string})=>f.id===a.id),y=fighters.find((f:{id:string})=>f.id===b.id);return game.world.variant==='ko-race'?(y?.ko||0)-(x?.ko||0):(y?.st||0)-(x?.st||0)||(y?.ko||0)-(x?.ko||0)})}
  if(game.kind==='snake'){
   const worms=new Map<string,any>(game.worms.map((w:any)=>[w.id,w]));
   const absent={alive:false,score:0};

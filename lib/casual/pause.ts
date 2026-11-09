@@ -1,10 +1,11 @@
+import type {PirateGame} from './pirate.ts';
 import type {SnakeGame} from './engine.ts';
 import type {CircuitGame} from './circuit.ts';
 import type {TerraGame} from './terra.ts';
 import type {PartyGame} from './party.ts';
 import type {BlocksGame} from './blocks.ts';
 import type {PoolGame} from './pool.ts';
-type TimedGame=SnakeGame|CircuitGame|TerraGame|PartyGame|BlocksGame|PoolGame;
+type TimedGame=SnakeGame|CircuitGame|TerraGame|PartyGame|BlocksGame|PoolGame|PirateGame;
 /** Move simulation timestamps together. Zero remains the "no effect" sentinel. */
 export function resumeTimeline(g:TimedGame,now:number){
  const oldTick=g.lastTickAt,oldStart=g.startAt,oldPause=g.pausedAt??now;

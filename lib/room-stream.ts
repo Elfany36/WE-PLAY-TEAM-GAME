@@ -3,7 +3,7 @@ import {ROOM_HINT_HEADERS} from './room-params.ts';
 export const STATE_INTERVAL=50,MAX_STATE_WINDOW=64;
 /** Keep the reliable pipe full over slow round trips, with a hard memory bound. */
 export function stateWindow(rtt:number){return Number.isFinite(rtt)?Math.max(4,Math.min(MAX_STATE_WINDOW,Math.ceil(Math.max(0,rtt)/STATE_INTERVAL)+3)):4}
-export const fastControls=new Set(['direction','drive','explore','party-control','block-input']);
+export const fastControls=new Set(['direction','drive','explore','party-control','block-input','pirate-input']);
 
 /** Rebuild a room-scoped request; sockets cannot select another room or mint seats. */
 export function roomStreamRequest(value:any,code:string,kind:'casual'|'arena'){

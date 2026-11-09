@@ -1,3 +1,4 @@
+import {piratePortrait} from './pirate-model-art.ts';
 import {FLEET_STYLES,FLEET_UNITS,type FleetStyle} from './fleet.ts';
 import {generalArt,fleetDrawing} from './tactical-visuals.ts';
 import {MODEL_SETS,MODEL_COLLECTIONS,type ModelFamily} from './model-catalog.ts';
@@ -190,7 +191,8 @@ const urls=new Map<string,string>();
 export function modelSvg(family:ModelFamily,model:string,color:string,options:ModelOptions={}){
  const ids=MODEL_SETS[family],id=ids.includes(model)?model:ids[0],index=ids.indexOf(id),fill=/^#[a-f\d]{6}$/i.test(color)?color:'#56e98b';
  let art='';
- if(family==='generals')art=generalArt(index,fill,Number.isInteger(options.value)&&options.value!>=0&&options.value!<=14?options.value:13,options.piece==='back');
+ if(family==='pirate')art=piratePortrait(id,fill);
+ else if(family==='generals')art=generalArt(index,fill,Number.isInteger(options.value)&&options.value!>=0&&options.value!<=14?options.value:13,options.piece==='back');
  else if(family==='fleet'){
   const unit=FLEET_UNITS.find(u=>u.id===options.fleetUnit)||FLEET_UNITS[0],style=FLEET_STYLES.includes(options.fleetStyle!)?options.fleetStyle!:'naval',drawing=fleetDrawing(style,index,fill,unit.length,FLEET_UNITS.indexOf(unit));
   art='<g transform="'+(options.vertical?'translate(77 0) rotate(90)':'translate(0 23)')+' scale('+(1/unit.length)+' .54)">'+drawing+'</g>';

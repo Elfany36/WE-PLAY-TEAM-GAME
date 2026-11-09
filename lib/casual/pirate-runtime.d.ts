@@ -1,0 +1,15 @@
+import type {PirateVariant,PirateMap} from './pirate-data.ts';
+export type PirateControl={seq:number;at:number;life:number;dx:number;down:boolean;jump:boolean;attack:boolean;special:boolean;dash:boolean;jumpSeq:number;attackSeq:number;specialSeq:number;dashSeq:number;aimX?:number;aimY?:number};
+export type PirateFighter={id:string;i:number;t:number;ch:number;color:string;model:string;x:number;y:number;vx:number;vy:number;face:number;dmg:number;life:number;st:number;dead:number;rt:number;inv:number;at:number;cd:number;hs:number;on:number;cy:number;dj:number;dd:number;pu:number|boolean;pa:number|boolean;pb:number|boolean;bomb:number|null;h:Record<string,number>;sp:number|null;fz:number;sh:number;gi:number;hz:number;mj:number;lv:number;jb:number;jh:number;ba:number;ad:number;sc:number;dsh:number;dc:number;dk:number;ps:number|boolean;pj:number|boolean;ko:number;la:string|null;lt:number;ra:number;mx:number|null;my:number|null;pp:number|null;sg:number;sq:number;vp:number;gh:number;pl:number;sl:number;kt:number;rf:number;dd2:number;jp:number;slm:number;ks:number;sw:number;lastSeq:number;jumpSeq:number;attackSeq:number;specialSeq:number;dashSeq:number};
+export type PirateBomb={id:number;x:number;y:number;vx:number;vy:number;st:number;t:number;h:string|null;own:string|null;fl:number;mine?:number;pot?:number;dead?:number};
+export type PirateProjectile={x:number;y:number;vx:number;vy:number;k:string;own:string|null;l:number;f:number;ht?:Record<string,number>};
+export type PirateStrike={x:number;y:number;t:number;f:number;own:string|null;big?:number};
+export type PirateZone={x:number;y:number;k:string;r:number;l:number;m:number;own:string|null;vx?:number};
+export type PirateObject={k:string;x:number;y:number;op?:number;cd?:number;f?:number};
+export type PirateVisual=Record<string,unknown>;
+export type PirateWorld={map:string;variant:PirateVariant;seed:number;difficulty:number;tick:number;elapsed:number;fighters:PirateFighter[];bombs:PirateBomb[];projectiles:PirateProjectile[];strikes:PirateStrike[];zones:PirateZone[];objects:PirateObject[];explosions:PirateVisual[];effects:PirateVisual[];texts:PirateVisual[];rings:PirateVisual[];impacts:PirateVisual[];arcs:PirateVisual[];beams:PirateVisual[];rewards:PirateVisual[];knockouts:PirateVisual[];event:{t:number;s:string};jumpPads:{x:number;y:number;sq:number}[];nb:number;ct:number;sk:number;lg:number;ice:number;potT:number;ended:boolean;winnerIds:string[];flash:number;shake:number;nextBombId?:number};
+export function createPirateWorld(map:string,variant:PirateVariant,seats:{id:string;bot:boolean;character:number;color:string;model:string}[],seed:number,stocks?:number,difficulty?:number):PirateWorld;
+export function stepPirateWorld(world:PirateWorld,inputs:Record<string,PirateControl>,steps:number,now:number):PirateWorld|undefined;
+export function hydratePirateWorld(world:PirateWorld):{MP:PirateMap;F:unknown[];B:unknown[];PJ:unknown[];SK:unknown[];ZN:unknown[]};
+
+export function awardPirateTreasure(world:PirateWorld,id:string,skill:number,now?:number):PirateWorld;

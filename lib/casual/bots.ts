@@ -31,7 +31,7 @@ export function botsDue(s:CasualState,now:number){
  const g=s.game;if(g.kind==='memory'&&g.revealed.filter(i=>!g.deck[i].matchedBy).join(',')!==s.ai.visible)return true;
  if(PACED_BOT_MODES.includes(g.kind)){const decision=botDecision(s,now);return !!decision&&(!s.ai.wait||s.ai.wait.key!==decision.key||now>=s.ai.wait.readyAt)}
  if(g.kind==='snake')return g.tick!==s.ai.snakeTick||g.startAt!==s.ai.snakeEpoch;
- if(now<s.ai.nextAt||g.kind==='circuit')return false;
+ if(now<s.ai.nextAt||g.kind==='circuit'||g.kind==='pirate')return false;
  if(!['phone','solitaire','sketch'].includes(g.kind)&&'currentId'in g&&!s.players.find(p=>p.id===g.currentId)?.bot&&!(g.kind==='property'&&(g.auction||g.debt||g.offer)))return false;
  return true;
 }

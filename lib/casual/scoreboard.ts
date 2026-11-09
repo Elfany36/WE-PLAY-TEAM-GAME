@@ -5,6 +5,7 @@ import {poolRemaining} from './pool.ts';
 /** One concise public standing per player; private hands and AI state stay private. */
 export function playerStanding(room:CasualPublic,id:string){
  const g=room.game as any;if(!g)return'';
+ if(g.kind==='pirate'){const f=g.world.fighters.find((f:{id:string})=>f.id===id);return f?f.ko+' KOs · '+(f.st<=0?'Out':f.dead?'Respawning':f.dmg+'% damage')+(g.world.variant==='ko-race'?'':' · '+f.st+' stocks'):''}
  if(g.kind==='solitaire')return (g.boards[id]?.status==='won'?'Completed':g.boards[id]?.status==='conceded'?'Deal ended':g.boards[id]?.status==='stuck'?'No moves':String((g.scores[id]||0)/10)+' cleared')+' · '+(g.boards[id]?.moves||0)+' moves';
  if(g.kind==='sketch')return (g.stage==='reveal'?'Answer revealed':g.artistId===id?g.stage==='choose'?'Choosing':'Drawing':g.guessed[id]?'Guessed':'Guessing')+' · '+(g.scores[id]||0)+' points';
  if(g.kind==='generals')return g.stage==='deploy'?(g.ready[id]?'Army deployed':'Arranging army'):g.pieces.filter((p:any)=>p.owner===id).length+' pieces · '+(g.captures[id]||0)+' captures';

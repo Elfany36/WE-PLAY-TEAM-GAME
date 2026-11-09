@@ -1,5 +1,5 @@
 import type {CasualPublic} from './engine.ts';
-const simultaneous=new Set(['snake','circuit','terra','sumo','tanks','pong','marble','blocks']);
+const simultaneous=new Set(['snake','circuit','terra','sumo','tanks','pong','marble','blocks','pirate']);
 export function casualPollPeriod(room:CasualPublic|null,live:boolean,elapsed=0,streaming=false){
  const game=room?.game,playing=room?.phase==='playing',fast=playing&&(simultaneous.has(room.mode)||room.mode==='pool'&&game?.moving||room.mode==='memory'&&(!live||game?.revealed?.length||game?.resolveAt));
  if(streaming&&playing&&(simultaneous.has(room!.mode)||room!.mode==='pool'&&game?.moving))return 2000;
