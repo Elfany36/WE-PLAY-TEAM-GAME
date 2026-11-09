@@ -1,0 +1,180 @@
+[
+  {
+    "variant": "klondike",
+    "width": 390,
+    "input": "touch",
+    "checks": [
+      "hint selects a playable move",
+      "select + blank column target + undo",
+      "visible drag preview + drop + undo",
+      "draw + move a waste card + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "klondike-three",
+    "width": 390,
+    "input": "touch",
+    "checks": [
+      "hint selects a playable move",
+      "select + blank column target + undo",
+      "visible drag preview + drop + undo",
+      "draw + move a waste card + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "freecell",
+    "width": 390,
+    "input": "touch",
+    "checks": [
+      "hint selects a playable move",
+      "select + blank column target + undo",
+      "visible drag preview + drop + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "spider-one",
+    "width": 390,
+    "input": "touch",
+    "checks": [
+      "hint selects a playable move",
+      "select + blank column target + undo",
+      "visible drag preview + drop + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "spider-two",
+    "width": 390,
+    "input": "touch",
+    "checks": [
+      "hint selects a playable move",
+      "select + blank column target + undo",
+      "visible drag preview + drop + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "spider-four",
+    "width": 390,
+    "input": "touch",
+    "checks": [
+      "hint selects a playable move",
+      "select + blank column target + undo",
+      "visible drag preview + drop + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "pyramid",
+    "width": 390,
+    "input": "touch",
+    "checks": [
+      "hint + exposed-card removal + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "tripeaks",
+    "width": 390,
+    "input": "touch",
+    "checks": [
+      "hint + exposed-card removal + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "klondike",
+    "width": 1440,
+    "input": "mouse",
+    "checks": [
+      "hint selects a playable move",
+      "select + blank column target + undo",
+      "Enter/Space card and destination controls",
+      "visible drag preview + drop + undo",
+      "draw + move a waste card + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "klondike-three",
+    "width": 1440,
+    "input": "mouse",
+    "checks": [
+      "hint selects a playable move",
+      "select + blank column target + undo",
+      "Enter/Space card and destination controls",
+      "visible drag preview + drop + undo",
+      "draw + move a waste card + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "freecell",
+    "width": 1440,
+    "input": "mouse",
+    "checks": [
+      "hint selects a playable move",
+      "select + blank column target + undo",
+      "Enter/Space card and destination controls",
+      "visible drag preview + drop + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "spider-one",
+    "width": 1440,
+    "input": "mouse",
+    "checks": [
+      "hint selects a playable move",
+      "select + blank column target + undo",
+      "Enter/Space card and destination controls",
+      "visible drag preview + drop + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "spider-two",
+    "width": 1440,
+    "input": "mouse",
+    "checks": [
+      "hint selects a playable move",
+      "select + blank column target + undo",
+      "Enter/Space card and destination controls",
+      "visible drag preview + drop + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "spider-four",
+    "width": 1440,
+    "input": "mouse",
+    "checks": [
+      "hint selects a playable move",
+      "select + blank column target + undo",
+      "Enter/Space card and destination controls",
+      "visible drag preview + drop + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "pyramid",
+    "width": 1440,
+    "input": "mouse",
+    "checks": [
+      "hint + exposed-card removal + undo"
+    ],
+    "status": "passed"
+  },
+  {
+    "variant": "tripeaks",
+    "width": 1440,
+    "input": "mouse",
+    "checks": [
+      "hint + exposed-card removal + undo"
+    ],
+    "status": "passed"
+  }
+]

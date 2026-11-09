@@ -1,0 +1,50 @@
+[
+  {
+    "variant": "klondike",
+    "transport": "local",
+    "input": "touch",
+    "status": "passed"
+  },
+  {
+    "variant": "klondike-three",
+    "transport": "local",
+    "input": "touch",
+    "status": "passed"
+  },
+  {
+    "variant": "freecell",
+    "transport": "local",
+    "input": "touch",
+    "status": "passed"
+  },
+  {
+    "variant": "spider-one",
+    "transport": "local",
+    "input": "touch",
+    "status": "passed"
+  },
+  {
+    "variant": "spider-two",
+    "transport": "local",
+    "input": "touch",
+    "status": "passed"
+  },
+  {
+    "variant": "spider-four",
+    "transport": "local",
+    "input": "touch",
+    "status": "passed"
+  },
+  {
+    "variant": "pyramid",
+    "transport": "local",
+    "input": "touch",
+    "status": "passed"
+  },
+  {
+    "variant": "tripeaks",
+    "transport": "local",
+    "input": "touch",
+    "status": "passed"
+  }
+]
