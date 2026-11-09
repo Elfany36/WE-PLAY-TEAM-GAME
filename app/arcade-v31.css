@@ -1,4 +1,9 @@
 /* Pirate Bomb Brawl: site typography and calm controls around the pixel arena. */
+:root[data-theme] .casual-arcade .details-hidden :is(.pirate-crew-hud,.pirate-footnote,.solitaire-heading,.tactical-board-legend,.sketch-artist) { display:none!important; }
+:root[data-theme] .casual-arcade .flexible-surface:has(.pirate-board,.solitaire-table,.sketch-board,.tactical-table) .surface-label { display:flex;flex:0 0 auto;min-width:0; }
+:root[data-theme] .casual-arcade .flexible-surface:has(.pirate-board,.solitaire-table,.sketch-board,.tactical-table) .surface-label > strong { display:none; }
+:root[data-theme] .casual-arcade .flexible-surface:has(.pirate-board,.solitaire-table,.sketch-board,.tactical-table) .surface-details-toggle { display:inline-flex; }
+:root[data-theme] .casual-arcade .flexible-surface:has(.pirate-board,.solitaire-table,.sketch-board,.tactical-table) .view-buttons { flex:1;min-width:0;width:auto; }
 :root[data-theme] .casual-arcade .pirate-board { min-width:0;padding:clamp(12px,2vw,22px);border:1px solid var(--border,var(--line));border-radius:18px;background:var(--surface);color:var(--text); }
 :root[data-theme] .pirate-board :is(button,select,input,summary) { font-family:inherit;letter-spacing:0;text-transform:none;box-shadow:none; }
 :root[data-theme] .pirate-heading { display:flex;align-items:center;gap:14px;justify-content:space-between;margin-bottom:15px; }
@@ -74,10 +79,16 @@
  :root[data-theme] .pirate-movement-controls { gap:4px; }
  :root[data-theme] .pirate-action-controls { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px; }
  :root[data-theme] .pirate-touch-controls button { width:45px;min-height:45px;padding:6px 4px;border-radius:8px; }
- :root[data-theme] .pirate-action-controls button { flex-direction:row;width:66px;min-height:40px;gap:4px;font-size:10px; }
+ :root[data-theme] .pirate-action-controls button { flex-direction:row;width:66px;min-height:44px;gap:4px;font-size:10px; }
  :root[data-theme] .pirate-action-controls button svg { width:16px;height:16px; }
  :root[data-theme] .pirate-footnote { font-size:10px;gap:8px; }
  :root[data-theme] .pirate-skillbook dl { grid-template-columns:minmax(0,1fr); }
+}
+@media(max-width:360px) {
+ :root[data-theme] .pirate-touch-controls { flex-wrap:wrap;justify-content:center;gap:10px; }
+ :root[data-theme] .pirate-action-controls { display:flex;gap:7px; }
+ :root[data-theme] .pirate-action-controls button { flex-direction:column;width:45px;min-height:48px; }
+ :root[data-theme] .pirate-footnote { flex-wrap:wrap;gap:4px 10px; }
 }
 
 :root[data-theme] .pirate-crew-stats { display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;padding:12px 0;border-block:1px solid var(--border,var(--line));margin-block:14px;font-size:12px; }

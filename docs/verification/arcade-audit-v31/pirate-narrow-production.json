@@ -1,0 +1,11 @@
+[
+  {
+    "name": "320 px Pirate touch controls stay reachable without overlap",
+    "checks": [
+      "seven reachable touch targets of at least 44 px",
+      "all targets remain within the board",
+      "no overlapping controls"
+    ],
+    "status": "passed"
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "game": "pirate",
+    "width": 320,
+    "checks": [
+      "secondary HUD hides; essential controls stay visible",
+      "HUD restores"
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "solitaire",
+    "width": 320,
+    "checks": [
+      "secondary HUD hides; essential controls stay visible",
+      "HUD restores"
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "generals",
+    "width": 320,
+    "checks": [
+      "secondary HUD hides; essential controls stay visible",
+      "HUD restores"
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "fleet",
+    "width": 320,
+    "checks": [
+      "secondary HUD hides; essential controls stay visible",
+      "HUD restores"
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "sketch",
+    "width": 320,
+    "checks": [
+      "secondary HUD hides; essential controls stay visible",
+      "HUD restores"
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "pirate",
+    "width": 390,
+    "checks": [
+      "secondary HUD hides; essential controls stay visible",
+      "HUD restores"
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "solitaire",
+    "width": 390,
+    "checks": [
+      "secondary HUD hides; essential controls stay visible",
+      "HUD restores"
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "generals",
+    "width": 390,
+    "checks": [
+      "secondary HUD hides; essential controls stay visible",
+      "HUD restores"
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "fleet",
+    "width": 390,
+    "checks": [
+      "secondary HUD hides; essential controls stay visible",
+      "HUD restores"
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "sketch",
+    "width": 390,
+    "checks": [
+      "secondary HUD hides; essential controls stay visible",
+      "HUD restores"
+    ],
+    "status": "passed"
+  }
+]

@@ -107,6 +107,18 @@ try{
   }finally{await context.close()}
  });
 
+ await caseRun('320 px Pirate touch controls stay reachable without overlap',async row=>{
+  let session,view;
+  try{
+   session=await post({action:'create',mode:'pirate',name:'Narrow controls QA',bots:1},undefined,201);await post({action:'start',code:session.room.code},session.token);view=await open(session,{width:320});
+   await view.page.locator('.pirate-touch-controls').scrollIntoViewIfNeeded();
+   const measured=await view.page.locator('.pirate-touch-controls').evaluate(controls=>{const board=controls.closest('.pirate-board').getBoundingClientRect();return Array.from(controls.querySelectorAll('button')).map(b=>{const r=b.getBoundingClientRect();return{label:b.getAttribute('aria-label'),x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height,inside:r.left>=board.left&&r.right<=board.right,reachable:document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('button')===b}})});
+   assert.equal(measured.length,7);for(const b of measured){assert(b.width>=44&&b.height>=44,b.label+' is too small');assert(b.inside&&b.reachable,b.label+' is clipped or covered')}
+   for(let a=0;a<measured.length;a++)for(let b=a+1;b<measured.length;b++){const x=measured[a],y=measured[b];assert(Math.min(x.right,y.right)-Math.max(x.x,y.x)<=0||Math.min(x.bottom,y.bottom)-Math.max(x.y,y.y)<=0,x.label+' overlaps '+y.label)}
+   assert.deepEqual(view.errors,[]);row.checks.push('seven reachable touch targets of at least 44 px','all targets remain within the board','no overlapping controls');await view.page.locator('.pirate-board').screenshot({path:output.replace(/\.json$/,'')+'-320.png'});
+  }finally{await view?.context.close();await close(session)}
+ });
+
  const maps=['seaside-cove','castle-keep','meadow-run','sunken-ruins','galleon-deck','twin-islands','ice-floes','thunder-reef'],modes=['classic','spells','bomb-party','stomp','ko-race','hot-potato','chaos'];
  for(const width of [390,1440])for(let i=0;i<maps.length;i++)await caseRun('Arena render · '+maps[i]+' · '+modes[i%modes.length]+' · '+width,async row=>{
   let session,view;

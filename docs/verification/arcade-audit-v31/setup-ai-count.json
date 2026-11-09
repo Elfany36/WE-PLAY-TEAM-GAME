@@ -1,0 +1,26 @@
+[
+  {
+    "game": "fleet",
+    "role": "spectator",
+    "computerCount": 2,
+    "status": "passed"
+  },
+  {
+    "game": "pirate",
+    "role": "spectator",
+    "computerCount": 6,
+    "status": "passed"
+  },
+  {
+    "game": "snake",
+    "role": "spectator",
+    "computerCount": 8,
+    "status": "passed"
+  },
+  {
+    "game": "snake",
+    "role": "player",
+    "computerCount": 7,
+    "status": "passed"
+  }
+]
