@@ -1,0 +1,37 @@
+[
+  {
+    "width": 1440,
+    "http": false,
+    "checks": [
+      "native/fallback fullscreen retains the same canvas and round; controls start hidden",
+      "chat drag, keyboard move/resize, rotation clamping, focus and delivery",
+      "room stream reconnects without leaving fullscreen",
+      "native settings dialog, pause/resume and authoritative controls",
+      "exit restores website controls and normal dock layout; saved preferences survive"
+    ],
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "http": false,
+    "checks": [
+      "native/fallback fullscreen retains the same canvas and round; controls start hidden",
+      "chat drag, keyboard move/resize, rotation clamping, focus and delivery",
+      "room stream reconnects without leaving fullscreen",
+      "native settings dialog, pause/resume and authoritative controls",
+      "exit restores website controls and normal dock layout; saved preferences survive"
+    ],
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "http": true,
+    "checks": [
+      "native/fallback fullscreen retains the same canvas and round; controls start hidden",
+      "chat drag, keyboard move/resize, rotation clamping, focus and delivery",
+      "native settings dialog, pause/resume and authoritative controls over HTTP fallback",
+      "exit restores website controls and normal dock layout; saved preferences survive"
+    ],
+    "status": "passed"
+  }
+]

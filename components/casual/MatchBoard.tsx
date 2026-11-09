@@ -21,7 +21,7 @@ export default function MatchBoard({embedded=false,room,open,setOpen,busy,local,
  const content=<>
   <Heading><span className="match-board-mark"><Crown size={20}/></span><span className="match-board-heading"><small>{playing?'ROUND '+room.round:'THE CREW'}</small><strong>{playing?'Match standings':'Player lobby'}</strong></span><span className="match-board-count">{players.length}<small>/{casualCapacity(room.mode)}</small></span>{!embedded&&<ChevronDown size={16}/>}</Heading>
   <ol className="match-board-list">{players.map((p,index)=>{
-   const color=playerColor(p),stat=matchStat(room,p.id),turn=g?.currentId===p.id,thinking=room.botThinking?.playerId===p.id;
+   const color=playerColor(p),stat=matchStat(room,p.id),turn=room.phase==='playing'&&!!g&&(g.kind==='sketch'?g.artistId===p.id:['memory','ladders','uno','property','pool','chess','dama','scidama','generals','fleet'].includes(g.kind)&&g.stage!=='deploy'&&g.currentId===p.id),thinking=room.botThinking?.playerId===p.id;
    const actor=g?.kind==='tanks'?g.actors.find((a:{id:string})=>a.id===p.id):null;
    const balls=g?.kind==='pool'&&g.groups[p.id]?g.balls.filter((b:{number:number;pocketed:boolean})=>!b.pocketed&&b.number>0&&b.number!==8&&(g.groups[p.id]==='solids'?b.number<8:b.number>8)):null;
    const backs=g?.kind==='uno'&&!p.isYou?g.opponentBacks?.[p.id]:null;

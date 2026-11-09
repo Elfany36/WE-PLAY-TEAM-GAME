@@ -9,7 +9,7 @@ import {dirname} from 'node:path';
 
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const base=process.env.BASE||'http://127.0.0.1:5173',origin=process.env.API_ORIGIN||'http://127.0.0.1:8787',api=origin+'/api/casual';
-const output=process.env.RESULTS||'work/pirate-browser.json',rows=[];
+const output=process.env.RESULTS||'work/pirate-browser.json',rows=[],fullscreen=process.env.FULLSCREEN==='1';
 await mkdir(dirname(output),{recursive:true});
 const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
 const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
@@ -20,7 +20,7 @@ async function post(body,token,expected=200){
 async function get(session){const r=await fetch(api+'?code='+session.room.code,{headers:{Authorization:'Bearer '+session.token}});assert(r.ok);return(await r.json()).room}
 async function until(fn,message,timeout=7000){const end=Date.now()+timeout;while(Date.now()<end){const value=await fn();if(value)return value;await wait(45)}throw Error(message)}
 async function open(session,{width=1440,latency=0}={}){
- const context=await browser.newContext({viewport:{width,height:1100},hasTouch:width<600});
+ const context=await browser.newContext({viewport:{width,height:fullscreen?(width<600?844:900):1100},hasTouch:width<600});
  await context.addInitScript(s=>sessionStorage.setItem('markup-casual-session',JSON.stringify(s)),{token:session.token,code:session.room.code,apiOrigin:origin});
  const page=await context.newPage(),errors=[],packets=[],media=[],latencies=[];
  page.setDefaultTimeout(12000);page.on('pageerror',e=>errors.push(e.message));
@@ -36,8 +36,17 @@ async function open(session,{width=1440,latency=0}={}){
  }
  await page.goto(base+'/#casual-arcade');await page.locator('.pirate-canvas').waitFor();
  await page.locator('.pirate-loading').waitFor({state:'detached'});
+ if(fullscreen){await page.evaluate(()=>{window.windowTestCanvas=document.querySelector('.pirate-canvas')});await page.getByRole('button',{name:'Fullscreen',exact:true}).click();await page.locator('.is-immersive').waitFor();assert(await page.evaluate(()=>window.windowTestCanvas===document.querySelector('.pirate-canvas')),'Fullscreen must retain the existing renderer')}
  return{context,page,errors,packets,media,latencies};
 }
+async function openControls(page){
+ if(fullscreen&&!await page.getByRole('button',{name:'Hide game menu',exact:true}).isVisible())await page.getByRole('button',{name:'Open game menu',exact:true}).click();
+ await page.locator(fullscreen?'.game-window-menu':':root').getByRole('button',{name:'Customize controls',exact:true}).first().click();
+}
+async function closeControls(page){await page.locator('.controls-dialog[open]').getByRole('button',{name:'Done',exact:false}).click();if(fullscreen)await page.getByRole('button',{name:'Close game menu',exact:true}).click()}
+async function enableTouch(page){if(!fullscreen)return;await page.getByRole('button',{name:'Open game menu',exact:true}).click();await page.getByRole('checkbox',{name:'Show game controls',exact:true}).check();await page.getByRole('button',{name:'Close game menu',exact:true}).click()}
+const resume=page=>fullscreen?page.locator('.game-window-actions').getByRole('button',{name:'Resume game',exact:true}):page.locator('.pirate-board').getByRole('button',{name:'Resume',exact:true});
+
 async function close(session){if(session)await post({action:'leave',code:session.room.code},session.token).catch(()=>{})}
 async function caseRun(name,fn){if(process.env.CASES&&!new RegExp(process.env.CASES).test(name))return;const row={name,checks:[]};try{await fn(row);row.status='passed'}catch(e){row.status='failed';row.error=e.message}rows.push(row);console.log(JSON.stringify(row));await writeFile(output,JSON.stringify(rows,null,2))}
 
@@ -54,14 +63,14 @@ try{
    await until(async()=>actor(await get(host)).x>before.x+20,'Keyboard movement did not reach the authority');
    const tap=async(code,edge)=>{await arena.focus();const count=packets.length;await page.keyboard.press(code,{delay:10});await until(()=>packets.slice(count).some(p=>p[edge]>0),'No '+edge+' packet');const receipt=Math.max(...packets.slice(count).map(p=>p[edge]||0));await until(async()=>actor(await get(host))[edge]>=receipt,edge+' was lost before simulation');};
    await tap('Space','jumpSeq');await tap('KeyF','attackSeq');await tap('KeyG','specialSeq');await tap('ShiftLeft','dashSeq');row.checks.push('movement and four short-tap receipts reach room authority');
-   await page.getByRole('button',{name:'Customize controls',exact:true}).first().click();const dialog=page.locator('.controls-dialog[open]');
-   await dialog.getByRole('button',{name:'Change Melee attack key'}).click();await page.keyboard.press('KeyB');await dialog.getByRole('button',{name:'Done',exact:false}).click();
+   await openControls(page);const dialog=page.locator('.controls-dialog[open]');
+   await dialog.getByRole('button',{name:'Change Melee attack key'}).click();await page.keyboard.press('KeyB');await closeControls(page);
    await tap('KeyB','attackSeq');row.checks.push('saved remapping controls the online pirate');
-   await arena.focus();await page.keyboard.down('KeyD');await wait(150);await page.getByRole('button',{name:'Customize controls',exact:true}).first().click();await page.keyboard.up('KeyD');
+   await arena.focus();await page.keyboard.down('KeyD');await wait(150);await openControls(page);await page.keyboard.up('KeyD');
    await until(()=>packets.at(-1)?.dx===0,'Opening settings did not release movement');await wait(latency+500);const stopped=actor(await get(host)).x;await wait(250);assert(Math.abs(actor(await get(host)).x-stopped)<3,'Movement stayed held after opening settings');
-   await dialog.getByRole('button',{name:'Reset controls',exact:false}).click();await dialog.getByRole('button',{name:'Save preferences',exact:false}).click();await dialog.getByRole('button',{name:'Done',exact:false}).click();row.checks.push('settings release held controls; reset and save work');
+   await dialog.getByRole('button',{name:'Reset controls',exact:false}).click();await dialog.getByRole('button',{name:'Save preferences',exact:false}).click();await closeControls(page);row.checks.push('settings release held controls; reset and save work');
    await arena.focus();await page.keyboard.press('KeyP');await until(async()=>(await get(host)).phase==='paused','Host pause shortcut failed');
-   await page.locator('.pirate-board').getByRole('button',{name:'Resume',exact:true}).click();await until(async()=>(await get(host)).phase==='playing','Resume failed');row.checks.push('native pause and resume');
+   await resume(page).click();await until(async()=>(await get(host)).phase==='playing','Resume failed');row.checks.push('native pause and resume');
    assert.equal(view.media.length,0,'Music should not download before opt-in');assert.deepEqual(view.errors,[]);assert(!await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1));
    row.packets=packets.length;row.mediaRequests=view.media.length;if(view.latencies.length)row.httpRoundTripMs={min:Math.min(...view.latencies),max:Math.max(...view.latencies)};
   }finally{await view?.context.close();await close(guest);await close(host)}
@@ -72,7 +81,7 @@ try{
   try{
    host=await post({action:'create',mode:'pirate',name:'Host QA',bots:0},undefined,201);guest=await post({action:'join',code:host.room.code,name:'Guest QA'});watcher=await post({action:'join',code:host.room.code,name:'Spectator QA',role:'spectator'});
    await post({action:'start',code:host.room.code},host.token);await post({action:'pause',code:host.room.code},host.token);await post({action:'disconnect',code:host.room.code},host.token);view=await open(watcher,{width:390});
-   assert.equal(await view.page.locator('.pirate-touch-controls').count(),0);await view.page.locator('.pirate-board').getByRole('button',{name:'Resume',exact:true}).click();await until(async()=>(await get(watcher)).phase==='playing','Spectator could not resume an absent host’s arena');
+   assert.equal(await view.page.locator('.pirate-touch-controls').count(),0);await resume(view.page).click();await until(async()=>(await get(watcher)).phase==='playing','Spectator could not resume an absent host’s arena');
    const r=await get(watcher);await post({action:'pirate-input',code:r.code,round:r.round,seq:Date.now(),life:0,dx:1,down:false,jump:false,attack:false,special:false,dash:false,jumpSeq:0,attackSeq:0,specialSeq:0,dashSeq:0},watcher.token,403);
    assert.deepEqual(view.errors,[]);row.checks.push('mobile spectator has no controls','absent-host resume is visible and works','forged controls rejected');
   }finally{await view?.context.close();await close(watcher);await close(guest);await close(host)}
@@ -84,7 +93,7 @@ try{
    host=await post({action:'create',mode:'pirate',name:'Touch QA',bots:0,pirateMap:'galleon-deck',pirateStocks:5},undefined,201);guest=await post({action:'join',code:host.room.code,name:'Guest QA'});await post({action:'start',code:host.room.code},host.token);view=await open(host,{width:390});
    const {page,packets}=view,arena=page.locator('.pirate-canvas'),actor=r=>r.game.world.fighters.find(f=>f.id===r.youId);
    await until(async()=>{const r=await get(host);return r.serverNow>r.game.startAt+1000},'Countdown did not finish');
-   const right=await page.getByRole('button',{name:'Pirate move right',exact:true}).boundingBox(),jump=await page.getByRole('button',{name:'Pirate jump',exact:true}).boundingBox(),cdp=await view.context.newCDPSession(page),center=(box,id)=>({x:box.x+box.width/2,y:box.y+box.height/2,id});
+   await enableTouch(page);const right=await page.getByRole('button',{name:'Pirate move right',exact:true}).boundingBox(),jump=await page.getByRole('button',{name:'Pirate jump',exact:true}).boundingBox(),cdp=await view.context.newCDPSession(page),center=(box,id)=>({x:box.x+box.width/2,y:box.y+box.height/2,id});
    const count=packets.length;await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[center(right,1),center(jump,2)]});await wait(250);await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});
    await until(()=>packets.slice(count).some(p=>p.dx===1&&p.jumpSeq>0),'Touch direction and jump could not be held together');await until(()=>packets.at(-1)?.dx===0,'Touch release did not clear movement');row.checks.push('two touch pointers hold direction and jump independently');
    await page.evaluate(()=>{window.pirateTestPad={axes:[1,0],buttons:Array.from({length:16},()=>({pressed:false,value:0})),index:1,id:'QA controller',connected:true,mapping:'standard'};Object.defineProperty(navigator,'getGamepads',{value:()=>[null,window.pirateTestPad],configurable:true})});
@@ -111,7 +120,7 @@ try{
   let session,view;
   try{
    session=await post({action:'create',mode:'pirate',name:'Narrow controls QA',bots:1},undefined,201);await post({action:'start',code:session.room.code},session.token);view=await open(session,{width:320});
-   await view.page.locator('.pirate-touch-controls').scrollIntoViewIfNeeded();
+   await enableTouch(view.page);await view.page.locator('.pirate-touch-controls').scrollIntoViewIfNeeded();
    const measured=await view.page.locator('.pirate-touch-controls').evaluate(controls=>{const board=controls.closest('.pirate-board').getBoundingClientRect();return Array.from(controls.querySelectorAll('button')).map(b=>{const r=b.getBoundingClientRect();return{label:b.getAttribute('aria-label'),x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height,inside:r.left>=board.left&&r.right<=board.right,reachable:document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('button')===b}})});
    assert.equal(measured.length,7);for(const b of measured){assert(b.width>=44&&b.height>=44,b.label+' is too small');assert(b.inside&&b.reachable,b.label+' is clipped or covered')}
    for(let a=0;a<measured.length;a++)for(let b=a+1;b<measured.length;b++){const x=measured[a],y=measured[b];assert(Math.min(x.right,y.right)-Math.max(x.x,y.x)<=0||Math.min(x.bottom,y.bottom)-Math.max(x.y,y.y)<=0,x.label+' overlaps '+y.label)}

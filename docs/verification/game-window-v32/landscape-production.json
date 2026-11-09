@@ -1,0 +1,100 @@
+[
+  {
+    "game": "pirate",
+    "width": 844,
+    "height": 390,
+    "fallback": false,
+    "field": {
+      "x": 0,
+      "y": 0,
+      "width": 844,
+      "height": 390
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "solitaire",
+    "width": 844,
+    "height": 390,
+    "fallback": false,
+    "field": {
+      "x": 16,
+      "y": 76,
+      "width": 812,
+      "height": 302
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "sketch",
+    "width": 844,
+    "height": 390,
+    "fallback": false,
+    "field": {
+      "x": 12,
+      "y": 124,
+      "width": 820,
+      "height": 227.8125
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "generals",
+    "width": 844,
+    "height": 390,
+    "fallback": false,
+    "field": {
+      "x": 264.5,
+      "y": 87,
+      "width": 315,
+      "height": 280
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "fleet",
+    "width": 844,
+    "height": 390,
+    "fallback": false,
+    "field": {
+      "x": 129,
+      "y": 87,
+      "width": 280,
+      "height": 280
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "snake",
+    "width": 844,
+    "height": 390,
+    "fallback": false,
+    "field": {
+      "x": 227,
+      "y": 0,
+      "width": 390,
+      "height": 390
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "tanks",
+    "width": 844,
+    "height": 390,
+    "fallback": false,
+    "field": {
+      "x": 110,
+      "y": 0,
+      "width": 624,
+      "height": 390
+    },
+    "status": "passed",
+    "restored": true
+  }
+]

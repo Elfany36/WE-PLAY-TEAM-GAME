@@ -1,0 +1,28 @@
+{
+  "origin": "http://127.0.0.1:4173",
+  "snapshotAgeMs": {
+    "samples": 112,
+    "p50": 57,
+    "p95": 90,
+    "max": 102
+  },
+  "serverSnapshotAgeMs": {
+    "samples": 112,
+    "p50": 55,
+    "p95": 89,
+    "max": 99
+  },
+  "inputToAuthoritativePoseMs": {
+    "samples": 30,
+    "p50": 92,
+    "p95": 137,
+    "max": 140
+  },
+  "intervalMs": {
+    "samples": 111,
+    "p50": 52,
+    "p95": 55,
+    "max": 131
+  },
+  "meanBytes": 1181.7767857142858
+}

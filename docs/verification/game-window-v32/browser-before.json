@@ -1,0 +1,91 @@
+{
+  "loading": {
+    "ttfb": 206,
+    "fcp": 852,
+    "lcp": 1160,
+    "cls": 0.000001068672839506173,
+    "longTasks": [
+      253,
+      125,
+      72,
+      183,
+      155
+    ],
+    "resources": [
+      {
+        "name": "/_next/static/css/index.mqIjfXIG.css",
+        "bytes": 123010,
+        "duration": 110.59999999776483
+      },
+      {
+        "name": "/_next/static/chunks/framework-D_rUT4EX.js",
+        "bytes": 59092,
+        "duration": 176.80000000074506
+      },
+      {
+        "name": "/_next/static/chunks/index-DCRL3Sdm.js",
+        "bytes": 56585,
+        "duration": 366.9000000022352
+      },
+      {
+        "name": "/fonts/dm-sans-latin-wght-normal.woff2",
+        "bytes": 36932,
+        "duration": 108.90000000223517
+      },
+      {
+        "name": "/fonts/manrope-latin-wght-normal.woff2",
+        "bytes": 24836,
+        "duration": 109.39999999850988
+      },
+      {
+        "name": "/_next/static/chunks/MarkupApp-DdfExGF6.js",
+        "bytes": 18980,
+        "duration": 172.79999999701977
+      },
+      {
+        "name": "/_next/static/chunks/rules-Cfsh7tNP.js",
+        "bytes": 18504,
+        "duration": 186
+      },
+      {
+        "name": "/_next/static/chunks/LearningVisual-5xDTnvkw.js",
+        "bytes": 13489,
+        "duration": 247.80000000074506
+      }
+    ]
+  },
+  "play": {
+    "seconds": 8.334,
+    "mainThreadMsPerSecond": 986.2661387089034,
+    "scriptMsPerSecond": 253.471562275018,
+    "layoutMsPerSecond": 6.965202783777297,
+    "styleMsPerSecond": 22.165346772258214,
+    "heapMB": 9.764015197753906,
+    "frameMs": {
+      "samples": 345,
+      "p50": 16.700000000000728,
+      "p95": 33.400000000001455,
+      "max": 100.10000000000036
+    },
+    "snapshotAgeMs": {
+      "samples": 144,
+      "p50": 91,
+      "p95": 146,
+      "max": 199
+    },
+    "inputToAuthoritativePoseMs": {
+      "samples": 44,
+      "p50": 111,
+      "p95": 165,
+      "max": 200
+    },
+    "snapshotBytes": {
+      "samples": 144,
+      "p50": 1211,
+      "p95": 1564,
+      "max": 1803
+    },
+    "bytesPerSecond": 20982.361411087113,
+    "errors": []
+  }
+}

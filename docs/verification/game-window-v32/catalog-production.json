@@ -1,0 +1,618 @@
+[
+  {
+    "game": "pirate",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 900
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "solitaire",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 16,
+      "y": 76,
+      "width": 1408,
+      "height": 812
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "sketch",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 12,
+      "y": 124,
+      "width": 1416,
+      "height": 737.8125
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "generals",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 275.625,
+      "y": 87,
+      "width": 888.75,
+      "height": 790
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "fleet",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 172,
+      "y": 87,
+      "width": 790,
+      "height": 790
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "uno",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 342.671875
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "ladders",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 338.515625,
+      "y": 68,
+      "width": 762.953125,
+      "height": 824
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "memory",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 170,
+      "y": 213.5,
+      "width": 1100,
+      "height": 545
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "snake",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 270,
+      "y": 0,
+      "width": 900,
+      "height": 900
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "property",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 318,
+      "y": 78,
+      "width": 804,
+      "height": 804
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "phone",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 170,
+      "y": 0,
+      "width": 1100,
+      "height": 900
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "circuit",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 900
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "terra",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 882
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "chess",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 180.5,
+      "y": 69.4375,
+      "width": 820,
+      "height": 820
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "dama",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 180.5,
+      "y": 69.4375,
+      "width": 820,
+      "height": 820
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "scidama",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 180.5,
+      "y": 69.4375,
+      "width": 820,
+      "height": 820
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "sumo",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 900
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "tanks",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 900
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "pong",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 900
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "marble",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 900
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "blocks",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 80,
+      "y": 0,
+      "width": 1280,
+      "height": 900
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "pool",
+    "width": 1440,
+    "height": 900,
+    "fallback": false,
+    "field": {
+      "x": 0,
+      "y": 75.921875,
+      "width": 1336,
+      "height": 748.15625
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "pirate",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "solitaire",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 16,
+      "y": 120,
+      "width": 358,
+      "height": 712
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "sketch",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 12,
+      "y": 168,
+      "width": 366,
+      "height": 637.8125
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "generals",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 8,
+      "y": 280.78125,
+      "width": 374,
+      "height": 332.4375
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "fleet",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 8,
+      "y": 118,
+      "width": 374,
+      "height": 374
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "uno",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 401.171875
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "ladders",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 110,
+      "width": 390,
+      "height": 451.703125
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "memory",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 20,
+      "y": 121,
+      "width": 350,
+      "height": 710
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "snake",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 227,
+      "width": 390,
+      "height": 390
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "property",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 8,
+      "y": 288,
+      "width": 374,
+      "height": 374
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "phone",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 0,
+      "width": 390,
+      "height": 844
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "circuit",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 300.125,
+      "width": 390,
+      "height": 243.75
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "terra",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 291.125,
+      "width": 390,
+      "height": 243.75
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "chess",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 67.796875,
+      "width": 390,
+      "height": 390
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "dama",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 97.9375,
+      "width": 390,
+      "height": 390
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "scidama",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 97.9375,
+      "width": 390,
+      "height": 390
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "sumo",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 300.125,
+      "width": 390,
+      "height": 243.75
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "tanks",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 300.125,
+      "width": 390,
+      "height": 243.75
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "pong",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 300.125,
+      "width": 390,
+      "height": 243.75
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "marble",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 300.125,
+      "width": 390,
+      "height": 243.75
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "blocks",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 101,
+      "width": 390,
+      "height": 642
+    },
+    "status": "passed",
+    "restored": true
+  },
+  {
+    "game": "pool",
+    "width": 390,
+    "height": 844,
+    "fallback": true,
+    "field": {
+      "x": 0,
+      "y": 251.03125,
+      "width": 390,
+      "height": 218.390625
+    },
+    "status": "passed",
+    "restored": true
+  }
+]

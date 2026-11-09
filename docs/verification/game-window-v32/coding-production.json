@@ -1,0 +1,38 @@
+[
+  {
+    "width": 1440,
+    "mode": "blanks",
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "survival",
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "mode": "quiz",
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "blanks",
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "survival",
+    "overflow": false,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "mode": "quiz",
+    "overflow": false,
+    "status": "passed"
+  }
+]

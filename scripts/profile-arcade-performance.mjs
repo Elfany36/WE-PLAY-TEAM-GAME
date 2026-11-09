@@ -1,0 +1,30 @@
+/** Bounded local performance measurement; uses isolated QA rooms and leaves them.
+ * Start the matching production UI/API first. BASE, API_ORIGIN and RESULTS are optional.
+ * Browser runs accept PLAYWRIGHT_MODULE, CHROMIUM_PATH and FULLSCREEN=1.
+ * Run with node --experimental-strip-types; browser measurements use 4x CPU throttling.
+ * Results describe this machine and workload, not public Internet latency.
+ */
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+import {writeFileSync} from 'node:fs';import assert from 'node:assert/strict';import {applyRoomDelta} from '../lib/room-delta.ts';
+const base=process.env.BASE||'http://127.0.0.1:4173',out=process.env.RESULTS||'work/arcade-performance.json',rows={},browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
+const wait=ms=>new Promise(r=>setTimeout(r,ms)),quantile=(a,q)=>{a=a.slice().sort((a,b)=>a-b);return a[Math.min(a.length-1,Math.floor(a.length*q))]??null},stats=a=>({samples:a.length,p50:quantile(a,.5),p95:quantile(a,.95),max:Math.max(0,...a)});
+async function post(body,token){const r=await fetch(base+'/api/casual',{method:'POST',headers:{'content-type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:JSON.stringify({...body,requestId:crypto.randomUUID()})});const d=await r.json();assert(r.ok,d.error);return d}
+let session;
+try{
+ const context=await browser.newContext({viewport:{width:1440,height:1000}}),page=await context.newPage(),cdp=await context.newCDPSession(page);await cdp.send('Performance.enable');await cdp.send('Emulation.setCPUThrottlingRate',{rate:4});
+ await context.addInitScript(()=>{window.audit={lcp:0,cls:0,longTasks:[],frames:[]};for(const [type,apply]of [['largest-contentful-paint',e=>window.audit.lcp=e.startTime],['layout-shift',e=>{if(!e.hadRecentInput)window.audit.cls+=e.value}],['longtask',e=>window.audit.longTasks.push(e.duration)]])try{new PerformanceObserver(list=>list.getEntries().forEach(apply)).observe({type,buffered:true})}catch{};let last=0;function frame(t){if(last)window.audit.frames.push(t-last);last=t;requestAnimationFrame(frame)}requestAnimationFrame(frame)});
+ await page.goto(base+'/',{waitUntil:'networkidle'});await page.locator('.app-shell').waitFor();rows.loading=await page.evaluate(()=>({ttfb:performance.getEntriesByType('navigation')[0].responseStart,fcp:performance.getEntriesByName('first-contentful-paint')[0]?.startTime,...window.audit,resources:performance.getEntriesByType('resource').map(r=>({name:new URL(r.name).pathname,bytes:r.encodedBodySize,duration:r.duration})).sort((a,b)=>b.bytes-a.bytes).slice(0,8)}));delete rows.loading.frames;
+ await context.close();console.log(JSON.stringify({loading:rows.loading}));
+ session=await post({action:'create',mode:'pirate',name:'Performance QA',bots:5,pirateStocks:5,pirateMode:'chaos'});await post({action:'start',code:session.room.code},session.token);
+ const ctx=await browser.newContext({viewport:{width:1440,height:1000}});await ctx.addInitScript(s=>sessionStorage.setItem('markup-casual-session',JSON.stringify(s)),{token:session.token,code:session.room.code,apiOrigin:base});
+ const p=await ctx.newPage(),c=await ctx.newCDPSession(p),bases=new Map(),ages=[],rounds=[],sent=new Map(),bytes=[],errors=[];let measuring=false,lastAck=0;
+ p.on('pageerror',e=>errors.push(e.message));p.on('websocket',ws=>{ws.on('framesent',f=>{try{const v=JSON.parse(f.payload.toString());if(measuring&&v.body?.action==='pirate-input')sent.set(v.body.seq,Date.now())}catch{}});ws.on('framereceived',f=>{try{const v=JSON.parse(f.payload.toString()),d=v.data;if(!d||(!d.room&&!d.patch))return;let r=d.room;if(d.patch){const b=bases.get(d.baseSnapshot);if(!b)return;r=applyRoomDelta(b,d.patch)}if(d.snapshotId)bases.set(d.snapshotId,r);while(bases.size>96)bases.delete(bases.keys().next().value);if(!measuring||r.game?.kind!=='pirate')return;ages.push(Date.now()-r.game.lastTickAt);bytes.push(f.payload.length);const actor=r.game.world.fighters.find(a=>a.id===r.youId);if(actor.lastSeq>lastAck){const at=sent.get(actor.lastSeq);if(at)rounds.push(Date.now()-at);lastAck=actor.lastSeq}}catch{}})});
+ await c.send('Performance.enable');await c.send('Emulation.setCPUThrottlingRate',{rate:4});await p.addInitScript(()=>{window.frameTimes=[];let last=0;function frame(t){if(last)window.frameTimes.push(t-last);last=t;requestAnimationFrame(frame)}requestAnimationFrame(frame)});
+ await p.goto(base+'/#casual-arcade');await p.locator('.pirate-canvas').waitFor();await p.locator('.pirate-loading').waitFor({state:'detached'});await wait(3500);await p.locator('.pirate-canvas').focus();
+ if(process.env.FULLSCREEN==='1'){await p.getByRole('button',{name:'Fullscreen',exact:true}).click();await wait(300)}
+ await p.evaluate(()=>window.frameTimes=[]);const before=Object.fromEntries((await c.send('Performance.getMetrics')).metrics.map(m=>[m.name,m.value]));measuring=true;const start=Date.now();
+ for(let i=0;i<16;i++){const code=i%2?'KeyA':'KeyD';await p.keyboard.down(code);await wait(130);await p.keyboard.up(code);await p.keyboard.press(i%4?'KeyF':'Space',{delay:10});await wait(320)}
+ measuring=false;const seconds=(Date.now()-start)/1000,after=Object.fromEntries((await c.send('Performance.getMetrics')).metrics.map(m=>[m.name,m.value])),times=await p.evaluate(()=>window.frameTimes);
+ rows.play={seconds,mainThreadMsPerSecond:1000*(after.TaskDuration-before.TaskDuration)/seconds,scriptMsPerSecond:1000*(after.ScriptDuration-before.ScriptDuration)/seconds,layoutMsPerSecond:1000*(after.LayoutDuration-before.LayoutDuration)/seconds,styleMsPerSecond:1000*(after.RecalcStyleDuration-before.RecalcStyleDuration)/seconds,heapMB:after.JSHeapUsedSize/1048576,frameMs:stats(times),snapshotAgeMs:stats(ages),inputToAuthoritativePoseMs:stats(rounds),snapshotBytes:stats(bytes),bytesPerSecond:bytes.reduce((a,b)=>a+b,0)/seconds,errors};
+ console.log(JSON.stringify({play:rows.play}));await ctx.close();writeFileSync(out,JSON.stringify(rows,null,2));
+}finally{if(session)await post({action:'leave',code:session.room.code},session.token).catch(()=>{});await browser.close()}

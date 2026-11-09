@@ -5,6 +5,7 @@ import {RoomStore} from './room-store.ts';
 import {roomBatch} from '../room-batch.ts';
 import {advanceCasual,publicCasual,type CasualState} from './engine.ts';
 import {casualTickDelay} from './room-timing.ts';
+import {continuousRoom,roomFanoutScene} from './fanout-timing.ts';
 import {publicArena,type ArenaState} from '../arena-engine.ts';
 import {roomSnapshot} from '../room-snapshots.ts';
 import {roomStreamRequest,STATE_INTERVAL,MAX_STATE_WINDOW} from '../room-stream.ts';
@@ -15,6 +16,8 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
  private readonly db:RoomStore;
  private authentication=new Map<WebSocket,{timer:ReturnType<typeof setTimeout>;done:()=>void}>();
  private notificationTimer:ReturnType<typeof setTimeout>|undefined;
+ private lastNotificationAt=0;
+ private lastNotificationScene='';
  private kind:'casual'|'arena';
  private tickTimer:ReturnType<typeof setTimeout>|undefined;
  private tickAt=0;
@@ -57,7 +60,11 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
     const next=advanceCasual(state,now);for(const session of active){const player=next.state.players.find(p=>p.id===session.playerId);if(player&&now-player.lastSeen>5000){player.lastSeen=now;next.changed=true}}
     return{state:next.state,changed:next.changed,result:()=>undefined};
    });this.tickFailures=0;
-  }catch{this.tickFailures=Math.min(5,this.tickFailures+1)}finally{this.tickRunning=false;this.armTick()}
+  }catch{this.tickFailures=Math.min(5,this.tickFailures+1)}finally{
+   // Fan out the just-committed tick without adding a second 50 ms timer.
+   if(!this.tickFailures){clearTimeout(this.notificationTimer);this.notificationTimer=undefined;this.notify()}
+   this.tickRunning=false;this.armTick();
+  }
  }
  async alarm(){
   await this.db.expire(Date.now());
@@ -68,11 +75,20 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
  }
  private scheduleNotification(){
   if(this.notificationTimer||!this.ctx.getWebSockets().length)return;
-  this.notificationTimer=setTimeout(()=>{this.notificationTimer=undefined;this.notify()},STATE_INTERVAL);
+  if(this.kind==='casual'){
+   const state=this.db.inspectState<CasualState>(),now=Date.now();
+   // Held-input commits need not fill the pipe with a pose from the previous tick.
+   // Phase/round changes and countdowns still publish immediately.
+   if(state&&continuousRoom(state,now)&&!this.tickFailures&&(this.tickRunning||this.tickTimer)&&this.lastNotificationScene===roomFanoutScene(state))return;
+  }
+  const delay=Math.max(0,this.lastNotificationAt+STATE_INTERVAL-Date.now());
+  this.notificationTimer=setTimeout(()=>{this.notificationTimer=undefined;this.notify()},delay);
  }
  private notify(){
   const row=this.db.snapshot();if(!row)return;
   const state=this.db.inspectState<AuthorityState>()!,now=Date.now();
+  this.lastNotificationAt=now;
+  if(this.kind==='casual')this.lastNotificationScene=roomFanoutScene(state as CasualState);
   for(const socket of this.ctx.getWebSockets()){
    const session=socket.deserializeAttachment() as Subscription|null;
    if(!session?.playerId)continue;

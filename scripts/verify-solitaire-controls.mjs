@@ -15,7 +15,7 @@ const base=process.env.BASE||'http://127.0.0.1:5173';
 const origin=process.env.API_ORIGIN||base,api=origin+'/api/casual';
 const output=process.env.RESULTS||'work/solitaire-controls.json';
 const browser=await chromium.launch({...(process.env.CHROMIUM_PATH?{executablePath:process.env.CHROMIUM_PATH}:{}),args:['--no-sandbox']});
-const rows=[];
+const rows=[],fullscreen=process.env.FULLSCREEN==='1';
 await mkdir(dirname(output),{recursive:true});
 async function post(body,token){
  const response=await fetch(api,{method:'POST',headers:{'content-type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:JSON.stringify({...body,requestId:crypto.randomUUID()})});
@@ -27,8 +27,8 @@ const cell=to=>to.index+(to.zone==='foundation'?100:to.zone==='cell'?200:0);
 const widths=(process.env.WIDTHS||'390,1440').split(',').map(Number);
 const variants=(process.env.VARIANTS||SOLITAIRE_VARIANTS.join(',')).split(',');
 for(const width of widths)for(const variant of variants){
- const touch=width<600,context=await browser.newContext({viewport:{width,height:1100},hasTouch:touch});
- const page=await context.newPage(),errors=[],actions=[],row={variant,width,input:touch?'touch':'mouse',checks:[]};
+ const touch=width<600,context=await browser.newContext({viewport:{width,height:fullscreen?(width<600?844:900):1100},hasTouch:touch});
+ const page=await context.newPage(),errors=[],actions=[],row={variant,width,input:touch?'touch':'mouse',fullscreen,checks:[]};
  const touchSession=touch?await context.newCDPSession(page):null;
  let session;
  page.setDefaultTimeout(10000);page.on('pageerror',error=>errors.push(error.message));
@@ -65,6 +65,7 @@ for(const width of widths)for(const variant of variants){
   await context.addInitScript(s=>{if(location.protocol==='http:'||location.protocol==='https:')sessionStorage.setItem('markup-casual-session',JSON.stringify(s))},{token:session.token,code:session.room.code,apiOrigin:origin});
   if(process.env.TRACE)await context.addInitScript(()=>{window.solitaireTrace=[];for(const type of ['pointerdown','pointerup','pointercancel','lostpointercapture','click','touchstart','touchend'])window.addEventListener(type,event=>{const button=event.target instanceof Element?event.target.closest('button'):null;window.solitaireTrace.push({type,target:button?.getAttribute('aria-label')||button?.textContent,disabled:button?.disabled,prevented:event.defaultPrevented,time:performance.now(),x:event.clientX,y:event.clientY,rect:button?.getBoundingClientRect().toJSON()});if(type==='pointerup'&&button?.textContent==='Undo')setTimeout(()=>window.solitaireTrace.push({type:'after-undo-tap',connected:button.isConnected,disabled:button.disabled,rect:button.getBoundingClientRect().toJSON(),hit:document.elementFromPoint(event.clientX,event.clientY)?.closest('button')?.textContent}),100)},true)});
   await page.goto(base+'/#casual-arcade');await page.locator('.solitaire-table').waitFor();await idle();await page.waitForTimeout(700);
+  if(fullscreen){await page.getByRole('button',{name:'Fullscreen',exact:true}).click();await page.locator('.is-immersive').waitFor();await page.waitForTimeout(250)}
   await click(page.getByRole('button',{name:'Hint',exact:true}));
   if(shape){
    const pair=solPairOptions(board,variant)[0];assert(pair);
@@ -118,6 +119,7 @@ for(const width of widths)for(const variant of variants){
     if(touch)await touchSession.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[point]});else await page.mouse.move(point.x,point.y);
    }
    await page.locator('.sol-drag-preview').waitFor({state:'visible'});
+   if(fullscreen)assert(await page.locator('.sol-drag-preview').evaluate(el=>!!el.closest('.is-immersive')),'Drag preview must remain inside the native fullscreen window');
    assert.equal(await page.locator('.sol-drag-preview img').count(),solCards(board,move.from).length,'Preview must show the whole moved run');
    if(touch)await touchSession.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});else await page.mouse.up();
    const after=await changed(board.version),cards=solCards(board,move.from);

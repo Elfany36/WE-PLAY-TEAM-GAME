@@ -55,7 +55,7 @@ export class RoomTransport{
     if(generation!==this.generation||controller.signal.aborted)throw aborted();
     if(!response.headers.get('content-type')?.includes('application/json'))throw Error('The room service returned an unexpected page. Reload the view to reconnect.');
     const data=JSON.parse(raw);if(!response.ok)throw Object.assign(Error(data.error||'The room request could not be completed.'),{status:response.status});
-    if(typeof init.body==='string')try{if(['direction','drive','party-control','block-input','explore'].includes(JSON.parse(init.body).action))this.stats.inputReceiptMs=Math.round(elapsed)}catch{}
+    if(typeof init.body==='string')try{if(['direction','drive','party-control','block-input','explore','pirate-input'].includes(JSON.parse(init.body).action))this.stats.inputReceiptMs=Math.round(elapsed)}catch{}
     return this.decode(data,raw,elapsed,typeof init.body==='string'?new TextEncoder().encode(init.body).byteLength:0,usedLive?'live':'http');
    }catch(error){
     if(generation!==this.generation||init.signal?.aborted)throw aborted();this.stats.failures++;

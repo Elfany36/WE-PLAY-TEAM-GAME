@@ -32,6 +32,7 @@ import './arcade-refinement.css';
 import './arcade-v28.css';
 import './arcade-v29.css';
 import './arcade-v31.css';
+import './game-window.css';
 import {themeInitScript,styleInitScript} from '../lib/client-state';
 export const metadata: Metadata = {title:'Markup — Your next line starts here',description:'Learn HTML and CSS with visual practice, source-linked documentation, a live playground, and a multiplayer arcade with card, board, word and action games.',icons:{icon:'/favicon.svg'}};
 export default function RootLayout({children}:{children:React.ReactNode}) {return <html lang="en" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{__html:themeInitScript+styleInitScript}}/></head><body>{children}</body></html>}

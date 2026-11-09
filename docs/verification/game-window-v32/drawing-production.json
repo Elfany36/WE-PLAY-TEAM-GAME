@@ -1,0 +1,8 @@
+{
+  "checks": [
+    "private prompt remains confined to the artist",
+    "fullscreen pointer drawing reaches the authority and appears on the other live canvas",
+    "correct chat guesses score; global chat is locked while other players keep guessing"
+  ],
+  "status": "passed"
+}

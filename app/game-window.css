@@ -1,0 +1,217 @@
+/* The playfield fills the window; room panels float without changing its size. */
+.room-workspace-measure,.standalone-game-window { min-width:0;width:100%; }
+body[data-game-window=open] :is(.app-shell,.main-shell,main,.casual-arcade) { transform:none!important;contain:none!important; }
+:root[data-game-window=open] { scrollbar-gutter:auto!important;overflow:hidden!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive,
+:root[data-theme] .main-shell .casual-arcade .room-shell.room-workspace.is-immersive[style] {
+ position:fixed!important;inset:0!important;z-index:2000!important;width:100vw!important;height:100dvh!important;max-width:none!important;max-height:none!important;
+ display:block!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;overflow:hidden!important;isolation:isolate;
+ background:#0b1423!important;color:#f0f5ff;--surface:#14243b;--surface-soft:#1b304b;--text:#f0f5ff;--muted:#bdcbdf;--border:#7186a366;--line:#7186a366;--accent:#a4d3ea;--accent-ink:#10273a;
+ scrollbar-gutter:auto!important;
+}
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.room-main,.party-live-layout,.party-board-panel,.flexible-surface,.adjustable-surface,.surface-content) {
+ width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;min-width:0!important;min-height:0!important;
+ margin:0!important;padding:0!important;border:0!important;border-radius:0!important;overflow:hidden!important;background:transparent!important;box-shadow:none!important;
+ scrollbar-gutter:auto!important;
+}
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.room-main,.party-live-layout,.flexible-surface,.adjustable-surface,.surface-content) { display:block!important;position:relative; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.surface-toolbar,.surface-restore,.surface-bottom,.surface-resize-controls,.party-playing-heading,.game-round-footer,.party-recovery,.party-resume-panel,.party-turn-banner,.table-hud,.game-help,.game-guide,.controlled-player,.path-toggle,.snake-player-strip,.stadium-caption,.stadium-roster,.snake-input-status,.snake-control-help,.pirate-footnote,.pirate-heading,.pirate-focus,.sumo-bracket,.sumo-waiting) { display:none!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.pirate-board,.snake-stadium,.club-arena,.action-world,.pool-stage) {
+ position:relative!important;display:grid!important;place-items:center;align-content:center;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;overflow:hidden!important;
+}
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-canvas-frame { width:100%!important;max-width:100%!important;height:100%!important;aspect-ratio:auto;border:0;border-radius:0; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-canvas { width:100%!important;height:100%!important;aspect-ratio:auto; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-board { grid-template:minmax(0,1fr) / minmax(0,1fr);place-items:stretch;align-content:stretch; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.club-arena,.action-world,.pool-stage)>canvas { width:min(100vw,calc(100dvh * 8 / 5))!important;height:auto!important;aspect-ratio:8/5;max-width:100%!important;max-height:100%!important;border:0;border-radius:0; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .snake-stadium>canvas { width:min(100vw,100dvh)!important;height:auto!important;aspect-ratio:1;max-height:100%!important;border:0;border-radius:0; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-bar { position:absolute;inset:max(10px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) auto max(12px,env(safe-area-inset-left));z-index:70;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;pointer-events:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-title { display:flex;gap:10px;align-items:center;min-width:0;max-width:min(54vw,560px);padding:10px 13px;border:1px solid #7e96b64d;border-radius:10px;background:#101d30ed;color:#eff5ff;pointer-events:auto; }
+:root[data-theme] .game-window-title>svg { flex-shrink:0;color:#bdd4ef; }
+:root[data-theme] .game-window-title strong { display:block;font-size:15px;line-height:1.35;font-weight:650;letter-spacing:-.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+:root[data-theme] .game-window-status { display:block;font-size:11px;line-height:1.5;color:#c0cee0;max-width:52ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-actions { display:flex;gap:5px;padding:5px;border:1px solid #7e96b64d;border-radius:10px;background:#101d30ed;pointer-events:auto;flex-shrink:0; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-actions button { display:flex;align-items:center;justify-content:center;min-width:38px;min-height:38px;padding:8px;border:1px solid transparent;border-radius:6px;background:transparent;color:#eff5ff;box-shadow:none;font:inherit;cursor:pointer; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-actions button[aria-pressed=true] { background:#3c587c66;border-color:#a4bad14d; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-actions button:hover { background:#3c587c99; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-actions button:focus-visible { outline:2px solid #d8edff;outline-offset:1px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-menu { position:absolute;z-index:80;top:max(72px,calc(env(safe-area-inset-top) + 64px));right:max(12px,env(safe-area-inset-right));width:min(340px,calc(100vw - 24px));max-height:calc(100dvh - 90px);overflow:auto;padding:17px;border:1px solid #7e96b666;border-radius:12px;background:#14243bf7;color:#eef4ff;box-shadow:0 12px 35px #0005; }
+:root[data-theme] .game-window-menu>header { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px; }
+:root[data-theme] .game-window-menu h2 { margin:0;font-size:17px;line-height:1.5;color:inherit; }
+:root[data-theme] .game-window-menu label { display:flex;align-items:center;gap:10px;min-height:42px;font-size:13px;color:inherit; }
+:root[data-theme] .game-window-menu>label { flex-direction:row;justify-content:flex-start; }
+:root[data-theme] .game-window-menu input[type=checkbox] { width:18px;height:18px;min-height:18px;margin:0;accent-color:#83c4dd; }
+:root[data-theme] .game-window-menu :is(button,select) { font:inherit;font-size:12px;min-height:38px;box-shadow:none; }
+:root[data-theme] .game-window-menu>button { display:flex;gap:9px;align-items:center;width:100%;padding:10px 8px;margin-top:7px;border:1px solid #7e96b64d;border-radius:7px;background:#243d5c;color:#eff5ff;text-align:left; }
+:root[data-theme] .game-window-menu header>button { display:grid;place-items:center;width:36px;padding:5px;background:transparent;color:inherit;border:0; }
+:root[data-theme] .game-window-settings-slot:not(:empty) { margin:15px 0 10px;padding-top:12px;border-top:1px solid #7e96b64d; }
+:root[data-theme] .game-window-room-options { display:grid;gap:8px;margin-top:12px; }
+:root[data-theme] .game-window-room-options .button { width:100%;min-height:40px;font-size:12px;box-shadow:none!important;border:1px solid #7e96b64d;border-radius:7px;background:#243d5c;color:#eff5ff; }
+:root[data-theme] .game-window-settings-slot .pirate-settings { margin:0;border:0;background:transparent; }
+:root[data-theme] .game-window-settings-slot .pirate-settings>summary { display:none; }
+:root[data-theme] .game-window-settings-slot .pirate-settings-grid { grid-template-columns:repeat(2,minmax(0,1fr));padding:0;gap:10px; }
+:root[data-theme] .game-window-settings-slot .pirate-local-settings { padding:12px 0 0; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel { position:absolute!important;z-index:40;grid-area:auto!important;right:16px;top:76px;width:280px;max-width:calc(100vw - 24px);height:min(32dvh,310px);max-height:calc(100dvh - 88px);min-height:120px;border:1px solid #7186a366!important;border-radius:10px;background:#14243bf2!important;box-shadow:0 5px 20px #0003; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel[style] { width:var(--window-panel-width,280px)!important;height:var(--window-panel-height,min(32dvh,310px))!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel-chat { top:auto;bottom:16px;--window-panel-height:min(34dvh,290px); }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel-guide { right:auto;left:16px;--window-panel-width:340px;--window-panel-height:min(75dvh,630px); }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel.is-collapsed { display:none!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel-header { padding:8px 10px;min-height:40px;background:#1a2e47; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel-header>strong { font-size:12px;cursor:move;touch-action:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel-header button { min-height:30px;min-width:30px;padding:5px;color:inherit; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel-header button span { display:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel-content { min-height:0;flex:1;overflow:auto; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel-tools { display:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel .match-board>header { display:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .match-board-list>li { min-height:56px;padding:8px 9px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .match-board-list { gap:5px;padding:8px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .match-avatar { width:30px;height:33px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .match-avatar img { width:30px;height:33px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .match-detail { display:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-crew-hud { position:absolute;z-index:15;left:16px;right:16px;bottom:16px;display:flex;justify-content:center;gap:9px;margin:0;padding:0;overflow:auto;pointer-events:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-crew-card { flex:0 1 165px;min-width:118px;padding:8px 9px;grid-template-columns:30px minmax(0,1fr);gap:6px;border-color:#7186a366;background:#14243be8;color:#edf4ff;pointer-events:auto; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-crew-card .character-model { width:30px!important;height:36px!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-crew-card strong { color:#f1f6ff;font-size:11px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-damage { color:#f1f6ff;font-size:22px;line-height:1.2; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-damage small { color:#c0cee0;font-size:9px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-stocks { color:#c0cee0;font-size:10px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-item { min-height:14px;padding-top:3px;font-size:9px;color:#dce9fc; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.club-hud,.action-hud,.arena-player-strip,.race-command,.race-live-order) { position:absolute!important;z-index:15;left:16px;right:auto;bottom:16px;max-width:calc(100% - 32px);max-height:22dvh;overflow:auto;margin:0!important;background:#14243be8;color:#eaf2ff; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .arena-player-strip { display:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive[data-game-hud=hidden] :is(.pirate-crew-hud,.club-hud,.action-hud,.arena-player-strip,.race-command,.race-live-order,.solitaire-heading,.tactical-commanders,.sketch-artist) { display:none!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive[data-game-controls=hidden] :is(.pirate-touch-controls,.club-controls,.action-controls,.blocks-buttons,.snake-controls) { display:none!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive[data-game-controls=shown] :is(.pirate-touch-controls,.club-controls,.action-controls,.blocks-buttons,.snake-controls) { display:flex!important;position:absolute;z-index:25;left:16px;right:16px;bottom:110px;padding:8px!important;max-height:30dvh;overflow:auto;background:#14243be0;border-radius:10px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .ladder-board { width:min(100vw,calc((100dvh - 76px) * 1000 / 1080))!important;max-width:100%!important;max-height:calc(100dvh - 76px);height:auto!important;margin:68px auto 0!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .ladder-controls { position:absolute;z-index:20;bottom:16px;right:16px;display:flex;gap:8px;width:auto;margin:0;padding:8px;background:#14243bea;border:1px solid #7186a366;border-radius:10px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .ladder-controls>div { display:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .party-result { position:absolute;z-index:55;top:50%;left:50%;transform:translate(-50%,-50%);width:min(660px,calc(100vw - 32px));max-height:70dvh;overflow:auto;background:#14243bf7!important;color:#f1f6ff;border:1px solid #7186a366!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.tactical-table,.solitaire-table,.sketch-board,.uno-experience,.estate-experience,.blocks-arena) { min-height:0!important;max-height:100%;max-width:100%; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .standalone-game-window .surface-content { overflow:auto!important; }
+@media(max-width:760px) {
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-bar { flex-direction:column;align-items:flex-end;gap:5px;inset:8px 8px auto; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-title { align-self:flex-start;max-width:calc(100vw - 16px);padding:6px 10px; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-title strong { font-size:12px; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-title>svg { display:none; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-status { font-size:10px; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-actions { gap:2px;padding:3px; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-actions button { min-width:44px;min-height:44px;padding:7px; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel { top:112px;right:12px;max-height:calc(100dvh - 124px);--window-panel-height:min(55dvh,350px); }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel-chat { bottom:12px;top:auto; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-menu { top:112px;max-height:calc(100dvh - 124px); }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-crew-hud { left:8px;right:8px;bottom:8px;justify-content:flex-start;gap:5px;pointer-events:auto; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-crew-card { min-width:112px;flex-shrink:0;padding:6px; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-damage { font-size:19px; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-item { display:none; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .ladder-board { max-height:calc(100dvh - 120px);width:min(100vw,calc((100dvh - 120px) * 1000 / 1080))!important;margin-top:110px!important; }
+}
+@media(max-height:500px) and (min-width:600px) {
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-bar { flex-direction:row;align-items:flex-start; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-title { max-width:40vw; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-status { display:none; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-crew-card { padding:5px; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pirate-item { display:none; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .dock-panel { top:64px;max-height:calc(100dvh - 76px); }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .game-window-menu { top:64px;max-height:calc(100dvh - 76px); }
+}
+
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pool-stage>canvas { width:min(100vw,calc(100dvh * 25 / 14))!important;aspect-ratio:25/14; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .blocks-arena { display:grid;place-items:center;height:100%;padding:0; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .blocks-arena>canvas { width:min(100vw,calc(100dvh * 3 / 2))!important;height:auto!important;max-height:100%;aspect-ratio:3/2; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .match-board-list>li { background:#1b304b!important;border-color:#7186a366!important;color:#f1f6ff!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.match-identity>strong,.match-score>strong) { color:#f1f6ff!important; }
+:root[data-theme] .standalone-game-window.is-immersive .surface-content { overflow:auto!important;padding:76px 20px 20px!important; }
+
+/* Board games retain their essential actions, with setup prose in Game info. */
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.tactical-title,.tactical-stage-strip,.tactical-commanders,.tactical-board-legend,.tactical-board-label,.tactical-arbiter,.tactical-rule-card,.general-rank-reference,.fleet-shot-report,.estate-market-hud,.estate-players,.edition-footnote,.pool-table-state,.pool-shot-feedback,.action-note) { display:none!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .tactical-table { position:relative;height:100%;padding:0!important;border:0!important;border-radius:0!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .generals-layout { height:100%;display:flex;align-items:center;justify-content:center;padding:80px 16px 16px;gap:16px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .generals-board-wrap { flex:0 1 auto;width:auto;max-width:100%; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .generals-board { width:min(calc(100vw - 32px),calc((100dvh - 110px) * 9 / 8))!important;height:auto!important;aspect-ratio:9/8;max-width:100%; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .generals-layout>.tactical-sidebar { position:absolute;left:16px;bottom:16px;z-index:20;max-width:calc(100% - 32px);padding:0;border:0;background:transparent; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .generals-table .tactical-instruction { margin:0;padding:10px;background:#14243bf0;border:1px solid #7186a366;border-radius:8px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .generals-table .tactical-instruction>:not(.tactical-deploy-actions) { display:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-deployment { height:100%;padding:80px 16px 16px;display:flex;align-items:center;justify-content:center;gap:16px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-deployment>div:first-child { flex:0 1 auto;width:min(calc(100vw - 360px),calc(100dvh - 110px));min-width:0; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-deployment>.tactical-sidebar { flex:0 0 290px;max-height:calc(100dvh - 112px);overflow:auto; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-table .tactical-instruction { padding:12px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-table .tactical-instruction>:is(.eyebrow,h3,p,.fleet-placement-status) { display:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-unit-roster { gap:5px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-unit-roster button { min-height:40px;padding:7px 9px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-unit-roster small { font-size:10px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-battle-grids { height:100%;padding:80px 16px 20px;display:flex;align-items:center;justify-content:center;gap:18px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-battle-grids>div { width:min(calc((100vw - 50px) / 2),calc(100dvh - 110px));min-width:0; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-grid { width:100%!important;height:auto!important;aspect-ratio:1; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-mobile-tabs { position:absolute;top:76px;left:50%;transform:translateX(-50%);z-index:15; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .property-experience { position:relative;height:100%;display:grid;grid-template:minmax(0,1fr) / minmax(0,1fr);place-items:center;padding:72px 0 12px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .property-experience>:not(.estate-board-frame) { position:absolute!important;z-index:20; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .estate-board-frame { width:min(calc(100vw - 24px),calc(100dvh - 96px))!important;height:auto!important;aspect-ratio:1;margin:0!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .property-action-bar { position:absolute;z-index:20;bottom:16px;left:16px;max-width:min(410px,calc(100vw - 32px));max-height:42dvh;overflow:auto;background:#14243bf5; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.estate-concede,.estate-fortune,.estate-local-view) { display:none!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive[data-game-controls=hidden] :is(.estate-management,.estate-trade,.estate-assets) { display:none!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive[data-game-controls=shown] :is(.estate-management,.estate-trade) { display:block;left:16px;top:80px;width:min(400px,calc(100vw - 32px));max-height:calc(100dvh - 110px);overflow:auto;background:#14243bf5; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.estate-debt,.estate-auction,.estate-offer) { top:50%;left:50%;transform:translate(-50%,-50%);width:min(520px,calc(100vw - 32px));max-height:70dvh;overflow:auto;background:#14243bf7; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .memory-fieldset { height:100%;min-height:0;padding:84px 12px 12px;margin:0;overflow:auto; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .memory-deck { display:grid;grid-template-columns:repeat(var(--deck-columns),minmax(0,1fr));gap:10px;width:min(100%,1100px);margin:auto;padding:0!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .memory-tile { min-height:0!important;aspect-ratio:1; }
+:root[data-theme] .casual-arcade .room-shell.room-workspace.is-immersive .party-live-layout.memory .memory-fieldset { display:flex!important;align-items:center;justify-content:center;height:100%!important;min-height:0!important;padding:84px 12px 12px!important;overflow:auto; }
+:root[data-theme] .casual-arcade .room-shell.room-workspace.is-immersive .party-live-layout.memory .memory-deck { padding:0!important;gap:10px!important;grid-template-columns:repeat(var(--deck-columns),minmax(0,1fr))!important;width:min(100%,1100px,max(calc(var(--deck-columns) * 44px + (var(--deck-columns) - 1) * 10px),calc((100dvh - var(--memory-fit-overhead,98px) - (var(--deck-rows) - 1) * 10px) / var(--deck-rows) * var(--deck-columns) + (var(--deck-columns) - 1) * 10px)))!important; }
+:root[data-theme] .casual-arcade .room-shell.room-workspace.is-immersive .party-live-layout.memory .memory-tile { height:auto!important;min-height:0!important;aspect-ratio:1!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .phone-studio { position:relative;width:100%!important;height:100%;min-height:0!important;padding:86px 16px 16px;overflow:auto; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pool-experience { display:grid;place-items:center;position:relative;height:100%; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .pool-shot-controls { position:absolute;z-index:20;bottom:16px;left:16px;max-width:calc(100vw - 32px);max-height:24dvh;overflow:auto;background:#14243bf0; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.club-help,.pool-match-hud) { display:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .action-world { grid-template:minmax(0,1fr) / minmax(0,1fr);align-content:stretch; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .blocks-arena>canvas { max-height:100dvh!important;min-height:0!important;height:auto!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.match-tags,.match-place,.match-tags span,.match-tags .is-turn) { color:#c4d9f2!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .chat-empty { min-height:20px;padding:8px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .chat-empty>span { font-size:22px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .chat-empty>:is(strong,p) { display:none; }
+/* Tables and drawing keep their actions reachable in short landscape windows. */
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .solitaire-table { display:flex!important;flex-direction:column;height:100%!important;padding:76px 16px 12px!important;gap:8px;border:0!important;border-radius:0!important;overflow:hidden; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .solitaire-heading { display:none!important; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sol-playfield { flex:1;min-height:0;max-height:none!important;overflow:auto!important;padding:0 0 8px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .solitaire-tools { flex-shrink:0;gap:6px;margin:0;padding:6px 0 0; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sol-move-status { flex-shrink:0;min-height:0;margin:0;padding:0;font-size:11px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sol-move-status>span { overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+:root[data-theme] .game-window-settings-slot .sol-table-options { margin:0;color:inherit; }
+:root[data-theme] .game-window-settings-slot .sol-table-swatches { grid-template-columns:repeat(2,minmax(0,1fr)); }
+:root[data-theme] .game-window-settings-slot .sol-local-view { color:inherit; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-board { display:flex!important;flex-direction:column;height:100%!important;padding:76px 12px 10px;gap:8px;border:0!important;border-radius:0!important;overflow:hidden; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-heading { flex-shrink:0;min-height:36px;padding:0 4px 6px;gap:8px;flex-wrap:nowrap;border:0;background:transparent; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-artist { display:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-heading .sketch-word { flex:1;padding:0;text-align:left; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-word>small { display:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-word strong { font-size:20px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-heading .sketch-clock { width:34px;height:34px;min-height:34px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-clock svg { width:34px;height:34px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-clock b { font-size:13px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-tools { flex-shrink:0;flex-wrap:nowrap;gap:8px;padding:4px;background:transparent;border:0; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-colors { min-width:0;flex:1;flex-wrap:nowrap;overflow-x:auto;padding:3px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-colors>button { flex-shrink:0;width:30px;height:30px;min-height:30px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-brush-tools { flex-shrink:0;gap:4px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-paper { flex:1;min-height:0;display:grid;place-items:center;padding:0;background:transparent;container-type:size; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-canvas-wrap { width:min(100cqw,calc(100cqh * 20 / 13));height:auto;aspect-ratio:20/13;border-radius:8px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-canvas { width:100%;height:100%; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-round-status { flex-shrink:0;padding:0 4px;font-size:10px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-round-status>div { display:none; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-inline-guess { display:flex;flex-shrink:0;padding:0;gap:6px; }
+:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .sketch-word-choices { flex:1;min-height:0;overflow:auto;padding:12px; }
+@media(max-width:760px) {
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.solitaire-table,.sketch-board) { padding-top:120px!important; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .memory-deck { grid-template-columns:repeat(4,minmax(0,1fr));gap:8px; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .memory-fieldset { padding-top:120px; }
+ :root[data-theme] .casual-arcade .room-shell.room-workspace.is-immersive .party-live-layout.memory .memory-fieldset { padding-top:120px!important; }
+ :root[data-theme] .casual-arcade .room-shell.room-workspace.is-immersive .party-live-layout.memory .memory-deck { --deck-columns:4!important;--deck-rows:var(--mobile-deck-rows)!important;--memory-fit-overhead:134px;grid-template-columns:repeat(4,minmax(0,1fr))!important; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .generals-layout { padding:120px 8px 70px; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .generals-board { width:min(calc(100vw - 16px),calc((100dvh - 200px) * 9 / 8))!important; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-deployment { flex-direction:column;justify-content:flex-start;padding:118px 8px 8px;gap:8px;overflow:auto; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-deployment>div:first-child { width:min(calc(100vw - 16px),calc(100dvh - 350px));flex:none; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-deployment>.tactical-sidebar { width:min(100%,430px);flex:none;max-height:none; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-unit-roster { display:grid;grid-template-columns:repeat(2,minmax(0,1fr)); }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-battle-grids { padding:168px 8px 20px; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-battle-grids>div { width:min(calc(100vw - 16px),calc(100dvh - 200px)); }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-battle-grids.show-target>div:last-child,:root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-battle-grids.show-own>div:first-child { display:none; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .fleet-mobile-tabs { top:120px; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .property-experience { padding-top:118px; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .estate-board-frame { width:min(calc(100vw - 16px),calc(100dvh - 180px))!important; }
+ :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive .phone-studio { padding-top:120px; }
+}

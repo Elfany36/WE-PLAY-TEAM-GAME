@@ -24,6 +24,10 @@
 :root[data-theme] .pirate-damage { display:flex;align-items:baseline;justify-content:space-between;gap:7px;font-size:19px;font-weight:700;line-height:1.5;font-variant-numeric:tabular-nums; }
 :root[data-theme] .pirate-damage small { font-size:10px;font-weight:500;color:var(--muted);white-space:nowrap; }
 :root[data-theme] .pirate-stocks { display:flex;align-items:center;gap:4px;font-size:10px;line-height:1.5;color:var(--muted); }
+:root[data-theme] .pirate-dash-meter { display:block;appearance:none;width:100%;height:3px;margin-top:5px;border:0;border-radius:3px;overflow:hidden;background:color-mix(in srgb,var(--text) 12%,transparent);accent-color:var(--crew-color); }
+:root[data-theme] .pirate-dash-meter::-webkit-progress-bar { background:color-mix(in srgb,var(--text) 12%,transparent); }
+:root[data-theme] .pirate-dash-meter::-webkit-progress-value { background:var(--crew-color); }
+:root[data-theme] .pirate-dash-meter::-moz-progress-bar { background:var(--crew-color); }
 :root[data-theme] .pirate-item { grid-column:1/-1;display:flex;gap:5px;align-items:center;font-size:10px;line-height:1.5;min-height:18px;color:var(--muted);border-top:1px solid var(--border,var(--line));padding-top:5px; }
 :root[data-theme] .pirate-item.has-bomb { color:var(--text);font-weight:650; }
 :root[data-theme] .pirate-settings { margin:0 0 12px;border:1px solid var(--border,var(--line));border-radius:9px;background:var(--surface); }
