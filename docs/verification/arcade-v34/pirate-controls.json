@@ -7,7 +7,7 @@
       "settings release held controls; reset and save work",
       "native pause and resume"
     ],
-    "packets": 22,
+    "packets": 20,
     "mediaRequests": 0,
     "status": "passed"
   },
@@ -19,11 +19,11 @@
       "settings release held controls; reset and save work",
       "native pause and resume"
     ],
-    "packets": 22,
+    "packets": 21,
     "mediaRequests": 0,
     "httpRoundTripMs": {
-      "min": 136,
-      "max": 189
+      "min": 105,
+      "max": 112
     },
     "status": "passed"
   },
@@ -35,11 +35,11 @@
       "settings release held controls; reset and save work",
       "native pause and resume"
     ],
-    "packets": 21,
+    "packets": 20,
     "mediaRequests": 0,
     "httpRoundTripMs": {
-      "min": 411,
-      "max": 411
+      "min": 412,
+      "max": 412
     },
     "status": "passed"
   },

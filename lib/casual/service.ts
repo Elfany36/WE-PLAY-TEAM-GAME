@@ -7,16 +7,13 @@ export function invitationService(origin:unknown){return origin===CASUAL_SERVICE
 export function invitationEndpoint(value:unknown){return value==='arcade'?CASUAL_SERVICE_ORIGIN+'/api/casual':value==='site'?legacyCasualEndpoint():undefined}
 export function joinCandidates(primary:string,allowDedicated=true){return[...new Set([primary,legacyCasualEndpoint(),...(allowDedicated?[CASUAL_SERVICE_ORIGIN+'/api/casual']:[])])]}
 /** Known dedicated service is the default for new production rooms. No health-probe downgrade. */
-export async function chooseCasualEndpoint(mode?:string,features?:{matchRounds?:number}){
+export async function chooseCasualEndpoint(_mode?:string,_features?:{matchRounds?:number}){
  const configured=multiplayerEndpoint('casual');
  if(typeof location==='undefined'||!(/\.chatgpt\.site$|\.github\.io$/.test(location.hostname)))return configured;
  const origin=new URL(configured,location.href).origin;
  if(origin!==location.origin&&!HOSTED_ORIGINS.includes(origin))return configured;
- // Unlimited play does not require the new round-series authority. Sending a zero
- // here used to route every new room away from the dedicated live room service.
- // UNO's call-window repair and Pirate still require the matching engine version.
- // Saved sessions and invitations remain pinned to their original service.
- if(mode==='uno'||mode==='pirate'||(features?.matchRounds||0)>0)return legacyCasualEndpoint();
+ // The v34 dedicated authority supports UNO calls, Pirate and finite rounds.
+ // Existing sessions/invitations remain pinned; no health probe or room migration.
  return CASUAL_SERVICE_ORIGIN+'/api/casual';
 }
 

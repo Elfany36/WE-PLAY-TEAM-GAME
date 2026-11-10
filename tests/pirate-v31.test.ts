@@ -46,9 +46,9 @@ test('Four local pirates have independent keyboard actions and authority input l
  const keys=['KeyD','ArrowLeft','KeyJ','Numpad6'];for(let i=0;i<4;i++){const mode=i?'pirate-local-'+(i+1):'pirate';assert.equal(controlAction({code:keys[i]},mode),i===1||i===2?'left':'right');s=applyCasualAction(s,{action:'pirate-input',round:s.round,...input(i+1,{dx:i%2?-1:1})},'local-'+i,N+3100)}
  s=advanceCasual(s,N+3150).state;const g=s.game as PirateGame;assert.equal(g.world.fighters.length,4);for(let i=0;i<4;i++)assert.equal(g.world.fighters[i].lastSeq,i+1);
 });
-test('New Pirate rooms use the matching website authority while older games keep theirs',async()=>{
+test('New Pirate rooms use the updated dedicated authority without moving existing rooms',async()=>{
  const old=Object.getOwnPropertyDescriptor(globalThis,'location');
- try{for(const hostname of ['markup-learn-play-together.kendsfabros.chatgpt.site','elfany36.github.io']){Object.defineProperty(globalThis,'location',{configurable:true,value:{hostname,origin:'https://'+hostname,href:'https://'+hostname+'/'}});assert.equal(await chooseCasualEndpoint('pirate'),hostname.endsWith('.github.io')?'https://markup-learn-play-together.kendsfabros.chatgpt.site/api/casual':'/api/casual');assert.equal(await chooseCasualEndpoint('snake'),CASUAL_SERVICE_ORIGIN+'/api/casual')}}
+ try{for(const hostname of ['markup-learn-play-together.kendsfabros.chatgpt.site','elfany36.github.io']){Object.defineProperty(globalThis,'location',{configurable:true,value:{hostname,origin:'https://'+hostname,href:'https://'+hostname+'/'}});assert.equal(await chooseCasualEndpoint('pirate'),CASUAL_SERVICE_ORIGIN+'/api/casual');assert.equal(await chooseCasualEndpoint('snake'),CASUAL_SERVICE_ORIGIN+'/api/casual')}}
  finally{if(old)Object.defineProperty(globalThis,'location',old);else Reflect.deleteProperty(globalThis,'location')}
 });
 test('A grounded jump retains the second jump and a held key cannot spend it twice',()=>{
