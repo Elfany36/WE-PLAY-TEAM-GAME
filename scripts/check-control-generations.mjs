@@ -1,0 +1,20 @@
+/** Late in-flight input, first-input revocation, reconnect and same-seat ownership in real local DOs. */
+import assert from'node:assert/strict';import{writeFileSync,mkdirSync}from'node:fs';import{dirname}from'node:path';
+const base=process.env.BASE||'http://127.0.0.1:4401',out=process.env.RESULTS||'work/realtime-v37/control-generations.json',rows=[],wait=ms=>new Promise(r=>setTimeout(r,ms));mkdirSync(dirname(out),{recursive:true});
+async function post(body,token){const r=await fetch(base+'/api/casual',{method:'POST',headers:{'content-type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:JSON.stringify({...body,requestId:crypto.randomUUID()})});return{status:r.status,...await r.json()}}
+async function get(s){const r=await fetch(base+'/api/casual?code='+s.room.code,{headers:{Authorization:'Bearer '+s.token}});assert(r.ok);return(await r.json()).room}
+async function epoch(s,want){let r;for(let i=0;i<100;i++){r=await get(s);if(r.controlEpoch===want)return r;await wait(20)}assert.fail('Control view did not advance to '+want)}
+async function connect(s){const ws=new WebSocket(base.replace('http','ws')+'/api/casual?code='+s.room.code+'&stream=1');await new Promise((resolve,reject)=>{ws.onopen=()=>ws.send(JSON.stringify({type:'auth',token:s.token,protocol:2,active:true,stateAck:true,stateWindow:4}));ws.onerror=reject;ws.onmessage=e=>{const v=JSON.parse(e.data);if(v.type==='ready')resolve();if(v.type==='state')ws.send(JSON.stringify({type:'ack',revision:v.data.room?.revision??v.data.revision,stateWindow:4}))}});return ws}
+for(const mode of(process.env.GAMES||'snake,terra,circuit,tanks,sumo,pong,marble,blocks,pirate').split(',')){let h,p,ws,second;const row={mode};try{
+ h=await post({action:'create',mode,name:'Generation QA',bots:0,arcadeV2:true});assert.equal(h.status,201,h.error);p=await post({action:'join',code:h.room.code,name:'Other QA'});const s=await post({action:'start',code:h.room.code},h.token);await wait(Math.max(0,(s.room.game.startAt||0)-Date.now())+50);ws=await connect(h);
+ const seq=Date.now(),g=s.room.game,input=mode==='terra'?{action:'explore',right:true,left:false,jump:false,use:false,tx:5,ty:5,slot:0}:mode==='circuit'?{action:'drive',throttle:1,steer:0,drift:false,use:false,recover:false}:mode==='snake'?{action:'direction',direction:'down'}:mode==='blocks'?{action:'block-input',moves:[{seq,move:'left'}]}:mode==='pirate'?{action:'pirate-input',life:g.world.fighters.find(f=>f.id===h.room.youId).life,dx:1,down:false,jump:false,attack:false,special:false,dash:false,jumpSeq:0,attackSeq:0,specialSeq:0,dashSeq:0}:{action:'party-control',dx:1,dy:0,aim:0,fire:false,dash:false,brake:false};
+ const packet={...input,code:h.room.code,round:s.room.round,inputEpoch:g.startAt},send=(n,e)=>post({...packet,seq:n,controlEpoch:e,...(mode==='blocks'?{moves:[{seq:n,move:'left'}]}:{})},h.token);
+ row.firstPacketInFlight=rows.length%2===0;if(!row.firstPacketInFlight)assert.equal((await send(seq,0)).status,200);
+ ws.send(JSON.stringify({type:'ping',active:false}));await epoch(h,1);const late=await send(seq+1,0);assert.equal(late.status,409);row.delayedNewerPacketRejected=true;
+ ws.send(JSON.stringify({type:'ping',active:false}));await wait(70);assert.equal((await get(h)).controlEpoch,1);row.idlePingDoesNotRevokeAgain=true;
+ ws.send(JSON.stringify({type:'ping',active:true}));assert.equal((await send(seq+2,1)).status,200);row.freshViewWorks=true;
+ second=await connect(h);ws.close();await wait(100);assert.equal((await get(h)).controlEpoch,1);row.otherActiveTabPreserved=true;
+ second.close();await epoch(h,2);assert.equal((await send(seq+3,1)).status,409);row.closedSocketRevokesInFlight=true;
+ row.status='passed';
+ }catch(e){row.status='failed';row.error=e.message}finally{ws?.close();second?.close();if(p?.token&&h?.room)await post({action:'leave',code:h.room.code},p.token).catch(()=>{});if(h?.token&&h?.room)await post({action:'leave',code:h.room.code},h.token).catch(()=>{})}rows.push(row);console.log(JSON.stringify(row));writeFileSync(out,JSON.stringify(rows,null,2))}
+if(rows.some(r=>r.status!=='passed'))process.exitCode=1;

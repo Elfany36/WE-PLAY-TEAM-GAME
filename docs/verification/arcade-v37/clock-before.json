@@ -1,0 +1,15 @@
+[
+  {
+    "seededAuthoritySequence": 1794353630817,
+    "sentSequences": [
+      1794350032218,
+      1794350032219,
+      1794350035740,
+      1794350035920,
+      1794350036120,
+      1794350036243
+    ],
+    "freshSequencesAccepted": false,
+    "status": "finding"
+  }
+]

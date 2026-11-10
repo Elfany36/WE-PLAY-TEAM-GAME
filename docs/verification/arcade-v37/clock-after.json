@@ -1,0 +1,21 @@
+[
+  {
+    "seededAuthoritySequence": 1794354195495,
+    "resumedBeforeReload": false,
+    "sentSequences": [
+      1794354195496,
+      1794354195497,
+      1794354195497,
+      1794354195498,
+      1794354195499,
+      1794354195500,
+      1794354195501,
+      1794354195502,
+      1794354195503,
+      1794354195504
+    ],
+    "freshSequencesAccepted": true,
+    "heartbeatsAfterBackwardClock": 4,
+    "status": "passed"
+  }
+]

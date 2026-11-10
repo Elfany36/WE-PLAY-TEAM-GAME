@@ -1,0 +1,134 @@
+[
+  {
+    "game": "snake",
+    "width": 1440,
+    "height": 900,
+    "websiteRatios": [
+      {
+        "label": "snake-stadium map-classic",
+        "actual": 1,
+        "expected": 1,
+        "error": 0
+      }
+    ],
+    "fullscreenRatios": [
+      {
+        "label": "snake-stadium map-classic",
+        "actual": 1,
+        "expected": 1,
+        "error": 0
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "blocks",
+    "width": 1440,
+    "height": 900,
+    "websiteRatios": [
+      {
+        "label": "blocks-arena",
+        "actual": 1.1866464339908953,
+        "expected": 1.1866464339908953,
+        "error": 0
+      }
+    ],
+    "fullscreenRatios": [
+      {
+        "label": "blocks-arena",
+        "actual": 1.1877777777777778,
+        "expected": 1.1877777777777778,
+        "error": 0
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "snake",
+    "width": 390,
+    "height": 844,
+    "websiteRatios": [
+      {
+        "label": "snake-stadium map-classic",
+        "actual": 1,
+        "expected": 1,
+        "error": 0
+      }
+    ],
+    "fullscreenRatios": [
+      {
+        "label": "snake-stadium map-classic",
+        "actual": 1,
+        "expected": 1,
+        "error": 0
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "blocks",
+    "width": 390,
+    "height": 844,
+    "websiteRatios": [
+      {
+        "label": "blocks-arena",
+        "actual": 0.6080843585237259,
+        "expected": 0.6080843585237259,
+        "error": 0
+      }
+    ],
+    "fullscreenRatios": [
+      {
+        "label": "blocks-arena",
+        "actual": 0.6074766355140186,
+        "expected": 0.6074766355140186,
+        "error": 0
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "snake",
+    "width": 844,
+    "height": 390,
+    "websiteRatios": [
+      {
+        "label": "snake-stadium map-classic",
+        "actual": 1,
+        "expected": 1,
+        "error": 0
+      }
+    ],
+    "fullscreenRatios": [
+      {
+        "label": "snake-stadium map-classic",
+        "actual": 1,
+        "expected": 1,
+        "error": 0
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "blocks",
+    "width": 844,
+    "height": 390,
+    "websiteRatios": [
+      {
+        "label": "blocks-arena",
+        "actual": 0.6077630234933605,
+        "expected": 0.6077630234933605,
+        "error": 0
+      }
+    ],
+    "fullscreenRatios": [
+      {
+        "label": "blocks-arena",
+        "actual": 1.1871794871794872,
+        "expected": 1.1871794871794872,
+        "error": 0
+      }
+    ],
+    "status": "passed"
+  }
+]

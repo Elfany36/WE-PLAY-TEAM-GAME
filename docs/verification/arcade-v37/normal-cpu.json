@@ -1,0 +1,344 @@
+[
+  {
+    "game": "snake",
+    "cpuThrottle": 1,
+    "injectedRoundTripMs": 0,
+    "canvas": {
+      "width": 950,
+      "height": 950,
+      "displayWidth": 950,
+      "displayHeight": 950,
+      "attributes": {
+        "alpha": false,
+        "colorSpace": "srgb",
+        "colorType": "unorm8",
+        "desynchronized": true,
+        "toneMapping": {
+          "mode": "standard"
+        },
+        "willReadFrequently": false
+      }
+    },
+    "seconds": 5.26,
+    "mainThreadMsPerSecond": 82.7439163498099,
+    "scriptMsPerSecond": 53.03441064638784,
+    "layoutMsPerSecond": 0.5256653992395365,
+    "otherTaskMsPerSecond": 23.947338403041826,
+    "heapMB": 9.11480712890625,
+    "displayFrameMs": {
+      "samples": 322,
+      "p50": 16.699999999999818,
+      "p95": 16.700000000000728,
+      "max": 16.80000000000109
+    },
+    "paintFrameMs": {
+      "samples": 315,
+      "p50": 16.699999999999818,
+      "p95": 16.799999999999272,
+      "max": 16.80000000000109
+    },
+    "inputReceiptMs": {
+      "samples": 8,
+      "p50": 15,
+      "p95": 24,
+      "max": 24
+    },
+    "inputToAuthorityMs": {
+      "samples": 8,
+      "p50": 31,
+      "p95": 47,
+      "max": 47
+    },
+    "serverWorkMs": {
+      "samples": 8,
+      "p50": 1,
+      "p95": 6,
+      "max": 6
+    },
+    "stateAgeMs": {
+      "samples": 35,
+      "p50": 38,
+      "p95": 142,
+      "max": 163
+    },
+    "payloadBytesPerSecond": 5543.155893536122,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "game": "tanks",
+    "cpuThrottle": 1,
+    "injectedRoundTripMs": 0,
+    "actor": {
+      "phase": "playing",
+      "format": "classic",
+      "alive": true,
+      "finishedAt": null,
+      "x": 162.416,
+      "y": 150.521
+    },
+    "canvas": {
+      "width": 1440,
+      "height": 900,
+      "displayWidth": 1440,
+      "displayHeight": 900,
+      "attributes": {
+        "alpha": false,
+        "colorSpace": "srgb",
+        "colorType": "unorm8",
+        "desynchronized": true,
+        "toneMapping": {
+          "mode": "standard"
+        },
+        "willReadFrequently": false
+      }
+    },
+    "seconds": 5.087,
+    "mainThreadMsPerSecond": 118.23609199921368,
+    "scriptMsPerSecond": 84.93807745232948,
+    "layoutMsPerSecond": 1.565362689207784,
+    "otherTaskMsPerSecond": 29.878710438372323,
+    "heapMB": 12.0340576171875,
+    "displayFrameMs": {
+      "samples": 310,
+      "p50": 16.699999999999818,
+      "p95": 16.799999999999272,
+      "max": 16.80000000000109
+    },
+    "paintFrameMs": {
+      "samples": 304,
+      "p50": 16.699999999999818,
+      "p95": 16.799999999999272,
+      "max": 16.80000000000109
+    },
+    "inputReceiptMs": {
+      "samples": 14,
+      "p50": 11,
+      "p95": 17,
+      "max": 17
+    },
+    "inputToAuthorityMs": {
+      "samples": 13,
+      "p50": 29,
+      "p95": 56,
+      "max": 56
+    },
+    "serverWorkMs": {
+      "samples": 14,
+      "p50": 1,
+      "p95": 1,
+      "max": 1
+    },
+    "stateAgeMs": {
+      "samples": 98,
+      "p50": 26,
+      "p95": 53,
+      "max": 67
+    },
+    "payloadBytesPerSecond": 17466.090033418517,
+    "paintMs": "0.60",
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "game": "blocks",
+    "cpuThrottle": 1,
+    "injectedRoundTripMs": 0,
+    "canvas": {
+      "width": 1425,
+      "height": 950,
+      "displayWidth": 1425,
+      "displayHeight": 950,
+      "attributes": {
+        "alpha": false,
+        "colorSpace": "srgb",
+        "colorType": "unorm8",
+        "desynchronized": true,
+        "toneMapping": {
+          "mode": "standard"
+        },
+        "willReadFrequently": false
+      }
+    },
+    "seconds": 5.067,
+    "mainThreadMsPerSecond": 89.00967041642001,
+    "scriptMsPerSecond": 63.62778764554963,
+    "layoutMsPerSecond": 0.2666271955792364,
+    "otherTaskMsPerSecond": 24.322873495164792,
+    "heapMB": 10.74197769165039,
+    "displayFrameMs": {
+      "samples": 308,
+      "p50": 16.699999999999818,
+      "p95": 16.700000000000728,
+      "max": 16.80000000000109
+    },
+    "paintFrameMs": {
+      "samples": 303,
+      "p50": 16.699999999999818,
+      "p95": 16.700000000000728,
+      "max": 16.80000000000109
+    },
+    "inputReceiptMs": {
+      "samples": 10,
+      "p50": 13,
+      "p95": 14,
+      "max": 14
+    },
+    "inputToAuthorityMs": {
+      "samples": 8,
+      "p50": 38,
+      "p95": 52,
+      "max": 52
+    },
+    "serverWorkMs": {
+      "samples": 10,
+      "p50": 1,
+      "p95": 1,
+      "max": 1
+    },
+    "stateAgeMs": {
+      "samples": 98,
+      "p50": 30,
+      "p95": 52,
+      "max": 57
+    },
+    "payloadBytesPerSecond": 8570.554568778369,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "game": "circuit",
+    "cpuThrottle": 1,
+    "injectedRoundTripMs": 0,
+    "canvas": {
+      "width": 1440,
+      "height": 900,
+      "displayWidth": 1440,
+      "displayHeight": 900,
+      "renderScale": "1.00",
+      "attributes": {
+        "alpha": false,
+        "colorSpace": "srgb",
+        "colorType": "unorm8",
+        "desynchronized": true,
+        "toneMapping": {
+          "mode": "standard"
+        },
+        "willReadFrequently": false
+      }
+    },
+    "seconds": 5.269,
+    "mainThreadMsPerSecond": 117.81248813816664,
+    "scriptMsPerSecond": 85.67071550578858,
+    "layoutMsPerSecond": 0.35927120895805764,
+    "otherTaskMsPerSecond": 30.8195103435187,
+    "heapMB": 9.98073959350586,
+    "displayFrameMs": {
+      "samples": 323,
+      "p50": 16.69999999999891,
+      "p95": 16.799999999999272,
+      "max": 16.80000000000109
+    },
+    "paintFrameMs": {
+      "samples": 316,
+      "p50": 16.699999999999818,
+      "p95": 16.799999999999272,
+      "max": 16.80000000000109
+    },
+    "inputReceiptMs": {
+      "samples": 40,
+      "p50": 17,
+      "p95": 47,
+      "max": 60
+    },
+    "inputToAuthorityMs": {
+      "samples": 26,
+      "p50": 47,
+      "p95": 68,
+      "max": 86
+    },
+    "serverWorkMs": {
+      "samples": 40,
+      "p50": 1,
+      "p95": 1,
+      "max": 1
+    },
+    "stateAgeMs": {
+      "samples": 102,
+      "p50": 35,
+      "p95": 66,
+      "max": 102
+    },
+    "payloadBytesPerSecond": 17472.38565192636,
+    "paintMs": "0.5",
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "game": "terra",
+    "cpuThrottle": 1,
+    "injectedRoundTripMs": 0,
+    "canvas": {
+      "width": 1438,
+      "height": 899,
+      "displayWidth": 1438,
+      "displayHeight": 898,
+      "renderScale": "1.00",
+      "attributes": {
+        "alpha": false,
+        "colorSpace": "srgb",
+        "colorType": "unorm8",
+        "desynchronized": true,
+        "toneMapping": {
+          "mode": "standard"
+        },
+        "willReadFrequently": false
+      }
+    },
+    "seconds": 5.226,
+    "mainThreadMsPerSecond": 188.03712208189816,
+    "scriptMsPerSecond": 155.77822426329888,
+    "layoutMsPerSecond": 0.5688863375430546,
+    "otherTaskMsPerSecond": 31.600076540375042,
+    "heapMB": 10.270698547363281,
+    "displayFrameMs": {
+      "samples": 313,
+      "p50": 16.699999999999818,
+      "p95": 16.700000000000728,
+      "max": 33.30000000000018
+    },
+    "paintFrameMs": {
+      "samples": 0,
+      "p50": null,
+      "p95": null,
+      "max": null
+    },
+    "inputReceiptMs": {
+      "samples": 24,
+      "p50": 17,
+      "p95": 37,
+      "max": 44
+    },
+    "inputToAuthorityMs": {
+      "samples": 23,
+      "p50": 46,
+      "p95": 60,
+      "max": 68
+    },
+    "serverWorkMs": {
+      "samples": 24,
+      "p50": 1,
+      "p95": 2,
+      "max": 2
+    },
+    "stateAgeMs": {
+      "samples": 100,
+      "p50": 43,
+      "p95": 69,
+      "max": 76
+    },
+    "payloadBytesPerSecond": 10504.78377344049,
+    "errors": [],
+    "status": "passed"
+  }
+]

@@ -1,3 +1,4 @@
+import {snakeCollisions} from './snake-collision.ts';
 import {matchRoundSettings,beginSeries,continuesSeries,settleSeries,type RoundSeries} from './round-series.ts';
 import {newPirate,advancePirate,pirateAction,leavePirate,publicPirate,pirateSettings,type PirateGame,type PirateSettings} from './pirate.ts';
 import {newSolitaire,solitaireAction,advanceSolitaire,publicSolitaire,leaveSolitaire,type SolitaireGame} from './solitaire.ts';
@@ -34,7 +35,7 @@ export const casualMinimum=(mode:string)=>isStrategy(mode)||['uno','property','p
 export type CasualSettings=PirateSettings&NewGameSettings&HiddenSettings&{matchRounds?:number;roundSeconds?:60|120|180|300|600;winTarget?:5|10|11|20|21;raceLaps?:1|2|3|5;scene?:TableScene;characterSelection?:boolean;arcadeV2?:boolean;unoSameColor?:boolean;sumoFormat?:'bracket'|'classic';blockPace?:'arcade'|'expert'|'blitz';cards:number;speed:number;map?:SnakeMapId;snakeSize?:32|48|64;battle?:boolean;difficulty?:'cozy'|'standard'|'expert';unoFlip?:boolean;track?:string;bots?:number;relayRounds?:number;relaySeconds?:number;arena?:'garden'|'canyon'|'neon'|'harbor'|'foundry'|'glacier'|'bamboo'|'relay'};
 export type Direction='up'|'right'|'down'|'left';
 export type Point={x:number;y:number};
-export type CasualPlayer={id:string;name:string;tokenHash:string;joinedAt:number;lastSeen:number;color:number;ready:boolean;characterRound?:number;retired:boolean;requests:string[];role?:'player'|'spectator';appearance?:Appearance;traffic?:RoomTraffic;bot?:boolean};
+export type CasualPlayer={id:string;name:string;tokenHash:string;joinedAt:number;lastSeen:number;color:number;ready:boolean;characterRound?:number;controlEpoch?:number;retired:boolean;requests:string[];role?:'player'|'spectator';appearance?:Appearance;traffic?:RoomTraffic;bot?:boolean};
 export type LadderGame={kind:'ladders';positions:Record<string,number>;currentId:string;turn:number;deadline:number;lockUntil:number;lastRoll:null|{playerId:string;die:number;from:number;landing:number;to:number;jump:'ladder'|'snake'|null;overshoot:boolean;at:number}};
 export type MemoryGame={kind:'memory';deck:{key:number;matchedBy:string|null}[];revealed:number[];currentId:string;turn:number;deadline:number;resolveAt:number|null;scores:Record<string,number>;moves:number};
 export type Worm={id:string;body:Point[];trail?:Point[];previous?:Point[];direction:Direction;queue:Direction[];queueTicks?:number[];alive:boolean;score:number;lastSeq:number;deathAt:number|null;deathPoint:Point|null;reason:string;respawnAt?:number;kills?:number;deaths?:number;best?:number;protectedUntil?:number};
@@ -77,16 +78,7 @@ function respawnWorm(s:CasualState,g:SnakeGame,w:Worm,now:number){const occupied
 export function stepSnake(s:CasualState,now:number){
  const g=s.game as SnakeGame;if(s.settings.battle)for(const w of g.worms)if(!w.alive&&w.respawnAt&&now>=w.respawnAt&&!s.players.find(p=>p.id===w.id)?.retired)respawnWorm(s,g,w,now);const alive=g.worms.filter(w=>w.alive);for(const w of alive)w.previous=w.body.map(p=>({...p}));const heads=new Map<string,Point>(),growing=new Set<string>();
  for(const w of alive){if(w.queue.length&&(!w.queueTicks?.length||w.queueTicks[0]<=g.tick+1)){w.direction=w.queue.shift()!;w.queueTicks?.shift();}const d=DIRECTIONS[w.direction],head={x:w.body[0].x+d.x,y:w.body[0].y+d.y};heads.set(w.id,head);if(g.food.some(f=>samePoint(f,head)))growing.add(w.id)}
- const dead=new Map<string,string>(),killers=new Map<string,string>();
- for(const w of alive){const head=heads.get(w.id)!;if(head.x<0||head.y<0||head.x>=(g.size||32)||head.y>=(g.size||32)){dead.set(w.id,'Hit a wall');continue}
-  if(g.obstacles?.some(p=>samePoint(p,head))){dead.set(w.id,'Hit an obstacle');continue}
-  for(const other of alive){const otherHead=heads.get(other.id)!;
-   if(other.id!==w.id&&samePoint(head,otherHead)){dead.set(w.id,'Head-on collision');break}
-   if(other.id!==w.id&&samePoint(head,other.body[0])&&samePoint(otherHead,w.body[0])){dead.set(w.id,'Head-swap collision');break}
-   const body=growing.has(other.id)?other.body:other.body.slice(0,-1);
-   if(body.some(part=>samePoint(part,head))){dead.set(w.id,other.id===w.id?'Hit your own body':'Hit another snake');if(other.id!==w.id)killers.set(w.id,other.id);break}
-  }
- }
+ const {dead,killers}=snakeCollisions(alive,heads,growing,g.size||32,g.obstacles);
  for(const w of alive){const head=heads.get(w.id)!;if(dead.has(w.id)){w.alive=false;w.deathAt=now;w.deathPoint=w.body[0];w.reason=dead.get(w.id)!;w.body=[];w.queue=[];w.queueTicks=[];if(s.settings.battle){w.deaths=(w.deaths||0)+1;w.respawnAt=now+2000;w.score=0;const killer=g.worms.find(v=>v.id===killers.get(w.id));if(killer)killer.kills=(killer.kills||0)+1}event(s,(s.players.find(p=>p.id===w.id)?.name||'A player')+' is out: '+w.reason.toLowerCase()+'.',now)}else{w.trail=[head,...(w.trail||w.body)].slice(0,32);w.body.unshift(head);if(growing.has(w.id)){w.score++;w.best=Math.max(w.best||0,w.score);g.food=g.food.filter(f=>!samePoint(f,head))}else w.body.pop()}}
  g.tick++;spawnFood(s,g);const remaining=g.worms.filter(w=>w.alive);
  if(s.settings.battle)return;
@@ -268,6 +260,7 @@ function applyAction(input:CasualState,a:Record<string,any>,id:string|null,now:n
  if(s.phase!=='playing'||!s.game)throw new CasualError('Wait for the host to start a round.',409);
  if(a.round!==s.round)throw new CasualError('This action belongs to an older round.',409);
  const g=s.game;
+ if(a.controlEpoch!==undefined&&['direction','drive','explore','party-control','block-input','pirate-input'].includes(a.action)&&a.controlEpoch!==(p.controlEpoch||0))throw new CasualError('These inputs belong to an older control view. Refreshing controls.',409);
  if(a.inputEpoch!==undefined&&'startAt'in g&&a.inputEpoch!==g.startAt)throw new CasualError('This control belongs to an older round timeline.',409);
  if('actors'in g){partyAction(s,a,p.id,now);return s}
  if(g.kind==='pirate'){pirateAction(s,a,p.id,now);return s}
@@ -321,6 +314,6 @@ export function publicCasual(s:CasualState,id:string,now:number){
  else if(s.game?.kind==='property')game={...s.game,chance:undefined,chest:undefined};
  else if(s.game?.kind==='memory'){const g=s.game;game={...g,deck:g.deck.map((c,index)=>({index,matchedBy:c.matchedBy,...(c.matchedBy||g.revealed.includes(index)?{key:c.key}:{})}))}}
  else if(s.game?.kind==='snake')game={...s.game,worms:s.game.worms.map(({queue,queueTicks,lastSeq,...w})=>({...w,...(w.id===id?{pendingTurns:queue,pendingTicks:queueTicks,inputAck:lastSeq}:{})}))};
- return{serverVersion:36,code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,...(s.mode!=='terra'&&s.phase==='playing'&&s.ai?.wait&&s.ai.wait.readyAt>now?{botThinking:{playerId:s.ai.wait.playerId,until:s.ai.wait.readyAt}}:{}),chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,series:s.series,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canResume:canResumeCasual(s,id,now),canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,traffic,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&(p.bot||now-lastSeen<20000),canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
+ return{serverVersion:37,controlEpoch:me.controlEpoch||0,code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,...(s.mode!=='terra'&&s.phase==='playing'&&s.ai?.wait&&s.ai.wait.readyAt>now?{botThinking:{playerId:s.ai.wait.playerId,until:s.ai.wait.readyAt}}:{}),chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,series:s.series,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canResume:canResumeCasual(s,id,now),canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,traffic,controlEpoch,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&(p.bot||now-lastSeen<20000),canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
 }
 export type CasualPublic=ReturnType<typeof publicCasual>&{viewingId?:string;revision?:number;network?:{rtt:number;totalRtt?:number;serverMs?:number;snapshotInterval?:number}};

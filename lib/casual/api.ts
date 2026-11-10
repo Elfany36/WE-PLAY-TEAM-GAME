@@ -65,6 +65,8 @@ export async function casualBody(req:Request){
  if(b.action==='block-input'){out.seq=b.seq;out.moves=b.moves}
  if(b.action==='pool-shot'){out.angle=b.angle;out.power=b.power;out.pocket=b.pocket}
  if(b.action==='pool-place'){out.x=b.x;out.y=b.y}
+ if(b.controlReceipt!==undefined){if(typeof b.controlReceipt!=='boolean')throw new CasualError('Choose a valid control receipt.');out.controlReceipt=b.controlReceipt}
+ if(b.controlEpoch!==undefined){if(!Number.isSafeInteger(b.controlEpoch)||b.controlEpoch<0)throw new CasualError('Use the current control view.');out.controlEpoch=b.controlEpoch}
  if(b.inputEpoch!==undefined){if(!Number.isSafeInteger(b.inputEpoch)||b.inputEpoch<0)throw new CasualError('Invalid arena start.');out.inputEpoch=b.inputEpoch}
  if(b.action==='craft-terra')out.recipe=b.recipe;
  if(b.action==='spawn-terra'){out.x=b.x;out.y=b.y}
@@ -108,7 +110,7 @@ export function createCasualAPI(DB:CasualDatabase|undefined,keepAlive?:((task:Pr
     return await batch(b.code).run((current,now)=>{authenticate(tokenHash,current);const next=structuredClone(current),p=next.players.find(p=>p.id===id)!;p.appearance={...p.appearance,avatar:version,useAvatar:true};p.requests=[...p.requests.slice(-23),b.requestId];return{state:next,changed:true,result:(final,revision,time)=>reply(req,{room:project(final,id,time,revision)})}});
    }finally{locks.delete(id)}
   }
-  const receiptOnly=!!authenticatedHash&&req.headers.get('X-Room-Control-Receipt')==='1'&&fastControls.has(b.action);
+  const receiptOnly=(b.controlReceipt===true||!!authenticatedHash&&req.headers.get('X-Room-Control-Receipt')==='1')&&fastControls.has(b.action);
   const result=(final:CasualState,id:string,revision:number,time:number,duplicate=false)=>receiptOnly?reply(req,{ack:b.requestId,revision,serverNow:time}):reply(req,{...(token?{token}:{}),...(duplicate?{ack:b.requestId}:{}),room:project(final,id,time,revision,b.worldRound,b.worldVersion,b.scene)});
   return await batch(b.code).run<Response|Promise<Response>>((state,now)=>{
    const id=joinId||authenticate(tokenHash,state);if(!joinId&&b.requestId&&state.players.find(p=>p.id===id)?.requests.includes(b.requestId)){const advanced=advanceCasual(state,now);return{state:advanced.state,changed:advanced.changed,result:(final:CasualState,revision:number,time:number)=>result(final,id,revision,time,true)}}const budget={traffic:state.players.find(p=>p.id===id)?.traffic};if(!takeRoomBudget(budget,now,b.action==='draft-phone'?10:1))throw new CasualError('Too many actions. Give the room a moment to catch up.',429);const prepared=b.action==='start'?{...state,settings:{...state.settings,characterSelection:false}}:state;const next=applyCasualAction(prepared,b.action==='join'?{...b,id,hash:tokenHash}:b,id,now),player=next.players.find(p=>p.id===id);if(player)player.traffic=budget.traffic;

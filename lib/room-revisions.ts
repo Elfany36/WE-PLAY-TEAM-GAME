@@ -29,7 +29,7 @@ export class RoomRevisionFeed{
  private wake=()=>{
   if(this.disposed||this.ended)return;
   if(document.hidden){this.ping();return}
-  if(this.socket&&Date.now()-this.lastMessage>=STALE_AFTER)this.disconnect(this.socket,true);
+  if(this.socket&&performance.now()-this.lastMessage>=STALE_AFTER)this.disconnect(this.socket,true);
   if(!this.socket){clearTimeout(this.retry);this.connect()}else this.ping();
  };
  setActive(active:boolean){if(this.active===active)return;this.active=active;this.ping()}
@@ -54,7 +54,7 @@ export class RoomRevisionFeed{
   if(this.disposed||this.ended||this.socket||typeof WebSocket==='undefined')return;
   const url=new URL(this.endpoint,location.href);url.protocol=url.protocol==='https:'?'wss:':'ws:';url.searchParams.set('stream','1');
   let socket:WebSocket;try{socket=new WebSocket(url)}catch{this.handlers.status(false);this.reconnect();return}
-  this.socket=socket;this.lastMessage=Date.now();
+  this.socket=socket;this.lastMessage=performance.now();
   // A connection that never opens must recover too.
   this.handshake=setTimeout(()=>this.disconnect(socket,true),8000);
   socket.onopen=()=>{if(this.disposed||this.socket!==socket)return;try{this.authenticatedAt=performance.now();socket.send(JSON.stringify({type:'auth',token:this.token,active:this.active&&!document.hidden,protocol:2,stateAck:true,stateWindow:MAX_STATE_WINDOW}))}catch{this.disconnect(socket,true)}};
@@ -64,19 +64,19 @@ export class RoomRevisionFeed{
    if(!data||typeof data!=='object'||Array.isArray(data))return;
    const revision=Number.isSafeInteger(data.revision)&&data.revision>=0;
    if(data.type==='ready'&&revision){
-    this.lastMessage=Date.now();this.ready=true;this.protocol=data.protocol===2?2:1;this.receipts=data.receipts===true;this.autonomousState=data.autonomous===true;this.measure(performance.now()-this.authenticatedAt);clearTimeout(this.handshake);this.failures=0;
+    this.lastMessage=performance.now();this.ready=true;this.protocol=data.protocol===2?2:1;this.receipts=data.receipts===true;this.autonomousState=data.autonomous===true;this.measure(performance.now()-this.authenticatedAt);clearTimeout(this.handshake);this.failures=0;
     this.handlers.status(true);clearInterval(this.heartbeat);
-    this.heartbeat=setInterval(()=>{if(document.hidden)return;if(Date.now()-this.lastMessage>=STALE_AFTER)this.disconnect(socket,true);else this.ping()},HEARTBEAT);
+    this.heartbeat=setInterval(()=>{if(document.hidden)return;if(performance.now()-this.lastMessage>=STALE_AFTER)this.disconnect(socket,true);else this.ping()},HEARTBEAT);
    }
    if(!this.ready)return;
-   if(data.type==='pong'){this.lastMessage=Date.now();const sent=this.pings.get(data.id);if(sent!==undefined){this.pings.delete(data.id);this.measure(performance.now()-sent)}return}
-   if((data.type==='ready'||data.type==='revision')&&revision){this.lastMessage=Date.now();this.handlers.revision(data.revision)}
+   if(data.type==='pong'){this.lastMessage=performance.now();const sent=this.pings.get(data.id);if(sent!==undefined){this.pings.delete(data.id);this.measure(performance.now()-sent)}return}
+   if((data.type==='ready'||data.type==='revision')&&revision){this.lastMessage=performance.now();this.handlers.revision(data.revision)}
    if(data.type==='state'&&this.protocol===2&&data.data&&typeof data.data==='object'){
-    this.lastMessage=Date.now();const accepted=this.handlers.state?.(data.data,new TextEncoder().encode(event.data).byteLength),revision=data.data.room?.revision??data.data.revision;
+    this.lastMessage=performance.now();const accepted=this.handlers.state?.(data.data,new TextEncoder().encode(event.data).byteLength),revision=data.data.room?.revision??data.data.revision;
     if(accepted!==false&&Number.isSafeInteger(revision)&&revision>=0)try{socket.send(JSON.stringify({type:'ack',revision,stateWindow:stateWindow(this.roundTrip)}))}catch{this.disconnect(socket,true)}
    }
    if(data.type==='response'&&typeof data.id==='string'&&Number.isInteger(data.status)&&data.status>=200&&data.status<=599){
-    this.lastMessage=Date.now();const entry=this.pending.get(data.id);if(!entry)return;this.pending.delete(data.id);entry.cleanup();this.measure(performance.now()-entry.sentAt);entry.resolve(Response.json(data.data,{status:data.status}));
+    this.lastMessage=performance.now();const entry=this.pending.get(data.id);if(!entry)return;this.pending.delete(data.id);entry.cleanup();this.measure(performance.now()-entry.sentAt);entry.resolve(Response.json(data.data,{status:data.status}));
    }
   };
   socket.onerror=()=>this.disconnect(socket,true);

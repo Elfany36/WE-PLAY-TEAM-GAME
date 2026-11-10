@@ -1,4 +1,5 @@
 'use client';
+import {nextControlSequence} from '../../lib/control-sequence';
 import {useEffect,useRef,useState} from 'react';
 import {createPortal} from 'react-dom';
 import {useGameWindow} from '../games/GameWindow';
@@ -43,13 +44,13 @@ export default function PirateArena({room,local,enabled=true,onControl,onAction}
  function send(id:string){
   const {room:r,enabled,onControl,local}=latest.current,g=r.game as Game,f=g.world.fighters.find(f=>f.id===id);
   if(!enabled||r.phase!=='playing'||!f||f.st<=0||f.dead||r.players.find(p=>p.id===id)?.bot)return;
-  const seq=Math.max(Date.now(),sequence.current+1);sequence.current=seq;const edge=edges.current.get(id)||{},point=cursor.current.visible?painter.current?.aim(cursor.current.u,cursor.current.v):aim.current?.id===id?aim.current:null;
+  const seq=nextControlSequence(sequence.current,Math.max(f.lastSeq||0,f.jumpSeq||0,f.attackSeq||0,f.specialSeq||0,f.dashSeq||0));sequence.current=seq;const edge=edges.current.get(id)||{},point=cursor.current.visible?painter.current?.aim(cursor.current.u,cursor.current.v):aim.current?.id===id?aim.current:null;
   prediction.current.record(id,{seq,at:performance.now(),dx:Number(button(id,'right'))-Number(button(id,'left')),jumpHeld:button(id,'jump'),jumpSeq:edge.jumpSeq||0,down:button(id,'down'),dashHeld:button(id,'dash'),dashSeq:edge.dashSeq||0});sent.current.set(id,performance.now());onControl({action:'pirate-input',seq,life:f.life??0,dx:Number(button(id,'right'))-Number(button(id,'left')),down:button(id,'down'),jump:button(id,'jump'),attack:button(id,'attack'),special:button(id,'special'),dash:button(id,'dash'),jumpSeq:edge.jumpSeq||0,attackSeq:edge.attackSeq||0,specialSeq:edge.specialSeq||0,dashSeq:edge.dashSeq||0,...(point?{aimX:Math.max(-200,Math.min(map.w+200,point.x)),aimY:Math.max(-400,Math.min(map.h+200,point.y))}:{}),...(local?{localActor:id}:{})});
  }
  function press(id:string,action:Action,source:string,on:boolean){
   const r=latest.current.room,g=r.game as Game,f=g.world.fighters.find(f=>f.id===id);if(on&&(!latest.current.enabled||r.phase!=='playing'||!f||f.dead||f.st<=0))return;
   const keys=controls(id),set=keys[action]||(keys[action]=new Set()),before=set.size>0;if(on)set.add(source);else set.delete(source);if(before===!!set.size)return;
-  if(on&&action in edgeNames){const next=Math.max(Date.now(),sequence.current+1);sequence.current=next;const prior=edges.current.get(id)||{};prior[edgeNames[action as keyof typeof edgeNames]]=next;edges.current.set(id,prior)}
+  if(on&&action in edgeNames){const next=nextControlSequence(sequence.current,Math.max(f?.lastSeq||0,f?.jumpSeq||0,f?.attackSeq||0,f?.specialSeq||0,f?.dashSeq||0));sequence.current=next;const prior=edges.current.get(id)||{};prior[edgeNames[action as keyof typeof edgeNames]]=next;edges.current.set(id,prior)}
   send(id);
  }
  function clear(){const ids=[...held.current.keys()];held.current.clear();pressedKeys.current.clear();aim.current=null;for(const id of ids)send(id)}

@@ -1,0 +1,45 @@
+{
+  "events": [
+    {
+      "at": 1794351079146,
+      "alive": true,
+      "deathAt": null
+    },
+    {
+      "at": 1794351081288,
+      "alive": false,
+      "deathAt": 1794351081111
+    },
+    {
+      "at": 1794351083373,
+      "alive": true,
+      "deathAt": 1794351081111
+    }
+  ],
+  "errors": [
+    "Cannot read properties of undefined (reading 'x')",
+    "Cannot read properties of undefined (reading 'x')"
+  ],
+  "resizes": [
+    {
+      "at": 1105,
+      "value": 894
+    },
+    {
+      "at": 1144.1000000014901,
+      "value": 574
+    },
+    {
+      "at": 1524,
+      "value": 950
+    },
+    {
+      "at": 5310.5,
+      "value": 950
+    },
+    {
+      "at": 5331.39999999851,
+      "value": 950
+    }
+  ]
+}

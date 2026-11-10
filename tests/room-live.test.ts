@@ -18,7 +18,7 @@ function environment(t:any){
  }
  const document=Object.assign(new EventTarget(),{hidden:false}),window=new EventTarget(),saved=new Map<string,PropertyDescriptor|undefined>();
  for(const [key,value]of Object.entries({document,window,location:new URL('https://example.test/'),WebSocket:Socket})){saved.set(key,Object.getOwnPropertyDescriptor(globalThis,key));Object.defineProperty(globalThis,key,{configurable:true,writable:true,value})}
- t.mock.timers.enable({apis:['Date','setTimeout','setInterval'],now:10000});
+ t.mock.timers.enable({apis:['Date','setTimeout','setInterval'],now:10000});t.mock.method(performance,'now',Date.now.bind(Date));
  const statuses:boolean[]=[],revisions:number[]=[],states:any[]=[],feed=new RoomRevisionFeed(endpoint,token,{status:v=>statuses.push(v),revision:v=>revisions.push(v),state:v=>{states.push(v)}});
  t.after(()=>{feed.stop();t.mock.timers.reset();for(const [key,descriptor]of saved){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else Reflect.deleteProperty(globalThis,key)}});
  const open=(protocol=2)=>{const socket=Socket.instances.at(-1)!;socket.open();socket.message({type:'ready',revision:0,protocol});return socket};
@@ -83,4 +83,11 @@ test('applied live states acknowledge their revision so a slow stream can coales
 test('seat ownership controls foreground presence and socket latency stays a real measurement',t=>{
  const e=environment(t);e.feed.start();const socket=e.open();e.feed.setActive(false);assert.equal(socket.sent.at(-1).active,false);e.feed.setActive(true);assert.equal(socket.sent.at(-1).active,true);assert(Number.isSafeInteger(socket.sent.at(-1).id));
  const transport=new RoomTransport();transport.observeLatency(438.2);assert.equal(transport.stats.rtt,438);assert.equal(transport.stats.totalRtt,438);transport.observeLatency(NaN);assert.equal(transport.stats.rtt,438);
+});
+
+test('clock correction cannot postpone silent-socket recovery',t=>{
+ const e=environment(t);e.feed.start();const socket=e.open();
+ const steady=Date.now.bind(Date);t.mock.method(Date,'now',()=>steady()-3600000);
+ e.tick(3000);assert.equal(socket.sent.at(-1).type,'ping');
+ e.tick(6000);assert.equal(e.statuses.at(-1),false);e.tick(1000);assert.equal(e.Socket.instances.length,2);
 });

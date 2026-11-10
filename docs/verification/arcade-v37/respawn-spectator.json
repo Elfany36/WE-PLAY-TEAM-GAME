@@ -1,0 +1,35 @@
+{
+  "events": [
+    {
+      "at": 1794351634037,
+      "alive": true,
+      "deathAt": null
+    },
+    {
+      "at": 1794351636114,
+      "alive": false,
+      "deathAt": 1794351636050
+    },
+    {
+      "at": 1794351638284,
+      "alive": true,
+      "deathAt": 1794351636050
+    }
+  ],
+  "errors": [],
+  "resizes": [
+    {
+      "at": 1071,
+      "value": 894
+    },
+    {
+      "at": 1127.7999999970198,
+      "value": 574
+    },
+    {
+      "at": 1484,
+      "value": 950
+    }
+  ],
+  "status": "passed"
+}

@@ -1,0 +1,25 @@
+{
+  "outboundDelayMs": 750,
+  "originalSerial": 1,
+  "firstPacket": {
+    "action": "block-input",
+    "seq": 1794351574062,
+    "moves": [
+      {
+        "seq": 1794351574062,
+        "move": "drop",
+        "pieceSerial": 1
+      }
+    ],
+    "round": 1,
+    "inputEpoch": 1794351573925,
+    "requestId": "control-1-1794351574062",
+    "controlEpoch": 0,
+    "code": "ABCDEFGH"
+  },
+  "serialAfterDelayedDrop": 2,
+  "occupiedAfterDelayedDrop": 4,
+  "finalX": 4,
+  "errors": [],
+  "status": "passed"
+}

@@ -2,12 +2,12 @@
   "schema": 1,
   "releases": [
     {
-      "siteVersion": 32,
-      "sourceCommit": "a89a0d581031ee5df2b89382640924612897a4c3"
-    },
-    {
       "siteVersion": 33,
       "sourceCommit": "63e7dda2efa092a91d4bc8d18582b28c8e42717b"
+    },
+    {
+      "siteVersion": 35,
+      "sourceCommit": "22f545db6a88a8306a136208f252190389d384a0"
     }
   ],
   "inheritedPublications": [
@@ -44,6 +44,16 @@
     },
     {
       "path": "_next/static/0fc11613-2b2c-464f-99ba-3f08e285a93e/_ssgManifest.js",
+      "bytes": 76,
+      "sha256": "653f3e53e89b4f8548ff86c19e92bb3c6b84b6be7485a320b1e00893ed877479"
+    },
+    {
+      "path": "_next/static/1fe50411-89d1-4fd0-b55b-ea5330811b2e/_buildManifest.js",
+      "bytes": 159,
+      "sha256": "47f02b34be6dc481257b6efce4c19e19111f37ef5c437f8ffed44f0da97fa9bb"
+    },
+    {
+      "path": "_next/static/1fe50411-89d1-4fd0-b55b-ea5330811b2e/_ssgManifest.js",
       "bytes": 76,
       "sha256": "653f3e53e89b4f8548ff86c19e92bb3c6b84b6be7485a320b1e00893ed877479"
     },
@@ -903,6 +913,11 @@
       "sha256": "fa56aeaa72dc22936d2678e14bf92e2ff5601a1bfbeb99ff17b0d5b922346240"
     },
     {
+      "path": "_next/static/chunks/CasualArcade-Dmhtu0yv.js",
+      "bytes": 265835,
+      "sha256": "79e57b62795e16de7d63eaf826cda8d04ecab16dc7daba1f4958ab130a3e5a28"
+    },
+    {
       "path": "_next/static/chunks/CasualArcade-Dn5OQY-w.js",
       "bytes": 151051,
       "sha256": "c48b9231c7217be8fc6a52ae6a0974477d9b4107fed066b15760eb285e52a3b7"
@@ -1061,6 +1076,11 @@
       "path": "_next/static/chunks/Documentation-D6dCN3oA.js",
       "bytes": 186348,
       "sha256": "038f7dc24622ad8af30d52a3ea76278b81c4bf4d5f1a4a3a5ff2d3ea7651abd8"
+    },
+    {
+      "path": "_next/static/chunks/Documentation-D7wbvYJD.js",
+      "bytes": 186358,
+      "sha256": "56ca2ace691b09409fcf1c47e693cdd07458ddf88e2b4e8da9fb579dc44a8c65"
     },
     {
       "path": "_next/static/chunks/Documentation-DATOEeAj.js",
@@ -1821,6 +1841,11 @@
       "path": "_next/static/chunks/MarkupApp-DtSHm49y.js",
       "bytes": 64542,
       "sha256": "847352287cf55766cba773af114eab95dcaeca6a36884db0f9e0b8e78765f74d"
+    },
+    {
+      "path": "_next/static/chunks/MarkupApp-NHZOKg5b.js",
+      "bytes": 64788,
+      "sha256": "cd7071057bbdeead62397fb47969db9958399078aa29281f3398a4bb77185761"
     },
     {
       "path": "_next/static/chunks/MarkupApp-QaAL-wwZ.js",
@@ -2796,6 +2821,11 @@
       "path": "_next/static/chunks/app-route-prefetch-policy-BuR6WTGi.js",
       "bytes": 937,
       "sha256": "df14e3065b9e010e3c1298cdb4da6e0ebb510dcdf6bdc933ce35ea6fec45631f"
+    },
+    {
+      "path": "_next/static/chunks/app-route-prefetch-policy-C2CghTsY.js",
+      "bytes": 937,
+      "sha256": "e9aa3ca009c02d1c9c8447cafbb1fbef96ac41c325f645e8580c7adb4094d0ec"
     },
     {
       "path": "_next/static/chunks/app-route-prefetch-policy-C6ejT6Dr.js",
@@ -4293,6 +4323,11 @@
       "sha256": "3761ae11c117a9ccd379f7b276ed22758db8d786f2dadad32b7bff0e244220a3"
     },
     {
+      "path": "_next/static/chunks/index-CkJPqpw6.js",
+      "bytes": 195844,
+      "sha256": "1549c206366d63da718b4a94650d011bf91d1163328604f927c2fd1787744091"
+    },
+    {
       "path": "_next/static/chunks/index-Cpb7Z7BW.js",
       "bytes": 195619,
       "sha256": "e3e4b2c750d21eacd846c4e85aacf4a6b3ea669ccae321771d936be035cfe606"
@@ -4591,6 +4626,11 @@
       "path": "_next/static/chunks/layout-segment-context-Cautu7pA.js",
       "bytes": 494,
       "sha256": "6564c0c440a2afba7edff926bf26bab5279f744fe67742b63c338ac554d72ad2"
+    },
+    {
+      "path": "_next/static/chunks/layout-segment-context-CckI2rGK.js",
+      "bytes": 494,
+      "sha256": "69d54809a1df34971b774c1a0378d05b051f40c04abec5ed7545c775c9d97528"
     },
     {
       "path": "_next/static/chunks/layout-segment-context-CeTI4Pyg.js",

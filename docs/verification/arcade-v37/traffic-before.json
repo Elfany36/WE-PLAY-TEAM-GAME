@@ -1,0 +1,9 @@
+{
+  "samples": 30,
+  "totalControlResponseBytes": 21402,
+  "meanControlResponseBytes": 713,
+  "fullControlStates": 30,
+  "autonomousStates": 45,
+  "meanServerMs": 1.4,
+  "status": "passed"
+}

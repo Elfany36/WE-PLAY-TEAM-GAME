@@ -1,0 +1,14 @@
+[
+  {
+    "label": "before",
+    "occupiedBefore": 4,
+    "occupiedAfter": 8,
+    "lateDropAffectedNewPiece": true
+  },
+  {
+    "label": "after",
+    "occupiedBefore": 4,
+    "occupiedAfter": 4,
+    "lateDropAffectedNewPiece": false
+  }
+]

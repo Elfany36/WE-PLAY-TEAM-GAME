@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Drawing blur, coalesced backlog and an undo/draw race",
+    "blurStoppedInk": true,
+    "lastPointAfterBlur": [
+      300,
+      130
+    ],
+    "coalescedPathPreserved": true,
+    "writesDuringUndo": 0,
+    "undoRaceNoError": true,
+    "undoRaceStrokeCount": 1,
+    "undoRaceOrdered": true,
+    "errors": [],
+    "correct": true,
+    "status": "passed"
+  },
+  {
+    "name": "Terra authority releases held input even when the neutral packet is lost",
+    "authorityClearedInput": true,
+    "correct": true,
+    "status": "passed"
+  },
+  {
+    "name": "A hidden local mining world owns no physics or UI clock intervals",
+    "hiddenIntervals": {},
+    "correct": true,
+    "status": "passed"
+  },
+  {
+    "name": "Racing resumes from authority without predicting a stale hidden interval",
+    "maxReturnDisplacement": 109.01636664694867,
+    "maxReturnAuthorityError": 0.000579799252155658,
+    "returnFrames": 8,
+    "roomPaused": true,
+    "resumeVisible": true,
+    "correct": true,
+    "status": "passed"
+  },
+  {
+    "name": "Racing resumes from authority without predicting a stale hidden interval over HTTP with a held old response",
+    "maxReturnDisplacement": 150.24063642345598,
+    "maxReturnAuthorityError": 0.0003075021052556709,
+    "returnFrames": 7,
+    "roomPaused": true,
+    "resumeVisible": true,
+    "correct": true,
+    "status": "passed"
+  }
+]

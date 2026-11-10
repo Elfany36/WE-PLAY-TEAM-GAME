@@ -1,0 +1,26 @@
+[
+  {
+    "mode": "terra",
+    "delayedNewerPacketStatus": 200,
+    "rejected": false,
+    "status": "finding"
+  },
+  {
+    "mode": "circuit",
+    "delayedNewerPacketStatus": 200,
+    "rejected": false,
+    "status": "finding"
+  },
+  {
+    "mode": "tanks",
+    "delayedNewerPacketStatus": 200,
+    "rejected": false,
+    "status": "finding"
+  },
+  {
+    "mode": "pirate",
+    "delayedNewerPacketStatus": 200,
+    "rejected": false,
+    "status": "finding"
+  }
+]
