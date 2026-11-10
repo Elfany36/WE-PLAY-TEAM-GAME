@@ -58,7 +58,18 @@ for(const width of widths)for(const variant of variants){
   for(let n=0;n<20;n++){
    session=await post({action:'create',mode:'solitaire',name:'Card controls QA',solitaireVariant:variant,bots:0});
    const start=await post({action:'start',code:session.room.code},session.token);board=start.room.game.boards[start.room.youId];
-   if(shape?solPairOptions(board,variant).length:legalSolitaireMoves(board,variant).some(m=>m.to.zone==='tableau'&&Math.abs(m.from.index-m.to.index)<=3))break;
+   let playable=shape?!!solPairOptions(board,variant).length:legalSolitaireMoves(board,variant).some(m=>m.to.zone==='tableau'&&Math.abs(m.from.index-m.to.index)<=3);
+   // A valid random draw-three deal need not have an immediate waste move.
+   // Select a reachable stock-move fixture through the actual API, then restart it.
+   if(playable&&variant.startsWith('klondike')){
+    playable=false;
+    for(let draw=0;draw<28;draw++){
+     const result=await post({action:'sol-draw',code:session.room.code,round:start.room.round,boardVersion:board.version},session.token);board=result.room.game.boards[result.room.youId];
+     if(legalSolitaireMoves(board,variant).some(m=>m.from.zone==='waste')){playable=true;break}
+    }
+    if(playable){const result=await post({action:'sol-restart',code:session.room.code,round:start.room.round,boardVersion:board.version},session.token);board=result.room.game.boards[result.room.youId]}
+   }
+   if(playable)break;
    await post({action:'leave',code:session.room.code},session.token);session=null;
   }
   assert(session,'Could not find a playable test deal');

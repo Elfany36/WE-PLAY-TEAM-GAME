@@ -1,0 +1,56 @@
+/** Focus loss, dense pen input, destructive-command races, lost release packets and tab return.
+ * Run against an isolated local Workers preview; BASE and RESULTS select the target and report.
+ */
+import assert from 'node:assert/strict';import {writeFileSync,mkdirSync} from 'node:fs';import {dirname} from 'node:path';
+import {CASUAL_GAMES} from '../lib/casual/rules.ts';
+const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
+const base=process.env.BASE||'http://127.0.0.1:4301',out=process.env.RESULTS||'work/realtime-v36/lifecycle.json',rows=[],wait=ms=>new Promise(r=>setTimeout(r,ms)),browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']});
+mkdirSync(dirname(out),{recursive:true});
+async function post(body,token){const r=await fetch(base+'/api/casual',{method:'POST',headers:{'content-type':'application/json',...(token?{Authorization:'Bearer '+token}:{})},body:JSON.stringify({requestId:crypto.randomUUID(),...body})});const d=await r.json();assert(r.ok,d.error);return d}
+async function get(s){const r=await fetch(base+'/api/casual?code='+s.room.code,{headers:{Authorization:'Bearer '+s.token}});assert(r.ok);return(await r.json()).room}
+async function until(check,message,timeout=10000){const end=Date.now()+timeout;while(!await check()){assert(Date.now()<end,message);await wait(20)}}
+function hiddenScript(){Object.defineProperty(document,'hidden',{configurable:true,get:()=>window.qaHidden===true});Object.defineProperty(document,'visibilityState',{configurable:true,get:()=>window.qaHidden?'hidden':'visible'})}
+async function visibility(page,hidden){await page.evaluate(hidden=>{window.qaHidden=hidden;document.dispatchEvent(new Event('visibilitychange'))},hidden)}
+async function open(mode,{lag=0}={}){
+ const host=await post({action:'create',mode,name:'Edge host QA',bots:0,cards:20,speed:175,arcadeV2:true}),peer=await post({action:'join',code:host.room.code,name:'Edge peer QA'});await post({action:'start',code:host.room.code},host.token);
+ const context=await browser.newContext({viewport:{width:1440,height:950}});await context.addInitScript(hiddenScript);await context.addInitScript(s=>{sessionStorage.setItem('markup-casual-session',JSON.stringify(s));localStorage.setItem('markup-motion-debug','1')},{code:host.room.code,token:host.token,apiOrigin:base});const page=await context.newPage(),errors=[],controls={dropNeutral:false,holdWrites:false,held:[]};page.on('pageerror',e=>errors.push(e.message));
+ await page.routeWebSocket('**/api/casual**',socket=>{const server=socket.connectToServer();const pipe=(target,up)=>{let at=0;return message=>{if(up&&controls.holdWrites){try{const v=JSON.parse(message.toString());if(v.body){controls.held.push(()=>target.send(message));return}}catch{}}if(up&&controls.dropNeutral)try{const v=JSON.parse(message.toString()),b=v.body;if(b?.action==='explore'&&!b.left&&!b.right&&!b.use&&!b.jump)return}catch{}at=Math.max(at+1,Date.now()+lag/2);setTimeout(()=>{try{target.send(message)}catch{}},Math.max(0,at-Date.now()))}};socket.onMessage(pipe(server,true));server.onMessage(pipe(socket,false))});
+ if(lag)await page.route('**/api/casual**',async route=>{await wait(lag/2);const response=await route.fetch();await wait(lag/2);await route.fulfill({response})});
+ await page.goto(base+'/#casual-arcade');
+ return{host,peer,context,page,errors,controls,async close(){await context.close();for(const s of [peer,host])await post({action:'leave',code:host.room.code},s.token).catch(()=>{})}};
+}
+async function observe(name,run){if(process.env.CASE&&!name.includes(process.env.CASE))return;const row={name};try{await run(row);row.status=row.correct?'passed':'finding'}catch(e){row.status='failed';row.error=e.message}rows.push(row);console.log(JSON.stringify(row));writeFileSync(out,JSON.stringify(rows,null,2));}
+try{
+ await observe('Drawing blur, coalesced backlog and an undo/draw race',async row=>{
+  const room=await open('sketch',{lag:400}),{page,host}=room;try{
+   let r=await get(host);await post({action:'sketch-choose',code:r.code,round:r.round,turn:r.game.turn,choice:0},host.token);await page.locator('.sketch-canvas.can-draw').waitFor();await page.getByRole('button',{name:'Fullscreen',exact:true}).click();const c=page.locator('.sketch-canvas'),b=await c.boundingBox();
+   await page.mouse.move(b.x+b.width*.1,b.y+b.height*.2);await page.mouse.down();await page.mouse.move(b.x+b.width*.3,b.y+b.height*.2,{steps:6});await wait(100);await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await page.mouse.move(b.x+b.width*.7,b.y+b.height*.6,{steps:6});await page.mouse.up();await until(async()=>{r=await get(host);return r.game.strokes[0]?.closed},'Stroke never closed');
+   const last=r.game.strokes[0].points.slice(-2);row.blurStoppedInk=last[0]<=350&&last[1]<=200;row.lastPointAfterBlur=last;
+   await page.mouse.move(b.x+b.width*.1,b.y+b.width*.1);await page.mouse.down();
+   await c.evaluate(node=>{const b=node.getBoundingClientRect(),points=Array.from({length:256},(_,i)=>({clientX:b.x+(i<=127?100+i/127*550:650)*b.width/1000,clientY:b.y+(i<=127?100:100+(i-128)/127*350)*b.height/650})),e=new PointerEvent('pointermove',{pointerId:1,pointerType:'mouse',buttons:1,button:0,bubbles:true,cancelable:true,clientX:points.at(-1).clientX,clientY:points.at(-1).clientY});Object.defineProperty(e,'getCoalescedEvents',{value:()=>points});node.dispatchEvent(e)});
+   await page.mouse.up();await wait(150);row.coalescedPathPreserved=await c.evaluate(node=>{const [r,g,b]=node.getContext('2d').getImageData(Math.round(350*node.width/1000),Math.round(100*node.height/650),1,1).data;return Math.min(r,g,b)<200});
+   await until(async()=>{r=await get(host);return r.game.strokes.length===2&&r.game.strokes.at(-1).closed},'Second stroke never closed');const count=r.game.strokes.length;
+   room.controls.holdWrites=true;await page.getByRole('button',{name:'Undo stroke',exact:true}).click();await until(()=>room.controls.held.length>0,'Undo never sent');await page.mouse.move(b.x+b.width*.2,b.y+b.height*.8);await page.mouse.down();await page.mouse.move(b.x+b.width*.6,b.y+b.height*.8,{steps:12});await page.mouse.up();await wait(150);row.writesDuringUndo=room.controls.held.length-1;room.controls.holdWrites=false;for(const send of room.controls.held.splice(0))send();await wait(1100);r=await get(host);row.undoRaceNoError=await page.locator('.sketch-feedback.error').count()===0;row.undoRaceStrokeCount=r.game.strokes.length;row.undoRaceOrdered=r.game.strokes.length===count-1;
+   row.errors=room.errors;row.correct=row.blurStoppedInk&&row.coalescedPathPreserved&&row.undoRaceNoError&&row.undoRaceOrdered&&!room.errors.length;
+  }finally{await room.close()}
+ });
+ await observe('Terra authority releases held input even when the neutral packet is lost',async row=>{
+  const room=await open('terra'),{page,host,peer}=room;let socket,timer;try{
+   socket=new WebSocket(base.replace('http:','ws:')+'/api/casual?code='+host.room.code+'&stream=1');await new Promise((resolve,reject)=>{socket.onopen=()=>socket.send(JSON.stringify({type:'auth',token:peer.token,active:true,protocol:2,stateAck:true,stateWindow:8}));socket.onmessage=e=>{const v=JSON.parse(e.data);if(v.type==='ready')resolve();if(v.type==='state'){const rev=v.data.room?.revision??v.data.revision;socket.send(JSON.stringify({type:'ack',revision:rev,stateWindow:8}))}};socket.onerror=reject});timer=setInterval(()=>socket.send(JSON.stringify({type:'ping',active:true})),3000);
+   await page.locator('.terra-world canvas').waitFor();await page.locator('.terra-world canvas').focus();await page.keyboard.down('KeyD');await until(async()=>(await get(peer)).game.inputs[host.room.youId]?.right,'Held explorer input never arrived');room.controls.dropNeutral=true;await visibility(page,true);await wait(150);const r=await get(peer);row.authorityClearedInput=!r.game.inputs[host.room.youId]?.at;row.correct=row.authorityClearedInput;
+  }finally{room.controls.dropNeutral=false;await visibility(page,false).catch(()=>{});await page.keyboard.up('KeyD').catch(()=>{});clearInterval(timer);socket?.close();await room.close()}
+ });
+ await observe('A hidden local mining world owns no physics or UI clock intervals',async row=>{
+  const context=await browser.newContext({viewport:{width:1440,height:950}});await context.addInitScript(hiddenScript);await context.addInitScript(()=>{window.hiddenTicks={};const start=window.setInterval;window.setInterval=function(fn,ms,...args){if(typeof fn!=='function')return start(fn,ms,...args);return start(()=>{if(document.hidden)window.hiddenTicks[ms]=(window.hiddenTicks[ms]||0)+1;fn(...args)},ms)}});const page=await context.newPage();try{
+   await page.goto(base+'/#casual-arcade');await page.getByLabel('Search arcade games').fill(CASUAL_GAMES.find(g=>g.id==='terra').name);await page.locator('.party-game-card').first().click();await page.getByLabel('Computer opponent count').selectOption('0');await page.getByRole('button',{name:'Play locally',exact:true}).click();await page.getByRole('button',{name:'Start game',exact:false}).click();await page.locator('.terra-world canvas').waitFor();await wait(300);await visibility(page,true);await page.evaluate(()=>window.hiddenTicks={});await wait(900);row.hiddenIntervals=await page.evaluate(()=>window.hiddenTicks);row.correct=!(row.hiddenIntervals[50]||row.hiddenIntervals[250]);
+  }finally{await visibility(page,false).catch(()=>{});await context.close()}
+ });
+ await observe('Racing resumes from authority without predicting a stale hidden interval',async row=>{
+  const room=await open('circuit',{lag:400}),{page,host}=room;try{
+   await page.locator('.kart-world canvas').waitFor();await page.getByRole('button',{name:'Fullscreen',exact:true}).click();await wait(3200);await page.locator('.kart-world canvas').focus();await page.keyboard.down('KeyW');await wait(900);
+   const id=host.room.youId,prior=await page.locator('.kart-world canvas').evaluate((c,id)=>c.motionTrace?.at(-1)?.entities.find(e=>e.id===id),id);assert(prior,'No recorded racer pose');await visibility(page,true);await wait(9500);const authority=(await get(host)).game.drivers.find(d=>d.id===id);await page.locator('.kart-world canvas').evaluate(c=>c.motionTrace=[]);await visibility(page,false);await wait(1100);await page.keyboard.up('KeyW');
+   const trace=await page.locator('.kart-world canvas').evaluate((c,id)=>(c.motionTrace||[]).flatMap(f=>f.entities.filter(e=>e.id===id).map(e=>({x:e.x,y:e.y}))),id);row.maxReturnDisplacement=Math.max(0,...trace.map(p=>Math.hypot(p.x-prior.x,p.y-prior.y)));row.maxReturnAuthorityError=Math.max(0,...trace.map(p=>Math.hypot(p.x-authority.x,p.y-authority.y)));row.returnFrames=trace.length;const r=await get(host);row.roomPaused=r.phase==='paused';row.resumeVisible=await page.getByRole('button',{name:'Resume game',exact:true}).isVisible();row.correct=row.returnFrames>0&&row.maxReturnAuthorityError<20&&row.roomPaused&&row.resumeVisible;
+  }finally{await room.close()}
+ });
+}finally{await browser.close()}
+if(!process.env.BASELINE&&rows.some(r=>!r.correct))process.exitCode=1;

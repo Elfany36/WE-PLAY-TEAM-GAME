@@ -9,6 +9,11 @@ export function expectsWorldUpdates(room:CasualPublic|null,receiptAge=0){
  return !!moving&&room.serverNow+Math.max(0,receiptAge)>=(room.game.startAt||0);
 }
 
+/** A returning moving canvas must see a new receipt before replaying prediction. */
+export function worldFrameReady(room:CasualPublic,received:number,wokeAt:number){
+ return received>=wokeAt||!expectsWorldUpdates(room,Math.max(0,wokeAt-received));
+}
+
 /** Healthy streams arrive every 100 ms. Recover missing state independently of pongs. */
 export function worldQuietLimit(interval=100){
  return Math.max(400,Math.min(650,(Number.isFinite(interval)&&interval>0?interval:100)*3));

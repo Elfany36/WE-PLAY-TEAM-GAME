@@ -15,6 +15,8 @@ import {PoseReconciler} from '../../lib/game-motion';
 import {controlAction,controlBindings} from '../../lib/player-controls';
 import {readStored,writeStored} from '../../lib/client-state';
 import {animateCanvas} from '../../lib/canvas-visibility';
+import {worldFrameReady} from '../../lib/casual/world-stream';
+import {visibleInterval} from '../../lib/visible-interval';
 import {controlHeartbeat} from '../../lib/control-channel';
 import PirateHud,{PirateClock} from './PirateHud';
 import ControlsPicker from './ControlsPicker';
@@ -34,7 +36,7 @@ export default function PirateArena({room,local,enabled=true,onControl,onAction}
  if((latest.current.room.game as Game)?.world.tick!==game.world.tick){const prior=latest.current.room.game as Game;previous.current=prior.world;snapshotSpan.current=Math.max(16,Math.min(150,game.lastTickAt-prior.lastTickAt));latest.current.received=performance.now()}
  latest.current={...latest.current,room,enabled:enabled&&!gameWindow?.menu,onControl,local};displayRef.current=display;seatRef.current=seat;
  const active=room.phase==='playing'&&enabled&&!spectating&&!gameWindow?.menu,own=game.world.fighters.find(f=>f.id===(local?seat:room.youId)),map=PIRATE_MAPS.find(m=>m.id===game.world.map)!,variant=PIRATE_MODES.find(m=>m.id===game.world.variant)!,canResume=(room as {canResume?:boolean}).canResume||room.hostId===room.youId;
- useEffect(()=>{const saved=readStored(preferenceKey),old=readStored('markup-pirate-display-v31') as Partial<PirateDisplay>|null;if(saved)setDisplay(pirateDisplay(saved));else if(old){const migrated=pirateDisplay({...old,camera:old.camera==='arena'?'arena':'action'});setDisplay(migrated);writeStored(preferenceKey,migrated);}const clock=setInterval(()=>setNow(latest.current.room.serverNow+Math.max(0,performance.now()-latest.current.received)),250);return()=>clearInterval(clock)},[]);
+ useEffect(()=>{const saved=readStored(preferenceKey),old=readStored('markup-pirate-display-v31') as Partial<PirateDisplay>|null;if(saved)setDisplay(pirateDisplay(saved));else if(old){const migrated=pirateDisplay({...old,camera:old.camera==='arena'?'arena':'action'});setDisplay(migrated);writeStored(preferenceKey,migrated);}const clock=visibleInterval(()=>setNow(latest.current.room.serverNow+Math.max(0,performance.now()-latest.current.received)),250);return clock},[]);
  function preference(patch:Partial<PirateDisplay>){setDisplay(old=>{const next=pirateDisplay({...old,...patch});writeStored(preferenceKey,next);return next})}
  function controls(id:string){let value=held.current.get(id);if(!value){value={};held.current.set(id,value)}return value}
  function button(id:string,action:Action){return !!controls(id)[action]?.size}
@@ -69,8 +71,8 @@ export default function PirateArena({room,local,enabled=true,onControl,onAction}
   const up=(event:KeyboardEvent)=>{for(const [key,value]of pressedKeys.current)if(key.startsWith(event.code+':')){press(value.id,value.action,'key:'+event.code,false);pressedKeys.current.delete(key)}};
   const blur=()=>{clear();cursor.current.visible=false},focus=(event:FocusEvent)=>{const target=event.target as HTMLElement;if(target.closest('input,textarea,select,dialog,[contenteditable=true]')||!target.closest('.pirate-board'))blur()},visibility=()=>{if(document.hidden)blur()};
   window.addEventListener('keydown',down);window.addEventListener('keyup',up);window.addEventListener('blur',blur);window.addEventListener('focusin',focus);document.addEventListener('visibilitychange',visibility);
-  const heartbeat=setInterval(()=>{if(document.hidden)return;for(const [id,keys]of held.current)if(Object.values(keys).some(set=>set.size)&&performance.now()-(sent.current.get(id)||0)>=controlHeartbeat(latest.current.room.network?.totalRtt,300))send(id)},80);
-  return()=>{clear();clearInterval(heartbeat);window.removeEventListener('keydown',down);window.removeEventListener('keyup',up);window.removeEventListener('blur',blur);window.removeEventListener('focusin',focus);document.removeEventListener('visibilitychange',visibility)};
+  const heartbeat=visibleInterval(()=>{if(document.hidden)return;for(const [id,keys]of held.current)if(Object.values(keys).some(set=>set.size)&&performance.now()-(sent.current.get(id)||0)>=controlHeartbeat(latest.current.room.network?.totalRtt,300))send(id)},80);
+  return()=>{clear();heartbeat();window.removeEventListener('keydown',down);window.removeEventListener('keyup',up);window.removeEventListener('blur',blur);window.removeEventListener('focusin',focus);document.removeEventListener('visibilitychange',visibility)};
  },[room.code,room.round,game.startAt,local]);
  useEffect(()=>{
   let canceled=false,loop:ReturnType<typeof animateCanvas>|null=null,observer:ResizeObserver|null=null,last=0,lastPaint=0,lastGamepadCount=0;setLoaded(false);setFailure('');
@@ -102,7 +104,7 @@ export default function PirateArena({room,local,enabled=true,onControl,onAction}
     }
     seenPrediction.current=g.lastTickAt;
     try{renderer.render(world,{effects:prefs.effects&&!matchMedia('(prefers-reduced-motion: reduce)').matches,shake:prefs.shake,camera:prefs.camera,focusId:focus,ownId:spectating?'':local?seatRef.current:r.youId,insets:cameraInsets.current,pointer:cursor.current.visible?cursor.current:null,countdown:Math.max(0,(g.startAt-server)/(1000/60)),paused:r.phase==='paused',finished:r.phase==='finished'},dt)}catch(error){loop?.dispose();setFailure(error instanceof Error?error.message:'The arena could not draw.')}
-   },()=>{renderer.dispose();resize()});
+   },()=>{renderer.dispose();resize()},{ready:wokeAt=>worldFrameReady(latest.current.room,latest.current.received,wokeAt),reset:()=>{prediction.current.rebase();smooth.current.reset();seenPrediction.current=0;previous.current=null;last=lastPaint=0}});
   }).catch(error=>{if(!canceled)setFailure(error instanceof Error?error.message:'The crew art could not load.')});
   return()=>{canceled=true;loop?.dispose();observer?.disconnect();painter.current?.dispose();painter.current=null};
  },[room.code,room.round,retry,local,spectating]);

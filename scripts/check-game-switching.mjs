@@ -1,0 +1,16 @@
+/** Visit all games in one tab and verify fullscreen cleanup, intervals and animation loops.
+ * Run against an isolated local Workers preview; BASE and RESULTS select the target and report.
+ */
+import assert from'node:assert/strict';import{mkdirSync,writeFileSync}from'node:fs';import{dirname}from'node:path';import{CASUAL_GAMES}from'../lib/casual/rules.ts';
+const{chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright'),base=process.env.BASE||'http://127.0.0.1:4301',out=process.env.RESULTS||'work/realtime-v36/same-tab.json',rows=[],browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',args:['--no-sandbox']}),context=await browser.newContext({viewport:{width:1440,height:950}});mkdirSync(dirname(out),{recursive:true});
+await context.addInitScript(()=>{
+ const intervals=new Map(),raf=new Set(),start=window.setInterval,clear=window.clearInterval,request=window.requestAnimationFrame,cancel=window.cancelAnimationFrame;window.activeIntervals=intervals;window.activeFrames=raf;
+ window.setInterval=function(fn,ms,...args){const id=start(fn,ms,...args);intervals.set(id,ms);return id};window.clearInterval=function(id){intervals.delete(id);return clear(id)};
+ window.requestAnimationFrame=function(fn){const id=request(time=>{raf.delete(id);fn(time)});raf.add(id);return id};window.cancelAnimationFrame=function(id){raf.delete(id);return cancel(id)};
+});const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));try{
+ await page.goto(base+'/#casual-arcade');await page.getByLabel('Search arcade games').waitFor();await page.waitForTimeout(1000);const baseline=await page.evaluate(()=>({intervals:[...window.activeIntervals.values()].sort((a,b)=>a-b),frames:window.activeFrames.size}));
+ for(const game of CASUAL_GAMES){const row={game:game.id};try{
+  await page.getByLabel('Search arcade games').fill(game.name);await page.locator('.party-game-card').first().click();await page.getByRole('button',{name:'Watch AI',exact:true}).click();await page.getByRole('button',{name:'Watch locally',exact:true}).click();await page.getByRole('button',{name:'Start game',exact:false}).click();await page.locator('.surface-toolbar').waitFor();if(game.id==='pirate')await page.locator('.pirate-loading').waitFor({state:'detached'});await page.getByRole('button',{name:'Fullscreen',exact:true}).click();await page.waitForTimeout(120);await page.getByRole('button',{name:'Exit fullscreen',exact:true}).click();await page.getByRole('button',{name:'Back to the arcade',exact:true}).click();await page.getByLabel('Search arcade games').waitFor();await page.waitForTimeout(250);
+  row.remaining=await page.evaluate(()=>({intervals:[...window.activeIntervals.values()].sort((a,b)=>a-b),frames:window.activeFrames.size}));assert.deepEqual(row.remaining.intervals,baseline.intervals,'Game interval leaked after exit');assert(row.remaining.frames<=baseline.frames+1,'Animation loop leaked after exit');assert.deepEqual(errors,[]);row.status='passed';
+ }catch(e){row.status='failed';row.error=e.message;row.errors=[...errors];rows.push(row);throw e}rows.push(row);writeFileSync(out,JSON.stringify({baseline,rows},null,2));console.log(JSON.stringify(row))}
+}finally{writeFileSync(out,JSON.stringify({rows},null,2));await context.close();await browser.close()}

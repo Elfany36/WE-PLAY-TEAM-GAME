@@ -44,11 +44,12 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
   if(this.kind!=='casual')return;
   const row=this.db.snapshot();if(!row)return;
   const state=this.db.inspectState<CasualState>()!;
-  if(!state.game||!['circuit','sumo','tanks','pong','marble','blocks','pirate'].includes(state.game.kind)||!('inputs'in state.game)||!state.game.inputs[session.playerId])return;
+  if(!state.game||!['circuit','terra','sumo','tanks','pong','marble','blocks','pirate'].includes(state.game.kind)||!('inputs'in state.game)||!state.game.inputs[session.playerId]?.at)return;
   if(this.ctx.getWebSockets().some(other=>{if(other===socket)return false;const s=other.deserializeAttachment() as Subscription|null;return s?.playerId===session.playerId&&s.tokenHash===session.tokenHash&&!!s.activeAt&&Date.now()-s.activeAt<10000}))return;
   await roomBatch<CasualState>(this.db,'casual:'+row.code,async()=>{const current=this.db.snapshot();if(!current)throw Error('Room expired');return{state:JSON.parse(current.state),revision:current.revision}},async(next,revision)=>!!(await this.db.prepare('UPDATE casual_rooms SET state=?, revision=revision+1 WHERE code=? AND revision=?').bind(JSON.stringify(next),row.code,revision).run()).meta.changes,()=>Error('Room busy'),task=>this.ctx.waitUntil(task),true).run((next)=>{
-   const game=next.game,player=next.players.find(p=>!p.retired&&p.id===session.playerId&&p.tokenHash===session.tokenHash);if(!player||!game||!['circuit','sumo','tanks','pong','marble','blocks','pirate'].includes(game.kind)||!('inputs'in game)||!game.inputs[session.playerId])return{state:next,changed:false,result:()=>undefined};
-   delete game.inputs[session.playerId];return{state:next,changed:true,result:()=>undefined};
+   const game=next.game,player=next.players.find(p=>!p.retired&&p.id===session.playerId&&p.tokenHash===session.tokenHash);if(!player||!game||!['circuit','terra','sumo','tanks','pong','marble','blocks','pirate'].includes(game.kind)||!('inputs'in game)||!game.inputs[session.playerId]?.at)return{state:next,changed:false,result:()=>undefined};
+   // Expire motion but retain its sequence barrier against late HTTP controls.
+   game.inputs[session.playerId].at=0;return{state:next,changed:true,result:()=>undefined};
   });
  }
  private async tick(){

@@ -1,0 +1,8 @@
+{
+  "name": "Avatar recovery after temporary asset failure",
+  "initialRequests": 4,
+  "requestsAfterReconnect": 5,
+  "recovered": true,
+  "status": "passed",
+  "urlsReleasedOnNavigation": true
+}

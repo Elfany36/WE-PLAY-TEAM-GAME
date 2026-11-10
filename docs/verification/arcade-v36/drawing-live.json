@@ -1,0 +1,22 @@
+{
+  "roundTripDelayMs": 200,
+  "baseline": false,
+  "rapidStrokes": 14,
+  "drawDurationMs": 569,
+  "lastReleaseToViewerMs": 230,
+  "strokeRequests": 3,
+  "batchSizes": [
+    1,
+    7,
+    6
+  ],
+  "injectedReceipts": 0,
+  "httpFallbacks": 0,
+  "emptyCoalescedPointCount": 13,
+  "stateToPaintMs": 20,
+  "viewerPainted": true,
+  "undoSynchronized": true,
+  "correctGuesserLocked": true,
+  "answerPrivate": true,
+  "status": "passed"
+}

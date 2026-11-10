@@ -1,0 +1,11 @@
+[
+  {
+    "mode": "circuit",
+    "unacknowledgedFrames": 4,
+    "backpressureRecovered": true,
+    "closedSocketReleased": true,
+    "staleControlIgnoredAfterClose": false,
+    "status": "failed",
+    "error": "An older control restarted movement after the socket closed"
+  }
+]

@@ -1,0 +1,85 @@
+[
+  {
+    "mode": "snake",
+    "unacknowledgedFrames": 4,
+    "backpressureRecovered": true,
+    "reconnectFullState": true,
+    "status": "passed"
+  },
+  {
+    "mode": "circuit",
+    "unacknowledgedFrames": 4,
+    "backpressureRecovered": true,
+    "closedSocketReleased": true,
+    "staleControlIgnoredAfterClose": true,
+    "reconnectFullState": true,
+    "freshControlsAfterReconnect": true,
+    "status": "passed"
+  },
+  {
+    "mode": "terra",
+    "unacknowledgedFrames": 4,
+    "backpressureRecovered": true,
+    "closedSocketReleased": true,
+    "staleControlIgnoredAfterClose": true,
+    "reconnectFullState": true,
+    "freshControlsAfterReconnect": true,
+    "missingBaseRecovered": true,
+    "status": "passed"
+  },
+  {
+    "mode": "sumo",
+    "unacknowledgedFrames": 4,
+    "backpressureRecovered": true,
+    "closedSocketReleased": true,
+    "staleControlIgnoredAfterClose": true,
+    "reconnectFullState": true,
+    "freshControlsAfterReconnect": true,
+    "status": "passed"
+  },
+  {
+    "mode": "tanks",
+    "unacknowledgedFrames": 4,
+    "backpressureRecovered": true,
+    "closedSocketReleased": true,
+    "staleControlIgnoredAfterClose": true,
+    "reconnectFullState": true,
+    "freshControlsAfterReconnect": true,
+    "status": "passed"
+  },
+  {
+    "mode": "pong",
+    "unacknowledgedFrames": 4,
+    "backpressureRecovered": true,
+    "closedSocketReleased": true,
+    "staleControlIgnoredAfterClose": true,
+    "reconnectFullState": true,
+    "freshControlsAfterReconnect": true,
+    "status": "passed"
+  },
+  {
+    "mode": "marble",
+    "unacknowledgedFrames": 4,
+    "backpressureRecovered": true,
+    "closedSocketReleased": true,
+    "staleControlIgnoredAfterClose": true,
+    "reconnectFullState": true,
+    "freshControlsAfterReconnect": true,
+    "status": "passed"
+  },
+  {
+    "mode": "blocks",
+    "unacknowledgedFrames": 4,
+    "backpressureRecovered": true,
+    "reconnectFullState": true,
+    "status": "passed"
+  },
+  {
+    "mode": "pirate",
+    "unacknowledgedFrames": 4,
+    "backpressureRecovered": true,
+    "privateInputAcknowledgedBeforeClose": true,
+    "reconnectFullState": true,
+    "status": "passed"
+  }
+]

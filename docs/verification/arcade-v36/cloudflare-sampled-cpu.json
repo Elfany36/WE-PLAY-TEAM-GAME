@@ -1,0 +1,15 @@
+{
+  "source":"Cloudflare Workers Observability native API",
+  "queryId":"arcade-v36-second-verification",
+  "window":"preceding 24 hours, before release v36",
+  "service":"markup-arcade",
+  "outcome":"ok",
+  "weightedSampledInvocationCount":20,
+  "sampleInterval":10,
+  "medianCpuMs":1,
+  "p95CpuMs":3,
+  "maxCpuMs":3,
+  "p95WallMs":47,
+  "activeIssues":{"markup-arcade":0,"we-play-team-game":0},
+  "limits":"Sparse sampled invocations; not a game-load test, Durable Object tick profile or Internet RTT measurement. A repeat aggregate query timed out at the analytics API. No infrastructure changes were based on this sample."
+}

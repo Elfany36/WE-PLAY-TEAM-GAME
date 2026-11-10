@@ -1,0 +1,180 @@
+{
+  "rows": [
+    {
+      "game": "pirate",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "solitaire",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "sketch",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "generals",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "fleet",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "uno",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "ladders",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "memory",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "snake",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "property",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "phone",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "circuit",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "terra",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "chess",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "dama",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "scidama",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "sumo",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "tanks",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "pong",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "marble",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "blocks",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    },
+    {
+      "game": "pool",
+      "remaining": {
+        "intervals": [],
+        "frames": 0
+      },
+      "status": "passed"
+    }
+  ]
+}

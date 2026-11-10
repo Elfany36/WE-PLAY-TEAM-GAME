@@ -1,0 +1,14 @@
+[
+  {
+    "mode": "terra",
+    "unacknowledgedFrames": 4,
+    "backpressureRecovered": true,
+    "closedSocketReleased": true,
+    "staleControlIgnoredAfterClose": true,
+    "reconnectFullState": true,
+    "freshControlsAfterReconnect": true,
+    "sameSeatActivePreserved": true,
+    "missingBaseRecovered": true,
+    "status": "passed"
+  }
+]

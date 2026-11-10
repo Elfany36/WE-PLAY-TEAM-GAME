@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Drawing blur, coalesced backlog and an undo/draw race",
+    "blurStoppedInk": false,
+    "lastPointAfterBlur": [
+      700,
+      390
+    ],
+    "coalescedPathPreserved": false,
+    "writesDuringUndo": 1,
+    "undoRaceNoError": false,
+    "undoRaceStrokeCount": 1,
+    "undoRaceOrdered": true,
+    "errors": [],
+    "correct": false,
+    "status": "finding"
+  }
+]

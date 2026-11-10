@@ -9,6 +9,8 @@ export class PiratePrediction{
  private inputs=new Map<string,Intent[]>();
  private frames=new Map<string,Frame>();
  reset(){this.inputs.clear();this.frames.clear()}
+ /** Discard presentation history after suspension while retaining unacknowledged intent. */
+ rebase(){this.frames.clear()}
  forget(id:string){this.inputs.delete(id);this.frames.delete(id)}
  record(id:string,input:Intent){const list=this.inputs.get(id)||[];list.push(input);if(list.length>64)list.shift();this.inputs.set(id,list);const frame=this.frames.get(id);if(frame&&input.at<=frame.snapshotAt+frame.count*1000/60)this.frames.delete(id)}
  pose<T extends PreviewFighter>(actor:T,world:World,snapshotAt:number,now:number):T{

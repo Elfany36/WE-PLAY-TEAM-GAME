@@ -1,0 +1,77 @@
+[
+  {
+    "width": 1440,
+    "cards": 12,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "cards": 32,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "cards": 64,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "cards": 128,
+    "status": "passed"
+  },
+  {
+    "width": 1440,
+    "cards": 200,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "cards": 12,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "cards": 32,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "cards": 64,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "cards": 128,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "cards": 200,
+    "status": "passed"
+  },
+  {
+    "width": 844,
+    "cards": 12,
+    "status": "passed"
+  },
+  {
+    "width": 844,
+    "cards": 32,
+    "status": "passed"
+  },
+  {
+    "width": 844,
+    "cards": 64,
+    "status": "passed"
+  },
+  {
+    "width": 844,
+    "cards": 128,
+    "status": "passed"
+  },
+  {
+    "width": 844,
+    "cards": 200,
+    "status": "passed"
+  }
+]
