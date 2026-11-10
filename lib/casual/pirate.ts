@@ -49,7 +49,7 @@ export function pirateAction(s:CasualState,a:Record<string,unknown>,id:string,no
  g.inputs[id]={seq:a.seq as number,at:now,life:a.life as number,dx:a.dx as number,down:a.down as boolean,jump:a.jump as boolean,attack:a.attack as boolean,special:a.special as boolean,dash:a.dash as boolean,jumpSeq:a.jumpSeq as number,attackSeq:a.attackSeq as number,specialSeq:a.specialSeq as number,dashSeq:a.dashSeq as number,...(a.aimX!==undefined?{aimX:a.aimX as number,aimY:a.aimY as number}:{})};
 }
 export function leavePirate(s:CasualState,id:string,now:number){const g=s.game as PirateGame,f=g.world.fighters.find(f=>f.id===id);if(f){f.st=0;f.dead=1;f.bomb=null}delete g.inputs[id];g.world.bombs=g.world.bombs.filter(b=>b.h!==id&&b.own!==id);g.world.projectiles=g.world.projectiles.filter(p=>p.own!==id);g.world.strikes=g.world.strikes.filter(p=>p.own!==id);g.world.zones=g.world.zones.filter(p=>p.own!==id);for(const other of g.world.fighters)if(other.la===id){other.la=null;other.lt=0}const active=g.world.fighters.filter(f=>f.st>0);if(active.length<2){g.world.ended=true;g.world.winnerIds=active.map(f=>f.id);complete(s,now)}}
-export function publicPirate(g:PirateGame){
+export function publicPirate(g:PirateGame,viewerId?:string){
  const {seed,difficulty,nextBombId,nb,ct,sk,potT,...world}=g.world;
- return{...g,inputs:{},world:{...world,fighters:world.fighters.map(f=>{const{h,lv,la,lt,pp,pu,pa,pb,ps,pj,jb,jh,ba,cy,dd,sc,dk,sg,pl,sl,kt,ks,sw,mx,my,...visible}=f;return visible})}};
+ return{...g,inputs:{},world:{...world,fighters:world.fighters.map(f=>{const{h,lv,la,lt,pp,pu,pa,pb,ps,pj,jb,jh,ba,cy,dd,sc,dk,sg,pl,sl,kt,ks,sw,mx,my,...visible}=f;return{...visible,...(f.id===viewerId?{pp,ps,pj,jb,jh,cy,dd,dk,pl,sl}:{})}})}};
 }

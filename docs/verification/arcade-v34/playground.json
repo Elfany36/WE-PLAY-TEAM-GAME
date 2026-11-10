@@ -1,0 +1,26 @@
+[
+  {
+    "width": 1440,
+    "checks": [
+      "readable in all 18 palettes × 2 tones × 3 interface styles",
+      "HTML/CSS tabs, live preview, indentation/outdent and native undo",
+      "3,000-line file keeps one gutter text node and synchronized line/scroll geometry",
+      "saved draft reload, mobile/desktop preview, faithful HTML/CSS export and reset",
+      "lesson editor, grading, progress and reset remain functional"
+    ],
+    "largePasteMs": 155,
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "checks": [
+      "readable in all 18 palettes × 2 tones × 3 interface styles",
+      "HTML/CSS tabs, live preview, indentation/outdent and native undo",
+      "3,000-line file keeps one gutter text node and synchronized line/scroll geometry",
+      "saved draft reload, mobile/desktop preview, faithful HTML/CSS export and reset",
+      "lesson editor, grading, progress and reset remain functional"
+    ],
+    "largePasteMs": 84,
+    "status": "passed"
+  }
+]

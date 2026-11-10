@@ -1,0 +1,89 @@
+{
+  "loading": {
+    "ttfb": 165.20000000018626,
+    "fcp": 796,
+    "lcp": 796,
+    "cls": 0.0005585949933087385,
+    "longTasks": [
+      72,
+      266,
+      109
+    ],
+    "resources": [
+      {
+        "name": "/_next/static/css/index.Di_ozHpB.css",
+        "bytes": 133958,
+        "duration": 72.09999999962747
+      },
+      {
+        "name": "/_next/static/chunks/framework-D_rUT4EX.js",
+        "bytes": 59092,
+        "duration": 134.30000000074506
+      },
+      {
+        "name": "/_next/static/chunks/index-BsDlhS5D.js",
+        "bytes": 56573,
+        "duration": 273
+      },
+      {
+        "name": "/fonts/dm-sans-latin-wght-normal.woff2",
+        "bytes": 36932,
+        "duration": 224.8999999994412
+      },
+      {
+        "name": "/fonts/manrope-latin-wght-normal.woff2",
+        "bytes": 24836,
+        "duration": 263.90000000037253
+      },
+      {
+        "name": "/_next/static/chunks/MarkupApp-BET30Mvt.js",
+        "bytes": 19201,
+        "duration": 128.29999999981374
+      },
+      {
+        "name": "/_next/static/chunks/rules-BfjP5UUz.js",
+        "bytes": 18504,
+        "duration": 158.1000000005588
+      },
+      {
+        "name": "/_next/static/chunks/LearningVisual-DMeDBdzt.js",
+        "bytes": 13560,
+        "duration": 169.1000000005588
+      }
+    ]
+  },
+  "play": {
+    "seconds": 8.36,
+    "mainThreadMsPerSecond": 980.3264354066987,
+    "scriptMsPerSecond": 334.4412679425837,
+    "layoutMsPerSecond": 7.208851674641154,
+    "styleMsPerSecond": 21.160645933014358,
+    "heapMB": 11.73476791381836,
+    "frameMs": {
+      "samples": 367,
+      "p50": 16.700000000000728,
+      "p95": 33.399999999999636,
+      "max": 66.70000000000073
+    },
+    "snapshotAgeMs": {
+      "samples": 160,
+      "p50": 53,
+      "p95": 110,
+      "max": 186
+    },
+    "inputToAuthoritativePoseMs": {
+      "samples": 42,
+      "p50": 75,
+      "p95": 101,
+      "max": 115
+    },
+    "snapshotBytes": {
+      "samples": 160,
+      "p50": 1205,
+      "p95": 1723,
+      "max": 2302
+    },
+    "bytesPerSecond": 24483.49282296651,
+    "errors": []
+  }
+}

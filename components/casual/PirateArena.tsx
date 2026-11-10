@@ -8,7 +8,9 @@ import type {publicPirate} from '../../lib/casual/pirate';
 import {PIRATE_MAPS,PIRATE_MODES,PIRATE_SKILLS} from '../../lib/casual/pirate-data';
 import {pirateDisplay,piratePixelRatio,PirateAutoQuality,type PirateDisplay} from '../../lib/casual/pirate-display';
 import {createPirateRenderer,loadPirateArt} from '../../lib/casual/pirate-renderer.js';
-import {piratePresentation} from '../../lib/casual/pirate-presentation';
+import {constrainPiratePose} from '../../lib/casual/pirate-presentation';
+import {PiratePrediction} from '../../lib/casual/pirate-prediction';
+import {PoseReconciler} from '../../lib/game-motion';
 import {controlAction,controlBindings} from '../../lib/player-controls';
 import {readStored,writeStored} from '../../lib/client-state';
 import {animateCanvas} from '../../lib/canvas-visibility';
@@ -24,6 +26,7 @@ const preferenceKey='markup-pirate-display-v33';
 export default function PirateArena({room,local,enabled=true,onControl,onAction}:{room:CasualPublic;local:boolean;enabled?:boolean;onControl:(packet:Record<string,unknown>)=>void;onAction:(action:string)=>unknown}){
  const gameWindow=useGameWindow(),immersiveRef=useRef(false),hudVisible=useRef(true),crew=useRef<HTMLDivElement>(null),cameraInsets=useRef({top:56,right:16,bottom:16,left:16}),cursor=useRef({u:.5,v:.5,visible:false,x:0,y:0,scale:1});immersiveRef.current=!!gameWindow?.active;hudVisible.current=!gameWindow?.active||gameWindow.hud;
  const game=room.game as Game,spectating=room.players.some(p=>p.isYou&&p.role==='spectator'),humans=room.players.filter(p=>!p.bot&&!p.retired&&p.role!=='spectator');
+ const prediction=useRef(new PiratePrediction()),smooth=useRef(new PoseReconciler()),seenPrediction=useRef(0);
  const previous=useRef<Game['world']|null>(null),snapshotSpan=useRef(50);
  const canvas=useRef<HTMLCanvasElement>(null),painter=useRef<ReturnType<typeof createPirateRenderer>|null>(null),latest=useRef({room,enabled,onControl,local,received:performance.now()}),held=useRef(new Map<string,Held>()),edges=useRef(new Map<string,Record<string,number>>()),sequence=useRef(0),sent=useRef(new Map<string,number>()),aim=useRef<{id:string;x:number;y:number}|null>(null),pressedKeys=useRef(new Map<string,{id:string;action:Action}>()),padAssignments=useRef(new Map<string,number>());
  const [display,setDisplay]=useState<PirateDisplay>(()=>pirateDisplay(null)),displayRef=useRef(display),[seat,setSeat]=useState(humans[0]?.id||room.youId),seatRef=useRef(seat),[loaded,setLoaded]=useState(false),[failure,setFailure]=useState(''),[retry,setRetry]=useState(0),[now,setNow]=useState(room.serverNow),[gamepads,setGamepads]=useState(0);
@@ -38,7 +41,7 @@ export default function PirateArena({room,local,enabled=true,onControl,onAction}
   const {room:r,enabled,onControl,local}=latest.current,g=r.game as Game,f=g.world.fighters.find(f=>f.id===id);
   if(!enabled||r.phase!=='playing'||!f||f.st<=0||f.dead||r.players.find(p=>p.id===id)?.bot)return;
   const seq=Math.max(Date.now(),sequence.current+1);sequence.current=seq;const edge=edges.current.get(id)||{},point=cursor.current.visible?painter.current?.aim(cursor.current.u,cursor.current.v):aim.current?.id===id?aim.current:null;
-  sent.current.set(id,performance.now());onControl({action:'pirate-input',seq,life:f.life??0,dx:Number(button(id,'right'))-Number(button(id,'left')),down:button(id,'down'),jump:button(id,'jump'),attack:button(id,'attack'),special:button(id,'special'),dash:button(id,'dash'),jumpSeq:edge.jumpSeq||0,attackSeq:edge.attackSeq||0,specialSeq:edge.specialSeq||0,dashSeq:edge.dashSeq||0,...(point?{aimX:Math.max(-200,Math.min(map.w+200,point.x)),aimY:Math.max(-400,Math.min(map.h+200,point.y))}:{}),...(local?{localActor:id}:{})});
+  prediction.current.record(id,{seq,at:performance.now(),dx:Number(button(id,'right'))-Number(button(id,'left')),jumpHeld:button(id,'jump'),jumpSeq:edge.jumpSeq||0,down:button(id,'down'),dashHeld:button(id,'dash'),dashSeq:edge.dashSeq||0});sent.current.set(id,performance.now());onControl({action:'pirate-input',seq,life:f.life??0,dx:Number(button(id,'right'))-Number(button(id,'left')),down:button(id,'down'),jump:button(id,'jump'),attack:button(id,'attack'),special:button(id,'special'),dash:button(id,'dash'),jumpSeq:edge.jumpSeq||0,attackSeq:edge.attackSeq||0,specialSeq:edge.specialSeq||0,dashSeq:edge.dashSeq||0,...(point?{aimX:Math.max(-200,Math.min(map.w+200,point.x)),aimY:Math.max(-400,Math.min(map.h+200,point.y))}:{}),...(local?{localActor:id}:{})});
  }
  function press(id:string,action:Action,source:string,on:boolean){
   const r=latest.current.room,g=r.game as Game,f=g.world.fighters.find(f=>f.id===id);if(on&&(!latest.current.enabled||r.phase!=='playing'||!f||f.dead||f.st<=0))return;
@@ -47,9 +50,9 @@ export default function PirateArena({room,local,enabled=true,onControl,onAction}
   send(id);
  }
  function clear(){const ids=[...held.current.keys()];held.current.clear();pressedKeys.current.clear();aim.current=null;for(const id of ids)send(id)}
- useEffect(()=>{clear();edges.current.clear();padAssignments.current.clear();},[room.code,room.round,game.startAt,room.phase,enabled]);
+ useEffect(()=>{clear();prediction.current.reset();smooth.current.reset();seenPrediction.current=0;edges.current.clear();padAssignments.current.clear();},[room.code,room.round,game.startAt,room.phase,enabled]);
  const lives=game.world.fighters.map(f=>f.id+':'+f.life+':'+f.dead+':'+f.st).join('|');
- useEffect(()=>{for(const f of game.world.fighters)if(f.dead||f.st<=0){held.current.delete(f.id);edges.current.delete(f.id);sent.current.delete(f.id);for(const [key,value]of pressedKeys.current)if(value.id===f.id)pressedKeys.current.delete(key)}},[lives]);
+ useEffect(()=>{for(const f of game.world.fighters)if(f.dead||f.st<=0){prediction.current.forget(f.id);smooth.current.forget(f.id);held.current.delete(f.id);edges.current.delete(f.id);sent.current.delete(f.id);for(const [key,value]of pressedKeys.current)if(value.id===f.id)pressedKeys.current.delete(key)}},[lives]);
  useEffect(()=>{
   const down=(event:KeyboardEvent)=>{
    if(event.repeat||event.ctrlKey||event.metaKey||event.altKey||(event.target as HTMLElement)?.closest('input,textarea,select,button,a,dialog,[contenteditable=true]'))return;
@@ -65,7 +68,7 @@ export default function PirateArena({room,local,enabled=true,onControl,onAction}
   const up=(event:KeyboardEvent)=>{for(const [key,value]of pressedKeys.current)if(key.startsWith(event.code+':')){press(value.id,value.action,'key:'+event.code,false);pressedKeys.current.delete(key)}};
   const blur=()=>{clear();cursor.current.visible=false},focus=(event:FocusEvent)=>{const target=event.target as HTMLElement;if(target.closest('input,textarea,select,dialog,[contenteditable=true]')||!target.closest('.pirate-board'))blur()},visibility=()=>{if(document.hidden)blur()};
   window.addEventListener('keydown',down);window.addEventListener('keyup',up);window.addEventListener('blur',blur);window.addEventListener('focusin',focus);document.addEventListener('visibilitychange',visibility);
-  const heartbeat=setInterval(()=>{if(document.hidden)return;for(const [id,keys]of held.current)if(Object.values(keys).some(set=>set.size)&&performance.now()-(sent.current.get(id)||0)>=controlHeartbeat(latest.current.room.network?.totalRtt))send(id)},80);
+  const heartbeat=setInterval(()=>{if(document.hidden)return;for(const [id,keys]of held.current)if(Object.values(keys).some(set=>set.size)&&performance.now()-(sent.current.get(id)||0)>=controlHeartbeat(latest.current.room.network?.totalRtt,300))send(id)},80);
   return()=>{clear();clearInterval(heartbeat);window.removeEventListener('keydown',down);window.removeEventListener('keyup',up);window.removeEventListener('blur',blur);window.removeEventListener('focusin',focus);document.removeEventListener('visibilitychange',visibility)};
  },[room.code,room.round,game.startAt,local]);
  useEffect(()=>{
@@ -94,8 +97,9 @@ export default function PirateArena({room,local,enabled=true,onControl,onAction}
     let world={...g.world,fighters:g.world.fighters.map(f=>{const old=prior?.fighters.find(p=>p.id===f.id);if(!old||f.dead||old.dead||old.life!==f.life||Math.hypot(f.x-old.x,f.y-old.y)>180)return f;return{...f,x:old.x+(f.x-old.x)*mix,y:old.y+(f.y-old.y)*mix}})};
     if(latest.current.enabled&&r.phase==='playing'&&server>=g.startAt){
      const ids=new Set(local?seats.map(p=>p.id):[r.youId]);
-     world={...world,fighters:world.fighters.map(f=>{if(!ids.has(f.id))return f;const actor=g.world.fighters.find(a=>a.id===f.id)!,edge=edges.current.get(f.id)||{},age=Math.min(local?50:100,elapsed+(local?0:Math.max(0,(r.network?.rtt||0)/2)));const predicted=piratePresentation(actor,world.map,{dx:Number(button(actor.id,'right'))-Number(button(actor.id,'left')),jump:(edge.jumpSeq||0)>(actor.jumpSeq||0),jumpHeld:button(actor.id,'jump')},age);return !variant.nm&&(edge.attackSeq||0)>(actor.attackSeq||0)?{...predicted,at:Math.max(predicted.at,20)}:predicted})};
+     world={...world,fighters:world.fighters.map(f=>{if(!ids.has(f.id))return f;const actor=g.world.fighters.find(a=>a.id===f.id)!,edge=edges.current.get(f.id)||{},transit=local?0:Math.max(0,Math.min(200,(r.network?.rtt||0)/2)),snapshotAt=received-transit-Math.max(0,r.serverNow-g.lastTickAt);const raw=prediction.current.pose(actor,g.world,snapshotAt,time),changed=seenPrediction.current!==g.lastTickAt,priorActor=prior?.fighters.find(a=>a.id===actor.id);if(priorActor&&(priorActor.life!==actor.life||Math.hypot(priorActor.x-actor.x,priorActor.y-actor.y)>180||actor.hs>0))smooth.current.forget(actor.id);const correction=smooth.current.resolve(actor.id,raw,dt,changed,100,480,undefined,point=>constrainPiratePose(raw,g.world.map,raw.on?{...point,y:raw.y}:point,g.world.elapsed+Math.min(18,Math.max(0,Math.floor((time-snapshotAt)/(1000/60))))));const predicted={...raw,x:correction.x,y:raw.on?raw.y:correction.y};return !variant.nm&&(edge.attackSeq||0)>(actor.attackSeq||0)?{...predicted,at:Math.max(predicted.at,20)}:predicted})};
     }
+    seenPrediction.current=g.lastTickAt;
     try{renderer.render(world,{effects:prefs.effects&&!matchMedia('(prefers-reduced-motion: reduce)').matches,shake:prefs.shake,camera:prefs.camera,focusId:focus,ownId:spectating?'':local?seatRef.current:r.youId,insets:cameraInsets.current,pointer:cursor.current.visible?cursor.current:null,countdown:Math.max(0,(g.startAt-server)/(1000/60)),paused:r.phase==='paused',finished:r.phase==='finished'},dt)}catch(error){loop?.dispose();setFailure(error instanceof Error?error.message:'The arena could not draw.')}
    },()=>{renderer.dispose();resize()});
   }).catch(error=>{if(!canceled)setFailure(error instanceof Error?error.message:'The crew art could not load.')});

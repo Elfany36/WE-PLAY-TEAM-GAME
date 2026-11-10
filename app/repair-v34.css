@@ -1,0 +1,23 @@
+/* A native, opaque text layer remains readable in every palette and interface style. */
+:root[data-theme] .source-editor { --editor-bg:#142632;--editor-text:#e4edf5;background:var(--editor-bg)!important;color:var(--editor-text)!important; }
+:root[data-theme] .source-editor .editing-area { background:var(--editor-bg)!important;isolation:isolate;font:14px/1.75 ui-monospace,SFMono-Regular,Consolas,'Liberation Mono',monospace; }
+:root[data-theme] .source-editor .editing-area textarea { font:inherit!important;padding-left:calc(var(--editor-gutter-digits,2ch) + 32px);color:var(--editor-text)!important;-webkit-text-fill-color:var(--editor-text)!important;background:transparent!important;caret-color:#fff;border:0!important;border-radius:0!important;box-shadow:none!important;outline-offset:-3px;white-space:pre;overflow-wrap:normal;word-break:normal;tab-size:2; }
+:root[data-theme] .source-editor .editing-area textarea::selection { color:#fff!important;-webkit-text-fill-color:#fff!important;background:#3c608b; }
+:root[data-theme] .source-editor .line-numbers { top:0;width:calc(var(--editor-gutter-digits,2ch) + 14px);white-space:pre;color:#9fb3c7!important;pointer-events:none;font:inherit;padding-top:20px; }
+:root[data-theme] .source-editor .editor-tabs,:root[data-theme] .source-editor .editor-bottom { background:#1b3340!important;color:#c6d6df!important; }
+:root[data-theme] .source-editor .editor-tabs button { color:#c6d6df!important; }
+:root[data-theme] .source-editor .editor-tabs button.selected { background:#2c4958!important;color:#fff!important;border-bottom-color:#b7dfae; }
+/* Keep the chosen table scene while the window changes presentation. */
+:root[data-theme] .casual-arcade { --game-window-background:radial-gradient(ellipse at 50% 15%,var(--scene-light-felt),var(--scene-felt)); }
+:root[data-theme] .casual-arcade .room-shell.room-workspace.is-immersive .uno-experience { background:radial-gradient(ellipse at 50% 30%,var(--scene-light-felt),var(--scene-felt))!important; }
+:root[data-theme] .casual-arcade .memory-back { background:linear-gradient(145deg,var(--scene-light-felt),var(--scene-felt))!important;color:var(--scene-accent)!important; }
+:root[data-theme] .casual-arcade .strategy-table { --board-ivory:var(--scene-light);--board-jade:var(--scene-dark); }
+:root[data-theme] .casual-arcade .strategy-square.light { background:var(--scene-light)!important; }
+:root[data-theme] .casual-arcade .strategy-square.dark { background:var(--scene-dark)!important; }
+:root[data-theme] .casual-arcade .room-shell.room-workspace.is-immersive .solitaire-table { background-color:var(--sol-felt)!important; }
+:root[data-theme] .uno-hand-heading>.uno-call-button { display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:102px;min-height:42px;margin:0;padding:9px 12px;border:1px solid #ffdab1;border-radius:9px;background:#a93e35;color:#fff7e6;font-size:14px;font-weight:800; }
+:root[data-theme] .uno-hand-heading>.uno-call-button.is-armed { background:#2a6545;border-color:#baefc9; }
+:root[data-theme] .uno-call-window { display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px; }
+.room-feedback { grid-column:1/-1;min-width:0; }
+:root[data-theme] .is-immersive>.room-feedback { display:block!important;position:absolute;inset:auto auto 16px 50%;transform:translateX(-50%);z-index:100;width:min(620px,calc(100% - 32px)); }
+:root[data-theme] .is-immersive>.room-feedback :is(.party-error,.party-connection-error) { margin:0;padding:12px 16px;border-radius:10px;box-shadow:0 6px 20px #0005;font-size:14px;line-height:1.5; }

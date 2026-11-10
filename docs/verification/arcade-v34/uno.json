@@ -1,0 +1,96 @@
+[
+  {
+    "name": "Classic · arm UNO with penalty play · 1440",
+    "checks": [
+      "reachable fullscreen UNO button",
+      "saved U shortcut arms declaration",
+      "penalty play declares atomically"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Classic · UNO survives Wild color selection · 1440",
+    "checks": [
+      "UNO stays armed during color selection",
+      "Wild and declaration reach authority together"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Classic · arm UNO with penalty play · 390",
+    "checks": [
+      "reachable fullscreen UNO button",
+      "saved U shortcut arms declaration",
+      "penalty play declares atomically"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Classic · UNO survives Wild color selection · 390",
+    "checks": [
+      "UNO stays armed during color selection",
+      "Wild and declaration reach authority together"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Flip · arm UNO with penalty play · 1440",
+    "checks": [
+      "reachable fullscreen UNO button",
+      "saved U shortcut arms declaration",
+      "penalty play declares atomically"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Flip · UNO survives Wild color selection · 1440",
+    "checks": [
+      "UNO stays armed during color selection",
+      "Wild and declaration reach authority together"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Flip · arm UNO with penalty play · 390",
+    "checks": [
+      "reachable fullscreen UNO button",
+      "saved U shortcut arms declaration",
+      "penalty play declares atomically"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Flip · UNO survives Wild color selection · 390",
+    "checks": [
+      "UNO stays armed during color selection",
+      "Wild and declaration reach authority together"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Late UNO is allowed out of turn until the next draw or play",
+    "checks": [
+      "late call stays visible on mobile",
+      "out-of-turn call uses its observed window"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Opponent catch draws exactly two; an expired catch displays an error in fullscreen",
+    "checks": [
+      "one catch adds two cards",
+      "stale action explains the closed window inside fullscreen",
+      "dismiss works"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Local hotseat can recover a missed UNO after the view passes to the next human",
+    "checks": [
+      "three actual shared-device players",
+      "privacy handoff retained",
+      "previous human can call UNO after the next view opens"
+    ],
+    "status": "passed"
+  }
+]

@@ -1,0 +1,55 @@
+[
+  {
+    "name": "Online controls · 0 ms injected round trip",
+    "checks": [
+      "movement and four short-tap receipts reach room authority",
+      "saved remapping controls the online pirate",
+      "settings release held controls; reset and save work",
+      "native pause and resume"
+    ],
+    "packets": 22,
+    "mediaRequests": 0,
+    "status": "passed"
+  },
+  {
+    "name": "Online controls · 90 ms injected round trip",
+    "checks": [
+      "movement and four short-tap receipts reach room authority",
+      "saved remapping controls the online pirate",
+      "settings release held controls; reset and save work",
+      "native pause and resume"
+    ],
+    "packets": 22,
+    "mediaRequests": 0,
+    "httpRoundTripMs": {
+      "min": 136,
+      "max": 189
+    },
+    "status": "passed"
+  },
+  {
+    "name": "Online controls · 400 ms injected round trip",
+    "checks": [
+      "movement and four short-tap receipts reach room authority",
+      "saved remapping controls the online pirate",
+      "settings release held controls; reset and save work",
+      "native pause and resume"
+    ],
+    "packets": 21,
+    "mediaRequests": 0,
+    "httpRoundTripMs": {
+      "min": 411,
+      "max": 411
+    },
+    "status": "passed"
+  },
+  {
+    "name": "Spectator cannot control; can resume when host disconnects",
+    "checks": [
+      "mobile spectator has no controls",
+      "absent-host resume is visible and works",
+      "forged controls rejected"
+    ],
+    "status": "passed"
+  }
+]

@@ -1,0 +1,12 @@
+'use client';
+import {useRef,useState,useEffect,useLayoutEffect,type CSSProperties} from 'react';
+import {indentCode} from '../../lib/editor-edit';
+/** The editable text paints itself; no transparent text depends on a separate paint layer. */
+export default function CodeEditor({html,css,onHtml,onCss}:{html:string;css:string;onHtml:(s:string)=>void;onCss:(s:string)=>void}){
+ const [tab,setTab]=useState<'html'|'css'>('html'),numbers=useRef<HTMLDivElement>(null),input=useRef<HTMLTextAreaElement>(null),selection=useRef<{start:number;end:number;tab:string}|null>(null),value=tab==='html'?html:css,change=tab==='html'?onHtml:onCss,lineCount=value.split('\n').length;
+ useEffect(()=>{if(numbers.current)numbers.current.style.transform=''},[tab]);
+ useLayoutEffect(()=>{const s=selection.current;if(s?.tab===tab)input.current?.setSelectionRange(s.start,s.end);selection.current=null},[value,tab]);
+ return <div className="code-editor source-editor"><div className="editor-tabs"><button type="button" className={tab==='html'?'selected':''} onClick={()=>setTab('html')}><span className="file-html">◇</span> index.html</button><button type="button" className={tab==='css'?'selected':''} onClick={()=>setTab('css')}><span className="file-css">#</span> style.css</button><span className="editor-lamp">UTF-8 · Ctrl+] indent</span></div><div className="editing-area" style={{'--editor-gutter-digits':Math.max(2,String(lineCount).length)+'ch'} as CSSProperties}><div ref={numbers} className="line-numbers" aria-hidden="true">{Array.from({length:lineCount},(_,i)=>i+1).join('\n')}</div><textarea ref={input} key={tab} aria-label={tab==='html'?'HTML code':'CSS code'} spellCheck={false} autoCapitalize="off" autoCorrect="off" wrap="off" value={value} onChange={e=>change(e.target.value)} onScroll={e=>{if(numbers.current)numbers.current.style.transform=`translateY(${-e.currentTarget.scrollTop}px)`}} onKeyDown={e=>{
+  if((e.key===']'||e.key==='[')&&(e.ctrlKey||e.metaKey)){e.preventDefault();const el=e.currentTarget,edit=indentCode(value,el.selectionStart,el.selectionEnd,e.key==='[');if(edit.value===value){el.setSelectionRange(edit.start,edit.end);return}selection.current={start:edit.start,end:edit.end,tab};el.setSelectionRange(edit.from,edit.to);const inserted=document.execCommand?.('insertText',false,edit.insert);if(!inserted)change(edit.value);else el.setSelectionRange(edit.start,edit.end);}
+ }}/></div><div className="editor-bottom"><span><span className="green-dot"/> HTML + CSS</span><span>Ctrl+[ outdent</span></div></div>;
+}

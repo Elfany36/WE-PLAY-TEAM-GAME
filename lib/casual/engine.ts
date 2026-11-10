@@ -309,7 +309,7 @@ function applyAction(input:CasualState,a:Record<string,any>,id:string|null,now:n
 export function publicCasual(s:CasualState,id:string,now:number){
  const me=s.players.find(p=>p.id===id&&!p.retired);if(!me)throw new CasualError('Your session ended. Join again.',401);
  const host=s.players.find(p=>p.id===s.hostId&&!p.retired);let game:any=s.game;
- if(s.game?.kind==='pirate')game=publicPirate(s.game);
+ if(s.game?.kind==='pirate')game=publicPirate(s.game,id);
  if(s.game?.kind==='solitaire')game=publicSolitaire(s.game,id);
  else if(s.game?.kind==='sketch')game=publicSketch(s.game,id,now);
  else if(s.game?.kind==='generals')game=publicGenerals(s.game,id,s.phase==='finished');
@@ -321,6 +321,6 @@ export function publicCasual(s:CasualState,id:string,now:number){
  else if(s.game?.kind==='property')game={...s.game,chance:undefined,chest:undefined};
  else if(s.game?.kind==='memory'){const g=s.game;game={...g,deck:g.deck.map((c,index)=>({index,matchedBy:c.matchedBy,...(c.matchedBy||g.revealed.includes(index)?{key:c.key}:{})}))}}
  else if(s.game?.kind==='snake')game={...s.game,worms:s.game.worms.map(({queue,queueTicks,lastSeq,...w})=>({...w,...(w.id===id?{pendingTurns:queue,pendingTicks:queueTicks,inputAck:lastSeq}:{})}))};
- return{serverVersion:33,code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,...(s.mode!=='terra'&&s.phase==='playing'&&s.ai?.wait&&s.ai.wait.readyAt>now?{botThinking:{playerId:s.ai.wait.playerId,until:s.ai.wait.readyAt}}:{}),chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,series:s.series,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canResume:canResumeCasual(s,id,now),canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,traffic,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&(p.bot||now-lastSeen<20000),canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
+ return{serverVersion:34,code:s.code,hostId:s.hostId,mode:s.mode,phase:s.phase,round:s.round,serverNow:now,...(s.mode!=='terra'&&s.phase==='playing'&&s.ai?.wait&&s.ai.wait.readyAt>now?{botThinking:{playerId:s.ai.wait.playerId,until:s.ai.wait.readyAt}}:{}),chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,settings:s.settings,series:s.series,game,result:s.result,pauseReason:s.pauseReason,events:s.events,isHost:id===s.hostId,youId:id,canResume:canResumeCasual(s,id,now),canClaimHost:id!==s.hostId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),players:s.players.map(({tokenHash,requests,lastSeen,traffic,...p})=>({...p,isYou:p.id===id,isHost:p.id===s.hostId,online:!p.retired&&(p.bot||now-lastSeen<20000),canRemove:!p.retired&&now-lastSeen>=HOST_TIMEOUT}))};
 }
 export type CasualPublic=ReturnType<typeof publicCasual>&{viewingId?:string;revision?:number;network?:{rtt:number;totalRtt?:number;serverMs?:number;snapshotInterval?:number}};

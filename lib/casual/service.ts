@@ -12,9 +12,11 @@ export async function chooseCasualEndpoint(mode?:string,features?:{matchRounds?:
  if(typeof location==='undefined'||!(/\.chatgpt\.site$|\.github\.io$/.test(location.hostname)))return configured;
  const origin=new URL(configured,location.href).origin;
  if(origin!==location.origin&&!HOSTED_ORIGINS.includes(origin))return configured;
- // Games requiring current round controls use the matching website authority.
+ // Unlimited play does not require the new round-series authority. Sending a zero
+ // here used to route every new room away from the dedicated live room service.
+ // UNO's call-window repair and Pirate still require the matching engine version.
  // Saved sessions and invitations remain pinned to their original service.
- if(mode==='pirate'||features?.matchRounds!==undefined)return legacyCasualEndpoint();
+ if(mode==='uno'||mode==='pirate'||(features?.matchRounds||0)>0)return legacyCasualEndpoint();
  return CASUAL_SERVICE_ORIGIN+'/api/casual';
 }
 

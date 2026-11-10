@@ -6,7 +6,7 @@ body[data-game-window=open] :is(.app-shell,.main-shell,main,.casual-arcade) { tr
 :root[data-theme] .main-shell .casual-arcade .room-shell.room-workspace.is-immersive[style] {
  position:fixed!important;inset:0!important;z-index:2000!important;width:100vw!important;height:100dvh!important;max-width:none!important;max-height:none!important;
  display:block!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;overflow:hidden!important;isolation:isolate;
- background:#0b1423!important;color:#f0f5ff;--surface:#14243b;--surface-soft:#1b304b;--text:#f0f5ff;--muted:#bdcbdf;--border:#7186a366;--line:#7186a366;--accent:#a4d3ea;--accent-ink:#10273a;
+ background:var(--game-window-background,#0b1423)!important;color:#f0f5ff;--surface:#14243b;--surface-soft:#1b304b;--text:#f0f5ff;--muted:#bdcbdf;--border:#7186a366;--line:#7186a366;--accent:#a4d3ea;--accent-ink:#10273a;
  scrollbar-gutter:auto!important;
 }
 :root[data-theme] :is(.room-shell.room-workspace,.standalone-game-window).is-immersive :is(.room-main,.party-live-layout,.party-board-panel,.flexible-surface,.adjustable-surface,.surface-content) {
