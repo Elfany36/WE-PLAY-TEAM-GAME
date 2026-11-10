@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Racing resumes from authority without predicting a stale hidden interval",
+    "maxReturnDisplacement": 310.8867877081077,
+    "maxReturnAuthorityError": 249.0462912137542,
+    "returnFrames": 34,
+    "roomPaused": true,
+    "resumeVisible": true,
+    "correct": false,
+    "status": "finding"
+  }
+]

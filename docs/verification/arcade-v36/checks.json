@@ -12,6 +12,8 @@
   "hostedBuild": "passed",
   "pagesBuild": "passed",
   "dedicatedWorkerMinifiedDryRun": "passed",
-  "retainedAssets": 1306,
-  "workerModuleSha256": "b9c005d250b5456283e6a7554bf5deb8e39b555c89a53f49d8cc2b2811238655"
+  "retainedAssets": 1330,
+  "workerModuleSha256": "b9c005d250b5456283e6a7554bf5deb8e39b555c89a53f49d8cc2b2811238655",
+  "strictLifecycleCases": 5,
+  "dedicatedWorkerUnchangedByFinalClientRefinement": true
 }

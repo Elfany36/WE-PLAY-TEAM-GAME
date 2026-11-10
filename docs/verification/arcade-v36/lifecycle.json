@@ -29,8 +29,18 @@
   },
   {
     "name": "Racing resumes from authority without predicting a stale hidden interval",
-    "maxReturnDisplacement": 128.117964930917,
-    "maxReturnAuthorityError": 0.0002967391606597582,
+    "maxReturnDisplacement": 59.221732659830295,
+    "maxReturnAuthorityError": 0.0004956366859753141,
+    "returnFrames": 9,
+    "roomPaused": true,
+    "resumeVisible": true,
+    "correct": true,
+    "status": "passed"
+  },
+  {
+    "name": "Racing resumes from authority without predicting a stale hidden interval over HTTP with a held old response",
+    "maxReturnDisplacement": 158.92400362575384,
+    "maxReturnAuthorityError": 0.0003075021052556709,
     "returnFrames": 9,
     "roomPaused": true,
     "resumeVisible": true,

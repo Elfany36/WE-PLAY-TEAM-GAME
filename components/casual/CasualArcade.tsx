@@ -117,7 +117,7 @@ export default function CasualArcade({name}:{name:string}){
  useEffect(()=>{if((local??remote)?.phase!=='playing')return;return visibleInterval(()=>setClock(Date.now()),250)},[local?.mode,local?.phase,remote?.mode,remote?.phase]);
  useEffect(()=>{if(local?.phase!=='playing')return;return visibleInterval(()=>{setLocal(previous=>{if(previous?.phase!=='playing')return previous;try{const next=advanceCasual(previous,Date.now());return next.changed?next.state:previous}catch(e){setError((e as Error).message);return previous}})},fastModes.includes(local.mode)?50:100)},[!!local,local?.mode,local?.phase]);
  useEffect(()=>{
-  if(!session)return;const s=session;let stopped=false,pending=false,frame=0,queuedState:CasualPublic|null=null,timer:ReturnType<typeof setTimeout>,controller:AbortController|null=null,failures=0,live=false,wantedRevision=-1,lastPollStarted=-Infinity,lastLiveResync=-Infinity;
+  if(!session)return;const s=session;let stopped=false,pending=false,frame=0,queuedState:CasualPublic|null=null,timer:ReturnType<typeof setTimeout>,controller:AbortController|null=null,failures=0,live=false,wantedRevision=-1,lastPollStarted=-Infinity,lastLiveResync=-Infinity,viewGeneration=0;
   const schedule=(ms:number)=>{clearTimeout(timer);if(!stopped)timer=setTimeout(poll,worldRecoveryDelay(roomRef.current,performance.now()-lastReceipt.current,ms))};
   const floor=()=>casualPollPeriod(roomRef.current,false)===200?200:120;
   async function poll(){
@@ -125,18 +125,19 @@ export default function CasualArcade({name}:{name:string}){
    if(document.hidden){schedule(1500);return}
    const currentRoom=roomRef.current,receiptAge=performance.now()-lastReceipt.current,expectsTicks=expectsWorldUpdates(currentRoom,receiptAge),snapshotAge=performance.now()-(transport.stats.lastStateReceipt||lastReceipt.current),liveAge=performance.now()-(transport.stats.lastLiveStateReceipt),quietLimit=expectsTicks?worldQuietLimit(transport.stats.stateInterval):2000,staleStream=expectsTicks&&transport.autonomous&&liveAge>=quietLimit;if(transport.autonomous&&liveAge<quietLimit){schedule(quietLimit-liveAge);return;}if(!staleStream&&lastReceipt.current&&snapshotAge<floor()&&wantedRevision<=(roomRef.current?.revision??-1)){schedule(floor()-snapshotAge);return}
    const delay=floor()-(performance.now()-lastPollStarted);if(delay>0){schedule(delay);return}
-   pending=true;controller=new AbortController();const started=performance.now();lastPollStarted=started;
+   pending=true;controller=new AbortController();const view=viewGeneration,started=performance.now();lastPollStarted=started;
    try{
     const current=roomRef.current,version=new URLSearchParams({...worldVersion(),...(current?.code===s.code&&current.revision!==undefined?{revision:current.revision}:{})} as any);
     if(staleStream&&performance.now()-lastLiveResync>3000){lastLiveResync=performance.now();liveFeed.current?.resync()}const d=await transport.send(endpoint()+'?code='+s.code+'&'+version.toString(),{signal:controller.signal,headers:{Authorization:'Bearer '+s.token}},{timeout:Math.min(12000,Math.max(floor()===200?3000:6000,transport.stats.totalRtt*1.6+1000)),forceHttp:staleStream});
-    if(!stopped&&sessionRef.current?.token===s.token){
+    if(!stopped&&view===viewGeneration&&sessionRef.current?.token===s.token){
      if(d.room)adopt(d.room,true);
      else if(d.unchanged&&roomRef.current?.code===s.code&&roomRef.current.revision===d.revision)adopt({...roomRef.current,serverNow:d.serverNow,network:d.network},true);
      failures=0;
     }
-   }catch(e){if(!stopped){failures++;setConnected(false);setConnectionError((e as any).name==='AbortError'?'The connection is slow. Reconnecting…':(e as Error).message);if([401,404,410].includes((e as any).status)){setSavedSession(null);setRemote(null);roomRef.current=null}}}
+   }catch(e){if(!stopped&&view===viewGeneration){failures++;setConnected(false);setConnectionError((e as any).name==='AbortError'?'The connection is slow. Reconnecting…':(e as Error).message);if([401,404,410].includes((e as any).status)){setSavedSession(null);setRemote(null);roomRef.current=null}}}
    finally{
     pending=false;
+    if(view!==viewGeneration){schedule(0);return}
     const now=performance.now(),elapsed=now-started,current=roomRef.current;
     const period=casualPollPeriod(current,live,elapsed,transport.stats.streaming&&!staleStream),dirty=wantedRevision>(current?.revision??-1);
     // A response can cross the countdown boundary; use the newly adopted state here.
@@ -144,10 +145,13 @@ export default function CasualArcade({name}:{name:string}){
     schedule(failures?Math.min(2000,250*2**Math.min(failures,3)):Math.min(streamWait,Math.max(0,(dirty?floor():period)-elapsed)));
    }
   }
-  const feed=new RoomRevisionFeed(endpoint()+'?code='+s.code,s.token,{latency:elapsed=>transport.observeLatency(elapsed),revision:revision=>{wantedRevision=Math.max(wantedRevision,revision);if(!pending&&revision>(roomRef.current?.revision??-1))schedule(Math.max(0,floor()-(performance.now()-lastPollStarted)))},status:ready=>{live=ready;transport.stats.live=ready;transport.attachLive(feed);if(!ready&&!pending)schedule(0)},state:(wire,wireBytes)=>{if(stopped||sessionRef.current?.token!==s.token)return;try{const data=transport.receive(wire,wireBytes);if(data.room){queuedState=data.room;if(!frame)frame=requestAnimationFrame(()=>{frame=0;const state=queuedState;queuedState=null;if(!stopped&&state)adopt(state,true)})}}catch{feed.resync();return false}}});
+  const feed=new RoomRevisionFeed(endpoint()+'?code='+s.code,s.token,{latency:elapsed=>transport.observeLatency(elapsed),revision:revision=>{wantedRevision=Math.max(wantedRevision,revision);if(!pending&&revision>(roomRef.current?.revision??-1))schedule(Math.max(0,floor()-(performance.now()-lastPollStarted)))},status:ready=>{live=ready;transport.stats.live=ready;transport.attachLive(feed);if(!ready&&!pending)schedule(0)},state:(wire,wireBytes)=>{if(stopped||sessionRef.current?.token!==s.token)return;try{const data=transport.receive(wire,wireBytes);if(data.room&&!document.hidden){queuedState=data.room;if(!frame)frame=requestAnimationFrame(()=>{frame=0;const state=queuedState;queuedState=null;if(!stopped&&state&&!document.hidden)adopt(state,true)})}}catch{feed.resync();return false}}});
   liveFeed.current=feed;feed.setActive(leaseOwner.current);transport.attachLive(feed);feed.start();const wake=()=>{if(!document.hidden&&!pending)schedule(0)};
-  void poll();document.addEventListener('visibilitychange',wake);window.addEventListener('online',wake);
-  return()=>{stopped=true;cancelAnimationFrame(frame);feed.stop();if(liveFeed.current===feed)liveFeed.current=null;transport.attachLive(null);clearTimeout(timer);controller?.abort();document.removeEventListener('visibilitychange',wake);window.removeEventListener('online',wake)};
+  // A browser can hold RAF callbacks for the entire hidden interval. Keep delta
+  // decoding/ACKs, but never re-stamp that queued old view as a new wake receipt.
+  const visibility=()=>{viewGeneration++;clearControls();controller?.abort();cancelAnimationFrame(frame);frame=0;queuedState=null;wake()};
+  void poll();document.addEventListener('visibilitychange',visibility);window.addEventListener('online',wake);
+  return()=>{stopped=true;cancelAnimationFrame(frame);feed.stop();if(liveFeed.current===feed)liveFeed.current=null;transport.attachLive(null);clearTimeout(timer);controller?.abort();document.removeEventListener('visibilitychange',visibility);window.removeEventListener('online',wake)};
  },[session?.token,session?.code,session?.apiOrigin]);
 
  const actor=local?(['lobby','finished'].includes(local.phase)?localView||local.hostId:localViewer(local,localView,localReview)):undefined;
