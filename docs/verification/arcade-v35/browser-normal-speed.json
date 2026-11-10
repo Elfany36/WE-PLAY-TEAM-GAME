@@ -1,0 +1,137 @@
+[
+  {
+    "game": "circuit",
+    "cpuThrottle": 1,
+    "injectedRoundTripMs": 0,
+    "canvas": {
+      "width": 1440,
+      "height": 900,
+      "displayWidth": 1440,
+      "displayHeight": 900,
+      "renderScale": "1.00",
+      "attributes": {
+        "alpha": false,
+        "colorSpace": "srgb",
+        "colorType": "unorm8",
+        "desynchronized": true,
+        "toneMapping": {
+          "mode": "standard"
+        },
+        "willReadFrequently": false
+      }
+    },
+    "seconds": 5.319,
+    "mainThreadMsPerSecond": 113.34047753337094,
+    "scriptMsPerSecond": 86.24365482233503,
+    "layoutMsPerSecond": 0.3694303440496324,
+    "otherTaskMsPerSecond": 25.884752773077647,
+    "heapMB": 14.141578674316406,
+    "displayFrameMs": {
+      "samples": 326,
+      "p50": 16.699999999999818,
+      "p95": 16.700000000000728,
+      "max": 33.29999999999927
+    },
+    "paintFrameMs": {
+      "samples": 319,
+      "p50": 16.699999999999818,
+      "p95": 16.700000000000728,
+      "max": 16.800000000000182
+    },
+    "inputReceiptMs": {
+      "samples": 40,
+      "p50": 17,
+      "p95": 36,
+      "max": 47
+    },
+    "inputToAuthorityMs": {
+      "samples": 25,
+      "p50": 31,
+      "p95": 72,
+      "max": 86
+    },
+    "serverWorkMs": {
+      "samples": 40,
+      "p50": 1,
+      "p95": 1,
+      "max": 2
+    },
+    "stateAgeMs": {
+      "samples": 103,
+      "p50": 37,
+      "p95": 56,
+      "max": 84
+    },
+    "payloadBytesPerSecond": 17357.96202293664,
+    "paintMs": "0.5",
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "game": "terra",
+    "cpuThrottle": 1,
+    "injectedRoundTripMs": 0,
+    "canvas": {
+      "width": 1438,
+      "height": 899,
+      "displayWidth": 1438,
+      "displayHeight": 898,
+      "renderScale": "1.00",
+      "attributes": {
+        "alpha": false,
+        "colorSpace": "srgb",
+        "colorType": "unorm8",
+        "desynchronized": true,
+        "toneMapping": {
+          "mode": "standard"
+        },
+        "willReadFrequently": false
+      }
+    },
+    "seconds": 5.185,
+    "mainThreadMsPerSecond": 175.2187078109932,
+    "scriptMsPerSecond": 146.29411764705884,
+    "layoutMsPerSecond": 0.693731918997105,
+    "otherTaskMsPerSecond": 28.142333654773388,
+    "heapMB": 9.860904693603516,
+    "displayFrameMs": {
+      "samples": 311,
+      "p50": 16.699999999999818,
+      "p95": 16.700000000000728,
+      "max": 33.399999999999636
+    },
+    "paintFrameMs": {
+      "samples": 0,
+      "p50": null,
+      "p95": null,
+      "max": null
+    },
+    "inputReceiptMs": {
+      "samples": 24,
+      "p50": 18,
+      "p95": 39,
+      "max": 39
+    },
+    "inputToAuthorityMs": {
+      "samples": 22,
+      "p50": 47,
+      "p95": 67,
+      "max": 75
+    },
+    "serverWorkMs": {
+      "samples": 24,
+      "p50": 1,
+      "p95": 1,
+      "max": 1
+    },
+    "stateAgeMs": {
+      "samples": 100,
+      "p50": 36,
+      "p95": 59,
+      "max": 76
+    },
+    "payloadBytesPerSecond": 10579.942140790743,
+    "errors": [],
+    "status": "passed"
+  }
+]

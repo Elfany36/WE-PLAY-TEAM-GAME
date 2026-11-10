@@ -9,6 +9,7 @@ import {TRACKS} from './circuit.ts';
 import {CLUB_MAPS} from './party.ts';
 import {TABLE_SCENE_IDS,type TableScene} from './scenes.ts';
 import {roomHint} from '../room-params.ts';
+import {fastControls} from '../room-stream.ts';
 import type {CasualDatabase} from './room-store.ts';
 import {cleanRoomText} from '../room-text.ts';
 import {takeRoomBudget} from '../room-budget.ts';
@@ -107,7 +108,7 @@ export function createCasualAPI(DB:CasualDatabase|undefined,keepAlive?:((task:Pr
     return await batch(b.code).run((current,now)=>{authenticate(tokenHash,current);const next=structuredClone(current),p=next.players.find(p=>p.id===id)!;p.appearance={...p.appearance,avatar:version,useAvatar:true};p.requests=[...p.requests.slice(-23),b.requestId];return{state:next,changed:true,result:(final,revision,time)=>reply(req,{room:project(final,id,time,revision)})}});
    }finally{locks.delete(id)}
   }
-  const receiptOnly=!!authenticatedHash&&req.headers.get('X-Room-Control-Receipt')==='1'&&['direction','drive','explore','party-control','block-input','pirate-input'].includes(b.action);
+  const receiptOnly=!!authenticatedHash&&req.headers.get('X-Room-Control-Receipt')==='1'&&fastControls.has(b.action);
   const result=(final:CasualState,id:string,revision:number,time:number,duplicate=false)=>receiptOnly?reply(req,{ack:b.requestId,revision,serverNow:time}):reply(req,{...(token?{token}:{}),...(duplicate?{ack:b.requestId}:{}),room:project(final,id,time,revision,b.worldRound,b.worldVersion,b.scene)});
   return await batch(b.code).run<Response|Promise<Response>>((state,now)=>{
    const id=joinId||authenticate(tokenHash,state);if(!joinId&&b.requestId&&state.players.find(p=>p.id===id)?.requests.includes(b.requestId)){const advanced=advanceCasual(state,now);return{state:advanced.state,changed:advanced.changed,result:(final:CasualState,revision:number,time:number)=>result(final,id,revision,time,true)}}const budget={traffic:state.players.find(p=>p.id===id)?.traffic};if(!takeRoomBudget(budget,now,b.action==='draft-phone'?10:1))throw new CasualError('Too many actions. Give the room a moment to catch up.',429);const prepared=b.action==='start'?{...state,settings:{...state.settings,characterSelection:false}}:state;const next=applyCasualAction(prepared,b.action==='join'?{...b,id,hash:tokenHash}:b,id,now),player=next.players.find(p=>p.id===id);if(player)player.traffic=budget.traffic;

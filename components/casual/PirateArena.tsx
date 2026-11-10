@@ -8,6 +8,7 @@ import type {publicPirate} from '../../lib/casual/pirate';
 import {PIRATE_MAPS,PIRATE_MODES,PIRATE_SKILLS} from '../../lib/casual/pirate-data';
 import {pirateDisplay,piratePixelRatio,PirateAutoQuality,type PirateDisplay} from '../../lib/casual/pirate-display';
 import {createPirateRenderer,loadPirateArt} from '../../lib/casual/pirate-renderer.js';
+export const preloadPirateArt=loadPirateArt;
 import {constrainPiratePose} from '../../lib/casual/pirate-presentation';
 import {PiratePrediction} from '../../lib/casual/pirate-prediction';
 import {PoseReconciler} from '../../lib/game-motion';

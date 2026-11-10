@@ -44,6 +44,7 @@ export function sketchAction(s:CasualState,a:Record<string,unknown>,id:string,no
  if(a.action==='sketch-choose'){if(g.stage!=='choose'||!Number.isInteger(a.choice)||(a.choice as number)<0||(a.choice as number)>=g.choices.length)throw new CasualError('Choose an available word.');startDrawing(g,a.choice as number,now);return}
  if(g.stage!=='draw')throw new CasualError('This canvas is not accepting strokes.',409);
  if(a.canvasEpoch!==g.canvasEpoch)throw new CasualError('The canvas changed. Start a new stroke.',409);
+ if(a.action==='sketch-strokes'){for(const segment of a.segments as Record<string,unknown>[])sketchAction(s,{...segment,action:'sketch-stroke',turn:g.turn,canvasEpoch:g.canvasEpoch},id,now);return}
  if(a.action==='sketch-clear'){g.strokes=[];g.pointCount=0;g.canvasEpoch++;return}
  if(a.action==='sketch-undo'){const last=g.strokes.pop();if(last)g.pointCount-=last.points.length/2;g.canvasEpoch++;return}
  if(a.action!=='sketch-stroke')throw new CasualError('Choose a drawing action.');
@@ -72,5 +73,5 @@ export function sketchChat(s:CasualState,id:string,text:string,messageId:string,
 export function leaveSketch(s:CasualState,id:string,now:number){const g=s.game as SketchGame;if(id===g.artistId)reveal(s,g,now);else{g.eligible=g.eligible.filter(p=>p!==id);if(g.stage==='draw'&&g.eligible.every(p=>g.guessed[p]))reveal(s,g,now)}}
 export function publicSketch(g:SketchGame,id:string,now:number){
  const mayKnow=id===g.artistId||!!g.guessed[id]||g.stage==='reveal',mask=Array.from(g.word).map((c,i)=>!/[a-z]/i.test(c)||g.revealedLetters.includes(i)?c:'_').join('');
- return{kind:g.kind,stage:g.stage,artistId:g.artistId,currentId:g.currentId,turn:g.turn,cycle:g.cycle,cycles:g.cycles,seconds:g.seconds,deadline:g.deadline,startedAt:g.startedAt,choices:g.stage==='choose'&&id===g.artistId?[...g.choices]:[],word:mayKnow?g.word:undefined,mask:g.stage==='choose'?'':mask,eligible:g.eligible,guessed:g.guessed,scores:g.scores,strokes:g.strokes,canvasEpoch:g.canvasEpoch,pointCount:g.pointCount,feedback:g.feedback[id],canGuess:g.stage==='draw'&&g.eligible.includes(id)&&!g.guessed[id]&&now<g.deadline,chatLocked:g.stage!=='reveal'&&(id===g.artistId||!!g.guessed[id]||!g.eligible.includes(id))};
+ return{kind:g.kind,stage:g.stage,artistId:g.artistId,currentId:g.currentId,turn:g.turn,cycle:g.cycle,cycles:g.cycles,seconds:g.seconds,deadline:g.deadline,startedAt:g.startedAt,choices:g.stage==='choose'&&id===g.artistId?[...g.choices]:[],word:mayKnow?g.word:undefined,mask:g.stage==='choose'?'':mask,eligible:g.eligible,guessed:g.guessed,scores:g.scores,strokes:g.strokes,canvasEpoch:g.canvasEpoch,pointCount:g.pointCount,strokeBatchLimit:8,feedback:g.feedback[id],canGuess:g.stage==='draw'&&g.eligible.includes(id)&&!g.guessed[id]&&now<g.deadline,chatLocked:g.stage!=='reveal'&&(id===g.artistId||!!g.guessed[id]||!g.eligible.includes(id))};
 }

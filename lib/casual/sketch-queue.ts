@@ -1,11 +1,13 @@
 export type StrokeSegment={strokeId:string;color:string;size:number;points:number[];closed:boolean;round?:number;turn?:number;canvasEpoch?:number};
 type Queued=StrokeSegment&{seq?:number;requestId?:string};
+export type OrderedSegment=StrokeSegment&{seq:number;requestId:string};
 /** Reliable ordered strokes: unlike held movement, older segments cannot be replaced. */
 export class SketchQueue{
  private waiting:Queued[]=[];private sending=false;private generation=0;private sequences=new Map<string,number>();private listeners:(()=>void)[]=[];
  private send:(segment:StrokeSegment&{seq:number;requestId:string})=>Promise<void>;
+ private batch?:{send:(segments:OrderedSegment[])=>Promise<void>;limit:()=>number};
  private onError:(error:unknown)=>void;
- constructor(send:(segment:StrokeSegment&{seq:number;requestId:string})=>Promise<void>,onError:(error:unknown)=>void=()=>{}){this.send=send;this.onError=onError}
+ constructor(send:(segment:OrderedSegment)=>Promise<void>,onError:(error:unknown)=>void=()=>{},batch?:{send:(segments:OrderedSegment[])=>Promise<void>;limit:()=>number}){this.send=send;this.onError=onError;this.batch=batch}
  get pending(){return this.waiting.length+(this.sending?1:0)}
  enqueue(segment:StrokeSegment){
   const tail=this.waiting.at(-1);
@@ -17,11 +19,14 @@ export class SketchQueue{
  idle(){return this.pending?new Promise<void>(resolve=>this.listeners.push(resolve)):Promise.resolve()}
  private finish(){if(!this.pending){for(const resolve of this.listeners)resolve();this.listeners=[]}}
  private async pump(){
-  if(this.sending||!this.waiting.length){this.finish();return}this.sending=true;const generation=this.generation,packet=this.waiting.shift()!;
-  packet.seq??=(this.sequences.get(packet.strokeId)||0)+1;packet.requestId??=crypto.randomUUID();let error:unknown;
-  for(let attempt=0;attempt<3;attempt++){try{await this.send(packet as StrokeSegment&{seq:number;requestId:string});error=undefined;break}catch(e){error=e;const status=(e as {status?:number}).status;if(status&&status<500&&status!==429)break;if(attempt<2)await new Promise(resolve=>setTimeout(resolve,120*2**attempt))}if(generation!==this.generation)return}
+  if(this.sending||!this.waiting.length){this.finish();return}this.sending=true;const generation=this.generation,packets:OrderedSegment[]=[],sequences=new Map(this.sequences),first=this.waiting[0],limit=Math.max(1,Math.min(8,Math.floor(this.batch?.limit()||1)));let bytes=0;
+  // One atomic ordered batch replaces many sequential round trips, including
+  // short strokes. It never crosses a canvas/turn or the small-request budget.
+  while(this.waiting.length&&packets.length<limit){const next=this.waiting[0],size=JSON.stringify(next).length+100;if(packets.length&&(bytes+size>2800||next.round!==first.round||next.turn!==first.turn||next.canvasEpoch!==first.canvasEpoch))break;const packet=this.waiting.shift()!;packet.seq??=(sequences.get(packet.strokeId)||0)+1;packet.requestId??=crypto.randomUUID();sequences.set(packet.strokeId,packet.seq);if(packet.closed)sequences.delete(packet.strokeId);packets.push(packet as OrderedSegment);bytes+=size}
+  let error:unknown;
+  for(let attempt=0;attempt<3;attempt++){try{if(packets.length>1&&this.batch)await this.batch.send(packets);else await this.send(packets[0]);error=undefined;break}catch(e){error=e;const status=(e as {status?:number}).status;if(status&&status<500&&status!==429)break;if(attempt<2)await new Promise(resolve=>setTimeout(resolve,120*2**attempt))}if(generation!==this.generation)return}
   if(generation!==this.generation)return;this.sending=false;
-  if(error){this.waiting=[];this.onError(error)}else{this.sequences.set(packet.strokeId,packet.seq!);if(packet.closed)this.sequences.delete(packet.strokeId)}
+  if(error){this.waiting=[];this.onError(error)}else this.sequences=sequences;
   this.finish();if(this.waiting.length)void this.pump();
  }
 }

@@ -1,0 +1,243 @@
+[
+  {
+    "name": "Online controls \u00b7 0 ms injected round trip",
+    "checks": [
+      "movement and four short-tap receipts reach room authority",
+      "saved remapping controls the online pirate",
+      "settings release held controls; reset and save work",
+      "native pause and resume"
+    ],
+    "packets": 24,
+    "mediaRequests": 0,
+    "status": "passed"
+  },
+  {
+    "name": "Online controls \u00b7 90 ms injected round trip",
+    "checks": [
+      "movement and four short-tap receipts reach room authority",
+      "saved remapping controls the online pirate",
+      "settings release held controls; reset and save work",
+      "native pause and resume"
+    ],
+    "packets": 22,
+    "mediaRequests": 0,
+    "httpRoundTripMs": {
+      "min": 104,
+      "max": 105
+    },
+    "status": "passed"
+  },
+  {
+    "name": "Online controls \u00b7 400 ms injected round trip",
+    "checks": [
+      "movement and four short-tap receipts reach room authority",
+      "saved remapping controls the online pirate",
+      "settings release held controls; reset and save work",
+      "native pause and resume"
+    ],
+    "packets": 20,
+    "mediaRequests": 0,
+    "httpRoundTripMs": {
+      "min": 410,
+      "max": 413
+    },
+    "status": "passed"
+  },
+  {
+    "name": "Spectator cannot control; can resume when host disconnects",
+    "checks": [
+      "mobile spectator has no controls",
+      "absent-host resume is visible and works",
+      "forged controls rejected"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Touch multi-input and a gamepad connected as controller two",
+    "checks": [
+      "two touch pointers hold direction and jump independently",
+      "controller index one can drive player one",
+      "neutral/disconnected gamepad releases movement"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Four local players have independent optional customization and controls",
+    "checks": [
+      "15 models / 24 colors for a guest",
+      "guest remapping is saved separately",
+      "default start with four human seats",
+      "four keyboard profiles and per-player touch selector"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "320 px Pirate touch controls stay reachable without overlap",
+    "checks": [
+      "seven reachable touch targets of at least 44 px",
+      "all targets remain within the board",
+      "no overlapping controls"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 seaside-cove \u00b7 classic \u00b7 390",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 castle-keep \u00b7 spells \u00b7 390",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 meadow-run \u00b7 bomb-party \u00b7 390",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 sunken-ruins \u00b7 stomp \u00b7 390",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 galleon-deck \u00b7 ko-race \u00b7 390",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 twin-islands \u00b7 hot-potato \u00b7 390",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 ice-floes \u00b7 chaos \u00b7 390",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 thunder-reef \u00b7 classic \u00b7 390",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 seaside-cove \u00b7 classic \u00b7 1440",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 castle-keep \u00b7 spells \u00b7 1440",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 meadow-run \u00b7 bomb-party \u00b7 1440",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 sunken-ruins \u00b7 stomp \u00b7 1440",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 galleon-deck \u00b7 ko-race \u00b7 1440",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 twin-islands \u00b7 hot-potato \u00b7 1440",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 ice-floes \u00b7 chaos \u00b7 1440",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  },
+  {
+    "name": "Arena render \u00b7 thunder-reef \u00b7 classic \u00b7 1440",
+    "checks": [
+      "decoded sprites and map",
+      "native HUD/settings",
+      "no page overflow or runtime errors",
+      "audio remains lazy"
+    ],
+    "status": "passed"
+  }
+]

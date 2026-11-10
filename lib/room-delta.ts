@@ -32,4 +32,11 @@ export function applyRoomDelta(base:any,delta:RoomDelta):any{
  const result={...base};for(const key of delta[2]||[])delete result[key];for(const key of Object.keys(delta[1]))if(!['__proto__','constructor','prototype'].includes(key))result[key]=applyRoomDelta(base?.[key],delta[1][key]);return result;
 }
 /** Quantize presentation coordinates only; stored physics and rule values stay exact. */
-export function wireRoom(value:any,key=''):any{if(typeof value==='number'&&['x','y','vx','vy','speed','angle','steering','drifting'].includes(key))return Math.round(value*1000)/1000;if(Array.isArray(value))return value.map(v=>wireRoom(v));if(record(value)){const result:Record<string,any>={};for(const k of Object.keys(value))if(value[k]!==undefined)result[k]=wireRoom(value[k],k);return result}return value}
+export function wireRoom(value:any,key='',cache?:WeakMap<object,any>):any{
+ if(typeof value==='number'&&['x','y','vx','vy','speed','angle','steering','drifting'].includes(key))return Math.round(value*1000)/1000;
+ if(!Array.isArray(value)&&!record(value))return value;
+ const known=cache?.get(value);if(known)return known;
+ const result:any=Array.isArray(value)?value.map(v=>wireRoom(v,'',cache)):{};
+ if(!Array.isArray(value))for(const k of Object.keys(value))if(value[k]!==undefined)result[k]=wireRoom(value[k],k,cache);
+ cache?.set(value,result);return result;
+}

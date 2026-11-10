@@ -45,6 +45,10 @@ async function openControls(page){
 }
 async function closeControls(page){await page.locator('.controls-dialog[open]').getByRole('button',{name:'Done',exact:false}).click();if(fullscreen)await page.getByRole('button',{name:'Close game menu',exact:true}).click()}
 async function enableTouch(page){if(!fullscreen)return;await page.getByRole('button',{name:'Open game menu',exact:true}).click();await page.getByRole('checkbox',{name:'Show game controls',exact:true}).check();await page.getByRole('button',{name:'Close game menu',exact:true}).click()}
+async function graphics(page,quality){
+ if(fullscreen){await page.getByRole('button',{name:'Open game menu',exact:true}).click();await page.getByLabel('Pirate graphics quality').selectOption(quality);await page.getByRole('button',{name:'Close game menu',exact:true}).click()}
+ else{await page.locator('.pirate-settings summary').click();await page.getByLabel('Pirate graphics quality').selectOption(quality);await page.locator('.pirate-settings summary').click()}
+}
 const resume=page=>fullscreen?page.locator('.game-window-actions').getByRole('button',{name:'Resume game',exact:true}):page.locator('.pirate-board').getByRole('button',{name:'Resume',exact:true});
 
 async function close(session){if(session)await post({action:'leave',code:session.room.code},session.token).catch(()=>{})}
@@ -133,7 +137,7 @@ try{
   let session,view;
   try{
    session=await post({action:'create',mode:'pirate',name:'Map QA',pirateMap:maps[i],pirateMode:modes[i%modes.length],bots:2},undefined,201);await post({action:'start',code:session.room.code},session.token);view=await open(session,{width});
-   await view.page.locator('.pirate-settings summary').click();await view.page.getByLabel('Pirate graphics quality').selectOption(i%2?'low':'high');await view.page.locator('.pirate-settings summary').click();await wait(100);
+   await graphics(view.page,i%2?'low':'high');await wait(100);
    assert.equal(await view.page.locator('.pirate-crew-card').count(),3);assert(!await view.page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1));assert.deepEqual(view.errors,[]);assert.equal(view.media.length,0);
    if(i===0){await wait(3200);await view.page.locator('.pirate-board').screenshot({path:output.replace(/\.json$/,'')+'-'+width+'.png'})}
    row.checks.push('decoded sprites and map','native HUD/settings','no page overflow or runtime errors','audio remains lazy');

@@ -89,6 +89,9 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
   const state=this.db.inspectState<AuthorityState>()!,now=Date.now();
   this.lastNotificationAt=now;
   if(this.kind==='casual')this.lastNotificationScene=roomFanoutScene(state as CasualState);
+  // Reuse common public world branches only within this synchronous fanout.
+  // Each player's private projection still passes through publicCasual/publicArena.
+  const fanout=new WeakMap<object,any>();
   for(const socket of this.ctx.getWebSockets()){
    const session=socket.deserializeAttachment() as Subscription|null;
    if(!session?.playerId)continue;
@@ -103,7 +106,7 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
      if(session.stateAck&&(session.pending?.length||0)>=(session.stateWindow||4))continue;
      const room=this.kind==='casual'?publicCasual(state as CasualState,session.playerId,now):publicArena(state as ArenaState,session.playerId,now);
      const url=new URL('https://room.internal/api/'+this.kind);url.searchParams.set('wire','1');if(session.base)url.searchParams.set('base',session.base);
-     const data=roomSnapshot(new Request(url),{room:{...room,revision:row.revision},clock:{receivedAt:now,sentAt:now,stateInterval:STATE_INTERVAL}});
+     const data=roomSnapshot(new Request(url),{room:{...room,revision:row.revision},clock:{receivedAt:now,sentAt:now,stateInterval:STATE_INTERVAL}},fanout);
      socket.send(JSON.stringify({type:'state',data}));socket.serializeAttachment({...session,revision:row.revision,base:data.snapshotId,...(session.stateAck?{pending:[...(session.pending||[]),row.revision]}:{})});
     }else{socket.send(JSON.stringify({type:'revision',revision:row.revision}));socket.serializeAttachment({...session,revision:row.revision})}
    }catch{socket.close(1011,'Reconnect room updates')}

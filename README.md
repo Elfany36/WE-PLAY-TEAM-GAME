@@ -11,7 +11,7 @@ This release contains the recording fixes and six-game expansion. See [Phase 1](
 - 24 lessons, 9 projects, 16 visual practices and 127 authored reference recipes.
 - Code Sprint, Stack Survival and Quiz Cards for up to 8 players, plus timed and untimed solo practice.
 - 849 definition facts, 2,547 question-format variants and 100 code-completion tasks. Seeded question and option shuffling gives every player the same order at the same progress index.
-- Seventeen casual games, including simultaneous Snake, memory, ladders, cards, drawing relay, kart racing, a shared mining world, strategy boards, sumo, tanks, paddle rally, marble racing, falling blocks and 8-ball pool. Most support 8 players; UNO supports up to 12; chess/dama/sci-dama, Paddle Rally and Pocket Billiards use 2 seats.
+- 22 arcade games, including simultaneous Snake, memory, ladders, cards, drawing relay, kart racing, a shared mining world, strategy boards, sumo, tanks, paddle rally, marble racing, falling blocks and 8-ball pool. Most support 8 players; UNO supports up to 12; chess/dama/sci-dama, Paddle Rally and Pocket Billiards use 2 seats.
 - Emoji chat and six free virtual gifts. Shared history clears when someone leaves or the host changes games, caps at 50 messages, and expires after 15 minutes.
 
 ## Arcade update
@@ -171,3 +171,5 @@ The [Solitaire and live drawing update](docs/verification/arcade-v28.md) brings 
 The [v33 window, proportion and audio update](docs/verification/arcade-v33.md) audits all 22 arcade games and the three coding games in both layouts, locks card/board/canvas proportions, restores Pirate's pixel HUD and all-fighter camera, adds Tank's reticle, introduces configurable match rounds, and shares optional music/effects with bounded resource use. Rules stay in a separate hideable panel; fullscreen room panels start hidden. The report records the exact verification and remaining upload/Cloudflare connection limits.
 
 The [UNO, scene, editor and delayed-control repairs](docs/verification/arcade-v34.md) add a clear UNO declaration/catch flow, preserve selected fullscreen boards, restore readable Playground/lesson code and correct held-input queuing on slow links. The updated v34 dedicated live service handles all new Sites/Pages arcade rooms, including UNO, Pirate and finite rounds. Existing room origins stay pinned. The report records local production checks and Cloudflare deployment verification.
+
+The [v35 realtime performance repair](docs/verification/arcade-v35.md) reduces drawing backlog and canvas/server work, warms lobby assets, and verifies all 22 games in normal and fullscreen layouts.

@@ -3,7 +3,7 @@ import {SOLITAIRE_VARIANTS,type SolitaireVariant,type SolPlace} from './solitair
 import {SKETCH_CATEGORIES} from './sketch-words.ts';
 import {SKETCH_COLORS} from './sketch.ts';
 export type NewGameSettings={solitaireVariant?:SolitaireVariant;sketchSeconds?:30|60|90|120;sketchRounds?:1|2|3|5;sketchCategory?:string};
-export const NEW_GAME_ACTIONS=['sol-move','sol-draw','sol-remove','sol-undo','sol-restart','sol-concede','sketch-choose','sketch-stroke','sketch-clear','sketch-undo'];
+export const NEW_GAME_ACTIONS=['sol-move','sol-draw','sol-remove','sol-undo','sol-restart','sol-concede','sketch-choose','sketch-stroke','sketch-strokes','sketch-clear','sketch-undo'];
 export function newGameSettings(v:Record<string,unknown>):NewGameSettings{
  const out:NewGameSettings={};
  if(v.solitaireVariant!==undefined){if(!SOLITAIRE_VARIANTS.includes(v.solitaireVariant as SolitaireVariant))throw new CasualError('Choose a Solitaire variant.');out.solitaireVariant=v.solitaireVariant as SolitaireVariant}
@@ -19,6 +19,10 @@ export function newGameActionFields(v:Record<string,unknown>):Record<string,unkn
  if(!Number.isSafeInteger(v.turn)||(v.turn as number)<1)throw new CasualError('Use the current drawing turn.');out.turn=v.turn;
  if(action==='sketch-choose'){if(!Number.isInteger(v.choice)||(v.choice as number)<0||(v.choice as number)>2)throw new CasualError('Choose a word.');out.choice=v.choice;return out}
  if(!Number.isSafeInteger(v.canvasEpoch)||(v.canvasEpoch as number)<0)throw new CasualError('Use the current canvas.');out.canvasEpoch=v.canvasEpoch;
+ if(action==='sketch-strokes'){
+  if(!Array.isArray(v.segments)||!v.segments.length||v.segments.length>8)throw new CasualError('Send up to eight ordered drawing segments.');
+  out.segments=v.segments.map(segment=>{if(!segment||typeof segment!=='object'||Array.isArray(segment))throw new CasualError('Use an ordered drawing segment.');const {round,turn,canvasEpoch,...fields}=newGameActionFields({...segment,action:'sketch-stroke',round:v.round,turn:v.turn,canvasEpoch:v.canvasEpoch});return fields});return out;
+ }
  if(action==='sketch-stroke'){
   if(typeof v.strokeId!=='string'||!/^[a-zA-Z0-9-]{8,64}$/.test(v.strokeId)||!Number.isSafeInteger(v.seq)||(v.seq as number)<1||(v.seq as number)>1000)throw new CasualError('Use an ordered drawing segment.');
   if(!SKETCH_COLORS.some(c=>c===v.color)||!Number.isInteger(v.size)||(v.size as number)<2||(v.size as number)>32||typeof v.closed!=='boolean')throw new CasualError('Choose a valid brush.');

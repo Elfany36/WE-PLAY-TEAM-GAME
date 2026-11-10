@@ -1,0 +1,41 @@
+[
+  {
+    "width": 1440,
+    "checks": [
+      "online custom round count saves on Set and reaches the authority",
+      "audio has no default media request or context",
+      "website pointer aim and independent mouse / Space firing",
+      "fullscreen pointer aim and independent mouse / Space firing",
+      "game menu releases held firing",
+      "music and effects opt in, volume, track reuse and local audio file",
+      "hidden and disabled audio stops without another player/context"
+    ],
+    "status": "passed"
+  },
+  {
+    "width": 390,
+    "checks": [
+      "online custom round count saves on Set and reaches the authority",
+      "audio has no default media request or context",
+      "website pointer aim and independent mouse / Space firing",
+      "fullscreen pointer aim and independent mouse / Space firing",
+      "game menu releases held firing",
+      "music and effects opt in, volume, track reuse and local audio file",
+      "hidden and disabled audio stops without another player/context"
+    ],
+    "status": "passed"
+  },
+  {
+    "width": 844,
+    "checks": [
+      "online custom round count saves on Set and reaches the authority",
+      "audio has no default media request or context",
+      "website pointer aim and independent mouse / Space firing",
+      "fullscreen pointer aim and independent mouse / Space firing",
+      "game menu releases held firing",
+      "music and effects opt in, volume, track reuse and local audio file",
+      "hidden and disabled audio stops without another player/context"
+    ],
+    "status": "passed"
+  }
+]

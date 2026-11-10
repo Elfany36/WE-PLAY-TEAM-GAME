@@ -1,0 +1,19 @@
+[
+  {
+    "game": "memory",
+    "roundTripDelayMs": 200,
+    "lobbyPreloadedSelectedGame": true,
+    "clickToViewerMs": 656,
+    "revealSurvivesReload": true,
+    "status": "passed"
+  },
+  {
+    "game": "chess",
+    "roundTripDelayMs": 200,
+    "lobbyPreloadedSelectedGame": true,
+    "clickToViewerMs": 984,
+    "staleTurnRejected": true,
+    "positionSurvivesReload": true,
+    "status": "passed"
+  }
+]

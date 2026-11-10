@@ -1,0 +1,103 @@
+[
+  {
+    "game": "circuit",
+    "cpuThrottle": 4,
+    "injectedRoundTripMs": 0,
+    "seconds": 5.843,
+    "mainThreadMsPerSecond": 249.35255861714873,
+    "scriptMsPerSecond": 198.68783159335956,
+    "layoutMsPerSecond": 1.468081465000861,
+    "otherTaskMsPerSecond": 46.906212562040054,
+    "heapMB": 12.548835754394531,
+    "displayFrameMs": {
+      "samples": 156,
+      "p50": 33.399999999999636,
+      "p95": 50.099999999999454,
+      "max": 116.70000000000073
+    },
+    "paintFrameMs": {
+      "samples": 153,
+      "p50": 33.399999999999636,
+      "p95": 50.099999999998545,
+      "max": 66.60000000000036
+    },
+    "inputReceiptMs": {
+      "samples": 39,
+      "p50": 87,
+      "p95": 144,
+      "max": 183
+    },
+    "inputToAuthorityMs": {
+      "samples": 34,
+      "p50": 102,
+      "p95": 184,
+      "max": 185
+    },
+    "serverWorkMs": {
+      "samples": 39,
+      "p50": 1,
+      "p95": 1,
+      "max": 2
+    },
+    "stateAgeMs": {
+      "samples": 113,
+      "p50": 98,
+      "p95": 175,
+      "max": 202
+    },
+    "payloadBytesPerSecond": 17603.799418107137,
+    "paintMs": "3.1",
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "game": "terra",
+    "cpuThrottle": 4,
+    "injectedRoundTripMs": 0,
+    "seconds": 5.325,
+    "mainThreadMsPerSecond": 391.0152112676057,
+    "scriptMsPerSecond": 320.57765258215966,
+    "layoutMsPerSecond": 1.7410328638497603,
+    "otherTaskMsPerSecond": 68.437558685446,
+    "heapMB": 12.817298889160156,
+    "displayFrameMs": {
+      "samples": 165,
+      "p50": 33.30000000000109,
+      "p95": 50,
+      "max": 66.70000000000073
+    },
+    "paintFrameMs": {
+      "samples": 0,
+      "p50": null,
+      "p95": null,
+      "max": null
+    },
+    "inputReceiptMs": {
+      "samples": 23,
+      "p50": 69,
+      "p95": 88,
+      "max": 92
+    },
+    "inputToAuthorityMs": {
+      "samples": 23,
+      "p50": 79,
+      "p95": 126,
+      "max": 131
+    },
+    "serverWorkMs": {
+      "samples": 23,
+      "p50": 1,
+      "p95": 3,
+      "max": 4
+    },
+    "stateAgeMs": {
+      "samples": 102,
+      "p50": 74,
+      "p95": 119,
+      "max": 139
+    },
+    "payloadBytesPerSecond": 10218.215962441314,
+    "errors": [],
+    "status": "passed"
+  }
+]
