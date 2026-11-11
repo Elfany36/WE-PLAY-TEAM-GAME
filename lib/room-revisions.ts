@@ -1,7 +1,7 @@
 import {ROOM_HINT_HEADERS} from './room-params.ts';
 import {stateWindow,MAX_STATE_WINDOW,fastControls} from './room-stream.ts';
 
-type Handlers={revision:(revision:number)=>void;status:(live:boolean)=>void;state?:(data:any,wireBytes?:number)=>boolean|void;latency?:(elapsed:number)=>void};
+type Handlers={revision:(revision:number)=>void;status:(live:boolean)=>void;state?:(data:any,wireBytes?:number)=>boolean|void;latency?:(elapsed:number,kind:'ping'|'auth'|'request')=>void};
 type Pending={resolve:(response:Response)=>void;reject:(error:Error)=>void;cleanup:()=>void;sentAt:number};
 const HEARTBEAT=3000,STALE_AFTER=9000;
 const unavailable=()=>Object.assign(Error('Reconnecting live room updates.'),{status:503});
@@ -20,7 +20,7 @@ export class RoomRevisionFeed{
  private endpoint:string;private token:string;private handlers:Handlers;
  constructor(endpoint:string,token:string,handlers:Handlers){this.endpoint=endpoint;this.token=token;this.handlers=handlers}
  get autonomous(){return this.streaming&&this.autonomousState}
- private measure(elapsed:number){if(!Number.isFinite(elapsed)||elapsed<0)return;this.roundTrip=elapsed;this.handlers.latency?.(elapsed)}
+ private measure(elapsed:number,kind:'ping'|'auth'|'request'){if(!Number.isFinite(elapsed)||elapsed<0)return;this.roundTrip=elapsed;this.handlers.latency?.(elapsed,kind)}
  get streaming(){return this.ready&&this.protocol===2}
  start(){
   if(this.started||this.disposed)return;this.started=true;
@@ -64,19 +64,19 @@ export class RoomRevisionFeed{
    if(!data||typeof data!=='object'||Array.isArray(data))return;
    const revision=Number.isSafeInteger(data.revision)&&data.revision>=0;
    if(data.type==='ready'&&revision){
-    this.lastMessage=performance.now();this.ready=true;this.protocol=data.protocol===2?2:1;this.receipts=data.receipts===true;this.autonomousState=data.autonomous===true;this.measure(performance.now()-this.authenticatedAt);clearTimeout(this.handshake);this.failures=0;
+    this.lastMessage=performance.now();this.ready=true;this.protocol=data.protocol===2?2:1;this.receipts=data.receipts===true;this.autonomousState=data.autonomous===true;this.measure(performance.now()-this.authenticatedAt,'auth');clearTimeout(this.handshake);this.failures=0;
     this.handlers.status(true);clearInterval(this.heartbeat);
-    this.heartbeat=setInterval(()=>{if(document.hidden)return;if(performance.now()-this.lastMessage>=STALE_AFTER)this.disconnect(socket,true);else this.ping()},HEARTBEAT);
+    this.heartbeat=setInterval(()=>{if(document.hidden)return;if(performance.now()-this.lastMessage>=STALE_AFTER)this.disconnect(socket,true);else this.ping()},HEARTBEAT);this.ping();
    }
    if(!this.ready)return;
-   if(data.type==='pong'){this.lastMessage=performance.now();const sent=this.pings.get(data.id);if(sent!==undefined){this.pings.delete(data.id);this.measure(performance.now()-sent)}return}
+   if(data.type==='pong'){this.lastMessage=performance.now();const sent=this.pings.get(data.id);if(sent!==undefined){this.pings.delete(data.id);this.measure(performance.now()-sent,'ping')}return}
    if((data.type==='ready'||data.type==='revision')&&revision){this.lastMessage=performance.now();this.handlers.revision(data.revision)}
    if(data.type==='state'&&this.protocol===2&&data.data&&typeof data.data==='object'){
     this.lastMessage=performance.now();const accepted=this.handlers.state?.(data.data,new TextEncoder().encode(event.data).byteLength),revision=data.data.room?.revision??data.data.revision;
     if(accepted!==false&&Number.isSafeInteger(revision)&&revision>=0)try{socket.send(JSON.stringify({type:'ack',revision,stateWindow:stateWindow(this.roundTrip)}))}catch{this.disconnect(socket,true)}
    }
    if(data.type==='response'&&typeof data.id==='string'&&Number.isInteger(data.status)&&data.status>=200&&data.status<=599){
-    this.lastMessage=performance.now();const entry=this.pending.get(data.id);if(!entry)return;this.pending.delete(data.id);entry.cleanup();this.measure(performance.now()-entry.sentAt);entry.resolve(Response.json(data.data,{status:data.status}));
+    this.lastMessage=performance.now();const entry=this.pending.get(data.id);if(!entry)return;this.pending.delete(data.id);entry.cleanup();this.measure(performance.now()-entry.sentAt,'request');entry.resolve(Response.json(data.data,{status:data.status}));
    }
   };
   socket.onerror=()=>this.disconnect(socket,true);

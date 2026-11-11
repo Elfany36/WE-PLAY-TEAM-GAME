@@ -2,7 +2,7 @@ import type {RoomTraffic} from './room-budget.ts';
 import {appendChat,activeChat,ChatError,type ChatMessage} from './room-chat.ts';
 import {questionAt,isCorrect,publicQuestion,type GameMode} from './question-bank.ts';
 export type ArenaPlayer={id:string;name:string;tokenHash:string;joinedAt:number;lastSeen:number;index:number;score:number;correct:number;wrong:number;clears:number;eliminatedAt:number|null;ready:boolean;answeredIds:string[];traffic?:RoomTraffic;receipts?:{id:string;feedback?:any}[]};
-export type ArenaState={version:2;chat?:ChatMessage[];chatEpoch?:number;code:string;hostId:string;mode:GameMode;topic:string;seed:number;round:number;createdAt:number;startedAt:number|null;duration:number;players:ArenaPlayer[];events:{text:string;at:number}[]};
+export type ArenaState={version:2;gatewayOrigin?:string;chat?:ChatMessage[];chatEpoch?:number;code:string;hostId:string;mode:GameMode;topic:string;seed:number;round:number;createdAt:number;startedAt:number|null;duration:number;players:ArenaPlayer[];events:{text:string;at:number}[]};
 export const CARD_LIMIT=100, HOST_TIMEOUT=45000;
 export class ArenaError extends Error{status:number;constructor(message:string,status=400){super(message);this.status=status;}}
 export function createArena(code:string,id:string,hash:string,name:string,now:number):ArenaState{return {version:2,code,hostId:id,mode:'blanks',topic:'All',seed:0,round:0,createdAt:now,startedAt:null,duration:90000,players:[newPlayer(id,hash,name,now)],events:[{text:name+' opened the room.',at:now}]};}
@@ -85,7 +85,7 @@ export function publicArena(state:ArenaState,playerId:string,now:number){
  const s=structuredClone(state);s.chat=activeChat(s.chat,now);updateDeaths(s,now);const me=s.players.find(p=>p.id===playerId);
  if(!me)throw new ArenaError('Join the room to see the game.',401);
  const ended=finished(s,now),host=s.players.find(p=>p.id===s.hostId);
- return {code:s.code,mode:s.mode,topic:s.topic,round:s.round,hostId:s.hostId,serverNow:now,startedAt:s.startedAt,duration:s.duration,ended,isHost:s.hostId===playerId,youId:playerId,canClaimHost:s.hostId!==playerId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),completed:me.index>=CARD_LIMIT,
+ return {code:s.code,gatewayOrigin:s.gatewayOrigin,mode:s.mode,topic:s.topic,round:s.round,hostId:s.hostId,serverNow:now,startedAt:s.startedAt,duration:s.duration,ended,isHost:s.hostId===playerId,youId:playerId,canClaimHost:s.hostId!==playerId&&(!host||now-host.lastSeen>=HOST_TIMEOUT),completed:me.index>=CARD_LIMIT,
  players:s.players.map(p=>({id:p.id,name:p.name,score:p.score,correct:p.correct,wrong:p.wrong,index:p.index,ready:p.ready,online:now-p.lastSeen<35000,canRemove:now-p.lastSeen>=HOST_TIMEOUT,isHost:p.id===s.hostId,isYou:p.id===playerId,rows:Math.min(12,pressure(p,s,now)),completed:p.index>=CARD_LIMIT,eliminated:p.eliminatedAt!==null,eliminatedAt:p.eliminatedAt})).sort((a,b)=>b.score-a.score||a.wrong-b.wrong||a.id.localeCompare(b.id)),
  chat:activeChat(s.chat,now),chatEpoch:s.chatEpoch||0,question:s.startedAt!==null&&!ended&&me.eliminatedAt===null&&me.index<CARD_LIMIT?publicQuestion(roundQuestion(s,me.index)):null,events:s.events};
 }

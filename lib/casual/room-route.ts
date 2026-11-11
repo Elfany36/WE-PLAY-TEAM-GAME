@@ -1,3 +1,4 @@
+import {PH_GATEWAY} from '../room-gateways.ts';
 import {roomStub} from '../room-placement.ts';
 import {createCasualAPI,casualBody,casualFailure} from './api.ts';
 import {roomOriginAllowed} from '../room-origin.ts';
@@ -34,7 +35,7 @@ export async function routeCasual(req:Request,env:RoomEnv,keepAlive?:(task:Promi
  const headers=new Headers(req.headers);headers.delete('X-Room-Code');headers.set('X-Room-Key',code);headers.set('X-Room-Legacy',options.legacyImport===false?'deny':'allow');if(create)headers.set('X-Room-Code',code);
  // Rebuilt from parts: the framework's request object is not a native Request.
  let res:Response;
- try{res=await roomStub(rooms,'casual:'+code).fetch(new Request(req.url,{method:req.method,headers,body:req.method==='POST'?text:undefined}))}
+ try{res=await roomStub(rooms,'casual:'+code,new URL(req.url).origin===PH_GATEWAY).fetch(new Request(req.url,{method:req.method,headers,body:req.method==='POST'?text:undefined}))}
  catch{return casualFailure(req,new CasualError('The room service is reconnecting. Please try again.',503))}
  if(res.status===101&&res.webSocket)return new Response(null,{status:101,headers:new Headers(res.headers),webSocket:res.webSocket});
  // Stub responses have immutable headers, which the framework still edits.

@@ -1,4 +1,5 @@
 'use client';
+import {roomGateway} from '../../lib/room-gateways';
 import {nextControlSequence} from '../../lib/control-sequence';
 import AudioSettings,{AudioButton} from './AudioSettings';
 import {useGameAudio} from './useGameAudio';
@@ -109,7 +110,7 @@ export default function CasualArcade({name}:{name:string}){
  async function request(body:Record<string,any>,s:Session|null=sessionRef.current){
   const control=['direction','drive','explore','party-control','block-input','pirate-input'].includes(body.action),hint=body.action==='join'?invitationEndpoint(new URLSearchParams(location.search).get('arcadeService')):undefined,target=s?sessionCasualEndpoint(s.apiOrigin):hint||await chooseCasualEndpoint(body.mode,{matchRounds:body.matchRounds}),init:RequestInit={method:'POST',keepalive:body.action==='draft-phone',headers:{'Content-Type':'application/json',...(s?{Authorization:'Bearer '+s.token}:{})},body:JSON.stringify({...body,...(s?{code:s.code}:{}),...worldVersion(),requestId:body.requestId||nonce()})},options={timeout:control?(transport.stats.streaming?Math.min(8000,Math.max(2000,transport.stats.rtt*3+500)):Math.min(12000,Math.max(3000,transport.stats.totalRtt*1.6+1000))):8000,retries:control||['create','join','draft-phone'].includes(body.action)?0:2};
   const targets=body.action==='join'&&!s&&!hint?joinCandidates(target,/\.chatgpt\.site$|\.github\.io$/.test(location.hostname)):[target];
-  for(let i=0;i<targets.length;i++){try{const data=await transport.send(targets[i],init,options);return{...data,apiOrigin:new URL(targets[i],location.href).origin}}catch(error){if((error as {status?:number}).status!==404||i===targets.length-1)throw error}}
+  for(let i=0;i<targets.length;i++){try{const data=await transport.send(targets[i],init,options);return{...data,apiOrigin:roomGateway(data.room?.gatewayOrigin)||new URL(targets[i],location.href).origin}}catch(error){if((error as {status?:number}).status!==404||i===targets.length-1)throw error}}
   throw Error('This room could not be found.');
  }
 
@@ -146,7 +147,7 @@ export default function CasualArcade({name}:{name:string}){
     schedule(failures?Math.min(2000,250*2**Math.min(failures,3)):Math.min(streamWait,Math.max(0,(dirty?floor():period)-elapsed)));
    }
   }
-  const feed=new RoomRevisionFeed(endpoint()+'?code='+s.code,s.token,{latency:elapsed=>transport.observeLatency(elapsed),revision:revision=>{wantedRevision=Math.max(wantedRevision,revision);if(!pending&&revision>(roomRef.current?.revision??-1))schedule(Math.max(0,floor()-(performance.now()-lastPollStarted)))},status:ready=>{live=ready;transport.stats.live=ready;transport.attachLive(feed);if(!ready&&!pending)schedule(0)},state:(wire,wireBytes)=>{if(stopped||sessionRef.current?.token!==s.token)return;try{const data=transport.receive(wire,wireBytes);if(data.room&&!document.hidden){queuedState=data.room;if(!frame)frame=requestAnimationFrame(()=>{frame=0;const state=queuedState;queuedState=null;if(!stopped&&state&&!document.hidden)adopt(state,true)})}}catch{feed.resync();return false}}});
+  const feed=new RoomRevisionFeed(endpoint()+'?code='+s.code,s.token,{latency:(elapsed,kind)=>transport.observeLatency(elapsed,kind),revision:revision=>{wantedRevision=Math.max(wantedRevision,revision);if(!pending&&revision>(roomRef.current?.revision??-1))schedule(Math.max(0,floor()-(performance.now()-lastPollStarted)))},status:ready=>{live=ready;transport.stats.live=ready;transport.attachLive(feed);if(!ready&&!pending)schedule(0)},state:(wire,wireBytes)=>{if(stopped||sessionRef.current?.token!==s.token)return;try{const data=transport.receive(wire,wireBytes);if(data.room&&!document.hidden){queuedState=data.room;if(!frame)frame=requestAnimationFrame(()=>{frame=0;const state=queuedState;queuedState=null;if(!stopped&&state&&!document.hidden)adopt(state,true)})}}catch{feed.resync();return false}}});
   liveFeed.current=feed;feed.setActive(leaseOwner.current);transport.attachLive(feed);feed.start();const wake=()=>{if(!document.hidden&&!pending)schedule(0)};
   // A browser can hold RAF callbacks for the entire hidden interval. Keep delta
   // decoding/ACKs, but never re-stamp that queued old view as a new wake receipt.

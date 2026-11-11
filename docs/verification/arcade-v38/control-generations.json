@@ -1,0 +1,92 @@
+[
+  {
+    "mode": "snake",
+    "firstPacketInFlight": true,
+    "delayedNewerPacketRejected": true,
+    "idlePingDoesNotRevokeAgain": true,
+    "freshViewWorks": true,
+    "otherActiveTabPreserved": true,
+    "closedSocketRevokesInFlight": true,
+    "status": "passed"
+  },
+  {
+    "mode": "terra",
+    "firstPacketInFlight": false,
+    "delayedNewerPacketRejected": true,
+    "idlePingDoesNotRevokeAgain": true,
+    "freshViewWorks": true,
+    "otherActiveTabPreserved": true,
+    "closedSocketRevokesInFlight": true,
+    "status": "passed"
+  },
+  {
+    "mode": "circuit",
+    "firstPacketInFlight": true,
+    "delayedNewerPacketRejected": true,
+    "idlePingDoesNotRevokeAgain": true,
+    "freshViewWorks": true,
+    "otherActiveTabPreserved": true,
+    "closedSocketRevokesInFlight": true,
+    "status": "passed"
+  },
+  {
+    "mode": "tanks",
+    "firstPacketInFlight": false,
+    "delayedNewerPacketRejected": true,
+    "idlePingDoesNotRevokeAgain": true,
+    "freshViewWorks": true,
+    "otherActiveTabPreserved": true,
+    "closedSocketRevokesInFlight": true,
+    "status": "passed"
+  },
+  {
+    "mode": "sumo",
+    "firstPacketInFlight": true,
+    "delayedNewerPacketRejected": true,
+    "idlePingDoesNotRevokeAgain": true,
+    "freshViewWorks": true,
+    "otherActiveTabPreserved": true,
+    "closedSocketRevokesInFlight": true,
+    "status": "passed"
+  },
+  {
+    "mode": "pong",
+    "firstPacketInFlight": false,
+    "delayedNewerPacketRejected": true,
+    "idlePingDoesNotRevokeAgain": true,
+    "freshViewWorks": true,
+    "otherActiveTabPreserved": true,
+    "closedSocketRevokesInFlight": true,
+    "status": "passed"
+  },
+  {
+    "mode": "marble",
+    "firstPacketInFlight": true,
+    "delayedNewerPacketRejected": true,
+    "idlePingDoesNotRevokeAgain": true,
+    "freshViewWorks": true,
+    "otherActiveTabPreserved": true,
+    "closedSocketRevokesInFlight": true,
+    "status": "passed"
+  },
+  {
+    "mode": "blocks",
+    "firstPacketInFlight": false,
+    "delayedNewerPacketRejected": true,
+    "idlePingDoesNotRevokeAgain": true,
+    "freshViewWorks": true,
+    "otherActiveTabPreserved": true,
+    "closedSocketRevokesInFlight": true,
+    "status": "passed"
+  },
+  {
+    "mode": "pirate",
+    "firstPacketInFlight": true,
+    "delayedNewerPacketRejected": true,
+    "idlePingDoesNotRevokeAgain": true,
+    "freshViewWorks": true,
+    "otherActiveTabPreserved": true,
+    "closedSocketRevokesInFlight": true,
+    "status": "passed"
+  }
+]

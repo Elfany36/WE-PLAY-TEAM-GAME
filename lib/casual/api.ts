@@ -1,3 +1,4 @@
+import {requestGateway} from '../room-gateways.ts';
 import {matchRoundSettings} from './round-series.ts';
 import {pirateSettings} from './pirate.ts';
 import {newGameSettings,newGameActionFields,NEW_GAME_ACTIONS} from './new-game-settings.ts';
@@ -94,7 +95,7 @@ export function createCasualAPI(DB:CasualDatabase|undefined,keepAlive?:((task:Pr
  async function POST(req:Request){beginRoomRequest(req);try{originCheck(req);const b=await casualBody(req);if(!DB)throw new CasualError('Room storage is unavailable.',503);
   if(b.action==='create'){
    const token=secret(),id=crypto.randomUUID(),tokenHash=await hash(token),now=Date.now();let code=newCode&&/^[A-HJ-NP-Z2-9]{8}$/.test(newCode)?newCode:'';if(!code)for(let i=0;i<8;i++)code+='ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[crypto.getRandomValues(new Uint8Array(1))[0]%32];
-   let s=createCasual(code,id,b.name,tokenHash,b.mode as CasualMode,crypto.getRandomValues(new Uint32Array(1))[0],now);s=applyCasualAction(s,{...b,action:'configure'},id,now);s.settings.characterSelection=false;if(b.appearance)s=applyCasualAction(s,{action:'appearance',appearance:b.appearance},id,now);
+   let s=createCasual(code,id,b.name,tokenHash,b.mode as CasualMode,crypto.getRandomValues(new Uint32Array(1))[0],now);s.gatewayOrigin=requestGateway(req);s=applyCasualAction(s,{...b,action:'configure'},id,now);s.settings.characterSelection=false;if(b.appearance)s=applyCasualAction(s,{action:'appearance',appearance:b.appearance},id,now);
    await DB.prepare('DELETE FROM casual_rooms WHERE created_at < ?').bind(now-ROOM_TTL).run();
    await DB.prepare('INSERT INTO casual_rooms(code,state,revision,created_at) VALUES(?,?,0,?)').bind(code,JSON.stringify(s),now).run();return reply(req,{token,room:{...publicCasual(s,id,now),revision:0}},201)
   }

@@ -1,20 +1,24 @@
-import {HOSTED_ORIGIN,HOSTED_ORIGINS,multiplayerEndpoint} from '../multiplayer-config.ts';
-export const CASUAL_SERVICE_ORIGIN='https://markup-arcade.kendsfabros.workers.dev';
+import {HOSTED_ORIGIN,HOSTED_ORIGINS,CLOUDFLARE_WEBSITE_ORIGIN,multiplayerEndpoint} from '../multiplayer-config.ts';
+import {SEA_GATEWAY,PH_GATEWAY} from '../room-gateways.ts';
+import {selectRoomGateway} from './gateway-choice.ts';
+export const CASUAL_SERVICE_ORIGIN=SEA_GATEWAY;
+export const PH_SERVICE_ORIGIN=PH_GATEWAY;
+let selectedGateway:{key:string;until:number;choice:Promise<string>}|undefined;
 export function legacyCasualEndpoint(){return(typeof location!=='undefined'&&location.hostname.endsWith('.github.io')?HOSTED_ORIGIN:'')+'/api/casual'}
-export function trustedCasualOrigin(origin:unknown):origin is string{return typeof origin==='string'&&[CASUAL_SERVICE_ORIGIN,...HOSTED_ORIGINS,typeof location!=='undefined'?location.origin:'',typeof location!=='undefined'?new URL(multiplayerEndpoint('casual'),location.href).origin:''].includes(origin)}
+export function trustedCasualOrigin(origin:unknown):origin is string{return typeof origin==='string'&&[CASUAL_SERVICE_ORIGIN,PH_SERVICE_ORIGIN,...HOSTED_ORIGINS,typeof location!=='undefined'?location.origin:'',typeof location!=='undefined'?new URL(multiplayerEndpoint('casual'),location.href).origin:''].includes(origin)}
 export function sessionCasualEndpoint(origin:unknown){return trustedCasualOrigin(origin)?origin+'/api/casual':legacyCasualEndpoint()}
-export function invitationService(origin:unknown){return origin===CASUAL_SERVICE_ORIGIN?'arcade':HOSTED_ORIGINS.includes(origin as string)||typeof location!=='undefined'&&origin===location.origin?'site':undefined}
-export function invitationEndpoint(value:unknown){return value==='arcade'?CASUAL_SERVICE_ORIGIN+'/api/casual':value==='site'?legacyCasualEndpoint():undefined}
-export function joinCandidates(primary:string,allowDedicated=true){return[...new Set([primary,legacyCasualEndpoint(),...(allowDedicated?[CASUAL_SERVICE_ORIGIN+'/api/casual']:[])])]}
-/** Known dedicated service is the default for new production rooms. No health-probe downgrade. */
+export function invitationService(origin:unknown){return origin===PH_SERVICE_ORIGIN?'ph':origin===CASUAL_SERVICE_ORIGIN?'arcade':HOSTED_ORIGINS.includes(origin as string)||typeof location!=='undefined'&&origin===location.origin?'site':undefined}
+export function invitationEndpoint(value:unknown){return value==='ph'?PH_SERVICE_ORIGIN+'/api/casual':value==='arcade'?CASUAL_SERVICE_ORIGIN+'/api/casual':value==='site'?legacyCasualEndpoint():undefined}
+export function joinCandidates(primary:string,allowDedicated=true){return[...new Set([primary,legacyCasualEndpoint(),...(allowDedicated?[CASUAL_SERVICE_ORIGIN+'/api/casual',PH_SERVICE_ORIGIN+'/api/casual']:[])])]}
+/** Production rooms choose the faster regional gateway; existing rooms stay pinned. */
 export async function chooseCasualEndpoint(_mode?:string,_features?:{matchRounds?:number}){
  const configured=multiplayerEndpoint('casual');
- if(typeof location==='undefined'||!(/\.chatgpt\.site$|\.github\.io$/.test(location.hostname)))return configured;
+ if(typeof location==='undefined'||!(/\.chatgpt\.site$|\.github\.io$/.test(location.hostname)||location.origin===CLOUDFLARE_WEBSITE_ORIGIN))return configured;
  const origin=new URL(configured,location.href).origin;
  if(origin!==location.origin&&!HOSTED_ORIGINS.includes(origin))return configured;
- // The v34 dedicated authority supports UNO calls, Pirate and finite rounds.
- // Existing sessions/invitations remain pinned; no health probe or room migration.
- return CASUAL_SERVICE_ORIGIN+'/api/casual';
+ if(typeof document==='undefined')return CASUAL_SERVICE_ORIGIN+'/api/casual';
+ const key=location.origin,now=performance.now();if(!selectedGateway||selectedGateway.key!==key||selectedGateway.until<now)selectedGateway={key,until:now+60000,choice:selectRoomGateway().then(r=>r.origin)};
+ return(await selectedGateway.choice)+'/api/casual';
 }
 
 export function arenaSessionEndpoint(origin:unknown){return sessionCasualEndpoint(origin).replace(/\/casual$/,'/arena')}

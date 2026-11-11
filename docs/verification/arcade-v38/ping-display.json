@@ -1,0 +1,20 @@
+[
+  {
+    "injectedRoundTripMs": 50,
+    "measuredRoomPingMs": 56,
+    "inputAcknowledgementMs": 0,
+    "measuredProbe": true,
+    "noArtificialCap": true,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "injectedRoundTripMs": 250,
+    "measuredRoomPingMs": 257,
+    "inputAcknowledgementMs": 0,
+    "measuredProbe": true,
+    "noArtificialCap": true,
+    "errors": [],
+    "status": "passed"
+  }
+]

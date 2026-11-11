@@ -1,0 +1,28 @@
+[
+  {
+    "scenario": {
+      "sea": 230,
+      "ph": 38,
+      "wanted": "https://markup-arcade-ph.kendsfabros.workers.dev"
+    },
+    "selected": "https://markup-arcade-ph.kendsfabros.workers.dev",
+    "probes": 5,
+    "newRoomUsesWebsiteProxy": false,
+    "diagnosticsVisible": true,
+    "errors": [],
+    "status": "passed"
+  },
+  {
+    "scenario": {
+      "sea": 28,
+      "ph": 140,
+      "wanted": "https://markup-arcade.kendsfabros.workers.dev"
+    },
+    "selected": "https://markup-arcade.kendsfabros.workers.dev",
+    "probes": 5,
+    "newRoomUsesWebsiteProxy": false,
+    "diagnosticsVisible": true,
+    "errors": [],
+    "status": "passed"
+  }
+]

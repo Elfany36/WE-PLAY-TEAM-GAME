@@ -1,0 +1,22 @@
+[
+  {
+    "kind": "casual",
+    "status": "passed",
+    "sameRoomCode": "AJFTZ6WM",
+    "sharedPlayers": true,
+    "privateStreams": true,
+    "crossGatewayActions": true,
+    "hostStates": 4,
+    "peerStates": 4
+  },
+  {
+    "kind": "arena",
+    "status": "passed",
+    "sameRoomCode": "4JFJ8JBV",
+    "sharedPlayers": true,
+    "privateStreams": true,
+    "crossGatewayActions": true,
+    "hostStates": 2,
+    "peerStates": 2
+  }
+]

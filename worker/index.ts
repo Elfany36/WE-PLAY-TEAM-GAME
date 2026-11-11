@@ -1,3 +1,6 @@
+import {routeCasual} from '../lib/casual/room-route';
+import {routeArena} from '../lib/arena-route';
+import {roomProbe} from '../lib/room-probe.ts';
 import handler from "vinext/server/fetch-handler";
 import { runWithConnectorBinding } from "../lib/connector-context";
 import type { ConnectorBinding } from "../lib/connector-contract.mjs";
@@ -7,6 +10,10 @@ export { CasualRoom,ArenaRoom } from "../lib/casual/room-do";
 
 const worker = {
   fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
+    const path=new URL(request.url).pathname;
+    if(path==='/api/ping')return roomProbe(request);
+    if(path==='/api/casual')return routeCasual(request,env,task=>ctx.waitUntil(task));
+    if(path==='/api/arena')return routeArena(request,env,task=>ctx.waitUntil(task));
     let binding = ctx.props?.CONNECTORS;
     // Local preview emulates the same request-scoped capability. This branch and
     // the auxiliary service binding are absent from production builds.

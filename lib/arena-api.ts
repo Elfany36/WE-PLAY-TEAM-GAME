@@ -1,3 +1,4 @@
+import {requestGateway} from './room-gateways.ts';
 import {roomHint} from './room-params.ts';
 import type {CasualDatabase} from './casual/room-store.ts';
 import {takeRoomBudget} from './room-budget.ts';
@@ -34,7 +35,7 @@ async function GET(req:Request){beginRoomRequest(req);try{
 function error(req:Request,e:unknown){return reply(req,{error:e instanceof ArenaError?e.message:'Could not complete the request. Please reconnect and try again.'},e instanceof ArenaError?e.status:503)}
 async function POST(req:Request){beginRoomRequest(req);try{checkOrigin(req);let b=await readArenaBody(req);if(!DB)throw new ArenaError('Room storage is unavailable.',503);
 if(b.action==='create'){
-const name=b.name;if(name.length<2||name.length>20)throw new ArenaError('Choose a display name of 2–20 characters.');const token=secret(),id=crypto.randomUUID(),tokenHash=await hash(token);const now=Date.now();let code=newCode&&/^[A-HJ-NP-Z2-9]{8}$/.test(newCode)?newCode:randomCode(),s=createArena(code,id,tokenHash,name,now);if(b.mode||b.topic)s=applyAction(s,{action:'configure',mode:b.mode||'blanks',topic:b.topic||'All'},id,now).state;
+const name=b.name;if(name.length<2||name.length>20)throw new ArenaError('Choose a display name of 2–20 characters.');const token=secret(),id=crypto.randomUUID(),tokenHash=await hash(token);const now=Date.now();let code=newCode&&/^[A-HJ-NP-Z2-9]{8}$/.test(newCode)?newCode:randomCode(),s=createArena(code,id,tokenHash,name,now);s.gatewayOrigin=requestGateway(req);if(b.mode||b.topic)s=applyAction(s,{action:'configure',mode:b.mode||'blanks',topic:b.topic||'All'},id,now).state;
 await DB.prepare('DELETE FROM arena_rooms WHERE created_at < ?').bind(now-ttl).run();
 await DB.prepare('INSERT INTO arena_rooms(code,state,revision,created_at) VALUES (?,?,0,?)').bind(code,JSON.stringify(s),now).run();return reply(req,{token,room:{...publicArena(s,id,now),revision:0}},201);
 }

@@ -1,0 +1,202 @@
+[
+  {
+    "game": "sketch",
+    "width": 1440,
+    "height": 900,
+    "websiteRatios": [
+      {
+        "label": "sketch-canvas ",
+        "actual": 1.5381443298969073,
+        "expected": 1.5384615384615385,
+        "error": 0.00020618556701035295
+      }
+    ],
+    "fullscreenRatios": [
+      {
+        "label": "sketch-canvas ",
+        "actual": 1.540059347181009,
+        "expected": 1.5377777777777777,
+        "error": 0.0014836795252226587
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "uno",
+    "width": 1440,
+    "height": 900,
+    "websiteRatios": [
+      {
+        "label": "UNO face",
+        "actual": 0.6643356643356644,
+        "expected": 0.6666666666666666,
+        "error": 0.0034965034965034336
+      },
+      {
+        "label": "UNO face",
+        "actual": 0.6643356643356644,
+        "expected": 0.6666666666666666,
+        "error": 0.0034965034965034336
+      }
+    ],
+    "fullscreenRatios": [
+      {
+        "label": "UNO face",
+        "actual": 0.6666666666666666,
+        "expected": 0.6666666666666666,
+        "error": 0
+      },
+      {
+        "label": "UNO face",
+        "actual": 0.6666666666666666,
+        "expected": 0.6666666666666666,
+        "error": 0
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "snake",
+    "width": 1440,
+    "height": 900,
+    "websiteRatios": [
+      {
+        "label": "snake-stadium map-classic",
+        "actual": 1,
+        "expected": 1,
+        "error": 0
+      }
+    ],
+    "fullscreenRatios": [
+      {
+        "label": "snake-stadium map-classic",
+        "actual": 1,
+        "expected": 1,
+        "error": 0
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "blocks",
+    "width": 1440,
+    "height": 900,
+    "websiteRatios": [
+      {
+        "label": "blocks-arena",
+        "actual": 1.1866464339908953,
+        "expected": 1.1866464339908953,
+        "error": 0
+      }
+    ],
+    "fullscreenRatios": [
+      {
+        "label": "blocks-arena",
+        "actual": 1.1877777777777778,
+        "expected": 1.1877777777777778,
+        "error": 0
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "sketch",
+    "width": 390,
+    "height": 844,
+    "websiteRatios": [
+      {
+        "label": "sketch-canvas ",
+        "actual": 1.5377358490566038,
+        "expected": 1.5384615384615385,
+        "error": 0.0004716981132075748
+      }
+    ],
+    "fullscreenRatios": [
+      {
+        "label": "sketch-canvas ",
+        "actual": 1.5423728813559323,
+        "expected": 1.5384615384615385,
+        "error": 0.0025423728813558366
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "uno",
+    "width": 390,
+    "height": 844,
+    "websiteRatios": [
+      {
+        "label": "UNO face",
+        "actual": 0.6666666666666666,
+        "expected": 0.6666666666666666,
+        "error": 0
+      },
+      {
+        "label": "UNO face",
+        "actual": 0.6666666666666666,
+        "expected": 0.6666666666666666,
+        "error": 0
+      }
+    ],
+    "fullscreenRatios": [
+      {
+        "label": "UNO face",
+        "actual": 0.6632653061224489,
+        "expected": 0.6666666666666666,
+        "error": 0.005102040816326592
+      },
+      {
+        "label": "UNO face",
+        "actual": 0.6632653061224489,
+        "expected": 0.6666666666666666,
+        "error": 0.005102040816326592
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "snake",
+    "width": 390,
+    "height": 844,
+    "websiteRatios": [
+      {
+        "label": "snake-stadium map-classic",
+        "actual": 1,
+        "expected": 1,
+        "error": 0
+      }
+    ],
+    "fullscreenRatios": [
+      {
+        "label": "snake-stadium map-classic",
+        "actual": 1,
+        "expected": 1,
+        "error": 0
+      }
+    ],
+    "status": "passed"
+  },
+  {
+    "game": "blocks",
+    "width": 390,
+    "height": 844,
+    "websiteRatios": [
+      {
+        "label": "blocks-arena",
+        "actual": 0.6080843585237259,
+        "expected": 0.6080843585237259,
+        "error": 0
+      }
+    ],
+    "fullscreenRatios": [
+      {
+        "label": "blocks-arena",
+        "actual": 0.6074766355140186,
+        "expected": 0.6074766355140186,
+        "error": 0
+      }
+    ],
+    "status": "passed"
+  }
+]

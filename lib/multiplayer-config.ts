@@ -1,5 +1,6 @@
 /** Public frontend configuration. This value is never a credential. */
 export const HOSTED_ORIGIN='https://markup-learn-play-together.kendsfabros.chatgpt.site';
+export const CLOUDFLARE_WEBSITE_ORIGIN='https://we-play-team-game.kendsfabros.workers.dev';
 export const HOSTED_ORIGINS=[HOSTED_ORIGIN,'https://markup-learn-play-together.brightbunch.chatgpt.site'];
 export function multiplayerEndpoint(kind:'arena'|'casual'){
  const configured=(import.meta as ImportMeta & {env?:Record<string,string>}).env?.VITE_ROOM_API_ORIGIN;
