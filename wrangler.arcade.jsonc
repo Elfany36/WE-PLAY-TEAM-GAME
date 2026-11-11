@@ -6,7 +6,6 @@
  "compatibility_flags":["nodejs_compat"],
  "account_id":"ad5e0678ef8fa101846cfe82265d3db1",
  "workers_dev":true,
- "placement":{"region":"aws:ap-southeast-1"},
  "observability":{"enabled":true,"head_sampling_rate":0.1},
  "durable_objects":{"bindings":[{"name":"CASUAL_ROOMS","class_name":"CasualRoom"},{"name":"ARENA_ROOMS","class_name":"ArenaRoom"}]},
  "migrations":[{"tag":"casual-rooms-v1","new_sqlite_classes":["CasualRoom"]},{"tag":"room-authorities-v2","new_sqlite_classes":["ArenaRoom"]}],

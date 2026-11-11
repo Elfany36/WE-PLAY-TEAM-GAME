@@ -1,4 +1,5 @@
 'use client';
+import {roomRouteSwitchSafe} from '../../lib/room-route-probes';
 import {roomGateway} from '../../lib/room-gateways';
 import {nextControlSequence} from '../../lib/control-sequence';
 import AudioSettings,{AudioButton} from './AudioSettings';
@@ -110,7 +111,7 @@ export default function CasualArcade({name}:{name:string}){
  async function request(body:Record<string,any>,s:Session|null=sessionRef.current){
   const control=['direction','drive','explore','party-control','block-input','pirate-input'].includes(body.action),hint=body.action==='join'?invitationEndpoint(new URLSearchParams(location.search).get('arcadeService')):undefined,target=s?sessionCasualEndpoint(s.apiOrigin):hint||await chooseCasualEndpoint(body.mode,{matchRounds:body.matchRounds}),init:RequestInit={method:'POST',keepalive:body.action==='draft-phone',headers:{'Content-Type':'application/json',...(s?{Authorization:'Bearer '+s.token}:{})},body:JSON.stringify({...body,...(s?{code:s.code}:{}),...worldVersion(),requestId:body.requestId||nonce()})},options={timeout:control?(transport.stats.streaming?Math.min(8000,Math.max(2000,transport.stats.rtt*3+500)):Math.min(12000,Math.max(3000,transport.stats.totalRtt*1.6+1000))):8000,retries:control||['create','join','draft-phone'].includes(body.action)?0:2};
   const targets=body.action==='join'&&!s&&!hint?joinCandidates(target,/\.chatgpt\.site$|\.github\.io$/.test(location.hostname)):[target];
-  for(let i=0;i<targets.length;i++){try{const data=await transport.send(targets[i],init,options);return{...data,apiOrigin:roomGateway(data.room?.gatewayOrigin)||new URL(targets[i],location.href).origin}}catch(error){if((error as {status?:number}).status!==404||i===targets.length-1)throw error}}
+  for(let i=0;i<targets.length;i++){try{const data=await transport.send(targets[i],init,options);return{...data,apiOrigin:new URL(targets[i],location.href).origin}}catch(error){if((error as {status?:number}).status!==404||i===targets.length-1)throw error}}
   throw Error('This room could not be found.');
  }
 
@@ -251,7 +252,7 @@ export default function CasualArcade({name}:{name:string}){
  <div className="game-round-footer">{isHost&&room.phase!=='finished'&&(confirmEnd?<div className="party-end-confirm"><span>End this round for everyone?</span><button className="danger-action danger-confirm" disabled={viewBusy} onClick={()=>action('end')}>End round</button><button className="text-link" onClick={()=>setConfirmEnd(false)}>Keep playing</button></div>:<button className="danger-action" onClick={()=>setConfirmEnd(true)}>End round</button>)}</div>
  </>}</div><RoomSidebar guide={roomGuide} room={room} busy={viewBusy} local={!!local} connected={connected&&(!session||lease.owns)} onAction={sidebarAction} onSend={sidebarSend}/>{(error||connectionError)&&<div className="room-feedback">{feedback}</div>}</RoomWorkspace></>}
  {room&&<GameKeyboardShortcuts room={room}/>}
- {room&&<ConnectionStats service={endpoint()} room={room} transport={transport} local={!!local}/>}
+ {room&&<ConnectionStats service={endpoint()} room={room} transport={transport} local={!!local} token={!local?session?.token:undefined} onRouteChange={origin=>{const s=sessionRef.current,r=roomRef.current;if(!s||!r||!roomGateway(origin)||actionBusy.current||!leaseOwner.current||!roomRouteSwitchSafe(r))return false;clearControls();setSavedSession({...s,apiOrigin:origin});return true}}/>}
  {!room&&feedback}
  </div></AvatarImages></GameInfoContext.Provider>
 }

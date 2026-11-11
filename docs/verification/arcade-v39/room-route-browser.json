@@ -1,0 +1,50 @@
+[
+  {
+    "scenario": {
+      "sea": 230,
+      "ph": 38,
+      "wanted": "https://markup-arcade-ph.kendsfabros.workers.dev",
+      "roomSea": 25,
+      "roomPh": 150,
+      "final": "https://markup-arcade.kendsfabros.workers.dev"
+    },
+    "initial": "https://markup-arcade-ph.kendsfabros.workers.dev",
+    "selected": "https://markup-arcade.kendsfabros.workers.dev",
+    "roomPreserved": true,
+    "diagnostics": {
+      "client": 39,
+      "serverVersion": 39,
+      "phase": "lobby",
+      "game": "ladders",
+      "service": "https://markup-arcade.kendsfabros.workers.dev/api/casual",
+      "roomPingMs": 13,
+      "measuredRoomPing": false,
+      "lastRequestRoundTripMs": 16,
+      "inputAcknowledgementMs": null,
+      "serverWorkMs": null,
+      "jitterMs": 1,
+      "gateway": {
+        "rtt": 233,
+        "entry": "MNL",
+        "region": "Automatic edge"
+      },
+      "roomRoutes": [
+        {
+          "origin": "https://markup-arcade.kendsfabros.workers.dev",
+          "transport": "http",
+          "rtt": 36
+        },
+        {
+          "origin": "https://markup-arcade-ph.kendsfabros.workers.dev",
+          "transport": "http",
+          "rtt": 161
+        }
+      ]
+    },
+    "probes": 5,
+    "newRoomUsesWebsiteProxy": false,
+    "diagnosticsVisible": true,
+    "errors": [],
+    "status": "passed"
+  }
+]

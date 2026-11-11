@@ -2,12 +2,12 @@
   "schema": 1,
   "releases": [
     {
-      "siteVersion": 35,
-      "sourceCommit": "22f545db6a88a8306a136208f252190389d384a0"
-    },
-    {
       "siteVersion": 36,
       "sourceCommit": "cfe37f02b6afd245123df576685f35ac72e4db05"
+    },
+    {
+      "siteVersion": 37,
+      "sourceCommit": "4636d325058e36a92d1f6546282dcefa6884d842"
     }
   ],
   "inheritedPublications": [
@@ -23,6 +23,15 @@
     {
       "provider": "github-pages",
       "sourceCommit": "cfe37f02b6afd245123df576685f35ac72e4db05"
+    },
+    {
+      "provider": "site",
+      "siteVersion": 35,
+      "sourceCommit": "22f545db6a88a8306a136208f252190389d384a0"
+    },
+    {
+      "provider": "github-pages",
+      "sourceCommit": "4636d325058e36a92d1f6546282dcefa6884d842"
     }
   ],
   "files": [
@@ -187,6 +196,16 @@
       "sha256": "653f3e53e89b4f8548ff86c19e92bb3c6b84b6be7485a320b1e00893ed877479"
     },
     {
+      "path": "_next/static/911891af-d623-46b9-8311-f4d5120649b6/_buildManifest.js",
+      "bytes": 159,
+      "sha256": "47f02b34be6dc481257b6efce4c19e19111f37ef5c437f8ffed44f0da97fa9bb"
+    },
+    {
+      "path": "_next/static/911891af-d623-46b9-8311-f4d5120649b6/_ssgManifest.js",
+      "bytes": 76,
+      "sha256": "653f3e53e89b4f8548ff86c19e92bb3c6b84b6be7485a320b1e00893ed877479"
+    },
+    {
       "path": "_next/static/99817ea3-df96-4a74-b7f1-317194de9d93/_buildManifest.js",
       "bytes": 159,
       "sha256": "47f02b34be6dc481257b6efce4c19e19111f37ef5c437f8ffed44f0da97fa9bb"
@@ -220,6 +239,11 @@
       "path": "_next/static/chunks/ActionWorld-0NUN25Rs.js",
       "bytes": 34540,
       "sha256": "172dda9f92d73c7c70b6a4d4052a6d2207ed4d9ea6a1b7d5cc3c976fd05955f8"
+    },
+    {
+      "path": "_next/static/chunks/ActionWorld-1nIq8u-s.js",
+      "bytes": 36049,
+      "sha256": "d5cd4657c44f5e322583558e78d64e6f71bd3c420b9135791e871fd57729a61c"
     },
     {
       "path": "_next/static/chunks/ActionWorld-BKWCS062.js",
@@ -582,6 +606,11 @@
       "sha256": "5a06c9d7fd42429999cf370dfefe82804cb64948a704d6a908b21041d91be96c"
     },
     {
+      "path": "_next/static/chunks/Arena-ChX3PwHZ.js",
+      "bytes": 446411,
+      "sha256": "61104135f363615f55413777bb7418c92335a1f2a56614abed30d93a0643d53a"
+    },
+    {
       "path": "_next/static/chunks/Arena-CkZkngOi.js",
       "bytes": 444619,
       "sha256": "7a8de410db1fb956d12ad7afe29c154c1ab941aaa6d943e492907de40506d02a"
@@ -832,6 +861,11 @@
       "sha256": "b0e16bc54184733942d82145b726a01646f25751db45e5c91c4ef8ec50bbf9cf"
     },
     {
+      "path": "_next/static/chunks/BlocksArena-DUWMbOUL.js",
+      "bytes": 13752,
+      "sha256": "bb542dee800ec89dfe1c27b29ca4095be53d858e38bb8b43567cff6b2a61f0f6"
+    },
+    {
       "path": "_next/static/chunks/BlocksArena-DglKBCvp.js",
       "bytes": 12978,
       "sha256": "9dfb943888737be5dc09a46832cebec546658a5763e57d529aadbb09e33b4292"
@@ -920,6 +954,11 @@
       "path": "_next/static/chunks/CasualArcade-Bz_lZIrt.js",
       "bytes": 174882,
       "sha256": "6140700bbcdca58724b0af7843bb63f086fece15f9cfa03886c76f9af97ac16a"
+    },
+    {
+      "path": "_next/static/chunks/CasualArcade-C-ifPDxB.js",
+      "bytes": 267173,
+      "sha256": "6c228481ac0f126a1f723930aac5d3fcb716bdf586f65b7d4bad0138bfff2bd3"
     },
     {
       "path": "_next/static/chunks/CasualArcade-C2_eraeO.js",
@@ -1172,6 +1211,11 @@
       "sha256": "ee313d324d4a3a67272041f28a7339ec03d4a42fabe9c829eedb228c3c650148"
     },
     {
+      "path": "_next/static/chunks/Documentation-YgnUHyqC.js",
+      "bytes": 186358,
+      "sha256": "2f00239a14f2b618297516c1f79f1b6c2da1aa4f70b634951e7881a52bc09981"
+    },
+    {
       "path": "_next/static/chunks/Documentation-glAl6oX2.js",
       "bytes": 186358,
       "sha256": "0270c73f7b1742cf150d0011981c6ec394a81086f15963c2db6951a7f35920c5"
@@ -1307,6 +1351,11 @@
       "sha256": "282f2b1578bb2891966e1b25bcf6a64fcd96470f7dd8e8af238eb0b6faa38a56"
     },
     {
+      "path": "_next/static/chunks/FlexibleSurface-CAx6cUsH.js",
+      "bytes": 74001,
+      "sha256": "55f4944e4f8f07b1aa99c34af9e98f3032bda8a54d50fa412bf93f6ebb211d91"
+    },
+    {
       "path": "_next/static/chunks/FlexibleSurface-CZAgA-N1.js",
       "bytes": 39957,
       "sha256": "7531f81f6e469914740fdf807cf6338062bebe3dc64aee116ff18e0938777e21"
@@ -1395,6 +1444,11 @@
       "path": "_next/static/chunks/GameChat-Bb7kuRX4.js",
       "bytes": 16088,
       "sha256": "3acfd11d776cf2919a19885938d51a69496ec8d998ea71c0b93aa89892f27c36"
+    },
+    {
+      "path": "_next/static/chunks/GameChat-Bm2Yyl8r.js",
+      "bytes": 16415,
+      "sha256": "4913b3270b64384ee2ab18673fd6c65f2e858788944bd7969a697d5864a9cee4"
     },
     {
       "path": "_next/static/chunks/GameChat-BxSHF-za.js",
@@ -1867,6 +1921,11 @@
       "sha256": "724e3410013ddf0769debb1b3ed2ab5e2f92c2bff40a358c3ad548318cbd1b56"
     },
     {
+      "path": "_next/static/chunks/MarkupApp-BwsqQ7rJ.js",
+      "bytes": 64842,
+      "sha256": "790a513d5c0db09dcfb47e574df29d981c2424e6a722df85e3d1811238b83a37"
+    },
+    {
       "path": "_next/static/chunks/MarkupApp-C29TOSvh.js",
       "bytes": 64448,
       "sha256": "4f625754ae829cd1266afa437796a73aa2f1137032e50aed154b17265c7ddd17"
@@ -2162,6 +2221,11 @@
       "sha256": "181f69105ca8c320d31f02b90a9a999d2f1545ba298d094cb81a31df61492566"
     },
     {
+      "path": "_next/static/chunks/PartyArena-DSr1T1bD.js",
+      "bytes": 35190,
+      "sha256": "9fa6015f418867bd6e1ef713736efa3bd2fe6f3efda7ea157ed32488f1d9c43a"
+    },
+    {
       "path": "_next/static/chunks/PartyArena-DTySVRKZ.js",
       "bytes": 33689,
       "sha256": "71f6abf2ed339b75722482af997116a0c5adb0cea70e18af6ead446d7e4f5b82"
@@ -2317,6 +2381,11 @@
       "sha256": "88aec776e68f8d5f29669d6a800e2aa6734dec82e71df0896745230bf6a38a83"
     },
     {
+      "path": "_next/static/chunks/PirateArena-CAWAs9Sw.js",
+      "bytes": 56412,
+      "sha256": "37c21c75bf1b0f94d006775dd54f6aca260b1d1c7d33a0d21e7a3983c76ecc9a"
+    },
+    {
       "path": "_next/static/chunks/PirateArena-CDIu7QJJ.js",
       "bytes": 50599,
       "sha256": "5893ba7eef377045a0c2cfba7d3e0184b31ea4f96e7ddd6ee6f71a2e78dea55c"
@@ -2460,6 +2529,11 @@
       "path": "_next/static/chunks/PoolTable-pgT2Qzwn.js",
       "bytes": 16567,
       "sha256": "8f5b9b9ccf7f3fa5306a389d67ccc00a4bcf4521c172d8a15f8b9252d8b44b32"
+    },
+    {
+      "path": "_next/static/chunks/PoolTable-ptWGBb7b.js",
+      "bytes": 16826,
+      "sha256": "6d502527ee6be846d6e4ccf41f307cd4fb03c9ed458a6cc8f7e6da5d9c006b8a"
     },
     {
       "path": "_next/static/chunks/PoolTable-xURruPRj.js",
@@ -2692,6 +2766,11 @@
       "sha256": "cccb29235ac92739fb704097f26ea6caba4bd82636766a4eb4a423e42a1943e0"
     },
     {
+      "path": "_next/static/chunks/SketchBoard-BnIM4Lsr.js",
+      "bytes": 16115,
+      "sha256": "fde91422210d620b27b1c33acb38acdf77d18a9412e4baa1919860085ba7e3ae"
+    },
+    {
       "path": "_next/static/chunks/SketchBoard-CJFAVrbG.js",
       "bytes": 16115,
       "sha256": "a449586c8cb7f0a4eb7d86d12321272f7c8803b13deb5d10a0d5547c79a34de9"
@@ -2725,6 +2804,11 @@
       "path": "_next/static/chunks/SolitaireTable-Bm6uIlo6.js",
       "bytes": 13456,
       "sha256": "ee646733fb0fe327a67b6cdddee2c10a1ea623e81675ce4a93916c0ef2ff9ab9"
+    },
+    {
+      "path": "_next/static/chunks/SolitaireTable-BtmiHXq5.js",
+      "bytes": 19513,
+      "sha256": "60dae918dd5e946658c988e280bb48f39d76251ef7380f5ac855556a2dc94911"
     },
     {
       "path": "_next/static/chunks/SolitaireTable-CJb-jzoE.js",
@@ -2780,6 +2864,11 @@
       "path": "_next/static/chunks/StrategyBoard-5J6k0HXu.js",
       "bytes": 13712,
       "sha256": "eddc23b5d0b84f3d2bc6ab6cfb43838355d80eab8cec0c7ce3271d217fff29ac"
+    },
+    {
+      "path": "_next/static/chunks/StrategyBoard-B2c9OAUc.js",
+      "bytes": 13600,
+      "sha256": "624f4e082fb8f9c1b47b33fbfab94ed0b8734de97830443531f428edb3936ab1"
     },
     {
       "path": "_next/static/chunks/StrategyBoard-B5fsjUIw.js",
@@ -2895,6 +2984,11 @@
       "path": "_next/static/chunks/WindowSettings-BT6vuloy.js",
       "bytes": 351,
       "sha256": "7c6641cc13207c8c2b4868f14d297825728cb9961d88838515ad0db123bfb749"
+    },
+    {
+      "path": "_next/static/chunks/WindowSettings-CuF8Dbmi.js",
+      "bytes": 351,
+      "sha256": "73b115ae093322aa1f90bf2941855ebe9613ef27762a55e4418a15a029b16f6f"
     },
     {
       "path": "_next/static/chunks/WindowSettings-Cz2zuJbL.js",
@@ -3025,6 +3119,11 @@
       "path": "_next/static/chunks/app-route-prefetch-policy-DaLk1Gja.js",
       "bytes": 937,
       "sha256": "b65d02667d6d7acf7ef16fbc83533aa4a262d9c6d202ec99ca636ded2a99705b"
+    },
+    {
+      "path": "_next/static/chunks/app-route-prefetch-policy-Dg1UxyWw.js",
+      "bytes": 937,
+      "sha256": "0c665ea04234c976d8f40b05d22367da688edf621b595ab2a245c2cea96df3e8"
     },
     {
       "path": "_next/static/chunks/app-route-prefetch-policy-DkQ9y24m.js",
@@ -4487,6 +4586,11 @@
       "sha256": "87e7cc48cb001931b4df233c6a622c10da350d23520c69e2d0cd81c58e60c49d"
     },
     {
+      "path": "_next/static/chunks/index-BLU6UqJM.js",
+      "bytes": 195844,
+      "sha256": "29b298b9d59c938615ad136da0f0cf6bccf8fe0448f529328030baabdaf8494c"
+    },
+    {
       "path": "_next/static/chunks/index-BOK3cXfE.js",
       "bytes": 195708,
       "sha256": "86943155049b156132318d2469b8d8e4cfe56cac4aa259ab9fd9f6576e5d3d50"
@@ -4765,6 +4869,11 @@
       "path": "_next/static/chunks/layout-segment-context-B0jase7J.js",
       "bytes": 494,
       "sha256": "6967ee6d2266612628d1e3269e83115fd755e08f25d8475f64c34cd12c343df1"
+    },
+    {
+      "path": "_next/static/chunks/layout-segment-context-B1TNB1bY.js",
+      "bytes": 494,
+      "sha256": "e2e8a83ac72be2b0c7c37e80f7102ece81c07c5c6406cb1065484e8891503dd7"
     },
     {
       "path": "_next/static/chunks/layout-segment-context-B2IX8F66.js",
@@ -6085,6 +6194,11 @@
       "path": "_next/static/chunks/sketch-UzmNYHOH.js",
       "bytes": 9668,
       "sha256": "6e044acf638fe2d8e36b9f5a548c45f14bea0a98e4f04ad959ed97f520ff8290"
+    },
+    {
+      "path": "_next/static/chunks/sketch-ZmQTYnmV.js",
+      "bytes": 9668,
+      "sha256": "5540a8fbb9e91fb26c13acbdf62715754962748d99d9d65533b06958a1eb2420"
     },
     {
       "path": "_next/static/chunks/sketch-eCMWS6sS.js",

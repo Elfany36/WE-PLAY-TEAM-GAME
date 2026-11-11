@@ -4,7 +4,8 @@ import {stableRoomRequest} from './room-params.ts';
 import {roomReceipt} from './network-clock.ts';
 import {applyRoomDelta} from './room-delta.ts';
 import type {RoomRevisionFeed} from './room-revisions.ts';
-export type TransportStats={live:boolean;streaming:boolean;pingRtt:number|null;lastPing:number;pingJitter:number;rtt:number;totalRtt:number;serverMs:number;jitter:number;bytesPerSecond:number;lastReceipt:number;lastStateReceipt:number;lastLiveStateReceipt:number;simulationLag:number;inputReceiptMs:number;stateSource:'live'|'http';stateInterval:number;receivedBytes:number;sentBytes:number;failures:number};
+export type RequestTiming={rtt:number;serverMs:number;at:number};
+export type TransportStats={lastRequest:RequestTiming|null;lastInput:RequestTiming|null;live:boolean;streaming:boolean;pingRtt:number|null;lastPing:number;pingJitter:number;rtt:number;totalRtt:number;serverMs:number;jitter:number;bytesPerSecond:number;lastReceipt:number;lastStateReceipt:number;lastLiveStateReceipt:number;simulationLag:number;inputReceiptMs:number;stateSource:'live'|'http';stateInterval:number;receivedBytes:number;sentBytes:number;failures:number};
 type Options={timeout?:number;retries?:number;forceHttp?:boolean}; // forceHttp refreshes reads; writes use the normal receipt path.
 const aborted=()=>new DOMException('Room session changed or request aborted.','AbortError');
 function retryDelay(ms:number,signal:AbortSignal){
@@ -25,11 +26,11 @@ export class RoomTransport{
  private samples:{at:number;bytes:number}[]=[];private generation=0;private roomMode:string|undefined;private roomVersion=0;
  private controllers=new Set<AbortController>();private live:RoomRevisionFeed|null=null;
  private liveRetryAt=0;private snapshotInterval=100;
- readonly stats:TransportStats={live:false,streaming:false,pingRtt:null,lastPing:0,pingJitter:0,rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,lastStateReceipt:0,lastLiveStateReceipt:0,simulationLag:0,inputReceiptMs:0,stateSource:'http',stateInterval:0,receivedBytes:0,sentBytes:0,failures:0};
+ readonly stats:TransportStats={lastRequest:null,lastInput:null,live:false,streaming:false,pingRtt:null,lastPing:0,pingJitter:0,rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,lastStateReceipt:0,lastLiveStateReceipt:0,simulationLag:0,inputReceiptMs:0,stateSource:'http',stateInterval:0,receivedBytes:0,sentBytes:0,failures:0};
  get autonomous(){return this.stats.streaming&&!!this.live?.autonomous}
  observeLatency(elapsed:number,kind:'ping'|'auth'|'request'='ping'){if(!Number.isFinite(elapsed)||elapsed<0)return;const value=Math.round(elapsed);if(kind==='ping'){if(this.stats.pingRtt!==null)this.stats.pingJitter=this.stats.pingJitter*.8+Math.abs(value-this.stats.pingRtt)*.2;this.stats.pingRtt=value;this.stats.lastPing=performance.now()}this.stats.jitter=this.stats.jitter*.8+Math.abs(value-this.stats.rtt)*.2;this.stats.rtt=value;this.stats.totalRtt=value;this.stats.serverMs=0}
  attachLive(feed:RoomRevisionFeed|null){this.live=feed;this.stats.streaming=!!feed?.streaming&&this.roomMode!=='phone'}
- reset(){this.generation++;for(const controller of this.controllers)controller.abort();this.controllers.clear();this.live=null;this.liveRetryAt=0;this.snapshotInterval=100;this.roomMode=undefined;this.roomVersion=0;this.bases.clear();this.pins.clear();this.latest=null;this.samples=[];Object.assign(this.stats,{live:false,streaming:false,pingRtt:null,lastPing:0,pingJitter:0,rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,lastStateReceipt:0,lastLiveStateReceipt:0,simulationLag:0,inputReceiptMs:0,stateSource:'http',stateInterval:0,receivedBytes:0,sentBytes:0,failures:0})}
+ reset(){this.generation++;for(const controller of this.controllers)controller.abort();this.controllers.clear();this.live=null;this.liveRetryAt=0;this.snapshotInterval=100;this.roomMode=undefined;this.roomVersion=0;this.bases.clear();this.pins.clear();this.latest=null;this.samples=[];Object.assign(this.stats,{lastRequest:null,lastInput:null,live:false,streaming:false,pingRtt:null,lastPing:0,pingJitter:0,rtt:0,totalRtt:0,serverMs:0,jitter:0,bytesPerSecond:0,lastReceipt:0,lastStateReceipt:0,lastLiveStateReceipt:0,simulationLag:0,inputReceiptMs:0,stateSource:'http',stateInterval:0,receivedBytes:0,sentBytes:0,failures:0})}
  private trimBases(){let disposable=this.bases.size-this.pins.size;for(const id of this.bases.keys()){if(disposable<=48)break;if(this.pins.has(id)||id===this.latest?.id)continue;this.bases.delete(id);disposable--}}
  private decode(data:any,raw:string|number,elapsed:number,tx=0,source:'live'|'http'='http'){
   const interval=data.clock?.stateInterval;if(Number.isFinite(interval)&&interval>=25&&interval<=1000)this.snapshotInterval=interval;
@@ -62,7 +63,7 @@ export class RoomTransport{
     if(generation!==this.generation||controller.signal.aborted)throw aborted();
     if(!response.headers.get('content-type')?.includes('application/json'))throw Error('The room service returned an unexpected page. Reload the view to reconnect.');
     const data=JSON.parse(raw);if(!response.ok)throw Object.assign(Error(data.error||'The room request could not be completed.'),{status:response.status});
-    if(typeof init.body==='string')try{if(['direction','drive','party-control','block-input','explore','pirate-input'].includes(JSON.parse(init.body).action))this.stats.inputReceiptMs=Math.round(elapsed)}catch{}
+    const timing={rtt:Math.round(elapsed),serverMs:roomReceipt(data,elapsed).network.serverMs,at:performance.now()};this.stats.lastRequest=timing;if((init.method||'GET').toUpperCase()==='POST'&&typeof init.body==='string')try{if(!['create','join','heartbeat','disconnect','upload-avatar'].includes(JSON.parse(init.body).action)){this.stats.inputReceiptMs=timing.rtt;this.stats.lastInput=timing}}catch{}
     return this.decode(data,raw,elapsed,typeof stable.body==='string'?new TextEncoder().encode(stable.body).byteLength:0,usedLive?'live':'http');
    }catch(error){
     if(generation!==this.generation||init.signal?.aborted)throw aborted();this.stats.failures++;

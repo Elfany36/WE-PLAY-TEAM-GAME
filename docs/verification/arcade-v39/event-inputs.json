@@ -1,0 +1,10 @@
+{
+  "game": "memory",
+  "injectedRoundTripMs": 200,
+  "inputAcknowledgementMs": 218,
+  "lastRequestRoundTripMs": 218,
+  "eventCadence": "On action",
+  "noTokenInDiagnostics": true,
+  "errors": [],
+  "status": "passed"
+}

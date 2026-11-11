@@ -10,7 +10,7 @@ import {publicArena,type ArenaState} from '../arena-engine.ts';
 import {roomSnapshot} from '../room-snapshots.ts';
 import {roomStreamRequest,STATE_INTERVAL,MAX_STATE_WINDOW} from '../room-stream.ts';
 type AuthorityState={players:{id:string;tokenHash:string;retired?:boolean}[]};
-type Subscription={playerId:string;tokenHash:string;expiresAt:number;revision:number;activeAt?:number;protocol?:number;base?:string;windowAt?:number;requests?:number;stateAck?:boolean;pending?:number[];stateWindow?:number};
+type Subscription={probe?:boolean;playerId:string;tokenHash:string;expiresAt:number;revision:number;activeAt?:number;protocol?:number;base?:string;windowAt?:number;requests?:number;stateAck?:boolean;pending?:number[];stateWindow?:number};
 /** Durable authority: private live snapshots and validated actions share the HTTP rule engine. */
 class RoomAuthority extends DurableObject<Cloudflare.Env>{
  private readonly db:RoomStore;
@@ -148,6 +148,7 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
    const state=this.db.inspectState<AuthorityState>()!;
    if(!state.players.some(p=>!p.retired&&p.id===prior.playerId&&p.tokenHash===prior.tokenHash)){socket.close(4001,'Room session ended');return}
    if(value.type==='ping'){
+    if(prior.probe){socket.send(JSON.stringify({type:'pong',...(Number.isSafeInteger(value.id)?{id:value.id}:{})}));return}
     const fresh=value.active===true&&(!prior.activeAt||now-prior.activeAt>=10000||value.resync===true);
     socket.serializeAttachment({...prior,activeAt:value.active===true?now:0,...(fresh?{revision:-1,base:undefined,pending:[]}:{})});this.armTick();socket.send(JSON.stringify({type:'pong',...(Number.isSafeInteger(value.id)?{id:value.id}:{})}));if(value.active!==true)await this.releaseInput(socket,prior);if(fresh)this.notify();return;
    }
@@ -169,9 +170,9 @@ class RoomAuthority extends DurableObject<Cloudflare.Env>{
   const tokenHash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value.token))),n=>n.toString(16).padStart(2,'0')).join(''),current=this.db.snapshot();if(!current){socket.close(4001,'Room expired');return}const state=this.db.inspectState<AuthorityState>()!,player=state.players.find(p=>!p.retired&&p.tokenHash===tokenHash);
   if(!player){socket.close(4001,'Room session ended');return}
   const auth=this.authentication.get(socket);if(auth){clearTimeout(auth.timer);auth.done();this.authentication.delete(socket)}
-  const protocol=value.protocol===2?2:1;
-  socket.serializeAttachment({playerId:player.id,tokenHash,expiresAt:current.created_at+86400000,revision:protocol===2?-1:current.revision,activeAt:value.active===true?Date.now():0,protocol,stateAck:protocol===2&&value.stateAck===true,pending:[],stateWindow:Number.isInteger(value.stateWindow)&&value.stateWindow>=4&&value.stateWindow<=MAX_STATE_WINDOW?value.stateWindow:4} satisfies Subscription);this.armTick();
-  socket.send(JSON.stringify({type:'ready',revision:current.revision,protocol,receipts:true,autonomous:this.kind==='casual'}));if(protocol===2)this.notify();
+  const probing=value.probe===true,protocol=probing?1:value.protocol===2?2:1;
+  socket.serializeAttachment({... (probing?{probe:true}:{}),playerId:player.id,tokenHash,expiresAt:current.created_at+86400000,revision:protocol===2?-1:current.revision,activeAt:!probing&&value.active===true?Date.now():0,protocol,stateAck:protocol===2&&value.stateAck===true,pending:[],stateWindow:Number.isInteger(value.stateWindow)&&value.stateWindow>=4&&value.stateWindow<=MAX_STATE_WINDOW?value.stateWindow:4} satisfies Subscription);this.armTick();
+  socket.send(JSON.stringify({type:'ready',revision:current.revision,protocol,receipts:true,autonomous:this.kind==='casual',...(probing?{probe:{version:39,code:current.code,playerId:player.id}}:{})}));if(protocol===2)this.notify();
  }
  webSocketClose(socket:WebSocket,code:number,reason:string){const session=socket.deserializeAttachment() as Subscription|null;if(session)this.ctx.waitUntil(this.releaseInput(socket,session).catch(()=>{}));const auth=this.authentication.get(socket);if(auth){clearTimeout(auth.timer);auth.done();this.authentication.delete(socket)}try{socket.close(code===1000||code>=3000&&code<=4999?code:1000,'Room updates closed')}catch{}}
  webSocketError(socket:WebSocket){socket.close(1011,'Reconnect room updates')}

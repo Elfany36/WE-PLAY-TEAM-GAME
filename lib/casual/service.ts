@@ -1,5 +1,5 @@
 import {HOSTED_ORIGIN,HOSTED_ORIGINS,CLOUDFLARE_WEBSITE_ORIGIN,multiplayerEndpoint} from '../multiplayer-config.ts';
-import {SEA_GATEWAY,PH_GATEWAY} from '../room-gateways.ts';
+import {SEA_GATEWAY,PH_GATEWAY,roomGateway} from '../room-gateways.ts';
 import {selectRoomGateway} from './gateway-choice.ts';
 export const CASUAL_SERVICE_ORIGIN=SEA_GATEWAY;
 export const PH_SERVICE_ORIGIN=PH_GATEWAY;
@@ -15,7 +15,7 @@ export async function chooseCasualEndpoint(_mode?:string,_features?:{matchRounds
  const configured=multiplayerEndpoint('casual');
  if(typeof location==='undefined'||!(/\.chatgpt\.site$|\.github\.io$/.test(location.hostname)||location.origin===CLOUDFLARE_WEBSITE_ORIGIN))return configured;
  const origin=new URL(configured,location.href).origin;
- if(origin!==location.origin&&!HOSTED_ORIGINS.includes(origin))return configured;
+ if(origin!==location.origin&&!HOSTED_ORIGINS.includes(origin)&&!roomGateway(origin))return configured;
  if(typeof document==='undefined')return CASUAL_SERVICE_ORIGIN+'/api/casual';
  const key=location.origin,now=performance.now();if(!selectedGateway||selectedGateway.key!==key||selectedGateway.until<now)selectedGateway={key,until:now+60000,choice:selectRoomGateway().then(r=>r.origin)};
  return(await selectedGateway.choice)+'/api/casual';

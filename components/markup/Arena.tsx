@@ -1,4 +1,5 @@
 'use client';
+import {roomRouteSwitchSafe} from '../../lib/room-route-probes';
 import {roomGateway} from '../../lib/room-gateways';
 import RoomWorkspace,{DockPanel} from '../casual/RoomWorkspace';
 import AudioSettings,{AudioButton} from '../casual/AudioSettings';
@@ -59,7 +60,7 @@ useEffect(()=>{const invitation=new URLSearchParams(location.search).get('room')
 async function request(body:any,s=sessionNow.current){
  const hint=body.action==='join'?invitationEndpoint(new URLSearchParams(location.search).get('roomService'))?.replace(/\/casual$/,'/arena'):undefined,target=s?arenaSessionEndpoint(s.apiOrigin):hint||await chooseArenaEndpoint(),targets=body.action==='join'&&!s&&!hint?arenaJoinCandidates(target,/\.chatgpt\.site$|\.github\.io$/.test(location.hostname)):[target];
  const init:RequestInit={method:'POST',headers:{'Content-Type':'application/json',...(s?{Authorization:'Bearer '+s.token}:{})},body:JSON.stringify({...body,code:s?.code||code,requestId:body.requestId||crypto.randomUUID()})};
- for(let i=0;i<targets.length;i++){try{const data=await transport.send(targets[i],init,{timeout:8000,retries:['create','join'].includes(body.action)?0:2});return{...data,apiOrigin:roomGateway(data.room?.gatewayOrigin)||new URL(targets[i],location.href).origin}}catch(error){if((error as {status?:number}).status!==404||i===targets.length-1)throw error}}
+ for(let i=0;i<targets.length;i++){try{const data=await transport.send(targets[i],init,{timeout:8000,retries:['create','join'].includes(body.action)?0:2});return{...data,apiOrigin:new URL(targets[i],location.href).origin}}catch(error){if((error as {status?:number}).status!==404||i===targets.length-1)throw error}}
  }
 
 useEffect(()=>{
@@ -97,4 +98,4 @@ return <div className="arena-screen"><div className="arena-page-header"><div><di
 </>}
 {liveRoom&&!!solo&&!liveRoom.startedAt&&<GameChat docked roomCode={liveRoom.code} resetKey={liveRoom.mode+':'+liveRoom.chatEpoch} youId={liveRoom.youId} messages={liveRoom.chat} local={!!solo} disabled={!solo&&(!connected||writesBlocked)} onSend={sendChat}/>}
 {error&&<div className="error-message arena-error" role="alert"><WifiOff size={17}/><p>{error}</p>{!connected&&session&&<button onClick={()=>{setSession(null);setRoom(null);removeStored('markup-arena-session',true);setConnected(true);setError('');}}>Return to join screen</button>}</div>}
-{liveRoom&&!solo&&!lease.owns&&<p role="status" className="party-pause-notice">Another tab controls this seat. <button className="text-link" onClick={lease.claim}>Control from this tab</button></p>}{liveRoom&&<ConnectionStats service={endpoint()} room={liveRoom} transport={transport} local={!!solo}/>}</div>}
+{liveRoom&&!solo&&!lease.owns&&<p role="status" className="party-pause-notice">Another tab controls this seat. <button className="text-link" onClick={lease.claim}>Control from this tab</button></p>}{liveRoom&&<ConnectionStats service={endpoint()} room={liveRoom} transport={transport} local={!!solo} token={!solo?session?.token:undefined} onRouteChange={origin=>{const s=sessionNow.current;if(!s||!roomGateway(origin)||inFlight.current||!lease.owns||!roomRouteSwitchSafe(roomNow.current))return false;const next={...s,apiOrigin:origin};sessionNow.current=next;setSession(next);writeStored('markup-arena-session',next,true);return true}}/>}</div>}

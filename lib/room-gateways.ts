@@ -7,5 +7,5 @@ export function gatewayProbeData(value:unknown){
  if(!value||typeof value!=='object'||Array.isArray(value))return null;
  const data=value as Record<string,unknown>;
  if(data.ok!==true||data.service!=='markup-arcade'||!Number.isSafeInteger(data.version)||Number(data.version)<38)return null;
- return{version:Number(data.version),region:data.gatewayRegion==='Hong Kong'?'Hong Kong':data.gatewayRegion==='Singapore'?'Singapore':'Website',entry:typeof data.entryColo==='string'&&/^[A-Z0-9]{3,6}$/.test(data.entryColo)?data.entryColo:null};
+ return{version:Number(data.version),region:data.gatewayRegion==='Hong Kong'?'Hong Kong':data.gatewayRegion==='Singapore'?'Singapore':data.gatewayRegion==='Automatic edge'?'Automatic edge':'Website',entry:typeof data.entryColo==='string'&&/^[A-Z0-9]{3,6}$/.test(data.entryColo)?data.entryColo:null};
 }

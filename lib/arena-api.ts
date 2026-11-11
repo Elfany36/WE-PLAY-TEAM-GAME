@@ -25,6 +25,7 @@ function batch(code:string){if(!DB)throw new ArenaError('Room storage is unavail
 async function OPTIONS(req:Request){return new Response(null,{status:204,headers:cors(req)})}
 async function GET(req:Request){beginRoomRequest(req);try{
  checkOrigin(req);const url=new URL(req.url),code=roomCode(url.searchParams.get('code')),tokenHash=await credential(req);
+ if(url.searchParams.get('probe')==='1'){const {state}=await read(code),id=authenticate(tokenHash,state);return reply(req,{probe:{version:39,code:state.code,playerId:id}})}
  return await batch(code).run((state,now)=>{
   const id=authenticate(tokenHash,state),player=state.players.find(p=>p.id===id)!;
   const messages=activeChat(state.chat,now),changed=now-player.lastSeen>=5000||messages.length!==(state.chat||[]).length;

@@ -1,0 +1,42 @@
+[
+  {
+    "kind": "casual",
+    "passiveSamples": [
+      {
+        "origin": "https://markup-arcade.kendsfabros.workers.dev",
+        "transport": "websocket",
+        "rtt": 1
+      },
+      {
+        "origin": "https://markup-arcade-ph.kendsfabros.workers.dev",
+        "transport": "websocket",
+        "rtt": 1
+      }
+    ],
+    "forcedObserver": true,
+    "noPrivateWorld": true,
+    "seatPreserved": true,
+    "controlsNotRevoked": true,
+    "status": "passed"
+  },
+  {
+    "kind": "arena",
+    "passiveSamples": [
+      {
+        "origin": "https://markup-arcade.kendsfabros.workers.dev",
+        "transport": "websocket",
+        "rtt": 1
+      },
+      {
+        "origin": "https://markup-arcade-ph.kendsfabros.workers.dev",
+        "transport": "websocket",
+        "rtt": 1
+      }
+    ],
+    "forcedObserver": true,
+    "noPrivateWorld": true,
+    "seatPreserved": true,
+    "controlsNotRevoked": true,
+    "status": "passed"
+  }
+]

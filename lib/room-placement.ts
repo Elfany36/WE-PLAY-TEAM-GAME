@@ -2,6 +2,6 @@
 export const ROOM_LOCATION_HINT='apac-se';
 export function roomStub(rooms:DurableObjectNamespace,name:string,nearGateway=false){
  // The pinned May 2026 type package predates apac-se (introduced June 2026).
- // Hong Kong gateway requests initialize new rooms nearby; existing IDs never move.
+ // Dedicated gateways request near-caller creation; existing IDs never move.
  return nearGateway?rooms.get(rooms.idFromName(name)):rooms.get(rooms.idFromName(name),{locationHint:ROOM_LOCATION_HINT as DurableObjectLocationHint});
 }

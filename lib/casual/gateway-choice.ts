@@ -6,7 +6,7 @@ export async function selectRoomGateway(fetcher:typeof fetch=fetch,clock=()=>per
   let rtt:number|null=null;
   // First request warms DNS/TLS; use the second request for a fair comparison.
   for(let i=0;i<2;i++){
-   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),timeout),start=clock();
+   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),i===0?Math.max(timeout,2500):timeout),start=clock();
    try{const response=await fetcher(origin+'/api/ping',{credentials:'omit',mode:'cors',signal:controller.signal});const data=gatewayProbeData(await response.json());if(!response.ok||!data)break;if(i===1)rtt=Math.max(0,clock()-start)}catch{break}finally{clearTimeout(timer)}
   }
   return{origin,rtt} satisfies GatewaySample;
